@@ -10,3 +10,7 @@ venv/
 build/
 dist/
 Results/Comparison/
+Results/current/
+Results/validation/
+.coverage
+htmlcov/

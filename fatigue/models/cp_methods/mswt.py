@@ -17,16 +17,10 @@ as the plane that maximizes DP.
 
 from typing import Mapping
 import numpy as np
+from fatigue.models.utils.tensors import as33 as _as33
 
 from ..base import CPPlaneResult
 from ..utils.param_utils import get_param
-
-
-def _as33(name: str, A: np.ndarray) -> np.ndarray:
-    A = np.asarray(A, dtype=float)
-    if A.shape != (3, 3):
-        raise ValueError(f"{name} must be shape (3,3); got {A.shape}.")
-    return A
 
 
 class MSWT:

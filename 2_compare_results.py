@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 import matplotlib.pyplot as plt
-from matplotlib import cm, colors as mcolors
+from matplotlib import colors as mcolors
 from fatigue.eval.metrics import log10_dp_ratio
 from fatigue.models.references import DISABLED_METHODS, IMPLEMENTATION_REVISION
 import numpy as np
@@ -190,7 +190,7 @@ def _cmap_sample_hex(cmap_name: str, idx: int, n: int) -> str:
     Sample a sequential colormap to get a readable, print-friendly color.
     Avoid the very light end to keep visibility on white backgrounds.
     """
-    cmap = cm.get_cmap(cmap_name)
+    cmap = plt.get_cmap(cmap_name)
     if n <= 1:
         t = 0.70
     else:
@@ -625,11 +625,11 @@ def plot_boxplot_errors(
     bp = ax.boxplot(
         data,
         positions=positions,
-        labels=labels,
         showfliers=True,
         patch_artist=True,
         flierprops=flierprops,
     )
+    ax.set_xticks(positions, labels)
     for i, (box, mth) in enumerate(zip(bp["boxes"], labels)):
         st = method_styles.get(mth)
         if st:

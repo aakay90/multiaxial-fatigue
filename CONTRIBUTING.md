@@ -47,15 +47,25 @@ Reference cases should include the article's material data, actual repeated path
 Run:
 
 ```bash
+python -m pip install -r requirements-dev.txt
+python -m ruff check .
 MPLBACKEND=Agg python -m unittest discover -s tests -v
 python tools/generate_method_docs.py
 python tools/generate_method_docs.py --check
+python tools/check_docs.py
 git diff --check
 # For changes affecting shared numerical behavior, also consider:
 # python tests/run_material_validation.py /tmp/wg43-validation
 ```
 
 The broad sweep is appropriate for shared numerical changes; routine documentation changes do not require regenerating all experimental results. Include commands, results and known warnings in the PR.
+
+Ruff checks unused imports, redefinitions and undefined names. No mass formatting
+migration is required. The documentation checker covers maintained local links
+and fragments; external availability and frozen research prose need separate
+review. Runtime dependencies remain in `requirements.txt`; development tooling
+is isolated in `requirements-dev.txt`. Preserve the historical CSVs described
+in [Results/README.md](Results/README.md).
 
 ## Update the catalogue
 

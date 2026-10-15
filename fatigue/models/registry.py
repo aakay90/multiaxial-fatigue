@@ -26,21 +26,19 @@ from .cp_methods.swt import SWT
 from .cp_methods.matake import Matake
 from .cp_methods.mcdiarmid import McDiarmid
 
-# New CP methods from attached papers
+# Additional critical-plane formulations
 from .cp_methods.mgse_yu import MGSE_Yu
 from .cp_methods.mgse_zhu import MGSE_Zhu
 from .cp_methods.mswt import MSWT
 from .cp_methods.mkbm import MKBM
 from .cp_methods.liu2021 import Liu2021
 
-# New CP methods from attached papers (Li 2021, Ince & Glinka 2014)
+# Li (2021), Ince & Glinka (2014)
 from .cp_methods.li import LI
 from .cp_methods.gse import GSE
 from .cp_methods.gsa import GSA
 
-# Invariant methods
-
-# Energy and integral methods
+# Case-level integral and hybrid methods
 from .integral_methods.bohme_papuga import BohmePapuga
 from .integral_methods.caim import CAIM
 
@@ -54,14 +52,12 @@ def _available_cp_methods():
         "MATAKE": Matake(),
         "MCD": McDiarmid(),
 
-        # Added methods
         "MGSE_YU": MGSE_Yu(),
         "MGSE_ZHU": MGSE_Zhu(),
         "MSWT": MSWT(),
         "MKBM": MKBM(),
         "LIU2021": Liu2021(),
 
-        # Added in v6+ patch (critical-plane)
         "LI": LI(),
         "GSE": GSE(),
         "GSA": GSA(),
@@ -74,8 +70,6 @@ def _available_direct_models():
     return {
         "BP": BohmePapuga(),
         "CAIM": CAIM(),
-        # "TRESCA": TrescaEqvStressAmp(),
-        # "W_MAX": ElasticStrainEnergyMax(),
     }
 
 
