@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "assessment_date": "2026-10-15",
   "baseline_github_commit": "01418383ac2ab3cea8bab225f718dd652ba82820",
   "notes": [
@@ -50,7 +50,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_FS"
+      "source_record_id": "I_FS",
+      "roadmap_rank": null,
+      "development_track": "available_validate",
+      "development_reason": "Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_FIN",
@@ -92,7 +96,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_FIN"
+      "source_record_id": "I_FIN",
+      "roadmap_rank": null,
+      "development_track": "available_validate",
+      "development_reason": "Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_SWT",
@@ -134,7 +142,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_SWT"
+      "source_record_id": "I_SWT",
+      "roadmap_rank": null,
+      "development_track": "available_validate",
+      "development_reason": "Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope.",
+      "reference_action": "Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation."
     },
     {
       "id": "I_MATAKE",
@@ -176,7 +188,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_MATAKE"
+      "source_record_id": "I_MATAKE",
+      "roadmap_rank": null,
+      "development_track": "available_validate",
+      "development_reason": "Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_MCD",
@@ -218,7 +234,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_MCD"
+      "source_record_id": "I_MCD",
+      "roadmap_rank": null,
+      "development_track": "available_validate",
+      "development_reason": "Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_MGSE_YU",
@@ -260,7 +280,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_MGSE_YU"
+      "source_record_id": "I_MGSE_YU",
+      "roadmap_rank": null,
+      "development_track": "available_validate",
+      "development_reason": "Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_MGSE_ZHU",
@@ -302,7 +326,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_MGSE_ZHU"
+      "source_record_id": "I_MGSE_ZHU",
+      "roadmap_rank": null,
+      "development_track": "source_review",
+      "development_reason": "Active formulation needs original-source verification before completeness can be established. Weighting and original plane rule require full-source verification. Add an independently calculated original-paper case before declaring complete.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_MSWT",
@@ -344,7 +372,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_MSWT"
+      "source_record_id": "I_MSWT",
+      "roadmap_rank": null,
+      "development_track": "source_review",
+      "development_reason": "Active formulation needs original-source verification before completeness can be established. Scalar reported form only; attribution/scope review pending; not Jiang incremental plasticity. Add an independently calculated original-paper case before declaring complete.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_MKBM",
@@ -386,7 +418,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_MKBM"
+      "source_record_id": "I_MKBM",
+      "roadmap_rank": null,
+      "development_track": "source_review",
+      "development_reason": "Active formulation needs original-source verification before completeness can be established. Source reproduction and plane rule not fully established; no cyclic plasticity input from importer. Add an independently calculated original-paper case before declaring complete.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_LIU2021",
@@ -428,7 +464,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_LIU2021"
+      "source_record_id": "I_LIU2021",
+      "roadmap_rank": null,
+      "development_track": "source_review",
+      "development_reason": "Active formulation needs original-source verification before completeness can be established. Original Eq. (27), normal strain/range interpretation and plane rule require full-source review. Add an independently calculated original-paper case before declaring complete.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_LI",
@@ -470,7 +510,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_LI"
+      "source_record_id": "I_LI",
+      "roadmap_rank": null,
+      "development_track": "source_review",
+      "development_reason": "Active formulation needs original-source verification before completeness can be established. Exact coefficient formulation remains provisional pending original full text. Add an independently calculated original-paper case before declaring complete.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_GSE",
@@ -512,7 +556,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_GSE"
+      "source_record_id": "I_GSE",
+      "roadmap_rank": null,
+      "development_track": "available_validate",
+      "development_reason": "Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_GSA",
@@ -554,7 +602,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_GSA"
+      "source_record_id": "I_GSA",
+      "roadmap_rank": null,
+      "development_track": "available_validate",
+      "development_reason": "Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_BP",
@@ -596,7 +648,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_BP"
+      "source_record_id": "I_BP",
+      "roadmap_rank": null,
+      "development_track": "available_validate",
+      "development_reason": "Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_CAIM",
@@ -639,7 +695,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already implemented, active",
-      "source_record_id": "I_CAIM"
+      "source_record_id": "I_CAIM",
+      "roadmap_rank": null,
+      "development_track": "available_validate",
+      "development_reason": "Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_CARSPA",
@@ -682,7 +742,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Previously attempted, disabled",
-      "source_record_id": "I_CARSPA"
+      "source_record_id": "I_CARSPA",
+      "roadmap_rank": null,
+      "development_track": "repair",
+      "development_reason": "Archived implementation has a known essential gap and remains disabled. Missing the published critical-plane orientation construction; maximum-shear/max-damage scans are not that criterion. Restore only after source-faithful repair and regression/reference checks.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_DANGVAN",
@@ -724,7 +788,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Previously attempted, disabled",
-      "source_record_id": "I_DANGVAN"
+      "source_record_id": "I_DANGVAN",
+      "roadmap_rank": null,
+      "development_track": "repair",
+      "development_reason": "Archived implementation has a known essential gap and remains disabled. Combines shear amplitude with independently reconstructed hydrostatic endpoints, losing their time relationship and corrupting the trace for out-of-phase histories. Restore only after source-faithful repair and regression/reference checks.",
+      "reference_action": "Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation."
     },
     {
       "id": "I_OTT",
@@ -766,7 +834,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Previously attempted, disabled",
-      "source_record_id": "I_OTT"
+      "source_record_id": "I_OTT",
+      "roadmap_rank": null,
+      "development_track": "repair",
+      "development_reason": "Archived implementation has a known essential gap and remains disabled. Only a proportional cycle reduction; non-proportional extension is unverified and fatigue-ratio calibration silently falls back to m=2 outside its supported range. Restore only after source-faithful repair and regression/reference checks.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_SWTD",
@@ -808,7 +880,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Previously attempted, disabled",
-      "source_record_id": "I_SWTD"
+      "source_record_id": "I_SWTD",
+      "roadmap_rank": null,
+      "development_track": "repair",
+      "development_reason": "Archived implementation has a known essential gap and remains disabled. Separately sorted stress and strain eigenvalues do not preserve paired physical directions; also ignores harmonic histories. Restore only after source-faithful repair and regression/reference checks.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "I_ZHU_EDP",
@@ -850,7 +926,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Previously attempted, disabled",
-      "source_record_id": "I_ZHU_EDP"
+      "source_record_id": "I_ZHU_EDP",
+      "roadmap_rank": null,
+      "development_track": "repair",
+      "development_reason": "Archived implementation has a known essential gap and remains disabled. An acknowledged proxy: omits elastoplastic work W0 and substitutes a phase proxy for the published non-proportional factor. Restore only after source-faithful repair and regression/reference checks.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N01",
@@ -888,7 +968,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N01"
+      "source_record_id": "N01",
+      "roadmap_rank": 1,
+      "development_track": "prioritized_addition",
+      "development_reason": "Established invariant baseline; reuses physical harmonic tensors and adds hydrostatic-maximum assessment.",
+      "reference_action": "Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation."
     },
     {
       "id": "N02",
@@ -926,7 +1010,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N02"
+      "source_record_id": "N02",
+      "roadmap_rank": 2,
+      "development_track": "prioritized_addition",
+      "development_reason": "Complementary invariant baseline isolates hydrostatic mean-stress effects from the Crossland maximum.",
+      "reference_action": "Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation."
     },
     {
       "id": "N03",
@@ -964,7 +1052,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N03"
+      "source_record_id": "N03",
+      "roadmap_rank": 5,
+      "development_track": "prioritized_addition",
+      "development_reason": "Adds a recognized mesoscopic/orientation-based endurance assessment beyond a maximum-plane scalar.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N04",
@@ -1002,7 +1094,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N04"
+      "source_record_id": "N04",
+      "roadmap_rank": 8,
+      "development_track": "prioritized_addition",
+      "development_reason": "Established critical-plane life framework; ratio-dependent resistance adds substantial engineering capability.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N05",
@@ -1040,7 +1136,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N05"
+      "source_record_id": "N05",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New criterion and exact coefficient/sign checks; use the published amplitude convention.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N06",
@@ -1078,7 +1178,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N06"
+      "source_record_id": "N06",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Scalar criterion, material-domain/denominator guards; recover equation from original.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N07",
@@ -1116,7 +1220,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N07"
+      "source_record_id": "N07",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Case-level branching, global normal/shear maxima and branch-boundary continuity.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N08",
@@ -1154,7 +1262,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N08"
+      "source_record_id": "N08",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Five-dimensional representation and principal extrema; verify original amplitude's frame treatment.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N09",
@@ -1192,7 +1304,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N09"
+      "source_record_id": "N09",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. True-fracture-strength field, invariant amplitude and native axial-curve conversion. Review's Su-based estimate is range-limited, not universal.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N10",
@@ -1230,7 +1346,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N10"
+      "source_record_id": "N10",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Measured t0 and coefficient/domain checks; no unsupported NP extension.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N11",
@@ -1268,7 +1388,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N11"
+      "source_record_id": "N11",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Scalar criterion and ratio guards; preserve published shear-amplitude definition.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N12",
@@ -1306,7 +1430,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N12"
+      "source_record_id": "N12",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Revised coefficients, stated ratio domain and mean-stress rule.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N13",
@@ -1344,7 +1472,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N13"
+      "source_record_id": "N13",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Closed-form evaluator and explicit proportional/mean-stress applicability checks.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N14",
@@ -1382,7 +1514,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N14"
+      "source_record_id": "N14",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Contains Gough–Pollard and Nishihara–Kawamoto; split exact original variants before counting. Separate named variants and original ductile/brittle/phase rules; do not equate to Golos or Khalij.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N15",
@@ -1420,7 +1556,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N15"
+      "source_record_id": "N15",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original coefficient equations and measured mean-stress calibration; reuse BP quadrature only.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N16",
@@ -1458,7 +1598,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N16"
+      "source_record_id": "N16",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Characteristic-plane construction, life-dependent strengths and implicit life solution. Original must establish supported NP scope.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N17",
@@ -1496,7 +1640,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N17"
+      "source_record_id": "N17",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Stable orientation tracking/averaging, two candidate evaluations and native curve use.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N18",
@@ -1534,7 +1682,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N18"
+      "source_record_id": "N18",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Five-dimensional hull amplitude, piecewise life solver and multi-curve calibration.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N19",
@@ -1572,7 +1724,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N19"
+      "source_record_id": "N19",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Principal-coordinate prismatic hull, optimization and published weight function.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N20",
@@ -1610,7 +1766,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N20"
+      "source_record_id": "N20",
+      "roadmap_rank": 12,
+      "development_track": "prioritized_addition",
+      "development_reason": "Adds invariant descriptors of complex periodic stress paths rather than a single ellipse amplitude.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N21",
@@ -1648,7 +1808,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N21"
+      "source_record_id": "N21",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Closed-path integration, explicit plane definition and parameter calibration; confirm translation/mean-stress handling.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N22",
@@ -1686,7 +1850,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N22"
+      "source_record_id": "N22",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Full cycle path and weighting calculation; correct range extraction for even one cycle.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N23",
@@ -1724,7 +1892,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N23"
+      "source_record_id": "N23",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Equal-life surface calibration and inversion, plane/path statistics and extra data groups.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N24",
@@ -1762,7 +1934,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N24"
+      "source_record_id": "N24",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Polynomial-map calibration/validation and prescribed frame treatment.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N25",
@@ -1800,7 +1976,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N25"
+      "source_record_id": "N25",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Deviatoric directional pairing, sectional search and original life equation; measured cyclic strains for plastic use.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N26",
@@ -1838,7 +2018,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N26"
+      "source_record_id": "N26",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New scalar correction with exact branch/sign rules. A general multiaxial plane rule is not established by this review.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N27",
@@ -1876,7 +2060,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N27"
+      "source_record_id": "N27",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New coefficient calibration; prescribed cyclic strains if inelastic; native life law.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N28",
@@ -1914,7 +2102,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N28"
+      "source_record_id": "N28",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Scalar criterion first; measured cyclic response and native life calibration for reproducing GH4169 tests.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N29",
@@ -1952,7 +2144,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N29"
+      "source_record_id": "N29",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original parameter/plane definition and life solver; genuine total strains for elastoplastic use.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N30",
@@ -1990,7 +2186,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N30"
+      "source_record_id": "N30",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Published Mohr-circle/plane construction, coefficient fields already partly supported, native life relation.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N31",
@@ -2028,7 +2228,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N31"
+      "source_record_id": "N31",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Validate review's claimed correlation-based factor against original; path integration and native life mapping.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N32",
@@ -2066,7 +2270,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N32"
+      "source_record_id": "N32",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Track principal directions through degeneracies, fatigue-space construction and multicoefficient/native-life calibration.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N33",
@@ -2104,7 +2312,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N33"
+      "source_record_id": "N33",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Proportional scope related to I_OTT and full Tveit workstream; not an independent theory. Explicitly named proportional-only evaluator; enforce published fatigue-ratio domain, approximately t−1/f−1 = 0.5–0.5852.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N34",
@@ -2142,7 +2354,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N34"
+      "source_record_id": "N34",
+      "roadmap_rank": 18,
+      "development_track": "prioritized_addition",
+      "development_reason": "Bounded homogeneous-volume scope introduces probabilistic outputs and appropriate calibration.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N35",
@@ -2180,7 +2396,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N35"
+      "source_record_id": "N35",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Block input and scalar damage-state integrator; preserve sequence and correct stress-function variants.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N36",
@@ -2218,7 +2438,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N36"
+      "source_record_id": "N36",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New microstructural material inputs and native life/threshold logic. Do not use raw von-Mises max−min, which loses fully reversed sign, without source justification.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N37",
@@ -2256,7 +2480,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N37"
+      "source_record_id": "N37",
+      "roadmap_rank": 13,
+      "development_track": "prioritized_addition",
+      "development_reason": "Adds projection-based interaction and life prediction; may reuse tensor decomposition.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N38",
@@ -2294,7 +2522,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N38"
+      "source_record_id": "N38",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Explicit amplitude-based evaluator, not unsigned scalar-history half-range. NP extension requires a separately chosen definition.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N39",
@@ -2332,7 +2564,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N39"
+      "source_record_id": "N39",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Direct baseline with signed-cycle conventions.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N40",
@@ -2370,7 +2606,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N40"
+      "source_record_id": "N40",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Exact cycle/mean convention and restricted scope.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N41",
@@ -2408,7 +2648,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N41"
+      "source_record_id": "N41",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Direct energy equivalence and correct mean treatment.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N42",
@@ -2446,7 +2690,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N42"
+      "source_record_id": "N42",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Weld metadata and stress-measure selection, interaction rules and native resistance curves.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N43",
@@ -2484,7 +2732,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N43"
+      "source_record_id": "N43",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Separate normal/shear resistance and interaction; explicit versioned design assumptions.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N44",
@@ -2522,7 +2774,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N44"
+      "source_record_id": "N44",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Obtain original Sonsino formulation, orientation averaging and normalization; no guessed equation from acronym.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N45",
@@ -2560,7 +2816,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N45"
+      "source_record_id": "N45",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Unresolved comparator variants; check equivalence with existing plane criteria. Exact plane/variant selection and material constants; compare analytically with Matake before retaining an equivalent duplicate.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N46",
@@ -2598,7 +2858,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N46"
+      "source_record_id": "N46",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Identify cited original version; input stabilized strains and implement its normal-range/mean correction and life relation.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N47",
@@ -2636,7 +2900,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N47"
+      "source_record_id": "N47",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original coefficient calibration and domain; distinguish from modified Marin N10.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N48",
@@ -2674,7 +2942,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N48"
+      "source_record_id": "N48",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Identify the exact version cited, energetic descriptors and calibration fields.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N49",
@@ -2712,7 +2984,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N49"
+      "source_record_id": "N49",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Amplitude tools and Deperrois/Freitas formulations require separate identity resolution. Identify which distinct amplitude/enclosure variants are meant and pair each with its actual failure criterion.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N50",
@@ -2750,7 +3026,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N50"
+      "source_record_id": "N50",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Retrieve exact original cited formulation, orientation weighting and calibration.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N51",
@@ -2788,7 +3068,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N51"
+      "source_record_id": "N51",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Exact Chen variant not established. Resolve cited version and its plane rule, then native life mapping. Constitutive response generation is C.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N52",
@@ -2826,7 +3110,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N52"
+      "source_record_id": "N52",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original path measure and coefficients; do not set NP hardening sensitivity to an arbitrary constant. Plastic simulation remains C.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N53",
@@ -2864,7 +3152,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N53"
+      "source_record_id": "N53",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Path/sphere integration, three-curve calibration and original per-cycle life/damage equations.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N54",
@@ -2902,7 +3194,11 @@
       "complexity": "Low (preliminary; source-specific amplitude/calibration may increase effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N54"
+      "source_record_id": "N54",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Several strain baselines, not one independent method. Register named baselines and original life scaling. Cyclic plastic response remains external/C.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N55",
@@ -2940,7 +3236,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N55"
+      "source_record_id": "N55",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New gradient input fields, projection rules, units and correction functions. No gradient recovery or FE solver included.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "N56",
@@ -2978,7 +3278,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N56"
+      "source_record_id": "N56",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Exact Chu-modified SWT identity not established. Identify original Chu citation and test algebraic equivalence to active SWT/MSWT before a new registration.",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "N57",
@@ -3016,7 +3320,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed, not implemented",
-      "source_record_id": "N57"
+      "source_record_id": "N57",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Source-defined strain-amplitude geometry and native life solver; measured plastic strains if relevant.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "R01",
@@ -3056,7 +3364,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed; archived implementation disabled or modified variant unregistered",
-      "source_record_id": "R01"
+      "source_record_id": "R01",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Additional source/scope for I_CARSPA; no additional method count. Missing critical-plane orientation construction",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "R02",
@@ -3096,7 +3408,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed; archived implementation disabled or modified variant unregistered",
-      "source_record_id": "R02"
+      "source_record_id": "R02",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Additional source/scope for I_DANGVAN; no additional method count. Physical shear/hydrostatic simultaneity lost in archived code; original 1973 reference has no verified DOI",
+      "reference_action": "Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation."
     },
     {
       "id": "R03",
@@ -3136,7 +3452,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed; archived implementation disabled or modified variant unregistered",
-      "source_record_id": "R03"
+      "source_record_id": "R03",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Additional source/scope for I_SWTD; no additional method count. Archived stress/strain eigen-directions were not physically paired",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "R04",
@@ -3176,7 +3496,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "Already reviewed; archived implementation disabled or modified variant unregistered",
-      "source_record_id": "R04"
+      "source_record_id": "R04",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Restoration/variant note, not a separate confirmed implementation. Comparator describes a variant; exact variant origin requires original verification",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "C01",
@@ -3216,7 +3540,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #3; not an independently counted local criterion",
-      "source_record_id": "C01"
+      "source_record_id": "C01",
+      "roadmap_rank": null,
+      "development_track": "broader_workstream",
+      "development_reason": "Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Internal-variable cycle integration and parameter identification",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "C02",
@@ -3256,7 +3584,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #4; not an independently counted local criterion",
-      "source_record_id": "C02"
+      "source_record_id": "C02",
+      "roadmap_rank": null,
+      "development_track": "broader_workstream",
+      "development_reason": "Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Recover original article; cycle integration",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "C03",
@@ -3296,7 +3628,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #10; not an independently counted local criterion",
-      "source_record_id": "C03"
+      "source_record_id": "C03",
+      "roadmap_rank": null,
+      "development_track": "broader_workstream",
+      "development_reason": "Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Spatial integration and volume calibration",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "C04",
@@ -3336,7 +3672,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #14; not an independently counted local criterion",
-      "source_record_id": "C04"
+      "source_record_id": "C04",
+      "roadmap_rank": null,
+      "development_track": "broader_workstream",
+      "development_reason": "Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Spatial field and local plasticity",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "C05",
@@ -3376,7 +3716,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #39; not an independently counted local criterion",
-      "source_record_id": "C05"
+      "source_record_id": "C05",
+      "roadmap_rank": null,
+      "development_track": "broader_workstream",
+      "development_reason": "Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Spatial stress paths and defect data",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "C06",
@@ -3416,7 +3760,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #41; not an independently counted local criterion",
-      "source_record_id": "C06"
+      "source_record_id": "C06",
+      "roadmap_rank": null,
+      "development_track": "broader_workstream",
+      "development_reason": "Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Defect geometry and spatial field",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "C07",
@@ -3456,7 +3804,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #42; not an independently counted local criterion",
-      "source_record_id": "C07"
+      "source_record_id": "C07",
+      "roadmap_rank": null,
+      "development_track": "broader_workstream",
+      "development_reason": "Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Defect distributions and statistical calibration",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "C08",
@@ -3496,7 +3848,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #45; not an independently counted local criterion",
-      "source_record_id": "C08"
+      "source_record_id": "C08",
+      "roadmap_rank": null,
+      "development_track": "scope_deferred",
+      "development_reason": "Full workflow targets variable-amplitude/random loading and is outside the current CA priorities; verify any faithful CA reduction first. Cycle counting and history-sensitive accumulation; CA branch to verify",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "C09",
@@ -3536,7 +3892,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #51; not an independently counted local criterion",
-      "source_record_id": "C09"
+      "source_record_id": "C09",
+      "roadmap_rank": null,
+      "development_track": "scope_deferred",
+      "development_reason": "Full workflow targets variable-amplitude/random loading and is outside the current CA priorities; verify any faithful CA reduction first. Spectral/random history beyond CA Liu–Mahadevan branch",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "C10",
@@ -3576,7 +3936,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #31; not an independently counted local criterion",
-      "source_record_id": "C10"
+      "source_record_id": "C10",
+      "roadmap_rank": null,
+      "development_track": "broader_workstream",
+      "development_reason": "Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Weld notch geometry and crack-growth data",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "C11",
@@ -3616,7 +3980,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #32; not an independently counted local criterion",
-      "source_record_id": "C11"
+      "source_record_id": "C11",
+      "roadmap_rank": null,
+      "development_track": "broader_workstream",
+      "development_reason": "Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Composite RVE, fiber orientation and interface properties",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "C12",
@@ -3656,7 +4024,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #43; not an independently counted local criterion",
-      "source_record_id": "C12"
+      "source_record_id": "C12",
+      "roadmap_rank": null,
+      "development_track": "broader_workstream",
+      "development_reason": "Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Crack geometry and mixed-mode stress intensity history",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "C13",
@@ -3696,7 +4068,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #48; not an independently counted local criterion",
-      "source_record_id": "C13"
+      "source_record_id": "C13",
+      "roadmap_rank": null,
+      "development_track": "application_comparison",
+      "development_reason": "Manufacturing-process comparison does not establish an independent general fatigue law; retain process/residual-stress context and existing-criterion links.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "C14",
@@ -3736,7 +4112,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already reviewed #1; not an independently counted local criterion",
-      "source_record_id": "C14"
+      "source_record_id": "C14",
+      "roadmap_rank": null,
+      "development_track": "broader_workstream",
+      "development_reason": "Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. FE local response and welded-joint metadata",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "G01",
@@ -3776,7 +4156,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G01"
+      "source_record_id": "G01",
+      "roadmap_rank": 3,
+      "development_track": "prioritized_addition",
+      "development_reason": "Recognized stress-plane formulation in a shared original paper; provides a comparator independent of BP.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G02",
@@ -3816,7 +4200,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G02"
+      "source_record_id": "G02",
+      "roadmap_rank": 4,
+      "development_track": "prioritized_addition",
+      "development_reason": "Adds orientation-integral coverage using existing quadrature with its own coefficients; shares the G01 source.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G03",
@@ -3856,7 +4244,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New significant extension / related family",
-      "source_record_id": "G03"
+      "source_record_id": "G03",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Exact corrected equations and material-domain guards",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G04",
@@ -3896,7 +4288,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G04"
+      "source_record_id": "G04",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Distinguish bending from axial strength; verify calibration",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G05",
@@ -3936,7 +4332,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New significant extension / related family",
-      "source_record_id": "G05"
+      "source_record_id": "G05",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original component/mean definitions; native calibration",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G06",
@@ -3976,7 +4376,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G06"
+      "source_record_id": "G06",
+      "roadmap_rank": 7,
+      "development_track": "prioritized_addition",
+      "development_reason": "Adds dual axial/torsional S–N calibration and native-life prediction.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G07",
@@ -4016,7 +4420,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G07"
+      "source_record_id": "G07",
+      "roadmap_rank": 9,
+      "development_track": "prioritized_addition",
+      "development_reason": "Adds a time-dependent equivalent-stress approach; exercises physical-cycle support beyond plane extrema.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G08",
@@ -4056,7 +4464,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G08"
+      "source_record_id": "G08",
+      "roadmap_rank": 10,
+      "development_track": "prioritized_addition",
+      "development_reason": "Adds a mathematically distinct complex-invariant and phase-sensitive formulation.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G09",
@@ -4096,7 +4508,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New significant extension / related family",
-      "source_record_id": "G09"
+      "source_record_id": "G09",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. G08 plus moment evaluation and native life calibration",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G10",
@@ -4136,7 +4552,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G10"
+      "source_record_id": "G10",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New fitted exponent and published domain checks",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G11",
@@ -4176,7 +4596,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G11"
+      "source_record_id": "G11",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Exact path term and calibration; independent validation",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G12",
@@ -4216,7 +4640,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G12"
+      "source_record_id": "G12",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Equivalent amplitude and life-law implementation",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G13",
@@ -4256,7 +4684,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G13"
+      "source_record_id": "G13",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Exact process transformation and consistent mean/cycle mapping",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G14",
@@ -4296,7 +4728,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New candidate; equation-level overlap unresolved",
-      "source_record_id": "G14"
+      "source_record_id": "G14",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Previously selected in the 23-entry research shortlist; held outside the published 22-entry sequence because equation-level overlap with GSE/GSA is unresolved. It remains a source-review opportunity, not an asserted duplicate. Total-strain input and exact energy/plane definitions",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G15",
@@ -4336,7 +4772,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G15"
+      "source_record_id": "G15",
+      "roadmap_rank": 14,
+      "development_track": "prioritized_addition",
+      "development_reason": "Introduces fracture-mode-dependent virtual energy and native energy-life relations.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G16",
@@ -4376,7 +4816,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G16"
+      "source_record_id": "G16",
+      "roadmap_rank": 15,
+      "development_track": "prioritized_addition",
+      "development_reason": "Adds multiaxial cyclic energy with mean stress and constraint effects.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G17",
@@ -4416,7 +4860,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G17"
+      "source_record_id": "G17",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Loop-work integration and calibration; constitutive generation is C",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G18",
@@ -4456,7 +4904,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G18"
+      "source_record_id": "G18",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Published sign and normal/shear combination; cycle mapping",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G19",
@@ -4496,7 +4948,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New candidate; equation-level overlap unresolved",
-      "source_record_id": "G19"
+      "source_record_id": "G19",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Overlap with Liu VSE and active LI/GSE unresolved. Exact virtual energy, plane search and life calibration",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G20",
@@ -4536,7 +4992,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G20"
+      "source_record_id": "G20",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. NP energy measure and native life relation",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G21",
@@ -4576,7 +5036,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New significant extension / related family",
-      "source_record_id": "G21"
+      "source_record_id": "G21",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original shear-energy equivalent and plane rule",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G22",
@@ -4616,7 +5080,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G22"
+      "source_record_id": "G22",
+      "roadmap_rank": 16,
+      "development_track": "prioritized_addition",
+      "development_reason": "Adds a recognized strain-life curve framework once prescribed stabilized strains and dual curves are supported.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G23",
@@ -4656,7 +5124,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G23"
+      "source_record_id": "G23",
+      "roadmap_rank": 11,
+      "development_track": "prioritized_addition",
+      "development_reason": "Broadens the programme to mesoscopic constant-amplitude life prediction.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G24",
@@ -4696,7 +5168,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "New significant extension / related family",
-      "source_record_id": "G24"
+      "source_record_id": "G24",
+      "roadmap_rank": 21,
+      "development_track": "prioritized_addition",
+      "development_reason": "Extends the programme to volume/surface effects and fatigue-strength scatter after statistical prerequisites.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G25",
@@ -4736,7 +5212,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "New significant extension / related family",
-      "source_record_id": "G25"
+      "source_record_id": "G25",
+      "roadmap_rank": null,
+      "development_track": "deferred_major_extension",
+      "development_reason": "Scientifically relevant but requires major new infrastructure/data; not rejected. Directional/spatial probability integration; calibration",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G26",
@@ -4776,7 +5256,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Newly located antecedent of reviewed family",
-      "source_record_id": "G26"
+      "source_record_id": "G26",
+      "roadmap_rank": 19,
+      "development_track": "prioritized_addition",
+      "development_reason": "Retains volumetric energy as an important major-extension target despite substantial FE/data prerequisites.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G27",
@@ -4816,7 +5300,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G27"
+      "source_record_id": "G27",
+      "roadmap_rank": null,
+      "development_track": "deferred_major_extension",
+      "development_reason": "Scientifically relevant but requires major new infrastructure/data; not rejected. Nonlocal averaging and domain definition",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G28",
@@ -4856,7 +5344,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "New significant extension / related family",
-      "source_record_id": "G28"
+      "source_record_id": "G28",
+      "roadmap_rank": null,
+      "development_track": "deferred_major_extension",
+      "development_reason": "Scientifically relevant but requires major new infrastructure/data; not rejected. Nonlocal probability and gradient processing",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G29",
@@ -4896,7 +5388,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G29"
+      "source_record_id": "G29",
+      "roadmap_rank": 17,
+      "development_track": "prioritized_addition",
+      "development_reason": "Bounded externally supplied-gradient scope is a practical first step toward spatial fatigue methods.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G30",
@@ -4936,7 +5432,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G30"
+      "source_record_id": "G30",
+      "roadmap_rank": 20,
+      "development_track": "prioritized_addition",
+      "development_reason": "Adds widely used control-volume energy assessment for components; deliberately retained despite high effort.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G31",
@@ -4976,7 +5476,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G31"
+      "source_record_id": "G31",
+      "roadmap_rank": null,
+      "development_track": "deferred_major_extension",
+      "development_reason": "Scientifically relevant but requires major new infrastructure/data; not rejected. Spatial/statistical framework and relevant local criterion",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G32",
@@ -5016,7 +5520,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G32"
+      "source_record_id": "G32",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Faithful line integral and closed-cycle damage calculation",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G33",
@@ -5056,7 +5564,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New significant extension / related family",
-      "source_record_id": "G33"
+      "source_record_id": "G33",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Admissibility check and separately identifiable Walker coefficients",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G34",
@@ -5096,7 +5608,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New candidate; equation-level overlap unresolved",
-      "source_record_id": "G34"
+      "source_record_id": "G34",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Gear-specific formulation independence from BP/CAIM unresolved. Exact local criterion; gear-property mappings require separate scope",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G35",
@@ -5136,7 +5652,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G35"
+      "source_record_id": "G35",
+      "roadmap_rank": 22,
+      "development_track": "prioritized_addition",
+      "development_reason": "Explores energy-damage evolution over a repeated cycle after stateful integration support; verify its CA reduction before coding.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G36",
@@ -5176,7 +5696,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G36"
+      "source_record_id": "G36",
+      "roadmap_rank": null,
+      "development_track": "deferred_major_extension",
+      "development_reason": "Scientifically relevant but requires major new infrastructure/data; not rejected. State evolution and native life output",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G37",
@@ -5216,7 +5740,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G37"
+      "source_record_id": "G37",
+      "roadmap_rank": null,
+      "development_track": "deferred_major_extension",
+      "development_reason": "Scientifically relevant but requires major new infrastructure/data; not rejected. Constitutive/state integration and cycle acceleration",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G38",
@@ -5256,7 +5784,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G38"
+      "source_record_id": "G38",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Published reduced criterion and extra calibration; full microscale simulation C",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G39",
@@ -5296,7 +5828,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G39"
+      "source_record_id": "G39",
+      "roadmap_rank": null,
+      "development_track": "deferred_major_extension",
+      "development_reason": "Scientifically relevant but requires major new infrastructure/data; not rejected. Defect statistics, material axes and competing-risk calculation",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G40",
@@ -5336,7 +5872,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G40"
+      "source_record_id": "G40",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Exact parameter and plane rule; native life mapping",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G41",
@@ -5376,7 +5916,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G41"
+      "source_record_id": "G41",
+      "roadmap_rank": 6,
+      "development_track": "prioritized_addition",
+      "development_reason": "Expands integral coverage to a native-life approach rather than a fitted damage index alone.",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G42",
@@ -5416,7 +5960,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G42"
+      "source_record_id": "G42",
+      "roadmap_rank": null,
+      "development_track": "deferred_major_extension",
+      "development_reason": "Scientifically relevant but requires major new infrastructure/data; not rejected. Evolving cycle sets and damage state",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G43",
@@ -5456,7 +6004,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G43"
+      "source_record_id": "G43",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Full-text reconstruction and comparison with existing formulas",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G44",
@@ -5496,7 +6048,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G44"
+      "source_record_id": "G44",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Temperature metadata and exact calibration",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G45",
@@ -5536,7 +6092,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G45"
+      "source_record_id": "G45",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original local parameter and domain checks",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G46",
@@ -5576,7 +6136,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G46"
+      "source_record_id": "G46",
+      "roadmap_rank": null,
+      "development_track": "deferred_major_extension",
+      "development_reason": "Scientifically relevant but requires major new infrastructure/data; not rejected. Probabilistic constitutive pipeline and uncertainty propagation",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G47",
@@ -5616,7 +6180,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New significant extension / related family",
-      "source_record_id": "G47"
+      "source_record_id": "G47",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Exact normalization, near-zero shear guards, life mapping",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G48",
@@ -5656,7 +6224,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New significant extension / related family",
-      "source_record_id": "G48"
+      "source_record_id": "G48",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Paired interaction terms and correct phase-sensitive evaluation",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G49",
@@ -5696,7 +6268,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G49"
+      "source_record_id": "G49",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original energy components and branch-specific calibration",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G50",
@@ -5736,7 +6312,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New candidate; equation-level overlap unresolved",
-      "source_record_id": "G50"
+      "source_record_id": "G50",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Independence from existing HCF criteria unresolved. Exact nonlinear interaction and material-domain checks",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G51",
@@ -5776,7 +6356,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Newly located antecedent of reviewed family",
-      "source_record_id": "G51"
+      "source_record_id": "G51",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Antecedent of reviewed Saintier energy family; not a separate confirmed law. Exact incremental algorithm and state/volume requirements",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "G52",
@@ -5816,7 +6400,11 @@
       "complexity": "Medium (preliminary; exact scope and data determine effort)",
       "issue_url": null,
       "review_status": "New distinct formulation candidate",
-      "source_record_id": "G52"
+      "source_record_id": "G52",
+      "roadmap_rank": null,
+      "development_track": "available_not_scheduled",
+      "development_reason": "Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Source-defined plane and energy calculation",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "L01",
@@ -5856,7 +6444,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L01"
+      "source_record_id": "L01",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation."
     },
     {
       "id": "L02",
@@ -5896,7 +6488,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L02"
+      "source_record_id": "L02",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "L03",
@@ -5936,7 +6532,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L03"
+      "source_record_id": "L03",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Additional source/scope for N56; no additional method count. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "L04",
@@ -5976,7 +6576,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L04"
+      "source_record_id": "L04",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "L05",
@@ -6016,7 +6620,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L05"
+      "source_record_id": "L05",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Additional source/scope for N47; no additional method count. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "L06",
@@ -6056,7 +6664,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L06"
+      "source_record_id": "L06",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Additional source/scope for N50; no additional method count. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "L07",
@@ -6096,7 +6708,11 @@
       "complexity": "High (new data/model infrastructure)",
       "issue_url": null,
       "review_status": "Already-reviewed-family precursor; do not count as new-only",
-      "source_record_id": "L07"
+      "source_record_id": "L07",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Additional source/scope for G26; no additional method count. Spatial volume integration and source-specific calibration",
+      "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
     },
     {
       "id": "L08",
@@ -6136,7 +6752,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L08"
+      "source_record_id": "L08",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "L09",
@@ -6176,7 +6796,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L09"
+      "source_record_id": "L09",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Additional source/scope for N08; no additional method count. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "L10",
@@ -6216,7 +6840,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L10"
+      "source_record_id": "L10",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Additional source/scope for G03; no additional method count. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "L11",
@@ -6256,7 +6884,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L11"
+      "source_record_id": "L11",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "L12",
@@ -6296,7 +6928,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L12"
+      "source_record_id": "L12",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "L13",
@@ -6336,7 +6972,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L13"
+      "source_record_id": "L13",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     },
     {
       "id": "L14",
@@ -6376,7 +7016,11 @@
       "complexity": "Not estimated; scope/original paper needed",
       "issue_url": null,
       "review_status": "Unresolved lead; potential overlap",
-      "source_record_id": "L14"
+      "source_record_id": "L14",
+      "roadmap_rank": null,
+      "development_track": "identity_or_relationship_review",
+      "development_reason": "Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying",
+      "reference_action": "Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI."
     }
   ]
 }

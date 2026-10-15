@@ -2,12 +2,18 @@
 
 Start with [METHODS.md](METHODS.md), the [suggested roadmap](ROADMAP.md) and [prepared Issues](docs/contribution-issues/README.md). Contributions can implement a method, resolve a source ambiguity, build a reproducible benchmark, validate existing code or improve documentation. Priority is advisory, not a project assignment.
 
-## Select and specify a method
+## Ten steps from a method to a PR
 
-1. Search existing open and closed Issues by permanent catalogue ID, aliases and original authors. Comment on an existing Issue or open a scoped proposal using the method template. Avoid duplicate tasks and bundling unrelated laws into one PR.
-2. Obtain the exact original paper and relevant errata/supplements. DOI metadata verifies identity, not governing equations. If the source has no verified DOI, provide a traceable bibliographic reference. Do not upload copyrighted articles without distribution rights; cite equations and record a concise implementation specification.
-3. State the supported CA loading path, mean-stress convention, material domain, required measurements and output (limit, utilization, damage parameter, native life or probability). General periodic loading does not imply the current importer supports it. Identify shared prerequisites before promising a plug-in.
-4. Record original versus repository adaptations separately. Never infer equivalence from names, replace an amplitude definition silently, omit plastic work or substitute an empirical life fit for a published native law.
+1. **Choose an ID.** Browse [all missing methods by family](docs/METHOD_INDEX.md#missing-methods-by-family), repairs or source-review tasks. The roadmap is a suggested sequence; you may propose another catalogued method. For a genuinely new candidate, establish its relationship to existing entries before assigning a new permanent ID.
+2. **Find or propose the task.** Use the entry’s Search Issues link, check aliases and closed Issues, and claim an existing task or open a scoped proposal. The Propose task link opens the method-specific template with its ID/title. Prepared briefs are not live Issues.
+3. **Confirm the primary formulation.** Obtain the exact original article, relevant errata/supplements and traceable citation. DOI metadata confirms identity, not equations. An unresolved variant needs reference work before numerical implementation. Do not upload copyrighted papers without redistribution rights.
+4. **Write a bounded specification.** State CA P/NP/mean-stress scope, material domain, equations, amplitude/range and shear conventions, required measurements and output (limit, damage parameter, native life or probability). Record repository adaptations separately from the original law.
+5. **Inspect reusable components.** Read only the [model interface guide](docs/adding-methods.md), one nearby implementation and relevant projection/search helpers. Verify that reuse preserves the source plane rule and physical simultaneous path. List any input, native-life or spatial/statistical prerequisite.
+6. **Implement and integrate.** Place the law in the appropriate model family, declare parameters, register it and add runtime citation metadata. Follow the paths/interfaces below; propose major prerequisites separately. A contributor need not understand all plotting/calibration code to implement one criterion.
+7. **Document inputs and limits.** Add material fields only when needed. State units, provenance, measured versus estimated constants, supported loading and explicitly unsupported cases. Never silently omit work terms or replace the native life law with a generic fit.
+8. **Numerically verify.** Add focused analytical/degenerate, phase/mean/frame checks as appropriate, unsupported-input checks and search/integration convergence. Compute at least one reference result independently of the implementation.
+9. **Validate and report evidence.** Reproduce a published case with its material/loading data and intermediate values where available. Keep calibration separate from validation; state inaccessible data or remaining predictive-validation gaps. Run the regression and documentation checks below.
+10. **Update and submit.** Update the JSON catalogue, source/test/evidence and actual Issue links; regenerate documentation. Submit a PR using the template, citing the permanent ID and acceptance checklist. A maintainer reviews scoped completeness and validation independently; passing unit tests alone does not promote scientific validation.
 
 ## Develop locally
 
@@ -45,7 +51,7 @@ The broad sweep is appropriate for shared numerical changes; routine documentati
 
 `docs/catalogue/methods.json` is the current source of truth. Keep permanent IDs, add canonical relationships and optional secondary classifications, and count each identifiable scoped method once by its primary family. Exclude unresolved bundles/overlaps from progress totals until reconciled. The archived research CSV is provenance, not another live status source.
 
-Update implementation status, declared scope, module/symbol, tests, remaining work, validation evidence and actual Issue URL. Generate `METHODS.md`, `ROADMAP.md`, the CSV, README counts and prepared briefs using `tools/generate_method_docs.py`. CI checks output freshness and evidence paths against the registry. Do not edit generated files independently. When adding an ID, update the generator's selected Issue/roadmap ID lists only if appropriate; the full catalogue is generated automatically.
+Update implementation status, declared scope, module/symbol, tests, remaining work, validation evidence and actual Issue URL. Generate `METHODS.md`, `ROADMAP.md`, the CSV, README counts and prepared briefs using `tools/generate_method_docs.py`. CI checks output freshness and evidence paths against the registry. Do not edit generated files independently. Roadmap selection is stored in each JSON record as `roadmap_rank`, `development_track` and `development_reason`; every record needs an explicit disposition. Unscheduled candidates must remain in the catalogue. The generator’s Issue-ID list controls only which prepared briefs are emitted, not which methods contributors may choose.
 
 ### Ready for “fully implemented”
 
