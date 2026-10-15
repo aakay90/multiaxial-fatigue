@@ -1,0 +1,563 @@
+{
+  "date": "2026-10-15",
+  "strategy": "One named source-code query per counted method/scoped record via system2, then stronger system1 queries and primary repository/file/license checks for useful leads. Four-query result batches; no exhaustive code-search or saturation claim.",
+  "queries": [
+    {
+      "id": "I_FS",
+      "q": "Fatemi–Socie fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_FIN",
+      "q": "Findley fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_SWT",
+      "q": "Smith–Watson–Topper fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_MATAKE",
+      "q": "Matake fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_MCD",
+      "q": "McDiarmid fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_MGSE_YU",
+      "q": "Yu generalized strain energy fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_MGSE_ZHU",
+      "q": "Zhu weighted generalized strain energy fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_MSWT",
+      "q": "Scalar modified SWT reported by Zhu fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_MKBM",
+      "q": "Li modified Kandil–Brown–Miller fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_LIU2021",
+      "q": "Liu et al.  modified shear amplitude fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_LI",
+      "q": "Li et al.  improved strain energy density fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_GSE",
+      "q": "Ince–Glinka generalized strain energy fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_GSA",
+      "q": "Ince–Glinka generalized strain amplitude fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_BP",
+      "q": "Böhme–Papuga fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_CAIM",
+      "q": "Critical–integral approach fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_CARSPA",
+      "q": "Carpinteri–Spagnoli fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_DANGVAN",
+      "q": "Dang Van fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_OTT",
+      "q": "Ottosen/Tveit proportional reduction fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_SWTD",
+      "q": "Deviatoric SWT fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "I_ZHU_EDP",
+      "q": "Zhu equivalent damage parameter fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N01",
+      "q": "Crossland fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N02",
+      "q": "Sines fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N03",
+      "q": "Papadopoulos, specified 2001 formulation fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N04",
+      "q": "Modified Wöhler Curve Method fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N05",
+      "q": "Wang maximum-shear-plane HCF criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N06",
+      "q": "Nonlinear critical-plane HCF criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N07",
+      "q": "Sectional critical-plane criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N08",
+      "q": "Hard-metal deviatoric-amplitude/principal-stress criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N09",
+      "q": "Unified equivalent shear stress fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N10",
+      "q": "Modified Marin-type mean-shear criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N11",
+      "q": "Quadratic damage-plane strength criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N12",
+      "q": "Revised multiaxial fatigue damage function fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N13",
+      "q": "Modified Gough limit curve fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N15",
+      "q": "Original Liu–Zenner integral criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N16",
+      "q": "Liu–Mahadevan characteristic-plane model, isotropic branch fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N17",
+      "q": "Mean-shear-sensitive weighted-plane criterion, CA branch fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N18",
+      "q": "Piecewise ruled S–N surface fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N19",
+      "q": "Improved Gough fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N20",
+      "q": "Stress-invariant endurance criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N21",
+      "q": "Equivalent Second Moment of Load Path fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N22",
+      "q": "Moment of Load Path , closed CA stress-path branch fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N23",
+      "q": "Equal-life surface with path correction fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N24",
+      "q": "Stress Scale Factor  family fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N25",
+      "q": "A90 deviatoric tensile critical-plane model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N26",
+      "q": "Negative-mean-stress modified SWT fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N27",
+      "q": "Wu–Hu–Song fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N28",
+      "q": "Modified WHS fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N29",
+      "q": "Original Kandil–Brown–Miller fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N30",
+      "q": "Normalized energy critical-plane parameter fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N31",
+      "q": "Load-path-sensitive modified fatigue parameter fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N32",
+      "q": "Multiaxial Fatigue Space fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N34",
+      "q": "Probabilistic slip-site model, homogeneous prescribed-volume scope fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N35",
+      "q": "HCF-DAM, prescribed proportional blocks fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N36",
+      "q": "Tanaka–Mura–Wu HCF crack-nucleation model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N37",
+      "q": "Projection-by-Projection , harmonic CA scope fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N38",
+      "q": "von Mises equivalent-amplitude baseline fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N39",
+      "q": "Tresca equivalent-amplitude baseline fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N40",
+      "q": "Maximum principal stress fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N41",
+      "q": "Elastic strain-energy equivalent-stress baseline fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N42",
+      "q": "IIW normal/shear interaction assessment fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N43",
+      "q": "Eurocode 3 normal/shear fatigue interaction fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N44",
+      "q": "Effective Equivalent Stress Hypothesis fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N46",
+      "q": "Wang–Brown strain-based assessment, selected original version fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N47",
+      "q": "Original Marin mean-stress criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N48",
+      "q": "Froustey–Lasserre energetic criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N50",
+      "q": "Grubisic–Simbürger formulation fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N52",
+      "q": "Itoh NP strain correction fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N53",
+      "q": "Substitute-amplitude/NP-damage method, CA branch fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N55",
+      "q": "Gradient-corrected local evaluator with externally supplied gradients fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "N57",
+      "q": "Combined deviatoric strain amplitudes fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G01",
+      "q": "Papuga–Růžička critical-plane criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G02",
+      "q": "Papuga–Růžička integral criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G03",
+      "q": "Papuga QCP mean-stress development fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G04",
+      "q": "Kakuno–Kawada fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G05",
+      "q": "Manson–McKnight–Papuga fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G06",
+      "q": "Margetin–Ďurka–Chmelko fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G07",
+      "q": "Modified Mohr–Mises hypothesis fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G08",
+      "q": "Complex-invariant linear wave interference fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G09",
+      "q": "Moment-adapted COIN LiWI fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G10",
+      "q": "Abasolo–Pallares-Santasmartas–Eizmendi exponent criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G11",
+      "q": "Yankin–Mugatarov–Wildemann loading-path criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G12",
+      "q": "Twin-shear unified-yield fatigue model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G13",
+      "q": "Braccesi–Cianetti–Lori–Pioli equivalent uniaxial process fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G15",
+      "q": "Liu virtual strain energy fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G16",
+      "q": "Ellyin–Kujawski multiaxial energy criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G17",
+      "q": "Garud plastic-work approach fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G18",
+      "q": "Łagoda–Macha–Będkowski critical-plane energy fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G20",
+      "q": "Lu–Wu–Zhong constant-amplitude energy model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G21",
+      "q": "Lu–Melendez–Martínez-Esnaola energy/plane family fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G22",
+      "q": "Modified Manson–Coffin Curve Method fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G23",
+      "q": "Morel mesoscopic constant-amplitude life model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G24",
+      "q": "Flacelière–Morel probabilistic fatigue family fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G25",
+      "q": "Morel–Huyen heterogeneous shakedown model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G26",
+      "q": "Palin-Luc–Lasserre fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G27",
+      "q": "Morel–Palin-Luc nonlocal HCF theory fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G28",
+      "q": "Delahay–Palin-Luc probabilistic gradient-energy model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G29",
+      "q": "Papadopoulos–Panoskaltsis invariant-gradient criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G30",
+      "q": "Berto–Lazzarin averaged strain energy density fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G31",
+      "q": "Wormsen–Härkegård weakest-link fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G32",
+      "q": "Stefanov curvilinear integral fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G33",
+      "q": "Zhai–Zou–Hu–Chen–Jin shakedown-constrained Walker model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G35",
+      "q": "Tien–Wei–Chen–Liu energy time-derivative damage fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G36",
+      "q": "Chaudonneret multiaxial continuum damage fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G37",
+      "q": "Lemaitre–Sermage–Desmorat two-scale damage fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G38",
+      "q": "Monchiet–Charkaluk–Kondo PSB damage criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G39",
+      "q": "Pessard–Morel–Morel–Bellett competing-mechanism model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G40",
+      "q": "Shang–Wang critical-plane damage model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G41",
+      "q": "Robert–Fogue–Bahuaud integral life criterion fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G42",
+      "q": "Malnati mesoplastic cycle-indicator method fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G43",
+      "q": "Xu et al. mean-stress/biaxiality modification fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G44",
+      "q": "Feng et al. elevated-temperature octahedral-stress model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G45",
+      "q": "Shao et al. compression–torsion bearing-steel model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G46",
+      "q": "Probabilistic FS/Chaboche material-variability framework fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G47",
+      "q": "Gates–Fatemi revised FS normalization fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G48",
+      "q": "Sharifimehr–Fatemi normal/shear interaction extension fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G49",
+      "q": "Leis total octahedral-energy parameter fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    },
+    {
+      "id": "G52",
+      "q": "Wei–Liu critical-plane energy model fatigue source code (GitHub OR MATLAB OR GitLab OR Zenodo)"
+    }
+  ],
+  "additional_catalogue_records": [
+    {
+      "id": "C04",
+      "route": "Author ECP repository found through source citation chaining"
+    },
+    {
+      "id": "C09",
+      "route": "ASU energy repository links to original random-spectrum code and constant driver"
+    }
+  ],
+  "platforms": "GitHub, GitLab, MathWorks File Exchange, author sites, SourceForge, Zenodo and publication-linked software.",
+  "limitations": "Generic results and homonyms were rejected; source indexing is incomplete. No accessible source identified is not proof of absence. MathWorks LoadPathMATLAB is FE load-flow visualization, not fatigue MLP; FatPy repository was empty at inspection, and an Issue is not an implementation. Sports/physiological fatigue results were rejected.",
+  "sources": [
+    {
+      "id": "EXT01",
+      "url": "https://github.com/achiocca1/FS-Sol",
+      "source_url": "https://github.com/achiocca1/FS-Sol/blob/bbab33d9d6d9979c8ea21e5543c4cf023818a6f8/FSSol_v1/FSSol_v1.m"
+    },
+    {
+      "id": "EXT02",
+      "url": "https://github.com/achiocca1/FI-Sol",
+      "source_url": "https://github.com/achiocca1/FI-Sol/blob/fd4406dff6092dcb54590296043193301a3aa583/FISol_v1.0/MAIN_FI.m"
+    },
+    {
+      "id": "EXT03",
+      "url": "https://github.com/cloestro/openfat",
+      "source_url": "https://github.com/cloestro/openfat/blob/782bbdf93080358aebf9decea4eb127fd3fe9265/crossland.c"
+    },
+    {
+      "id": "EXT04",
+      "url": "https://github.com/ymlasu/Energy-based-time-derivative-damage-accumulation-model-under-uniaxial-and-multiaxial-random-loadings",
+      "source_url": "https://github.com/ymlasu/Energy-based-time-derivative-damage-accumulation-model-under-uniaxial-and-multiaxial-random-loadings/blob/6cf6d82e607f15e6cd0bb8045105608cdaf810fe/Fatigue_Model_D.m"
+    },
+    {
+      "id": "EXT05",
+      "url": "https://github.com/ladisk/FLife",
+      "source_url": "https://github.com/ladisk/FLife/blob/dfe660987296abd5670d87f16e709065da3315db/FLife/multiaxial/criteria.py"
+    },
+    {
+      "id": "EXT06",
+      "url": "https://github.com/ladisk/FLife",
+      "source_url": "https://github.com/ladisk/FLife/blob/dfe660987296abd5670d87f16e709065da3315db/FLife/multiaxial/criteria.py"
+    },
+    {
+      "id": "EXT07",
+      "url": "https://github.com/ralic/Code_Aster",
+      "source_url": "https://github.com/ralic/Code_Aster/blob/master/code_aster/Cata/Commands/post_fatigue.py"
+    },
+    {
+      "id": "EXT08",
+      "url": "https://sourceforge.net/p/fatlab/code/HEAD/tree/trunk/calc_fatigue_stress.m",
+      "source_url": "https://sourceforge.net/p/fatlab/code/HEAD/tree/trunk/calc_fatigue_stress.m"
+    },
+    {
+      "id": "EXT09",
+      "url": "https://github.com/Gunnstein/fatpack",
+      "source_url": "https://github.com/Gunnstein/fatpack/blob/master/fatpack/stresscorrection.py"
+    },
+    {
+      "id": "EXT10",
+      "url": "https://www.pragtic.com/PragTicHelp/files/%7BB1530853-7C95-4C02-B465-FEB43C9456D0%7D.htm",
+      "source_url": "https://www.pragtic.com/PragTicHelp/files/%7BB1530853-7C95-4C02-B465-FEB43C9456D0%7D.htm"
+    },
+    {
+      "id": "EXT11",
+      "url": "https://github.com/ymlasu/strain-based-model",
+      "source_url": "https://github.com/ymlasu/strain-based-model/blob/0cb1b31d1a30484f4b7490b40a38f5634f94be3f/mafa304sin.m"
+    },
+    {
+      "id": "EXT12",
+      "url": "https://github.com/achiocca1/ECP",
+      "source_url": "https://github.com/achiocca1/ECP/blob/9d5115258d5a13b926788a0c636a417d94e85efd/MAIN.m"
+    },
+    {
+      "id": "EXT13",
+      "url": "https://github.com/ymlasu/Multiaxial-high-cycle-fatigue-life-prediction-model",
+      "source_url": "https://github.com/ymlasu/Multiaxial-high-cycle-fatigue-life-prediction-model/blob/96e5768cbb8d071c307b27f2d1b78666da086ab3/stress_based_prediction_constant.m"
+    },
+    {
+      "id": "EXT14",
+      "url": "https://github.com/ymlasu/An-energy-based-model-under-multiaxial-biaxial-loading",
+      "source_url": "https://github.com/ymlasu/An-energy-based-model-under-multiaxial-biaxial-loading/blob/f8b9f47125df2406e41f075632abde86cd837d0f/Fatigue_Model.m"
+    },
+    {
+      "id": "EXT15",
+      "url": "https://zenodo.org/records/10370862",
+      "source_url": "https://zenodo.org/records/10370862"
+    }
+  ]
+}

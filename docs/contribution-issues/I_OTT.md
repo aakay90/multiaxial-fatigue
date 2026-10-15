@@ -16,6 +16,10 @@
 
 ## Available components and remaining work
 
+FABER phase: Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply.
+
+External source discovery: no_accessible_source_identified; not integrated or independently validated. Consult the linked inventory for exact variant, language, license, evidence and reuse restrictions. External code does not count as integrated WG4.3 implementation.
+
 Only a proportional cycle reduction; non-proportional extension is unverified and fatigue-ratio calibration silently falls back to m=2 outside its supported range. Restore only after source-faithful repair and regression/reference checks.
 
 Existing implementation: [fatigue/models/invariant_methods/ottosen.py](../../fatigue/models/invariant_methods/ottosen.py); symbol `OttosenReduced`. Existing tests: [tests/test_method_audit.py](../../tests/test_method_audit.py).

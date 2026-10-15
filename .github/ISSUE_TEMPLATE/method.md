@@ -21,6 +21,8 @@ Principle; CA P/NP/mean-stress applicability; material restrictions; inputs/unit
 
 ## Existing code, tests and dependencies
 
+Check `docs/EXTERNAL_IMPLEMENTATIONS.md` and link any external source file/revision. State exact/modified/related correspondence, CA/plain-geometry compatibility, source accessibility, license and permission limits. An external implementation is not integrated WG4.3 code. Do not copy or translate before an applicable license/permission and project compatibility have been established.
+
 Relevant paths/symbols, reusable components, missing functionality/data, catalogue entry and related Issues.
 
 ## Acceptance criteria

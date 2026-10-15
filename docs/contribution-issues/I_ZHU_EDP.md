@@ -16,6 +16,10 @@
 
 ## Available components and remaining work
 
+FABER phase: Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply.
+
+External source discovery: no_accessible_source_identified; not integrated or independently validated. Consult the linked inventory for exact variant, language, license, evidence and reuse restrictions. External code does not count as integrated WG4.3 implementation.
+
 An acknowledged proxy: omits elastoplastic work W0 and substitutes a phase proxy for the published non-proportional factor. Restore only after source-faithful repair and regression/reference checks.
 
 Existing implementation: [fatigue/models/energy_based_methods/zhu_edp.py](../../fatigue/models/energy_based_methods/zhu_edp.py); symbol `ZhuEDP`. Existing tests: [tests/test_method_audit.py](../../tests/test_method_audit.py).

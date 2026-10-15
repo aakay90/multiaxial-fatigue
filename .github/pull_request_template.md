@@ -14,6 +14,8 @@ Commands/results, preserved existing behavior and remaining limitations. Update 
 
 - [ ] Exact primary formulation/version, scope and relationship to existing criteria identified.
 - [ ] Required inputs, units, assumptions and departures documented.
+- [ ] Current plain/smooth CA scope or explicit future-extension status stated.
+- [ ] External source files/revisions, variant correspondence, license permissions and retained notices reviewed before any reuse/translation; availability has not been mistaken for WG4.3 integration.
 - [ ] Meaningful numerical checks and independently computed reference result provided, or scientific gaps stated.
 - [ ] Implementation completeness and validation evidence classified separately.
 - [ ] Catalogue disposition and actual Issue links updated; generated docs pass `--check`.

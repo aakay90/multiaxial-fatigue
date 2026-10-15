@@ -16,6 +16,10 @@
 
 ## Available components and remaining work
 
+FABER phase: Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply.
+
+External source discovery: possible_or_related_source; [EXT07](../EXTERNAL_IMPLEMENTATIONS.md#ext07); not integrated or independently validated. Consult the linked inventory for exact variant, language, license, evidence and reuse restrictions. External code does not count as integrated WG4.3 implementation.
+
 Combines shear amplitude with independently reconstructed hydrostatic endpoints, losing their time relationship and corrupting the trace for out-of-phase histories. Restore only after source-faithful repair and regression/reference checks.
 
 Existing implementation: [fatigue/models/cp_methods/dangvan.py](../../fatigue/models/cp_methods/dangvan.py); symbol `DangVan`. Existing tests: [tests/test_method_audit.py](../../tests/test_method_audit.py).

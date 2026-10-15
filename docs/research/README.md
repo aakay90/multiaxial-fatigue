@@ -1,5 +1,7 @@
 # Research provenance
 
+The 15 October targeted external-code pass is recorded in `external-code-search.json` and generated [external inventory](../EXTERNAL_IMPLEMENTATIONS.md). It adds source/variant/license metadata without repeating the literature review, promoting validation, or copying third-party code. The present FABER WG4.3 review-article phase is plain/smooth-geometry CA fatigue; broader geometry/loading sources remain future/reference tracks.
+
 The live status catalogue is [../catalogue/methods.json](../catalogue/methods.json). This directory preserves earlier research evidence; its dates and implementation labels are historical and must not override the live catalogue.
 
 - `Review-FABER-WG43.md`: supplied 51-publication review, content preserved with line endings/trailing whitespace normalized. It contains duplicate/misattributed descriptions; see the assessment and coverage register before selecting a formulation.
