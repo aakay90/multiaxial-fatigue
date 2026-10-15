@@ -7,13 +7,13 @@ import csv
 import io
 import json
 from pathlib import Path
+from urllib.parse import urlencode
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'docs/catalogue/methods.json'
 STATUSES = ['fully_implemented', 'partially_implemented', 'not_implemented', 'requires_review']
 LABEL = dict(zip(STATUSES, ['Fully implemented', 'Partially implemented', 'Not implemented', 'Requires review']))
 ISSUE_IDS = ['I_LIU2021', 'I_MGSE_ZHU', 'I_MKBM', 'I_LI', 'I_MSWT', 'I_CARSPA', 'I_DANGVAN', 'I_OTT', 'I_SWTD', 'I_ZHU_EDP', 'N01', 'N02', 'G01', 'G02', 'N03', 'N04']
-ROADMAP_IDS = ['N01', 'N02', 'G01', 'G02', 'N03', 'G41', 'G06', 'N04', 'G07', 'G08', 'G23', 'N20', 'N37', 'G15', 'G16', 'G22', 'G29', 'N34', 'G26', 'G30', 'G24', 'G35']
 
 
 def cell(s):
@@ -70,6 +70,15 @@ def validate(data):
     for m in entries:
         if 'saved metadata in' in m['reference_status']:
             assert m['doi'].removeprefix('https://doi.org/').lower() in dois
+    inherited = list(csv.DictReader((ROOT / 'docs/research/Multiaxial_Fatigue_Master_Catalogue.csv').open()))
+    assert set(ids) == {r['ID'] for r in inherited}, 'Inherited research record lost or added without reconciliation'
+    ranks = [m['roadmap_rank'] for m in entries if m['roadmap_rank'] is not None]
+    assert sorted(ranks) == list(range(1, len(ranks) + 1)), 'Duplicate or missing roadmap rank'
+    for m in entries:
+        assert m['development_reason'] and m['reference_action']
+        assert (m['roadmap_rank'] is not None) == (m['development_track'] == 'prioritized_addition')
+        if m['roadmap_rank'] is not None:
+            assert m['count_in_progress'] and m['implementation_status'] == 'not_implemented'
     return entries
 
 
@@ -92,6 +101,7 @@ def catalogue(entries):
     txt += '## Progress\n\n' + overview(entries) + '\n¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.\n\n'
     excluded = [m for m in entries if not m['count_in_progress']]
     txt += f'All {len(entries)} inherited records remain traceable. {len(excluded)} bundles, overlap checks, related publications, unresolved leads and broad workstreams are excluded from progress totals. Absence from those totals is not a scientific rejection. The [51-publication coverage register](docs/research/Review_51_Coverage.csv) preserves every supplied review entry.\n\n'
+    txt += 'Browse [contribution opportunities and status/loading/validation views](docs/METHOD_INDEX.md), or inspect the [complete count reconciliation and record dispositions](docs/COUNT_RECONCILIATION.md). Roadmap selection never removes an entry here.\n\n'
     txt += '## Browse by family\n\n'
     families = sorted({m['primary_family'] for m in entries})
     for f in families:
@@ -103,7 +113,7 @@ def catalogue(entries):
         txt += table(['ID', 'Method / scope', 'Implementation', 'Validation', 'Priority', 'Counted'], [[f'[{m["id"]}](#{m["id"].lower()})',m['name'],LABEL[m['implementation_status']],m['validation_status'],m['priority'],'Yes' if m['count_in_progress'] else m['record_type']] for m in group])
         for m in group:
             txt += f'\n### {m["id"]}\n\n**{m["name"]}** — {m["authors_year"]}\n\n'
-            details = [('Primary / secondary family', m['primary_family'] + '; ' + ', '.join(m['secondary_classifications'])),('Record / counting',m['record_type']+'; '+m['count_reason']),('Reference',m['reference']),('DOI',m['doi'] or 'No verified original DOI available'),('Reference evidence',m['reference_status']),('Formulation evidence',m['formulation_evidence']),('Principle',m['principle']),('Loading scope',m['loading_scope']),('Inputs / material parameters',m['required_inputs']),('Output',m['prediction_capability']),('Implementation / evidence',LABEL[m['implementation_status']]+'; '+m['completeness_evidence']),('Validation / evidence',m['validation_status']+'; '+m['validation_evidence']),('Python implementation',pathlink(m['module'])+'; '+m['symbol']),('Automated tests',', '.join(pathlink(p) for p in m['test_files']) or 'None for this candidate'),('Limitations',m['limitations']),('Missing tasks',m['missing_tasks']),('Reuse',m['reuse']),('Feasibility / effort / priority',m['feasibility']+' / '+m['complexity']+' / '+m['priority']),('Provenance / prior status',m['source_record_id']+'; '+m['review_status']),('Related catalogue ID',f'[{m["canonical_id"]}](#{m["canonical_id"].lower()})' if m['canonical_id'] else 'None recorded'),('GitHub Issue / prepared brief',m['issue_url'] or (f'[Prepared {m["id"]} brief](docs/contribution-issues/{m["id"]}.md)' if m['id'] in ISSUE_IDS else 'No Issue created; agree exact source/version and scope before opening one'))]
+            details = [('Primary / secondary family', m['primary_family'] + '; ' + ', '.join(m['secondary_classifications'])),('Record / counting',m['record_type']+'; '+m['count_reason']),('Reference',m['reference']),('DOI',m['doi'] or 'No verified original DOI available'),('Reference evidence',m['reference_status']),('Formulation evidence',m['formulation_evidence']),('Principle',m['principle']),('Loading scope',m['loading_scope']),('Inputs / material parameters',m['required_inputs']),('Output',m['prediction_capability']),('Implementation / evidence',LABEL[m['implementation_status']]+'; '+m['completeness_evidence']),('Validation / evidence',m['validation_status']+'; '+m['validation_evidence']),('Python implementation',pathlink(m['module'])+'; '+m['symbol']),('Automated tests',', '.join(pathlink(p) for p in m['test_files']) or 'None for this candidate'),('Limitations',m['limitations']),('Missing tasks',m['missing_tasks']),('Reference retrieval action',m['reference_action']),('Development disposition',m['development_track']+'; '+m['development_reason']),('Roadmap rank',m['roadmap_rank']),('Reuse',m['reuse']),('Feasibility / effort / priority',m['feasibility']+' / '+m['complexity']+' / '+m['priority']),('Provenance / prior status',m['source_record_id']+'; '+m['review_status']),('Related catalogue ID',f'[{m["canonical_id"]}](#{m["canonical_id"].lower()})' if m['canonical_id'] else 'None recorded'),('GitHub Issue / prepared brief',issue_links(m))]
             txt += table(['Field', 'Evidence / task'], details)
     return txt
 
@@ -160,8 +170,11 @@ Use separate reviewable PRs for source/benchmark specification, prerequisites an
 
 def roadmap(entries):
     byid = {m['id']:m for m in entries}
-    txt = '# Suggested implementation roadmap\n\nThese are research recommendations, not formally agreed WG4.3 commitments. No new fatigue law is implemented by this documentation change. Preserve the audit baseline and select one original formulation per PR.\n\n## Existing-code evidence and restoration\n\nFirst resolve LIU2021 Eq. (27), then MGSE_ZHU, MKBM, LI and scalar MSWT scope. Their code is active but completeness remains unestablished. Restore CARSPA plane orientation, Dang Van simultaneous shakedown/shear–hydrostatic history, the bounded OTT reduction/full-model distinction, physically paired SWTD directions and the actual ZHU_EDP work/path model in separate tasks. Prepared briefs specify evidence and acceptance criteria.\n\n## Ordered programme across families\n\n'
-    txt += table(['Order','ID / method','Added capability / principle','Exact paper to retrieve','DOI','Prerequisite / missing work'], [[i,f'[{id}](METHODS.md#{id.lower()}) — {byid[id]["name"]}',byid[id]['principle'],byid[id]['reference'],byid[id]['doi'] or 'Original DOI unverified; use traceable citation',byid[id]['missing_tasks']] for i,id in enumerate(ROADMAP_IDS,1)])
+    roadmap_ids = [m['id'] for m in sorted((e for e in entries if e['roadmap_rank'] is not None), key=lambda e:e['roadmap_rank'])]
+    txt = '# Suggested implementation roadmap\n\nThese are research recommendations, not formally agreed WG4.3 commitments. No new fatigue law is implemented by this documentation change. Preserve the audit baseline and select one original formulation per PR.\n\n## Existing-code evidence and restoration\n\nFirst resolve LIU2021 Eq. (27), then MGSE_ZHU, MKBM, LI and scalar MSWT scope. Their code is active but completeness remains unestablished. Restore CARSPA plane orientation, Dang Van simultaneous shakedown/shear–hydrostatic history, the bounded OTT reduction/full-model distinction, physically paired SWTD directions and the actual ZHU_EDP work/path model in separate tasks. Prepared briefs specify evidence and acceptance criteria.\n\n'
+    txt += roadmap_explanation(entries)
+    txt += "## Ordered programme across families\n\n"
+    txt += table(['Order','ID / method','Added capability / principle','Exact paper to retrieve','DOI','Prerequisite / missing work'], [[i,f'[{id}](METHODS.md#{id.lower()}) — {byid[id]["name"]}',byid[id]['development_reason'],byid[id]['reference'],byid[id]['doi'] or 'Original DOI unverified; use traceable citation',byid[id]['missing_tasks']] for i,id in enumerate(roadmap_ids,1)])
     txt += '\n**First new-discovery paper:** Papuga & Růžička (2008), *Two new multiaxial criteria for high cycle fatigue computation*, [10.1016/j.ijfatigue.2007.02.015](https://doi.org/10.1016/j.ijfatigue.2007.02.015), for G01/G02. Keep the 2008 laws distinct from later PCRN/PIN/QCP versions. Consult their saved relationship notes; the 2019 mean-stress development and erratum are separate version requirements, not substitutions for the original paper.\n\n'
     txt += '## Reusable prerequisites\n\n'
     txt += table(['Component','Existing reuse','Beneficiaries / boundary'],[
@@ -176,10 +189,107 @@ def roadmap(entries):
     return txt
 
 
+def selected(entries):
+    return [m for m in entries if m['roadmap_rank'] is not None]
+
+
+def issue_links(m, prefix=''):
+    if m['issue_url']:
+        return f'[Open Issue]({m["issue_url"]})'
+    search = 'https://github.com/andreachiocca/multiaxial-fatigue/issues?' + urlencode({'q':f'{m["id"]} in:title,body'})
+    proposal = 'https://github.com/andreachiocca/multiaxial-fatigue/issues/new?' + urlencode({'template':'method.md','title':f'[{m["id"]}] {m["name"]}'})
+    bits = [f'[Search Issues]({search})', f'[Propose task]({proposal})']
+    if m['id'] in ISSUE_IDS:
+        bits.insert(0, f'[Prepared brief]({prefix}docs/contribution-issues/{m["id"]}.md)')
+    return ' · '.join(bits) + ' (no live Issue linked)'
+
+
+def roadmap_explanation(entries):
+    missing = [m for m in entries if m['count_in_progress'] and m['implementation_status']=='not_implemented']
+    chosen = selected(entries); deferred = [m for m in missing if m['roadmap_rank'] is None]
+    return f'''## Why the roadmap is shorter than the catalogue
+
+This roadmap selects **{len(chosen)} of {len(missing)} missing method/scoped candidates** for an initial programme. **{len(deferred)} remain outside the sequence**: {sum(m['feasibility'] in 'AB' for m in deferred)} with preliminary A/B feasibility and {sum(m['feasibility']=='C' for m in deferred)} requiring major extensions. They remain contribution opportunities, including medium/low-priority candidates. The five existing repairs and five existing-source reviews above form separate tracks.
+
+Selection balances recognized CA fatigue relevance, additional scientific capability, methodological diversity, reuse of current utilities, reference/benchmark leads, material data and shared prerequisites. Numerical simplicity is not the sole criterion: volumetric, mesoscopic and probabilistic extensions are deliberately retained. Order is advisory and may change when original papers/data establish better feasibility.
+
+The earlier research shortlist had 23 entries. G14 (Glinka–Shen–Plumtree) was subsequently held for overlap review against GSE/GSA, leaving 22 in this sequence; it remains in the full catalogue and is not asserted equivalent.
+
+No candidate is rejected just because it is absent here. Deferred rows have explicit requirements in the [complete per-record reconciliation](docs/COUNT_RECONCILIATION.md) and [contribution index](docs/METHOD_INDEX.md). For work outside the sequence, choose its permanent ID, check source identity and related criteria, then open a scoped proposal using the method template. A different sequence is welcome when justified by a source-faithful formulation and available validation data.
+
+Full VA/random-only workflows are deferred from CA priorities. Bundles and uncertain identities need specification first; application/comparison papers are not automatically new laws. Those dispositions do not remove their source records from the catalogue.
+
+'''
+
+
+def reconciliation(entries):
+    counted = [m for m in entries if m['count_in_progress']]
+    missing = [m for m in counted if m['implementation_status']=='not_implemented']
+    chosen = selected(entries); outside = [m for m in missing if m['roadmap_rank'] is None]
+    txt = '# Catalogue and roadmap count reconciliation\n\nGenerated from `catalogue/methods.json`; every inherited permanent ID is checked against the frozen research CSV.\n\n'
+    txt += f'## Answer to “about 100 reviewed, but about 20 in the roadmap?”\n\nThe **{len(missing)} missing method/scoped candidates** describe the implementation backlog. The **{len(chosen)} roadmap entries** are an intentionally selected initial development sequence. The other **{len(outside)}** are retained, individually accounted for and open to proposals. The prior 23-step research shortlist was itself selective; the published initial roadmap had 22 additions. Neither was the literature census. The only difference between the earlier 23-entry shortlist and the 22-entry published sequence is **G14, Glinka–Shen–Plumtree**: it remains in the catalogue as an overlap-review record pending an equation-level comparison with GSE/GSA. This is not proof that the laws are equivalent. The missing explanation is corrected here.\n\n'
+    txt += 'There is no evidence of an inherited record being lost: all **161/161 IDs** survive, and all **51/51 numbered FABER publications** have dispositions. The weakness was that the selection policy and the nonselected backlog were not prominent enough. This update adds explicit development dispositions and browse links; it does not fabricate additional fatigue laws.\n\n'
+    txt += '## Exact inventory arithmetic\n\n'
+    prefix_rows=[]
+    for prefix,desc in [('I_','Current and archived implementation records'),('N','Inherited review-derived candidate packages'),('G','Extended-search publication/formulation packages'),('R','Restoration/variant notes'),('C','Wider workflows/model/application packages'),('L','Historical bibliographic/identity leads')]:
+        group=[m for m in entries if m['id'].startswith(prefix)]
+        prefix_rows.append([prefix,desc,len(group),sum(m['count_in_progress'] for m in group),sum(not m['count_in_progress'] for m in group)])
+    txt += table(['ID prefix','What it represents','All records','In method progress total','Outside denominator'],prefix_rows+[['TOTAL','',len(entries),len(counted),len(entries)-len(counted)]])
+    txt += f'\n**161 = 117 + 44; 117 = 20 implementation records + 97 missing candidates; 97 = {len(chosen)} prioritized additions + {len(outside)} nonselected candidates.** Of the 97 missing candidates, {sum(m["feasibility"] in "AB" for m in missing)} have preliminary A/B feasibility and {sum(m["feasibility"]=="C" for m in missing)} have C feasibility. Feasibility does not certify available measured data, equations or a reproducible algorithm.\n\n'
+    txt += '## What these numbers do and do not count\n\nA publication can introduce several laws (G01/PCR and G02/PI share one 2008 article), compare existing laws, extend one family or supply an algorithm. Different papers can describe the same formulation. N14 contains Gough–Pollard and Nishihara–Kawamoto and is a bundle, not one reconciled independent law. R01/R02/R03 refer to existing archived implementations and are linked to their canonical IDs. `_ext` variants are documented under their parent implementation. Meaningful later versions remain distinguished in scope/relationship notes; unresolved equivalence is not asserted.\n\n'
+    txt += '**117 is a reconciled count of identifiable method/scoped-candidate records, not a scientifically final count of independent theories.** Exact independence remains unresolved for some bundles, variants and broad C workstreams; expanding those could increase the denominator, while finding equivalences could reduce it. Resolving that would require original-paper work beyond this documentation task. All candidates remain visible irrespective of difficulty or family.\n\n'
+    c=collections.Counter(m['record_type'] for m in entries if not m['count_in_progress'])
+    txt += table(['Outside progress denominator','Records'],sorted(c.items()))
+    txt += '\nBroader workstreams are excluded from the narrow method-progress denominator because their boundaries are not reconciled, not because major extensions are unwanted. Twelve **counted** missing candidates already have C feasibility, and three are on the initial roadmap. Full VA/random workflows are outside the CA priority scope. Nguyen’s manufacturing comparison does not establish an independent law. The per-record reasons below preserve these distinctions.\n\n'
+    tracks=collections.Counter(m['development_track'] for m in entries)
+    txt += '## Development dispositions\n\n'+table(['Track','Records'],sorted(tracks.items()))
+    txt += '\n## Every record accounted for\n\nUse the catalogue link for full references, loading/data scope and scientific limitations. “Outside denominator” is not a scientific exclusion. Development dispositions and reasons are fields in the JSON and generated CSV.\n\n'
+    txt += table(['ID / name','Record type','Counted','Implementation','Development disposition','Selection / deferral / relationship reason'],[[f'[{m["id"]}](../METHODS.md#{m["id"].lower()}) — {m["name"]}',m['record_type'],'Yes' if m['count_in_progress'] else 'No',LABEL[m['implementation_status']],f'#{m["roadmap_rank"]}' if m['roadmap_rank'] else m['development_track'],m['development_reason']] for m in entries])
+    txt += '\nThe frozen [research checkpoint](research/Multiaxial_Fatigue_Research_Checkpoint.md), [original 51-publication review](research/Review-FABER-WG43.md), [coverage register](research/Review_51_Coverage.csv) and [prior assessment](research/feasibility-assessment.md) remain source evidence. Some inherited workstream numbering is inconsistent and remains flagged; it is not promoted to a verified method identity. No new broad search or original-equation verification was performed.\n'
+    return txt
+
+
+def readme_reconciliation(entries):
+    counted=[m for m in entries if m['count_in_progress']]
+    missing=[m for m in counted if m['implementation_status']=='not_implemented']
+    n=len(selected(entries))
+    return f'The catalogue contains **{len(missing)} missing method/scoped candidates**; the roadmap selects **{n}** for an initial, dependency-aware programme. The other **{len(missing)-n} remain available for proposals**. The complete index retains **{len(entries)} research records**, including **{len(counted)} identifiable method/scoped records** and **{len(entries)-len(counted)} bundles, related sources, unresolved overlaps/leads and wider workstreams** outside that progress denominator. These are not {len(entries)} independent fatigue theories.\n'
+
+
+def readme_navigation(entries):
+    missing=[m for m in entries if m['count_in_progress'] and m['implementation_status']=='not_implemented']
+    txt=f'**{len(missing)} missing method candidates** are available to explore: {sum(m["feasibility"] in "AB" for m in missing)} have preliminary A/B feasibility (a new criterion or manageable extensions). Pick by scientific interest and available references/data; an off-roadmap proposal is welcome.\n\n'
+    families=sorted({m['primary_family'] for m in missing})
+    txt += 'Browse contribution opportunities by family: '+ ' · '.join(f'[{f}](docs/METHOD_INDEX.md#family-{f.lower().replace(" / ","-").replace(" ","-")})' for f in families)+'.\n\n'
+    active=[m for m in entries if m['enabled']]
+    txt+='**Available in the current API:** '+', '.join(f'[{m["registry_name"]}](METHODS.md#{m["id"].lower()})' for m in active)+'. Each link states the implemented scope and evidence; active does not automatically mean source completeness is established.\n'
+    return txt
+
+
+def browse(entries):
+    counted=[m for m in entries if m['count_in_progress']]
+    txt='# Find a method to contribute\n\nGenerated from [catalogue/methods.json](catalogue/methods.json). The [full catalogue](../METHODS.md) includes every research record; [count reconciliation](COUNT_RECONCILIATION.md) explains the denominator. A/B/C/D and priorities are preliminary scientific/engineering judgments, not promises about available equations or measured material data.\n\n'
+    txt+='[Available API methods](#available-api-methods) · [Repairs](#repairs) · [Source reviews](#source-reviews) · [Missing methods by family](#missing-methods-by-family) · [Validation and benchmarks](#validation-and-benchmarks) · [Loading scope](#loading-scope) · [Unresolved/related work](#unresolved-and-related-work)\n\n'
+    for title,group in [('Available API methods',[m for m in entries if m['enabled']]),('Repairs',[m for m in counted if m['implementation_status']=='partially_implemented']),('Source reviews',[m for m in counted if m['implementation_status']=='requires_review'])]:
+        txt+=f'## {title}\n\n'
+        txt+=table(['ID / method','Completeness','Validation evidence','Task / Issue'],[[f'[{m["id"]}](../METHODS.md#{m["id"].lower()}) — {m["name"]}',LABEL[m['implementation_status']],m['validation_status']+'; '+m['validation_evidence'],issue_links(m,'../')] for m in group])+'\n'
+    txt+='## Missing methods by family\n\nThese are all missing counted candidates, not only the prioritized roadmap. A numbered row is selected in the initial sequence; other rows remain open to proposals. Follow the catalogue link for the principle, required material parameters and exact outstanding tasks. DOI identity does not establish a fully reproducible algorithm.\n\n'
+    missing=[m for m in counted if m['implementation_status']=='not_implemented']
+    for family in sorted({m['primary_family'] for m in missing}):
+        anchor=family.lower().replace(' / ','-').replace(' ','-');txt+=f'<a id="family-{anchor}"></a>\n\n### {family}\n\n'
+        txt+=table(['ID / method','Authors/year; reference','Loading scope / expected output','Feasibility; plan','Find or propose work'],[[f'[{m["id"]}](../METHODS.md#{m["id"].lower()}) — {m["name"]}',m['authors_year']+'; '+(f'[DOI]({m["doi"]})' if m['doi'] else 'No verified original DOI; see catalogue citation'),m['loading_scope']+' / '+m['prediction_capability'],m['feasibility']+'; '+(f'roadmap #{m["roadmap_rank"]}' if m['roadmap_rank'] else m['development_track']),issue_links(m,'../')] for m in missing if m['primary_family']==family])+'\n'
+    txt+='## Validation and benchmarks\n\n'
+    txt+=table(['Evidence level','Counted records','What contributors can do'],[[level,sum(m['validation_status']==level for m in counted),task] for level,task in [('not_tested','Implement or repair the law, then supply meaningful numerical checks. Disabled guards are not criterion tests.'),('basic_numerical_tests','Supply independently calculated published cases, intermediate results and independent datasets.'),('reference_examples_reproduced','Extend independent validation across material/loading domains.'),('independently_validated','Extend evidence to new documented domains without changing the source formulation.')]])
+    txt+='\nExisting evidence is linked per active method above and in the catalogue. BP has analytical loading limits and phase checks; CAIM also has a separate dense calculation of supplied MATLAB equations. Those are numerical verification, not reproduced experimental datasets. Other active methods have the documented analytical/regression tests. The material workbooks are available for future comparisons; old result CSVs are historical and must not be treated as current validation.\n\n'
+    txt+='## Loading scope\n\nCurrent executable input: physical single-frequency CA tensors `S_mean + S_sin sin(t) + S_cos cos(t)`, with strains inferred elastically by the workbook importer. API availability and each law’s validity domain are separate. A repeating NP path can be nonsinusoidal, but the current importer cannot represent arbitrary periodic waveforms.\n\nUse the loading/output columns above to screen candidate P/NP, mean-stress, strength-limit and life capabilities. These are source-domain assessments, not newly implemented capabilities. For proposed strain/plastic-work, gradient or probability use, inspect the required data and restrictions in the linked catalogue entry before coding.\n\n'
+    txt+='## Unresolved and related work\n\nAll noncounted bundles, possible equivalences, wider physical models, applications and bibliographic leads have an individual [reconciliation row](COUNT_RECONCILIATION.md#every-record-accounted-for). They are valid reference/specification contribution opportunities. They need source/scope clarification before a claim that a new independent criterion has been implemented. They are not hidden rejections or restricted to critical-plane work.\n'
+    return txt
+
+
 def main():
     args = argparse.ArgumentParser(); args.add_argument('--check', action='store_true'); opt = args.parse_args()
     data = json.loads(DATA.read_text()); entries = validate(data)
-    outputs = {'METHODS.md':catalogue(entries), 'ROADMAP.md':roadmap(entries)}
+    outputs = {'METHODS.md':catalogue(entries), 'ROADMAP.md':roadmap(entries), 'docs/COUNT_RECONCILIATION.md':reconciliation(entries), 'docs/METHOD_INDEX.md':browse(entries)}
     rows = []
     for m in entries:
         rows.append({k:json.dumps(v, ensure_ascii=False) if isinstance(v,(list,dict)) else v for k,v in m.items()})
@@ -194,6 +304,12 @@ def main():
     readme = (ROOT / 'README.md').read_text()
     before, rest = readme.split('<!-- METHOD_PROGRESS_START -->'); _,after=rest.split('<!-- METHOD_PROGRESS_END -->')
     outputs['README.md'] = before+'<!-- METHOD_PROGRESS_START -->\n\n'+overview(entries)+'\n<!-- METHOD_PROGRESS_END -->'+after
+    readme = outputs['README.md']
+    before, rest = readme.split('<!-- METHOD_NAVIGATION_START -->'); _,after = rest.split('<!-- METHOD_NAVIGATION_END -->')
+    outputs['README.md'] = before+'<!-- METHOD_NAVIGATION_START -->\n\n'+readme_navigation(entries)+'\n<!-- METHOD_NAVIGATION_END -->'+after
+    readme = outputs['README.md']
+    before, rest = readme.split('<!-- METHOD_RECONCILIATION_START -->'); _,after = rest.split('<!-- METHOD_RECONCILIATION_END -->')
+    outputs['README.md'] = before+'<!-- METHOD_RECONCILIATION_START -->\n\n'+readme_reconciliation(entries)+'\n<!-- METHOD_RECONCILIATION_END -->'+after
     stale=[]
     for path,content in outputs.items():
         p=ROOT/path

@@ -31,6 +31,8 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 All 161 inherited records remain traceable. 44 bundles, overlap checks, related publications, unresolved leads and broad workstreams are excluded from progress totals. Absence from those totals is not a scientific rejection. The [51-publication coverage register](docs/research/Review_51_Coverage.csv) preserves every supplied review entry.
 
+Browse [contribution opportunities and status/loading/validation views](docs/METHOD_INDEX.md), or inspect the [complete count reconciliation and record dispositions](docs/COUNT_RECONCILIATION.md). Roadmap selection never removes an entry here.
+
 ## Browse by family
 
 - [Critical plane](#family-critical-plane)
@@ -97,11 +99,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Signed normal maximum retained; RSS ellipse shear convention; finite plane grid, not continuous global optimization. |
 | Missing tasks | No known essential coding gap within the declared repository scope. Add independent publication/experimental validation; do not broaden scope without evidence. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_FIN; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_FIN+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_FIN%5D+Findley) (no live Issue linked) |
 
 ### I_MATAKE
 
@@ -125,11 +130,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Tension-only normal term is an adaptation; RSS ellipse convention; not an unrestricted reproduction of original mean-stress behavior. |
 | Missing tasks | No known essential coding gap within the declared repository scope. Add independent publication/experimental validation; do not broaden scope without evidence. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_MATAKE; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_MATAKE+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_MATAKE%5D+Matake+%28tension-only+repository+adaptation%29) (no live Issue linked) |
 
 ### I_MCD
 
@@ -153,11 +161,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Common surface-crack form only; no crack-type-specific calibration; tension-only normal convention. |
 | Missing tasks | No known essential coding gap within the declared repository scope. Add independent publication/experimental validation; do not broaden scope without evidence. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_MCD; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_MCD+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_MCD%5D+McDiarmid+%28surface-crack+repository+scope%29) (no live Issue linked) |
 
 ### I_CARSPA
 
@@ -181,11 +192,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Missing the published critical-plane orientation construction; maximum-shear/max-damage scans are not that criterion. |
 | Missing tasks | Missing the published critical-plane orientation construction; maximum-shear/max-damage scans are not that criterion. Restore only after source-faithful repair and regression/reference checks. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | repair; Archived implementation has a known essential gap and remains disabled. Missing the published critical-plane orientation construction; maximum-shear/max-damage scans are not that criterion. Restore only after source-faithful repair and regression/reference checks. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | I_CARSPA; Previously attempted, disabled |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared I_CARSPA brief](docs/contribution-issues/I_CARSPA.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/I_CARSPA.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_CARSPA+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_CARSPA%5D+Carpinteri%E2%80%93Spagnoli) (no live Issue linked) |
 
 ### N04
 
@@ -209,11 +223,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Established life-based method rather than fitting one generic DP curve. |
 | Missing tasks | Dual-curve calibration, ratio cutoff/validity, native life mapping. No universal transfer of welded FAT curves to smooth specimens. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Established critical-plane life framework; ratio-dependent resistance adds substantial engineering capability. |
+| Roadmap rank | 8 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | N04; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared N04 brief](docs/contribution-issues/N04.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/N04.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N04+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN04%5D+Modified+W%C3%B6hler+Curve+Method+%2F+Susmel%E2%80%93Lazzarin) (no live Issue linked) |
 
 ### N05
 
@@ -237,11 +254,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Compact mean-normal-sensitive alternative to Findley/Matake, not the existing MSWT. |
 | Missing tasks | New criterion and exact coefficient/sign checks; use the published amplitude convention. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New criterion and exact coefficient/sign checks; use the published amplitude convention. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / High |
 | Provenance / prior status | N05; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N05+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN05%5D+Wang+maximum-shear-plane+HCF+criterion) (no live Issue linked) |
 
 ### N06
 
@@ -265,11 +285,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Tests nonlinear interaction without constitutive extensions. |
 | Missing tasks | Scalar criterion, material-domain/denominator guards; recover equation from original. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Scalar criterion, material-domain/denominator guards; recover equation from original. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / High |
 | Provenance / prior status | N06; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N06+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN06%5D+Nonlinear+critical-plane+HCF+criterion) (no live Issue linked) |
 
 ### N07
 
@@ -293,11 +316,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Adapts mechanism/plane selection to material and loading; distinct from fixed-metric CP methods. |
 | Missing tasks | Case-level branching, global normal/shear maxima and branch-boundary continuity. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Case-level branching, global normal/shear maxima and branch-boundary continuity. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | N07; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N07+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN07%5D+Sectional+critical-plane+criterion) (no live Issue linked) |
 
 ### N11
 
@@ -321,11 +347,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Simple nonlinear CP benchmark; not CAIM or Findley. |
 | Missing tasks | Scalar criterion and ratio guards; preserve published shear-amplitude definition. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Scalar criterion and ratio guards; preserve published shear-amplitude definition. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Medium |
 | Provenance / prior status | N11; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N11+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN11%5D+Quadratic+damage-plane+strength+criterion) (no live Issue linked) |
 
 ### N12
 
@@ -349,11 +378,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | More useful mean-stress development of N11; share evaluator but retain version identity. |
 | Missing tasks | Revised coefficients, stated ratio domain and mean-stress rule. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Revised coefficients, stated ratio domain and mean-stress rule. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N12; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N12+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN12%5D+Revised+multiaxial+fatigue+damage+function) (no live Issue linked) |
 
 ### N16
 
@@ -377,11 +409,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Distinct crack-plane mechanism; foundation for the Wei random-spectrum extension. |
 | Missing tasks | Characteristic-plane construction, life-dependent strengths and implicit life solution. Original must establish supported NP scope. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Characteristic-plane construction, life-dependent strengths and implicit life solution. Original must establish supported NP scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | N16; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N16+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN16%5D+Liu%E2%80%93Mahadevan+characteristic-plane+model%2C+isotropic+branch) (no live Issue linked) |
 
 ### N25
 
@@ -405,11 +440,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Tensile-crack/compressive-mean behavior not captured by simple clipped SWT. Full VA counting is C. |
 | Missing tasks | Deviatoric directional pairing, sectional search and original life equation; measured cyclic strains for plastic use. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Deviatoric directional pairing, sectional search and original life equation; measured cyclic strains for plastic use. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N25; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N25+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN25%5D+A90%28T%29+deviatoric+tensile+critical-plane+model) (no live Issue linked) |
 
 ### R01
 
@@ -433,11 +471,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Do not re-enable archived implementation without full source and tests |
 | Missing tasks | Missing critical-plane orientation construction |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | identity_or_relationship_review; Additional source/scope for I_CARSPA; no additional method count. Missing critical-plane orientation construction |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | R01; Already reviewed; archived implementation disabled or modified variant unregistered |
 | Related catalogue ID | [I_CARSPA](#i_carspa) |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=R01+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BR01%5D+Original+Carpinteri%E2%80%93Spagnoli) (no live Issue linked) |
 
 ### R02
 
@@ -461,11 +502,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Do not re-enable archived implementation without full source and tests |
 | Missing tasks | Physical shear/hydrostatic simultaneity lost in archived code; original 1973 reference has no verified DOI |
+| Reference retrieval action | Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation. |
+| Development disposition | identity_or_relationship_review; Additional source/scope for I_DANGVAN; no additional method count. Physical shear/hydrostatic simultaneity lost in archived code; original 1973 reference has no verified DOI |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | R02; Already reviewed; archived implementation disabled or modified variant unregistered |
 | Related catalogue ID | [I_DANGVAN](#i_dangvan) |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=R02+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BR02%5D+Dang+Van+elastic-shakedown+CA+formulation) (no live Issue linked) |
 
 ### R04
 
@@ -489,11 +533,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Do not re-enable archived implementation without full source and tests |
 | Missing tasks | Comparator describes a variant; exact variant origin requires original verification |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | identity_or_relationship_review; Restoration/variant note, not a separate confirmed implementation. Comparator describes a variant; exact variant origin requires original verification |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | R04; Already reviewed; archived implementation disabled or modified variant unregistered |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=R04+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BR04%5D+Modified+Carpinteri%E2%80%93Spagnoli+%28reviewed+comparison%29) (no live Issue linked) |
 
 ### G01
 
@@ -517,11 +564,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | 2008 original; 2019 mean-stress revision and erratum mandatory; not BP |
 | Missing tasks | Versioned coefficient calibration; original shear-amplitude rule |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Recognized stress-plane formulation in a shared original paper; provides a comparator independent of BP. |
+| Roadmap rank | 3 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G01; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared G01 brief](docs/contribution-issues/G01.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/G01.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G01+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG01%5D+Papuga%E2%80%93R%C5%AF%C5%BEi%C4%8Dka+critical-plane+criterion+%28PCR%3B+later+PCRN%29) (no live Issue linked) |
 
 ### G03
 
@@ -545,11 +595,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | 2009 origin: Improvements of two criteria for multiaxial fatigue limit evaluation, Bulletin of Applied Mechanics 5(20):80–86; DOI not verified. 2019 authoritative formulation; erratum 10.1007/s00419-019-01570-9 Later primary formulation; 2009 QCP original lacks a verified DOI; corrected 2019 erratum 10.1007/s00419-019-01570-9 |
 | Missing tasks | Exact corrected equations and material-domain guards |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Exact corrected equations and material-domain guards |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G03; New significant extension / related family |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G03+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG03%5D+Papuga+QCP+mean-stress+development) (no live Issue linked) |
 
 ### G06
 
@@ -573,11 +626,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Not a generic Matake relabeling; companion validation 10.1016/j.ijfatigue.2020.105532 |
 | Missing tasks | Dual-curve calibration and life solution |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Adds dual axial/torsional S–N calibration and native-life prediction. |
+| Roadmap rank | 7 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G06; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G06+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG06%5D+Margetin%E2%80%93%C4%8Eurka%E2%80%93Chmelko+%28MDC%29) (no live Issue linked) |
 
 ### G10
 
@@ -601,11 +657,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | 2024 criterion; not identical to reviewed 2018 modified Marin formulation |
 | Missing tasks | New fitted exponent and published domain checks |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New fitted exponent and published domain checks |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G10; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G10+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG10%5D+Abasolo%E2%80%93Pallares-Santasmartas%E2%80%93Eizmendi+exponent+criterion) (no live Issue linked) |
 
 ### G33
 
@@ -629,11 +688,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | 2026 research model; no general geometry/material claim |
 | Missing tasks | Admissibility check and separately identifiable Walker coefficients |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Admissibility check and separately identifiable Walker coefficients |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G33; New significant extension / related family |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G33+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG33%5D+Zhai%E2%80%93Zou%E2%80%93Hu%E2%80%93Chen%E2%80%93Jin+shakedown-constrained+Walker+model) (no live Issue linked) |
 
 ### G43
 
@@ -657,11 +719,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | New bibliographic candidate; independence remains provisional |
 | Missing tasks | Full-text reconstruction and comparison with existing formulas |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Full-text reconstruction and comparison with existing formulas |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | G43; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G43+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG43%5D+Xu+et+al.+mean-stress%2Fbiaxiality+modification) (no live Issue linked) |
 
 ### G50
 
@@ -685,11 +750,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Not Wang 2018 or 2022; identity established, equation-level overlap still to check |
 | Missing tasks | Exact nonlinear interaction and material-domain checks |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | identity_or_relationship_review; Independence from existing HCF criteria unresolved. Exact nonlinear interaction and material-domain checks |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G50; New candidate; equation-level overlap unresolved |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G50+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG50%5D+Wang%E2%80%93Shang%E2%80%93Wang+ductile%2Fbrittle+HCF+criterion) (no live Issue linked) |
 
 <a id="family-energy-based"></a>
 
@@ -752,11 +820,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Repository multiaxial extension of the uniaxial parameter; negative normal maxima clipped; no independently verified general NP SWT formulation. |
 | Missing tasks | No known essential coding gap within the declared repository scope. Add independent publication/experimental validation; do not broaden scope without evidence. |
+| Reference retrieval action | Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_SWT; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_SWT+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_SWT%5D+Smith%E2%80%93Watson%E2%80%93Topper+%28repository+plane+extension%29) (no live Issue linked) |
 
 ### I_MGSE_YU
 
@@ -780,11 +851,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Maximum-damage scan is an explicit adaptation of the near-maximum-shear plane description; RSS ellipse convention. Original restricted search is outside the declared scope. |
 | Missing tasks | No known essential coding gap within the declared repository scope. Add independent publication/experimental validation; do not broaden scope without evidence. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_MGSE_YU; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_MGSE_YU+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_MGSE_YU%5D+Yu+generalized+strain+energy+%28repository+damage-plane+adaptation%29) (no live Issue linked) |
 
 ### I_MGSE_ZHU
 
@@ -808,11 +882,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Weighting and original plane rule require full-source verification. |
 | Missing tasks | Weighting and original plane rule require full-source verification. Add an independently calculated original-paper case before declaring complete. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | source_review; Active formulation needs original-source verification before completeness can be established. Weighting and original plane rule require full-source verification. Add an independently calculated original-paper case before declaring complete. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_MGSE_ZHU; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared I_MGSE_ZHU brief](docs/contribution-issues/I_MGSE_ZHU.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/I_MGSE_ZHU.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_MGSE_ZHU+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_MGSE_ZHU%5D+Zhu+weighted+generalized+strain+energy) (no live Issue linked) |
 
 ### I_MSWT
 
@@ -836,11 +913,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Scalar reported form only; attribution/scope review pending; not Jiang incremental plasticity. |
 | Missing tasks | Scalar reported form only; attribution/scope review pending; not Jiang incremental plasticity. Add an independently calculated original-paper case before declaring complete. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | source_review; Active formulation needs original-source verification before completeness can be established. Scalar reported form only; attribution/scope review pending; not Jiang incremental plasticity. Add an independently calculated original-paper case before declaring complete. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_MSWT; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared I_MSWT brief](docs/contribution-issues/I_MSWT.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/I_MSWT.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_MSWT+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_MSWT%5D+Scalar+modified+SWT+reported+by+Zhu+%282018%29) (no live Issue linked) |
 
 ### I_LI
 
@@ -864,11 +944,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Exact coefficient formulation remains provisional pending original full text. |
 | Missing tasks | Exact coefficient formulation remains provisional pending original full text. Add an independently calculated original-paper case before declaring complete. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | source_review; Active formulation needs original-source verification before completeness can be established. Exact coefficient formulation remains provisional pending original full text. Add an independently calculated original-paper case before declaring complete. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_LI; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared I_LI brief](docs/contribution-issues/I_LI.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/I_LI.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_LI+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_LI%5D+Li+et+al.+%282021%29+improved+strain+energy+density) (no live Issue linked) |
 
 ### I_GSE
 
@@ -892,11 +975,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Scalar form checked through Yu Eq. (3); imported elastic histories give zero plastic contribution. General stabilized loops not imported. |
 | Missing tasks | No known essential coding gap within the declared repository scope. Add independent publication/experimental validation; do not broaden scope without evidence. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_GSE; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_GSE+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_GSE%5D+Ince%E2%80%93Glinka+generalized+strain+energy) (no live Issue linked) |
 
 ### I_SWTD
 
@@ -920,11 +1006,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Separately sorted stress and strain eigenvalues do not preserve paired physical directions; also ignores harmonic histories. |
 | Missing tasks | Separately sorted stress and strain eigenvalues do not preserve paired physical directions; also ignores harmonic histories. Restore only after source-faithful repair and regression/reference checks. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | repair; Archived implementation has a known essential gap and remains disabled. Separately sorted stress and strain eigenvalues do not preserve paired physical directions; also ignores harmonic histories. Restore only after source-faithful repair and regression/reference checks. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | I_SWTD; Previously attempted, disabled |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared I_SWTD brief](docs/contribution-issues/I_SWTD.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/I_SWTD.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_SWTD+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_SWTD%5D+Deviatoric+SWT) (no live Issue linked) |
 
 ### I_ZHU_EDP
 
@@ -948,11 +1037,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | An acknowledged proxy: omits elastoplastic work W0 and substitutes a phase proxy for the published non-proportional factor. |
 | Missing tasks | An acknowledged proxy: omits elastoplastic work W0 and substitutes a phase proxy for the published non-proportional factor. Restore only after source-faithful repair and regression/reference checks. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | repair; Archived implementation has a known essential gap and remains disabled. An acknowledged proxy: omits elastoplastic work W0 and substitutes a phase proxy for the published non-proportional factor. Restore only after source-faithful repair and regression/reference checks. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | I_ZHU_EDP; Previously attempted, disabled |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared I_ZHU_EDP brief](docs/contribution-issues/I_ZHU_EDP.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/I_ZHU_EDP.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_ZHU_EDP+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_ZHU_EDP%5D+Zhu+equivalent+damage+parameter) (no live Issue linked) |
 
 ### N21
 
@@ -976,11 +1068,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Adds path geometry beyond an ellipse amplitude. Weld validation does not establish general smooth-specimen plane choice. |
 | Missing tasks | Closed-path integration, explicit plane definition and parameter calibration; confirm translation/mean-stress handling. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Closed-path integration, explicit plane definition and parameter calibration; confirm translation/mean-stress handling. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N21; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N21+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN21%5D+Equivalent+Second+Moment+of+Load+Path+%28ESMLP%29) (no live Issue linked) |
 
 ### N22
 
@@ -1004,11 +1099,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Broader path-sensitive framework. General asynchronous/VA/PDMR workflow remains C. |
 | Missing tasks | Full cycle path and weighting calculation; correct range extraction for even one cycle. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Full cycle path and weighting calculation; correct range extraction for even one cycle. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N22; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N22+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN22%5D+Moment+of+Load+Path+%28MLP%29%2C+closed+CA+stress-path+branch) (no live Issue linked) |
 
 ### N26
 
@@ -1032,11 +1130,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Cheap targeted study of compressive mean stresses. Not the existing MSWT, and not deviatoric SWT. |
 | Missing tasks | New scalar correction with exact branch/sign rules. A general multiaxial plane rule is not established by this review. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New scalar correction with exact branch/sign rules. A general multiaxial plane rule is not established by this review. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Low |
 | Provenance / prior status | N26; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N26+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN26%5D+Negative-mean-stress+modified+SWT) (no live Issue linked) |
 
 ### N30
 
@@ -1060,11 +1161,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Different normalization and physical plane choice from GSE/GSA. Plastic response must be supplied, not synthesized. |
 | Missing tasks | Published Mohr-circle/plane construction, coefficient fields already partly supported, native life relation. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Published Mohr-circle/plane construction, coefficient fields already partly supported, native life relation. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N30; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N30+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN30%5D+Normalized+energy+critical-plane+parameter) (no live Issue linked) |
 
 ### N41
 
@@ -1088,11 +1192,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Measures biaxiality sensitivity without a CP search; distinct from plane GSE. |
 | Missing tasks | Direct energy equivalence and correct mean treatment. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Direct energy equivalence and correct mean treatment. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Low |
 | Provenance / prior status | N41; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N41+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN41%5D+Elastic+strain-energy+equivalent-stress+baseline) (no live Issue linked) |
 
 ### N48
 
@@ -1116,11 +1223,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Alternative energetic mean-stress comparator; original needed to confirm precise domain. |
 | Missing tasks | Identify the exact version cited, energetic descriptors and calibration fields. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Identify the exact version cited, energetic descriptors and calibration fields. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N48; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N48+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN48%5D+Froustey%E2%80%93Lasserre+energetic+criterion) (no live Issue linked) |
 
 ### N56
 
@@ -1144,11 +1254,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Potentially useful tensile-damage comparator; no invented “Chu” formula. |
 | Missing tasks | Identify original Chu citation and test algebraic equivalence to active SWT/MSWT before a new registration. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Exact Chu-modified SWT identity not established. Identify original Chu citation and test algebraic equivalence to active SWT/MSWT before a new registration. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N56; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N56+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN56%5D+Chu-modified+SWT%2C+exact+referenced+variant) (no live Issue linked) |
 
 ### R03
 
@@ -1172,11 +1285,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Do not re-enable archived implementation without full source and tests |
 | Missing tasks | Archived stress/strain eigen-directions were not physically paired |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | identity_or_relationship_review; Additional source/scope for I_SWTD; no additional method count. Archived stress/strain eigen-directions were not physically paired |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | R03; Already reviewed; archived implementation disabled or modified variant unregistered |
 | Related catalogue ID | [I_SWTD](#i_swtd) |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=R03+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BR03%5D+Deviatoric+SWT) (no live Issue linked) |
 
 ### G14
 
@@ -1200,11 +1316,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Distinct source from implemented Ince–Glinka GSE/GSA; equation equivalence check before coding Compare equations with active GSE/GSA |
 | Missing tasks | Total-strain input and exact energy/plane definitions |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | identity_or_relationship_review; Previously selected in the 23-entry research shortlist; held outside the published 22-entry sequence because equation-level overlap with GSE/GSA is unresolved. It remains a source-review opportunity, not an asserted duplicate. Total-strain input and exact energy/plane definitions |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G14; New candidate; equation-level overlap unresolved |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G14+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG14%5D+Glinka%E2%80%93Shen%E2%80%93Plumtree+energy+criterion) (no live Issue linked) |
 
 ### G15
 
@@ -1228,11 +1347,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | K. C. Liu 1993, not LIU2021, LI or Liu–Mahadevan. Do not arbitrarily maximize both mode formulas |
 | Missing tasks | Mode-specific energy evaluator and native life inversion |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Introduces fracture-mode-dependent virtual energy and native energy-life relations. |
+| Roadmap rank | 14 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G15; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G15+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG15%5D+Liu+virtual+strain+energy+%28VSE+modes+I%2FII%29) (no live Issue linked) |
 
 ### G16
 
@@ -1256,11 +1378,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Group earlier Ellyin/Golos energy developments; keep 1974 elastic criterion as ancestry, not assumed equivalent |
 | Missing tasks | Elastic/plastic energy separation and energy-life calibration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Adds multiaxial cyclic energy with mean stress and constraint effects. |
+| Roadmap rank | 15 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G16; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G16+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG16%5D+Ellyin%E2%80%93Kujawski+multiaxial+energy+criterion) (no live Issue linked) |
 
 ### G17
 
@@ -1284,11 +1409,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | B only as postprocessor; not meaningful as a zero-plastic-work elastic HCF shortcut |
 | Missing tasks | Loop-work integration and calibration; constitutive generation is C |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Loop-work integration and calibration; constitutive generation is C |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | G17; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G17+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG17%5D+Garud+plastic-work+approach) (no live Issue linked) |
 
 ### G18
 
@@ -1312,11 +1440,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Not all Macha-family variants are independently counted |
 | Missing tasks | Published sign and normal/shear combination; cycle mapping |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Published sign and normal/shear combination; cycle mapping |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G18; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G18+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG18%5D+%C5%81agoda%E2%80%93Macha%E2%80%93B%C4%99dkowski+critical-plane+energy) (no live Issue linked) |
 
 ### G19
 
@@ -1340,11 +1471,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Not repository LI 2021; retain provisionally distinct pending algebraic comparison Compare equations with Liu VSE and active GSE/LI |
 | Missing tasks | Exact virtual energy, plane search and life calibration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | identity_or_relationship_review; Overlap with Liu VSE and active LI/GSE unresolved. Exact virtual energy, plane search and life calibration |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G19; New candidate; equation-level overlap unresolved |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G19+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG19%5D+Li%E2%80%93Qiu%E2%80%93Tong%E2%80%93Gao+virtual-SED+criterion) (no live Issue linked) |
 
 ### G20
 
@@ -1368,11 +1502,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Not Lu–Martínez-Esnaola MFS; generating NP hardening remains C |
 | Missing tasks | NP energy measure and native life relation |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. NP energy measure and native life relation |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G20; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G20+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG20%5D+Lu%E2%80%93Wu%E2%80%93Zhong+constant-amplitude+energy+model) (no live Issue linked) |
 
 ### G21
 
@@ -1396,11 +1533,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | 2017/2018 related developments grouped; not automatically the reviewed 2021 MFS formulation |
 | Missing tasks | Original shear-energy equivalent and plane rule |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original shear-energy equivalent and plane rule |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G21; New significant extension / related family |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G21+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG21%5D+Lu%E2%80%93Melendez%E2%80%93Mart%C3%ADnez-Esnaola+energy%2Fplane+family) (no live Issue linked) |
 
 ### G35
 
@@ -1424,11 +1564,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | B for prescribed repeating cycle and published time-integration law; no inferred Miner substitute. General coupled response generation C. |
 | Missing tasks | Stateful integration, derivative discretization and calibration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Explores energy-damage evolution over a repeated cycle after stateful integration support; verify its CA reduction before coding. |
+| Roadmap rank | 22 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G35; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G35+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG35%5D+Tien%E2%80%93Wei%E2%80%93Chen%E2%80%93Liu+energy+time-derivative+damage) (no live Issue linked) |
 
 ### G49
 
@@ -1452,11 +1595,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Creep/hold-time constitutive branch is separate C work; not required for initial CA scope |
 | Missing tasks | Original energy components and branch-specific calibration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original energy components and branch-specific calibration |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G49; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G49+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG49%5D+Leis+total+octahedral-energy+parameter) (no live Issue linked) |
 
 ### G51
 
@@ -1480,11 +1626,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Closely related to reviewed Saintier 2013; new reference/antecedent, not yet a confirmed new independent criterion Antecedent to the reviewed Saintier approach, not automatically a separate law |
 | Missing tasks | Exact incremental algorithm and state/volume requirements |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | identity_or_relationship_review; Antecedent of reviewed Saintier energy family; not a separate confirmed law. Exact incremental algorithm and state/volume requirements |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | G51; Newly located antecedent of reviewed family |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G51+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG51%5D+Benabes%E2%80%93Saintier%E2%80%93Palin-Luc+incremental+energy+method) (no live Issue linked) |
 
 ### G52
 
@@ -1508,11 +1657,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Not Wei 2020 random-spectrum Liu–Mahadevan extension or Wei 2023 ESMLP |
 | Missing tasks | Source-defined plane and energy calculation |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Source-defined plane and energy calculation |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G52; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G52+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG52%5D+Wei%E2%80%93Liu+critical-plane+energy+model) (no live Issue linked) |
 
 ### L03
 
@@ -1536,11 +1688,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Identify exact original and algebraic relation to active SWT/MSWT |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Additional source/scope for N56; no additional method count. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L03; Unresolved lead; potential overlap |
 | Related catalogue ID | [N56](#n56) |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L03+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL03%5D+Chu-modified+SWT+used+by+Benedetti+2022) (no live Issue linked) |
 
 ### L04
 
@@ -1564,11 +1719,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Original variant and DOI to verify; may duplicate current energy criteria |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L04; Unresolved lead; potential overlap |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L04+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL04%5D+Chen%E2%80%93Xu%E2%80%93Huang+%28CXH%29+energy+parameter) (no live Issue linked) |
 
 ### L07
 
@@ -1592,11 +1750,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | 1998 European Journal of Mechanics - A/Solids 17(2), 237–251, DOI 10.1016/S0997-7538(98)80084-3; independently developed spatial energy concept; overlaps reviewed Saintier and G26, not a new-only discovery |
 | Missing tasks | Spatial volume integration and source-specific calibration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | identity_or_relationship_review; Additional source/scope for G26; no additional method count. Spatial volume integration and source-specific calibration |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | L07; Already-reviewed-family precursor; do not count as new-only |
 | Related catalogue ID | [G26](#g26) |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L07+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL07%5D+Palin-Luc%E2%80%93Lasserre+1998+volumetric-energy+precursor) (no live Issue linked) |
 
 ### L11
 
@@ -1620,11 +1781,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Separate G16 from earlier energy variants; 1974 DOI verified separately |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L11; Unresolved lead; potential overlap |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L11+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL11%5D+1998+Ellyin%2Fenergy+ancestry+and+1974+multiaxial+stress-energy+criterion) (no live Issue linked) |
 
 <a id="family-integral-and-hybrid"></a>
 
@@ -1667,11 +1831,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_bohme_papuga.py](tests/test_bohme_papuga.py) |
 | Limitations | Single harmonic; MCC major semi-axis; 24x48 sphere quadrature; R=0 strengths may be estimated, not measured. |
 | Missing tasks | No known essential coding gap within the declared repository scope. Add independent publication/experimental validation; do not broaden scope without evidence. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_BP; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_BP+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_BP%5D+B%C3%B6hme%E2%80%93Papuga) (no live Issue linked) |
 
 ### I_CAIM
 
@@ -1695,11 +1862,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_caim.py](tests/test_caim.py) |
 | Limitations | Single harmonic; numerical multi-start maximum refinement; 24x48 quadrature; MATLAB grid not reproduced exactly; R=0 estimates documented. |
 | Missing tasks | No known essential coding gap within the declared repository scope. Add independent publication/experimental validation; do not broaden scope without evidence. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_CAIM; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_CAIM+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_CAIM%5D+Critical%E2%80%93integral+approach+%28CAIM%29) (no live Issue linked) |
 
 ### N03
 
@@ -1723,11 +1893,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Established mesoscopic alternative, useful for mean-shear comparisons. |
 | Missing tasks | Correct directional integral/extremum definitions and calibration; reuse sphere quadrature, not BP coefficients. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Adds a recognized mesoscopic/orientation-based endurance assessment beyond a maximum-plane scalar. |
+| Roadmap rank | 5 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | N03; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared N03 brief](docs/contribution-issues/N03.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/N03.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N03+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN03%5D+Papadopoulos%2C+specified+2001+formulation) (no live Issue linked) |
 
 ### N15
 
@@ -1751,11 +1924,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Parent-method baseline for BP/CAIM; related but not already implemented by BP. |
 | Missing tasks | Original coefficient equations and measured mean-stress calibration; reuse BP quadrature only. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original coefficient equations and measured mean-stress calibration; reuse BP quadrature only. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N15; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N15+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN15%5D+Original+Liu%E2%80%93Zenner+integral+criterion) (no live Issue linked) |
 
 ### N17
 
@@ -1779,11 +1955,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Addresses mean shear and changing plane direction; separate from N05. |
 | Missing tasks | Stable orientation tracking/averaging, two candidate evaluations and native curve use. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Stable orientation tracking/averaging, two candidate evaluations and native curve use. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | N17; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N17+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN17%5D+Mean-shear-sensitive+weighted-plane+criterion%2C+CA+branch) (no live Issue linked) |
 
 ### N50
 
@@ -1807,11 +1986,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Historical comparison to newer integral models; limited priority because BP/CAIM already exist. |
 | Missing tasks | Retrieve exact original cited formulation, orientation weighting and calibration. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Retrieve exact original cited formulation, orientation weighting and calibration. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N50; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N50+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN50%5D+Grubisic%E2%80%93Simb%C3%BCrger+formulation) (no live Issue linked) |
 
 ### N53
 
@@ -1835,11 +2017,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Distinguishes intrinsic NP sensitivity from simple amplitude equivalence; validated on magnesium welds, broader transfer needs data. |
 | Missing tasks | Path/sphere integration, three-curve calibration and original per-cycle life/damage equations. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Path/sphere integration, three-curve calibration and original per-cycle life/damage equations. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N53; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N53+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN53%5D+Substitute-amplitude%2FNP-damage+method%2C+CA+branch) (no live Issue linked) |
 
 ### G02
 
@@ -1863,11 +2048,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Shared 2008 paper with G01; 2019 PIN extension DOI 10.1051/matecconf/201930016010 |
 | Missing tasks | Directional integral and version-specific coefficients |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Adds orientation-integral coverage using existing quadrature with its own coefficients; shares the G01 source. |
+| Roadmap rank | 4 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G02; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared G02 brief](docs/contribution-issues/G02.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/G02.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G02+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG02%5D+Papuga%E2%80%93R%C5%AF%C5%BEi%C4%8Dka+integral+criterion+%28PI%3B+later+PIN%29) (no live Issue linked) |
 
 ### G41
 
@@ -1891,11 +2079,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | 1994 practical paper; Robert 1992 thesis is earlier source; group family, do not count Fogue alias separately |
 | Missing tasks | Sphere integral, native life mapping and exact weights |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Expands integral coverage to a native-life approach rather than a fitted damage index alone. |
+| Roadmap rank | 6 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G41; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G41+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG41%5D+Robert%E2%80%93Fogue%E2%80%93Bahuaud+integral+life+criterion) (no live Issue linked) |
 
 ### L01
 
@@ -1919,11 +2110,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Fatigue ’96, volume II, pp. 1013–1018 is traceable; no original-paper DOI located; formula/independence from Robert–Fogue–Bahuaud G41 requires proceedings |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation. |
+| Development disposition | identity_or_relationship_review; Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L01; Unresolved lead; potential overlap |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L01+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL01%5D+Kenmeugne%E2%80%93Vidal-Salle%E2%80%93Robert%E2%80%93Bahuaud+selective+integral+%28Fatigue+1996%29) (no live Issue linked) |
 
 ### L02
 
@@ -1947,11 +2141,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | 1985 7th Congrès Français de Mécanique, pp. 30–31 cited by later work; original title/formula and relationship to G41 unresolved |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L02; Unresolved lead; potential overlap |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L02+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL02%5D+Fogue%E2%80%93Bahuaud+early+global+criterion) (no live Issue linked) |
 
 ### L06
 
@@ -1975,11 +2172,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Identify source and independent formula beyond reviewed name |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Additional source/scope for N50; no additional method count. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L06; Unresolved lead; potential overlap |
 | Related catalogue ID | [N50](#n50) |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L06+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL06%5D+Grubisic%E2%80%93Simb%C3%BCrger+original) (no live Issue linked) |
 
 <a id="family-invariant-based"></a>
 
@@ -2024,11 +2224,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Only a proportional cycle reduction; non-proportional extension is unverified and fatigue-ratio calibration silently falls back to m=2 outside its supported range. |
 | Missing tasks | Only a proportional cycle reduction; non-proportional extension is unverified and fatigue-ratio calibration silently falls back to m=2 outside its supported range. Restore only after source-faithful repair and regression/reference checks. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | repair; Archived implementation has a known essential gap and remains disabled. Only a proportional cycle reduction; non-proportional extension is unverified and fatigue-ratio calibration silently falls back to m=2 outside its supported range. Restore only after source-faithful repair and regression/reference checks. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | I_OTT; Previously attempted, disabled |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared I_OTT brief](docs/contribution-issues/I_OTT.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/I_OTT.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_OTT+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_OTT%5D+Ottosen%2FTveit+proportional+reduction+%28archived+scope%29) (no live Issue linked) |
 
 ### N01
 
@@ -2052,11 +2255,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Standard invariant benchmark currently absent; clear contrast with critical-plane and integral models. |
 | Missing tasks | Direct invariant evaluator; explicitly selected original NP amplitude definition and endurance normalization. |
+| Reference retrieval action | Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation. |
+| Development disposition | prioritized_addition; Established invariant baseline; reuses physical harmonic tensors and adds hydrostatic-maximum assessment. |
+| Roadmap rank | 1 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / High |
 | Provenance / prior status | N01; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared N01 brief](docs/contribution-issues/N01.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/N01.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N01+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN01%5D+Crossland) (no live Issue linked) |
 
 ### N02
 
@@ -2080,11 +2286,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Separates mean-hydrostatic from peak-hydrostatic effects; pairs naturally with Crossland. |
 | Missing tasks | Explicit calibration of hydrostatic coefficient; measured mean-stress data are absent, despite optional R=0 fields. |
+| Reference retrieval action | Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation. |
+| Development disposition | prioritized_addition; Complementary invariant baseline isolates hydrostatic mean-stress effects from the Crossland maximum. |
+| Roadmap rank | 2 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | N02; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared N02 brief](docs/contribution-issues/N02.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/N02.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N02+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN02%5D+Sines) (no live Issue linked) |
 
 ### N08
 
@@ -2108,11 +2317,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Efficient invariant-style benchmark targeting hard materials. |
 | Missing tasks | Five-dimensional representation and principal extrema; verify original amplitude's frame treatment. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Five-dimensional representation and principal extrema; verify original amplitude's frame treatment. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / High |
 | Provenance / prior status | N08; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N08+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN08%5D+Hard-metal+deviatoric-amplitude%2Fprincipal-stress+criterion) (no live Issue linked) |
 
 ### N09
 
@@ -2136,11 +2348,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Direct comparison against axial fatigue properties; alternative waveform-sensitive invariant approach. |
 | Missing tasks | True-fracture-strength field, invariant amplitude and native axial-curve conversion. Review's Su-based estimate is range-limited, not universal. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. True-fracture-strength field, invariant amplitude and native axial-curve conversion. Review's Su-based estimate is range-limited, not universal. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | N09; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N09+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN09%5D+Unified+equivalent+shear+stress) (no live Issue linked) |
 
 ### N10
 
@@ -2164,11 +2379,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Explicit mean-shear sensitivity; useful contrast with criteria insensitive to mean shear. |
 | Missing tasks | Measured t0 and coefficient/domain checks; no unsupported NP extension. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Measured t0 and coefficient/domain checks; no unsupported NP extension. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N10; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N10+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN10%5D+Modified+Marin-type+mean-shear+criterion) (no live Issue linked) |
 
 ### N18
 
@@ -2192,11 +2410,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Genuine hydrostatic-dependent life surface; not a single Basquin DP regression. |
 | Missing tasks | Five-dimensional hull amplitude, piecewise life solver and multi-curve calibration. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Five-dimensional hull amplitude, piecewise life solver and multi-curve calibration. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N18; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N18+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN18%5D+Piecewise+ruled+S%E2%80%93N+surface) (no live Issue linked) |
 
 ### N19
 
@@ -2220,11 +2441,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Covers ductile-to-brittle behavior and phase effects beyond simple ellipses. |
 | Missing tasks | Principal-coordinate prismatic hull, optimization and published weight function. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Principal-coordinate prismatic hull, optimization and published weight function. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N19; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N19+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN19%5D+Improved+Gough+%2F+Nishihara%E2%80%93Kawamoto+criterion) (no live Issue linked) |
 
 ### N20
 
@@ -2248,11 +2472,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Computationally compatible despite unclear review equations; do not discard solely for missing threshold detail. |
 | Missing tasks | Physical cycle averages/extrema, parameter fields and admissibility checks. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Adds invariant descriptors of complex periodic stress paths rather than a single ellipse amplitude. |
+| Roadmap rank | 12 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N20; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N20+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN20%5D+Stress-invariant+endurance+criterion) (no live Issue linked) |
 
 ### N33
 
@@ -2276,11 +2503,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Honest, narrow use of an available analytical reduction. Does not restore OTT or support NP/VA life. |
 | Missing tasks | Explicitly named proportional-only evaluator; enforce published fatigue-ratio domain, approximately t−1/f−1 = 0.5–0.5852. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | identity_or_relationship_review; Proportional scope related to I_OTT and full Tveit workstream; not an independent theory. Explicitly named proportional-only evaluator; enforce published fatigue-ratio domain, approximately t−1/f−1 = 0.5–0.5852. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Low |
 | Provenance / prior status | N33; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N33+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN33%5D+Published+proportional+Hershey%E2%80%93Hosford%E2%80%93Sines+reduction) (no live Issue linked) |
 
 ### N47
 
@@ -2304,11 +2534,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Parent-method comparator for the mean-shear modification. |
 | Missing tasks | Original coefficient calibration and domain; distinguish from modified Marin N10. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original coefficient calibration and domain; distinguish from modified Marin N10. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N47; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N47+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN47%5D+Original+Marin+mean-stress+criterion) (no live Issue linked) |
 
 ### G08
 
@@ -2332,11 +2565,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Group 2021 LiWI precursor here. Full notch-strain workflow exceeds local equivalent-stress scope |
 | Missing tasks | Complex-invariant utilities; waveform and mean-stress interface |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Adds a mathematically distinct complex-invariant and phase-sensitive formulation. |
+| Roadmap rank | 10 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G08; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G08+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG08%5D+Complex-invariant+linear+wave+interference+%28COIN+LiWI%29) (no live Issue linked) |
 
 ### G11
 
@@ -2360,11 +2596,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Restricted evidence; do not assume universal superiority |
 | Missing tasks | Exact path term and calibration; independent validation |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Exact path term and calibration; independent validation |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | G11; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G11+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG11%5D+Yankin%E2%80%93Mugatarov%E2%80%93Wildemann+loading-path+criterion) (no live Issue linked) |
 
 ### G12
 
@@ -2388,11 +2627,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Not merely Tresca; preserve the fatigue adaptation |
 | Missing tasks | Equivalent amplitude and life-law implementation |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Equivalent amplitude and life-law implementation |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G12; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G12+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG12%5D+Twin-shear+unified-yield+fatigue+model) (no live Issue linked) |
 
 <a id="family-mesoscopic-and-damage"></a>
 
@@ -2431,11 +2673,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Combines shear amplitude with independently reconstructed hydrostatic endpoints, losing their time relationship and corrupting the trace for out-of-phase histories. |
 | Missing tasks | Combines shear amplitude with independently reconstructed hydrostatic endpoints, losing their time relationship and corrupting the trace for out-of-phase histories. Restore only after source-faithful repair and regression/reference checks. |
+| Reference retrieval action | Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation. |
+| Development disposition | repair; Archived implementation has a known essential gap and remains disabled. Combines shear amplitude with independently reconstructed hydrostatic endpoints, losing their time relationship and corrupting the trace for out-of-phase histories. Restore only after source-faithful repair and regression/reference checks. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | I_DANGVAN; Previously attempted, disabled |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared I_DANGVAN brief](docs/contribution-issues/I_DANGVAN.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/I_DANGVAN.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_DANGVAN+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_DANGVAN%5D+Dang+Van) (no live Issue linked) |
 
 ### N35
 
@@ -2459,11 +2704,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Sequence-sensitive accumulation without solving plasticity. General arbitrary multiaxial histories remain C. |
 | Missing tasks | Block input and scalar damage-state integrator; preserve sequence and correct stress-function variants. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Block input and scalar damage-state integrator; preserve sequence and correct stress-function variants. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N35; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N35+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN35%5D+%28V%29HCF-DAM%2C+prescribed+proportional+blocks) (no live Issue linked) |
 
 ### N36
 
@@ -2487,11 +2735,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Mechanistic initiation-life comparison. Missing measured surface energy is a data barrier, not a need to simulate dislocations. |
 | Missing tasks | New microstructural material inputs and native life/threshold logic. Do not use raw von-Mises max−min, which loses fully reversed sign, without source justification. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New microstructural material inputs and native life/threshold logic. Do not use raw von-Mises max−min, which loses fully reversed sign, without source justification. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N36; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N36+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN36%5D+Tanaka%E2%80%93Mura%E2%80%93Wu+HCF+crack-nucleation+model) (no live Issue linked) |
 
 ### G23
 
@@ -2515,11 +2766,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | B only for faithful published CA evaluator; general internal-state integration C |
 | Missing tasks | Published CA reduction, threshold and life constants |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Broadens the programme to mesoscopic constant-amplitude life prediction. |
+| Roadmap rank | 11 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G23; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G23+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG23%5D+Morel+mesoscopic+constant-amplitude+life+model) (no live Issue linked) |
 
 ### G36
 
@@ -2543,11 +2797,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Chaboche-related development; review mentions Chaboche generically, not this specific formulation |
 | Missing tasks | State evolution and native life output |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | deferred_major_extension; Scientifically relevant but requires major new infrastructure/data; not rejected. State evolution and native life output |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Medium |
 | Provenance / prior status | G36; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G36+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG36%5D+Chaudonneret+multiaxial+continuum+damage) (no live Issue linked) |
 
 ### G37
 
@@ -2571,11 +2828,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Not the misattributed 2015 weld paper found in an early search lead |
 | Missing tasks | Constitutive/state integration and cycle acceleration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | deferred_major_extension; Scientifically relevant but requires major new infrastructure/data; not rejected. Constitutive/state integration and cycle acceleration |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Medium |
 | Provenance / prior status | G37; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G37+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG37%5D+Lemaitre%E2%80%93Sermage%E2%80%93Desmorat+two-scale+damage) (no live Issue linked) |
 
 ### G38
 
@@ -2599,11 +2859,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Dang Van-like special limit is not a reason to discard the full distinct model |
 | Missing tasks | Published reduced criterion and extra calibration; full microscale simulation C |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Published reduced criterion and extra calibration; full microscale simulation C |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G38; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G38+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG38%5D+Monchiet%E2%80%93Charkaluk%E2%80%93Kondo+PSB+damage+criterion) (no live Issue linked) |
 
 ### G42
 
@@ -2627,11 +2890,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Potential bounded B periodic algorithm needs study; not assumed |
 | Missing tasks | Evolving cycle sets and damage state |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | deferred_major_extension; Scientifically relevant but requires major new infrastructure/data; not rejected. Evolving cycle sets and damage state |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | G42; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G42+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG42%5D+Malnati+mesoplastic+cycle-indicator+method) (no live Issue linked) |
 
 <a id="family-nonlocal-and-gradient"></a>
 
@@ -2675,11 +2941,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Preserves gradient physics if inputs are genuinely supplied. Full FE/mesh-gradient pipeline remains C; not usable on current point-only workbooks. |
 | Missing tasks | New gradient input fields, projection rules, units and correction functions. No gradient recovery or FE solver included. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New gradient input fields, projection rules, units and correction functions. No gradient recovery or FE solver included. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N55; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N55+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN55%5D+Gradient-corrected+local+evaluator+with+externally+supplied+gradients) (no live Issue linked) |
 
 ### C03
 
@@ -2703,11 +2972,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Spatial integration and volume calibration |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | broader_workstream; Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Spatial integration and volume calibration |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C03; Already reviewed #10; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C03+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC03%5D+Saintier+nonlocal+energy+workstream) (no live Issue linked) |
 
 ### C04
 
@@ -2731,11 +3003,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Spatial field and local plasticity |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | broader_workstream; Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Spatial field and local plasticity |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C04; Already reviewed #14; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C04+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC04%5D+Chiocca%E2%80%93Frendo+ECP+workstream) (no live Issue linked) |
 
 ### C05
 
@@ -2759,11 +3034,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Spatial stress paths and defect data |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | broader_workstream; Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Spatial stress paths and defect data |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C05; Already reviewed #39; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C05+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC05%5D+Benedetti+critical-distance+%2F+defect+workstream) (no live Issue linked) |
 
 ### C06
 
@@ -2787,11 +3065,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Defect geometry and spatial field |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | broader_workstream; Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Defect geometry and spatial field |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C06; Already reviewed #41; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C06+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC06%5D+M%C3%A9rot+defect-size+and+shape+workstream) (no live Issue linked) |
 
 ### C10
 
@@ -2815,11 +3096,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Weld notch geometry and crack-growth data |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | broader_workstream; Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Weld notch geometry and crack-growth data |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C10; Already reviewed #31; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C10+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC10%5D+Bufalari+effective-notch%2Ftotal-stress+welded-joint+workflow) (no live Issue linked) |
 
 ### C14
 
@@ -2843,11 +3127,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | FE local response and welded-joint metadata |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | broader_workstream; Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. FE local response and welded-joint metadata |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C14; Already reviewed #1; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C14+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC14%5D+Garcia+generalized+local+weld+CSEM+thesis) (no live Issue linked) |
 
 ### G26
 
@@ -2871,11 +3158,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Grouped original energy concept and 2003 volumetric development; reviewed Saintier 2013 is later related work Earlier Palin-Luc–Lasserre 1998 DOI 10.1016/S0997-7538(98)80084-3 |
 | Missing tasks | FE field import, quadrature and influence-volume construction |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Retains volumetric energy as an important major-extension target despite substantial FE/data prerequisites. |
+| Roadmap rank | 19 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / High |
 | Provenance / prior status | G26; Newly located antecedent of reviewed family |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G26+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG26%5D+Palin-Luc%E2%80%93Lasserre+%2F+Banvillet+volumetric+energy) (no live Issue linked) |
 
 ### G27
 
@@ -2899,11 +3189,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Not identical to reviewed Luu gradient formulation or Saintier energy-life model |
 | Missing tasks | Nonlocal averaging and domain definition |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | deferred_major_extension; Scientifically relevant but requires major new infrastructure/data; not rejected. Nonlocal averaging and domain definition |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Medium |
 | Provenance / prior status | G27; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G27+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG27%5D+Morel%E2%80%93Palin-Luc+nonlocal+HCF+theory) (no live Issue linked) |
 
 ### G28
 
@@ -2927,11 +3220,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Extension of energy-volume family; retain separately for probabilistic output |
 | Missing tasks | Nonlocal probability and gradient processing |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | deferred_major_extension; Scientifically relevant but requires major new infrastructure/data; not rejected. Nonlocal probability and gradient processing |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Medium |
 | Provenance / prior status | G28; New significant extension / related family |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G28+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG28%5D+Delahay%E2%80%93Palin-Luc+probabilistic+gradient-energy+model) (no live Issue linked) |
 
 ### G29
 
@@ -2955,11 +3251,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | B external-gradient postprocessor; complete FE workflow C; not Luu 2014 |
 | Missing tasks | Gradient input convention and calibration; exact invariant definitions |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Bounded externally supplied-gradient scope is a practical first step toward spatial fatigue methods. |
+| Roadmap rank | 17 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G29; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G29+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG29%5D+Papadopoulos%E2%80%93Panoskaltsis+invariant-gradient+criterion) (no live Issue linked) |
 
 ### G30
 
@@ -2983,11 +3282,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Averaged SED is not a pointwise elastic-energy scalar; welded precursor is supplementary |
 | Missing tasks | Spatial field integration and notch geometry |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Adds widely used control-volume energy assessment for components; deliberately retained despite high effort. |
+| Roadmap rank | 20 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / High |
 | Provenance / prior status | G30; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G30+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG30%5D+Berto%E2%80%93Lazzarin+averaged+strain+energy+density+%28SED%29) (no live Issue linked) |
 
 ### G31
 
@@ -3011,11 +3313,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | A framework coupled to local criteria, not a new universal multiaxial scalar |
 | Missing tasks | Spatial/statistical framework and relevant local criterion |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | deferred_major_extension; Scientifically relevant but requires major new infrastructure/data; not rejected. Spatial/statistical framework and relevant local criterion |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Medium |
 | Provenance / prior status | G31; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G31+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG31%5D+Wormsen%E2%80%93H%C3%A4rkeg%C3%A5rd+weakest-link+%2F+extremes+model) (no live Issue linked) |
 
 <a id="family-probabilistic"></a>
 
@@ -3052,11 +3357,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Reliability/scatter capability rather than another deterministic DP. Full heterogeneous effective-volume calculation is C. |
 | Missing tasks | Probabilistic calibration, directional integration and native probability/life outputs. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Bounded homogeneous-volume scope introduces probabilistic outputs and appropriate calibration. |
+| Roadmap rank | 18 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N34; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N34+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN34%5D+Probabilistic+slip-site+model%2C+homogeneous+prescribed-volume+scope) (no live Issue linked) |
 
 ### C07
 
@@ -3080,11 +3388,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Defect distributions and statistical calibration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | broader_workstream; Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Defect distributions and statistical calibration |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C07; Already reviewed #42; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C07+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC07%5D+Tomaszewski+multiple-defect+scatter) (no live Issue linked) |
 
 ### G24
 
@@ -3108,11 +3419,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Homogeneous known-support subcase potentially B after full equations; supplement 10.1016/j.ijfatigue.2005.01.009 |
 | Missing tasks | Probability estimation, run-outs and spatial integration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Extends the programme to volume/surface effects and fatigue-strength scatter after statistical prerequisites. |
+| Roadmap rank | 21 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Medium |
 | Provenance / prior status | G24; New significant extension / related family |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G24+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG24%5D+Flaceli%C3%A8re%E2%80%93Morel+probabilistic+fatigue+family) (no live Issue linked) |
 
 ### G25
 
@@ -3136,11 +3450,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Related to G24 but materially different heterogeneity treatment; homogeneous subcase may later be B |
 | Missing tasks | Directional/spatial probability integration; calibration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | deferred_major_extension; Scientifically relevant but requires major new infrastructure/data; not rejected. Directional/spatial probability integration; calibration |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Medium |
 | Provenance / prior status | G25; New significant extension / related family |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G25+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG25%5D+Morel%E2%80%93Huyen+heterogeneous+shakedown+model) (no live Issue linked) |
 
 ### G39
 
@@ -3164,11 +3481,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Specialized model; not isotropic Liu–Mahadevan |
 | Missing tasks | Defect statistics, material axes and competing-risk calculation |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | deferred_major_extension; Scientifically relevant but requires major new infrastructure/data; not rejected. Defect statistics, material axes and competing-risk calculation |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | G39; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G39+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG39%5D+Pessard%E2%80%93Morel%E2%80%93Morel%E2%80%93Bellett+competing-mechanism+model) (no live Issue linked) |
 
 ### G46
 
@@ -3192,11 +3512,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Distinct probabilistic workflow; active FS is reusable but not the full method |
 | Missing tasks | Probabilistic constitutive pipeline and uncertainty propagation |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | deferred_major_extension; Scientifically relevant but requires major new infrastructure/data; not rejected. Probabilistic constitutive pipeline and uncertainty propagation |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | G46; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G46+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG46%5D+Probabilistic+FS%2FChaboche+material-variability+framework) (no live Issue linked) |
 
 <a id="family-specialized"></a>
 
@@ -3244,11 +3567,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Useful welded-joint branch once matching stress data exist. Computing notch stresses from geometry/FE is C. |
 | Missing tasks | Weld metadata and stress-measure selection, interaction rules and native resistance curves. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Weld metadata and stress-measure selection, interaction rules and native resistance curves. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N42; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N42+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN42%5D+IIW+normal%2Fshear+interaction+assessment) (no live Issue linked) |
 
 ### N43
 
@@ -3272,11 +3598,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Engineering-design comparator. Current generic Basquin fit is not standards compliance. Full spectra/FE workflow is C. |
 | Missing tasks | Separate normal/shear resistance and interaction; explicit versioned design assumptions. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Separate normal/shear resistance and interaction; explicit versioned design assumptions. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N43; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N43+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN43%5D+Eurocode+3+normal%2Fshear+fatigue+interaction) (no live Issue linked) |
 
 ### N44
 
@@ -3300,11 +3629,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Adds a weld-specific NP comparator. Geometry/FE preparation remains external/C. |
 | Missing tasks | Obtain original Sonsino formulation, orientation averaging and normalization; no guessed equation from acronym. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Obtain original Sonsino formulation, orientation averaging and normalization; no guessed equation from acronym. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N44; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N44+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN44%5D+Effective+Equivalent+Stress+Hypothesis+%28EESH%29) (no live Issue linked) |
 
 ### N45
 
@@ -3328,11 +3660,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Reproduces the study's comparison cases. Its VA counting branch is C for the present application. |
 | Missing tasks | Exact plane/variant selection and material constants; compare analytically with Matake before retaining an equivalent duplicate. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | identity_or_relationship_review; Unresolved comparator variants; check equivalence with existing plane criteria. Exact plane/variant selection and material constants; compare analytically with Matake before retaining an equivalent duplicate. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N45; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N45+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN45%5D+Linear+normal%2Fshear+critical-plane+equivalent-stress+variants) (no live Issue linked) |
 
 ### C01
 
@@ -3356,11 +3691,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Internal-variable cycle integration and parameter identification |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | broader_workstream; Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Internal-variable cycle integration and parameter identification |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C01; Already reviewed #3; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C01+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC01%5D+Tveit%E2%80%93Reyes%E2%80%93Erduran+full+continuum+endurance%2Fdamage+model) (no live Issue linked) |
 
 ### C02
 
@@ -3384,11 +3722,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Recover original article; cycle integration |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | broader_workstream; Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Recover original article; cycle integration |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C02; Already reviewed #4; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C02+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC02%5D+Tveit+et+al.+2025+continuum+follow-up) (no live Issue linked) |
 
 ### C08
 
@@ -3412,11 +3753,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Cycle counting and history-sensitive accumulation; CA branch to verify |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | scope_deferred; Full workflow targets variable-amplitude/random loading and is outside the current CA priorities; verify any faithful CA reduction first. Cycle counting and history-sensitive accumulation; CA branch to verify |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C08; Already reviewed #45; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C08+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC08%5D+Tao+modified+Wang%E2%80%93Brown+variable-amplitude+workflow) (no live Issue linked) |
 
 ### C11
 
@@ -3440,11 +3784,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Composite RVE, fiber orientation and interface properties |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | broader_workstream; Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Composite RVE, fiber orientation and interface properties |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C11; Already reviewed #32; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C11+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC11%5D+Zhang+SFRP+multiscale+interface+workstream) (no live Issue linked) |
 
 ### C12
 
@@ -3468,11 +3815,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Crack geometry and mixed-mode stress intensity history |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | broader_workstream; Retained wider formulation/application package; its independent-method boundary and scope are not reconciled, so excluded from the method progress denominator rather than rejected for difficulty. Crack geometry and mixed-mode stress intensity history |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C12; Already reviewed #43; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C12+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC12%5D+Sheen+non-proportional+crack+path%2Fgrowth) (no live Issue linked) |
 
 ### C13
 
@@ -3496,11 +3846,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Process residual stress and gradients; no independent generic criterion |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | application_comparison; Manufacturing-process comparison does not establish an independent general fatigue law; retain process/residual-stress context and existing-criterion links. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C13; Already reviewed #48; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C13+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC13%5D+Nguyen+manufacturing-process+fatigue+comparison) (no live Issue linked) |
 
 ### L05
 
@@ -3524,11 +3877,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Separate original from reviewed 2018 modification |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Additional source/scope for N47; no additional method count. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L05; Unresolved lead; potential overlap |
 | Related catalogue ID | [N47](#n47) |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L05+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL05%5D+Original+Marin+mean-stress+criterion) (no live Issue linked) |
 
 ### L08
 
@@ -3552,11 +3908,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Original proceedings/formula and Findley relation to verify |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L08; Unresolved lead; potential overlap |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L08+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL08%5D+Stulen%E2%80%93Cummings+1954+multiaxial+failure+criterion) (no live Issue linked) |
 
 ### L09
 
@@ -3580,11 +3939,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Determine if earlier source is the identical N08 criterion |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Additional source/scope for N08; no additional method count. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L09; Unresolved lead; potential overlap |
 | Related catalogue ID | [N08](#n08) |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L09+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL09%5D+Gon%C3%A7alves+2004+versus+reviewed+2005) (no live Issue linked) |
 
 ### L10
 
@@ -3608,11 +3970,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | No original-paper DOI verified; later source G03 has verified DOI |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Additional source/scope for G03; no additional method count. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L10; Unresolved lead; potential overlap |
 | Related catalogue ID | [G03](#g03) |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L10+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL10%5D+QCP+original+2009+Bulletin+of+Applied+Mechanics+5%2820%29%3A80%E2%80%9386) (no live Issue linked) |
 
 ### L12
 
@@ -3636,11 +4001,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Exact criterion, DOI and relationship to G26/G30 unresolved |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L12; Unresolved lead; potential overlap |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L12+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL12%5D+Vittori+energy+distribution+and+older+local-volume+formulations) (no live Issue linked) |
 
 ### L13
 
@@ -3664,11 +4032,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Several are amplitude algorithms rather than independent fatigue laws |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L13; Unresolved lead; potential overlap |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L13+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL13%5D+Classic+Fogue%2FDeperrois%2FFreitas+path+measures) (no live Issue linked) |
 
 ### L14
 
@@ -3692,11 +4063,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Source-level distinction from existing criteria and independent validation not assessed |
 | Missing tasks | Identify primary formulation; deduplicate before classifying |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Historical identity/overlap lead; not an independently counted method. Identify primary formulation; deduplicate before classifying |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | D / Not estimated; scope/original paper needed / Low |
 | Provenance / prior status | L14; Unresolved lead; potential overlap |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=L14+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BL14%5D+2025%2F2026+lower-evidence+CP%2Fenergy+variants) (no live Issue linked) |
 
 <a id="family-spectral-frequency-domain"></a>
 
@@ -3728,11 +4102,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Major extension or application, not automatically an independent method Historical workstream reference numbering is inconsistent in places; use coverage register and original review, not this number alone. |
 | Missing tasks | Spectral/random history beyond CA Liu–Mahadevan branch |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | scope_deferred; Full workflow targets variable-amplitude/random loading and is outside the current CA priorities; verify any faithful CA reduction first. Spectral/random history beyond CA Liu–Mahadevan branch |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Low |
 | Provenance / prior status | C09; Already reviewed #51; not an independently counted local criterion |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=C09+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BC09%5D+Wei+random-spectrum+extension) (no live Issue linked) |
 
 <a id="family-strain-based"></a>
 
@@ -3780,11 +4157,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Uses monotonic Sy as cyclic-yield approximation; elastic importer; tension-only normal term; RSS ellipse shear convention. Native general elastoplastic FS life framework is outside the declared scope. |
 | Missing tasks | No known essential coding gap within the declared repository scope. Add independent publication/experimental validation; do not broaden scope without evidence. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_FS; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_FS+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_FS%5D+Fatemi%E2%80%93Socie+%28repository+elastic%2Fharmonic+scope%29) (no live Issue linked) |
 
 ### I_MKBM
 
@@ -3808,11 +4188,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Source reproduction and plane rule not fully established; no cyclic plasticity input from importer. |
 | Missing tasks | Source reproduction and plane rule not fully established; no cyclic plasticity input from importer. Add an independently calculated original-paper case before declaring complete. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | source_review; Active formulation needs original-source verification before completeness can be established. Source reproduction and plane rule not fully established; no cyclic plasticity input from importer. Add an independently calculated original-paper case before declaring complete. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_MKBM; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared I_MKBM brief](docs/contribution-issues/I_MKBM.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/I_MKBM.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_MKBM+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_MKBM%5D+Li+modified+Kandil%E2%80%93Brown%E2%80%93Miller) (no live Issue linked) |
 
 ### I_LIU2021
 
@@ -3836,11 +4219,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Original Eq. (27), normal strain/range interpretation and plane rule require full-source review. |
 | Missing tasks | Original Eq. (27), normal strain/range interpretation and plane rule require full-source review. Add an independently calculated original-paper case before declaring complete. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | source_review; Active formulation needs original-source verification before completeness can be established. Original Eq. (27), normal strain/range interpretation and plane rule require full-source review. Add an independently calculated original-paper case before declaring complete. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_LIU2021; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Prepared I_LIU2021 brief](docs/contribution-issues/I_LIU2021.md) |
+| GitHub Issue / prepared brief | [Prepared brief](docs/contribution-issues/I_LIU2021.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_LIU2021+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_LIU2021%5D+Liu+et+al.+%282021%29+modified+shear+amplitude) (no live Issue linked) |
 
 ### I_GSA
 
@@ -3864,11 +4250,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | [tests/test_method_audit.py](tests/test_method_audit.py) |
 | Limitations | Scalar form checked through Yu Eq. (4); measured strength coefficients optional; empirical steel/von-Mises fallbacks are not measured properties. |
 | Missing tasks | No known essential coding gap within the declared repository scope. Add independent publication/experimental validation; do not broaden scope without evidence. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Existing |
 | Provenance / prior status | I_GSA; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_GSA+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_GSA%5D+Ince%E2%80%93Glinka+generalized+strain+amplitude) (no live Issue linked) |
 
 ### N27
 
@@ -3892,11 +4281,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Explicit shear/tensile coupling; do not reuse k_FS without proof of equivalence. |
 | Missing tasks | New coefficient calibration; prescribed cyclic strains if inelastic; native life law. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New coefficient calibration; prescribed cyclic strains if inelastic; native life law. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N27; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N27+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN27%5D+Wu%E2%80%93Hu%E2%80%93Song+%28WHS%29) (no live Issue linked) |
 
 ### N28
 
@@ -3920,11 +4312,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Relatively inexpensive new criterion. Elastic evaluation cannot reproduce NP cyclic hardening in the validation material. |
 | Missing tasks | Scalar criterion first; measured cyclic response and native life calibration for reproducing GH4169 tests. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Scalar criterion first; measured cyclic response and native life calibration for reproducing GH4169 tests. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Medium |
 | Provenance / prior status | N28; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N28+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN28%5D+Modified+WHS+%28MWHS%29) (no live Issue linked) |
 
 ### N29
 
@@ -3948,11 +4343,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Useful original benchmark; MKBM in the repository is not identical. |
 | Missing tasks | Original parameter/plane definition and life solver; genuine total strains for elastoplastic use. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original parameter/plane definition and life solver; genuine total strains for elastoplastic use. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N29; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N29+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN29%5D+Original+Kandil%E2%80%93Brown%E2%80%93Miller+%28KBM%29) (no live Issue linked) |
 
 ### N31
 
@@ -3976,11 +4374,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Adds an explicit NP sensitivity measure. No claim that elastic strain alone reproduces plastic-hardening tests. |
 | Missing tasks | Validate review's claimed correlation-based factor against original; path integration and native life mapping. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Validate review's claimed correlation-based factor against original; path integration and native life mapping. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N31; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N31+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN31%5D+Load-path-sensitive+modified+fatigue+parameter) (no live Issue linked) |
 
 ### N46
 
@@ -4004,11 +4405,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Broader strain-based benchmark. Not the Wang–Brown cycle-counting algorithm used by Tao. |
 | Missing tasks | Identify cited original version; input stabilized strains and implement its normal-range/mean correction and life relation. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Identify cited original version; input stabilized strains and implement its normal-range/mean correction and life relation. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N46; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N46+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN46%5D+Wang%E2%80%93Brown+strain-based+assessment%2C+selected+original+version) (no live Issue linked) |
 
 ### N51
 
@@ -4032,11 +4436,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Reproduces Deng's comparator set; less urgent than the new stress criteria. |
 | Missing tasks | Resolve cited version and its plane rule, then native life mapping. Constitutive response generation is C. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Exact Chen variant not established. Resolve cited version and its plane rule, then native life mapping. Constitutive response generation is C. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N51; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N51+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN51%5D+Chen+strain-based+criterion%2C+exact+cited+version) (no live Issue linked) |
 
 ### N52
 
@@ -4060,11 +4467,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Physical NP strain benchmark when corresponding experiments are supplied. |
 | Missing tasks | Original path measure and coefficients; do not set NP hardening sensitivity to an arbitrary constant. Plastic simulation remains C. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original path measure and coefficients; do not set NP hardening sensitivity to an arbitrary constant. Plastic simulation remains C. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N52; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N52+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN52%5D+Itoh+NP+strain+correction+%2F+criterion) (no live Issue linked) |
 
 ### N54
 
@@ -4088,11 +4498,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Inexpensive reference against which FS/KBM/WHS gains can be measured; not new Wu criteria. |
 | Missing tasks | Register named baselines and original life scaling. Cyclic plastic response remains external/C. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Several strain baselines, not one independent method. Register named baselines and original life scaling. Cyclic plastic response remains external/C. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Low |
 | Provenance / prior status | N54; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N54+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN54%5D+Equivalent-strain+and+maximum-shear-strain+baselines) (no live Issue linked) |
 
 ### N57
 
@@ -4116,11 +4529,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Strain-space counterpart to invariant stress methods, distinct from GSE/GSA. |
 | Missing tasks | Source-defined strain-amplitude geometry and native life solver; measured plastic strains if relevant. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Source-defined strain-amplitude geometry and native life solver; measured plastic strains if relevant. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N57; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N57+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN57%5D+Combined+deviatoric+strain+amplitudes) (no live Issue linked) |
 
 ### G22
 
@@ -4144,11 +4560,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Related to MWCM but not an equivalent stress-life formula |
 | Missing tasks | Dual strain-life curve solver and exact plane rule |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Adds a recognized strain-life curve framework once prescribed stabilized strains and dual curves are supported. |
+| Roadmap rank | 16 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G22; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G22+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG22%5D+Modified+Manson%E2%80%93Coffin+Curve+Method+%28MMCCM%29) (no live Issue linked) |
 
 ### G40
 
@@ -4172,11 +4591,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Keep separate from Wang–Brown and Wang 2018/2022; compare algebra before implementation Crossref author truncated; cited as D.-G. Shang and D.-J. Wang in primary references |
 | Missing tasks | Exact parameter and plane rule; native life mapping |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Exact parameter and plane rule; native life mapping |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G40; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G40+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG40%5D+Shang%E2%80%93Wang+critical-plane+damage+model) (no live Issue linked) |
 
 ### G47
 
@@ -4200,11 +4622,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Not a second independent FS base criterion; keep source-specific variant |
 | Missing tasks | Exact normalization, near-zero shear guards, life mapping |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Exact normalization, near-zero shear guards, life mapping |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G47; New significant extension / related family |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G47+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG47%5D+Gates%E2%80%93Fatemi+revised+FS+normalization) (no live Issue linked) |
 
 ### G48
 
@@ -4228,11 +4653,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Extension usable with shear-based CP models, not an interchangeable coefficient tweak |
 | Missing tasks | Paired interaction terms and correct phase-sensitive evaluation |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Paired interaction terms and correct phase-sensitive evaluation |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G48; New significant extension / related family |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G48+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG48%5D+Sharifimehr%E2%80%93Fatemi+normal%2Fshear+interaction+extension) (no live Issue linked) |
 
 <a id="family-stress-based"></a>
 
@@ -4278,11 +4706,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Cheap baseline for a wider strength-ratio range. |
 | Missing tasks | Closed-form evaluator and explicit proportional/mean-stress applicability checks. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Closed-form evaluator and explicit proportional/mean-stress applicability checks. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Medium |
 | Provenance / prior status | N13; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N13+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN13%5D+Modified+Gough+limit+curve) (no live Issue linked) |
 
 ### N14
 
@@ -4306,11 +4737,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Reference limits for judging claimed improvements; modest novelty. |
 | Missing tasks | Separate named variants and original ductile/brittle/phase rules; do not equate to Golos or Khalij. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Contains Gough–Pollard and Nishihara–Kawamoto; split exact original variants before counting. Separate named variants and original ductile/brittle/phase rules; do not equate to Golos or Khalij. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Medium |
 | Provenance / prior status | N14; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N14+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN14%5D+Gough%E2%80%93Pollard+and+Nishihara%E2%80%93Kawamoto+baselines) (no live Issue linked) |
 
 ### N23
 
@@ -4334,11 +4768,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Handles stress-level and amplitude-ratio effects explicitly. Existing two fatigue limits are insufficient calibration. |
 | Missing tasks | Equal-life surface calibration and inversion, plane/path statistics and extra data groups. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Equal-life surface calibration and inversion, plane/path statistics and extra data groups. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N23; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N23+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN23%5D+Equal-life+surface+with+path+correction) (no live Issue linked) |
 
 ### N24
 
@@ -4362,11 +4799,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Material/path-dependent scaling. Cannot transfer 42CrMo4 coefficients to other materials; 2017 is a refinement, not another independent family. |
 | Missing tasks | Polynomial-map calibration/validation and prescribed frame treatment. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Polynomial-map calibration/validation and prescribed frame treatment. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N24; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N24+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN24%5D+Stress+Scale+Factor+%28SSF%29+family) (no live Issue linked) |
 
 ### N38
 
@@ -4390,11 +4830,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Essential low-cost baseline. |
 | Missing tasks | Explicit amplitude-based evaluator, not unsigned scalar-history half-range. NP extension requires a separately chosen definition. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Explicit amplitude-based evaluator, not unsigned scalar-history half-range. NP extension requires a separately chosen definition. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Medium |
 | Provenance / prior status | N38; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N38+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN38%5D+von+Mises+equivalent-amplitude+baseline) (no live Issue linked) |
 
 ### N39
 
@@ -4418,11 +4861,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Separates maximum-shear from von-Mises behavior; a supporting baseline, not Doudard's probabilistic model. |
 | Missing tasks | Direct baseline with signed-cycle conventions. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Direct baseline with signed-cycle conventions. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Low |
 | Provenance / prior status | N39; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N39+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN39%5D+Tresca+equivalent-amplitude+baseline) (no live Issue linked) |
 
 ### N40
 
@@ -4446,11 +4892,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Useful comparator, despite poor NP weld performance reported in review. Not a recommended universal design criterion. |
 | Missing tasks | Exact cycle/mean convention and restricted scope. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Exact cycle/mean convention and restricted scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Low |
 | Provenance / prior status | N40; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N40+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN40%5D+Maximum+principal+stress+%2F+Rankine+baseline) (no live Issue linked) |
 
 ### G04
 
@@ -4474,11 +4923,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Not Kawamoto/Nishihara; original full equations still required |
 | Missing tasks | Distinguish bending from axial strength; verify calibration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Distinguish bending from axial strength; verify calibration |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G04; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G04+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG04%5D+Kakuno%E2%80%93Kawada) (no live Issue linked) |
 
 ### G05
 
@@ -4502,11 +4954,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Group original MMK and MMP as a development family; do not treat 2017 as original MMK MMP reported in this 2017 paper; original MMK is older |
 | Missing tasks | Original component/mean definitions; native calibration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original component/mean definitions; native calibration |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G05; New significant extension / related family |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G05+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG05%5D+Manson%E2%80%93McKnight%E2%80%93Papuga+%28MMP%29) (no live Issue linked) |
 
 ### G07
 
@@ -4530,11 +4985,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | 2017 local scope B; full notch/plastic workflow C. Supplement 10.1016/j.ijfatigue.2020.105643 |
 | Missing tasks | Exact time-equivalence algorithm; periodic-cycle input |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Adds a time-dependent equivalent-stress approach; exercises physical-cycle support beyond plane extrema. |
+| Roadmap rank | 9 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G07; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G07+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG07%5D+Modified+Mohr%E2%80%93Mises+hypothesis+%28MMMH%29) (no live Issue linked) |
 
 ### G09
 
@@ -4558,11 +5016,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | 2026 online publication found before cutoff; November issue date is later than search date Online pre-cutoff; issue assigned November 2026 |
 | Missing tasks | G08 plus moment evaluation and native life calibration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. G08 plus moment evaluation and native life calibration |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G09; New significant extension / related family |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G09+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG09%5D+Moment-adapted+COIN+LiWI+%28MA-COIN+LiWI%29) (no live Issue linked) |
 
 ### G13
 
@@ -4586,11 +5047,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | CA scope does not require full random-loading stack |
 | Missing tasks | Exact process transformation and consistent mean/cycle mapping |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Exact process transformation and consistent mean/cycle mapping |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G13; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G13+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG13%5D+Braccesi%E2%80%93Cianetti%E2%80%93Lori%E2%80%93Pioli+equivalent+uniaxial+process) (no live Issue linked) |
 
 ### G34
 
@@ -4614,11 +5078,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | B local criterion only; complete gear/contact/hardness workflow C Separate source from BP and CAIM; full gear workflow major extension |
 | Missing tasks | Exact local criterion; gear-property mappings require separate scope |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | identity_or_relationship_review; Gear-specific formulation independence from BP/CAIM unresolved. Exact local criterion; gear-property mappings require separate scope |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | G34; New candidate; equation-level overlap unresolved |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G34+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG34%5D+B%C3%B6hme%E2%80%93Vinogradov%E2%80%93Papuga%E2%80%93Berto+gear+model+%28BO%29) (no live Issue linked) |
 
 ### G44
 
@@ -4642,11 +5109,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Primarily elevated-temperature LCF; B postprocessing only. Ohno–Wang response generation and creep-fatigue would be C. |
 | Missing tasks | Temperature metadata and exact calibration |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Temperature metadata and exact calibration |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | G44; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G44+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG44%5D+Feng+et+al.+elevated-temperature+octahedral-stress+model) (no live Issue linked) |
 
 ### G45
 
@@ -4670,11 +5140,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | B supplied local cycle; full rolling-contact simulation C |
 | Missing tasks | Original local parameter and domain checks |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original local parameter and domain checks |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | G45; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G45+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG45%5D+Shao+et+al.+compression%E2%80%93torsion+bearing-steel+model) (no live Issue linked) |
 
 <a id="family-tensor-and-path-based"></a>
 
@@ -4709,11 +5182,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Broader response map; source reconstruction and parameter identifiability must precede implementation. |
 | Missing tasks | Track principal directions through degeneracies, fatigue-space construction and multicoefficient/native-life calibration. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Track principal directions through degeneracies, fatigue-space construction and multicoefficient/native-life calibration. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N32; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N32+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN32%5D+Multiaxial+Fatigue+Space+%28MFS%29) (no live Issue linked) |
 
 ### N37
 
@@ -4737,11 +5213,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Alternative to plane scans. Full VA multiaxial counting architecture is C; 2009 largely develops the same framework. |
 | Missing tasks | Covariance/eigenbasis, source-defined cycle treatment and projection interaction; native life calculation. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | prioritized_addition; Adds projection-based interaction and life prediction; may reuse tensor decomposition. |
+| Roadmap rank | 13 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | N37; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N37+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN37%5D+Projection-by-Projection+%28PbP%29%2C+harmonic+CA+scope) (no live Issue linked) |
 
 ### N49
 
@@ -4765,11 +5244,14 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | Helps compare NP amplitude definitions. Not one undifferentiated “Deperrois–Freitas model.” |
 | Missing tasks | Identify which distinct amplitude/enclosure variants are meant and pair each with its actual failure criterion. |
+| Reference retrieval action | Original publication/variant identity remains unresolved; current comparator/review citation is a lead. Resolve it before numerical implementation; do not guess a DOI. |
+| Development disposition | identity_or_relationship_review; Amplitude tools and Deperrois/Freitas formulations require separate identity resolution. Identify which distinct amplitude/enclosure variants are meant and pair each with its actual failure criterion. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N49; Already reviewed, not implemented |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N49+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN49%5D+Deperrois%2FFreitas+path-amplitude+formulations) (no live Issue linked) |
 
 ### G32
 
@@ -4793,8 +5275,11 @@ All 161 inherited records remain traceable. 44 bundles, overlap checks, related 
 | Automated tests | None for this candidate |
 | Limitations | CA closed-cycle scope first; full arbitrary-history implementation may be C Crossref author Stephanov; transliteration Stefanov in some citations |
 | Missing tasks | Faithful line integral and closed-cycle damage calculation |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Faithful line integral and closed-cycle damage calculation |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G32; New distinct formulation candidate |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | No Issue created; agree exact source/version and scope before opening one |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G32+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG32%5D+Stefanov+curvilinear+integral+%2F+IDD+family) (no live Issue linked) |
