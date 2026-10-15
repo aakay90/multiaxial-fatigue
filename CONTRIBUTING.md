@@ -1,5 +1,15 @@
 # Contributing to WG4.3
 
+This framework supports preparation of the **FABER WG4.3 scientific review article** and collaborative comparison of published multiaxial fatigue criteria. The present phase is **constant-amplitude loading of plain/smooth geometries**, P/NP where the selected law supports it, without explicit notches, cracks or significant gradients. Wider loading/geometry work remains a potential future track, not an existing capability or committed deliverable.
+
+## Check external code before starting from scratch
+
+Consult the [external-code inventory](docs/EXTERNAL_IMPLEMENTATIONS.md) and the method’s discovery metadata. An external implementation remains external until independently reviewed, integrated and tested; it does not change WG4.3 completeness or validation.
+
+For any proposed reuse or translation, record the exact file/revision, method/version correspondence, original paper, loading/material/geometry assumptions, dependencies, tests and license grant. Public code without an explicit applicable license is not permission to copy, translate or redistribute. GPL obligations differ from MIT/ISC notices, and this repository’s own license is still undecided: resolve compatibility with maintainers before integration. Where permission is absent, link the source and seek permission or derive an independent implementation from the scientific formulation with appropriate review. Do not port unknown-license code under a new license.
+
+Compare intermediate quantities and source-specific plane/amplitude conventions, not only final life. External tests and published claims are evidence leads, not scientific validation of a port. Attach provenance and notices to the eventual PR. For geometry/gradient/spectral software, first establish whether a faithful smooth-point CA subcase exists; do not silently import a broader physical model.
+
 Start with [METHODS.md](METHODS.md), the [suggested roadmap](ROADMAP.md) and [prepared Issues](docs/contribution-issues/README.md). Contributions can implement a method, resolve a source ambiguity, build a reproducible benchmark, validate existing code or improve documentation. Priority is advisory, not a project assignment.
 
 ## Ten steps from a method to a PR

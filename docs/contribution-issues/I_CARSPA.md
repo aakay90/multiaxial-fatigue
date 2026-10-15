@@ -16,6 +16,10 @@
 
 ## Available components and remaining work
 
+FABER phase: Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply.
+
+External source discovery: possible_or_related_source; [EXT06](../EXTERNAL_IMPLEMENTATIONS.md#ext06); not integrated or independently validated. Consult the linked inventory for exact variant, language, license, evidence and reuse restrictions. External code does not count as integrated WG4.3 implementation.
+
 Missing the published critical-plane orientation construction; maximum-shear/max-damage scans are not that criterion. Restore only after source-faithful repair and regression/reference checks.
 
 Existing implementation: [fatigue/models/cp_methods/car_spa.py](../../fatigue/models/cp_methods/car_spa.py); symbol `CarSpa`. Existing tests: [tests/test_method_audit.py](../../tests/test_method_audit.py).

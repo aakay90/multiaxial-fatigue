@@ -1,12 +1,20 @@
-# WG4.3 — Help build a traceable multiaxial fatigue library
+# FABER WG4.3 — Help build a traceable multiaxial fatigue library
 
-WG4.3 is developing a Python collection of multiaxial fatigue assessment methods that researchers can inspect, implement and compare against reproducible evidence. We invite contributions of **missing criteria, source-faithful repairs and independent validation cases** across all relevant methodological families.
+## About the Project — FABER WG4.3
+
+This work is developed in the context of **FABER Working Group 4.3 (WG4.3)** to support the **preparation of a scientific review article on multiaxial fatigue assessment methods**. The article is not presented here as already published. See the [official WG4.3 activities](https://faber-cost.eu/wg4-fatigue-estimation-categories/wg4-3-multiaxial-high-cycle-fatigue/).
+
+The repository combines two purposes: **scientific review and comparison**—identify, classify, document, implement and compare published criteria—and **open collaborative development**, where researchers contribute implementations, numerical benchmarks and independent validation. We invite **missing criteria, source-faithful repairs and validation cases** across all methodological families.
 
 Multiaxial fatigue depends on interacting stress/strain components, phase shifts, mean stresses and material response. Published methods use different physical assumptions, plane rules, amplitude definitions and fatigue-life relations. A shared collection makes those differences explicit and helps researchers compare results without treating one numerical convention as universal.
 
-The principal scientific scope is **constant-amplitude high-cycle fatigue**, including proportional and non-proportional repeating paths where a criterion supports them. The current software handles **single-frequency harmonic stress cycles**, elastic strains inferred from stress, damage-parameter assessment, empirical life fitting where valid, and CSV/plot comparisons. Native life laws, arbitrary periodic inputs, cyclic plasticity and spatial/probabilistic capabilities are tracked as distinct development needs.
+**Present scientific scope:** constant-amplitude multiaxial fatigue, principally HCF, of **plain/smooth geometries**—without explicit geometrical stress concentrations, notches, cracks or significant stress gradients. Both proportional and non-proportional loading are relevant where supported by each method, irrespective of whether its formulation is stress-, strain-, energy-, plane-, invariant- or otherwise based.
+
+**Current software:** single-frequency harmonic stress cycles, elastic strains inferred from stress, damage-parameter assessment, empirical life fitting where valid, and CSV/plot comparisons. **Potential future extensions**, not existing capabilities or formal commitments, include variable-amplitude and richer periodic histories, notches/gradients, complex geometries, structural applications and additional fatigue phenomena. Wider methods remain catalogued but are marked separately from the current phase.
 
 ## Help us implement missing fatigue methods
+
+Before starting from scratch, consult the [external source-code inventory](docs/EXTERNAL_IMPLEMENTATIONS.md). It distinguishes inspected source, related/unverified leads and cases with no accessible source identified. A public repository is not automatically licensed for reuse; external code is neither integrated nor scientifically validated merely by being linked here.
 
 Start with the [contribution index](docs/METHOD_INDEX.md), which lists every missing candidate by family, references, loading scope and development disposition. You can implement a criterion, complete a disabled formulation, review equations, supply a missing original reference, improve numerical robustness or validate an existing implementation.
 
@@ -54,6 +62,8 @@ Browse contribution opportunities by family: [Critical plane](docs/METHOD_INDEX.
 **Complete** means essential components are implemented and tested for the explicitly named **repository scope**, which may include documented adaptations. **Partial** means known essential gaps; those archived methods are disabled. **Requires review** means active code exists but source completeness is not established. **Validation is independent:** no method is currently claimed independently validated against published or experimental datasets merely because its tests pass.
 
 Each record has one primary family for counting and may have secondary classifications. For example, an energy criterion can also use a critical plane. The [catalogue](METHODS.md) records those overlaps, original versus adapted formulations, `_ext` variants, code, tests and missing work.
+
+These counts cover the complete catalogue, including potential future geometry/loading tracks. Check each record’s **current FABER phase** before proposing near-term work; catalogue inclusion is not a claim of present plain-geometry compatibility.
 
 ## Why are there about 100 candidates but only about 20 roadmap entries?
 
