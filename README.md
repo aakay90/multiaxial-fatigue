@@ -1,6 +1,40 @@
-# Multiaxial fatigue methods
+# WG4.3 — Multiaxial fatigue assessment
 
-Python workflow for calibrating and comparing multiaxial fatigue methods against experimental material datasets. The implementation already separates critical-plane methods, invariant methods, and energy-based methods through a central registry.
+Research Python application for implementing, comparing and progressively validating multiaxial fatigue criteria. The working scope is constant-amplitude high-cycle fatigue, including proportional and phase-shifted non-proportional loading. Critical-plane, invariant, integral, energy, mesoscopic, probabilistic and nonlocal candidates are tracked without treating every publication as a distinct method.
+
+The current workflow imports material workbooks, builds physical single-frequency stress/elastic-strain harmonics, evaluates 13 critical-plane and two direct integral/hybrid models, calibrates damage curves and exports comparisons. General sampled periodic paths, constitutive plasticity, FE spatial processing and spectral fatigue are future infrastructure, not current capabilities.
+
+## Methods and contribution opportunities
+
+- [Full method catalogue](METHODS.md): scoped completeness, independent validation status, references, source/tests and missing tasks.
+- [Suggested roadmap](ROADMAP.md): a diverse implementation sequence and exact papers to retrieve.
+- [Contributing](CONTRIBUTING.md): interfaces, scientific evidence and completion checklist.
+- [Prepared Issue briefs](docs/contribution-issues/README.md): actionable repairs, source checks and initial additions.
+- [Structured catalogue JSON](docs/catalogue/methods.json) and [generated CSV](docs/catalogue/methods.csv).
+- [Research provenance and all 51 review publications](docs/research/README.md).
+
+<!-- METHOD_PROGRESS_START -->
+
+| Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
+| --- | --- | --- | --- | --- | --- |
+| Critical plane | 3 | 1 | 14 | 0 | 18 |
+| Energy based | 3 | 2 | 15 | 3 | 23 |
+| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
+| Invariant based | 0 | 1 | 12 | 0 | 13 |
+| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
+| Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
+| Probabilistic | 0 | 0 | 5 | 0 | 5 |
+| Specialized | 0 | 0 | 3 | 0 | 3 |
+| Strain based | 2 | 0 | 11 | 2 | 15 |
+| Stress based | 0 | 0 | 13 | 0 | 13 |
+| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
+| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
+
+<!-- METHOD_PROGRESS_END -->
+
+“Fully implemented” applies only to the named **repository scope**, including explicitly documented adaptations. It is independent of scientific validation. “Requires review” records active code whose original-formulation completeness is not established. Counts use one primary family per identifiable method/scoped candidate; bundles, unresolved overlaps and research workstreams remain searchable but are excluded from totals. They are not counts of independent fatigue theories.
+
+No method is currently labelled independently validated against published or experimental datasets. Analytical limits, regression tests and CAIM's separate angular calculation are described in the catalogue. Five flawed archived implementations remain disabled. Existing `_ext` variants are documented within each method and are not counted again.
 
 ## Setup
 
