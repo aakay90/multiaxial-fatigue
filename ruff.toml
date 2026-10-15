@@ -1,0 +1,6 @@
+# Catch unused imports, redefinitions and undefined names without imposing a
+# repository-wide formatting migration on scientific implementations.
+target-version = "py310"
+
+[lint]
+select = ["F401", "F811", "F821"]

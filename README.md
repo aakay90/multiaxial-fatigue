@@ -93,6 +93,12 @@ python 1_run_material.py --model BP --material AISI316L --results-dir Results/cu
 MPLBACKEND=Agg python -m unittest discover -s tests -v
 ```
 
+For contributor checks, install `requirements-dev.txt`, then run
+`python -m ruff check .`, `python tools/generate_method_docs.py --check` and
+`python tools/check_docs.py`. CI runs these checks and the unit tests. The
+documentation check verifies local destinations; external links and frozen
+research documents are excluded.
+
 The workbook run writes a new result under `Results/current/`. It reports when optional material properties are estimated. For a minimal direct calculation using the current API, run:
 
 ```python
@@ -131,3 +137,9 @@ General nonsinusoidal periodic paths, constitutive plasticity, mesh/control-volu
 Historical `Results/*.csv` predate the numerical audit and are excluded from current comparisons by default. Recalibrate affected parameters before ranking methods. Current exports preserve `log10(DP_e/DP)` for all slopes; unreliable life inversions remain suppressed. Run `python 2_compare_results.py --results_dir Results/current --out_dir Results/Comparison` to compare fresh runs.
 
 The repository is public and welcomes scientific contributions. A software license has not yet been selected, so reuse terms still need a maintainer decision. No copyrighted article PDFs are distributed here.
+
+When referencing calculations, cite the repository URL and exact commit, along
+with each criterion's original publication from the catalogue. The review
+article is in preparation; no article DOI or software release DOI is assigned
+here. See the [cleanup audit](docs/repository-cleanup.md) for preserved archives,
+branch classifications and remaining maintenance decisions.

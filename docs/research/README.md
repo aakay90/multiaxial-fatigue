@@ -1,5 +1,10 @@
 # Research provenance
 
+The [documentation development history](documentation-history.md) consolidates
+the three original documentation checkpoints, retaining their scientific and
+publication context. Current maintenance decisions are in the
+[cleanup audit](../repository-cleanup.md).
+
 The 15 October targeted external-code pass is recorded in `external-code-search.json` and generated [external inventory](../EXTERNAL_IMPLEMENTATIONS.md). It adds source/variant/license metadata without repeating the literature review, promoting validation, or copying third-party code. The present FABER WG4.3 review-article phase is plain/smooth-geometry CA fatigue; broader geometry/loading sources remain future/reference tracks.
 
 The live status catalogue is [../catalogue/methods.json](../catalogue/methods.json). This directory preserves earlier research evidence; its dates and implementation labels are historical and must not override the live catalogue.
