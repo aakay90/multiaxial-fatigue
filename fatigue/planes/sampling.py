@@ -1,7 +1,7 @@
 # fatigue/planes/sampling.py
 from __future__ import annotations
 import numpy as np
-from typing import Union, Optional
+from typing import Union
 
 
 def dcmesh_xyz(a1, n1, a2, n2=None):

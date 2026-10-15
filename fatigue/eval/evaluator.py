@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Mapping, Tuple
 import numpy as np
+from fatigue.models.utils.tensors import as33 as _as33
 import math
 from fatigue.models.base import CriticalPlaneMethod
 from fatigue.models.utils.plane_history import shear_maximum, split_strain_ranges
@@ -23,11 +24,6 @@ def cp_rot(
         T_rot = R.T @ T @ R
     """
 
-    def _as33(name: str, A: np.ndarray) -> np.ndarray:
-        A = np.asarray(A, dtype=float)
-        if A.shape != (3, 3):
-            raise ValueError(f"{name} must be shape (3,3); got {A.shape}.")
-        return A
 
     S0 = _as33("S0", S0)
     E0 = _as33("E0", E0)

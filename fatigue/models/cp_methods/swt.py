@@ -1,16 +1,9 @@
 # fatigue_cp/methods/swt.py
 from __future__ import annotations
-from typing import Mapping, Tuple
-import numpy as np
+from typing import Mapping
+from fatigue.models.utils.tensors import as33 as _as33
 from ..base import CPPlaneResult
 
-
-def _as33(name: str, A: np.ndarray) -> np.ndarray:
-    """Ensure A is a single (3,3) tensor."""
-    A = np.asarray(A, dtype=float)
-    if A.shape != (3, 3):
-        raise ValueError(f"{name} must be shape (3,3); got {A.shape}.")
-    return A
 
 class SWT:
     name = "SWT"
