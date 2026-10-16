@@ -52,8 +52,8 @@
     "L_LI": "1",
     "k_MGSE": "1",
     "a_MSWT": "1",
-    "alpha_w": "1",
-    "xi_ZHU": "1"
+    "alpha_w": "unverified legacy constant",
+    "xi_ZHU": "unverified legacy constant"
   },
   "curve_units": {
     "N": "cycle",
@@ -117,7 +117,83 @@
         "A_surv": 0.0023263909334775407,
         "n": 6,
         "R2_log": 0.0007959813179277964
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "FIN": {
       "series": {
@@ -163,7 +239,83 @@
         "A_surv": 159.9856722501578,
         "n": 6,
         "R2_log": 0.0008378721485184926
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "SWT": {
       "series": {
@@ -209,7 +361,83 @@
         "A_surv": 0.3385000463775646,
         "n": 6,
         "R2_log": 0.0008378721485292617
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "MATAKE": {
       "series": {
@@ -255,7 +483,83 @@
         "A_surv": 147.2965158665305,
         "n": 6,
         "R2_log": 0.0008378721485241547
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "MCD": {
       "series": {
@@ -301,7 +605,83 @@
         "A_surv": 137.19377557620854,
         "n": 6,
         "R2_log": 0.0008378721485113871
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "MGSE_YU": {
       "series": {
@@ -347,7 +727,83 @@
         "A_surv": 0.3433471169716154,
         "n": 6,
         "R2_log": 0.0008378721485271523
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "MGSE_ZHU": {
       "series": {
@@ -393,7 +849,83 @@
         "A_surv": 0.2569412852645593,
         "n": 6,
         "R2_log": 0.000837872148530483
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "MSWT": {
       "series": {
@@ -439,7 +971,83 @@
         "A_surv": 0.16919247513979765,
         "n": 6,
         "R2_log": 0.0008378721485285956
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "MKBM": {
       "series": {
@@ -485,7 +1093,83 @@
         "A_surv": 0.003285767394048425,
         "n": 6,
         "R2_log": 0.0007936091178385452
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "LIU2021": {
       "series": {
@@ -531,7 +1215,83 @@
         "A_surv": 0.0019310151165949049,
         "n": 6,
         "R2_log": 0.0008147383588830159
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "LI": {
       "series": {
@@ -577,7 +1337,83 @@
         "A_surv": 0.7210050987842131,
         "n": 6,
         "R2_log": 0.0008378721485283736
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "GSE": {
       "series": {
@@ -623,7 +1459,83 @@
         "A_surv": 0.3433471169716154,
         "n": 6,
         "R2_log": 0.0008378721485271523
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "GSA": {
       "series": {
@@ -669,7 +1581,83 @@
         "A_surv": 0.0005254572931028448,
         "n": 6,
         "R2_log": 0.0008378721485220453
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ]
     },
     "BP": {
       "series": {
@@ -700,7 +1688,46 @@
         "n": 6,
         "R2_log": 0.0008378721485285956
       },
-      "fit_ext": null
+      "fit_ext": null,
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": []
     },
     "CAIM": {
       "series": {
@@ -731,7 +1758,46 @@
         "n": 6,
         "R2_log": 0.0008378721485288176
       },
-      "fit_ext": null
+      "fit_ext": null,
+      "design_observations": [
+        {
+          "specimen_id": "Uniaxial_2",
+          "excel_row": 3,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 2474000.0
+        },
+        {
+          "specimen_id": "Uniaxial_3",
+          "excel_row": 4,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 206000.0
+        },
+        {
+          "specimen_id": "Uniaxial_5",
+          "excel_row": 6,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 116000.0
+        },
+        {
+          "specimen_id": "Uniaxial_6",
+          "excel_row": 7,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 158000.0
+        },
+        {
+          "specimen_id": "Uniaxial_8",
+          "excel_row": 9,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 638000.0
+        },
+        {
+          "specimen_id": "Uniaxial_9",
+          "excel_row": 10,
+          "source_file": "AISI316L.xlsx",
+          "N_cycles": 509000.0
+        }
+      ],
+      "design_observations_ext": []
     }
   },
   "optimisation": null,

@@ -101,6 +101,15 @@ class CalibrationWorkflowTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "requires parameter k_FS"):
             validate_record(record)
 
+    def test_formulation_and_settings_changes_reject_stored_curves(self):
+        record, path = self.export()
+        with self.assertRaisesRegex(ValueError, "No compatible"):
+            load_calibration(data=self.data, material=self.material, model="BP", settings=curve_settings(4, 8), folder=self.folder)
+        record["formulation_fingerprints"]["BP"] = "0" * 64
+        path.write_text(json.dumps(record))
+        with self.assertRaisesRegex(ValueError, "incompatible"):
+            self.load(calibration_id=record["calibration_id"])
+
     def test_failure_only_curve_and_fingerprint_ignore_runouts(self):
         failures = failures_only(self.data)
         a, _ = self.export(failures)

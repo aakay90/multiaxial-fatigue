@@ -31,7 +31,14 @@ def legacy_columns(workbook):
     row = next((row[0].row for row in sheet.iter_rows() if str(row[0].value).strip().lower() == "average"), None)
     if row is None:
         raise ValueError("Summary has no Average row")
-    return columns, {name: float(sheet.cell(row, col).value) for col, name in columns.items()}
+    if columns:
+        occupied = [c.column for c in sheet[1] if c.value is not None]
+        if set(columns) != set(range(min(columns), max(occupied) + 1)):
+            raise ValueError("Legacy coefficients must form the trailing Summary block; this workbook needs a reviewed migration")
+    try:
+        return columns, {name: float(sheet.cell(row, col).value) for col, name in columns.items()}
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Legacy coefficient caches are missing or invalid; recalculate the original workbook before migration") from exc
 
 
 def migrated_workbook(file, target, columns):

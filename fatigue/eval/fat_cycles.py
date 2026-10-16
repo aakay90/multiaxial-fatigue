@@ -213,7 +213,8 @@ def fatigue_plots(
     ax1.set_ylabel("Fatigue parameter F")
 
     ax1.grid(True, which="both")
-    ax1.legend()
+    ax1.legend(loc="upper center", bbox_to_anchor=(0.5, -0.18), ncol=2, fontsize=8)
+    fig1.subplots_adjust(bottom=0.30)
 
     # =========================
     # 2) Nexp vs Npred (parity)

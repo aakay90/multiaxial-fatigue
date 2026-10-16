@@ -94,7 +94,7 @@ def formulation_fingerprint(name):
         "fatigue/models/utils/param_utils.py")]
     digest = hashlib.sha256()
     for path in sorted(set(paths)):
-        digest.update(str(path.relative_to(root)).encode() + b"\0" + path.read_text(encoding="utf-8").encode())
+        digest.update(path.relative_to(root).as_posix().encode() + b"\0" + path.read_text(encoding="utf-8").encode())
     return digest.hexdigest()
 
 
@@ -182,7 +182,8 @@ def create_record(*, data, material, parameters, curves, settings, procedure,
         "material_input_units": {k: "MPa" if k in {"Sy", "Su", "E", "Sigm1", "Taum1", "Sig0", "Tau0", "sigma_f", "tau_f"}
                                  else "1" for k in PROPERTY_KEYS},
         "parameters": parameters, "parameter_origin": parameter_origin,
-        "parameter_units": {p: "1" for p in parameters},
+        "parameter_units": {p: "1" if p in METHOD_PARAMETERS.values() else "unverified legacy constant"
+                            for p in parameters},
         "curve_units": {"N": "cycle", "DP": "criterion-dependent repository damage parameter",
                         "A": "DP * cycle**(-b)", "A_surv": "DP * cycle**(-b)", "b": "1",
                         "STD": "1 (ln cycle residual)", "STD_ln_DP": "1", "R2_log": "1"},

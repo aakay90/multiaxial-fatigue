@@ -134,6 +134,7 @@ def save_fatigue_csv(
     N_pred,
     test_status=None,
     specimen_ids=None,
+    specimen_ids_design=None,
     N_design=None,
     F_design=None,
     N_pred_design=None,
@@ -333,13 +334,15 @@ def save_fatigue_csv(
                         float(log10_dp_ratio(dp_fit_i, cp)),
                         IMPLEMENTATION_REVISION,
                         reference["url"] or reference["citation"],
-                        "failure", "", calibration_id, calibration_file,
+                        "failure", specimen_ids_design[i] if specimen_ids_design is not None else "", calibration_id, calibration_file,
                     ]
                 )
 
         for i, (ne, cp, npred, err) in enumerate(zip(N_exp, CP, N_pred, err_other)):
             dp_fit_i = float(DP_fit[i]) if DP_fit is not None and i < len(DP_fit) else float("nan")
             edp_i = float(Error_ln_dp[i]) if Error_ln_dp is not None and i < len(Error_ln_dp) else float("nan")
+            if statuses[i] != "failure":
+                dp_fit_i = edp_i = float("nan")
             w.writerow(
                 [
                     material_name,

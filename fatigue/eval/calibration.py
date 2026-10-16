@@ -59,6 +59,7 @@ def collect_uniaxial_series_and_fit(
 
         N_ext_list: list[float] = []
         CP_ext_list: list[float] = []
+        observations_std, observations_ext = [], []
 
         # early check for required params
         missing = [k for k in model.required_params() if params.get(k, None) is None]
@@ -73,6 +74,9 @@ def collect_uniaxial_series_and_fit(
             if not is_failure(data[material_name]["cases"][case_id]):
                 continue
             Nf = float(p["Nf_cycles"])
+            meta = data[material_name]["cases"][case_id]["meta"]
+            observation = {"specimen_id": meta.get("specimen_id"), "excel_row": meta.get("excel_row"),
+                           "source_file": meta.get("source_file"), "N_cycles": Nf}
 
             if not (np.isfinite(Nf) and Nf > 0):
                 continue
@@ -95,6 +99,7 @@ def collect_uniaxial_series_and_fit(
                 if np.isfinite(v) and v > 0:
                     N_std_list.append(Nf)
                     CP_std_list.append(v)
+                    observations_std.append(observation)
 
             # Extreme variant ("_ext"), optional
             if "_ext" in res.values:
@@ -102,6 +107,7 @@ def collect_uniaxial_series_and_fit(
                 if np.isfinite(vext) and vext > 0:
                     N_ext_list.append(Nf)
                     CP_ext_list.append(vext)
+                    observations_ext.append(observation)
 
         # Convert to arrays
         N_std = np.asarray(N_std_list, dtype=float)
@@ -116,6 +122,8 @@ def collect_uniaxial_series_and_fit(
 
         # Backward-compatible output structure
         out[model.name] = {
+            "design_observations": observations_std,
+            "design_observations_ext": observations_ext,
             "series": {
                 "N": N_std,        # keep legacy meaning: N associated to CP (by_metric or direct)
                 "CP": CP_std,      # legacy "CP"

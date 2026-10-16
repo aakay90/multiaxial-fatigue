@@ -363,6 +363,8 @@ def main():
         N_exp=Nexp,
         test_status=statuses,
         specimen_ids=specimen_ids,
+        specimen_ids_design=[p.get("specimen_id", "") for p in
+                            stored_curve.get("design_observations_ext" if variant_key else "design_observations", [])] or None,
         CP=values,
         N_pred=Npred,
         N_design=N_d,

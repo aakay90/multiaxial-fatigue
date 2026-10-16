@@ -52,8 +52,8 @@
     "L_LI": "1",
     "k_MGSE": "1",
     "a_MSWT": "1",
-    "alpha_w": "1",
-    "xi_ZHU": "1"
+    "alpha_w": "unverified legacy constant",
+    "xi_ZHU": "unverified legacy constant"
   },
   "curve_units": {
     "N": "cycle",
@@ -198,7 +198,407 @@
         "A_surv": 0.02409437402343241,
         "n": 33,
         "R2_log": 0.7897005895484426
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "FIN": {
       "series": {
@@ -325,7 +725,407 @@
         "A_surv": 1497.4568246664705,
         "n": 33,
         "R2_log": 0.7880645795863701
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "SWT": {
       "series": {
@@ -452,7 +1252,407 @@
         "A_surv": 9.602158042923621,
         "n": 33,
         "R2_log": 0.7880645795863706
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "MATAKE": {
       "series": {
@@ -579,7 +1779,407 @@
         "A_surv": 1229.9205652556304,
         "n": 33,
         "R2_log": 0.7880645795863706
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "MCD": {
       "series": {
@@ -706,7 +2306,407 @@
         "A_surv": 836.1987520773164,
         "n": 33,
         "R2_log": 0.7880645795863702
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "MGSE_YU": {
       "series": {
@@ -833,7 +2833,407 @@
         "A_surv": 9.7832810370261,
         "n": 33,
         "R2_log": 0.7880645795863704
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "MGSE_ZHU": {
       "series": {
@@ -960,7 +3360,407 @@
         "A_surv": 11.042481749362164,
         "n": 33,
         "R2_log": 0.7880645795863704
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "MSWT": {
       "series": {
@@ -1087,7 +3887,407 @@
         "A_surv": 5.089143762749517,
         "n": 33,
         "R2_log": 0.7880645795863706
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "MKBM": {
       "series": {
@@ -1214,7 +4414,407 @@
         "A_surv": 0.017621523227716637,
         "n": 33,
         "R2_log": 0.7896408353501129
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "LIU2021": {
       "series": {
@@ -1341,7 +4941,407 @@
         "A_surv": 0.01149403942762018,
         "n": 33,
         "R2_log": 0.78951041963277
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "LI": {
       "series": {
@@ -1468,7 +5468,407 @@
         "A_surv": 48.01079021461819,
         "n": 33,
         "R2_log": 0.7880645795863706
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "GSE": {
       "series": {
@@ -1595,7 +5995,407 @@
         "A_surv": 9.7832810370261,
         "n": 33,
         "R2_log": 0.7880645795863703
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "GSA": {
       "series": {
@@ -1722,7 +6522,407 @@
         "A_surv": 0.008992655356503522,
         "n": 33,
         "R2_log": 0.7880645795863707
-      }
+      },
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ]
     },
     "BP": {
       "series": {
@@ -1807,7 +7007,208 @@
         "n": 33,
         "R2_log": 0.7880645795863703
       },
-      "fit_ext": null
+      "fit_ext": null,
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": []
     },
     "CAIM": {
       "series": {
@@ -1892,7 +7293,208 @@
         "n": 33,
         "R2_log": 0.7880645795863706
       },
-      "fit_ext": null
+      "fit_ext": null,
+      "design_observations": [
+        {
+          "specimen_id": "Plain_axial_1",
+          "excel_row": 2,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 75621.8245925823
+        },
+        {
+          "specimen_id": "Plain_axial_2",
+          "excel_row": 3,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 138257.954633599
+        },
+        {
+          "specimen_id": "Plain_axial_3",
+          "excel_row": 4,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 159701.094620937
+        },
+        {
+          "specimen_id": "Plain_axial_4",
+          "excel_row": 5,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 184793.617935077
+        },
+        {
+          "specimen_id": "Plain_axial_5",
+          "excel_row": 6,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 197176.632963797
+        },
+        {
+          "specimen_id": "Plain_axial_6",
+          "excel_row": 7,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 228157.380286733
+        },
+        {
+          "specimen_id": "Plain_axial_7",
+          "excel_row": 8,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 258114.099159339
+        },
+        {
+          "specimen_id": "Plain_axial_8",
+          "excel_row": 9,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 345627.224850786
+        },
+        {
+          "specimen_id": "Plain_axial_9",
+          "excel_row": 10,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 401179.142074744
+        },
+        {
+          "specimen_id": "Plain_axial_10",
+          "excel_row": 11,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 527793.893472805
+        },
+        {
+          "specimen_id": "Plain_axial_11",
+          "excel_row": 12,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 478318.075011766
+        },
+        {
+          "specimen_id": "Plain_axial_12",
+          "excel_row": 13,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 645987.919165603
+        },
+        {
+          "specimen_id": "Plain_axial_13",
+          "excel_row": 14,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1025519.29114769
+        },
+        {
+          "specimen_id": "Plain_axial_14",
+          "excel_row": 15,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 901940.442951261
+        },
+        {
+          "specimen_id": "Plain_axial_15",
+          "excel_row": 16,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1576842.7796911
+        },
+        {
+          "specimen_id": "Plain_axial_16",
+          "excel_row": 17,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 2629781.59628505
+        },
+        {
+          "specimen_id": "Plain_axial_17",
+          "excel_row": 18,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1843487.37080331
+        },
+        {
+          "specimen_id": "Plain_axial_18",
+          "excel_row": 19,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1269406.0
+        },
+        {
+          "specimen_id": "Plain_axial_19",
+          "excel_row": 20,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 253166.0
+        },
+        {
+          "specimen_id": "Plain_axial_20",
+          "excel_row": 21,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 147470.0
+        },
+        {
+          "specimen_id": "Plain_axial_21",
+          "excel_row": 22,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 212560.0
+        },
+        {
+          "specimen_id": "Plain_axial_24",
+          "excel_row": 25,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 274825.0
+        },
+        {
+          "specimen_id": "Plain_axial_25",
+          "excel_row": 26,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 33380.0
+        },
+        {
+          "specimen_id": "Plain_axial_26",
+          "excel_row": 27,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 1045282.0
+        },
+        {
+          "specimen_id": "Plain_axial_30",
+          "excel_row": 31,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 74300.0
+        },
+        {
+          "specimen_id": "Plain_axial_31",
+          "excel_row": 32,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 3620.0
+        },
+        {
+          "specimen_id": "Plain_axial_32",
+          "excel_row": 33,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 66300.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_17",
+          "excel_row": 111,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 6040.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_18",
+          "excel_row": 112,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 19951.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_19",
+          "excel_row": 113,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 53752.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_20",
+          "excel_row": 114,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 56929.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_21",
+          "excel_row": 115,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 247953.0
+        },
+        {
+          "specimen_id": "Plain_multiaxial_22",
+          "excel_row": 116,
+          "source_file": "42CrMo4_QT.xlsx",
+          "N_cycles": 269178.0
+        }
+      ],
+      "design_observations_ext": []
     }
   },
   "optimisation": null,
