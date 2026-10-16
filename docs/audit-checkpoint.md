@@ -46,6 +46,7 @@ Executed successfully in this session before this checkpoint update
 - Ruff, dependency consistency, generated-method documentation and local documentation-link checks passed.
 - Failure-only versus failure-plus-run-out coefficient and curve regressions passed.
 - Script 0 to JSON to Script 1 and CSV/plot integration passed on AISI316L.
+- Repeated Script 0, then Script 1 and Script 2 passed on AISI316L/BP in `/tmp/wg43-final-e2e`; exactly one JSON record, 31 failures and 13 run-outs, with censored errors undefined.
 
 These are software tests and numerical regression comparisons. They do not
 establish independent experimental validation of the fatigue criteria. Initial
@@ -67,9 +68,18 @@ now tested. Modified files in this milestone are `AGENTS.md`, Script 0,
 `fatigue/eval/calibration_store.py`, `fatigue/eval/calibration.py`,
 `tests/test_calibration_workflow.py`, the workflow and verification documents,
 and this checkpoint. No known local test failure remains. These changes are
-committed and published. Later edits to this checkpoint are documentation only.
+committed and published. A later CI diagnostic milestone adds
+`tools/run_tests.py` and updates `.github/workflows/quality.yml` to expose test
+tracebacks as check annotations without changing discovery or test assertions.
+The diagnostic runner also passes all 38 tests locally.
 
-Next action is to inspect the current checks and review feedback on PR #5 and
+On `d7c0c65`, the push CI run succeeded but the PR CI test job failed, while its
+catalogue job passed. The connector supplied only exit status and did not expose
+the traceback. The diagnostic runner makes future failures readable through check
+annotations. Do not infer that the failed PR job is resolved until the new run
+has passed or its annotated failure has been diagnosed.
+
+Next action is to inspect the current checks and test-failure annotations on PR #5 and
 check Git status before making changes. Address concrete feedback on the same
 branch, run the relevant tests, update this checkpoint and commit verified work.
 Do not recreate this implementation or open a duplicate PR. Do not merge without
