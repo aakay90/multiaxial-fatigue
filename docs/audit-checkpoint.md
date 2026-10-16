@@ -11,7 +11,7 @@ The JSON calibration, run-out, native-life and recovery workflows are implemente
 and tested. Branch `feat/calibration-history-runouts`.
 PR [#5](https://github.com/andreachiocca/multiaxial-fatigue/pull/5) is open for
 review and has not been merged. The verified implementation commit is
-`7a872566c4019123b767f69aca2b327248ea5e4f`. Use `git log -1` for the later
+`f0df0a7a9588b59fc7abca051bbf1790da853230`. Use `git log -1` for the later
 checkpoint-only commit. The five previous local implementation commits were
 recovered rather than reimplemented. Their original local history, including
 this session's incremental work, is retained on
@@ -26,7 +26,7 @@ this session's incremental work, is retained on
 | Native cycle outputs bypass damage fitting | Implemented and tested with a synthetic model |
 | Suppression of duplicate equivalent calibrations | Implemented and tested successfully; sequential equivalent exports reuse the stored ID |
 | Persistent checkpoint and recovery instructions | Checkpoint committed; mandatory milestone procedure added to `AGENTS.md` |
-| Publication | PR #5 open; remote implementation tree verified equal to local tested tree; CI and human review to be checked before merge |
+| Publication | PR #5 open; remote implementation tree verified equal to local tested tree; push and PR CI passed on f0df0a7; human review pending |
 
 ## Code and verification
 
@@ -47,6 +47,7 @@ Executed successfully in this session before this checkpoint update
 - Failure-only versus failure-plus-run-out coefficient and curve regressions passed.
 - Script 0 to JSON to Script 1 and CSV/plot integration passed on AISI316L.
 - Repeated Script 0, then Script 1 and Script 2 passed on AISI316L/BP in `/tmp/wg43-final-e2e`; exactly one JSON record, 31 failures and 13 run-outs, with censored errors undefined.
+- GitHub Actions passed on `f0df0a7` for both [PR checks](https://github.com/andreachiocca/multiaxial-fatigue/actions/runs/38967518197) and [push checks](https://github.com/andreachiocca/multiaxial-fatigue/actions/runs/38967513186).
 
 These are software tests and numerical regression comparisons. They do not
 establish independent experimental validation of the fatigue criteria. Initial
@@ -81,11 +82,12 @@ tied coefficient values within floating-point rounding. A three-plane fixture
 was generated from the original `e70a8af` checkout, retains all 11 failure points
 and has separated objective minima for all five methods. Tests now compare that
 baseline and recompute its objective grids. Original fixtures, production search
-procedures and fatigue formulations are preserved. The fix passes locally;
-the next CI run must be checked before declaring the PR ready.
+procedures and fatigue formulations are preserved. The correction passes all 39
+tests locally and both push and PR CI checks on `f0df0a7`. No active test or
+publication blocker remains for this task.
 
-Next action is to inspect the current checks and test-failure annotations on PR #5 and
-check Git status before making changes. Address concrete feedback on the same
+Next action is to review PR #5, confirm its current checks and check Git status
+before making changes. Address concrete review feedback on the same
 branch, run the relevant tests, update this checkpoint and commit verified work.
 Do not recreate this implementation or open a duplicate PR. Do not merge without
 an explicit user instruction. Independent original-paper validation listed in

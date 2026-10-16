@@ -11,6 +11,7 @@ optimisation baseline was also captured before changing the calibration code.
 | Check | Result |
 |---|---|
 | Existing and new unit/integration tests | 39 passed |
+| GitHub Actions | Push and PR checks passed on `f0df0a7`; the earlier tied-minimum fixture failure was diagnosed and corrected without a production-code change |
 | Pre-change material/model sweep | 64 runs, 3,936 failure rows |
 | JSON-based material/model sweep | 64 runs, 4,608 rows, including 672 run-out rows |
 | Failure-row comparison | All original columns reproduced, maximum observed numerical difference 0 |
