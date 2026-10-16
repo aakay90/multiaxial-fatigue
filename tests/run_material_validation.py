@@ -34,10 +34,13 @@ def main():
             with (out/'validation.log').open('a') as log, contextlib.redirect_stdout(log):
                 runner['main']()
             df=pd.read_csv(out/f'{name}_{material}.csv')
-            assert len(df)==count,(name,material,len(df),count)
+            failures = df.loc[df.Test_status == 'failure']
+            runouts = df.loc[df.Test_status == 'runout']
+            assert len(failures)==count,(name,material,len(failures),count)
             assert np.isfinite(df.CP_value).all(),(name,material,'nonfinite DP')
-            assert np.isfinite(df.Error_log10_dp).all(),(name,material,'missing log ratio')
-            np.testing.assert_allclose(df.Error_log10_dp,log10_dp_ratio(df.DP_fit,df.CP_value),atol=1e-12)
+            assert np.isfinite(failures.Error_log10_dp).all(),(name,material,'missing log ratio')
+            np.testing.assert_allclose(failures.Error_log10_dp,log10_dp_ratio(failures.DP_fit,failures.CP_value),atol=1e-12)
+            assert runouts[['Error_ln','Error_ln_dp','Error_log10_dp','DP_fit']].isna().all().all()
             assert df.Method_reference.notna().all(),(name,material,'missing reference')
             if df.Metric_mode.eq('DP_DIFF').all():
                 assert df.Nf_expected.isna().all(),(name,material,'flat curve life prediction')

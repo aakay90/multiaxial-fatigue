@@ -132,6 +132,8 @@ def save_fatigue_csv(
     N_exp,
     CP,
     N_pred,
+    test_status=None,
+    specimen_ids=None,
     N_design=None,
     F_design=None,
     N_pred_design=None,
@@ -178,6 +180,12 @@ def save_fatigue_csv(
     path = os.path.join(out_dir, filename)
 
     reference = method_reference(method_name)
+    statuses = list(test_status) if test_status is not None else ["failure"] * len(N_exp)
+    specimens = list(specimen_ids) if specimen_ids is not None else [""] * len(N_exp)
+    if len(statuses) != len(N_exp) or len(specimens) != len(N_exp):
+        raise ValueError("Observation status/specimen IDs must match result rows")
+    calibration_id = (extra_meta or {}).get("calibration_id", "")
+    calibration_file = (extra_meta or {}).get("calibration_file", "")
     family = (method_family or infer_method_family(method_name)).strip() or "UNKNOWN"
 
     mode = str(metric_mode or "Nf").strip() or "Nf"
@@ -300,6 +308,7 @@ def save_fatigue_csv(
                 "Error_log10_dp",
                 "Implementation_revision",
                 "Method_reference",
+                "Test_status", "Specimen_id", "Calibration_id", "Calibration_file",
             ]
         )
 
@@ -324,6 +333,7 @@ def save_fatigue_csv(
                         float(log10_dp_ratio(dp_fit_i, cp)),
                         IMPLEMENTATION_REVISION,
                         reference["url"] or reference["citation"],
+                        "failure", "", calibration_id, calibration_file,
                     ]
                 )
 
@@ -342,11 +352,12 @@ def save_fatigue_csv(
                     float(npred),
                     dp_fit_i,
                     1,
-                    float(err),
-                    edp_i,
-                    float(log10_dp_ratio(dp_fit_i, cp)),
+                    float(err) if statuses[i] == "failure" else float("nan"),
+                    edp_i if statuses[i] == "failure" else float("nan"),
+                    float(log10_dp_ratio(dp_fit_i, cp)) if statuses[i] == "failure" else float("nan"),
                     IMPLEMENTATION_REVISION,
                     reference["url"] or reference["citation"],
+                    statuses[i], specimens[i], calibration_id, calibration_file,
                 ]
             )
 

@@ -36,7 +36,7 @@ Datasets
 
 Notes
 -----
-- This script does NOT write back to Excel; it prints calibrated parameters and
+- This script writes JSON calibration records without editing Excel. It reports parameters and
   returns a nested dictionary for programmatic use.
 - No SciPy is used: a grid-refine search is implemented.
 """
@@ -55,6 +55,7 @@ from fatigue.planes.sampling import dcmesh_xyz, gentang
 from fatigue.eval.evaluator import best_cp_for_case
 from fatigue.eval.fitting import fit_power_law_with_survival_std
 
+from fatigue.imp.observations import failures_only
 from fatigue.models.cp_methods.fs import FatemiSocie
 from fatigue.models.cp_methods.fin import Findley
 from fatigue.models.cp_methods.li import LI
@@ -327,12 +328,15 @@ def calibrate_material_params(
     bounds_L_LI: Tuple[float, float] = (0.0, 5.0),
     bounds_k_MGSE: Tuple[float, float] = (0.0, 5.0),
     bounds_a_MSWT: Tuple[float, float] = (0.0, 1.0),
+    methods: Optional[Sequence[str]] = None,
 ) -> Dict[str, Any]:
     """Calibrate FS/FIN + additional parameters for one material."""
 
     if material_name not in data:
         raise KeyError(f"Material '{material_name}' not found. Available: {list(data.keys())}")
 
+    methods = set(methods if methods is not None else ("FS", "FIN", "LI", "MGSE_ZHU", "MSWT"))
+    data = failures_only(data)
     if R_list is None:
         R_list = _build_R_list()
 
@@ -494,7 +498,7 @@ def calibrate_material_params(
         n_grid=n_grid_1d,
         n_refine=n_refine_1d,
         param_name="k_FS",
-    )
+    ) if "FS" in methods else None
     FI_cal = _calibrate_1d(
         cases_data=uniax_cases,
         dp_eval=fin_eval,
@@ -503,7 +507,7 @@ def calibrate_material_params(
         n_grid=n_grid_1d,
         n_refine=n_refine_1d,
         param_name="k_FI",
-    )
+    ) if "FIN" in methods else None
     LI_cal = _calibrate_1d(
         cases_data=uniax_cases,
         dp_eval=li_eval,
@@ -512,7 +516,7 @@ def calibrate_material_params(
         n_grid=n_grid_1d,
         n_refine=n_refine_1d,
         param_name="L_LI",
-    )
+    ) if "LI" in methods else None
     MGSE_cal = _calibrate_1d(
         cases_data=uniax_cases,
         dp_eval=mgse_eval,
@@ -521,7 +525,7 @@ def calibrate_material_params(
         n_grid=n_grid_1d,
         n_refine=n_refine_1d,
         param_name="k_MGSE",
-    )
+    ) if "MGSE_ZHU" in methods else None
     MSWT_cal = _calibrate_1d(
         cases_data=uniax_cases,
         dp_eval=mswt_eval,
@@ -530,7 +534,7 @@ def calibrate_material_params(
         n_grid=n_grid_1d,
         n_refine=n_refine_1d,
         param_name="a_MSWT",
-    )
+    ) if "MSWT" in methods else None
 
     # ------------------
     # Pack output
@@ -545,32 +549,12 @@ def calibrate_material_params(
             "torsion_info": torsion_info,
             "n_uniax": int(len(uniax_cases)),
         },
-        "FS": {
-            "k_FS": FS_cal.p_opt,
-            "scatter_STD": FS_cal.scatter_STD,
-            "fit": FS_cal.fit,
-        },
-        "FI": {
-            "k_FI": FI_cal.p_opt,
-            "scatter_STD": FI_cal.scatter_STD,
-            "fit": FI_cal.fit,
-        },
-        "LI": {
-            "L_LI": LI_cal.p_opt,
-            "scatter_STD": LI_cal.scatter_STD,
-            "fit": LI_cal.fit,
-        },
-        "MGSE_ZHU": {
-            "k_MGSE": MGSE_cal.p_opt,
-            "scatter_STD": MGSE_cal.scatter_STD,
-            "fit": MGSE_cal.fit,
-        },
-        "MSWT": {
-            "a_MSWT": MSWT_cal.p_opt,
-            "scatter_STD": MSWT_cal.scatter_STD,
-            "fit": MSWT_cal.fit,
-        },
     }
+    for name, result in [("FS", FS_cal), ("FI", FI_cal), ("LI", LI_cal),
+                         ("MGSE_ZHU", MGSE_cal), ("MSWT", MSWT_cal)]:
+        if result is not None:
+            out[name] = {result.param_name: result.p_opt,
+                         "scatter_STD": result.scatter_STD, "fit": result.fit}
 
     return out
 
@@ -599,39 +583,62 @@ def calibrate_many(
     return out
 
 
+def main(argv=None):
+    """Export fitted coefficients and selected master curves with provenance."""
+    import argparse
+    from fatigue.models.registry import _available_cp_methods, _available_direct_models
+    from fatigue.eval.calibration import export_calibration
+    from fatigue.eval.calibration_store import METHOD_PARAMETERS, curve_settings, load_calibration
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--data-folder", default="Experimental_Data")
+    parser.add_argument("--calibrations-dir", default="Calibrations")
+    parser.add_argument("--material", help="Workbook stem; omitted selects all materials")
+    parser.add_argument("--models", nargs="+", default=list(_available_cp_methods()) + list(_available_direct_models()))
+    parser.add_argument("--n1", type=int, default=20)
+    parser.add_argument("--n2", type=int, default=40)
+    parser.add_argument("--stdnum", type=float, default=0.0, help="Master-curve damage-space shift")
+    parser.add_argument("--parameter-stdnum", type=float, default=2.0)
+    parser.add_argument("--plane-stride", type=int, default=10)
+    parser.add_argument("--n-grid", type=int, default=41)
+    parser.add_argument("--n-refine", type=int, default=6)
+    parser.add_argument("--reuse-calibration", help="Explicit compatible JSON ID supplying coefficients")
+    args = parser.parse_args(argv)
+    data = exp.import_experimental_data_grouped_by_material(args.data_folder)
+    materials = [args.material] if args.material else list(data)
+    models = list(dict.fromkeys(m.removesuffix("_ext") for m in args.models))
+    settings = curve_settings(args.n1, args.n2, args.stdnum)
+    paths = []
+    for material in materials:
+        needed = [m for m in models if m in METHOD_PARAMETERS]
+        optimisation = None
+        params = {}
+        origin = "No method coefficients required"
+        if args.reuse_calibration:
+            previous, _, path = load_calibration(data=data, material=material, model=models[0],
+                settings=settings, folder=args.calibrations_dir, calibration_id=args.reuse_calibration)
+            params = previous["parameters"]
+            origin = f"Explicit reuse of {previous['calibration_id']}"
+            print(f"Coefficient source {path}")
+        elif needed:
+            optimisation = calibrate_material_params(
+                data=data, material_name=material, R_list=_build_R_list(n1=args.n1, n2=args.n2),
+                stdnum=args.parameter_stdnum, plane_stride=args.plane_stride,
+                n_grid_1d=args.n_grid, n_refine_1d=args.n_refine, methods=needed)
+            params = {METHOD_PARAMETERS[m]: optimisation["FI" if m == "FIN" else m][METHOD_PARAMETERS[m]] for m in needed}
+            origin = "Optimised by Script 0 on uniaxial tension/torsion failures"
+        missing = [METHOD_PARAMETERS[m] for m in needed if METHOD_PARAMETERS[m] not in params]
+        if missing:
+            raise ValueError(f"Missing calibrated coefficients {missing}")
+        if optimisation is not None:
+            optimisation["settings"] = {"stdnum": args.parameter_stdnum, "plane_stride": args.plane_stride,
+                "n_grid": args.n_grid, "n_refine": args.n_refine, "n1": args.n1, "n2": args.n2,
+                "bounds": {"k_FS": [0, 3], "k_FI": [0, 3], "L_LI": [0, 5], "k_MGSE": [0, 5], "a_MSWT": [0, 1]}}
+        record, path = export_calibration(data=data, material=material, models=models, parameters=params,
+            settings=settings, folder=args.calibrations_dir, optimisation=optimisation, parameter_origin=origin)
+        print(f"Saved calibration {path}; observations {record['counts']}")
+        paths.append(path)
+    return paths
+
+
 if __name__ == "__main__":
-    data = exp.import_experimental_data_grouped_by_material("Experimental_Data", verbose=True)
-
-    mats = list(data.keys())
-    if not mats:
-        raise SystemExit("No materials found in Experimental_Data")
-
-    R_list = _build_R_list()
-
-    for material_name in mats:
-        cal = calibrate_material_params(
-            data=data,
-            material_name=material_name,
-            R_list=R_list,
-            stdnum=2.0,
-            plane_stride=10,
-        )
-
-        print("\n" + "=" * 72)
-        print("Material:", cal["material"])
-        sel = cal["selection"]
-        print(f"Uniaxial cases: tension={len(sel['tension_case_ids'])} torsion={len(sel['torsion_case_ids'])} (total={sel['n_uniax']})")
-
-        print("\nCalibrated parameters")
-        print(f"  k_FS     = {cal['FS']['k_FS']:.6g}")
-        print(f"  k_FI     = {cal['FI']['k_FI']:.6g}")
-        print(f"  L_LI     = {cal['LI']['L_LI']:.6g}")
-        print(f"  k_MGSE   = {cal['MGSE_ZHU']['k_MGSE']:.6g}")
-        print(f"  a_MSWT   = {cal['MSWT']['a_MSWT']:.6g}")
-        # Scatter summary
-        print("\nScatter STD (lnN residuals)")
-        print(f"  FS      STD = {cal['FS']['scatter_STD']:.6g}")
-        print(f"  FI      STD = {cal['FI']['scatter_STD']:.6g}")
-        print(f"  LI      STD = {cal['LI']['scatter_STD']:.6g}")
-        print(f"  MGSE    STD = {cal['MGSE_ZHU']['scatter_STD']:.6g}")
-        print(f"  MSWT    STD = {cal['MSWT']['scatter_STD']:.6g}")
+    main()

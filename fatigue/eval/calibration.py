@@ -6,6 +6,7 @@ import numpy as np
 
 from fatigue.eval.fitting import fit_power_law_with_survival_std
 from fatigue.models.base import FatigueModel
+from fatigue.imp.observations import is_failure
 
 
 def collect_uniaxial_series_and_fit(
@@ -69,6 +70,8 @@ def collect_uniaxial_series_and_fit(
 
         for p in points:
             case_id = int(p["case_id"])
+            if not is_failure(data[material_name]["cases"][case_id]):
+                continue
             Nf = float(p["Nf_cycles"])
 
             if not (np.isfinite(Nf) and Nf > 0):
@@ -123,3 +126,23 @@ def collect_uniaxial_series_and_fit(
         }
 
     return out
+
+
+def export_calibration(*, data, material, models, parameters, settings, folder,
+                       procedure="Script 0", optimisation=None, parameter_origin="optimised by Script 0"):
+    """Fit selected failure-only master curves and save one complete record."""
+    from fatigue.imp import experimental_data as exp
+    from fatigue.planes.sampling import build_R_list
+    from fatigue.models.registry import get_models
+    from fatigue.eval.calibration_store import material_parameters, create_record, save_record
+    params = material_parameters(data[material]["material"], parameters)
+    curves = collect_uniaxial_series_and_fit(
+        data=data, exp=exp, material_name=material,
+        uniax_cases=exp.extract_uniaxial_tension(data),
+        R_list=build_R_list(n1=settings["n1"], n2=settings["n2"]),
+        models=get_models(models), params=params, stdnum=settings["stdnum"],
+    )
+    record = create_record(data=data, material=material, parameters=parameters,
+                           curves=curves, settings=settings, procedure=procedure,
+                           optimisation=optimisation, parameter_origin=parameter_origin)
+    return record, save_record(record, folder)
