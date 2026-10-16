@@ -145,189 +145,39 @@
         "n": 15,
         "R2_log": 0.370765299990508
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "FIN": {
@@ -402,189 +252,39 @@
         "n": 15,
         "R2_log": 0.36770897897161803
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "SWT": {
@@ -659,189 +359,39 @@
         "n": 15,
         "R2_log": 0.36770897897161803
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "MATAKE": {
@@ -916,189 +466,39 @@
         "n": 15,
         "R2_log": 0.36770897897161914
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "MCD": {
@@ -1173,189 +573,39 @@
         "n": 15,
         "R2_log": 0.3677089789716188
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "MGSE_YU": {
@@ -1430,189 +680,39 @@
         "n": 15,
         "R2_log": 0.36770897897161814
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "MGSE_ZHU": {
@@ -1687,189 +787,39 @@
         "n": 15,
         "R2_log": 0.36770897897161803
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "MSWT": {
@@ -1944,189 +894,39 @@
         "n": 15,
         "R2_log": 0.36770897897161814
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "MKBM": {
@@ -2201,189 +1001,39 @@
         "n": 15,
         "R2_log": 0.3710676314757949
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "LIU2021": {
@@ -2458,189 +1108,39 @@
         "n": 15,
         "R2_log": 0.3720580335593483
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "LI": {
@@ -2715,189 +1215,39 @@
         "n": 15,
         "R2_log": 0.36770897897161803
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "GSE": {
@@ -2972,189 +1322,39 @@
         "n": 15,
         "R2_log": 0.3677089789716175
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "GSA": {
@@ -3229,189 +1429,39 @@
         "n": 15,
         "R2_log": 0.3677089789716178
       },
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids_ext": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ]
     },
     "BP": {
@@ -3462,99 +1512,24 @@
         "R2_log": 0.36770897897161814
       },
       "fit_ext": null,
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": []
+      "design_observation_ids_ext": []
     },
     "CAIM": {
       "series": {
@@ -3604,99 +1579,24 @@
         "R2_log": 0.3677089789716179
       },
       "fit_ext": null,
-      "design_observations": [
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 18,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 42965.4273003532
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 19,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 53224.3063861345
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 20,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 74235.9147219274
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 21,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 84965.2032209136
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 22,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 85644.66011619
-        },
-        {
-          "specimen_id": "Axial Plain",
-          "excel_row": 23,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 105236.601896741
-        },
-        {
-          "specimen_id": "Axial_Plain_1",
-          "excel_row": 28,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 11031.3528048772
-        },
-        {
-          "specimen_id": "Axial_Plain_2",
-          "excel_row": 29,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 40006.5810894231
-        },
-        {
-          "specimen_id": "Axial_Plain_3",
-          "excel_row": 30,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 57103.2394053551
-        },
-        {
-          "specimen_id": "Axial_Plain_4",
-          "excel_row": 31,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 138140.084016818
-        },
-        {
-          "specimen_id": "Axial_Plain_5",
-          "excel_row": 32,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 158100.877593167
-        },
-        {
-          "specimen_id": "Axial_Plain_6",
-          "excel_row": 33,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 314293.718745582
-        },
-        {
-          "specimen_id": "Axial_Plain_7",
-          "excel_row": 34,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 382466.36690465
-        },
-        {
-          "specimen_id": "Axial_Plain_8",
-          "excel_row": 35,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 602214.6719323
-        },
-        {
-          "specimen_id": "Axial_Plain_9",
-          "excel_row": 36,
-          "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
-          "N_cycles": 808421.128345918
-        }
+      "design_observation_ids": [
+        "row-18",
+        "row-19",
+        "row-20",
+        "row-21",
+        "row-22",
+        "row-23",
+        "row-28",
+        "row-29",
+        "row-30",
+        "row-31",
+        "row-32",
+        "row-33",
+        "row-34",
+        "row-35",
+        "row-36"
       ],
-      "design_observations_ext": []
+      "design_observation_ids_ext": []
     }
   },
   "optimisation": null,
@@ -3838,7 +1738,7 @@
     "GSE": "ff94459a7f4087c75fb3c6bb7af39acbf01a7d57e0f684b6f9704fa44207c988",
     "GSA": "4b518ca81ecbe1a2149c5ca943f134bcb7d7519df9bba2f30c88cd65247fc7dd",
     "BP": "eaa41466d26b55c44cd72c239e084e92811cc4e3d610c55a6a2907f0b466bffc",
-    "CAIM": "5cc8a0b3fad5755ca32f6e574fc5ff191f8fcd501758d85843e58094b39c1532"
+    "CAIM": "9444788bf883afafc25bf05b366b59d857e443634d10648d1db1dfa68406dc45"
   },
   "damage_parameter_units": {
     "FS": "1",
@@ -3856,5 +1756,97 @@
     "GSA": "1",
     "BP": "1",
     "CAIM": "1"
+  },
+  "design_observations": {
+    "row-18": {
+      "specimen_id": "Axial Plain",
+      "excel_row": 18,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 42965.4273003532
+    },
+    "row-19": {
+      "specimen_id": "Axial Plain",
+      "excel_row": 19,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 53224.3063861345
+    },
+    "row-20": {
+      "specimen_id": "Axial Plain",
+      "excel_row": 20,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 74235.9147219274
+    },
+    "row-21": {
+      "specimen_id": "Axial Plain",
+      "excel_row": 21,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 84965.2032209136
+    },
+    "row-22": {
+      "specimen_id": "Axial Plain",
+      "excel_row": 22,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 85644.66011619
+    },
+    "row-23": {
+      "specimen_id": "Axial Plain",
+      "excel_row": 23,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 105236.601896741
+    },
+    "row-28": {
+      "specimen_id": "Axial_Plain_1",
+      "excel_row": 28,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 11031.3528048772
+    },
+    "row-29": {
+      "specimen_id": "Axial_Plain_2",
+      "excel_row": 29,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 40006.5810894231
+    },
+    "row-30": {
+      "specimen_id": "Axial_Plain_3",
+      "excel_row": 30,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 57103.2394053551
+    },
+    "row-31": {
+      "specimen_id": "Axial_Plain_4",
+      "excel_row": 31,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 138140.084016818
+    },
+    "row-32": {
+      "specimen_id": "Axial_Plain_5",
+      "excel_row": 32,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 158100.877593167
+    },
+    "row-33": {
+      "specimen_id": "Axial_Plain_6",
+      "excel_row": 33,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 314293.718745582
+    },
+    "row-34": {
+      "specimen_id": "Axial_Plain_7",
+      "excel_row": 34,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 382466.36690465
+    },
+    "row-35": {
+      "specimen_id": "Axial_Plain_8",
+      "excel_row": 35,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 602214.6719323
+    },
+    "row-36": {
+      "specimen_id": "Axial_Plain_9",
+      "excel_row": 36,
+      "source_file": "Ti6Al4V_andrea_(AXIAL).xlsx",
+      "N_cycles": 808421.128345918
+    }
   }
 }

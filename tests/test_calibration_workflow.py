@@ -41,9 +41,9 @@ class CalibrationWorkflowTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.folder = Path(self.temp.name)
 
-    def export(self, data=None):
+    def export(self, data=None, settings=None):
         return export_calibration(data=data or self.data, material=self.material, models=["BP"],
-                                  parameters={}, settings=self.settings, folder=self.folder)
+                                  parameters={}, settings=settings or self.settings, folder=self.folder)
 
     def load(self, **kwargs):
         return load_calibration(data=kwargs.pop("data", self.data), material=self.material,
@@ -51,22 +51,47 @@ class CalibrationWorkflowTests(unittest.TestCase):
 
     def test_round_trip_precision_units_metadata_and_history(self):
         first, p1 = self.export()
-        second, p2 = self.export()
+        repeated, repeated_path = self.export()
+        self.assertEqual(repeated_path, p1)
+        self.assertEqual(repeated, first)
+        second, p2 = self.export(settings=curve_settings(3, 6, 1.0))
         self.assertNotEqual(p1, p2)
         self.assertTrue(p1.is_file())
-        record, curve, path = self.load()
+        record, curve, path = load_calibration(data=self.data, material=self.material,
+            model="BP", settings=curve_settings(3, 6, 1.0), folder=self.folder)
         self.assertEqual(path, p2)
         self.assertEqual(record["material_id"], self.material)
         self.assertEqual(record["curve_units"]["N"], "cycle")
         self.assertEqual(record["counts"]["runout"], 13)
-        np.testing.assert_array_equal(curve["series"]["N"], first["curves"]["BP"]["series"]["N"])
+        np.testing.assert_array_equal(curve["series"]["N"], second["curves"]["BP"]["series"]["N"])
         self.assertEqual(curve["fit"], second["curves"]["BP"]["fit"])
         self.assertEqual(self.load(calibration_id=first["calibration_id"])[2], p1)
         # Selection follows record time, not filesystem modification time.
         p1.touch()
-        self.assertEqual(self.load()[2], p2)
+        self.assertEqual(load_calibration(data=self.data, material=self.material,
+            model="BP", settings=curve_settings(3, 6, 1.0), folder=self.folder)[2], p2)
         with self.assertRaises(FileExistsError):
             save_record(first, self.folder)
+
+    def test_equivalence_ignores_censored_counts_rows_and_runtime_provenance(self):
+        record, path = self.export()
+        repeated = copy.deepcopy(record)
+        repeated["calibration_id"] += "_repeat"
+        repeated["software"]["git_commit"] = "another-commit"
+        repeated["software"]["tracked_worktree_dirty"] = not repeated["software"]["tracked_worktree_dirty"]
+        repeated["source"]["workbook_sha256"] = "0" * 64
+        repeated["counts"]["runout"] += 1
+        repeated["design_observations"][next(iter(repeated["design_observations"]))]["excel_row"] = 999
+        self.assertEqual(save_record(repeated, self.folder), path)
+        self.assertEqual(len(list((self.folder / self.material).glob("*.json"))), 1)
+        self.assertEqual(json.loads(path.read_text()), record)
+
+    def test_changed_calibration_output_creates_history_even_with_same_inputs(self):
+        record, path = self.export()
+        changed = copy.deepcopy(record)
+        changed["calibration_id"] += "_changed"
+        changed["curves"]["BP"]["fit"]["A"] *= 1.01
+        self.assertNotEqual(save_record(changed, self.folder), path)
 
     def test_missing_and_incompatible_calibrations(self):
         with self.assertRaisesRegex(ValueError, "Run python 0_"):
@@ -113,7 +138,8 @@ class CalibrationWorkflowTests(unittest.TestCase):
     def test_failure_only_curve_and_fingerprint_ignore_runouts(self):
         failures = failures_only(self.data)
         a, _ = self.export(failures)
-        b, _ = self.export(self.data)
+        b, _ = export_calibration(data=self.data, material=self.material, models=["BP"],
+            parameters={}, settings=self.settings, folder=self.folder / "with-runouts")
         self.assertEqual(a["curves"], b["curves"])
         self.assertEqual(a["input_fingerprint"], b["input_fingerprint"])
         self.assertEqual(a["counts"]["runout"], 0)

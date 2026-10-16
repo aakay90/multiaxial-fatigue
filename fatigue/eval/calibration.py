@@ -5,7 +5,7 @@ from typing import Any, Mapping
 import numpy as np
 
 from fatigue.eval.fitting import fit_power_law_with_survival_std
-from fatigue.models.base import FatigueModel
+from fatigue.models.base import FatigueModel, model_output_quantity
 from fatigue.imp.observations import is_failure
 
 
@@ -53,6 +53,8 @@ def collect_uniaxial_series_and_fit(
     points = uniax_cases[material_name]["points"]
 
     for model in models:
+        if model_output_quantity(model) != "damage_parameter":
+            raise ValueError(f"{model.name} must return damage_parameter for master-curve fitting")
         # lists for standard and ext variants
         N_std_list: list[float] = []
         CP_std_list: list[float] = []
@@ -75,7 +77,7 @@ def collect_uniaxial_series_and_fit(
                 continue
             Nf = float(p["Nf_cycles"])
             meta = data[material_name]["cases"][case_id]["meta"]
-            observation = {"specimen_id": meta.get("specimen_id"), "excel_row": meta.get("excel_row"),
+            observation = {"case_id": case_id, "specimen_id": meta.get("specimen_id"), "excel_row": meta.get("excel_row"),
                            "source_file": meta.get("source_file"), "N_cycles": Nf}
 
             if not (np.isfinite(Nf) and Nf > 0):
@@ -92,6 +94,7 @@ def collect_uniaxial_series_and_fit(
                 R_list=R_list,
                 harmonics=H,
             )
+            model_output_quantity(model, res)
 
             # Standard variant ("")
             if "" in res.values:
@@ -142,7 +145,7 @@ def export_calibration(*, data, material, models, parameters, settings, folder,
     from fatigue.imp import experimental_data as exp
     from fatigue.planes.sampling import build_R_list
     from fatigue.models.registry import get_models
-    from fatigue.eval.calibration_store import material_parameters, create_record, save_record
+    from fatigue.eval.calibration_store import material_parameters, create_record, save_record, read_record
     params = material_parameters(data[material]["material"], parameters)
     curves = collect_uniaxial_series_and_fit(
         data=data, exp=exp, material_name=material,
@@ -153,4 +156,6 @@ def export_calibration(*, data, material, models, parameters, settings, folder,
     record = create_record(data=data, material=material, parameters=parameters,
                            curves=curves, settings=settings, procedure=procedure,
                            optimisation=optimisation, parameter_origin=parameter_origin)
-    return record, save_record(record, folder)
+    path = save_record(record, folder)
+    # Equivalent reruns report the persisted ID and its original provenance.
+    return read_record(path), path

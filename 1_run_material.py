@@ -10,6 +10,7 @@ from fatigue.planes.sampling import build_R_list
 from fatigue.eval.calibration_store import load_calibration, material_parameters, curve_settings
 from fatigue.report.export_csv import save_fatigue_csv
 from fatigue.models.registry import get_models
+from fatigue.models.base import model_output_quantity
 
 
 # ----------------------------
@@ -111,6 +112,16 @@ def main():
     mat_prop = exp.get_material_properties(data, material=MATERIAL_NAME)
 
     base_name, variant_key = _variant_from_model_name(MODEL_NAME)
+    model = get_models([base_name])[0]
+    quantity = model_output_quantity(model)
+    if quantity == "life_cycles":
+        from fatigue.eval.direct_life import run_direct_life
+        return run_direct_life(data=data, material=MATERIAL_NAME, model=model,
+            method_name=MODEL_NAME, variant=variant_key, results_dir=RESULTS_DIR,
+            classify_loading_type=classify_loading_type, make_plots=MAKE_PLOTS,
+            plot_dir=PLOT_DIR, show_runouts=SHOW_RUNOUTS)
+    if quantity != "damage_parameter":
+        raise ValueError(f"{base_name} returns an index without a supported damage-life relation")
     record, stored_curve, calibration_path = load_calibration(
         data=data, material=MATERIAL_NAME, model=base_name,
         settings=curve_settings(DCMESH_N1, DCMESH_N2, STDNUM),
@@ -261,6 +272,7 @@ def main():
             R_list=R_list,  # CP uses it, non-CP ignores it
             harmonics=H,
         )
+        model_output_quantity(model, res)
 
         if variant_key not in res.values:
             raise ValueError(

@@ -69,6 +69,14 @@ in [Results/README.md](Results/README.md).
 
 ## Update the catalogue
 
+Experimental inputs and fitted coefficients use separate sources. Preserve the
+Excel observation-status convention, use the central failure-only selectors and
+export fitted values through Script 0. Run-outs must not contribute to coefficient
+optimisation, master curves or ordinary error statistics. New calibrated parameters
+need explicit units and JSON validation. Add a failure-only versus failure-plus-run-out
+regression when changing calibration data flow. See the
+[workflow](docs/calibration-workflow.md) for historical selection and compatibility.
+
 `docs/catalogue/methods.json` is the current source of truth. Keep permanent IDs, add canonical relationships and optional secondary classifications, and count each identifiable scoped method once by its primary family. Exclude unresolved bundles/overlaps from progress totals until reconciled. The archived research CSV is provenance, not another live status source.
 
 Update implementation status, declared scope, module/symbol, tests, remaining work, validation evidence and actual Issue URL. Generate `METHODS.md`, `ROADMAP.md`, the CSV, README counts and prepared briefs using `tools/generate_method_docs.py`. CI checks output freshness and evidence paths against the registry. Do not edit generated files independently. Roadmap selection is stored in each JSON record as `roadmap_rank`, `development_track` and `development_reason`; every record needs an explicit disposition. Unscheduled candidates must remain in the catalogue. The generator’s Issue-ID list controls only which prepared briefs are emitted, not which methods contributors may choose.

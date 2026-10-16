@@ -1443,7 +1443,7 @@ def compute_stats_table(df: pd.DataFrame) -> pd.DataFrame:
         df["Error_log10_dp"] = log10_dp_ratio(df["DP_fit"], df["CP_value"])
     rows = []
     for (mat, meth, mode), g in df.groupby(["Material", "Method", "Metric_mode"], dropna=False):
-        metrics = ["Error_log10_dp"]
+        metrics = [] if str(mode).strip().upper() == "NF_DIRECT" else ["Error_log10_dp"]
         if str(mode).strip().upper() != "DP_DIFF":
             metrics.append("Error_ln")
         for metric in metrics:
@@ -1672,8 +1672,8 @@ def main(argv=None) -> None:
         # Split by metric mode
         mode_u = df_mat["Metric_mode"].astype(str).str.strip().str.upper()
         df_nf = df_mat[mode_u != "DP_DIFF"].copy()
-        # All slopes participate in damage-space comparisons.
-        df_dp = df_mat.copy()
+        # Native cycle predictions have no damage parameter to compare.
+        df_dp = df_mat[mode_u != "NF_DIRECT"].copy()
 
         safe_mat = _safe_name(mat)
         mat_dir = out_dir / safe_mat

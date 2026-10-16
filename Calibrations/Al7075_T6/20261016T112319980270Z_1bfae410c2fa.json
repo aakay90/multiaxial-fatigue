@@ -133,141 +133,31 @@
         "n": 11,
         "R2_log": 0.8796110774664401
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "FIN": {
@@ -330,141 +220,31 @@
         "n": 11,
         "R2_log": 0.8844207369888382
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "SWT": {
@@ -527,141 +307,31 @@
         "n": 11,
         "R2_log": 0.8844207369888379
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "MATAKE": {
@@ -724,141 +394,31 @@
         "n": 11,
         "R2_log": 0.8844207369888382
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "MCD": {
@@ -921,141 +481,31 @@
         "n": 11,
         "R2_log": 0.8844207369888382
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "MGSE_YU": {
@@ -1118,141 +568,31 @@
         "n": 11,
         "R2_log": 0.884420736988838
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "MGSE_ZHU": {
@@ -1315,141 +655,31 @@
         "n": 11,
         "R2_log": 0.884420736988838
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "MSWT": {
@@ -1512,141 +742,31 @@
         "n": 11,
         "R2_log": 0.8844207369888379
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "MKBM": {
@@ -1709,141 +829,31 @@
         "n": 11,
         "R2_log": 0.8819859592736428
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "LIU2021": {
@@ -1906,141 +916,31 @@
         "n": 11,
         "R2_log": 0.8823949443160108
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "LI": {
@@ -2103,141 +1003,31 @@
         "n": 11,
         "R2_log": 0.884420736988838
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "GSE": {
@@ -2300,141 +1090,31 @@
         "n": 11,
         "R2_log": 0.8844207369888378
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "GSA": {
@@ -2497,141 +1177,31 @@
         "n": 11,
         "R2_log": 0.8844207369888382
       },
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids_ext": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ]
     },
     "BP": {
@@ -2674,75 +1244,20 @@
         "R2_log": 0.8844207369888379
       },
       "fit_ext": null,
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": []
+      "design_observation_ids_ext": []
     },
     "CAIM": {
       "series": {
@@ -2784,75 +1299,20 @@
         "R2_log": 0.8844207369888379
       },
       "fit_ext": null,
-      "design_observations": [
-        {
-          "specimen_id": "Plain_axial_1",
-          "excel_row": 2,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 322262.0
-        },
-        {
-          "specimen_id": "Plain_axial_2",
-          "excel_row": 3,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 133766.0
-        },
-        {
-          "specimen_id": "Plain_axial_3",
-          "excel_row": 4,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 529531.0
-        },
-        {
-          "specimen_id": "Plain_axial_4",
-          "excel_row": 5,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 419980.0
-        },
-        {
-          "specimen_id": "Plain_axial_6",
-          "excel_row": 7,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 356775.0
-        },
-        {
-          "specimen_id": "Plain_axial_7",
-          "excel_row": 8,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 645187.0
-        },
-        {
-          "specimen_id": "Plain_axial_8",
-          "excel_row": 9,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 2807604.0
-        },
-        {
-          "specimen_id": "Plain_axial_9",
-          "excel_row": 10,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 3722394.0
-        },
-        {
-          "specimen_id": "Plain_axial_11",
-          "excel_row": 12,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 125000.0
-        },
-        {
-          "specimen_id": "Plain_axial_12",
-          "excel_row": 13,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 73200.0
-        },
-        {
-          "specimen_id": "Plain_axial_13",
-          "excel_row": 14,
-          "source_file": "Al7075_T6.xlsx",
-          "N_cycles": 40400.0
-        }
+      "design_observation_ids": [
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-7",
+        "row-8",
+        "row-9",
+        "row-10",
+        "row-12",
+        "row-13",
+        "row-14"
       ],
-      "design_observations_ext": []
+      "design_observation_ids_ext": []
     }
   },
   "optimisation": null,
@@ -2994,7 +1454,7 @@
     "GSE": "ff94459a7f4087c75fb3c6bb7af39acbf01a7d57e0f684b6f9704fa44207c988",
     "GSA": "4b518ca81ecbe1a2149c5ca943f134bcb7d7519df9bba2f30c88cd65247fc7dd",
     "BP": "eaa41466d26b55c44cd72c239e084e92811cc4e3d610c55a6a2907f0b466bffc",
-    "CAIM": "5cc8a0b3fad5755ca32f6e574fc5ff191f8fcd501758d85843e58094b39c1532"
+    "CAIM": "9444788bf883afafc25bf05b366b59d857e443634d10648d1db1dfa68406dc45"
   },
   "damage_parameter_units": {
     "FS": "1",
@@ -3012,5 +1472,73 @@
     "GSA": "1",
     "BP": "1",
     "CAIM": "1"
+  },
+  "design_observations": {
+    "row-2": {
+      "specimen_id": "Plain_axial_1",
+      "excel_row": 2,
+      "source_file": "Al7075_T6.xlsx",
+      "N_cycles": 322262.0
+    },
+    "row-3": {
+      "specimen_id": "Plain_axial_2",
+      "excel_row": 3,
+      "source_file": "Al7075_T6.xlsx",
+      "N_cycles": 133766.0
+    },
+    "row-4": {
+      "specimen_id": "Plain_axial_3",
+      "excel_row": 4,
+      "source_file": "Al7075_T6.xlsx",
+      "N_cycles": 529531.0
+    },
+    "row-5": {
+      "specimen_id": "Plain_axial_4",
+      "excel_row": 5,
+      "source_file": "Al7075_T6.xlsx",
+      "N_cycles": 419980.0
+    },
+    "row-7": {
+      "specimen_id": "Plain_axial_6",
+      "excel_row": 7,
+      "source_file": "Al7075_T6.xlsx",
+      "N_cycles": 356775.0
+    },
+    "row-8": {
+      "specimen_id": "Plain_axial_7",
+      "excel_row": 8,
+      "source_file": "Al7075_T6.xlsx",
+      "N_cycles": 645187.0
+    },
+    "row-9": {
+      "specimen_id": "Plain_axial_8",
+      "excel_row": 9,
+      "source_file": "Al7075_T6.xlsx",
+      "N_cycles": 2807604.0
+    },
+    "row-10": {
+      "specimen_id": "Plain_axial_9",
+      "excel_row": 10,
+      "source_file": "Al7075_T6.xlsx",
+      "N_cycles": 3722394.0
+    },
+    "row-12": {
+      "specimen_id": "Plain_axial_11",
+      "excel_row": 12,
+      "source_file": "Al7075_T6.xlsx",
+      "N_cycles": 125000.0
+    },
+    "row-13": {
+      "specimen_id": "Plain_axial_12",
+      "excel_row": 13,
+      "source_file": "Al7075_T6.xlsx",
+      "N_cycles": 73200.0
+    },
+    "row-14": {
+      "specimen_id": "Plain_axial_13",
+      "excel_row": 14,
+      "source_file": "Al7075_T6.xlsx",
+      "N_cycles": 40400.0
+    }
   }
 }

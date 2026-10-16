@@ -37,9 +37,28 @@ class CaseResult:
     Convention used across the codebase:
       - ""     : standard value
       - "_ext" : extreme/max value (optional)
+
+    ``output_quantity`` is ``damage_parameter`` by default. A model returning
+    cycles declares ``life_cycles`` on both the model and its result. An
+    unconverted index declares ``index`` and cannot enter generic curve fitting.
     """
 
     values: dict[str, float]
+    output_quantity: str = "damage_parameter"
+
+
+def model_output_quantity(model, result=None):
+    """Require explicit cycle units before routing a model to life comparison.
+
+    Existing models retain their damage-parameter contract. An index has no
+    generic life conversion and must supply a separately justified relation.
+    """
+    quantity = getattr(model, "output_quantity", "damage_parameter")
+    if quantity not in {"damage_parameter", "life_cycles", "index"}:
+        raise ValueError(f"Unknown output quantity {quantity!r} for {model.name}")
+    if result is not None and result.output_quantity != quantity:
+        raise ValueError(f"Output quantity mismatch for {model.name}")
+    return quantity
 
 
 class FatigueModel(Protocol):

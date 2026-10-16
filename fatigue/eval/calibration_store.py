@@ -87,6 +87,8 @@ def formulation_fingerprint(name):
     implementation = getattr(model, "_m", model)
     root = Path(__file__).resolve().parents[2]
     paths = [Path(inspect.getfile(type(implementation)))]
+    if name == "CAIM":
+        paths.append(root / "fatigue/models/integral_methods/bohme_papuga.py")
     paths += [root / p for p in (
         "fatigue/eval/fitting.py", "fatigue/eval/evaluator.py", "fatigue/planes/sampling.py",
         "fatigue/models/cp_adapter.py", "fatigue/models/utils/plane_history.py",
@@ -106,6 +108,21 @@ def _identity(value):
 
 def _finite(value):
     return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def compact_design_observations(curves):
+    """Store specimen provenance once, with per-curve references to used rows."""
+    curves, observations = json_value(curves), {}
+    for curve in curves.values():
+        for suffix in ("", "_ext"):
+            keys = []
+            for observation in curve.pop("design_observations" + suffix, []):
+                row = observation.get("excel_row")
+                key = f"row-{row}" if row is not None else f"case-{observation.get('case_id')}"
+                observations[key] = observation
+                keys.append(key)
+            curve["design_observation_ids" + suffix] = keys
+    return curves, observations
 
 
 def validate_record(record):
@@ -142,6 +159,10 @@ def validate_record(record):
                     raise ValueError(f"invalid design series for {name}")
                 if not all(_finite(v) and v > 0 for v in [*series["N"], *series[dp_key]]):
                     raise ValueError(f"invalid design values for {name}")
+                suffix = "_ext" if fit_key == "fit_ext" else ""
+                ids = curve["design_observation_ids" + suffix]
+                if len(ids) != len(series["N"]) or any(key not in record["design_observations"] for key in ids):
+                    raise ValueError(f"invalid design provenance for {name}")
         for key in ("curve_settings", "procedure_version", "implementation_revision", "counts", "source", "software", "formulation_fingerprints"):
             if key not in record:
                 raise ValueError(f"missing {key}")
@@ -155,6 +176,7 @@ def create_record(*, data, material, parameters, curves, settings, procedure,
                   optimisation=None, parameter_origin="optimised by Script 0"):
     """Construct a record; saving is a separate atomic operation."""
     block = data[material]
+    curves, design_observations = compact_design_observations(curves)
     source = dict(block.get("source", {}))
     workbook = Path(source.get("workbook", ""))
     if workbook.is_file():
@@ -190,6 +212,7 @@ def create_record(*, data, material, parameters, curves, settings, procedure,
         "damage_parameter_units": {name: DAMAGE_UNITS[name] for name in curves},
         "nonfinite_diagnostics": "Undefined optional scatter or R2 values are null; required fits must be finite.",
         "curve_settings": settings, "curves": curves, "optimisation": optimisation,
+        "design_observations": design_observations,
         "counts": counts, "references": {n: method_reference(n) for n in curves},
         "formulation_fingerprints": {n: formulation_fingerprint(n) for n in curves},
         "software": {"git_commit": commit, "tracked_worktree_dirty": dirty,
@@ -199,12 +222,53 @@ def create_record(*, data, material, parameters, curves, settings, procedure,
     return record
 
 
+def calibration_signature(record):
+    """Identify equivalent numerical results without timestamp or row provenance.
+
+    Keep inputs, fitting options, formulations, computed values and NumPy version.
+    Source paths, workbook formatting, censored counts and Git working state do
+    not change the calibration. Reuse retains the original record's provenance.
+    """
+    keys = ("schema_version", "material_id", "input_fingerprint", "procedure_version",
+            "implementation_revision", "parameters", "curve_settings", "formulation_fingerprints",
+            "curves", "optimisation", "parameter_origin", "procedure", "material_inputs",
+            "parameter_units", "curve_units", "damage_parameter_units")
+    content = json_value({key: record.get(key) for key in keys})
+    for curve in content["curves"].values():
+        for suffix in ("", "_ext"):
+            curve.pop("design_observation_ids" + suffix, None)
+    optimisation = content.get("optimisation")
+    if optimisation:
+        selection = optimisation.get("selection", {})
+        selection.pop("tension_case_ids", None)
+        selection.pop("torsion_case_ids", None)
+    content["software"] = {key: value for key, value in record["software"].items()
+                           if key not in {"git_commit", "tracked_worktree_dirty"}}
+    return hashlib.sha256(json.dumps(content, sort_keys=True, allow_nan=False).encode()).hexdigest()
+
+
+def read_record(path):
+    """Read and validate a complete historical JSON record."""
+    try:
+        record = json.loads(Path(path).read_text(encoding="utf-8"), parse_constant=_reject_json_number)
+        validate_record(record)
+    except (OSError, ValueError) as exc:
+        raise ValueError(f"Cannot read calibration {path}: {exc}") from exc
+    return record
+
+
 def save_record(record, folder=DEFAULT_FOLDER):
     """Publish a complete JSON file atomically, without replacing prior history."""
     validate_record(record)
     directory = Path(folder) / _identity(record["material_id"])
     directory.mkdir(parents=True, exist_ok=True)
     final = directory / (_identity(record["calibration_id"]) + ".json")
+    if final.exists():
+        raise FileExistsError(f"Calibration ID already exists: {final}")
+    signature = calibration_signature(record)
+    for path in sorted(directory.glob("*.json")):
+        if calibration_signature(read_record(path)) == signature:
+            return path
     temp = None
     try:
         with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=directory,
@@ -221,6 +285,10 @@ def save_record(record, folder=DEFAULT_FOLDER):
     return final
 
 
+def _reject_json_number(value):
+    raise ValueError(f"Non-finite JSON numeric constant {value}")
+
+
 def load_calibration(*, data, material, model, settings, folder=DEFAULT_FOLDER, calibration_id=None):
     """Select by declared UTC creation time and ID, never by file mtime."""
     directory = Path(folder) / _identity(material)
@@ -228,12 +296,7 @@ def load_calibration(*, data, material, model, settings, folder=DEFAULT_FOLDER, 
     compatible = []
     fingerprint = input_fingerprint(data, material)
     for path in paths:
-        try:
-            record = json.loads(path.read_text(encoding="utf-8"),
-                                parse_constant=lambda value: (_ for _ in ()).throw(ValueError(value)))
-            validate_record(record)
-        except (OSError, ValueError) as exc:
-            raise ValueError(f"Cannot read calibration {path}: {exc}") from exc
+        record = read_record(path)
         matches = (record["material_id"] == material and record["input_fingerprint"] == fingerprint
                    and record["procedure_version"] == PROCEDURE_VERSION
                    and record["implementation_revision"] == IMPLEMENTATION_REVISION
@@ -252,4 +315,7 @@ def load_calibration(*, data, material, model, settings, folder=DEFAULT_FOLDER, 
     _, _, record, path = max(compatible, key=lambda item: (item[0], item[1]))
     curve = record["curves"][model]
     curve = {**curve, "series": {k: np.asarray(v, dtype=float) for k, v in curve["series"].items()}}
+    for suffix in ("", "_ext"):
+        curve["design_observations" + suffix] = [record["design_observations"][key]
+            for key in curve.get("design_observation_ids" + suffix, [])]
     return record, curve, path

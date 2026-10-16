@@ -55,7 +55,7 @@ from fatigue.planes.sampling import dcmesh_xyz, gentang
 from fatigue.eval.evaluator import best_cp_for_case
 from fatigue.eval.fitting import fit_power_law_with_survival_std
 
-from fatigue.imp.observations import failures_only
+from fatigue.imp.observations import failures_only, observation_counts
 from fatigue.models.cp_methods.fs import FatemiSocie
 from fatigue.models.cp_methods.fin import Findley
 from fatigue.models.cp_methods.li import LI
@@ -635,7 +635,8 @@ def main(argv=None):
                 "bounds": {"k_FS": [0, 3], "k_FI": [0, 3], "L_LI": [0, 5], "k_MGSE": [0, 5], "a_MSWT": [0, 1]}}
         record, path = export_calibration(data=data, material=material, models=models, parameters=params,
             settings=settings, folder=args.calibrations_dir, optimisation=optimisation, parameter_origin=origin)
-        print(f"Saved calibration {path}; observations {record['counts']}")
+        print(f"Saved or reused calibration {path}; current observations {observation_counts(data[material])}; "
+              f"stored observations {record['counts']}")
         paths.append(path)
     return paths
 
