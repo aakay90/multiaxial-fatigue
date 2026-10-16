@@ -40,7 +40,7 @@ Relevant files are `0_calibrate_material_params.py`, `1_run_material.py`,
 
 Executed successfully in this session before this checkpoint update
 
-- `MPLBACKEND=Agg python -m unittest discover -s tests -v`, 38 tests passed after the equivalence extension.
+- `MPLBACKEND=Agg python tools/run_tests.py`, 39 tests passed after the portable calibration-fixture correction.
 - Baseline and revised `tests/run_material_validation.py`, 64 runs each.
 - `python tests/compare_material_regression.py /tmp/wg43-old-20261016 /tmp/wg43-current-20261016`, all 3,936 original failure rows exactly equal, with 672 additional censored rows.
 - Ruff, dependency consistency, generated-method documentation and local documentation-link checks passed.
@@ -71,13 +71,18 @@ and this checkpoint. No known local test failure remains. These changes are
 committed and published. A later CI diagnostic milestone adds
 `tools/run_tests.py` and updates `.github/workflows/quality.yml` to expose test
 tracebacks as check annotations without changing discovery or test assertions.
-The diagnostic runner also passes all 38 tests locally.
+The diagnostic runner also passes all 39 tests locally.
 
 On `d7c0c65`, the push CI run succeeded but the PR CI test job failed, while its
 catalogue job passed. The connector supplied only exit status and did not expose
-the traceback. The diagnostic runner makes future failures readable through check
-annotations. Do not infer that the failed PR job is resolved until the new run
-has passed or its annotated failure has been diagnosed.
+the traceback. The diagnostic runner exposed the cause on `2384227`. The old
+two-plane MSWT fixture used only five torsion observations, so its objective had
+tied coefficient values within floating-point rounding. A three-plane fixture
+was generated from the original `e70a8af` checkout, retains all 11 failure points
+and has separated objective minima for all five methods. Tests now compare that
+baseline and recompute its objective grids. Original fixtures, production search
+procedures and fatigue formulations are preserved. The fix passes locally;
+the next CI run must be checked before declaring the PR ready.
 
 Next action is to inspect the current checks and test-failure annotations on PR #5 and
 check Git status before making changes. Address concrete feedback on the same

@@ -199,7 +199,7 @@ it does not introduce or scientifically validate a new fatigue criterion.
 The test suite covers JSON precision/history, required fields, incompatible inputs,
 failure-only optimisation, generic curve fitting, explicit status import, error masking,
 plots and Script 0 → JSON → Script 1 integration. The pre-change optimisation fixture
-uses two specified planes for a bounded software regression, not a recommended scientific
+uses three specified planes with separated grid minima for a bounded software regression, not a recommended scientific
 plane search. The 64-run comparison reproduces all 3,936 original failed-specimen rows
 with zero observed numerical difference and adds 672 run-out rows. Calibration and
 software regression remain distinct from independent scientific validation.

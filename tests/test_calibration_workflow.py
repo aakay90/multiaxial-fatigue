@@ -8,6 +8,7 @@ import runpy
 import shutil
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import matplotlib
 matplotlib.use("Agg")
@@ -151,18 +152,39 @@ class CalibrationWorkflowTests(unittest.TestCase):
         self.assertIsNotNone(self.load(data=failures))
 
     def test_all_five_optimisations_ignore_runouts_and_match_previous_code(self):
-        planes = np.array([np.eye(3), [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]])
+        baseline = json.loads((ROOT / "tests/fixtures/parameter_calibration_three_plane_baseline.json").read_text())
+        planes = np.asarray(baseline["settings"]["planes"])
         def fit(data):
             return self.script0["calibrate_material_params"](data=data, material_name=self.material,
                 R_list=planes, n_grid_1d=5, n_refine_1d=1)
         a, b = fit(failures_only(self.data)), fit(self.data)
-        baseline = json.loads((ROOT / "tests/fixtures/parameter_calibration_baseline.json").read_text())
         for method, param in [("FS", "k_FS"), ("FI", "k_FI"), ("LI", "L_LI"),
                               ("MGSE_ZHU", "k_MGSE"), ("MSWT", "a_MSWT")]:
             self.assertEqual(a[method], b[method])
+            self.assertEqual(a[method]["fit"]["n"], 11)
             self.assertAlmostEqual(a[method][param], baseline[method][param], places=12)
             for key in ["A", "b", "A_surv", "STD"]:
                 np.testing.assert_allclose(a[method]["fit"][key], baseline[method]["fit"][key], rtol=1e-12, atol=1e-12)
+
+    def test_coefficient_regression_fixture_has_an_identifiable_grid_minimum(self):
+        baseline = json.loads((ROOT / "tests/fixtures/parameter_calibration_three_plane_baseline.json").read_text())
+        minimizer = self.script0["minimize_1d_grid_refine"]
+        grids = []
+        def capture(objective, bounds, **kwargs):
+            values = [objective(float(x)) for x in np.linspace(*bounds, kwargs["n_grid"])]
+            grids.append(values)
+            return minimizer(objective, bounds, **kwargs)
+        with patch.dict(self.script0["calibrate_material_params"].__globals__, minimize_1d_grid_refine=capture):
+            self.script0["calibrate_material_params"](data=self.data, material_name=self.material,
+                R_list=np.asarray(baseline["settings"]["planes"]), n_grid_1d=5, n_refine_1d=1)
+        self.assertEqual(len(grids), 5)
+        for method, observed in zip(["FS", "FI", "LI", "MGSE_ZHU", "MSWT"], grids):
+            finite = sorted(value for value in observed if np.isfinite(value))
+            with self.subTest(method=method):
+                self.assertGreater(finite[1] - finite[0], 1e-6)
+                actual = np.where(np.isfinite(observed), observed, np.nan)
+                expected = np.asarray(baseline["objective_grids"][method]["scatter_STD"], dtype=float)
+                np.testing.assert_allclose(actual, expected, rtol=1e-12, atol=1e-12)
 
     def test_explicit_status_import_unknown_and_invalid_observations(self):
         self.assertEqual(status_from_flag("Yes"), "runout")
