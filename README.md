@@ -89,6 +89,7 @@ Use Python 3.10+ from the repository root:
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 python -m pip install -r requirements.txt
+python 0_calibrate_material_params.py --models BP --material AISI316L
 python 1_run_material.py --model BP --material AISI316L --results-dir Results/current --no-plots
 MPLBACKEND=Agg python -m unittest discover -s tests -v
 ```
@@ -98,6 +99,21 @@ For contributor checks, install `requirements-dev.txt`, then run
 `python tools/check_docs.py`. CI runs these checks and the unit tests. The
 documentation check verifies local destinations; external links and frozen
 research documents are excluded.
+
+Excel contains material properties and experimental observations. Script 0 writes
+a new, traceable JSON calibration under `Calibrations/<material>/`; earlier records
+remain available. Script 1 automatically selects a compatible record or accepts
+`--calibration-id ID`. It reports the file used and requires recalibration when
+relevant inputs or numerical formulations change. No manual coefficient transfer
+through Excel is required. The four initial migration records retain the previous
+coefficients and analysis results, with their legacy provenance stated explicitly.
+
+Run-outs are imported using the existing Yes/No flag, excluded from all fitting
+and ordinary error statistics, and displayed as open markers with arrows indicating
+lower-bound lives. Use `--hide-runouts` to hide them or `--plot-dir PATH` to save
+analysis plots. Adding run-outs alone does not invalidate a calibration. See the
+[calibration workflow](docs/calibration-workflow.md) and
+[experimental-data convention](Experimental_Data/README.md) for details.
 
 The workbook run writes a new result under `Results/current/`. It reports when optional material properties are estimated. For a minimal direct calculation using the current API, run:
 
@@ -122,11 +138,12 @@ These illustrative strengths are in MPa: reversed strengths are amplitudes; R=0 
 
 | Component | Responsibility |
 |---|---|
-| `0_calibrate_material_params.py`, `1_run_material.py`, `2_compare_results.py` | Calibrate the selected model, run workbook cases, compare exported results |
+| `0_calibrate_material_params.py`, `1_run_material.py`, `2_compare_results.py` | Export JSON calibrations, assess workbook cases using compatible records, compare results |
 | `fatigue/imp/`, `fatigue/planes/` | Import loading/material data and sample candidate planes |
 | `fatigue/models/` | Criterion implementations, plane adapter, registry and source metadata |
 | `fatigue/eval/`, `fatigue/report/` | Evaluate/calibrate damage curves and export results |
 | `tests/` | Analytical/regression cases and optional material sweep |
+| `Calibrations/`, `Experimental_Data/` | Versioned calibration history and material/experimental inputs |
 
 A physical harmonic cycle is represented by mean, sine and cosine **3×3 tensors**. The workbook importer derives isotropic elastic strains. Plane methods return damage and a selection metric; case-level methods can use the full harmonic tensors directly. Reuse projections, plane searches and sphere quadrature only when they match the original criterion. Details are in [architecture](docs/architecture.md) and [adding methods](docs/adding-methods.md).
 

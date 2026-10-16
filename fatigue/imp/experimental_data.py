@@ -6,6 +6,8 @@ import numpy as np
 import pandas as pd
 import math
 from openpyxl import load_workbook
+import warnings
+from fatigue.imp.observations import test_status, is_failure
 
 
 #### Extract experimental data from Excel files
@@ -33,7 +35,7 @@ def import_experimental_data_grouped_by_material(
     Conventions:
       - node = 1 for plain specimens
       - loadstep 1 = max, loadstep 2 = min
-      - Filter Dataset: Notched == No and Run out == No
+      - Filter Dataset: plain specimens; retain failures, run-outs and unknown status
       - Dataset numeric Nulls -> 0.0
       - Material properties are read from "Summary" at the row number given by the named cell "Average"
     """
@@ -208,8 +210,6 @@ def import_experimental_data_grouped_by_material(
             "Tensile_strength_MPa": "Tensile strength",
             "Tensile_fatigue_limit_MPa": "Tensile fatigue limit",
             "Torsional_fatigue_limit_MPa": "Torsional fatigue limit",
-            "k_FS": "k FS",
-            "k_FI": "k FI",
         }
 
         col_map: Dict[str, int] = {}
@@ -307,8 +307,6 @@ def import_experimental_data_grouped_by_material(
         uts = to_float_or_none(ws.cell(row=avg_row, column=col_map["Tensile_strength_MPa"]).value)
         sfl = to_float_or_none(ws.cell(row=avg_row, column=col_map["Tensile_fatigue_limit_MPa"]).value)
         tfl = to_float_or_none(ws.cell(row=avg_row, column=col_map["Torsional_fatigue_limit_MPa"]).value)
-        kfs = to_float_or_none(ws.cell(row=avg_row, column=col_map["k_FS"]).value)
-        kfi = to_float_or_none(ws.cell(row=avg_row, column=col_map["k_FI"]).value)
 
         # Optional fatigue properties / extra model constants
         def _read_opt(key: str, *needles: str) -> Optional[float]:
@@ -332,11 +330,12 @@ def import_experimental_data_grouped_by_material(
         b0_opt = _read_opt("b0", "b0", "shear fatigue strength exponent")
         c0_opt = _read_opt("c0", "c0", "shear fatigue ductility exponent")
 
-        k_mgse_opt = _read_opt("k_MGSE", "k_mgse", "k mgse")
-        a_mswt_opt = _read_opt("a_MSWT", "a_mswt", "a mswt")
-        alpha_w_opt = _read_opt("alpha_w", "alpha_w", "alpha w")
-        xi_zhu_opt = _read_opt("xi_ZHU", "xi_zhu", "xi zhu")
-        L_li_opt = _read_opt("L_LI", "l_li", "li weight")
+        legacy_headers = {"k fs (-)", "k fi (-)", "l_li", "k_mgse", "a_mswt", "alpha_w", "xi_zhu"}
+        if any(norm_text(c.value) in legacy_headers for c in ws[header_row]):
+            warnings.warn(f"{fp.name} contains legacy calibration columns. These values are ignored. "
+                          "Migrate them with tools/migrate_calibrations.py before using Script 1.",
+                          UserWarning, stacklevel=2)
+        wb.close()
 
         E_file = float(E_file)
         nu_file = float(nu_file)
@@ -380,8 +379,6 @@ def import_experimental_data_grouped_by_material(
                 "Torsional_fatigue_limit_MPa": tfl,
                 "Tensile_fatigue_R0_MPa": s0,
                 "Torsional_fatigue_R0_MPa": t0,
-                "k_FS": kfs,
-                "k_FI": kfi,
 
                 # Optional fatigue properties
                 "sigma_f": sigma_f_opt,
@@ -393,13 +390,9 @@ def import_experimental_data_grouped_by_material(
                 "b0": b0_opt,
                 "c0": c0_opt,
 
-                # Optional model constants
-                "k_MGSE": k_mgse_opt,
-                "a_MSWT": a_mswt_opt,
-                "alpha_w": alpha_w_opt,
-                "xi_ZHU": xi_zhu_opt,
-                "L_LI": L_li_opt,
             },
+            "source": {"workbook": str(fp), "summary_sheet": "Summary", "dataset_sheet": "Dataset"},
+            "excluded_observations": [],
             "cases": {}
         }
 
@@ -407,11 +400,11 @@ def import_experimental_data_grouped_by_material(
         for idx, row in df.iterrows():
             if not is_no_value(row[col_notch]):
                 continue
-            if not is_no_value(row[col_run]):
-                continue
-
+            status = test_status(row[col_run])
             Nf = to_float_or_zero(row[col_Nf])
-            if Nf <= 0:
+            if not np.isfinite(Nf) or Nf <= 0:
+                data[material_name]["excluded_observations"].append(
+                    {"excel_row": int(idx) + 2, "reason": "invalid cycle count", "test_status": status})
                 continue
 
             mr = to_float_or_zero(row[col_mr]); ar = to_float_or_zero(row[col_ar])
@@ -432,6 +425,11 @@ def import_experimental_data_grouped_by_material(
             # -----------------------------
             phi_r_deg = to_float_or_zero(row[col_pr]) if col_pr is not None else 0.0
             phi_t_deg = to_float_or_zero(row[col_pt]) if col_pt is not None else 0.0
+
+            if not np.isfinite([mr, ar, ma, aa, ms, aS, phi_r_deg, phi_t_deg]).all():
+                data[material_name]["excluded_observations"].append(
+                    {"excel_row": int(idx) + 2, "reason": "non-finite loading input", "test_status": status})
+                continue
 
             phi_r = math.radians(float(phi_r_deg))
             phi_t = math.radians(float(phi_t_deg))
@@ -457,6 +455,10 @@ def import_experimental_data_grouped_by_material(
             data[material_name]["cases"][case_id] = {
                 "meta": {
                     "Nf_cycles": float(Nf),
+                    "test_status": status,
+                    "runout_flag": str(row[col_run]),
+                    "specimen_id": str(row.get("Specimen name", idx)),
+                    "excel_row": int(idx) + 2,
                     "row_index": int(idx),
                     "source_file": fp.name,
                     "phase_rad_deg": float(phi_r_deg),
@@ -618,6 +620,8 @@ def extract_uniaxial_tension(
         points: List[Dict[str, float]] = []
 
         for case_id, case in cases.items():
+            if not is_failure(case):
+                continue
             # Extract tensors directly from the existing structure
             Smax = np.asarray(case[node][1]["stress"], dtype=float)  # loadstep 1: max
             Emin = np.asarray(case[node][2]["strain"], dtype=float)  # not used directly, but kept for symmetry

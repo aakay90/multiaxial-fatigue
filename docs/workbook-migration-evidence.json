@@ -1,0 +1,50 @@
+[
+  {
+    "path": "Experimental_Data/42CrMo4_QT.xlsx",
+    "public_baseline_blob": "af45517e21c2a78b24d833e41ce753e9547f7138",
+    "changed_zip_members": [
+      "xl/worksheets/sheet1.xml",
+      "xl/tables/table1.xml"
+    ],
+    "Dataset_cells": "identical to existing public workbook",
+    "retained_Summary_cells": "identical",
+    "new_worksheets_or_members": false,
+    "archive": "original public bytes exactly preserved"
+  },
+  {
+    "path": "Experimental_Data/Al7075_T6.xlsx",
+    "public_baseline_blob": "3f1a7a02dab5637f35f2cda2266ce6b1543a940f",
+    "changed_zip_members": [
+      "xl/worksheets/sheet1.xml",
+      "xl/tables/table1.xml"
+    ],
+    "Dataset_cells": "identical to existing public workbook",
+    "retained_Summary_cells": "identical",
+    "new_worksheets_or_members": false,
+    "archive": "original public bytes exactly preserved"
+  },
+  {
+    "path": "Experimental_Data/AISI316L.xlsx",
+    "public_baseline_blob": "35e18dd82840da2f6719cdc7fd1b601192e6ef57",
+    "changed_zip_members": [
+      "xl/worksheets/sheet1.xml",
+      "xl/tables/table1.xml"
+    ],
+    "Dataset_cells": "identical to existing public workbook",
+    "retained_Summary_cells": "identical",
+    "new_worksheets_or_members": false,
+    "archive": "original public bytes exactly preserved"
+  },
+  {
+    "path": "Experimental_Data/Ti6Al4V_andrea_(AXIAL).xlsx",
+    "public_baseline_blob": "47e912a9b28916e96c689fec37930e7bcd818c0e",
+    "changed_zip_members": [
+      "xl/worksheets/sheet1.xml",
+      "xl/tables/table1.xml"
+    ],
+    "Dataset_cells": "identical to existing public workbook",
+    "retained_Summary_cells": "identical",
+    "new_worksheets_or_members": false,
+    "archive": "original public bytes exactly preserved"
+  }
+]

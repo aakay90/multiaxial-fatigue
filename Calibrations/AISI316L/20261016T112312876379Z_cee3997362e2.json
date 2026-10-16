@@ -1,0 +1,1159 @@
+{
+  "schema_version": 1,
+  "status": "success",
+  "calibration_id": "20261016T112312876379Z_cee3997362e2",
+  "created_at": "2026-10-16T11:23:12.876379+00:00",
+  "material_id": "AISI316L",
+  "material_name": "AISI316L",
+  "material_condition": null,
+  "procedure": "Legacy workbook migration, no coefficient re-optimisation",
+  "procedure_version": "failure-only-json-v1",
+  "implementation_revision": "2026-10-07-audit1",
+  "input_fingerprint": "1b85e32c6442a11119006131f3caa3c6dbc6bb0d85f78d49dd84463800125110",
+  "source": {
+    "workbook": "Experimental_Data/AISI316L.xlsx",
+    "summary_sheet": "Summary",
+    "dataset_sheet": "Dataset",
+    "original_archive": "Experimental_Data/archive/pre-json-calibration.zip",
+    "original_archive_member": "AISI316L.xlsx",
+    "workbook_sha256": "e806f4005e34beb5d2b9bb094b0a44f5cb2bbb705446d9f8c102ab00030f21a5"
+  },
+  "material_inputs": {
+    "Sy": 265.0,
+    "Su": 585.0,
+    "E": 174000.0,
+    "nu": 0.27,
+    "Sigm1": 241.0,
+    "Taum1": 144.0,
+    "Sig0": null,
+    "Tau0": null,
+    "sigma_f": null,
+    "epsilon_f": null,
+    "b_fat": null,
+    "c_fat": null,
+    "tau_f": null,
+    "gamma_f": null,
+    "b0": null,
+    "c0": null
+  },
+  "parameters": {
+    "k_FS": 0.62,
+    "k_FI": 0.28,
+    "L_LI": 2.13,
+    "k_MGSE": 0.5,
+    "a_MSWT": 0.36,
+    "alpha_w": 0.0,
+    "xi_ZHU": 0.0
+  },
+  "parameter_origin": "Transferred legacy workbook values; original fitting settings unverified",
+  "parameter_units": {
+    "k_FS": "1",
+    "k_FI": "1",
+    "L_LI": "1",
+    "k_MGSE": "1",
+    "a_MSWT": "1",
+    "alpha_w": "unverified legacy constant",
+    "xi_ZHU": "unverified legacy constant"
+  },
+  "curve_units": {
+    "N": "cycle",
+    "DP": "criterion-dependent repository damage parameter",
+    "A": "DP * cycle**(-b)",
+    "A_surv": "DP * cycle**(-b)",
+    "b": "1",
+    "STD": "1 (ln cycle residual)",
+    "STD_ln_DP": "1",
+    "R2_log": "1"
+  },
+  "nonfinite_diagnostics": "Undefined optional scatter or R2 values are null; required fits must be finite.",
+  "curve_settings": {
+    "n1": 20,
+    "n2": 40,
+    "stdnum": 0.0,
+    "selection": "reversed axial failures, existing tolerances"
+  },
+  "curves": {
+    "FS": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          0.002186756289308176,
+          0.002186756289308176,
+          0.0022435289525048795,
+          0.0022435289525048795,
+          0.0023007285296031232,
+          0.002358355020602906
+        ],
+        "CP_ext": [
+          0.002234921922084779,
+          0.002234921922084779,
+          0.0022945584540777567,
+          0.0022945584540777567,
+          0.0023546985278097283,
+          0.002415342143280695
+        ]
+      },
+      "fit": {
+        "A": 0.0022738424688755797,
+        "b": -0.0007354283973116466,
+        "STD": 40.06551111119607,
+        "STD_ln_DP": 0.02946531462397889,
+        "A_surv": 0.0022738424688755797,
+        "n": 6,
+        "R2_log": 0.0007988202037986225
+      },
+      "fit_ext": {
+        "A": 0.0023263909334775407,
+        "b": -0.000754414484304922,
+        "STD": 40.13695182580131,
+        "STD_ln_DP": 0.030279897813233397,
+        "A_surv": 0.0023263909334775407,
+        "n": 6,
+        "R2_log": 0.0007959813179277964
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "FIN": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          154.91553186137102,
+          154.91553186137102,
+          158.21160700735763,
+          158.21160700735763,
+          161.50768215334426,
+          164.80375729933087
+        ],
+        "CP_ext": [
+          154.91553186137102,
+          154.91553186137102,
+          158.21160700735763,
+          158.21160700735763,
+          161.50768215334426,
+          164.80375729933087
+        ]
+      },
+      "fit": {
+        "A": 159.9856722501578,
+        "b": -0.000617038722254183,
+        "STD": 39.119909683471086,
+        "STD_ln_DP": 0.02413849908578804,
+        "A_surv": 159.9856722501578,
+        "n": 6,
+        "R2_log": 0.0008378721485184926
+      },
+      "fit_ext": {
+        "A": 159.9856722501578,
+        "b": -0.000617038722254183,
+        "STD": 39.119909683471086,
+        "STD_ln_DP": 0.02413849908578804,
+        "A_surv": 159.9856722501578,
+        "n": 6,
+        "R2_log": 0.0008378721485184926
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "SWT": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          0.3173850574712644,
+          0.3173850574712644,
+          0.3310344827586207,
+          0.3310344827586207,
+          0.34497126436781606,
+          0.35919540229885055
+        ],
+        "CP_ext": [
+          0.3173850574712644,
+          0.3173850574712644,
+          0.3310344827586207,
+          0.3310344827586207,
+          0.34497126436781606,
+          0.35919540229885055
+        ]
+      },
+      "fit": {
+        "A": 0.3385000463775646,
+        "b": -0.001234077444506833,
+        "STD": 39.119909683519516,
+        "STD_ln_DP": 0.04827699817157587,
+        "A_surv": 0.3385000463775646,
+        "n": 6,
+        "R2_log": 0.0008378721485292617
+      },
+      "fit_ext": {
+        "A": 0.3385000463775646,
+        "b": -0.001234077444506833,
+        "STD": 39.119909683519516,
+        "STD_ln_DP": 0.04827699817157587,
+        "A_surv": 0.3385000463775646,
+        "n": 6,
+        "R2_log": 0.0008378721485292617
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "MATAKE": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          140.41493775933608,
+          140.41493775933608,
+          143.40248962655602,
+          143.40248962655602,
+          146.39004149377593,
+          149.37759336099583
+        ],
+        "CP_ext": [
+          142.62851026503765,
+          142.62851026503765,
+          145.6631594196129,
+          145.6631594196129,
+          148.69780857418817,
+          151.73245772876342
+        ]
+      },
+      "fit": {
+        "A": 145.0104966330543,
+        "b": -0.000617038722252987,
+        "STD": 39.11990968354689,
+        "STD_ln_DP": 0.024138499085788023,
+        "A_surv": 145.0104966330543,
+        "n": 6,
+        "R2_log": 0.0008378721485094998
+      },
+      "fit_ext": {
+        "A": 147.2965158665305,
+        "b": -0.0006170387222535837,
+        "STD": 39.11990968350943,
+        "STD_ln_DP": 0.024138499085788252,
+        "A_surv": 147.2965158665305,
+        "n": 6,
+        "R2_log": 0.0008378721485241547
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "MCD": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          131.96153846153845,
+          131.96153846153845,
+          134.76923076923077,
+          134.76923076923077,
+          137.57692307692307,
+          140.3846153846154
+        ],
+        "CP_ext": [
+          132.84593809266718,
+          132.84593809266718,
+          135.67244741378775,
+          135.67244741378775,
+          138.49895673490835,
+          141.32546605602892
+        ]
+      },
+      "fit": {
+        "A": 136.28043094366117,
+        "b": -0.0006170387222535031,
+        "STD": 39.11990968351367,
+        "STD_ln_DP": 0.024138499085787714,
+        "A_surv": 136.28043094366117,
+        "n": 6,
+        "R2_log": 0.0008378721485350349
+      },
+      "fit_ext": {
+        "A": 137.19377557620854,
+        "b": -0.0006170387222528709,
+        "STD": 39.119909683554866,
+        "STD_ln_DP": 0.024138499085788405,
+        "A_surv": 137.19377557620854,
+        "n": 6,
+        "R2_log": 0.0008378721485113871
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "MGSE_YU": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          0.3219297770230728,
+          0.3219297770230728,
+          0.3357746519969034,
+          0.3357746519969034,
+          0.3499109980228147,
+          0.3643388151008067
+        ],
+        "CP_ext": [
+          0.3219297770230728,
+          0.3219297770230728,
+          0.3357746519969034,
+          0.3357746519969034,
+          0.3499109980228147,
+          0.3643388151008067
+        ]
+      },
+      "fit": {
+        "A": 0.3433471169716154,
+        "b": -0.0012340774445068197,
+        "STD": 39.11990968351999,
+        "STD_ln_DP": 0.04827699817157594,
+        "A_surv": 0.3433471169716154,
+        "n": 6,
+        "R2_log": 0.0008378721485271523
+      },
+      "fit_ext": {
+        "A": 0.3433471169716154,
+        "b": -0.0012340774445068197,
+        "STD": 39.11990968351999,
+        "STD_ln_DP": 0.04827699817157594,
+        "A_surv": 0.3433471169716154,
+        "n": 6,
+        "R2_log": 0.0008378721485271523
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "MGSE_ZHU": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          0.24091377671325934,
+          0.24091377671325934,
+          0.25127448689332255,
+          0.25127448689332255,
+          0.2618533172877029,
+          0.27265026789640034
+        ],
+        "CP_ext": [
+          0.24091377671325934,
+          0.24091377671325934,
+          0.25127448689332255,
+          0.25127448689332255,
+          0.2618533172877029,
+          0.27265026789640034
+        ]
+      },
+      "fit": {
+        "A": 0.2569412852645593,
+        "b": -0.0012340774445070166,
+        "STD": 39.11990968351374,
+        "STD_ln_DP": 0.04827699817157593,
+        "A_surv": 0.2569412852645593,
+        "n": 6,
+        "R2_log": 0.000837872148530483
+      },
+      "fit_ext": {
+        "A": 0.2569412852645593,
+        "b": -0.0012340774445070166,
+        "STD": 39.11990968351374,
+        "STD_ln_DP": 0.04827699817157593,
+        "A_surv": 0.2569412852645593,
+        "n": 6,
+        "R2_log": 0.000837872148530483
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "MSWT": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          0.15863857042445925,
+          0.15863857042445925,
+          0.16546096254321144,
+          0.16546096254321144,
+          0.17242698396972686,
+          0.17953663470400544
+        ],
+        "CP_ext": [
+          0.15863857042445925,
+          0.15863857042445925,
+          0.16546096254321144,
+          0.16546096254321144,
+          0.17242698396972686,
+          0.17953663470400544
+        ]
+      },
+      "fit": {
+        "A": 0.16919247513979765,
+        "b": -0.0012340774445070844,
+        "STD": 39.11990968351153,
+        "STD_ln_DP": 0.04827699817157585,
+        "A_surv": 0.16919247513979765,
+        "n": 6,
+        "R2_log": 0.0008378721485285956
+      },
+      "fit_ext": {
+        "A": 0.16919247513979765,
+        "b": -0.0012340774445070844,
+        "STD": 39.11990968351153,
+        "STD_ln_DP": 0.04827699817157585,
+        "A_surv": 0.16919247513979765,
+        "n": 6,
+        "R2_log": 0.0008378721485285956
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "MKBM": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          0.0024267661570158317,
+          0.0024267661570158317,
+          0.0024831489915419645,
+          0.0024831489915419645,
+          0.0025397297224029496,
+          0.0025965083495987852
+        ],
+        "CP_ext": [
+          0.003152923230523809,
+          0.003152923230523809,
+          0.0032395398135042826,
+          0.0032395398135042826,
+          0.0033269702760676985,
+          0.003415214618214057
+        ]
+      },
+      "fit": {
+        "A": 0.0025133517083931463,
+        "b": -0.0006654623117915841,
+        "STD": 39.629562543841715,
+        "STD_ln_DP": 0.02637198030571408,
+        "A_surv": 0.0025133517083931463,
+        "n": 6,
+        "R2_log": 0.0008164774299053157
+      },
+      "fit_ext": {
+        "A": 0.003285767394048425,
+        "b": -0.0007753598252674247,
+        "STD": 40.19694204531235,
+        "STD_ln_DP": 0.03116709396053818,
+        "A_surv": 0.003285767394048425,
+        "n": 6,
+        "R2_log": 0.0007936091178385452
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "LIU2021": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          0.0018353982467642956,
+          0.0018353982467642956,
+          0.0018770604463839648,
+          0.0018770604463839648,
+          0.0019188314448824997,
+          0.0019607112422598996
+        ],
+        "CP_ext": [
+          0.0018639420453233566,
+          0.0018639420453233566,
+          0.0019076242593931408,
+          0.0019076242593931408,
+          0.0019514741348245883,
+          0.0019954916716177
+        ]
+      },
+      "fit": {
+        "A": 0.0018994016502719608,
+        "b": -0.0006520909862232462,
+        "STD": 39.50869157768575,
+        "STD_ln_DP": 0.025763261655283164,
+        "A_surv": 0.0018994016502719608,
+        "n": 6,
+        "R2_log": 0.0008214767441838688
+      },
+      "fit_ext": {
+        "A": 0.0019310151165949049,
+        "b": -0.0006705361847648673,
+        "STD": 39.67186946488861,
+        "STD_ln_DP": 0.026601423993476245,
+        "A_surv": 0.0019310151165949049,
+        "n": 6,
+        "R2_log": 0.0008147383588830159
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "LI": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          0.32491501795977007,
+          0.32491501795977007,
+          0.33888827586206893,
+          0.33888827586206893,
+          0.3531557076149425,
+          0.36771731321839074
+        ],
+        "CP_ext": [
+          0.676030172413793,
+          0.676030172413793,
+          0.705103448275862,
+          0.705103448275862,
+          0.7347887931034482,
+          0.7650862068965517
+        ]
+      },
+      "fit": {
+        "A": 0.34653095997787303,
+        "b": -0.0012340774445070313,
+        "STD": 39.11990968351334,
+        "STD_ln_DP": 0.04827699817157601,
+        "A_surv": 0.34653095997787303,
+        "n": 6,
+        "R2_log": 0.0008378721485285956
+      },
+      "fit_ext": {
+        "A": 0.7210050987842131,
+        "b": -0.0012340774445069162,
+        "STD": 39.11990968351696,
+        "STD_ln_DP": 0.04827699817157597,
+        "A_surv": 0.7210050987842131,
+        "n": 6,
+        "R2_log": 0.0008378721485283736
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "GSE": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          0.32192977702307285,
+          0.32192977702307285,
+          0.3357746519969034,
+          0.3357746519969034,
+          0.3499109980228147,
+          0.3643388151008067
+        ],
+        "CP_ext": [
+          0.32192977702307285,
+          0.32192977702307285,
+          0.3357746519969034,
+          0.3357746519969034,
+          0.3499109980228147,
+          0.3643388151008067
+        ]
+      },
+      "fit": {
+        "A": 0.3433471169716154,
+        "b": -0.0012340774445068197,
+        "STD": 39.11990968351999,
+        "STD_ln_DP": 0.04827699817157594,
+        "A_surv": 0.3433471169716154,
+        "n": 6,
+        "R2_log": 0.0008378721485271523
+      },
+      "fit_ext": {
+        "A": 0.3433471169716154,
+        "b": -0.0012340774445068197,
+        "STD": 39.11990968351999,
+        "STD_ln_DP": 0.04827699817157594,
+        "A_surv": 0.3433471169716154,
+        "n": 6,
+        "R2_log": 0.0008378721485271523
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "GSA": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          0.0004926802668266814,
+          0.0004926802668266814,
+          0.0005138684177314054,
+          0.0005138684177314054,
+          0.0005355026349709654,
+          0.0005575829185453616
+        ],
+        "CP_ext": [
+          0.0004926802668266814,
+          0.0004926802668266814,
+          0.0005138684177314054,
+          0.0005138684177314054,
+          0.0005355026349709654,
+          0.0005575829185453616
+        ]
+      },
+      "fit": {
+        "A": 0.0005254572931028448,
+        "b": -0.001234077444506417,
+        "STD": 39.119909683532924,
+        "STD_ln_DP": 0.04827699817157615,
+        "A_surv": 0.0005254572931028448,
+        "n": 6,
+        "R2_log": 0.0008378721485220453
+      },
+      "fit_ext": {
+        "A": 0.0005254572931028448,
+        "b": -0.001234077444506417,
+        "STD": 39.119909683532924,
+        "STD_ln_DP": 0.04827699817157615,
+        "A_surv": 0.0005254572931028448,
+        "n": 6,
+        "R2_log": 0.0008378721485220453
+      },
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ]
+    },
+    "BP": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          0.9751037344398336,
+          0.9751037344398336,
+          0.9958506224066386,
+          0.9958506224066386,
+          1.0165975103734435,
+          1.0373443983402484
+        ],
+        "CP_ext": []
+      },
+      "fit": {
+        "A": 1.0070173377295493,
+        "b": -0.000617038722253475,
+        "STD": 39.119909683515814,
+        "STD_ln_DP": 0.024138499085787943,
+        "A_surv": 1.0070173377295493,
+        "n": 6,
+        "R2_log": 0.0008378721485285956
+      },
+      "fit_ext": null,
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": []
+    },
+    "CAIM": {
+      "series": {
+        "N": [
+          2474000.0,
+          206000.0,
+          116000.0,
+          158000.0,
+          638000.0,
+          509000.0
+        ],
+        "CP": [
+          0.9751037344390892,
+          0.9751037344390892,
+          0.9958506224058783,
+          0.9958506224058783,
+          1.0165975103726674,
+          1.0373443983394566
+        ],
+        "CP_ext": []
+      },
+      "fit": {
+        "A": 1.0070173377287803,
+        "b": -0.0006170387222534575,
+        "STD": 39.11990968351699,
+        "STD_ln_DP": 0.02413849908578798,
+        "A_surv": 1.0070173377287803,
+        "n": 6,
+        "R2_log": 0.0008378721485288176
+      },
+      "fit_ext": null,
+      "design_observation_ids": [
+        "row-3",
+        "row-4",
+        "row-6",
+        "row-7",
+        "row-9",
+        "row-10"
+      ],
+      "design_observation_ids_ext": []
+    }
+  },
+  "optimisation": null,
+  "counts": {
+    "failure": 31,
+    "runout": 13,
+    "unknown": 0,
+    "invalid_excluded": 0,
+    "failures_used_by_curve": {
+      "FS": 6,
+      "FIN": 6,
+      "SWT": 6,
+      "MATAKE": 6,
+      "MCD": 6,
+      "MGSE_YU": 6,
+      "MGSE_ZHU": 6,
+      "MSWT": 6,
+      "MKBM": 6,
+      "LIU2021": 6,
+      "LI": 6,
+      "GSE": 6,
+      "GSA": 6,
+      "BP": 6,
+      "CAIM": 6
+    }
+  },
+  "references": {
+    "FS": {
+      "citation": "Fatemi & Socie (1988), A critical plane approach to multiaxial fatigue damage including out-of-phase loading",
+      "url": "https://doi.org/10.1111/j.1460-2695.1988.tb01169.x",
+      "variant": "standard"
+    },
+    "FIN": {
+      "citation": "Findley (1959), A theory for the effect of mean stress on fatigue of metals under combined torsion and axial load or bending",
+      "url": "https://doi.org/10.1115/1.4008327",
+      "variant": "standard"
+    },
+    "SWT": {
+      "citation": "Smith, Watson & Topper (1970), A stress-strain function for the fatigue of metals, Journal of Materials 5(4), 767–778",
+      "url": "",
+      "variant": "standard"
+    },
+    "MATAKE": {
+      "citation": "Matake (1977), An explanation on fatigue limit under combined stress",
+      "url": "https://doi.org/10.1299/jsme1958.20.257",
+      "variant": "standard"
+    },
+    "MCD": {
+      "citation": "McDiarmid (1991), A general criterion for high cycle multiaxial fatigue failure",
+      "url": "https://doi.org/10.1111/j.1460-2695.1991.tb00673.x",
+      "variant": "standard"
+    },
+    "MGSE_YU": {
+      "citation": "Yu, Zhu, Liu & Liu (2017), Multiaxial fatigue damage parameter and life prediction without any additional material constants, Eq. (11)",
+      "url": "https://doi.org/10.3390/ma10080923",
+      "variant": "standard"
+    },
+    "MGSE_ZHU": {
+      "citation": "Zhu et al. (2018), Evaluation and comparison of critical plane criteria for multiaxial fatigue analysis of ductile and brittle materials",
+      "url": "https://doi.org/10.1016/j.ijfatigue.2018.03.028",
+      "variant": "standard"
+    },
+    "MSWT": {
+      "citation": "Modified SWT form reported by Zhu et al. (2018), Evaluation and comparison of critical plane criteria for multiaxial fatigue analysis of ductile and brittle materials",
+      "url": "https://doi.org/10.1016/j.ijfatigue.2018.03.028",
+      "variant": "standard"
+    },
+    "MKBM": {
+      "citation": "Li et al. (2011), Multiaxial fatigue life prediction for various metallic materials based on the critical plane approach",
+      "url": "https://doi.org/10.1016/j.ijfatigue.2010.07.003",
+      "variant": "standard"
+    },
+    "LIU2021": {
+      "citation": "Liu, Ran, Wei & Zhang (2021), A critical plane-based multiaxial fatigue life prediction method considering the material sensitivity and the shear stress",
+      "url": "https://doi.org/10.1016/j.ijpvp.2021.104532",
+      "variant": "standard"
+    },
+    "LI": {
+      "citation": "Li et al. (2021), Multiaxial fatigue life prediction for metals by means of an improved strain energy density-based critical plane criterion",
+      "url": "https://doi.org/10.1016/j.euromechsol.2021.104353",
+      "variant": "standard"
+    },
+    "GSE": {
+      "citation": "Ince & Glinka (2014), A generalized fatigue damage parameter for multiaxial fatigue life prediction under proportional and non-proportional loadings",
+      "url": "https://doi.org/10.1016/j.ijfatigue.2013.10.007",
+      "variant": "standard"
+    },
+    "GSA": {
+      "citation": "Ince & Glinka (2014), A generalized fatigue damage parameter for multiaxial fatigue life prediction under proportional and non-proportional loadings",
+      "url": "https://doi.org/10.1016/j.ijfatigue.2013.10.007",
+      "variant": "standard"
+    },
+    "BP": {
+      "citation": "Böhme & Papuga (2024), Advancements in stress-based multiaxial fatigue prediction: A data-driven approach and a new criterion",
+      "url": "https://doi.org/10.1111/ffe.14281",
+      "variant": "standard"
+    },
+    "CAIM": {
+      "citation": "Böhme, Papuga & Lange (2026), Decoupling amplitude and mean stress effects in multiaxial fatigue: A critical–integral approach",
+      "url": "https://doi.org/10.1111/ffe.70244",
+      "variant": "standard"
+    }
+  },
+  "software": {
+    "git_commit": "e70a8af3a7a06cfb49626bff16c04605c884830b",
+    "tracked_worktree_dirty": true,
+    "numpy": "2.3.5"
+  },
+  "material_input_units": {
+    "Sy": "MPa",
+    "Su": "MPa",
+    "E": "MPa",
+    "nu": "1",
+    "Sigm1": "MPa",
+    "Taum1": "MPa",
+    "Sig0": "MPa",
+    "Tau0": "MPa",
+    "sigma_f": "MPa",
+    "epsilon_f": "1",
+    "b_fat": "1",
+    "c_fat": "1",
+    "tau_f": "MPa",
+    "gamma_f": "1",
+    "b0": "1",
+    "c0": "1"
+  },
+  "formulation_fingerprints": {
+    "FS": "66b6ced913fe942001b72b93add5050e264f1183ca4a76170d9603eaecc0f9fc",
+    "FIN": "f65f1330ca96ba1fca84513f61ddaf59c12b7b1af8e57c802de746e5953acb7b",
+    "SWT": "320ffce3de1b49cb7da3c8fcf0ea9718b42d72bdbd4c893ccf692583756fbc7d",
+    "MATAKE": "bbfba662160375589e22d27717c8424c5de64e2f7e60776a6c179fa6f6814cb0",
+    "MCD": "06a4bc4d7cc62a895e46c7015280a6af09550d2b688c45b2f3f72ae363c3ce2a",
+    "MGSE_YU": "3dd398467c825b8b255999b03ae9b36a168b49f854249b17c4a1dedb7571b90c",
+    "MGSE_ZHU": "47675ca3a29922cd5cb8d4aaca4927aaf2805e96d744abb99b5d9492c9265bf4",
+    "MSWT": "dabf1ce7a48aa3173cca5186d824d692614d4a69c341ddf1307d5cd0cb0d83a9",
+    "MKBM": "c9880f6b4c7059af23c7f3a633fb629d61402713d0df81d11425786894cdf913",
+    "LIU2021": "95fee0cd33849fc80601c0557f333ed7df7773fc2b0f18241461540584c99892",
+    "LI": "1160a35b18848880874af8b4e9c9de2ce4a800d422b5119ce48e82ab929cf663",
+    "GSE": "ff94459a7f4087c75fb3c6bb7af39acbf01a7d57e0f684b6f9704fa44207c988",
+    "GSA": "4b518ca81ecbe1a2149c5ca943f134bcb7d7519df9bba2f30c88cd65247fc7dd",
+    "BP": "eaa41466d26b55c44cd72c239e084e92811cc4e3d610c55a6a2907f0b466bffc",
+    "CAIM": "9444788bf883afafc25bf05b366b59d857e443634d10648d1db1dfa68406dc45"
+  },
+  "damage_parameter_units": {
+    "FS": "1",
+    "FIN": "MPa",
+    "SWT": "MPa",
+    "MATAKE": "MPa",
+    "MCD": "MPa",
+    "MGSE_YU": "MPa",
+    "MGSE_ZHU": "MPa",
+    "MSWT": "MPa",
+    "MKBM": "1",
+    "LIU2021": "1",
+    "LI": "MPa",
+    "GSE": "MPa",
+    "GSA": "1",
+    "BP": "1",
+    "CAIM": "1"
+  },
+  "design_observations": {
+    "row-3": {
+      "specimen_id": "Uniaxial_2",
+      "excel_row": 3,
+      "source_file": "AISI316L.xlsx",
+      "N_cycles": 2474000.0
+    },
+    "row-4": {
+      "specimen_id": "Uniaxial_3",
+      "excel_row": 4,
+      "source_file": "AISI316L.xlsx",
+      "N_cycles": 206000.0
+    },
+    "row-6": {
+      "specimen_id": "Uniaxial_5",
+      "excel_row": 6,
+      "source_file": "AISI316L.xlsx",
+      "N_cycles": 116000.0
+    },
+    "row-7": {
+      "specimen_id": "Uniaxial_6",
+      "excel_row": 7,
+      "source_file": "AISI316L.xlsx",
+      "N_cycles": 158000.0
+    },
+    "row-9": {
+      "specimen_id": "Uniaxial_8",
+      "excel_row": 9,
+      "source_file": "AISI316L.xlsx",
+      "N_cycles": 638000.0
+    },
+    "row-10": {
+      "specimen_id": "Uniaxial_9",
+      "excel_row": 10,
+      "source_file": "AISI316L.xlsx",
+      "N_cycles": 509000.0
+    }
+  }
+}

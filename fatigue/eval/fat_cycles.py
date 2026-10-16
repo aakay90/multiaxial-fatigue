@@ -2,6 +2,7 @@
 import numpy as np
 from typing import Optional, Tuple, Union
 import matplotlib.pyplot as plt
+from fatigue.report.observations import plot_runouts
 
 
 def fatigue_cycles(
@@ -89,6 +90,8 @@ def fatigue_plots(
     error_factors=(2, 5),      # NEW: factor bands for parity plot
     show: bool = True,
     return_figax: bool = True,
+    test_status=None,
+    show_runouts: bool = True,
 ):
     """
     Create two fatigue plots:
@@ -133,12 +136,18 @@ def fatigue_plots(
 
     if not (len(F_par) == len(N_exp) == len(N_pred)):
         raise ValueError("F_par, N_exp, and N_pred must have the same length.")
-    if A == 0 or B == 0:
-        raise ValueError("A and B must be non-zero.")
+    if A == 0:
+        raise ValueError("A must be non-zero.")
     if np.any(N_exp <= 0) or np.any(N_pred <= 0):
         raise ValueError("N_exp and N_pred must be > 0 for log plotting.")
     if loglog and np.any(F_par <= 0):
         raise ValueError("F_par must be > 0 for log-log Wöhler plotting.")
+
+    statuses = np.asarray(test_status if test_status is not None else ["failure"] * len(N_exp))
+    if len(statuses) != len(N_exp):
+        raise ValueError("test_status must match experimental points")
+    failed = statuses == "failure"
+    runout = (statuses == "runout") & show_runouts
 
     have_design = (F_design is not None) and (N_design is not None)
     if have_design:
@@ -157,6 +166,7 @@ def fatigue_plots(
         if have_design:
             N_all.append(N_design)
         N_all = np.concatenate(N_all)
+        N_all = N_all[np.isfinite(N_all) & (N_all > 0)]
         N_low = np.min(N_all) / 10.0
         N_high = np.max(N_all) * 10.0
     else:
@@ -181,11 +191,8 @@ def fatigue_plots(
     # Put grid below everything
     ax1.set_axisbelow(True)
 
-    # Plot experimental points first
-    if loglog:
-        ax1.scatter(N_exp, F_par, label="Experimental")
-    else:
-        ax1.scatter(N_exp, F_par, label="Experimental")
+    ax1.scatter(N_exp[failed], F_par[failed], label="Failed specimens")
+    plot_runouts(ax1, N_exp[runout], F_par[runout])
 
     # Choose curve color = design points color (if present),
     # otherwise just plot the curve normally.
@@ -206,7 +213,8 @@ def fatigue_plots(
     ax1.set_ylabel("Fatigue parameter F")
 
     ax1.grid(True, which="both")
-    ax1.legend()
+    ax1.legend(loc="upper center", bbox_to_anchor=(0.5, -0.18), ncol=2, fontsize=8)
+    fig1.subplots_adjust(bottom=0.30)
 
     # =========================
     # 2) Nexp vs Npred (parity)
@@ -215,11 +223,20 @@ def fatigue_plots(
     ax2 = fig2.add_subplot(111)
 
     ax2.set_axisbelow(True)  # grid below points/lines
-    ax2.scatter(N_exp, N_pred, label="Predictions")
+    valid = np.isfinite(N_pred) & (N_pred > 0)
+    if not valid.any():
+        ax2.text(0.5, 0.5, "Life predictions are unavailable for this calibration",
+                 transform=ax2.transAxes, ha="center", va="center")
+    ax2.scatter(N_exp[failed & valid], N_pred[failed & valid], label="Failed specimens")
+    plot_runouts(ax2, N_exp[runout & valid], N_pred[runout & valid])
 
     # Determine parity plot range
-    xy_low = min(np.min(N_exp), np.min(N_pred)) / 10.0
-    xy_high = max(np.max(N_exp), np.max(N_pred)) * 10.0
+    finite_predictions = N_pred[valid]
+    combined = np.concatenate([N_exp, finite_predictions])
+    if not combined.size:
+        combined = N_design if have_design else N_line
+    xy_low = np.min(combined) / 10.0
+    xy_high = np.max(combined) * 10.0
     xy_low = float(max(xy_low, 1e-300))
     xy_high = float(max(xy_high, xy_low * 1.0001))
 

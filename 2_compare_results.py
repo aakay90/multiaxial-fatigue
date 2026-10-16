@@ -10,6 +10,7 @@ from typing import Dict, List, Optional, Tuple
 import matplotlib.pyplot as plt
 from matplotlib import colors as mcolors
 from fatigue.eval.metrics import log10_dp_ratio
+from fatigue.report.observations import plot_runouts, mask_censored_errors
 from fatigue.models.references import DISABLED_METHODS, IMPLEMENTATION_REVISION
 import numpy as np
 import pandas as pd
@@ -500,7 +501,7 @@ def read_results_csv(csv_path: Path) -> Optional[pd.DataFrame]:
         df.loc[m, "Error_dp"] = df.loc[m, "CP_value"] - df.loc[m, "DP_fit"]
 
     df["source_file"] = str(csv_path)
-    return df
+    return mask_censored_errors(df)
 
 
 def collect_all_results(results_dir: Path) -> pd.DataFrame:
@@ -897,6 +898,9 @@ def plot_expected_vs_experimental(
     scatter_alpha = 0.2
     factors = sorted(set(float(f) for f in factors if np.isfinite(f) and f > 1.0))
 
+    df_mat = df_mat.copy()
+    if "Test_status" not in df_mat:
+        df_mat["Test_status"] = "failure"
     methods = sorted(df_mat["Method"].dropna().unique().tolist())
 
     xall = pd.to_numeric(df_mat["Nf_exp"], errors="coerce").to_numpy(dtype=float)
@@ -931,11 +935,19 @@ def plot_expected_vs_experimental(
     # --- Matplotlib ---
     fig, ax = plt.subplots(figsize=(7, 7))
 
+    runout_legend = False
     for meth in methods:
         sub = df_mat[df_mat["Method"] == meth]
         x = pd.to_numeric(sub["Nf_exp"], errors="coerce").to_numpy(dtype=float)
         y = pd.to_numeric(sub["Nf_expected"], errors="coerce").to_numpy(dtype=float)
         mm = np.isfinite(x) & np.isfinite(y) & (x > 0) & (y > 0)
+        rr = mm & sub["Test_status"].eq("runout").to_numpy()
+        st = method_styles.get(meth)
+        col = ("#" + st["hex"]) if st else "C0"
+        plot_runouts(ax, x[rr], y[rr], color=col,
+                     label="Run-out (experimental life lower bound)" if not runout_legend else "_nolegend_")
+        runout_legend = runout_legend or bool(rr.any())
+        mm &= sub["Test_status"].eq("failure").to_numpy()
         if np.any(mm):
             st = method_styles.get(meth)
             col = ("#" + st["hex"]) if st else None
@@ -997,7 +1009,8 @@ def plot_expected_vs_experimental(
         va="top",
     )
 
-    ax.set_xlabel(r"Experimental number of cycles to failure - $N_f$")
+    ax.set_xlabel("Recorded experimental cycles (run-outs are lower bounds)" if runout_legend
+                  else r"Experimental number of cycles to failure - $N_f$")
     ax.set_ylabel(r"Expected number of cycles to failure - $N_{f,e}$")
     ax.legend(fontsize=9, loc="lower left")  # only Bisector + Factors (and methods if enabled)
     fig.tight_layout()
@@ -1006,11 +1019,18 @@ def plot_expected_vs_experimental(
 
     # --- TikZ export ---
     scat_files = []
+    runout_files = []
     for meth in methods:
         sub = df_mat[df_mat["Method"] == meth]
         x = pd.to_numeric(sub["Nf_exp"], errors="coerce").to_numpy(dtype=float)
         y = pd.to_numeric(sub["Nf_expected"], errors="coerce").to_numpy(dtype=float)
         mm = np.isfinite(x) & np.isfinite(y) & (x > 0) & (y > 0)
+        rr = mm & sub["Test_status"].eq("runout").to_numpy()
+        if rr.any():
+            dat_runout = data_dir / "scatter" / f"{_safe_name(meth)}_runout.dat"
+            _write_dat_xy(dat_runout, x[rr], y[rr])
+            runout_files.append((meth, dat_runout, x[rr], y[rr]))
+        mm &= sub["Test_status"].eq("failure").to_numpy()
         if np.any(mm):
             dat = data_dir / "scatter" / f"{_safe_name(meth)}.dat"
             _write_dat_xy(dat, x[mm], y[mm])
@@ -1069,6 +1089,17 @@ def plot_expected_vs_experimental(
         )
         if show_method_legends:
             tex += r"\addlegendentry{" + _latex_escape(meth) + r"}" + "\n"
+
+    for i, (meth, dat, rx, ry) in enumerate(runout_files):
+        style = method_styles.get(meth, {})
+        colour = "{" + f"rgb,255:red,{int(style.get('hex', '1F77B4')[0:2],16)};green,{int(style.get('hex', '1F77B4')[2:4],16)};blue,{int(style.get('hex', '1F77B4')[4:6],16)}" + "}"
+        tex += (r"\addplot[only marks,mark=o,mark options={fill=none},color=" + colour
+                + (",forget plot" if i else "") + r"] table[x index=0,y index=1] {" + dat.as_posix() + "};\n")
+        if i == 0:
+            tex += r"\addlegendentry{Run-out (experimental life lower bound)}" + "\n"
+        for xx, yy in zip(rx, ry):
+            tex += (r"\draw[->,color=" + colour + "] (axis cs:"
+                    + f"{xx:.6e},{yy:.6e}) -- (axis cs:{xx*1.35:.6e},{yy:.6e});\n")
 
     # Bisector with legend entry
     tex += (
@@ -1404,14 +1435,15 @@ def plot_dp_point_vs_fit(
 
 def compute_stats_table(df: pd.DataFrame) -> pd.DataFrame:
     """DP log10 statistics for all slopes, plus life errors where meaningful."""
-    df = df.copy()
+    df = mask_censored_errors(df)
+    df = df.loc[df["Test_status"] == "failure"].copy()
     if "Metric_mode" not in df:
         df["Metric_mode"] = "Nf"
     if "DP_fit" in df and "CP_value" in df:
         df["Error_log10_dp"] = log10_dp_ratio(df["DP_fit"], df["CP_value"])
     rows = []
     for (mat, meth, mode), g in df.groupby(["Material", "Method", "Metric_mode"], dropna=False):
-        metrics = ["Error_log10_dp"]
+        metrics = [] if str(mode).strip().upper() == "NF_DIRECT" else ["Error_log10_dp"]
         if str(mode).strip().upper() != "DP_DIFF":
             metrics.append("Error_ln")
         for metric in metrics:
@@ -1527,6 +1559,7 @@ def main(argv=None) -> None:
     ap.add_argument("--results_dir", type=str, default="Results")
     ap.add_argument("--out_dir", type=str, default="Results/Comparison")
     ap.add_argument("--include-legacy", action="store_true", help="Include pre-audit results explicitly; disabled methods are still excluded.")
+    ap.add_argument("--hide-runouts", action="store_true")
     ap.add_argument("--flag_filter", type=str, default="all", choices=["all", "design", "other"])
 
     # scatter opacity (clustering visibility)
@@ -1599,6 +1632,10 @@ def main(argv=None) -> None:
         m = np.isfinite(df["DP_fit"]) & np.isfinite(df["CP_value"])
         df.loc[m, "Error_dp"] = df.loc[m, "CP_value"] - df.loc[m, "DP_fit"]
 
+    df = mask_censored_errors(df)
+    if args.hide_runouts:
+        df = df.loc[df["Test_status"] != "runout"].copy()
+
     if args.flag_filter != "all" and "Flag" in df.columns:
         if args.flag_filter == "design":
             df = df[df["Flag"] == 0]
@@ -1635,8 +1672,8 @@ def main(argv=None) -> None:
         # Split by metric mode
         mode_u = df_mat["Metric_mode"].astype(str).str.strip().str.upper()
         df_nf = df_mat[mode_u != "DP_DIFF"].copy()
-        # All slopes participate in damage-space comparisons.
-        df_dp = df_mat.copy()
+        # Native cycle predictions have no damage parameter to compare.
+        df_dp = df_mat[mode_u != "NF_DIRECT"].copy()
 
         safe_mat = _safe_name(mat)
         mat_dir = out_dir / safe_mat

@@ -7,9 +7,10 @@ import numpy as np
 import fatigue.imp.experimental_data as exp
 import fatigue.eval.fat_cycles as fatc
 from fatigue.planes.sampling import build_R_list
-from fatigue.eval.calibration import collect_uniaxial_series_and_fit
+from fatigue.eval.calibration_store import load_calibration, material_parameters, curve_settings
 from fatigue.report.export_csv import save_fatigue_csv
 from fatigue.models.registry import get_models
+from fatigue.models.base import model_output_quantity
 
 
 # ----------------------------
@@ -26,6 +27,10 @@ DCMESH_N1 = 20
 DCMESH_N2 = 2 * DCMESH_N1
 STDNUM = 0
 MAKE_PLOTS = True
+CALIBRATIONS_DIR = "Calibrations"
+CALIBRATION_ID = None
+SHOW_RUNOUTS = True
+PLOT_DIR = None
 
 def _variant_from_model_name(name: str) -> tuple[str, str]:
     """
@@ -106,67 +111,24 @@ def main():
     # ----------------------------
     mat_prop = exp.get_material_properties(data, material=MATERIAL_NAME)
 
-    Sy = mat_prop.get("Yield_strength_MPa", None)
-    Su = mat_prop.get("Tensile_strength_MPa", None)
-    E = mat_prop.get("E_MPa", None)
-    nu = mat_prop.get("nu", None)
-    Sigm1 = mat_prop.get("Tensile_fatigue_limit_MPa", None)
-    Taum1 = mat_prop.get("Torsional_fatigue_limit_MPa", None)
-    Sig0 = mat_prop.get("Tensile_fatigue_R0_MPa", None)
-    Tau0 = mat_prop.get("Torsional_fatigue_R0_MPa", None)
-    k_FS = mat_prop.get("k_FS", None)
-    k_FI = mat_prop.get("k_FI", None)  # your dataset uses "k_FI"
-
-    # Optional advanced parameters (may or may not exist in Summary sheet)
-    k_MGSE = mat_prop.get("k_MGSE", None)
-    a_MSWT = mat_prop.get("a_MSWT", None)
-    alpha_w = mat_prop.get("alpha_w", None)
-    xi_ZHU = mat_prop.get("xi_ZHU", None)
-
-    # Optional Li-2021 weight index
-    L_LI = mat_prop.get("L_LI", None)
-
-    # Optional strain-life parameters (if you add them in Summary)
-    sigma_f = mat_prop.get("sigma_f", None)
-    epsilon_f = mat_prop.get("epsilon_f", None)
-    b_fat = mat_prop.get("b_fat", None)
-    c_fat = mat_prop.get("c_fat", None)
-    tau_f = mat_prop.get("tau_f", None)
-    gamma_f = mat_prop.get("gamma_f", None)
-    b0 = mat_prop.get("b0", None)
-    c0 = mat_prop.get("c0", None)
-
-    params = {
-        "Sy": float(Sy) if Sy is not None else None,
-        "Su": float(Su) if Su is not None else None,
-        "E": float(E) if E is not None else None,
-        "nu": float(nu) if nu is not None else None,
-        "Sigm1": float(Sigm1) if Sigm1 is not None else None,
-        "Taum1": float(Taum1) if Taum1 is not None else None,
-        "Sig0": float(Sig0) if Sig0 is not None else None,
-        "Tau0": float(Tau0) if Tau0 is not None else None,
-        "k_FS": float(k_FS) if k_FS is not None else None,
-        "k_FI": float(k_FI) if k_FI is not None else None,
-
-        # optional added constants
-        "k_MGSE": float(k_MGSE) if k_MGSE is not None else None,
-        "a_MSWT": float(a_MSWT) if a_MSWT is not None else None,
-        "alpha_w": float(alpha_w) if alpha_w is not None else None,
-        "xi_ZHU": float(xi_ZHU) if xi_ZHU is not None else None,
-
-        "L_LI": float(L_LI) if L_LI is not None else None,
-
-        # optional strain-life parameters
-        "sigma_f": float(sigma_f) if sigma_f is not None else None,
-        "epsilon_f": float(epsilon_f) if epsilon_f is not None else None,
-        "b_fat": float(b_fat) if b_fat is not None else None,
-        "c_fat": float(c_fat) if c_fat is not None else None,
-        "tau_f": float(tau_f) if tau_f is not None else None,
-        "gamma_f": float(gamma_f) if gamma_f is not None else None,
-        "b0": float(b0) if b0 is not None else None,
-        "c0": float(c0) if c0 is not None else None,
-        # add future model params here, e.g. "E": ..., "nu": ..., "k_MY": ...
-    }
+    base_name, variant_key = _variant_from_model_name(MODEL_NAME)
+    model = get_models([base_name])[0]
+    quantity = model_output_quantity(model)
+    if quantity == "life_cycles":
+        from fatigue.eval.direct_life import run_direct_life
+        return run_direct_life(data=data, material=MATERIAL_NAME, model=model,
+            method_name=MODEL_NAME, variant=variant_key, results_dir=RESULTS_DIR,
+            classify_loading_type=classify_loading_type, make_plots=MAKE_PLOTS,
+            plot_dir=PLOT_DIR, show_runouts=SHOW_RUNOUTS)
+    if quantity != "damage_parameter":
+        raise ValueError(f"{base_name} returns an index without a supported damage-life relation")
+    record, stored_curve, calibration_path = load_calibration(
+        data=data, material=MATERIAL_NAME, model=base_name,
+        settings=curve_settings(DCMESH_N1, DCMESH_N2, STDNUM),
+        folder=CALIBRATIONS_DIR, calibration_id=CALIBRATION_ID)
+    print(f"Calibration record {calibration_path}")
+    params = material_parameters(mat_prop, record["parameters"])
+    Sig0, Tau0 = params["Sig0"], params["Tau0"]
 
     print(mat_prop)
 
@@ -199,16 +161,7 @@ def main():
             f"Available: {params}"
         )
 
-    cal = collect_uniaxial_series_and_fit(
-        data=data,
-        exp=exp,
-        material_name=MATERIAL_NAME,
-        uniax_cases=uniax_Rm1,
-        R_list=R_list,
-        models=[model],
-        params=params,
-        stdnum=STDNUM,
-    )
+    cal = {base_name: stored_curve}
 
     # Pull calibration for this model
     if base_name not in cal:
@@ -300,8 +253,15 @@ def main():
     DP_fit: list[float] = []
     Error_ln_dp: list[float] = []
     loading_type: list[str] = []
+    statuses, specimen_ids = [], []
 
     for case_id in data_no_uniax[MATERIAL_NAME]["cases"].keys():
+        observation = data_no_uniax[MATERIAL_NAME]["cases"][case_id]["meta"]
+        status = observation.get("test_status", "failure")
+        if status not in {"failure", "runout"}:
+            continue
+        statuses.append(status)
+        specimen_ids.append(observation.get("specimen_id", str(case_id)))
         S0, E0, S1, E1, H = exp.extract_tensor(
             data_no_uniax, MATERIAL_NAME, int(case_id), node=1, include_harmonics=True
         )
@@ -312,6 +272,7 @@ def main():
             R_list=R_list,  # CP uses it, non-CP ignores it
             harmonics=H,
         )
+        model_output_quantity(model, res)
 
         if variant_key not in res.values:
             raise ValueError(
@@ -345,6 +306,9 @@ def main():
         else:
             err_ln_dp_i = np.nan
 
+        if status != "failure":
+            dp_fit_i = np.nan
+            err_ln_dp_i = np.nan
         values.append(float(F))
         Nexp.append(float(Nf))
         Npred.append(float(N_pred) if np.isfinite(N_pred) else float("nan"))
@@ -355,13 +319,27 @@ def main():
     # 7) Plot (same call/signature as MAIN)
     # ----------------------------
     # Plot only in Nf mode (parity plot requires meaningful N_pred)
-    if metric_mode == "Nf" and MAKE_PLOTS:
-        fatc.fatigue_plots(
+    if MAKE_PLOTS:
+        figures = fatc.fatigue_plots(
             values, Nexp, Npred,
             A=As, B=b,
             F_design=F_d,
             N_design=N_d,
+            test_status=statuses,
+            show_runouts=SHOW_RUNOUTS,
+            show=PLOT_DIR is None,
         )
+        if PLOT_DIR is not None:
+            from pathlib import Path
+            import matplotlib.pyplot as plt
+            directory = Path(PLOT_DIR)
+            directory.mkdir(parents=True, exist_ok=True)
+            prefix = f"{MODEL_NAME}_{MATERIAL_NAME}_{record['calibration_id']}"
+            figures[0].savefig(directory / f"{prefix}_damage_life.png", dpi=160, bbox_inches="tight")
+            if metric_mode == "Nf":
+                figures[2].savefig(directory / f"{prefix}_life_parity.png", dpi=160, bbox_inches="tight")
+            plt.close(figures[0])
+            plt.close(figures[2])
 
     # ----------------------------
     # 8) Save CSV (same design points handling + metadata style as MAIN)
@@ -386,6 +364,8 @@ def main():
         "n_planes": len(R_list),
         "dcmesh_n1": DCMESH_N1,
         "dcmesh_n2": DCMESH_N2,
+        "calibration_id": record["calibration_id"],
+        "calibration_file": str(calibration_path),
     }
 
     csv_path = save_fatigue_csv(
@@ -393,6 +373,10 @@ def main():
         method_name=MODEL_NAME,        # keep filename compatibility
         material_name=MATERIAL_NAME,
         N_exp=Nexp,
+        test_status=statuses,
+        specimen_ids=specimen_ids,
+        specimen_ids_design=[p.get("specimen_id", "") for p in
+                            stored_curve.get("design_observations_ext" if variant_key else "design_observations", [])] or None,
         CP=values,
         N_pred=Npred,
         N_design=N_d,
@@ -419,7 +403,15 @@ if __name__ == "__main__":
     parser.add_argument("--material", default=MATERIAL_NAME)
     parser.add_argument("--results-dir", default=RESULTS_DIR)
     parser.add_argument("--no-plots", action="store_true")
+    parser.add_argument("--data-folder", default=DATA_FOLDER)
+    parser.add_argument("--calibrations-dir", default=CALIBRATIONS_DIR)
+    parser.add_argument("--calibration-id")
+    parser.add_argument("--hide-runouts", action="store_true")
+    parser.add_argument("--plot-dir", help="Save plots without an interactive window")
     args = parser.parse_args()
     MODEL_NAME, MATERIAL_NAME, RESULTS_DIR = args.model, args.material, args.results_dir
+    DATA_FOLDER, CALIBRATIONS_DIR, CALIBRATION_ID = args.data_folder, args.calibrations_dir, args.calibration_id
+    SHOW_RUNOUTS = not args.hide_runouts
+    PLOT_DIR = args.plot_dir
     MAKE_PLOTS = not args.no_plots
     main()

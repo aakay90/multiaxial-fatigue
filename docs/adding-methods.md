@@ -12,10 +12,25 @@ The user-facing method name is registered in `fatigue/models/registry.py`. The r
 ## Direct method
 
 1. Add a class in `fatigue/models/invariant_methods/`, `fatigue/models/energy_based_methods/`, or `fatigue/models/integral_methods/`. Follow an existing model and the `FatigueModel` protocol in `fatigue/models/base.py`.
-2. Provide `name`, `required_params()`, and `evaluate_case(*, S0, E0, S1, E1, params, R_list=None, harmonics=None) -> CaseResult`. The result uses `values={"": damage}`. A direct model must explicitly use `harmonics` if its calculation needs phase information.
+2. Provide `name`, `required_params()`, and `evaluate_case(*, S0, E0, S1, E1, params, R_list=None, harmonics=None) -> CaseResult`. A damage-parameter result uses `values={"": damage}`. A direct model must explicitly use `harmonics` if its calculation needs phase information.
 3. Import and register the class in `_available_direct_models()` in `fatigue/models/registry.py`, then select it with `MODEL_NAME` in `1_run_material.py`.
 
-If a method needs a new material parameter, add it to the Excel `Summary` sheet, update the mapping in `fatigue/imp/experimental_data.py`, pass it in the runner's `params` dictionary, and declare it in `required_params()`.
+For a model that already predicts life, declare `output_quantity = "life_cycles"`
+on the model and return `CaseResult(values={"": N}, output_quantity="life_cycles")`.
+Convert reversals to cycles within the method according to its published convention.
+Script 1 then compares the native life directly, without a damage master curve.
+Use `output_quantity = "index"` for an output without a supported damage–life
+relation; generic fitting and conversion are refused. See the output table in the
+[calibration workflow](calibration-workflow.md). Computational family and output
+quantity are separate properties. No cycle-valued criterion is currently enabled.
+
+An independently measured material parameter belongs in Excel `Summary` and its
+import mapping. A coefficient fitted by the framework belongs in JSON. Extend
+Script 0, `METHOD_PARAMETERS`, units and record validation for a new fitted
+coefficient, rather than introducing another editable Excel field. Update the
+shared `material_parameters()` mapping for measured inputs, declare required
+parameters and add failure-only calibration checks. See the
+[calibration workflow](calibration-workflow.md).
 
 For a new method family, update `_family_cmap_name()` in `2_compare_results.py` if the plots need a distinct color palette. If calibration produces NaN, check the method's values on the design subset and its required parameters first.
 

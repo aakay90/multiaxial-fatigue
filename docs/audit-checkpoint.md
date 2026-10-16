@@ -1,4 +1,102 @@
-# Continuation checkpoint — 7 October 2026
+# Development continuation checkpoint
+
+Updated 16 October 2026. This is the single development checkpoint. Read this
+section, check Git status and recent commits, then verify the recorded state
+before changing code. The previous scientific audit remains below as historical
+context and must not be repeated for calibration-pipeline work.
+
+## Current objective and recovery state
+
+The JSON calibration, run-out, native-life and recovery workflows are implemented
+and tested. Branch `feat/calibration-history-runouts`.
+PR [#5](https://github.com/andreachiocca/multiaxial-fatigue/pull/5) is open for
+review and has not been merged. The verified implementation commit is
+`f0df0a7a9588b59fc7abca051bbf1790da853230`. Use `git log -1` for the later
+checkpoint-only commit. The five previous local implementation commits were
+recovered rather than reimplemented. Their original local history, including
+this session's incremental work, is retained on
+`recovery/calibration-workflow-20261016` in the working checkout.
+
+| Requirement | Actual status |
+|---|---|
+| JSON export, metadata, historical IDs and compatible loading | Implemented and tested successfully |
+| Experimental properties separated from fitted coefficients | Implemented and tested successfully |
+| Four workbook migrations and byte-identical original archive | Implemented and verified against public main |
+| Failure-only fitting, run-out import, statistics and plots | Implemented and tested successfully |
+| Native cycle outputs bypass damage fitting | Implemented and tested with a synthetic model |
+| Suppression of duplicate equivalent calibrations | Implemented and tested successfully; sequential equivalent exports reuse the stored ID |
+| Persistent checkpoint and recovery instructions | Checkpoint committed; mandatory milestone procedure added to `AGENTS.md` |
+| Publication | PR #5 open; remote implementation tree verified equal to local tested tree; push and PR CI passed on f0df0a7; human review pending |
+
+## Code and verification
+
+Relevant files are `0_calibrate_material_params.py`, `1_run_material.py`,
+`2_compare_results.py`, `fatigue/eval/calibration_store.py`,
+`fatigue/eval/calibration.py`, `fatigue/eval/direct_life.py`,
+`fatigue/imp/experimental_data.py`, `fatigue/imp/observations.py`,
+`fatigue/models/base.py`, `fatigue/report/export_csv.py` and
+`fatigue/report/observations.py`. Format and migration details are in
+`docs/calibration-workflow.md` and `docs/calibration-verification.md`.
+
+Executed successfully in this session before this checkpoint update
+
+- `MPLBACKEND=Agg python tools/run_tests.py`, 39 tests passed after the portable calibration-fixture correction.
+- Baseline and revised `tests/run_material_validation.py`, 64 runs each.
+- `python tests/compare_material_regression.py /tmp/wg43-old-20261016 /tmp/wg43-current-20261016`, all 3,936 original failure rows exactly equal, with 672 additional censored rows.
+- Ruff, dependency consistency, generated-method documentation and local documentation-link checks passed.
+- Failure-only versus failure-plus-run-out coefficient and curve regressions passed.
+- Script 0 to JSON to Script 1 and CSV/plot integration passed on AISI316L.
+- Repeated Script 0, then Script 1 and Script 2 passed on AISI316L/BP in `/tmp/wg43-final-e2e`; exactly one JSON record, 31 failures and 13 run-outs, with censored errors undefined.
+- GitHub Actions passed on `f0df0a7` for both [PR checks](https://github.com/andreachiocca/multiaxial-fatigue/actions/runs/38967518197) and [push checks](https://github.com/andreachiocca/multiaxial-fatigue/actions/runs/38967513186).
+
+These are software tests and numerical regression comparisons. They do not
+establish independent experimental validation of the fatigue criteria. Initial
+JSON coefficients were transferred without re-optimisation; their original
+calibration settings remain unverified. Original `Results/*.csv` are unchanged.
+
+## Blockers and precise next action
+
+Automatic publication review rejected the illustrative PNG. It was removed in
+`7dd9f35` and replaced with reproducible plotting instructions. Do not publish
+`docs/images/runout-example.png` or a historical tree containing it. All four
+cleaned workbooks and the original archive were checked against existing public
+repository data. The published PR contains the image-free code, JSON records,
+cleaned workbooks, original archive and this checkpoint. No publication blocker
+remains for the requested workflow.
+
+Equivalent-export reuse, changed-output history and metadata preservation are
+now tested. Modified files in this milestone are `AGENTS.md`, Script 0,
+`fatigue/eval/calibration_store.py`, `fatigue/eval/calibration.py`,
+`tests/test_calibration_workflow.py`, the workflow and verification documents,
+and this checkpoint. No known local test failure remains. These changes are
+committed and published. A later CI diagnostic milestone adds
+`tools/run_tests.py` and updates `.github/workflows/quality.yml` to expose test
+tracebacks as check annotations without changing discovery or test assertions.
+The diagnostic runner also passes all 39 tests locally.
+
+On `d7c0c65`, the push CI run succeeded but the PR CI test job failed, while its
+catalogue job passed. The connector supplied only exit status and did not expose
+the traceback. The diagnostic runner exposed the cause on `2384227`. The old
+two-plane MSWT fixture used only five torsion observations, so its objective had
+tied coefficient values within floating-point rounding. A three-plane fixture
+was generated from the original `e70a8af` checkout, retains all 11 failure points
+and has separated objective minima for all five methods. Tests now compare that
+baseline and recompute its objective grids. Original fixtures, production search
+procedures and fatigue formulations are preserved. The correction passes all 39
+tests locally and both push and PR CI checks on `f0df0a7`. No active test or
+publication blocker remains for this task.
+
+Next action is to review PR #5, confirm its current checks and check Git status
+before making changes. Address concrete review feedback on the same
+branch, run the relevant tests, update this checkpoint and commit verified work.
+Do not recreate this implementation or open a duplicate PR. Do not merge without
+an explicit user instruction. Independent original-paper validation listed in
+the historical audit below remains outside this pipeline-refactoring task.
+At every later milestone record tests, uncommitted changes, blockers and the next
+executable step before committing. Use `git log -1` for the containing checkpoint
+commit; a file cannot embed its own commit hash.
+
+## Historical scientific audit, 7 October 2026
 
 ## Completed
 
