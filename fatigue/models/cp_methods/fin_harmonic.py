@@ -23,9 +23,10 @@ def _finite_stress(name, value):
     raw = np.asarray(value)
     if raw.dtype.kind not in 'biuf':
         raise TypeError(f'{name} must contain real numeric coefficients')
-    tensor = as33(name, raw)
-    if not np.isfinite(tensor).all():
-        raise ValueError(f'{name} must contain finite coefficients')
+    with np.errstate(over='ignore', under='ignore', invalid='ignore'):
+        tensor = as33(name, raw)
+    if not np.isfinite(tensor).all() or np.any((raw != 0) & (tensor == 0)):
+        raise ValueError(f'{name} must be finite and nonzero values must survive float64 conversion')
     return tensor
 
 

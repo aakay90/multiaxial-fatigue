@@ -185,6 +185,18 @@ class FindleyHarmonicTests(unittest.TestCase):
                 h = dict(case['harmonics'], **{key: bad})
                 with self.assertRaises(ValueError):
                     evaluate_findley(**dict(case, harmonics=h), shear_amplitude_algorithm='mcc_harmonic')
+            h = dict(case['harmonics'], **{key: np.eye(3, dtype=complex)})
+            with self.assertRaises(TypeError):
+                evaluate_findley(**dict(case, harmonics=h), shear_amplitude_algorithm='mcc_harmonic')
+        for key in ('S0', 'S1'):
+            with self.assertRaises(ValueError):
+                evaluate_findley(**dict(case, **{key: np.full((3, 3), np.nan)}),
+                                 shear_amplitude_algorithm='mcc_harmonic')
+        if np.finfo(np.longdouble).tiny < np.finfo(float).tiny:
+            tiny = np.eye(3, dtype=np.longdouble)*np.longdouble('1e-400')
+            h = dict(case['harmonics'], S_sin=tiny)
+            with self.assertRaisesRegex(ValueError, 'float64 conversion'):
+                evaluate_findley(**dict(case, harmonics=h), shear_amplitude_algorithm='mcc_harmonic')
         for planes in ([], None, np.zeros((1, 3, 3))):
             with self.assertRaises(ValueError):
                 evaluate_findley(**dict(case, R_list=planes), shear_amplitude_algorithm='mcc_harmonic')

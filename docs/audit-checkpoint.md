@@ -32,14 +32,29 @@ and signed mean normal stress, endpoint fallback and explicit-request rejection,
 extreme shear scales, identical FIN variants, captured main outputs for FIN/FS/
 Matake/McDiarmid and unchanged formulation fingerprints for these four methods.
 
-Files at this milestone are the new Findley diagnostic module, its tests and this
-checkpoint. Documentation and the complete post-change suite are still pending.
+The first verified milestone is published as
+`176ce53600a427865b9822e6294a641af087381b`. The changed files are the new Findley
+diagnostic module, its tests, `docs/shear-amplitude.md` and this checkpoint.
+The complete post-change suite passed all 83 tests (70 existing plus 13 new),
+without skips, including the final float64 conversion rejection tests. Focused
+tests, repository-wide Ruff, documentation links, the generated method catalogue
+and diff checks passed. A protected-path diff confirms that these four files are
+the entire change: JSON records, experimental inputs, numbered scripts, registry,
+other criteria, production FIN, evaluator, adapter and calibration store are
+unchanged. Production FIN/FS/Matake/McDiarmid fingerprint snapshots pass exactly.
+
+The numerical note documents inputs, selection, example damage values and the
+calibration boundary. Circular/elliptical prescribed-plane damage is 12.4/16.542136
+and 12.4/13.580340 (MCC/MCE). In the ranking example MCC selects normal x with
+13.806248 and MCE selects normal z with 15.542136. Default proportional and
+non-proportional snapshots match main exactly; explicitly selected MCE agrees
+within float64 rounding. FIN and FIN_ext agree for both algorithms.
 Known limitations are complete single-harmonic histories and the supplied finite
 plane grid; normal-extrema float64 arithmetic retains existing limitations. No
 experimental validation or compatible MCC damage-life calibration is claimed.
-Next action: extend `docs/shear-amplitude.md`, run the complete suite and repository
-checks, verify protected paths/fingerprints, then publish one open review PR. Do
-not implement Phase 3, edit JSON records or activate alternative-amplitude life.
+Next action: publish the final verified documentation/input-validation commit,
+open one review PR and check its published tree and CI status. Do not merge it,
+implement Phase 3, edit JSON records or activate alternative-amplitude life.
 
 ## Previous phase, independent harmonic shear amplitudes
 
