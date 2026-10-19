@@ -1,6 +1,47 @@
 # Development continuation checkpoint
 
-## Current phase, independent harmonic shear amplitudes
+## Current phase, controlled Findley harmonic amplitudes
+
+Updated 19 October 2026. Branch `feat/findley-shear-amplitude` starts from verified
+main `71eaac38ef619144c7ea055edf3b5ef3835ed7fe`, the merge of Phase 1 PR #7.
+PR #7 is merged; the historical open-PR status below is superseded. There was
+no existing Phase 2 implementation or open PR. The initial working tree was clean.
+The dataset work from PR #6 and independent amplitude library remain present.
+
+The objective is Findley-only numerical damage evaluation with explicit MCC/MCE,
+without changing production life prediction or calibration compatibility. Review
+of `fin.py`, `cp_adapter.py`, `evaluator.py` and calibration fingerprints found
+that editing any shared production source would invalidate stored curves, even
+for unchanged algorithms. The smallest safe interface is therefore the separate
+`fatigue/models/cp_methods/fin_harmonic.py::evaluate_findley` function. It uses the
+existing case arguments and returns `CaseResult`. No registry entry is added.
+
+Omitted selection delegates exactly to the unchanged FIN adapter. Explicit MCC,
+MCE or RSS selections require both harmonic stress tensors. They rotate the actual
+coefficients on every candidate plane, call the shared amplitude library, reuse
+the existing signed harmonic normal-stress extrema, and maximise Findley damage.
+FIN and FIN_ext consequently return the same maximum. No algorithm is hidden in
+material parameters. No other method can receive this option through its adapter.
+
+Verification at this milestone: all 70 baseline tests passed before editing.
+The 13 new tests in `tests/test_findley_harmonic.py` first failed on the missing
+module, then passed; focused Ruff checks also passed. Tests include analytical
+circles/ellipses, a two-plane ranking reversal, independent SVD/projection checks
+on 30 random planes, proportional equality, phase/basis invariance, mean shear
+and signed mean normal stress, endpoint fallback and explicit-request rejection,
+extreme shear scales, identical FIN variants, captured main outputs for FIN/FS/
+Matake/McDiarmid and unchanged formulation fingerprints for these four methods.
+
+Files at this milestone are the new Findley diagnostic module, its tests and this
+checkpoint. Documentation and the complete post-change suite are still pending.
+Known limitations are complete single-harmonic histories and the supplied finite
+plane grid; normal-extrema float64 arithmetic retains existing limitations. No
+experimental validation or compatible MCC damage-life calibration is claimed.
+Next action: extend `docs/shear-amplitude.md`, run the complete suite and repository
+checks, verify protected paths/fingerprints, then publish one open review PR. Do
+not implement Phase 3, edit JSON records or activate alternative-amplitude life.
+
+## Previous phase, independent harmonic shear amplitudes
 
 Updated 19 October 2026. Branch `feat/shear-amplitude-harmonic` starts at
 `1154f86`, the stable main merge of dataset PR #6. The working tree was clean.
