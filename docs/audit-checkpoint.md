@@ -78,12 +78,19 @@ Excel inputs, results and numerical fixtures. All method formulation fingerprint
 on the original path remain unchanged. The documentation records exact metadata,
 compatibility rules, coarse example and the FatPy development/interoperability note.
 
-Next action: publish the final verification/documentation commit, open one focused
-Phase 3A PR and verify the remote tree and CI. Keep the PR open for review. Only
-complete single-harmonic histories and finite plane grids are supported; existing
-float64 normal-extrema limitations remain. The example uses a coarse verification
-grid and does not establish predictive validation. No stored calibration or
-reference result is replaced. Do not implement Phase 3B or expose MCC life prediction.
+Phase 3A is complete in [PR #9](https://github.com/andreachiocca/multiaxial-fatigue/pull/9),
+open and unmerged on `feat/findley-amplitude-calibration`. The verified implementation
+and documentation commit is `0105b695ca42b6f73995b089cced0bd8f3797230`. The published
+tree matches the tested local tree exactly. Both GitHub workflows passed for this
+commit: push run 39268373284 and PR run 39268498442. This following checkpoint-only
+status commit does not change numerical source, tests or metadata identities.
+
+Next action is human review of PR #9. No Phase 3A tests remain outstanding. Keep
+the PR open without merge. Only complete single-harmonic histories and finite
+plane grids are supported; existing float64 normal-extrema limitations remain.
+The example uses a coarse verification grid and does not establish predictive
+validation. No stored calibration or reference result is replaced. Phase 3B,
+including MCC production life prediction, requires separate explicit approval.
 
 ## Previous phase, controlled Findley harmonic amplitudes
 
