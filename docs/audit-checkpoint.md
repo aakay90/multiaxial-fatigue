@@ -6,37 +6,83 @@ implementation is preserved. No uncommitted changes existed at session start.
 
 ## Current objective and actual status
 
-Support the revised experimental workbooks, method-material preflight checks,
-and common observation subsets without changing fatigue criteria.
+The revised dataset importer, method preflight, safe batch skips and observation
+subset reporting are implemented. JSON history, formulations and family labels
+are preserved. The remote branch exists; its first importer milestone
+is `dfb514da82bd2792dd1d4da86fc0bb9dc9891e79`. Direct Git push has no credentials;
+publication uses the GitHub connector. Local milestone history is retained.
 
-- JSON history, failure-only fitting and censored plotting exist. Verification
-  against the revised workbooks is pending.
-- Revised headers mostly retain stress names. Numeric filename prefixes, moved
-  Summary averages, missing elastic properties and source identity conflicts
-  require changes. The current importer aborts on missing E/nu.
-- Eligibility reporting, batch skip handling and common subsets are missing.
-- Original data remain unchanged. Dataset migration has not started.
-- Importer now reads all 12 revised files, strips ordering prefixes, retains
-  source Summary rows and flags identity/loading issues. Missing E/nu leaves
-  strain undefined while preserving measured stresses and censored observations.
-- Baseline 39 tests and four new importer tests pass. Modified importer, new
-  `fatigue/imp/schema.py` and `tests/test_dataset_import.py`.
-- Direct Git push lacks credentials; use the authorised GitHub connector.
+- Active inputs are 12 revised workbooks plus unchanged Al7075_T6, absent from
+  the revised collection. Four previous active files remain byte-identical in
+  `Experimental_Data/archive/pre-dataset-migration` for reproducible regressions.
+- Header aliases are explicit. Stress columns remain authoritative; force and
+  moment columns are preserved metadata, never silently substituted. Phases are
+  relative to the axial phase. Missing elastic properties leave strain undefined.
+- Per-method input, conditional approximation, calibration and case checks are in
+  `fatigue/eval/eligibility.py`. Script 0 skips each failed pair independently;
+  Script 1 issues a controlled warning; Script 3 exports the matrix and can run
+  compatible combinations. No automatic recalibration occurs during assessment.
+- `fatigue/report/subsets.py` and Script 2 intersect identified failure
+  observations separately for life and damage metrics. Individual results remain
+  intact. Dataset fingerprints prevent mixing changed inputs; ambiguous IDs and
+  duplicate results cannot enter a common comparison.
+- New tests cover missing inputs/results, run-out-only data, conditional method
+  requirements, batch continuation, and pairwise/group matched observations.
 
-## Verification and next action
+## Verification executed
 
-Remote main fetched successfully. Latest baseline is `022b6c0`; previous
-implementation tests recorded below are historical, not rerun yet.
-Read both workbook schemas, add focused importer tests, implement canonical IDs
-without aliasing ambiguous materials, preserve missing properties and provenance.
-Then run baseline and new tests, commit this milestone and push.
+`MPLBACKEND=Agg python tools/run_tests.py` passed 58 tests. Ruff, documentation
+links, method catalogue and `git diff --check` passed. The original numerical
+fixtures run against the archived original active workbooks, not substituted
+new data. The attached previous collection was compared with the new collection
+using `tools/audit_dataset_migration.py`; structured results are in
+`docs/data/dataset-migration.json`. All 56 shared 42CrMo4_QT and 44 AISI316L
+observations retain the supplied stresses. AISI316L properties changed.
 
-## Identified scientific issues
+Script 0 with n1=3, n2=6, grid=7, refine=2 explicitly generated/reused all 15
+method calibrations on revised 42CrMo4_QT under `/tmp/wg43-new-calibrations`.
+Script 3 assessed all 15 base methods plus FS_ext and skipped 48 unsupported
+pairs in the selected four-material batch. BP/SWT common life comparison used
+45 failure observations per method. Eleven run-outs per method remain in
+individual outputs with undefined conventional errors. These are software and
+regression checks, not independent scientific validation or final calibration.
+Temporary example records are not installed as default production calibrations.
+The common parity plot was inspected visually. The installer dry run, byte
+preservation, legacy snapshot retirement and conflicting archive checks passed.
 
-`2_CX18.xlsx` declares `30NCD16` in Summary. Do not alias to XC18 or 30NCD16.
-AISI316L and Ti6Al4V average properties combine different references; preserve
-source rows and report their origin rather than claiming condition equivalence.
-Several new materials lack nu. No default may be invented.
+## Scientific limitations and precise next action
+
+Do not silently correct measured source data. CX18 declares 30NCD16 in Summary;
+Ti6Al4V includes a Summary name Ti64Al4V. Both identity conflicts are flagged.
+AISI316L averages fatigue strengths at different R, so methods requiring its
+reversed axial fatigue strength are blocked until that input is resolved.
+En3B/GJS600 have only notched observations in the revised files and remain in
+storage outside the current plain-specimen scope. Missing nu blocks strain
+methods; run-out-only observations do not define an S–N curve. Steel empirical
+estimates are blocked for non-steels unless the required fatigue properties are
+supplied. Published historical results are unchanged.
+
+Publication of the raw workbook tree was rejected by automatic review. The
+repository was verified through the connector (owner andreachiocca, admin/push
+permission, public visibility); all 12 files match the user-supplied ZIP exactly.
+The instructions request replacement of active inputs and GitHub publication,
+but the tree operation still requires explicit user confirmation for publishing
+raw workbooks and embedded content. Do not bypass the rejection through Git or
+an indirect reference. No new-workbook tree was attached to the remote branch.
+
+The code-only publication preserves all previous public active files, adds
+byte-identical public baseline archives and excludes the 12 revised files and the
+detailed source-property export `docs/data/dataset-migration.json`. Local commit
+`866d24d` retains the complete tested migration. The provided attachment and
+`tools/install_revised_dataset.py` allow recovery after approval. Three full-data
+tests are skipped remotely while the revised files are withheld; do not count
+those as remote validation. Source-name restrictions remain as described above.
+
+Next action is to finish final code checks and open the code-only PR, record its
+link and ask for explicit publication approval for all twelve raw workbooks and
+embedded images. After approval, install the supplied ZIP, regenerate reports,
+run all tests, publish the dataset on the same PR and check CI. No merge is authorised.
+No PR exists for this new branch yet. Resume from here, not the historical audit.
 
 ## Historical scientific audit, 7 October 2026
 

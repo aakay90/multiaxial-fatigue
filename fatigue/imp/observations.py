@@ -19,7 +19,8 @@ def is_failure(case):
         n = float(meta["Nf_cycles"])
     except (KeyError, TypeError, ValueError):
         return False
-    return meta.get("test_status", "failure") == "failure" and math.isfinite(n) and n > 0
+    return (meta.get("test_status", "failure") == "failure" and math.isfinite(n) and n > 0
+            and not meta.get("loading_issues"))
 
 
 def failures_only(data):

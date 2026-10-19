@@ -1559,6 +1559,8 @@ def main(argv=None) -> None:
     ap.add_argument("--results_dir", type=str, default="Results")
     ap.add_argument("--out_dir", type=str, default="Results/Comparison")
     ap.add_argument("--include-legacy", action="store_true", help="Include pre-audit results explicitly; disabled methods are still excluded.")
+    ap.add_argument("--common-methods", nargs="+", help="Use the same eligible failure observations for these methods")
+    ap.add_argument("--comparison-metric", choices=["life", "damage"], default="life")
     ap.add_argument("--hide-runouts", action="store_true")
     ap.add_argument("--flag_filter", type=str, default="all", choices=["all", "design", "other"])
 
@@ -1641,6 +1643,24 @@ def main(argv=None) -> None:
             df = df[df["Flag"] == 0]
         elif args.flag_filter == "other":
             df = df[df["Flag"] == 1]
+
+    from fatigue.report.subsets import common_subset, write_subset_reports
+    write_subset_reports(df, out_dir)
+    if args.common_methods:
+        df = common_subset(df, args.common_methods, args.comparison_metric)
+        if df.empty:
+            raise ValueError("No common eligible failure observations for the selected methods and metric")
+        df.to_csv(out_dir / "selected_common_observations.csv", index=False)
+        (out_dir / "subset_definition.txt").write_text(
+            f"Common {args.comparison_metric} comparison of {', '.join(args.common_methods)}. "
+            f"{len(df) // len(args.common_methods)} matched failure observations per method. "
+            "See selected_common_observations.csv for observation and dataset identifiers.\n")
+        # A common life subset must not silently produce damage rankings on a
+        # different finite-value subset, or conversely.
+        if args.comparison_metric == "life":
+            df[["Error_ln_dp", "Error_log10_dp", "Error_dp"]] = np.nan
+        else:
+            df["Error_ln"] = np.nan
 
     # Build global palette:
     # - colors per Method_family

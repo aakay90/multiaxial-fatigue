@@ -350,7 +350,7 @@ def calibrate_material_params(
     cases = mat.get("cases", {})
 
     Sy = mat_prop.get("Yield_strength_MPa", None)
-    if Sy is None or not np.isfinite(Sy):
+    if "FS" in methods and (Sy is None or not np.isfinite(Sy)):
         raise ValueError(f"Yield strength not found/invalid for material '{material_name}'. Needed for FS.")
 
     selector_kwargs = dict(
@@ -601,6 +601,7 @@ def main(argv=None):
     parser.add_argument("--plane-stride", type=int, default=10)
     parser.add_argument("--n-grid", type=int, default=41)
     parser.add_argument("--n-refine", type=int, default=6)
+    parser.add_argument("--status-file", help="Write per-method calibration outcomes as JSON")
     parser.add_argument("--reuse-calibration", help="Explicit compatible JSON ID supplying coefficients")
     args = parser.parse_args(argv)
     data = exp.import_experimental_data_grouped_by_material(args.data_folder)
@@ -608,36 +609,59 @@ def main(argv=None):
     models = list(dict.fromkeys(m.removesuffix("_ext") for m in args.models))
     settings = curve_settings(args.n1, args.n2, args.stdnum)
     paths = []
+    from fatigue.eval.eligibility import calibration_readiness, warn_unavailable
+    from fatigue.eval.calibration_store import json_value
+    import json
+    outcomes = []
     for material in materials:
-        needed = [m for m in models if m in METHOD_PARAMETERS]
-        optimisation = None
-        params = {}
-        origin = "No method coefficients required"
-        if args.reuse_calibration:
-            previous, _, path = load_calibration(data=data, material=material, model=models[0],
-                settings=settings, folder=args.calibrations_dir, calibration_id=args.reuse_calibration)
-            params = previous["parameters"]
-            origin = f"Explicit reuse of {previous['calibration_id']}"
-            print(f"Coefficient source {path}")
-        elif needed:
-            optimisation = calibrate_material_params(
-                data=data, material_name=material, R_list=_build_R_list(n1=args.n1, n2=args.n2),
-                stdnum=args.parameter_stdnum, plane_stride=args.plane_stride,
-                n_grid_1d=args.n_grid, n_refine_1d=args.n_refine, methods=needed)
-            params = {METHOD_PARAMETERS[m]: optimisation["FI" if m == "FIN" else m][METHOD_PARAMETERS[m]] for m in needed}
-            origin = "Optimised by Script 0 on uniaxial tension/torsion failures"
-        missing = [METHOD_PARAMETERS[m] for m in needed if METHOD_PARAMETERS[m] not in params]
-        if missing:
-            raise ValueError(f"Missing calibrated coefficients {missing}")
-        if optimisation is not None:
-            optimisation["settings"] = {"stdnum": args.parameter_stdnum, "plane_stride": args.plane_stride,
-                "n_grid": args.n_grid, "n_refine": args.n_refine, "n1": args.n1, "n2": args.n2,
-                "bounds": {"k_FS": [0, 3], "k_FI": [0, 3], "L_LI": [0, 5], "k_MGSE": [0, 5], "a_MSWT": [0, 1]}}
-        record, path = export_calibration(data=data, material=material, models=models, parameters=params,
-            settings=settings, folder=args.calibrations_dir, optimisation=optimisation, parameter_origin=origin)
-        print(f"Saved or reused calibration {path}; current observations {observation_counts(data[material])}; "
-              f"stored observations {record['counts']}")
-        paths.append(path)
+        for method in models:
+            readiness = calibration_readiness(data, material, method)
+            status = {'material': material, 'method': method, **readiness}
+            if not readiness['can_calibrate'] and not args.reuse_calibration:
+                status['reasons'] += ['Missing or invalid inputs: ' + ', '.join(readiness['missing_properties'])]
+                warn_unavailable(status, 'calibration')
+                outcomes.append({**status, 'status': 'skipped'})
+                continue
+            try:
+                needed = [method] if method in METHOD_PARAMETERS else []
+                optimisation = None
+                params = {}
+                origin = "No method coefficients required"
+                if args.reuse_calibration:
+                    previous, _, path = load_calibration(data=data, material=material, model=method,
+                        settings=settings, folder=args.calibrations_dir, calibration_id=args.reuse_calibration)
+                    params = previous["parameters"]
+                    origin = f"Explicit reuse of {previous['calibration_id']}"
+                    print(f"Coefficient source {path}")
+                elif needed:
+                    optimisation = calibrate_material_params(
+                        data=data, material_name=material, R_list=_build_R_list(n1=args.n1, n2=args.n2),
+                        stdnum=args.parameter_stdnum, plane_stride=args.plane_stride,
+                        n_grid_1d=args.n_grid, n_refine_1d=args.n_refine, methods=needed)
+                    params = {METHOD_PARAMETERS[m]: optimisation["FI" if m == "FIN" else m][METHOD_PARAMETERS[m]] for m in needed}
+                    origin = "Optimised by Script 0 on uniaxial tension/torsion failures"
+                missing = [METHOD_PARAMETERS[m] for m in needed if METHOD_PARAMETERS[m] not in params]
+                if missing:
+                    raise ValueError(f"Missing calibrated coefficients {missing}")
+                if optimisation is not None:
+                    optimisation["settings"] = {"stdnum": args.parameter_stdnum, "plane_stride": args.plane_stride,
+                        "n_grid": args.n_grid, "n_refine": args.n_refine, "n1": args.n1, "n2": args.n2,
+                        "bounds": {"k_FS": [0, 3], "k_FI": [0, 3], "L_LI": [0, 5], "k_MGSE": [0, 5], "a_MSWT": [0, 1]}}
+                record, path = export_calibration(data=data, material=material, models=[method], parameters=params,
+                    settings=settings, folder=args.calibrations_dir, optimisation=optimisation, parameter_origin=origin)
+                print(f"Saved or reused calibration {path}; current observations {observation_counts(data[material])}; "
+                      f"stored observations {record['counts']}")
+                paths.append(path)
+                outcomes.append({**status, 'status': 'saved', 'calibration_id': record['calibration_id']})
+            except (ValueError, KeyError, RuntimeError) as exc:
+                status['reasons'] = [str(exc)]
+                warn_unavailable(status, 'calibration')
+                outcomes.append({**status, 'status': 'failed'})
+    if args.status_file:
+        Path(args.status_file).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.status_file).write_text(json.dumps(json_value(outcomes), indent=2, allow_nan=False) + '\n')
+    print(f"Calibration summary: {sum(o['status'] == 'saved' for o in outcomes)} saved/reused; "
+          f"{sum(o['status'] != 'saved' for o in outcomes)} skipped/failed")
     return paths
 
 

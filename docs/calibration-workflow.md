@@ -34,12 +34,12 @@ and master curves use `FIN`. `_ext` is a separate stored curve, not a new materi
 
 ```bash
 # Fit the requested coefficient and both FS curve variants.
-python 0_calibrate_material_params.py --material AISI316L --models FS
-python 1_run_material.py --material AISI316L --model FS_ext --results-dir Results/current --plot-dir Results/current/plots
+python 0_calibrate_material_params.py --material 42CrMo4_QT --models FS
+python 1_run_material.py --material 42CrMo4_QT --model FS_ext --results-dir Results/current --plot-dir Results/current/plots
 
 # BP/CAIM require no fitted method coefficients, but still need master curves.
-python 0_calibrate_material_params.py --material AISI316L --models BP CAIM
-python 1_run_material.py --material AISI316L --model BP --results-dir Results/current --no-plots
+python 0_calibrate_material_params.py --material 42CrMo4_QT --models BP CAIM
+python 1_run_material.py --material 42CrMo4_QT --model BP --results-dir Results/current --no-plots
 python 2_compare_results.py --results_dir Results/current --out_dir Results/Comparison
 ```
 
@@ -203,3 +203,11 @@ uses three specified planes with separated grid minima for a bounded software re
 plane search. The 64-run comparison reproduces all 3,936 original failed-specimen rows
 with zero observed numerical difference and adds 672 run-out rows. Calibration and
 software regression remain distinct from independent scientific validation.
+
+## Revised collection
+
+Script 0 now checks and processes each selected method independently, reporting
+skipped and failed combinations and optionally writing `--status-file` JSON.
+Script 3 exports method-material eligibility and can execute compatible pairs.
+The [dataset workflow](dataset-workflow.md) describes missing-property checks,
+source-identity restrictions and common failure-observation comparisons.

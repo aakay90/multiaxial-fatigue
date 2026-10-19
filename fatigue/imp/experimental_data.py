@@ -139,7 +139,7 @@ def import_experimental_data_grouped_by_material(
         if is_nullish(x):
             return False
         if isinstance(x, (bool, np.bool_)):
-            return (x is False)
+            return not bool(x)
         if isinstance(x, (int, np.integer)):
             return int(x) == 0
         return str(x).strip().lower().startswith("no")
@@ -328,8 +328,20 @@ def import_experimental_data_grouped_by_material(
         # A filename is not evidence that a contradictory source identity is equivalent.
         identity_issues = []
         declared = [str(r.get("Material name", "")).strip() for r in source_rows]
-        if material_name == "CX18":
-            identity_issues.append("CX18 filename conflicts with Summary material 30NCD16; confirm identity before assessment")
+        revised_summary = any(normalise(c.value) == "stress ratio r" for c in ws[header_row])
+        if revised_summary:
+            import re
+            def alloy_token(value):
+                return re.sub(r"[^a-z0-9]", "", str(value).split("(")[0].lower())
+            expected = alloy_token(material_name)
+            if any(alloy_token(name) != expected for name in declared):
+                identity_issues.append(f"Filename material {material_name} conflicts with Summary names {declared}; confirm identity before assessment")
+        property_issues = {}
+        ratios = {to_float_or_none(r.get("Stress ratio R")) for r in source_rows
+                  if to_float_or_none(r.get("Tensile fatigue limit (MPa)")) is not None}
+        ratios.discard(None)
+        if len(ratios) > 1:
+            property_issues['Sigm1'] = "Summary average combines tensile fatigue strengths at different stress ratios; provide a consistent R=-1 strength"
         wb.close()
 
 
@@ -393,15 +405,21 @@ def import_experimental_data_grouped_by_material(
             "source": {"workbook": str(fp), "summary_sheet": "Summary", "dataset_sheet": "Dataset",
                        "summary_average_row": avg_row, "format": "revised" if revised else "legacy"},
             "identity_issues": identity_issues,
+            "property_issues": property_issues,
             "declared_material_names": declared,
             "source_property_rows": source_rows,
             "excluded_observations": [],
+            "scope_exclusions": [],
             "cases": {}
         }
 
         case_id = 0
         for idx, row in df.iterrows():
             if not is_no_value(row[col_notch]):
+                if to_float_or_none(row[col_Nf]) is not None:
+                    data[material_name]["scope_exclusions"].append({
+                        "excel_row": int(idx) + 2, "reason": "outside plain-specimen scope or unknown notch status",
+                        "test_status": test_status(row[col_run])})
                 continue
             status = test_status(row[col_run])
             Nf = to_float_or_zero(row[col_Nf])
