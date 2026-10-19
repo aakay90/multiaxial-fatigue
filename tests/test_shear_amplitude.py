@@ -28,8 +28,8 @@ class HarmonicAmplitudeTests(unittest.TestCase):
             for algorithm, expected in [('mcc_harmonic', 10), ('mce_harmonic', math.sqrt(125))]:
                 for transform in [Q, np.diag([-1, 1]) @ Q]:
                     self.assertAlmostEqual(shear_amplitude(transform @ a, transform @ b, algorithm=algorithm), expected, places=13)
-                # tau(t+angle) = (a*cos-angle - b*sin-angle)*sin(t)
-                #              + (a*sin-angle + b*cos-angle)*cos(t).
+                # tau(t+angle) = (a*cos(angle) - b*sin(angle))*sin(t)
+                #              + (a*sin(angle) + b*cos(angle))*cos(t).
                 result = shear_amplitude(a * math.cos(angle) - b * math.sin(angle),
                     a * math.sin(angle) + b * math.cos(angle), algorithm=algorithm)
                 self.assertAlmostEqual(result, expected, places=13)

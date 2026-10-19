@@ -54,9 +54,17 @@ The appendix MAT comparison array was inspected for scope, not used as a pure
 amplitude benchmark. A 100,000-path timing comparison measured about 0.020 s for
 scaled MCC versus 0.062 s for NumPy SVD; it is a local observation only.
 
-Next action is to publish the final documentation and validation update on the
-same branch, open the dedicated PR, verify its checks and record its link here.
-Leave the PR open without merge. Phase 2 must separately review method-specific
+Phase 1 is complete in [PR #7](https://github.com/andreachiocca/multiaxial-fatigue/pull/7),
+open without merge. Verified implementation commit is
+`2a17791d06e951a557c3d8707c2d156dbbb49f09`; a later commit only records this status
+and clarifies a test comment. Both GitHub workflows passed, push run 39242032913
+and PR run 39242046649. The published tree matches the tested local tree exactly.
+The PR contains only four files: the amplitude module, its tests, the technical
+note and this existing checkpoint. The previous experimental-data work remains
+preserved on main and is not part of the PR diff.
+
+Next action is human review of PR #7. Keep it open without merge. Do not integrate
+these algorithms into a criterion until that separate phase is authorised. Phase 2 must separately review method-specific
 integration, effective-algorithm metadata and dependency-scoped compatibility.
 The following dataset checkpoint is a retained record of completed earlier work.
 
