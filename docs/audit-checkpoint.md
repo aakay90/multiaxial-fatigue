@@ -1,5 +1,45 @@
 # Development continuation checkpoint
 
+## Current phase, independent harmonic shear amplitudes
+
+Updated 19 October 2026. Branch `feat/shear-amplitude-harmonic` starts at
+`1154f86`, the stable main merge of dataset PR #6. The working tree was clean.
+Experimental inputs, JSON records and previous implementation are preserved.
+No existing independent two-component amplitude API was found. Existing private
+RSS range and BP major-semiaxis expressions remain untouched.
+
+Current objective is a standalone MCC/MCE library, analytical and reference-code
+tests, and one short technical note. No production integration or configuration
+change is authorised in this phase.
+
+Reference inspection found active MCC and commented MCE expressions in the two
+algebraic MATLAB Ca.m files. MOI/Ca.m uses path-length quadrature and is a different
+definition. PragTic MCCM_IM/MCEM_IM process sampled polygons iteratively and are
+not the harmonic solver to port. The full PDF is absent; supplied equation
+transcriptions and MATLAB sources are available. Do not claim a full PDF review
+or native MATLAB execution.
+
+Baseline `1154f86` passed all 58 existing tests before implementation. The new
+`fatigue/models/utils/shear_amplitude.py` supplies vectorised `shear_amplitude`
+with explicit mcc_harmonic/mce_harmonic identifiers and the rss alias. It uses a
+scaled closed-form Gram eigenvalue for MCC and the scaled Frobenius norm for MCE.
+It rejects incompatible shapes, non-real/non-finite inputs and unrepresentable
+outputs; exact zero is the only zero threshold. No production import was added.
+
+The 12 tests in `tests/test_shear_amplitude.py` passed. They cover analytical
+values, degeneracy, rotations/reflections and phase shifts, mean translation,
+time sampling and LCM, batched inputs, SVD cross-checks, float64 extreme scales,
+input rejection, existing RSS/engineering-strain conventions, BP equivalence,
+and two MATLAB-equation load reconstructions. Ruff passed for both new files.
+Tests first failed on the absent module, then passed after implementation.
+
+Next action is to publish this tested numerical milestone, write the concise
+reference/limitation note, run all existing tests and check the protected trees
+against `1154f86`. Then publish documentation and open a dedicated unmerged PR.
+The following dataset checkpoint is a retained record of completed earlier work.
+
+## Previous dataset workflow checkpoint
+
 Updated 19 October 2026. Branch `feat/dataset-eligibility`, based on `022b6c0`.
 PR #5 was merged into main before this session. The recovered JSON/run-out
 implementation is preserved. No uncommitted changes existed at session start.
