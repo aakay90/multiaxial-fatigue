@@ -31,7 +31,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class CalibrationWorkflowTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.data = exp.import_experimental_data_grouped_by_material(ROOT / "Experimental_Data")
+        cls.data = exp.import_experimental_data_grouped_by_material(ROOT / "Experimental_Data/archive/pre-dataset-migration")
         cls.material = "AISI316L"
         cls.settings = curve_settings(3, 6)
         cls.script0 = runpy.run_path(str(ROOT / "0_calibrate_material_params.py"))
@@ -190,7 +190,7 @@ class CalibrationWorkflowTests(unittest.TestCase):
         self.assertEqual(status_from_flag("Yes"), "runout")
         self.assertEqual(status_from_flag("no"), "failure")
         self.assertEqual(status_from_flag(None), "unknown")
-        source = ROOT / "Experimental_Data/AISI316L.xlsx"
+        source = ROOT / "Experimental_Data/archive/pre-dataset-migration/AISI316L.xlsx"
         target = self.folder / source.name
         shutil.copy2(source, target)
         # This temporary fixture uses cached Summary values when appending rows.
@@ -245,13 +245,13 @@ class CalibrationWorkflowTests(unittest.TestCase):
     def test_script0_to_script1_json_integration(self):
         with contextlib.redirect_stdout(io.StringIO()):
             paths = self.script0["main"](["--material", self.material, "--models", "FS",
-                "--data-folder", str(ROOT / "Experimental_Data"), "--calibrations-dir", str(self.folder),
+                "--data-folder", str(ROOT / "Experimental_Data/archive/pre-dataset-migration"), "--calibrations-dir", str(self.folder),
                 "--n1", "3", "--n2", "6", "--n-grid", "3", "--n-refine", "1", "--plane-stride", "1"])
             record = json.loads(paths[0].read_text())
             self.assertIn("k_FS", record["parameters"])
             self.assertEqual(record["parameter_units"]["k_FS"], "1")
             runner = runpy.run_path(str(ROOT / "1_run_material.py"))
-            runner["main"].__globals__.update(DATA_FOLDER=str(ROOT / "Experimental_Data"),
+            runner["main"].__globals__.update(DATA_FOLDER=str(ROOT / "Experimental_Data/archive/pre-dataset-migration"),
                 CALIBRATIONS_DIR=str(self.folder), MATERIAL_NAME=self.material, MODEL_NAME="FS",
                 DCMESH_N1=3, DCMESH_N2=6, RESULTS_DIR=str(self.folder), MAKE_PLOTS=False)
             runner["main"]()

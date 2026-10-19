@@ -160,3 +160,13 @@ with each criterion's original publication from the catalogue. The review
 article is in preparation; no article DOI or software release DOI is assigned
 here. See the [cleanup audit](docs/repository-cleanup.md) for preserved archives,
 branch classifications and remaining maintenance decisions.
+
+## Dataset eligibility and matched comparisons
+
+The revised workbook importer preserves unavailable properties and reports
+method-specific reasons for skipped assessments. Generate a compatibility matrix
+with `python 3_review_subsets.py`; add `--run` to assess compatible combinations
+without automatic calibration. Script 2 accepts `--common-methods BP SWT` and
+`--comparison-metric life` or `damage` for comparisons on identical failure
+observations. See the [dataset workflow](docs/dataset-workflow.md) for source
+identity restrictions, calibration settings and reproducible examples.

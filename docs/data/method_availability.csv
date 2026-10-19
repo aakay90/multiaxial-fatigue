@@ -1,0 +1,16 @@
+method,materials,failure_observations,runout_observations,excluded_combinations
+BP,1,87,14,12
+CAIM,1,87,14,12
+FIN,1,87,14,12
+FS,1,87,14,12
+GSA,0,0,0,13
+GSE,1,87,14,12
+LI,1,87,14,12
+LIU2021,0,0,0,13
+MATAKE,1,87,14,12
+MCD,1,87,14,12
+MGSE_YU,1,87,14,12
+MGSE_ZHU,1,87,14,12
+MKBM,1,87,14,12
+MSWT,1,87,14,12
+SWT,1,87,14,12

@@ -93,7 +93,7 @@ def classify_loading_type(*, H: dict, meta: dict, tol: float = 1e-6, phase_tol_d
         return "UNKNOWN"
 
 
-def main():
+def main(data=None):
     # ----------------------------
     # 1) Plane sampling
     # ----------------------------
@@ -104,7 +104,8 @@ def main():
     # ----------------------------
     # 2) Import experimental data (same as MAIN)
     # ----------------------------
-    data = exp.import_experimental_data_grouped_by_material(DATA_FOLDER, verbose=True)
+    if data is None:
+        data = exp.import_experimental_data_grouped_by_material(DATA_FOLDER, verbose=True)
 
     # ----------------------------
     # 3) Material properties (same keys as MAIN)
@@ -122,6 +123,16 @@ def main():
             plot_dir=PLOT_DIR, show_runouts=SHOW_RUNOUTS)
     if quantity != "damage_parameter":
         raise ValueError(f"{base_name} returns an index without a supported damage-life relation")
+    from fatigue.eval.eligibility import assess_eligibility, warn_unavailable
+    eligibility = assess_eligibility(data=data, material=MATERIAL_NAME, method=MODEL_NAME,
+        settings=curve_settings(DCMESH_N1, DCMESH_N2, STDNUM), folder=CALIBRATIONS_DIR,
+        calibration_id=CALIBRATION_ID)
+    if not eligibility['prediction_available']:
+        warn_unavailable(eligibility)
+        return eligibility
+    for approximation in eligibility['approximations']:
+        print(f"Approximation for {MATERIAL_NAME}/{MODEL_NAME}: {approximation}")
+
     record, stored_curve, calibration_path = load_calibration(
         data=data, material=MATERIAL_NAME, model=base_name,
         settings=curve_settings(DCMESH_N1, DCMESH_N2, STDNUM),
@@ -256,12 +267,12 @@ def main():
     statuses, specimen_ids = [], []
 
     for case_id in data_no_uniax[MATERIAL_NAME]["cases"].keys():
+        if case_id not in eligibility["eligible_case_ids"]:
+            continue
         observation = data_no_uniax[MATERIAL_NAME]["cases"][case_id]["meta"]
         status = observation.get("test_status", "failure")
         if status not in {"failure", "runout"}:
             continue
-        statuses.append(status)
-        specimen_ids.append(observation.get("specimen_id", str(case_id)))
         S0, E0, S1, E1, H = exp.extract_tensor(
             data_no_uniax, MATERIAL_NAME, int(case_id), node=1, include_harmonics=True
         )
@@ -281,6 +292,12 @@ def main():
             )
 
         F = float(res.values[variant_key])
+        if not np.isfinite(F) or F <= 0:
+            import warnings
+            warnings.warn(f"Skipping non-positive/non-finite prediction for {MATERIAL_NAME}/{MODEL_NAME}/{case_id}")
+            continue
+        statuses.append(status)
+        specimen_ids.append(observation.get("specimen_id", str(case_id)))
 
         # Experimental cycles for this case
         Nf = float(data_no_uniax[MATERIAL_NAME]["cases"][int(case_id)]["meta"]["Nf_cycles"]) 
@@ -393,7 +410,10 @@ def main():
         material_meta=material_meta,
         extra_meta=extra_meta,
     )
+    from fatigue.report.subsets import attach_observation_ids
+    attach_observation_ids(csv_path, data[MATERIAL_NAME])
     print("Saved:", csv_path)
+    return {**eligibility, "csv_path": str(csv_path), "status": "evaluated"}
 
 
 if __name__ == "__main__":

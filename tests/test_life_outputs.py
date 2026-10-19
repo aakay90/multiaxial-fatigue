@@ -33,7 +33,7 @@ class SyntheticLifeModel:
 class LifeOutputTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.data = exp.import_experimental_data_grouped_by_material(ROOT / "Experimental_Data")
+        cls.data = exp.import_experimental_data_grouped_by_material(ROOT / "Experimental_Data/archive/pre-dataset-migration")
 
     def test_life_result_declares_cycles_without_changing_legacy_default(self):
         self.assertEqual(CaseResult({"": 1.0}).output_quantity, "damage_parameter")
@@ -57,7 +57,7 @@ class LifeOutputTests(unittest.TestCase):
                 runner = runpy.run_path(str(ROOT / "1_run_material.py"))
                 model = SyntheticLifeModel()
                 model.evaluate_case = lambda **kwargs: result
-                runner["main"].__globals__.update(DATA_FOLDER=str(ROOT / "Experimental_Data"),
+                runner["main"].__globals__.update(DATA_FOLDER=str(ROOT / "Experimental_Data/archive/pre-dataset-migration"),
                     MATERIAL_NAME="AISI316L", MODEL_NAME=model.name, RESULTS_DIR=folder, MAKE_PLOTS=False)
                 with patch.dict(runner["main"].__globals__, get_models=lambda names: [model]), contextlib.redirect_stdout(io.StringIO()):
                     with self.assertRaises(ValueError):
@@ -67,7 +67,7 @@ class LifeOutputTests(unittest.TestCase):
     def test_runner_exports_direct_cycles_without_archive_or_damage_fit(self):
         with tempfile.TemporaryDirectory() as folder:
             runner = runpy.run_path(str(ROOT / "1_run_material.py"))
-            runner["main"].__globals__.update(DATA_FOLDER=str(ROOT / "Experimental_Data"),
+            runner["main"].__globals__.update(DATA_FOLDER=str(ROOT / "Experimental_Data/archive/pre-dataset-migration"),
                 CALIBRATIONS_DIR=str(Path(folder) / "absent"), MATERIAL_NAME="AISI316L",
                 MODEL_NAME="SYNTHETIC_LIFE", RESULTS_DIR=folder, MAKE_PLOTS=True, PLOT_DIR=folder)
             with patch.dict(runner["main"].__globals__, get_models=lambda names: [SyntheticLifeModel()]), contextlib.redirect_stdout(io.StringIO()):

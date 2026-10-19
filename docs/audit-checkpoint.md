@@ -1,100 +1,111 @@
 # Development continuation checkpoint
 
-Updated 16 October 2026. This is the single development checkpoint. Read this
-section, check Git status and recent commits, then verify the recorded state
-before changing code. The previous scientific audit remains below as historical
-context and must not be repeated for calibration-pipeline work.
+Updated 19 October 2026. Branch `feat/dataset-eligibility`, based on `022b6c0`.
+PR #5 was merged into main before this session. The recovered JSON/run-out
+implementation is preserved. No uncommitted changes existed at session start.
 
-## Current objective and recovery state
+## Current objective and actual status
 
-The JSON calibration, run-out, native-life and recovery workflows are implemented
-and tested. Branch `feat/calibration-history-runouts`.
-PR [#5](https://github.com/andreachiocca/multiaxial-fatigue/pull/5) is open for
-review and has not been merged. The verified implementation commit is
-`f0df0a7a9588b59fc7abca051bbf1790da853230`. Use `git log -1` for the later
-checkpoint-only commit. The five previous local implementation commits were
-recovered rather than reimplemented. Their original local history, including
-this session's incremental work, is retained on
-`recovery/calibration-workflow-20261016` in the working checkout.
+The revised dataset importer, method preflight, safe batch skips and observation
+subset reporting are implemented. Draft PR [#6](https://github.com/andreachiocca/multiaxial-fatigue/pull/6) is open without merge. JSON history, formulations and family labels
+are preserved. The remote branch exists; its first importer milestone
+is `dfb514da82bd2792dd1d4da86fc0bb9dc9891e79`. Direct Git push has no credentials;
+publication uses the GitHub connector. Local milestone history is retained.
 
-| Requirement | Actual status |
-|---|---|
-| JSON export, metadata, historical IDs and compatible loading | Implemented and tested successfully |
-| Experimental properties separated from fitted coefficients | Implemented and tested successfully |
-| Four workbook migrations and byte-identical original archive | Implemented and verified against public main |
-| Failure-only fitting, run-out import, statistics and plots | Implemented and tested successfully |
-| Native cycle outputs bypass damage fitting | Implemented and tested with a synthetic model |
-| Suppression of duplicate equivalent calibrations | Implemented and tested successfully; sequential equivalent exports reuse the stored ID |
-| Persistent checkpoint and recovery instructions | Checkpoint committed; mandatory milestone procedure added to `AGENTS.md` |
-| Publication | PR #5 open; remote implementation tree verified equal to local tested tree; push and PR CI passed on f0df0a7; human review pending |
+- The tested local migration used 12 revised workbooks plus unchanged Al7075_T6, absent from
+  the revised collection. The user explicitly approved publication on 19 October 2026; the revised collection is now installed locally for publication on the same PR. Four previous active files remain byte-identical in
+  `Experimental_Data/archive/pre-dataset-migration` for reproducible regressions.
+- Header aliases are explicit. Stress columns remain authoritative; force and
+  moment columns are preserved metadata, never silently substituted. Phases are
+  relative to the axial phase. Missing elastic properties leave strain undefined.
+- Per-method input, conditional approximation, calibration and case checks are in
+  `fatigue/eval/eligibility.py`. Script 0 skips each failed pair independently;
+  Script 1 issues a controlled warning; Script 3 exports the matrix and can run
+  compatible combinations. No automatic recalibration occurs during assessment.
+- `fatigue/report/subsets.py` and Script 2 intersect identified failure
+  observations separately for life and damage metrics. Individual results remain
+  intact. Dataset fingerprints prevent mixing changed inputs; ambiguous IDs and
+  duplicate results cannot enter a common comparison.
+- New tests cover missing inputs/results, run-out-only data, conditional method
+  requirements, batch continuation, and pairwise/group matched observations.
 
-## Code and verification
+## Verification executed
 
-Relevant files are `0_calibrate_material_params.py`, `1_run_material.py`,
-`2_compare_results.py`, `fatigue/eval/calibration_store.py`,
-`fatigue/eval/calibration.py`, `fatigue/eval/direct_life.py`,
-`fatigue/imp/experimental_data.py`, `fatigue/imp/observations.py`,
-`fatigue/models/base.py`, `fatigue/report/export_csv.py` and
-`fatigue/report/observations.py`. Format and migration details are in
-`docs/calibration-workflow.md` and `docs/calibration-verification.md`.
+`MPLBACKEND=Agg python tools/run_tests.py` passed 58 tests. Ruff, documentation
+links, method catalogue and `git diff --check` passed. The original numerical
+fixtures run against the archived original active workbooks, not substituted
+new data. The attached previous collection was compared with the new collection
+using `tools/audit_dataset_migration.py`; the detailed structured audit was
+generated locally and can be regenerated from the supplied source files. All 56 shared 42CrMo4_QT and 44 AISI316L
+observations retain the supplied stresses. AISI316L properties changed.
 
-Executed successfully in this session before this checkpoint update
+Script 0 with n1=3, n2=6, grid=7, refine=2 explicitly generated/reused all 15
+method calibrations on revised 42CrMo4_QT under `/tmp/wg43-new-calibrations`.
+Script 3 assessed all 15 base methods plus FS_ext and skipped 48 unsupported
+pairs in the selected four-material batch. BP/SWT common life comparison used
+45 failure observations per method. Eleven run-outs per method remain in
+individual outputs with undefined conventional errors. These are software and
+regression checks, not independent scientific validation or final calibration.
+Temporary example records are not installed as default production calibrations.
 
-- `MPLBACKEND=Agg python tools/run_tests.py`, 39 tests passed after the portable calibration-fixture correction.
-- Baseline and revised `tests/run_material_validation.py`, 64 runs each.
-- `python tests/compare_material_regression.py /tmp/wg43-old-20261016 /tmp/wg43-current-20261016`, all 3,936 original failure rows exactly equal, with 672 additional censored rows.
-- Ruff, dependency consistency, generated-method documentation and local documentation-link checks passed.
-- Failure-only versus failure-plus-run-out coefficient and curve regressions passed.
-- Script 0 to JSON to Script 1 and CSV/plot integration passed on AISI316L.
-- Repeated Script 0, then Script 1 and Script 2 passed on AISI316L/BP in `/tmp/wg43-final-e2e`; exactly one JSON record, 31 failures and 13 run-outs, with censored errors undefined.
-- GitHub Actions passed on `f0df0a7` for both [PR checks](https://github.com/andreachiocca/multiaxial-fatigue/actions/runs/38967518197) and [push checks](https://github.com/andreachiocca/multiaxial-fatigue/actions/runs/38967513186).
+The exact published implementation `904c61994e1bb10e5808ac3dd73f99ac794b53b7`
+was checked in `/tmp/wg43-public-check`. The suite passed with 58 discovered
+checks, 55 executed successfully and 3 full-collection tests skipped because the
+withheld workbooks were absent. Ruff, documentation links and catalogue passed.
+GitHub Actions succeeded for both push run 39235075215 and PR run 39235140578.
+The archived-input end-to-end runner completed 60 combinations and 4,290 rows
+(3,646 failures, 644 run-outs); four GSA/LIU2021 combinations on Al/Ti were
+explicitly skipped because the steel empirical estimate is unsupported there.
+This runner checks execution, counts and recomputed errors. The frozen numerical
+fixtures separately check unchanged coefficients and method results; a new exact
+full-table comparison against main was not performed this session.
+The common parity plot was inspected visually. The installer dry run, byte
+preservation, legacy snapshot retirement and conflicting archive checks passed.
 
-These are software tests and numerical regression comparisons. They do not
-establish independent experimental validation of the fatigue criteria. Initial
-JSON coefficients were transferred without re-optimisation; their original
-calibration settings remain unverified. Original `Results/*.csv` are unchanged.
+## Scientific limitations and precise next action
 
-## Blockers and precise next action
+Do not silently correct measured source data. CX18 declares 30NCD16 in Summary;
+Ti6Al4V includes a Summary name Ti64Al4V. Both identity conflicts are flagged.
+AISI316L averages fatigue strengths at different R, so methods requiring its
+reversed axial fatigue strength are blocked until that input is resolved.
+En3B/GJS600 have only notched observations in the revised files and remain in
+storage outside the current plain-specimen scope. Missing nu blocks strain
+methods; run-out-only observations do not define an S–N curve. Steel empirical
+estimates are blocked for non-steels unless the required fatigue properties are
+supplied. Published historical results are unchanged.
 
-Automatic publication review rejected the illustrative PNG. It was removed in
-`7dd9f35` and replaced with reproducible plotting instructions. Do not publish
-`docs/images/runout-example.png` or a historical tree containing it. All four
-cleaned workbooks and the original archive were checked against existing public
-repository data. The published PR contains the image-free code, JSON records,
-cleaned workbooks, original archive and this checkpoint. No publication blocker
-remains for the requested workflow.
+The previous raw-workbook publication block was resolved by the user's explicit
+"si autorizzo" on 19 October 2026, answering the request to publish all twelve
+workbooks, raw observations and embedded content in the public repository.
+The same PR #6 is used without merge. The supplied ZIP was installed with
+`tools/install_revised_dataset.py --apply`; the detailed migration audit and
+eligibility snapshots are regenerated. Original workbook bytes are preserved.
+The complete pre-publication recovery history remains at local branch
+`recovery/revised-dataset-local-20261019` (`4111686`).
 
-Equivalent-export reuse, changed-output history and metadata preservation are
-now tested. Modified files in this milestone are `AGENTS.md`, Script 0,
-`fatigue/eval/calibration_store.py`, `fatigue/eval/calibration.py`,
-`tests/test_calibration_workflow.py`, the workflow and verification documents,
-and this checkpoint. No known local test failure remains. These changes are
-committed and published. A later CI diagnostic milestone adds
-`tools/run_tests.py` and updates `.github/workflows/quality.yml` to expose test
-tracebacks as check annotations without changing discovery or test assertions.
-The diagnostic runner also passes all 39 tests locally.
+Automatic review accepted workbook publication under this approval but rejected
+the additional detailed audit of source-property data. That optional JSON export
+is excluded from the publication; its generator remains available. Do not publish
+that extra report without separate approval. This does not block publishing the
+explicitly authorised twelve workbooks.
 
-On `d7c0c65`, the push CI run succeeded but the PR CI test job failed, while its
-catalogue job passed. The connector supplied only exit status and did not expose
-the traceback. The diagnostic runner exposed the cause on `2384227`. The old
-two-plane MSWT fixture used only five torsion observations, so its objective had
-tied coefficient values within floating-point rounding. A three-plane fixture
-was generated from the original `e70a8af` checkout, retains all 11 failure points
-and has separated objective minima for all five methods. Tests now compare that
-baseline and recompute its objective grids. Original fixtures, production search
-procedures and fatigue formulations are preserved. The correction passes all 39
-tests locally and both push and PR CI checks on `f0df0a7`. No active test or
-publication blocker remains for this task.
+The fresh 58-test run passed without skips after installation of the authorised
+collection. Ruff, documentation links, the method catalogue and diff checks
+passed. The eligibility snapshot was regenerated. Commit
+`52b061b87d351be310d4e10127c085a5c985b24b` publishes the twelve workbooks on PR #6.
+Every published workbook was compared byte for byte with `New_Exp_data/` in the
+supplied ZIP. The public migration excludes only the additional detailed
+source-property audit. Historical workbooks, JSON records and reference results
+remain preserved. GitHub CI passed for the data commit on both the push
+(run 39237587054) and PR (run 39237595131) workflows, with the complete revised
+collection available.
 
-Next action is to review PR #5, confirm its current checks and check Git status
-before making changes. Address concrete review feedback on the same
-branch, run the relevant tests, update this checkpoint and commit verified work.
-Do not recreate this implementation or open a duplicate PR. Do not merge without
-an explicit user instruction. Independent original-paper validation listed in
-the historical audit below remains outside this pipeline-refactoring task.
-At every later milestone record tests, uncommitted changes, blockers and the next
-executable step before committing. Use `git log -1` for the containing checkpoint
-commit; a file cannot embed its own commit hash.
+Current publication is complete and verified. PR #6 remains open without merge.
+Next action is human review of PR #6; no further dataset publication step is pending. Future scientific
+work should address the source identity and mixed-fatigue-strength restrictions
+above before interpreting affected method/material comparisons. No repeated
+implementation or further permission for the twelve workbooks is required.
+Resume from here, not the historical audit.
 
 ## Historical scientific audit, 7 October 2026
 

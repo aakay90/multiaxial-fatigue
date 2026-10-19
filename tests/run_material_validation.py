@@ -25,6 +25,9 @@ def main():
     g=runner['main'].__globals__
     g['RESULTS_DIR']=str(out)
     g['MAKE_PLOTS']=False
+    g['DATA_FOLDER']='Experimental_Data/archive/pre-dataset-migration'
+    executed = 0
+    skipped = 0
     counts={'AISI316L':31,'42CrMo4_QT':70,'Al7075_T6':87,'Ti6Al4V_andrea_(AXIAL)':58}
     names=list(_available_cp_methods())+list(_available_direct_models())+['FS_ext']
     rows=0
@@ -32,7 +35,12 @@ def main():
         for material,count in counts.items():
             g['MODEL_NAME'],g['MATERIAL_NAME']=name,material
             with (out/'validation.log').open('a') as log, contextlib.redirect_stdout(log):
-                runner['main']()
+                outcome = runner['main']()
+            if isinstance(outcome, dict) and not outcome.get('prediction_available', True):
+                skipped += 1
+                print(f'SKIP {name} / {material}: {outcome.get("reasons")}', flush=True)
+                continue
+            executed += 1
             df=pd.read_csv(out/f'{name}_{material}.csv')
             failures = df.loc[df.Test_status == 'failure']
             runouts = df.loc[df.Test_status == 'runout']
@@ -46,7 +54,7 @@ def main():
                 assert df.Nf_expected.isna().all(),(name,material,'flat curve life prediction')
             rows+=len(df)
             print(f'PASS {name} / {material}: {len(df)} rows',flush=True)
-    print(f'PASS {len(names)*len(counts)} runs, {rows} rows',flush=True)
+    print(f'PASS {executed} runs, {rows} rows; {skipped} combinations explicitly skipped',flush=True)
 
 
 if __name__=='__main__': main()

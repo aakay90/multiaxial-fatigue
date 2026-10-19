@@ -146,6 +146,11 @@ def export_calibration(*, data, material, models, parameters, settings, folder,
     from fatigue.planes.sampling import build_R_list
     from fatigue.models.registry import get_models
     from fatigue.eval.calibration_store import material_parameters, create_record, save_record, read_record
+    from fatigue.eval.eligibility import input_requirements
+    for name in models:
+        missing, issues, _ = input_requirements(data, material, name, parameters=parameters)
+        if missing or issues:
+            raise ValueError(f"Cannot calibrate {material}/{name}: missing {missing}; {'; '.join(issues)}")
     params = material_parameters(data[material]["material"], parameters)
     curves = collect_uniaxial_series_and_fit(
         data=data, exp=exp, material_name=material,
