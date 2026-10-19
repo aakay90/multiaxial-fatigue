@@ -54,6 +54,10 @@ from fatigue.imp import experimental_data as exp
 from fatigue.planes.sampling import dcmesh_xyz, gentang
 from fatigue.eval.evaluator import best_cp_for_case
 from fatigue.eval.fitting import fit_power_law_with_survival_std
+from fatigue.eval.findley_calibration import (
+    FindleyCalibrationModel, FindleyCalibrationUnavailable, amplitude_identity, check_amplitude_methods,
+    require_stress_harmonics,
+)
 
 from fatigue.imp.observations import failures_only, observation_counts
 from fatigue.models.cp_methods.fs import FatemiSocie
@@ -329,6 +333,7 @@ def calibrate_material_params(
     bounds_k_MGSE: Tuple[float, float] = (0.0, 5.0),
     bounds_a_MSWT: Tuple[float, float] = (0.0, 1.0),
     methods: Optional[Sequence[str]] = None,
+    shear_amplitude_algorithm: str = "method_default",
 ) -> Dict[str, Any]:
     """Calibrate FS/FIN + additional parameters for one material."""
 
@@ -336,6 +341,7 @@ def calibrate_material_params(
         raise KeyError(f"Material '{material_name}' not found. Available: {list(data.keys())}")
 
     methods = set(methods if methods is not None else ("FS", "FIN", "LI", "MGSE_ZHU", "MSWT"))
+    check_amplitude_methods(methods, shear_amplitude_algorithm)
     data = failures_only(data)
     if R_list is None:
         R_list = _build_R_list()
@@ -386,6 +392,8 @@ def calibrate_material_params(
     uniax_cases: List[Dict[str, Any]] = []
     for cid in combined_ids:
         c = cases[int(cid)]
+        if "FIN" in methods and shear_amplitude_algorithm != "method_default":
+            require_stress_harmonics(c, material_name, int(cid))
         Nf = float(c["meta"]["Nf_cycles"])
         S0, E0, S1, E1, H = exp.extract_tensor(data, material_name, int(cid), node=node, include_harmonics=True)
         uniax_cases.append({"case_id": int(cid), "Nf": Nf, "S0": S0, "E0": E0, "S1": S1, "E1": E1, "H": H})
@@ -398,6 +406,7 @@ def calibrate_material_params(
     # ------------------
     fs_method = FatemiSocie()
     fin_method = Findley()
+    configured_findley = FindleyCalibrationModel(shear_amplitude_algorithm)
     li_method = LI()
     mgse_method = MGSE_Zhu()
     mswt_method = MSWT()
@@ -422,6 +431,11 @@ def calibrate_material_params(
         return float(best.by_metric)  # plane maximizing Δγ
 
     def fin_eval(case_dict: Dict[str, Any], k: float) -> float:
+        if shear_amplitude_algorithm != "method_default":
+            result = configured_findley.evaluate_case(
+                S0=case_dict["S0"], E0=case_dict["E0"], S1=case_dict["S1"], E1=case_dict["E1"],
+                R_list=R_use, params={"k_FI": float(k)}, harmonics=case_dict["H"])
+            return float(result.values["_ext"])
         best = best_cp_for_case(
             S0=case_dict["S0"],
             E0=case_dict["E0"],
@@ -556,6 +570,9 @@ def calibrate_material_params(
             out[name] = {result.param_name: result.p_opt,
                          "scatter_STD": result.scatter_STD, "fit": result.fit}
 
+    if "FIN" in methods:
+        out["amplitude_settings"] = {"FIN": amplitude_identity(shear_amplitude_algorithm)}
+
     return out
 
 
@@ -603,6 +620,9 @@ def main(argv=None):
     parser.add_argument("--n-refine", type=int, default=6)
     parser.add_argument("--status-file", help="Write per-method calibration outcomes as JSON")
     parser.add_argument("--reuse-calibration", help="Explicit compatible JSON ID supplying coefficients")
+    parser.add_argument("--shear-amplitude-algorithm", default="method_default",
+                        choices=("method_default", "mcc_harmonic", "mce_harmonic", "rss"),
+                        help="Findley calibration only; method_default preserves historical MCE/RSS")
     args = parser.parse_args(argv)
     data = exp.import_experimental_data_grouped_by_material(args.data_folder)
     materials = [args.material] if args.material else list(data)
@@ -615,7 +635,8 @@ def main(argv=None):
     outcomes = []
     for material in materials:
         for method in models:
-            readiness = calibration_readiness(data, material, method)
+            readiness = calibration_readiness(data, material, method,
+                shear_amplitude_algorithm=args.shear_amplitude_algorithm)
             status = {'material': material, 'method': method, **readiness}
             if not readiness['can_calibrate'] and not args.reuse_calibration:
                 status['reasons'] += ['Missing or invalid inputs: ' + ', '.join(readiness['missing_properties'])]
@@ -623,13 +644,15 @@ def main(argv=None):
                 outcomes.append({**status, 'status': 'skipped'})
                 continue
             try:
+                check_amplitude_methods([method], args.shear_amplitude_algorithm)
                 needed = [method] if method in METHOD_PARAMETERS else []
                 optimisation = None
                 params = {}
                 origin = "No method coefficients required"
                 if args.reuse_calibration:
                     previous, _, path = load_calibration(data=data, material=material, model=method,
-                        settings=settings, folder=args.calibrations_dir, calibration_id=args.reuse_calibration)
+                        settings=settings, folder=args.calibrations_dir, calibration_id=args.reuse_calibration,
+                        shear_amplitude_algorithm=args.shear_amplitude_algorithm)
                     params = previous["parameters"]
                     origin = f"Explicit reuse of {previous['calibration_id']}"
                     print(f"Coefficient source {path}")
@@ -637,7 +660,8 @@ def main(argv=None):
                     optimisation = calibrate_material_params(
                         data=data, material_name=material, R_list=_build_R_list(n1=args.n1, n2=args.n2),
                         stdnum=args.parameter_stdnum, plane_stride=args.plane_stride,
-                        n_grid_1d=args.n_grid, n_refine_1d=args.n_refine, methods=needed)
+                        n_grid_1d=args.n_grid, n_refine_1d=args.n_refine, methods=needed,
+                        shear_amplitude_algorithm=args.shear_amplitude_algorithm)
                     params = {METHOD_PARAMETERS[m]: optimisation["FI" if m == "FIN" else m][METHOD_PARAMETERS[m]] for m in needed}
                     origin = "Optimised by Script 0 on uniaxial tension/torsion failures"
                 missing = [METHOD_PARAMETERS[m] for m in needed if METHOD_PARAMETERS[m] not in params]
@@ -648,7 +672,8 @@ def main(argv=None):
                         "n_grid": args.n_grid, "n_refine": args.n_refine, "n1": args.n1, "n2": args.n2,
                         "bounds": {"k_FS": [0, 3], "k_FI": [0, 3], "L_LI": [0, 5], "k_MGSE": [0, 5], "a_MSWT": [0, 1]}}
                 record, path = export_calibration(data=data, material=material, models=[method], parameters=params,
-                    settings=settings, folder=args.calibrations_dir, optimisation=optimisation, parameter_origin=origin)
+                    settings=settings, folder=args.calibrations_dir, optimisation=optimisation, parameter_origin=origin,
+                    shear_amplitude_algorithm=args.shear_amplitude_algorithm)
                 print(f"Saved or reused calibration {path}; current observations {observation_counts(data[material])}; "
                       f"stored observations {record['counts']}")
                 paths.append(path)
@@ -656,7 +681,8 @@ def main(argv=None):
             except (ValueError, KeyError, RuntimeError) as exc:
                 status['reasons'] = [str(exc)]
                 warn_unavailable(status, 'calibration')
-                outcomes.append({**status, 'status': 'failed'})
+                outcome = 'skipped' if isinstance(exc, FindleyCalibrationUnavailable) else 'failed'
+                outcomes.append({**status, 'status': outcome})
     if args.status_file:
         Path(args.status_file).parent.mkdir(parents=True, exist_ok=True)
         Path(args.status_file).write_text(json.dumps(json_value(outcomes), indent=2, allow_nan=False) + '\n')

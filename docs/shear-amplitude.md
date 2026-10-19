@@ -5,6 +5,9 @@ plane-selection rule, calibration record, experimental input or reporting format
 The existing evaluator, plane-history utilities and Böhme–Papuga implementation
 do not import the new module. Phase 2 adds a separate Findley damage-parameter
 entry point for numerical comparisons, without changing production predictions.
+Phase 3A uses that interface for configurable Findley calibration in Script 0.
+Production Findley assessment continues to evaluate MCE and load MCE-compatible
+records only.
 
 ## Definition and API
 
@@ -201,21 +204,40 @@ not independent experimental validation of alternative-amplitude Findley.
 This separate entry point is intentional. Calibration fingerprints hash entire
 production source files, including `fin.py`, the evaluator and adapter. Keeping
 them unchanged preserves both established results and existing record identities.
-No algorithm parameter is added to the general adapter, registry, numbered scripts
-or material dictionary. Other criteria therefore cannot inherit this selection.
+No algorithm parameter is added to the general adapter, production registry or
+material dictionary. Script 0 has a Findley-specific calibration option, described
+below. Other criteria cannot inherit this selection.
 The diagnostic function does not load or apply a damage-life curve. In particular,
 an MCE-calibrated curve must not be applied to MCC damage parameters.
 
-## Subsequent calibration and user-configuration integration
+## Findley calibration selection
 
-The definition version is `DEFINITION_VERSION = "harmonic-shear-v1"`. No JSON
-schema or compatibility check changes in Phases 1 or 2. Phase 3 must record
-the effective resolved algorithm, its definition/implementation version, the
-fatigue method and variant using it, coefficient/strain conventions, and relevant
-calibration settings. Resolve aliases such as `rss` before recording the canonical
-identifier. Never store an unresolved `method_default` as the effective algorithm.
+Script 0 accepts `--shear-amplitude-algorithm method_default|mcc_harmonic|mce_harmonic`.
+It also accepts `rss` as a canonicalised MCE alias. The default preserves the
+historical numerical path, including its endpoint fallback. Explicit selections
+require stored stress sine and cosine tensors for every selected coefficient and
+master-curve failure observation. Checking the original case avoids silently
+using the proportional fallback supplied by the general tensor extractor.
 
-Compatibility must include that identity only for computations depending on it.
-A changed amplitude can change the critical plane and calibration, so affected
-records need explicit rejection or recalibration. Unrelated methods must not be
-invalidated. Production integration and user configuration require separate review.
+`fatigue/eval/findley_calibration.py` supplies the configured case-level callable
+to both calibration stages. Every candidate plane is evaluated using the same
+selected amplitude in coefficient optimisation and curve fitting. The existing
+selection rules, normal-stress maximum, coefficient bounds, scatter objective,
+failure-only fitting and plane-grid settings are retained. An explicit override
+for another method is rejected; unavailable batch pairs are reported and skipped.
+
+New Findley records store method-scoped `amplitude_settings`, including the resolved
+algorithm, `DEFINITION_VERSION` from the shared library (`harmonic-shear-v1`), the
+evaluation path and implementation fingerprint. The fingerprint and metadata also
+distinguish records in calibration history, even when proportional cases give
+identical fitted values. Metadata-free legacy MCE requires verified historical
+source identity and all existing input/procedure/settings compatibility checks.
+
+The [calibration workflow](calibration-workflow.md#findley-amplitude-selection)
+provides commands, record fields, compatibility rules and a complete numerical
+example. Script 1 and the production Findley registry remain unchanged. Their
+ordinary calibration lookups require MCE before choosing the newest compatible
+record, including when an explicit ID is supplied. MCC records cannot supply that
+assessment. Production MCC life prediction and its configuration require separate
+Phase 3B approval. Neither calibration agreement nor these software checks establish
+independent experimental validation of alternative-amplitude Findley.
