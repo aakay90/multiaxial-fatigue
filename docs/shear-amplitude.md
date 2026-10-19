@@ -1,9 +1,10 @@
-# Independent harmonic shear amplitudes
+# Harmonic shear amplitudes and controlled Findley evaluation
 
 Phase 1 provides a numerical utility without changing any fatigue criterion,
 plane-selection rule, calibration record, experimental input or reporting format.
 The existing evaluator, plane-history utilities and Böhme–Papuga implementation
-do not import the new module.
+do not import the new module. Phase 2 adds a separate Findley damage-parameter
+entry point for numerical comparisons, without changing production predictions.
 
 ## Definition and API
 
@@ -123,10 +124,92 @@ time sampling, longest chords, extreme scales, invalid inputs, batch evaluation,
 source-equation reconstructions and agreement with existing RSS and BP helpers.
 Run `MPLBACKEND=Agg python tools/run_tests.py` for existing fatigue regressions too.
 
-## Subsequent integration
+## Controlled Findley evaluation
+
+The method-specific function `evaluate_findley` in
+`fatigue/models/cp_methods/fin_harmonic.py` accepts the existing CP adapter case
+arguments (`S0`, `E0`, `S1`, `E1`, `params`, `R_list`, `harmonics`) and the optional
+keyword `shear_amplitude_algorithm`. It returns the existing `CaseResult`, with
+stress-valued damage parameters, not fatigue life.
+
+```python
+from fatigue.models.cp_methods.fin_harmonic import evaluate_findley
+
+# case contains the existing CP adapter arguments, including params['k_FI'].
+legacy = evaluate_findley(**case)
+mce = evaluate_findley(**case, shear_amplitude_algorithm="mce_harmonic")
+mcc = evaluate_findley(**case, shear_amplitude_algorithm="mcc_harmonic")
+print(mcc.values[""], mcc.values["_ext"])  # FIN and FIN_ext damage parameters
+```
+
+Omitted selection (`None`) delegates exactly to the unchanged production FIN
+adapter. This preserves the existing harmonic MCE/RSS convention and, if harmonic
+coefficients are unavailable, the existing two-endpoint calculation. `None` is
+an interface sentinel, not another numerical amplitude algorithm. Every explicit
+selection, including MCE or its `rss` alias, requires both finite, real 3 by 3
+stress tensors `harmonics['S_sin']` and `harmonics['S_cos']`. Partial or absent
+coefficients raise `ValueError`; two endpoints cannot establish phase information.
+No `method_default` identifier is accepted.
+
+Stress tensors and coefficient tensors share a global basis. Each orthonormal
+matrix in `R_list` has the candidate-plane axes as columns, with its third column
+as the normal. After transformation by \(R^T S R\), the local xz/yz entries of
+each coefficient tensor form the two input vectors to the shared amplitude
+function. Strain tensors retain the adapter interface but do not enter Findley.
+The midpoint `(S0 + S1)/2` defines the mean stress, as in the production evaluator;
+a separate `S_mean` entry is not read. The coefficient tensors, not the synthetic
+endpoint shear range, determine explicit harmonic amplitudes.
+
+On **every** candidate plane the function evaluates
+\(P=\tau_a+k_{\mathrm{FI}}\sigma_{n,\max}\), then maximises this complete
+expression. The existing normal-extrema helper is reused without alteration,
+including signed compression. It gives
+\(\sigma_{n,\max}=\sigma_{n,m}+\sqrt{\sigma_{n,s}^2+\sigma_{n,c}^2}\)
+independently of the selected shear algorithm. Mean shear does not enter the
+amplitude. No factor of two is applied to amplitude in the Findley expression.
+Both output keys contain the same maximum because Findley selects planes by
+damage itself; no artificial distinction between FIN and FIN_ext is introduced.
+
+For a prescribed plane with mean normal stress 7, normal sine/cosine coefficients
+3 and 4, and \(k_{\mathrm{FI}}=0.2\), the normal contribution is 2.4.
+
+| Shear semiaxes | MCC amplitude | MCE amplitude | MCC Findley | MCE Findley |
+|---|---:|---:|---:|---:|
+| 10, 10 | 10 | 14.142136 | 12.4 | 16.542136 |
+| 10, 5 | 10 | 11.180340 | 12.4 | 13.580340 |
+| 10, 0 | 10 | 10 | 12.4 | 12.4 |
+
+The automated two-plane example additionally reverses the ranking. On normal z,
+a circle of radius 10 and mean normal 7 gives MCC/MCE damage 11.4/15.542136.
+On normal x, a line of amplitude \(\sqrt{164}\) and mean normal 5 gives
+13.806248 for either algorithm. Thus MCC selects normal x and MCE selects normal z.
+Replacing amplitude only after an MCE search would give the wrong MCC result.
+The tests also compare 30 random planes with independent SVD and normal-traction
+projections, and check default snapshots, phase/basis invariance, mean stresses,
+endpoint rejection, small/large shear scales and other-method isolation.
+Run `python -m unittest discover -s tests -p test_findley_harmonic.py -v`.
+
+Only the supplied finite plane set is searched. The input assumptions and
+arbitrary-path restrictions of the shared library still apply. Explicit MCE and
+legacy harmonic MCE agree within float64 rounding for ordinary stress scales;
+explicit evaluation avoids the legacy synthetic-shear endpoint cutoff and mean
+subtraction. The omitted-selection path remains exactly unchanged. Normal-extrema
+arithmetic retains the existing float64 limits, including overflow when normal
+coefficients are squared at extreme scales. These are numerical verifications,
+not independent experimental validation of alternative-amplitude Findley.
+
+This separate entry point is intentional. Calibration fingerprints hash entire
+production source files, including `fin.py`, the evaluator and adapter. Keeping
+them unchanged preserves both established results and existing record identities.
+No algorithm parameter is added to the general adapter, registry, numbered scripts
+or material dictionary. Other criteria therefore cannot inherit this selection.
+The diagnostic function does not load or apply a damage-life curve. In particular,
+an MCE-calibrated curve must not be applied to MCC damage parameters.
+
+## Subsequent calibration and user-configuration integration
 
 The definition version is `DEFINITION_VERSION = "harmonic-shear-v1"`. No JSON
-schema or compatibility check changes in this PR. A later integration must record
+schema or compatibility check changes in Phases 1 or 2. Phase 3 must record
 the effective resolved algorithm, its definition/implementation version, the
 fatigue method and variant using it, coefficient/strain conventions, and relevant
 calibration settings. Resolve aliases such as `rss` before recording the canonical
@@ -135,4 +218,4 @@ identifier. Never store an unresolved `method_default` as the effective algorith
 Compatibility must include that identity only for computations depending on it.
 A changed amplitude can change the critical plane and calibration, so affected
 records need explicit rejection or recalibration. Unrelated methods must not be
-invalidated. Method integration and user configuration require separate review.
+invalidated. Production integration and user configuration require separate review.
