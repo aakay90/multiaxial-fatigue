@@ -176,6 +176,11 @@ class FindleyCalibrationTests(unittest.TestCase):
             np.testing.assert_allclose(mcc['curves']['FIN']['fit'][key], mce['curves']['FIN']['fit'][key], rtol=2e-13)
         self.assertNotEqual(mcc['calibration_id'], mce['calibration_id'])
         self.assertNotEqual(calibration_signature(mcc), calibration_signature(mce))
+        identical_values = copy.deepcopy(mcc)
+        identical_values['amplitude_settings']['FIN'] = mce['amplitude_settings']['FIN']
+        identical_values['formulation_fingerprints']['FIN'] = mce['formulation_fingerprints']['FIN']
+        self.assertEqual(identical_values['curves'], mcc['curves'])
+        self.assertNotEqual(calibration_signature(identical_values), calibration_signature(mcc))
         alias, _ = self.export('rss', parameters=mce['parameters'], optimisation=self.optimise('rss'))
         self.assertEqual(alias['calibration_id'], mce['calibration_id'])
 
@@ -250,16 +255,16 @@ class FindleyCalibrationTests(unittest.TestCase):
     def test_relevant_dependency_changes_reject_only_dependent_records(self):
         self.export('mcc_harmonic')
         mce, _ = self.export(models=['FIN', 'BP'])
-        old_read = Path.read_bytes
+        old_read = Path.read_text
         for relative in ('fatigue/eval/findley_calibration.py', 'fatigue/models/cp_methods/fin_harmonic.py',
                          'fatigue/models/utils/shear_amplitude.py'):
             target = ROOT / relative
 
-            def changed_read(path):
-                content = old_read(path)
-                return content+b'\n# simulated numerical dependency change' if path == target else content
+            def changed_read(path, *args, **kwargs):
+                content = old_read(path, *args, **kwargs)
+                return content+'\n# simulated numerical dependency change' if path == target else content
 
-            with patch.object(Path, 'read_bytes', changed_read):
+            with patch.object(Path, 'read_text', changed_read):
                 with self.assertRaisesRegex(ValueError, 'No compatible'):
                     self.load('mcc_harmonic')
                 self.assertEqual(self.load()[0]['calibration_id'], mce['calibration_id'])
@@ -271,6 +276,17 @@ class FindleyCalibrationTests(unittest.TestCase):
         changed['amplitude_settings']['FIN']['definition_version'] = 'future'
         save_record(changed, self.folder)
         self.assertEqual(self.load(model='BP', calibration_id=changed['calibration_id'])[0], changed)
+        old_text = Path.read_text
+
+        def changed_base(path, *args, **kwargs):
+            content = old_text(path, *args, **kwargs)
+            return content+'\n# changed Findley equation' if path == ROOT / 'fatigue/models/cp_methods/fin.py' else content
+
+        with patch.object(Path, 'read_text', changed_base):
+            for algorithm in ('method_default', 'mcc_harmonic'):
+                with self.assertRaisesRegex(ValueError, 'No compatible'):
+                    self.load(algorithm)
+            self.assertEqual(self.load(model='BP')[0]['calibration_id'], changed['calibration_id'])
 
     def test_invalid_metadata_is_rejected_without_rewriting_records(self):
         record, _ = self.export()
@@ -318,6 +334,53 @@ class FindleyCalibrationTests(unittest.TestCase):
         self.assertIn('missing-history/FIN', reasons)
         self.assertIn('only for FIN', reasons)
         self.assertEqual(read_record(paths[0])['amplitude_settings']['FIN']['algorithm'], 'mcc_harmonic')
+
+    def test_coefficient_history_failure_is_skipped_without_stopping_batch(self):
+        bad = copy.deepcopy(self.data[self.material])
+        # Axial curve preflight succeeds; only a selected torsion history is absent.
+        torsion = next(case for case in bad['cases'].values()
+                       if case['meta']['test_status'] == 'failure'
+                       and self.script['_uniaxial_torsion_filter'](case)[0])
+        torsion.pop('harmonics')
+        data = {'missing-torsion': bad, self.material: self.data[self.material]}
+        status_path = self.folder / 'coefficient-status.json'
+        with patch.object(self.script['exp'], 'import_experimental_data_grouped_by_material', return_value=data), \
+             self.assertWarnsRegex(RuntimeWarning, 'missing-torsion/FIN'), contextlib.redirect_stdout(io.StringIO()):
+            paths = self.script['main'](['--models', 'FIN', '--n1', '3', '--n2', '6', '--n-grid', '3',
+                '--n-refine', '1', '--shear-amplitude-algorithm', 'mcc_harmonic',
+                '--calibrations-dir', str(self.folder), '--status-file', str(status_path)])
+        self.assertEqual(len(paths), 1)
+        self.assertEqual([o['status'] for o in json.loads(status_path.read_text())], ['skipped', 'saved'])
+
+    def test_runouts_are_ignored_and_runout_only_cannot_calibrate(self):
+        changed = copy.deepcopy(self.data)
+        for case in changed[self.material]['cases'].values():
+            if case['meta']['test_status'] == 'runout':
+                case.pop('harmonics', None)
+        original, _ = self.export('mcc_harmonic')
+        repeated, _ = self.export('mcc_harmonic', data=changed)
+        self.assertEqual(original['calibration_id'], repeated['calibration_id'])
+        self.assertEqual(self.optimise('mcc_harmonic')['FI'], self.optimise('mcc_harmonic', changed)['FI'])
+        for case in changed[self.material]['cases'].values():
+            case['meta']['test_status'] = 'runout'
+        ready = calibration_readiness(changed, self.material, 'FIN', shear_amplitude_algorithm='mcc_harmonic')
+        self.assertFalse(ready['can_calibrate'])
+        self.assertIn('distinct observed', ' '.join(ready['reasons']))
+
+    def test_cli_reuse_requires_matching_algorithm(self):
+        mcc, _ = self.export('mcc_harmonic')
+        args = ['--material', self.material, '--models', 'FIN', '--n1', '3', '--n2', '6',
+                '--reuse-calibration', mcc['calibration_id'], '--calibrations-dir', str(self.folder)]
+        with patch.object(self.script['exp'], 'import_experimental_data_grouped_by_material', return_value=self.data), \
+             self.assertWarnsRegex(RuntimeWarning, 'incompatible.*mce_harmonic'), \
+             contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(self.script['main'](args), [])
+        with patch.object(self.script['exp'], 'import_experimental_data_grouped_by_material', return_value=self.data), \
+             contextlib.redirect_stdout(io.StringIO()):
+            selected = args+['--shear-amplitude-algorithm', 'mcc_harmonic']
+            first, second = self.script['main'](selected), self.script['main'](selected)
+        self.assertEqual(first, second)
+        self.assertEqual(read_record(first[0])['parameters'], mcc['parameters'])
 
     def test_production_script1_never_selects_newer_or_explicit_mcc(self):
         mce, _ = self.export()

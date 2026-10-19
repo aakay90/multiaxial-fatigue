@@ -39,23 +39,51 @@ Implemented at this milestone:
 - Ordinary loader calls require MCE. Script 1, production FIN, evaluator, adapter,
   registry, other criteria, historical JSON and Excel inputs are unchanged.
 
-Actual checks: all 15 new `tests/test_findley_calibration.py` tests pass (1.8 s).
-The original 83 tests passed after the initial code changes, and repository Ruff
-passes with the new tests. New checks include actual historical JSON acceptance,
+The first verified milestone is published as
+`36ff0a12225ca9bfeb6ebb4d146f3dfdf4112132`. Actual final checks: all 18 new
+`tests/test_findley_calibration.py` tests pass. The full suite passes all 101 tests
+(83 existing plus 18 new, 15.7 s, no skips). Repository Ruff, documentation links
+(1,394), generated method catalogue, CLI help and diff checks pass. New checks include actual historical JSON acceptance,
 unknown-provenance rejection, canonical metadata/record reuse, coefficient and
 curve consistency, independent non-proportional objective SVD, dependency/version
 changes, batch skips, and exact Script 1 CSV comparison with a newer MCC present.
 An explicitly selected MCC ID and an MCC-only store cannot supply MCE assessment.
+Missing coefficient-subset histories also produce a safe batch skip. Explicit
+coefficient reuse checks amplitude compatibility and equivalent reruns reuse IDs.
+The first attempt at the new missing-torsion test used an obsolete case number
+from a historical numerical fixture; the test now selects an actual failed torsion
+observation. No scientific selection rule or saved reference value was changed.
+
+Complete Script 0 runs used current `Al7075_T6`, n1=3, n2=6, n_grid=5, n_refine=1,
+plane_stride=1, parameter_stdnum=2 and master_stdnum=0 in a temporary directory.
+All three selections (default, explicit MCE, MCC) gave k_FI=0.75; final master
+A=A_surv=724.2113871168674, b=-0.10692522368903569 and STD=0.5061625852437134.
+Coefficient fitting used 23 failures (11 axial, 12 torsional); the master curve
+used 11 axial failures. Fourteen run-outs were excluded. Selected observations
+and master-curve damage series agree exactly between algorithms on these
+proportional calibration cases, while their metadata/record identities differ.
+The coefficient-stage default diagnostic fit has A=634.6482916208016,
+b=-0.10977780510589384, A_surv=445.01621466900093 and STD=1.6167214068576232.
+Original-main Script 0 and calibration collector source were separately executed
+on these same data/settings. Coefficient result, selected cases, master fit and
+damage series match the new default exactly. Production lookup selects MCE even
+with a newer MCC in that temporary archive; an explicit MCC ID is rejected.
 
 Modified files are Script 0, calibration.py, calibration_store.py, eligibility.py,
-the new Findley calibration adapter, its tests and this existing checkpoint.
-Next action: run a complete MCC/MCE example on current eligible input in a
-temporary directory, finish focused edge checks, update the existing technical
-and calibration/architecture documentation, then run the complete suite and
-quality checks and publish one open PR. Preserve all stored records/reference
-results. Only complete single-harmonic histories and finite plane grids are
-supported; calibration agreement is not independent predictive validation. Do
-not implement Phase 3B or expose MCC life prediction.
+the new Findley calibration adapter, its tests, docs/shear-amplitude.md,
+docs/calibration-workflow.md, docs/architecture.md and this existing checkpoint.
+A protected-path diff confirms unchanged Script 1, other production/review scripts,
+all models, shared evaluator, importer, plane sampling, historical calibrations,
+Excel inputs, results and numerical fixtures. All method formulation fingerprints
+on the original path remain unchanged. The documentation records exact metadata,
+compatibility rules, coarse example and the FatPy development/interoperability note.
+
+Next action: publish the final verification/documentation commit, open one focused
+Phase 3A PR and verify the remote tree and CI. Keep the PR open for review. Only
+complete single-harmonic histories and finite plane grids are supported; existing
+float64 normal-extrema limitations remain. The example uses a coarse verification
+grid and does not establish predictive validation. No stored calibration or
+reference result is replaced. Do not implement Phase 3B or expose MCC life prediction.
 
 ## Previous phase, controlled Findley harmonic amplitudes
 

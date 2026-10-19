@@ -123,7 +123,7 @@ def findley_amplitude_settings(selection: str = "method_default") -> dict[str, s
         for relative in ("fatigue/eval/findley_calibration.py",
                          "fatigue/models/cp_methods/fin_harmonic.py",
                          "fatigue/models/utils/shear_amplitude.py"):
-            digest.update(relative.encode() + b"\0" + (root / relative).read_bytes())
+            digest.update(relative.encode() + b"\0" + (root / relative).read_text(encoding="utf-8").encode())
         fingerprint = digest.hexdigest()
     return {**settings, "implementation_fingerprint": fingerprint}
 
@@ -392,9 +392,8 @@ def load_calibration(*, data, material, model, settings, folder=DEFAULT_FOLDER, 
                              "inputs, formulation or curve settings")
     if not compatible:
         parameter = METHOD_PARAMETERS.get(model)
-        raise ValueError(f"No compatible calibration for {material}/{model}"
-                         + (f" using {resolve_findley_algorithm(shear_amplitude_algorithm)}" if model == "FIN" else "")
-                         +
+        amplitude_note = f" using {resolve_findley_algorithm(shear_amplitude_algorithm)}" if model == "FIN" else ""
+        raise ValueError(f"No compatible calibration for {material}/{model}{amplitude_note}"
                          f" (coefficient {parameter or 'none'} and master curve required). "
                          f"Run python 0_calibrate_material_params.py --material '{material}' --models {model}. "
                          "Changed failure data, properties or fitting settings require a new record.")

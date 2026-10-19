@@ -38,3 +38,25 @@ New exports additionally contain `Error_log10_dp`, `Implementation_revision`, an
 JSON-based exports also identify `Test_status`, `Specimen_id`, `Calibration_id`
 and `Calibration_file`. For run-outs, `Nf_exp` is a recorded lower bound. Ordinary
 error fields and `DP_fit` remain undefined; comparison readers preserve that rule.
+
+## Development conventions and potential FatPy interoperability
+
+The [FatPy contributing](https://faberorg.github.io/FatPy/development/contributing/),
+[testing](https://faberorg.github.io/FatPy/development/testing/) and
+[code-style](https://faberorg.github.io/FatPy/development/code_style/) guides were
+reviewed for Phase 3A. New calibration configuration uses typed interfaces,
+focused functions, explicit dependencies, reproducible unit/integration tests and
+the existing automated checks. Numerical theory and API/calibration usage remain
+in their existing technical documents. The unittest framework and package layout
+are retained; FatPy imports, packaging changes and repository-wide typing or
+formatting migrations are outside this change.
+
+The current [FatPy repository](https://github.com/faberorg/FatPy) describes separate
+plane-based methods and structural-mechanics utilities. The independent harmonic
+amplitude function, tensor transformations and plane/method evaluation interfaces
+are potential components for future WG6 exchange. This is an architectural
+similarity, not confirmed API compatibility. Exchange would require agreement on
+tensor/component order, tangent bases, harmonic phase conventions, units, amplitude
+versus range, output quantities and calibration provenance. The present Findley
+calibration adapter connects existing numerical components to fitting; the store
+alone manages JSON history. No FatPy source or dependency is introduced.

@@ -71,6 +71,7 @@ are stored as `null`, with that convention recorded explicitly.
 | `optimisation` | Coefficient-search results, diagnostic fits, selected cases, fallback information and settings |
 | `counts` | Available failures/run-outs/unknowns, invalid exclusions and actual observations used for fitting |
 | `input_fingerprint`, `formulation_fingerprints` | Compatibility identities for material/failure inputs and numerical source |
+| `amplitude_settings` | Optional method-scoped Findley algorithm, definition version, evaluation path and implementation fingerprint |
 | `procedure_version`, `implementation_revision`, `references`, `software` | Procedure and scientific/software traceability, including Git state |
 
 The following excerpt comes from the initial AISI316L migration record. It is a
@@ -142,6 +143,130 @@ so adding run-outs does not change the historical provenance or hide their curre
 exclusion. Compare the human-readable JSON metadata directly when reviewing two
 historical calibrations. The signature is computed on demand, allowing existing
 schema-version-1 files to remain readable without rewriting them.
+
+## Findley amplitude selection
+
+Findley calibration accepts the following Script 0 option. The mathematical
+definitions and amplitude/range conventions are given in
+[harmonic shear amplitudes](shear-amplitude.md). Selection affects both optimisation
+of `k_FI` on the established axial/torsional failure subset and master-curve fitting
+on the established reversed axial failure subset. The complete Findley expression
+is maximised on every candidate plane with the same selected amplitude.
+
+```bash
+python 0_calibrate_material_params.py --material Al7075_T6 --models FIN \
+  --shear-amplitude-algorithm mcc_harmonic
+python 0_calibrate_material_params.py --material Al7075_T6 --models FIN \
+  --shear-amplitude-algorithm mce_harmonic
+```
+
+`method_default` is the default and resolves to MCE, retaining the historical
+computational path exactly. Explicit `mce_harmonic` and `rss` use the shared
+harmonic implementation; `rss` is stored as `mce_harmonic`. Explicit overrides
+for other methods are unsupported. In a mixed batch, those pairs are reported
+and skipped while eligible Findley calibrations proceed. Default batches retain
+ordinary calibration for all methods. Run-outs remain excluded from both stages.
+
+Explicit MCC/MCE requests require original stored `S_sin` and `S_cos` tensors for
+all selected failures. Missing or invalid histories identify the material, FIN,
+case and coefficient. The extractor's synthetic in-phase endpoint fallback is
+not accepted for these requests. Default evaluation retains that fallback. Missing
+material properties and run-out-only datasets retain existing eligibility rules.
+
+The following excerpt is the exact amplitude metadata from the coarse MCC example
+below. This is an optional extension of schema 1; historical files are not rewritten.
+The definition version comes from the numerical library, not a second constant.
+
+```json
+{
+  "amplitude_settings": {
+    "FIN": {
+      "algorithm": "mcc_harmonic",
+      "definition_version": "harmonic-shear-v1",
+      "evaluation_path": "harmonic",
+      "implementation_fingerprint": "61d9e0b2d7a9d39939ae76f96fda437ad3c3219816ee725410e5ae4badc73dff"
+    }
+  }
+}
+```
+
+`evaluation_path` distinguishes the historical adapter (`legacy`, necessarily MCE)
+from explicit Phase 2 evaluation (`harmonic`). Its implementation fingerprint is
+also stored under `formulation_fingerprints.FIN`. The legacy path retains the
+existing production source identity. Harmonic evaluation additionally hashes
+the Findley calibration adapter, Phase 2 evaluator and shared amplitude library,
+along with the canonical algorithm and definition version. Source line endings
+are normalised as in existing formulation hashes. These added dependencies affect
+Findley harmonic records only. Other methods retain their existing hashes.
+
+| Requested Findley algorithm | Record | Behaviour, subject to all other checks |
+|---|---|---|
+| Default, MCE or RSS | Verified historical MCE without amplitude metadata | Accept |
+| MCC | Historical MCE | Reject |
+| MCC | Compatible new MCC | Accept |
+| Default, MCE or RSS | Compatible new MCE | Accept |
+| MCE | MCC, even if newer or explicitly requested by ID | Reject |
+| MCC or MCE | Different definition or relevant implementation | Reject |
+
+Missing metadata alone does not establish MCE. The store recognises the verified
+historical FIN fingerprint `f65f1330ca96ba1fca84513f61ddaf59c12b7b1af8e57c802de746e5953acb7b`
+and also requires it to match the current legacy source, with unchanged material,
+inputs, procedure, implementation revision and curve settings. Unknown provenance
+or a changed formulation is not accepted. Alternative records have distinct source
+identities, so removing their metadata cannot make them verified legacy MCE.
+
+The signature includes method-scoped amplitude metadata. Equivalent sequential
+reruns reuse their original ID; MCC/MCE identities remain distinct even if their
+numerical fits coincide. Explicit coefficient reuse through `--reuse-calibration`
+also requires a matching amplitude definition. Optimisation metadata and downstream
+curve metadata must agree. Historical files and IDs remain immutable.
+
+Script 1, eligibility and batch/review assessments call the loader without an
+override and therefore require MCE for FIN. Algorithm compatibility is checked
+before creation time or ID. A newer MCC record cannot displace MCE; an explicit
+MCC ID or an MCC-only archive gives a controlled compatibility error. Script 1
+performs no automatic recalibration and offers no MCC prediction option. New MCC
+damage-life curves require a separately approved Phase 3B assessment integration.
+
+### Complete numerical example
+
+On the current `Al7075_T6` workbook, the commands above were run with the following
+additional settings and a temporary `--calibrations-dir`:
+
+```text
+--n1 3 --n2 6 --n-grid 5 --n-refine 1 --plane-stride 1
+--parameter-stdnum 2 --stdnum 0
+```
+
+The coarse grid is a reproducibility check. It retains the existing `[0, 3]`
+coefficient bounds and selects 23 coefficient failures (11 axial and 12 torsional),
+11 axial master-curve failures and no run-outs from the 14 available run-outs.
+
+| Configuration | Optimised k_FI | Master A = A_surv | Master b | Scatter STD |
+|---|---:|---:|---:|---:|
+| Default MCE | 0.75 | 724.2113871168674 | -0.10692522368903569 | 0.5061625852437134 |
+| Explicit MCE | 0.75 | 724.2113871168674 | -0.10692522368903569 | 0.5061625852437134 |
+| Explicit MCC | 0.75 | 724.2113871168674 | -0.10692522368903569 | 0.5061625852437134 |
+
+The coefficient-stage fit uses its own 23-point population and gives `A=634.6482916208016`,
+`b=-0.10977780510589384`, `A_surv=445.01621466900093` and `STD=1.6167214068576232`
+for the default. It is distinct from the final axial master curve. The original
+main implementation was executed on these same inputs/settings; its coefficient
+result, selected observations, master curve and damage series match the new default
+exactly. MCC/MCE damage series also coincide here because the calibration paths
+are proportional. Their record identities remain distinct. These new optimisation
+results do not replace the historically transferred workbook coefficient.
+
+Non-proportional diagnostic cases in the automated tests compare the actual
+coefficient-objective callable against independent SVD calculations on every plane.
+The existing circular and ranking-reversal examples distinguish MCC from MCE.
+These checks verify numerical consistency and calibration reproducibility, not
+independent predictive accuracy. Explicit MCE can differ from historical endpoint
+encoding at float64 rounding or very small shear scales, as documented in the
+[numerical limitations](shear-amplitude.md#controlled-findley-evaluation).
+
+Run `python -m unittest discover -s tests -p test_findley_calibration.py -v` for
+the calibration/JSON/production-safety integration checks.
 
 ## Run-out interpretation and plots
 

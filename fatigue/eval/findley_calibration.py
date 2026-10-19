@@ -12,6 +12,10 @@ from fatigue.models.registry import get_models
 from fatigue.models.utils.shear_amplitude import ALGORITHMS, DEFINITION_VERSION
 
 
+class FindleyCalibrationUnavailable(ValueError):
+    """A requested method or history cannot support explicit amplitude calibration."""
+
+
 def resolve_findley_algorithm(selection: str = "method_default") -> str:
     """Return the canonical amplitude identifier used by a Findley calibration.
 
@@ -34,7 +38,8 @@ def check_amplitude_methods(methods: Iterable[str], selection: str) -> None:
     resolve_findley_algorithm(selection)
     unsupported = [name for name in methods if name.removesuffix("_ext") != "FIN"]
     if selection != "method_default" and unsupported:
-        raise ValueError(f"Shear amplitude override {selection!r} is supported only for FIN; got {unsupported}")
+        raise FindleyCalibrationUnavailable(
+            f"Shear amplitude override {selection!r} is supported only for FIN; got {unsupported}")
 
 
 def amplitude_identity(selection: str) -> dict[str, str]:
@@ -62,8 +67,9 @@ def require_stress_harmonics(case: Mapping[str, Any], material: str, case_id: in
         value = harmonics.get(name) if isinstance(harmonics, Mapping) else None
         raw = np.asarray(value)
         if raw.shape != (3, 3) or raw.dtype.kind not in "biuf" or not np.isfinite(raw).all():
-            raise ValueError(f"{material}/FIN case {case_id}: missing or invalid {name}; "
-                             "explicit amplitude calibration requires stored S_sin and S_cos tensors")
+            raise FindleyCalibrationUnavailable(
+                f"{material}/FIN case {case_id}: missing or invalid {name}; "
+                "explicit amplitude calibration requires stored S_sin and S_cos tensors")
 
 
 class FindleyCalibrationModel:

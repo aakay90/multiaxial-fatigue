@@ -55,7 +55,7 @@ from fatigue.planes.sampling import dcmesh_xyz, gentang
 from fatigue.eval.evaluator import best_cp_for_case
 from fatigue.eval.fitting import fit_power_law_with_survival_std
 from fatigue.eval.findley_calibration import (
-    FindleyCalibrationModel, amplitude_identity, check_amplitude_methods,
+    FindleyCalibrationModel, FindleyCalibrationUnavailable, amplitude_identity, check_amplitude_methods,
     require_stress_harmonics,
 )
 
@@ -681,7 +681,8 @@ def main(argv=None):
             except (ValueError, KeyError, RuntimeError) as exc:
                 status['reasons'] = [str(exc)]
                 warn_unavailable(status, 'calibration')
-                outcomes.append({**status, 'status': 'failed'})
+                outcome = 'skipped' if isinstance(exc, FindleyCalibrationUnavailable) else 'failed'
+                outcomes.append({**status, 'status': outcome})
     if args.status_file:
         Path(args.status_file).parent.mkdir(parents=True, exist_ok=True)
         Path(args.status_file).write_text(json.dumps(json_value(outcomes), indent=2, allow_nan=False) + '\n')
