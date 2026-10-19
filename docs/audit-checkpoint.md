@@ -89,12 +89,22 @@ is excluded from the publication; its generator remains available. Do not publis
 that extra report without separate approval. This does not block publishing the
 explicitly authorised twelve workbooks.
 
-The fresh 58-test run passed without skips. Ruff, documentation links, the
-method catalogue and diff checks passed. The eligibility snapshot was regenerated.
-Next action is to publish the revised data and updated documentation on PR #6,
-verify the remote tree and GitHub CI, then record publication in the PR discussion. Do not merge.
-Scientific source restrictions listed above remain explicit and are not repaired
-by changing measured data. No additional publication permission is required.
+The fresh 58-test run passed without skips after installation of the authorised
+collection. Ruff, documentation links, the method catalogue and diff checks
+passed. The eligibility snapshot was regenerated. Commit
+`52b061b87d351be310d4e10127c085a5c985b24b` publishes the twelve workbooks on PR #6.
+Every published workbook was compared byte for byte with `New_Exp_data/` in the
+supplied ZIP. The public migration excludes only the additional detailed
+source-property audit. Historical workbooks, JSON records and reference results
+remain preserved. GitHub CI passed for the data commit on both the push
+(run 39237587054) and PR (run 39237595131) workflows, with the complete revised
+collection available.
+
+Current publication is complete and verified. PR #6 remains open without merge.
+Next action is human review of PR #6; no further dataset publication step is pending. Future scientific
+work should address the source identity and mixed-fatigue-strength restrictions
+above before interpreting affected method/material comparisons. No repeated
+implementation or further permission for the twelve workbooks is required.
 Resume from here, not the historical audit.
 
 ## Historical scientific audit, 7 October 2026
