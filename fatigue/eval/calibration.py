@@ -7,6 +7,7 @@ import numpy as np
 from fatigue.eval.fitting import fit_power_law_with_survival_std
 from fatigue.models.base import FatigueModel, model_output_quantity
 from fatigue.imp.observations import is_failure
+from fatigue.eval.findley_calibration import calibration_models, require_stress_harmonics
 
 
 def collect_uniaxial_series_and_fit(
@@ -83,6 +84,9 @@ def collect_uniaxial_series_and_fit(
             if not (np.isfinite(Nf) and Nf > 0):
                 continue
 
+            if getattr(model, "requires_stress_harmonics", False):
+                require_stress_harmonics(data[material_name]["cases"][case_id], material_name, case_id)
+
             S0, E0, S1, E1, H = exp.extract_tensor(
                 data, material_name, case_id, node=1, include_harmonics=True
             )
@@ -140,13 +144,14 @@ def collect_uniaxial_series_and_fit(
 
 
 def export_calibration(*, data, material, models, parameters, settings, folder,
-                       procedure="Script 0", optimisation=None, parameter_origin="optimised by Script 0"):
+                       procedure="Script 0", optimisation=None, parameter_origin="optimised by Script 0",
+                       shear_amplitude_algorithm="method_default"):
     """Fit selected failure-only master curves and save one complete record."""
     from fatigue.imp import experimental_data as exp
     from fatigue.planes.sampling import build_R_list
-    from fatigue.models.registry import get_models
     from fatigue.eval.calibration_store import material_parameters, create_record, save_record, read_record
     from fatigue.eval.eligibility import input_requirements
+    configured_models = calibration_models(models, shear_amplitude_algorithm)
     for name in models:
         missing, issues, _ = input_requirements(data, material, name, parameters=parameters)
         if missing or issues:
@@ -156,11 +161,12 @@ def export_calibration(*, data, material, models, parameters, settings, folder,
         data=data, exp=exp, material_name=material,
         uniax_cases=exp.extract_uniaxial_tension(data),
         R_list=build_R_list(n1=settings["n1"], n2=settings["n2"]),
-        models=get_models(models), params=params, stdnum=settings["stdnum"],
+        models=configured_models, params=params, stdnum=settings["stdnum"],
     )
     record = create_record(data=data, material=material, parameters=parameters,
                            curves=curves, settings=settings, procedure=procedure,
-                           optimisation=optimisation, parameter_origin=parameter_origin)
+                           optimisation=optimisation, parameter_origin=parameter_origin,
+                           shear_amplitude_algorithm=shear_amplitude_algorithm)
     path = save_record(record, folder)
     # Equivalent reruns report the persisted ID and its original provenance.
     return read_record(path), path

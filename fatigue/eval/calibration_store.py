@@ -14,10 +14,17 @@ import numpy as np
 
 from fatigue.imp.observations import failures_only, observation_counts
 from fatigue.models.references import IMPLEMENTATION_REVISION, method_reference
+from fatigue.eval.findley_calibration import amplitude_identity, check_amplitude_methods, resolve_findley_algorithm
+from fatigue.models.utils.shear_amplitude import ALGORITHMS, DEFINITION_VERSION
 
 SCHEMA_VERSION = 1
 PROCEDURE_VERSION = "failure-only-json-v1"
 DEFAULT_FOLDER = "Calibrations"
+# Verified historical MCE/RSS formulation in the four initial JSON records and
+# merged Phase 2 (1ffb889). A missing metadata field alone establishes nothing.
+LEGACY_FINDLEY_FORMULATIONS = frozenset({
+    "f65f1330ca96ba1fca84513f61ddaf59c12b7b1af8e57c802de746e5953acb7b",
+})
 METHOD_PARAMETERS = {"FS": "k_FS", "FIN": "k_FI", "LI": "L_LI",
                      "MGSE_ZHU": "k_MGSE", "MSWT": "a_MSWT"}
 LEGACY_PARAMETERS = (*METHOD_PARAMETERS.values(), "alpha_w", "xi_ZHU")
@@ -100,6 +107,46 @@ def formulation_fingerprint(name):
     return digest.hexdigest()
 
 
+def findley_amplitude_settings(selection: str = "method_default") -> dict[str, str]:
+    """Identify the selected Findley definition and its actual source dependencies.
+
+    The legacy path retains its established source fingerprint. Explicit
+    harmonic evaluation additionally tracks the calibration adapter, Phase 2
+    evaluator and shared amplitude library. Unrelated method hashes are unchanged.
+    """
+    settings = amplitude_identity(selection)
+    fingerprint = formulation_fingerprint("FIN")
+    if settings["evaluation_path"] == "harmonic":
+        root = Path(__file__).resolve().parents[2]
+        digest = hashlib.sha256()
+        digest.update(json.dumps({**settings, "base_formulation": fingerprint}, sort_keys=True).encode())
+        for relative in ("fatigue/eval/findley_calibration.py",
+                         "fatigue/models/cp_methods/fin_harmonic.py",
+                         "fatigue/models/utils/shear_amplitude.py"):
+            digest.update(relative.encode() + b"\0" + (root / relative).read_bytes())
+        fingerprint = digest.hexdigest()
+    return {**settings, "implementation_fingerprint": fingerprint}
+
+
+def _formulation_matches(record: dict, model: str, selection: str) -> bool:
+    """Check only dependencies relevant to the requested method and amplitude."""
+    stored = record["formulation_fingerprints"].get(model)
+    if model != "FIN":
+        return stored == formulation_fingerprint(model)
+    requested = resolve_findley_algorithm(selection)
+    amplitude = record.get("amplitude_settings", {}).get("FIN")
+    if amplitude is None:
+        # Other material, procedure and implementation checks remain in the
+        # loader. Also require the historical source identity to match today.
+        return (requested == "mce_harmonic" and stored in LEGACY_FINDLEY_FORMULATIONS
+                and stored == formulation_fingerprint("FIN"))
+    if amplitude["algorithm"] != requested or amplitude["definition_version"] != DEFINITION_VERSION:
+        return False
+    actual_selection = "method_default" if amplitude["evaluation_path"] == "legacy" else requested
+    expected = findley_amplitude_settings(actual_selection)
+    return amplitude == expected and stored == expected["implementation_fingerprint"]
+
+
 def _identity(value):
     if not isinstance(value, str) or not value or Path(value).name != value or value in {".", ".."}:
         raise ValueError(f"Invalid material/calibration identifier {value!r}")
@@ -166,6 +213,21 @@ def validate_record(record):
         for key in ("curve_settings", "procedure_version", "implementation_revision", "counts", "source", "software", "formulation_fingerprints"):
             if key not in record:
                 raise ValueError(f"missing {key}")
+        amplitudes = record.get("amplitude_settings", {})
+        if not isinstance(amplitudes, dict) or set(amplitudes) - {"FIN"}:
+            raise ValueError("amplitude_settings must be scoped to FIN")
+        for name, amplitude in amplitudes.items():
+            if name not in record["curves"] or amplitude["algorithm"] not in ALGORITHMS:
+                raise ValueError("amplitude metadata requires a FIN curve and canonical algorithm")
+            if not isinstance(amplitude["definition_version"], str) or not amplitude["definition_version"]:
+                raise ValueError("missing amplitude definition version")
+            if amplitude["evaluation_path"] not in {"legacy", "harmonic"}:
+                raise ValueError("invalid amplitude evaluation path")
+            if amplitude["evaluation_path"] == "legacy" and amplitude["algorithm"] != "mce_harmonic":
+                raise ValueError("legacy Findley uses MCE")
+            fingerprint = amplitude["implementation_fingerprint"]
+            if not isinstance(fingerprint, str) or len(fingerprint) != 64 or any(c not in "0123456789abcdef" for c in fingerprint):
+                raise ValueError("invalid amplitude implementation fingerprint")
         # Includes optional diagnostics. JSON null is allowed, NaN/Infinity are not.
         json.dumps(record, allow_nan=False)
     except (KeyError, TypeError, ValueError, OverflowError, AttributeError) as exc:
@@ -173,9 +235,17 @@ def validate_record(record):
 
 
 def create_record(*, data, material, parameters, curves, settings, procedure,
-                  optimisation=None, parameter_origin="optimised by Script 0"):
+                  optimisation=None, parameter_origin="optimised by Script 0",
+                  shear_amplitude_algorithm="method_default"):
     """Construct a record; saving is a separate atomic operation."""
     block = data[material]
+    check_amplitude_methods(curves, shear_amplitude_algorithm)
+    amplitude = findley_amplitude_settings(shear_amplitude_algorithm) if "FIN" in curves else None
+    if optimisation and amplitude:
+        coefficient_amplitude = optimisation.get("amplitude_settings", {}).get("FIN")
+        expected_identity = amplitude_identity(shear_amplitude_algorithm)
+        if coefficient_amplitude != expected_identity:
+            raise ValueError("Findley coefficient optimisation and master curve must use the same amplitude settings")
     curves, design_observations = compact_design_observations(curves)
     source = dict(block.get("source", {}))
     workbook = Path(source.get("workbook", ""))
@@ -218,6 +288,9 @@ def create_record(*, data, material, parameters, curves, settings, procedure,
         "software": {"git_commit": commit, "tracked_worktree_dirty": dirty,
                      "numpy": np.__version__},
     })
+    if amplitude:
+        record["amplitude_settings"] = {"FIN": amplitude}
+        record["formulation_fingerprints"]["FIN"] = amplitude["implementation_fingerprint"]
     validate_record(record)
     return record
 
@@ -234,6 +307,8 @@ def calibration_signature(record):
             "curves", "optimisation", "parameter_origin", "procedure", "material_inputs",
             "parameter_units", "curve_units", "damage_parameter_units")
     content = json_value({key: record.get(key) for key in keys})
+    if "amplitude_settings" in record:
+        content["amplitude_settings"] = json_value(record["amplitude_settings"])
     for curve in content["curves"].values():
         for suffix in ("", "_ext"):
             curve.pop("design_observation_ids" + suffix, None)
@@ -289,8 +364,15 @@ def _reject_json_number(value):
     raise ValueError(f"Non-finite JSON numeric constant {value}")
 
 
-def load_calibration(*, data, material, model, settings, folder=DEFAULT_FOLDER, calibration_id=None):
-    """Select by declared UTC creation time and ID, never by file mtime."""
+def load_calibration(*, data, material, model, settings, folder=DEFAULT_FOLDER, calibration_id=None,
+                     shear_amplitude_algorithm="method_default"):
+    """Select the newest compatible record, requiring MCE for ordinary FIN calls.
+
+    Explicit harmonic requests are available to calibration code. Omitted
+    selection continues to require MCE, including for an explicitly supplied ID.
+    Algorithm compatibility is checked before creation time is considered.
+    """
+    check_amplitude_methods([model], shear_amplitude_algorithm)
     directory = Path(folder) / _identity(material)
     paths = [directory / (_identity(calibration_id) + ".json")] if calibration_id else sorted(directory.glob("*.json"))
     compatible = []
@@ -300,15 +382,19 @@ def load_calibration(*, data, material, model, settings, folder=DEFAULT_FOLDER, 
         matches = (record["material_id"] == material and record["input_fingerprint"] == fingerprint
                    and record["procedure_version"] == PROCEDURE_VERSION
                    and record["implementation_revision"] == IMPLEMENTATION_REVISION
-                   and record["formulation_fingerprints"].get(model) == formulation_fingerprint(model)
+                   and _formulation_matches(record, model, shear_amplitude_algorithm)
                    and record["curve_settings"] == settings and model in record["curves"])
         if matches:
             compatible.append((record["created_at"], record["calibration_id"], record, path))
         elif calibration_id:
-            raise ValueError(f"Calibration {calibration_id} is incompatible with {material}/{model}, inputs or curve settings")
+            raise ValueError(f"Calibration {calibration_id} is incompatible with {material}/{model}, "
+                             f"amplitude {resolve_findley_algorithm(shear_amplitude_algorithm) if model == 'FIN' else 'method default'}, "
+                             "inputs, formulation or curve settings")
     if not compatible:
         parameter = METHOD_PARAMETERS.get(model)
         raise ValueError(f"No compatible calibration for {material}/{model}"
+                         + (f" using {resolve_findley_algorithm(shear_amplitude_algorithm)}" if model == "FIN" else "")
+                         +
                          f" (coefficient {parameter or 'none'} and master curve required). "
                          f"Run python 0_calibrate_material_params.py --material '{material}' --models {model}. "
                          "Changed failure data, properties or fitting settings require a new record.")

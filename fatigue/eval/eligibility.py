@@ -81,16 +81,28 @@ def case_issue(case, *, strain=False):
     return list(dict.fromkeys(reasons))
 
 
-def calibration_readiness(data, material, method):
+def calibration_readiness(data, material, method, *, shear_amplitude_algorithm="method_default"):
     """Report whether current failure data permit an attempt, not fit success."""
     from fatigue.imp.experimental_data import extract_uniaxial_tension
     base = method.removesuffix('_ext')
+    from fatigue.eval.findley_calibration import check_amplitude_methods, require_stress_harmonics
+    try:
+        check_amplitude_methods([base], shear_amplitude_algorithm)
+    except ValueError as exc:
+        return {'can_calibrate': False, 'missing_properties': [], 'reasons': [str(exc)],
+                'approximations': [], 'design_failures': 0}
     missing, issues, approximations = input_requirements(data, material, base, calibration=True)
     usable = {cid: c for cid, c in data[material]['cases'].items()
               if not case_issue(c, strain=base not in STRESS_ONLY)}
     selected = {material: {**data[material], 'cases': usable}}
     points = extract_uniaxial_tension(selected).get(material, {}).get('points', [])
     lives = {p['Nf_cycles'] for p in points}
+    if base == 'FIN' and shear_amplitude_algorithm != 'method_default':
+        for point in points:
+            try:
+                require_stress_harmonics(usable[point['case_id']], material, point['case_id'])
+            except ValueError as exc:
+                issues.append(str(exc))
     if len(points) < 2 or len(lives) < 2:
         issues.append('Master curve requires at least two distinct observed axial R=-1 failure lives')
     return {'can_calibrate': not missing and not issues, 'missing_properties': missing,

@@ -1,6 +1,63 @@
 # Development continuation checkpoint
 
-## Current phase, controlled Findley harmonic amplitudes
+## Current phase, configurable Findley calibration (Phase 3A)
+
+Updated 19 October 2026. Branch `feat/findley-amplitude-calibration` starts at
+verified main `1ffb8896d1447e9f9f40f37f0c8c7dd08a563251`, the merge of PR #8.
+The initial working tree was clean and no Phase 3A PR was open. Phase 1 library,
+Phase 2 interface and experimental-data changes are present. PR #8 is merged;
+its historical open-PR status below is superseded. Baseline suite passed all
+83 tests before editing (12.8 s, no skips).
+
+The objective is selectable Findley calibration in Script 0, method-scoped JSON
+provenance and compatibility, while production assessment remains MCE. Reviewed
+Script 0, calibration/fitting, store, eligibility, all loader call sites and the
+verified Findley evaluator. FatPy contributing, testing and code-style pages and
+current repository were reviewed. Adopt explicit typed configuration, focused
+components, unit/integration checks and concise API/theory documentation. No
+FatPy source, dependency or package/test-framework migration is introduced.
+
+Implemented at this milestone:
+
+- `fatigue/eval/findley_calibration.py` resolves default/RSS to canonical MCE,
+  validates method scope and original stored histories, and adapts the Phase 2
+  evaluator for both coefficient optimisation and master-curve fitting.
+- Script 0 accepts `--shear-amplitude-algorithm`. Default numerical branches and
+  observation selection remain intact. Explicit requests check raw case histories
+  before `extract_tensor` can synthesise proportional coefficients. Batch preflight
+  skips unsupported methods or missing axial histories; selected coefficient cases
+  are also checked before optimisation.
+- `calibration.py` uses the configured model and persists its effective identity.
+  `calibration_store.py` adds optional FIN-scoped amplitude metadata within schema
+  1, includes it in record signatures, validates optimisation/curve consistency
+  and checks algorithm compatibility before choosing the newest record.
+- The original formulation hashes are preserved. Explicit harmonic records add
+  dependencies on the calibration adapter, Phase 2 evaluator and shared amplitude
+  library. Metadata-free MCE is accepted only for the verified historical FIN hash
+  `f65f1330...953acb7b`, matching current source plus all previous provenance/input/
+  settings checks. Removing MCC metadata cannot confer legacy MCE compatibility.
+- Ordinary loader calls require MCE. Script 1, production FIN, evaluator, adapter,
+  registry, other criteria, historical JSON and Excel inputs are unchanged.
+
+Actual checks: all 15 new `tests/test_findley_calibration.py` tests pass (1.8 s).
+The original 83 tests passed after the initial code changes, and repository Ruff
+passes with the new tests. New checks include actual historical JSON acceptance,
+unknown-provenance rejection, canonical metadata/record reuse, coefficient and
+curve consistency, independent non-proportional objective SVD, dependency/version
+changes, batch skips, and exact Script 1 CSV comparison with a newer MCC present.
+An explicitly selected MCC ID and an MCC-only store cannot supply MCE assessment.
+
+Modified files are Script 0, calibration.py, calibration_store.py, eligibility.py,
+the new Findley calibration adapter, its tests and this existing checkpoint.
+Next action: run a complete MCC/MCE example on current eligible input in a
+temporary directory, finish focused edge checks, update the existing technical
+and calibration/architecture documentation, then run the complete suite and
+quality checks and publish one open PR. Preserve all stored records/reference
+results. Only complete single-harmonic histories and finite plane grids are
+supported; calibration agreement is not independent predictive validation. Do
+not implement Phase 3B or expose MCC life prediction.
+
+## Previous phase, controlled Findley harmonic amplitudes
 
 Updated 19 October 2026. Branch `feat/findley-shear-amplitude` starts from verified
 main `71eaac38ef619144c7ea055edf3b5ef3835ed7fe`, the merge of Phase 1 PR #7.
