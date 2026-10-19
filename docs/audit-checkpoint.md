@@ -7,13 +7,13 @@ implementation is preserved. No uncommitted changes existed at session start.
 ## Current objective and actual status
 
 The revised dataset importer, method preflight, safe batch skips and observation
-subset reporting are implemented. JSON history, formulations and family labels
+subset reporting are implemented. Draft PR [#6](https://github.com/andreachiocca/multiaxial-fatigue/pull/6) is open without merge. JSON history, formulations and family labels
 are preserved. The remote branch exists; its first importer milestone
 is `dfb514da82bd2792dd1d4da86fc0bb9dc9891e79`. Direct Git push has no credentials;
 publication uses the GitHub connector. Local milestone history is retained.
 
-- Active inputs are 12 revised workbooks plus unchanged Al7075_T6, absent from
-  the revised collection. Four previous active files remain byte-identical in
+- The tested local migration used 12 revised workbooks plus unchanged Al7075_T6, absent from
+  the revised collection. The public branch retains the previous active inputs. Four previous active files remain byte-identical in
   `Experimental_Data/archive/pre-dataset-migration` for reproducible regressions.
 - Header aliases are explicit. Stress columns remain authoritative; force and
   moment columns are preserved metadata, never silently substituted. Phases are
@@ -47,6 +47,18 @@ pairs in the selected four-material batch. BP/SWT common life comparison used
 individual outputs with undefined conventional errors. These are software and
 regression checks, not independent scientific validation or final calibration.
 Temporary example records are not installed as default production calibrations.
+
+The exact published implementation `904c61994e1bb10e5808ac3dd73f99ac794b53b7`
+was checked in `/tmp/wg43-public-check`. The suite passed with 58 discovered
+checks, 55 executed successfully and 3 full-collection tests skipped because the
+withheld workbooks were absent. Ruff, documentation links and catalogue passed.
+GitHub Actions succeeded for both push run 39235075215 and PR run 39235140578.
+The archived-input end-to-end runner completed 60 combinations and 4,290 rows
+(3,646 failures, 644 run-outs); four GSA/LIU2021 combinations on Al/Ti were
+explicitly skipped because the steel empirical estimate is unsupported there.
+This runner checks execution, counts and recomputed errors. The frozen numerical
+fixtures separately check unchanged coefficients and method results; a new exact
+full-table comparison against main was not performed this session.
 The common parity plot was inspected visually. The installer dry run, byte
 preservation, legacy snapshot retirement and conflicting archive checks passed.
 
@@ -72,17 +84,22 @@ an indirect reference. No new-workbook tree was attached to the remote branch.
 
 The code-only publication preserves all previous public active files, adds
 byte-identical public baseline archives and excludes the 12 revised files and the
-detailed source-property export `docs/data/dataset-migration.json`. Local commit
-`866d24d` retains the complete tested migration. The provided attachment and
+detailed source-property export `docs/data/dataset-migration.json`. Local recovery branch `recovery/revised-dataset-local-20261019` at `4111686`
+retains the complete tested migration and its documentation, including `866d24d`. The provided attachment and
 `tools/install_revised_dataset.py` allow recovery after approval. Three full-data
 tests are skipped remotely while the revised files are withheld; do not count
 those as remote validation. Source-name restrictions remain as described above.
 
-Next action is to finish final code checks and open the code-only PR, record its
-link and ask for explicit publication approval for all twelve raw workbooks and
-embedded images. After approval, install the supplied ZIP, regenerate reports,
-run all tests, publish the dataset on the same PR and check CI. No merge is authorised.
-No PR exists for this new branch yet. Resume from here, not the historical audit.
+Next action requires explicit user approval to publish all twelve supplied Excel
+workbooks, including raw observations and embedded images, to the public repository.
+The code and installer are already concrete and reviewable in PR #6. After approval,
+run `python tools/install_revised_dataset.py '../upload/exp_data(1).zip' --apply`
+(or prepare that attachment again if the scratch path no longer exists), verify
+that all 58 tests execute without skips, regenerate the audit and eligibility
+exports, and publish the dataset on the same branch/PR. Recheck CI and keep the
+PR unmerged. Do not repeat the implementation or attempt another publication
+of the blocked data before approval. No active code/test blocker remains.
+Resume from here, not the historical audit.
 
 ## Historical scientific audit, 7 October 2026
 
