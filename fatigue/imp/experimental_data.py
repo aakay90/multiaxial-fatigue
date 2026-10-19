@@ -8,6 +8,7 @@ import math
 from openpyxl import load_workbook
 import warnings
 from fatigue.imp.observations import test_status, is_failure
+from fatigue.imp.schema import material_id, dataset_column, normalise
 
 
 #### Extract experimental data from Excel files
@@ -16,7 +17,7 @@ def import_experimental_data_grouped_by_material(
     verbose: bool = False
 ) -> Dict[str, Any]:
     """
-    Import experimental datasets grouped by material (= Excel filename stem).
+    Import experimental datasets grouped by canonical material ID (filename without ordering prefix).
 
     Output format (UNCHANGED structure):
       data[material_name] = {
@@ -36,7 +37,7 @@ def import_experimental_data_grouped_by_material(
       - node = 1 for plain specimens
       - loadstep 1 = max, loadstep 2 = min
       - Filter Dataset: plain specimens; retain failures, run-outs and unknown status
-      - Dataset numeric Nulls -> 0.0
+      - Legacy inactive stress Nulls retain their zero convention. Revised missing stresses are flagged.
       - Material properties are read from "Summary" at the row number given by the named cell "Average"
     """
     folder = Path(folder)
@@ -149,6 +150,8 @@ def import_experimental_data_grouped_by_material(
                          [0.0,    0.0,    0.0]], dtype=float)
 
     def stress_to_strain_iso(stress: np.ndarray, E: float, nu: float) -> np.ndarray:
+        if E is None or nu is None or E <= 0 or not (-1 < nu < 0.5):
+            return np.full((3, 3), np.nan)
         sig_xx, sig_yy, sig_zz = stress[0, 0], stress[1, 1], stress[2, 2]
         tau_xy, tau_yz, tau_zx = stress[0, 1], stress[1, 2], stress[2, 0]
 
@@ -217,7 +220,10 @@ def import_experimental_data_grouped_by_material(
 
         # Find each column independently; keep the max header row found as "header_row_used"
         for key, header_substring in desired.items():
-            r, c = _find_header_row_and_col_indices(ws, header_substring, search_rows=80)
+            try:
+                r, c = _find_header_row_and_col_indices(ws, header_substring, search_rows=80)
+            except KeyError:
+                continue
             col_map[key] = c
             header_row_used = r if header_row_used is None else max(header_row_used, r)
 
@@ -225,30 +231,15 @@ def import_experimental_data_grouped_by_material(
             raise KeyError("Could not locate Summary headers.")
         return header_row_used, col_map
 
-    # Dataset column token map
-    colmap_tokens = {
-        "Nf":       ["number", "cycles", "failure"],
-        "notched":  ["notched"],
-        "runout":   ["run", "out"],
-        "mean_rad": ["mean", "radial", "stress"],
-        "amp_rad":  ["amplit", "radial", "stress"],
-        "mean_ax":  ["mean", "axial", "stress"],
-        "amp_ax":   ["amplit", "axial", "stress"],
-        "mean_sh":  ["mean", "shear", "stress"],
-        "amp_sh":   ["amplit", "shear", "stress"],
-
-        # Optional out-of-phase columns. If absent, phases default to 0.
-        "phase_rad": ["phase", "radial", "load"],
-        "phase_tor": ["phase", "torsional", "load"],
-    }
-
     # -----------------------------
     # Main
     # -----------------------------
     data: Dict[str, Any] = {}
 
     for fp in files:
-        material_name = fp.stem  # filename without extension
+        material_name = material_id(fp.stem)
+        if material_name in data:
+            raise ValueError(f"Duplicate canonical material ID {material_name}")
 
         wb = load_workbook(fp, data_only=True)
         if "Summary" not in wb.sheetnames:
@@ -294,19 +285,14 @@ def import_experimental_data_grouped_by_material(
             raise KeyError(f"[{fp.name}] Could not determine the 'Average' row.")
 
         # --- Extract material properties from Summary at avg_row ---
-        E_file = to_float_or_none(ws.cell(row=avg_row, column=col_map["E_MPa"]).value)
-        nu_file = to_float_or_none(ws.cell(row=avg_row, column=col_map["nu"]).value)
-
-        if E_file is None:
-            raise ValueError(f"[{fp.name}] Young's modulus at Summary row {avg_row} is missing/invalid.")
-        if nu_file is None or not (0.0 < nu_file < 0.6):
-            raise ValueError(f"[{fp.name}] Poisson ratio at Summary row {avg_row} is missing/invalid or not plausible.")
+        E_file = to_float_or_none(ws.cell(row=avg_row, column=col_map["E_MPa"]).value if "E_MPa" in col_map else None)
+        nu_file = to_float_or_none(ws.cell(row=avg_row, column=col_map["nu"]).value if "nu" in col_map else None)
 
         # Optional extra properties (can be None if not present / invalid)
-        ys = to_float_or_none(ws.cell(row=avg_row, column=col_map["Yield_strength_MPa"]).value)
-        uts = to_float_or_none(ws.cell(row=avg_row, column=col_map["Tensile_strength_MPa"]).value)
-        sfl = to_float_or_none(ws.cell(row=avg_row, column=col_map["Tensile_fatigue_limit_MPa"]).value)
-        tfl = to_float_or_none(ws.cell(row=avg_row, column=col_map["Torsional_fatigue_limit_MPa"]).value)
+        ys = to_float_or_none(ws.cell(row=avg_row, column=col_map["Yield_strength_MPa"]).value if "Yield_strength_MPa" in col_map else None)
+        uts = to_float_or_none(ws.cell(row=avg_row, column=col_map["Tensile_strength_MPa"]).value if "Tensile_strength_MPa" in col_map else None)
+        sfl = to_float_or_none(ws.cell(row=avg_row, column=col_map["Tensile_fatigue_limit_MPa"]).value if "Tensile_fatigue_limit_MPa" in col_map else None)
+        tfl = to_float_or_none(ws.cell(row=avg_row, column=col_map["Torsional_fatigue_limit_MPa"]).value if "Torsional_fatigue_limit_MPa" in col_map else None)
 
         # Optional fatigue properties / extra model constants
         def _read_opt(key: str, *needles: str) -> Optional[float]:
@@ -335,38 +321,51 @@ def import_experimental_data_grouped_by_material(
             warnings.warn(f"{fp.name} contains legacy calibration columns. These values are ignored. "
                           "Migrate them with tools/migrate_calibrations.py before using Script 1.",
                           UserWarning, stacklevel=2)
+        source_rows = []
+        for values in ws.iter_rows(min_row=header_row + 1, max_row=avg_row - 1, values_only=True):
+            if len(values) > 3 and values[3] is not None:
+                source_rows.append(dict(zip([str(c.value) for c in ws[header_row]], values)))
+        # A filename is not evidence that a contradictory source identity is equivalent.
+        identity_issues = []
+        declared = [str(r.get("Material name", "")).strip() for r in source_rows]
+        if material_name == "CX18":
+            identity_issues.append("CX18 filename conflicts with Summary material 30NCD16; confirm identity before assessment")
         wb.close()
 
-        E_file = float(E_file)
-        nu_file = float(nu_file)
 
         if verbose:
-            print(f"[{fp.name}] material='{material_name}' -> E={E_file:.3f} MPa, nu={nu_file:.6f}")
+            print(f"[{fp.name}] material='{material_name}' -> E={E_file} MPa, nu={nu_file}")
 
         # Dataset
         df = pd.read_excel(fp, sheet_name="Dataset", engine="openpyxl")
 
-        col_Nf    = find_col(list(df.columns), colmap_tokens["Nf"])
-        col_notch = find_col(list(df.columns), colmap_tokens["notched"])
-        col_run   = find_col(list(df.columns), colmap_tokens["runout"])
+        col_Nf    = dataset_column(list(df.columns), "Nf")
+        col_notch = dataset_column(list(df.columns), "notched")
+        col_run   = dataset_column(list(df.columns), "runout")
 
-        col_mr    = find_col(list(df.columns), colmap_tokens["mean_rad"])
-        col_ar    = find_col(list(df.columns), colmap_tokens["amp_rad"])
-        col_max   = find_col(list(df.columns), colmap_tokens["mean_ax"])
-        col_aax   = find_col(list(df.columns), colmap_tokens["amp_ax"])
-        col_ms    = find_col(list(df.columns), colmap_tokens["mean_sh"])
-        col_as    = find_col(list(df.columns), colmap_tokens["amp_sh"])
+        col_mr    = dataset_column(list(df.columns), "mean_rad")
+        col_ar    = dataset_column(list(df.columns), "amp_rad")
+        col_max   = dataset_column(list(df.columns), "mean_ax")
+        col_aax   = dataset_column(list(df.columns), "amp_ax")
+        col_ms    = dataset_column(list(df.columns), "mean_sh")
+        col_as    = dataset_column(list(df.columns), "amp_sh")
 
         # Optional out-of-phase columns: phases in degrees with respect to axial.
         # If not present in a workbook, we fall back to 0° (in-phase).
         try:
-            col_pr = find_col(list(df.columns), colmap_tokens["phase_rad"])
+            col_pr = dataset_column(list(df.columns), "phase_rad")
         except KeyError:
             col_pr = None
         try:
-            col_pt = find_col(list(df.columns), colmap_tokens["phase_tor"])
+            col_pt = dataset_column(list(df.columns), "phase_tor")
         except KeyError:
             col_pt = None
+
+        revised = "Phase AXIAL load (°)" in df.columns
+        try:
+            col_pa = dataset_column(list(df.columns), "phase_ax")
+        except KeyError:
+            col_pa = None
 
         # Initialize container for this material (structure preserved; only adds keys inside "material")
         data[material_name] = {
@@ -391,7 +390,11 @@ def import_experimental_data_grouped_by_material(
                 "c0": c0_opt,
 
             },
-            "source": {"workbook": str(fp), "summary_sheet": "Summary", "dataset_sheet": "Dataset"},
+            "source": {"workbook": str(fp), "summary_sheet": "Summary", "dataset_sheet": "Dataset",
+                       "summary_average_row": avg_row, "format": "revised" if revised else "legacy"},
+            "identity_issues": identity_issues,
+            "declared_material_names": declared,
+            "source_property_rows": source_rows,
             "excluded_observations": [],
             "cases": {}
         }
@@ -407,6 +410,10 @@ def import_experimental_data_grouped_by_material(
                     {"excel_row": int(idx) + 2, "reason": "invalid cycle count", "test_status": status})
                 continue
 
+            loading_issues = []
+            if revised and any(to_float_or_none(row[c]) is None for c in
+                               [col_mr, col_ar, col_max, col_aax, col_ms, col_as]):
+                loading_issues.append("Missing stress component; applied forces/moments are not substituted")
             mr = to_float_or_zero(row[col_mr]); ar = to_float_or_zero(row[col_ar])
             ma = to_float_or_zero(row[col_max]); aa = to_float_or_zero(row[col_aax])
             ms = to_float_or_zero(row[col_ms]);  aS = to_float_or_zero(row[col_as])
@@ -431,6 +438,18 @@ def import_experimental_data_grouped_by_material(
                     {"excel_row": int(idx) + 2, "reason": "non-finite loading input", "test_status": status})
                 continue
 
+            phi_a_deg = to_float_or_zero(row[col_pa]) if col_pa is not None else 0.0
+            phi_r_deg -= phi_a_deg
+            phi_t_deg -= phi_a_deg
+            if revised:
+                frequencies = []
+                for amp, column in [(ar, "Freq RADIAL load [Hz]"), (aa, "Freq AXIAL load[Hz]"),
+                                    (aS, "Freq TORSIONAL load [Hz]")]:
+                    value = to_float_or_none(row.get(column))
+                    if amp != 0 and value is not None:
+                        frequencies.append(value)
+                if frequencies and not np.allclose(frequencies, frequencies[0]):
+                    loading_issues.append("Different active loading frequencies are unsupported by the single-harmonic model")
             phi_r = math.radians(float(phi_r_deg))
             phi_t = math.radians(float(phi_t_deg))
 
@@ -455,6 +474,9 @@ def import_experimental_data_grouped_by_material(
             data[material_name]["cases"][case_id] = {
                 "meta": {
                     "Nf_cycles": float(Nf),
+                    "loading_issues": loading_issues,
+                    "experimental_metadata": {str(k): (None if is_nullish(v) else v)
+                                              for k, v in row.items() if "picture" not in str(k).lower()},
                     "test_status": status,
                     "runout_flag": str(row[col_run]),
                     "specimen_id": str(row.get("Specimen name", idx)),
