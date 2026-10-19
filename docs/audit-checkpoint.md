@@ -52,9 +52,18 @@ within float64 rounding. FIN and FIN_ext agree for both algorithms.
 Known limitations are complete single-harmonic histories and the supplied finite
 plane grid; normal-extrema float64 arithmetic retains existing limitations. No
 experimental validation or compatible MCC damage-life calibration is claimed.
-Next action: publish the final verified documentation/input-validation commit,
-open one review PR and check its published tree and CI status. Do not merge it,
-implement Phase 3, edit JSON records or activate alternative-amplitude life.
+Phase 2 is complete in [PR #8](https://github.com/andreachiocca/multiaxial-fatigue/pull/8),
+open and unmerged on `feat/findley-shear-amplitude`. Verified implementation and
+documentation commit is `50dabaf1c7f7c38b0af34ec8074d1f60758d0093`. The published
+Git tree matches the tested local tree exactly. Both GitHub quality workflows
+passed for that commit: push run 39248633505 and PR run 39248694751. This later
+checkpoint-only status commit does not alter numerical code or test definitions.
+
+Next action is human review of PR #8. Keep it open without merge. No tests remain
+outstanding for Phase 2. Phase 3 requires separate approval and resolved algorithm/
+definition-version metadata with dependency-scoped calibration compatibility
+before production life prediction can use alternative amplitudes. Do not edit
+JSON records, enable a global option or apply MCE curves to MCC damage.
 
 ## Previous phase, independent harmonic shear amplitudes
 
