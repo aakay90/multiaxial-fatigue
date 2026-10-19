@@ -115,6 +115,10 @@ class HarmonicAmplitudeTests(unittest.TestCase):
                      ([0, 0], [np.inf, 0]), ([1j, 0], [0, 0]), (['1', '2'], [0, 0])]:
             with self.subTest(a=a, b=b), self.assertRaises((TypeError, ValueError)):
                 shear_amplitude(a, b)
+        if np.finfo(np.longdouble).tiny < np.longdouble(np.nextafter(0., 1.)):
+            extended_tiny = np.array([np.finfo(np.longdouble).tiny, 0], dtype=np.longdouble)
+            with self.assertRaises(ValueError):
+                shear_amplitude(extended_tiny, [0, 0])
         for name in ['method_default', 'mcc', 'MCC', '', None, [], 1]:
             with self.subTest(name=name), self.assertRaises(ValueError):
                 shear_amplitude([1, 2], [3, 4], algorithm=name)

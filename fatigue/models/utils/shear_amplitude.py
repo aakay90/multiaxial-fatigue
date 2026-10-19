@@ -19,12 +19,12 @@ def _coefficients(sine, cosine):
         raw = np.asarray(value)
         if raw.dtype.kind not in 'biuf':
             raise TypeError('Harmonic coefficients must be real numeric arrays')
-        with np.errstate(over='ignore', invalid='ignore'):
+        with np.errstate(over='ignore', invalid='ignore', under='ignore'):
             array = np.asarray(raw, dtype=np.float64)
         if array.ndim < 1 or array.shape[-1] != 2:
             raise ValueError('Each coefficient array must have shape (..., 2)')
-        if not np.isfinite(array).all():
-            raise ValueError('Harmonic coefficients must be finite in float64')
+        if not np.isfinite(array).all() or np.any((raw != 0) & (array == 0)):
+            raise ValueError('Harmonic coefficients must be finite and nonzero values must survive float64 conversion')
         arrays.append(array)
     a, b = arrays
     if a.shape != b.shape:

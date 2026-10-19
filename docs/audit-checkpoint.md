@@ -33,9 +33,31 @@ input rejection, existing RSS/engineering-strain conventions, BP equivalence,
 and two MATLAB-equation load reconstructions. Ruff passed for both new files.
 Tests first failed on the absent module, then passed after implementation.
 
-Next action is to publish this tested numerical milestone, write the concise
-reference/limitation note, run all existing tests and check the protected trees
-against `1154f86`. Then publish documentation and open a dedicated unmerged PR.
+The tested numerical milestone is published as `88229e93e2a2fb3527f23164537e2ab0c513351f`.
+The technical note is [Independent harmonic shear amplitudes](shear-amplitude.md).
+The complete suite passed all 70 tests (58 existing plus 12 new), without skips.
+Ruff, documentation links, generated method catalogue and diff checks passed.
+A final input-validation check also rejects nonzero extended-precision values
+that would silently become zero when converted to float64.
+
+A protected-path diff against `1154f86` confirmed unchanged production helpers,
+numbered scripts, methods, criteria, requirements, calibrations, Excel inputs and
+reference results. Only the new module, tests, note and this checkpoint belong to
+this phase. The new module is not imported by any production file. Thus the
+existing numerical implementation and its calibration fingerprints are preserved.
+No new independent experimental fatigue validation is claimed.
+
+The algebraic MATLAB files have identical SHA-256 `e96f70827fc0ce5c158ab56ade21af3a9eb8e4b72e47f205c5f3c93ab08092e5`.
+Their active expression and commented alternative were reconstructed in two test
+cases. Neither native MATLAB/Octave nor the PragTic application was executed.
+The appendix MAT comparison array was inspected for scope, not used as a pure
+amplitude benchmark. A 100,000-path timing comparison measured about 0.020 s for
+scaled MCC versus 0.062 s for NumPy SVD; it is a local observation only.
+
+Next action is to publish the final documentation and validation update on the
+same branch, open the dedicated PR, verify its checks and record its link here.
+Leave the PR open without merge. Phase 2 must separately review method-specific
+integration, effective-algorithm metadata and dependency-scoped compatibility.
 The following dataset checkpoint is a retained record of completed earlier work.
 
 ## Previous dataset workflow checkpoint
