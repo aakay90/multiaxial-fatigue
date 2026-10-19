@@ -1,16 +1,16 @@
 # Revised experimental inputs and comparison subsets
 
-Publication of the twelve supplied workbooks remains blocked by automatic review.
-The public branch therefore retains its previous active inputs. Local tests used
-the complete revised collection. The original attachment can be installed after
-reviewing the dry-run report without modifying measured workbook cells.
+The user explicitly authorised publication of the twelve supplied workbooks,
+including raw observations and embedded content, on 19 October 2026. The active
+collection is installed without rewriting measured cells. The installer remains
+available for reproducing this migration from the original attachment.
 
 ```bash
 python tools/install_revised_dataset.py exp_data.zip
 python tools/install_revised_dataset.py exp_data.zip --apply
 ```
 
-The October 2026 collection contains twelve revised workbooks. After installation, the active folder
+The October 2026 collection contains twelve revised workbooks. The active folder
 also retains Al7075_T6, which was absent from that collection. Previous active
 workbooks are preserved byte for byte under
 `Experimental_Data/archive/pre-dataset-migration/`. The importer reads only the
@@ -61,8 +61,10 @@ available even when no plain cases are eligible.
 | En3B and GJS600 | The revised observations are marked notched and therefore outside the present plain-specimen analysis. |
 | Several added materials | nu is missing and/or all observations are run-outs. These conditions prevent strain reconstruction or ordinary master-curve fitting where required. |
 
-The locally generated `docs/data/dataset-migration.json` records comparison with the seven supplied old
-workbooks. This detailed Summary export is withheld from publication with the raw inputs. Regenerate it with the audit tool, including header changes, properties, source rows and shared stresses.
+The generated migration audit records comparison with the seven supplied old
+workbooks, including header changes, properties, source rows and shared stresses. The detailed
+source-property export is generated locally by the audit tool rather than
+distributed with the workbooks.
 The supplied old collection and the previous repository inputs are different
 snapshots. Do not assume that the same filename gives the same calibration inputs.
 The 56 shared 42CrMo4_QT and 44 shared AISI316L observations retain their supplied
@@ -114,7 +116,7 @@ the existing slope rule. Flat curves retain their existing damage-space comparis
 When `--run` is used, actual exported prediction and failure/run-out counts are
 recorded separately. Preflight availability is not a numerical accuracy ranking.
 The checked-in matrix describes the supplied revised collection using the retained standard-grid
-records; regenerate it after installing that collection. Until then, the public checkout uses the previous inputs; example calibrations generated under temporary folders are not installed
+records; regenerate it after changing that collection; example calibrations generated under temporary folders are not installed
 as production calibrations.
 
 ## Common failure observations
@@ -165,8 +167,7 @@ Regenerate a dataset audit with
 Keep subsequent milestones and remaining source questions in the single
 [development checkpoint](audit-checkpoint.md).
 
-Three tests using the full revised collection are skipped when its workbook files
-are absent. They passed locally before publication. Synthetic schema tests and
-the archived public-data pipeline remain executable without the new files.
-The external data-publication block does not constitute a passing remote test
-of the withheld collection.
+All 58 automated tests execute with the revised collection installed, including
+the three full-collection checks previously skipped while its publication was
+pending. These checks remain optional when a contributor works without that
+collection.

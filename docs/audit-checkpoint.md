@@ -13,7 +13,7 @@ is `dfb514da82bd2792dd1d4da86fc0bb9dc9891e79`. Direct Git push has no credential
 publication uses the GitHub connector. Local milestone history is retained.
 
 - The tested local migration used 12 revised workbooks plus unchanged Al7075_T6, absent from
-  the revised collection. The public branch retains the previous active inputs. Four previous active files remain byte-identical in
+  the revised collection. The user explicitly approved publication on 19 October 2026; the revised collection is now installed locally for publication on the same PR. Four previous active files remain byte-identical in
   `Experimental_Data/archive/pre-dataset-migration` for reproducible regressions.
 - Header aliases are explicit. Stress columns remain authoritative; force and
   moment columns are preserved metadata, never silently substituted. Phases are
@@ -35,8 +35,8 @@ publication uses the GitHub connector. Local milestone history is retained.
 links, method catalogue and `git diff --check` passed. The original numerical
 fixtures run against the archived original active workbooks, not substituted
 new data. The attached previous collection was compared with the new collection
-using `tools/audit_dataset_migration.py`; structured results are in
-`docs/data/dataset-migration.json`. All 56 shared 42CrMo4_QT and 44 AISI316L
+using `tools/audit_dataset_migration.py`; the detailed structured audit was
+generated locally and can be regenerated from the supplied source files. All 56 shared 42CrMo4_QT and 44 AISI316L
 observations retain the supplied stresses. AISI316L properties changed.
 
 Script 0 with n1=3, n2=6, grid=7, refine=2 explicitly generated/reused all 15
@@ -74,31 +74,27 @@ methods; run-out-only observations do not define an S–N curve. Steel empirical
 estimates are blocked for non-steels unless the required fatigue properties are
 supplied. Published historical results are unchanged.
 
-Publication of the raw workbook tree was rejected by automatic review. The
-repository was verified through the connector (owner andreachiocca, admin/push
-permission, public visibility); all 12 files match the user-supplied ZIP exactly.
-The instructions request replacement of active inputs and GitHub publication,
-but the tree operation still requires explicit user confirmation for publishing
-raw workbooks and embedded content. Do not bypass the rejection through Git or
-an indirect reference. No new-workbook tree was attached to the remote branch.
+The previous raw-workbook publication block was resolved by the user's explicit
+"si autorizzo" on 19 October 2026, answering the request to publish all twelve
+workbooks, raw observations and embedded content in the public repository.
+The same PR #6 is used without merge. The supplied ZIP was installed with
+`tools/install_revised_dataset.py --apply`; the detailed migration audit and
+eligibility snapshots are regenerated. Original workbook bytes are preserved.
+The complete pre-publication recovery history remains at local branch
+`recovery/revised-dataset-local-20261019` (`4111686`).
 
-The code-only publication preserves all previous public active files, adds
-byte-identical public baseline archives and excludes the 12 revised files and the
-detailed source-property export `docs/data/dataset-migration.json`. Local recovery branch `recovery/revised-dataset-local-20261019` at `4111686`
-retains the complete tested migration and its documentation, including `866d24d`. The provided attachment and
-`tools/install_revised_dataset.py` allow recovery after approval. Three full-data
-tests are skipped remotely while the revised files are withheld; do not count
-those as remote validation. Source-name restrictions remain as described above.
+Automatic review accepted workbook publication under this approval but rejected
+the additional detailed audit of source-property data. That optional JSON export
+is excluded from the publication; its generator remains available. Do not publish
+that extra report without separate approval. This does not block publishing the
+explicitly authorised twelve workbooks.
 
-Next action requires explicit user approval to publish all twelve supplied Excel
-workbooks, including raw observations and embedded images, to the public repository.
-The code and installer are already concrete and reviewable in PR #6. After approval,
-run `python tools/install_revised_dataset.py '../upload/exp_data(1).zip' --apply`
-(or prepare that attachment again if the scratch path no longer exists), verify
-that all 58 tests execute without skips, regenerate the audit and eligibility
-exports, and publish the dataset on the same branch/PR. Recheck CI and keep the
-PR unmerged. Do not repeat the implementation or attempt another publication
-of the blocked data before approval. No active code/test blocker remains.
+The fresh 58-test run passed without skips. Ruff, documentation links, the
+method catalogue and diff checks passed. The eligibility snapshot was regenerated.
+Next action is to publish the revised data and updated documentation on PR #6,
+verify the remote tree and GitHub CI, then record publication in the PR discussion. Do not merge.
+Scientific source restrictions listed above remain explicit and are not repaired
+by changing measured data. No additional publication permission is required.
 Resume from here, not the historical audit.
 
 ## Historical scientific audit, 7 October 2026

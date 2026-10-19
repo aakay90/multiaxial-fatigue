@@ -41,9 +41,9 @@ replace an archive containing different originals. The importer warns about old
 coefficient columns and ignores their values, so Excel and JSON are never competing
 sources. See the [workflow](../docs/calibration-workflow.md) before migration.
 
-The prepared October 2026 collection contains twelve revised files plus retained
-Al7075_T6. Its public release is pending explicit data-publication approval;
-the public checkout retains the previous active files until installation. The previous repository inputs remain byte-identical in
+The October 2026 active collection contains twelve revised files plus retained
+Al7075_T6. The supplied revised workbooks are preserved without editing measured
+cells, including their embedded content. The previous repository inputs remain byte-identical in
 `archive/pre-dataset-migration/`. Numeric filename prefixes do not form part of
 material identity. Unresolved Summary identities and inconsistent fatigue-strength
 reference conditions are reported before assessment. See the
