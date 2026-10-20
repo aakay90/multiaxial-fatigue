@@ -1,0 +1,158 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=22mm,headheight=14pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{lmodern,microtype,amsmath,amssymb,booktabs,array,longtable,xcolor,hyperref,fancyhdr,enumitem}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue!55!black}
+\definecolor{ink}{HTML}{17324A}
+\definecolor{rule}{HTML}{CAD4DA}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.1}
+\setlist[itemize]{leftmargin=5mm,topsep=2pt,itemsep=1pt}
+\setlist[enumerate]{leftmargin=6mm,topsep=2pt,itemsep=1pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small\color{ink}FABER WG4.3  |  Scientific review}\fancyhead[R]{\small Susmel N04}\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\newcommand{\sct}[1]{\needspace{5\baselineskip}\vspace{7pt}{\large\bfseries\color{ink}#1}\par\vspace{2pt}}
+\newcommand{\lab}[1]{\textbf{#1.}}
+\newcommand{\MPa}{\,\mathrm{MPa}}
+\newcommand{\sn}{\sigma_{n}}
+\newcommand{\ta}{\tau_{a}}
+\renewcommand{\theequation}{D\arabic{equation}}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries\color{ink}Scientific implementation dossier}\par
+\vspace{3pt}{\large Susmel and Lazzarin modified W\"ohler curve, 2002}\par
+\vspace{8pt}{\small Independent review for the FABER WG4.3 Numerical Developer  |  19 October 2026}\par
+\end{center}
+
+\sct{A  Executive assessment}\phantomsection\label{sec:assessment}
+\textbf{Method N04. READY FOR RESTRICTED IMPLEMENTATION.} The full 2002 paper establishes the original high-cycle, stress-based modified W\"ohler curve method for constant-amplitude smooth specimens. Its fatigue-limit form can be specified and checked independently. A life-valued implementation additionally requires matched fully reversed axial and torsional stress-life curves at the same reference life. Those curve slopes and their provenance are not supplied by the paper's Table 1. The present benchmarks do not amount to experimental predictive validation.
+
+The principal numerical requirements are the \emph{minimum-circumscribed-circle} (MCC) radius of each physical shear-traction trajectory, a continuous or converged search for planes of maximum \emph{shear amplitude}, and signed normal-stress extrema on the selected plane. Tied maximum-shear planes can have different normal stresses. The 2002 paper gives no tie rule. Such cases need an explicit policy or a reported set of possible outputs. A generic RSS/MCE harmonic amplitude or a maximum-full-damage plane would define a different method.
+
+Independent checks below cover reversed axial and torsional limits, proportional and $90^\circ$ non-proportional axial--torsional histories, tensile mean stress, a two-dimensional shear ellipse, and unresolved zero-shear and tied-plane limits. No production repository file was changed. The repository was read at \texttt{main} commit \texttt{1ffb8896d1447e9f9f40f37f0c8c7dd08a563251}.
+
+\sct{B  Source register and method identity}\phantomsection\label{sec:sources}
+\small
+\begin{longtable}{@{}p{9mm}p{89mm}p{58mm}@{}}
+\toprule ID & Reference or source & Evidence and checked extent\\\midrule
+\endhead
+P1 & L. Susmel and P. Lazzarin, ``A bi-parametric W\"ohler curve for high cycle multiaxial fatigue assessment,'' \emph{Fatigue \& Fracture of Engineering Materials \& Structures} 25 (2002) 63--78. \href{https://doi.org/10.1046/j.1460-2695.2002.00462.x}{doi:10.1046/j.1460-2695.2002.00462.x} \cite{susmel2002}. & P; full uploaded PDF. pp. 65, 68--71, Eqs. (1), (5), (7)--(11), Table 1. Publisher metadata checked.\\
+P2 & P. Lazzarin and L. Susmel, ``A stress-based method to predict lifetime under multiaxial fatigue loadings,'' \emph{FFEMS} 26 (2003) 1171--1187. \href{https://doi.org/10.1046/j.1460-2695.2003.00723.x}{doi:10.1046/j.1460-2695.2003.00723.x} \cite{lazzarin2003}. & P; publisher abstract only. Low/medium-cycle extension; equations not checked.\\
+P3 & L. Susmel, R. Tovo and P. Lazzarin, ``The mean stress effect on the high-cycle fatigue strength from a multiaxial fatigue point of view,'' \emph{International Journal of Fatigue} 27 (2005) 928--943. \href{https://doi.org/10.1016/j.ijfatigue.2004.11.012}{doi:10.1016/j.ijfatigue.2004.11.012} \cite{susmel2005}. & P; author repository abstract only. Mean-stress and applicability discussion; equations not checked.\\
+P4 & L. Susmel, ``Multiaxial fatigue limits and material sensitivity to non-zero mean stresses normal to the critical planes,'' \emph{FFEMS} 31 (2008) 295--309. \href{https://doi.org/10.1111/j.1460-2695.2008.01228.x}{doi:10.1111/j.1460-2695.2008.01228.x} \cite{susmel2008}. & P; publisher abstract only. Material mean-stress sensitivity variant; equations not checked.\\
+R1 & WG4.3 \href{https://github.com/andreachiocca/multiaxial-fatigue/blob/1ffb8896d1447e9f9f40f37f0c8c7dd08a563251/METHODS.md\#n04}{N04 catalogue}, \href{https://github.com/andreachiocca/multiaxial-fatigue/blob/1ffb8896d1447e9f9f40f37f0c8c7dd08a563251/ROADMAP.md}{roadmap}, \href{https://github.com/andreachiocca/multiaxial-fatigue/blob/1ffb8896d1447e9f9f40f37f0c8c7dd08a563251/docs/contribution-issues/N04.md}{prepared N04 brief}. & R; text checked. N04 is not implemented, not tested, and ranked 8. The catalogue requested the original paper.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\lab{Variant map} P1 is the selected N04 identity and is directly aligned with the catalogue's cited 2002 article. P2 extends the approach to a different life regime. P3 examines mean-stress limits. P4 introduces a material mean-stress sensitivity parameter. These later articles are materially relevant but their full equations were not available here; no formula from them is imported into the 2002 specification. No corrigendum to P1 was located in the targeted publisher/DOI search, which is not proof that none exists. The later welded-joint and critical-distance branches lie outside the present plain-specimen scope.
+
+\sct{C  Mathematical specification of P1}\phantomsection\label{sec:math}
+\lab{Inputs and tensor convention} Let the physical, symmetric Cauchy stress tensor in a fixed orthonormal frame be
+\begin{equation}
+\boldsymbol\sigma(\theta)=\boldsymbol\sigma_m+\boldsymbol\sigma_s\sin\theta+\boldsymbol\sigma_c\cos\theta,\qquad 0\leq\theta<2\pi. \label{eq:stress-history}
+\end{equation}
+All six independent stress components are in MPa. Off-diagonal components are physical shear stresses, not engineering shear strains. The common frequency and simultaneous phase coefficients are essential; two independently selected endpoint tensors do not specify the history. For a plane with unit normal $\mathbf n$, $\mathbf n$ and $-\mathbf n$ represent the same plane. With $P=I-\mathbf n\mathbf n^T$,
+\begin{equation}
+\sn(\theta)=\mathbf n^T\boldsymbol\sigma(\theta)\mathbf n,\qquad
+\boldsymbol\tau(\theta)=P\boldsymbol\sigma(\theta)\mathbf n. \label{eq:traction}
+\end{equation}
+The signed maximum normal stress follows P1 Eq. (1):
+\begin{equation}
+\sigma_{n,m}=\mathbf n^T\boldsymbol\sigma_m\mathbf n,\quad
+\sigma_{n,a}=\sqrt{(\mathbf n^T\boldsymbol\sigma_s\mathbf n)^2+(\mathbf n^T\boldsymbol\sigma_c\mathbf n)^2},\quad
+\sigma_{n,\max}=\sigma_{n,m}+\sigma_{n,a}. \label{eq:normal-extrema}
+\end{equation}
+P1 does not prescribe clipping negative $\sigma_{n,\max}$ or negative mean stress in Eqs. (5) and (8)--(11). Any clipping is a separate convention.
+
+\lab{Amplitude and plane} P1 p. 65 and Fig. 2 define $\ta(\mathbf n)$ as the radius of the minimum circle enclosing the complete in-plane shear-vector path. Define $\mathbf a=P\boldsymbol\sigma_s\mathbf n$ and $\mathbf b=P\boldsymbol\sigma_c\mathbf n$. For the complete, centred harmonic ellipse, central symmetry fixes the circle centre at the mean shear vector. Its exact radius is
+\begin{equation}
+\ta(\mathbf n)=\max_\theta\|\mathbf a\sin\theta+\mathbf b\cos\theta\|
+=\sqrt{\lambda_{\max}\!\begin{pmatrix}\mathbf a\cdot\mathbf a&\mathbf a\cdot\mathbf b\\\mathbf a\cdot\mathbf b&\mathbf b\cdot\mathbf b\end{pmatrix}}. \label{eq:mcc-amplitude}
+\end{equation}
+Equation D4 is an independent analytical reduction of P1's geometric definition, not a new published equation. The shear range on a centred harmonic ellipse's longest chord is $2\ta$. The RSS/MCE combination $\sqrt{\|\mathbf a\|^2+\|\mathbf b\|^2}$ is generally larger and is not P1's definition.
+
+The P1 initiation plane is any $\mathbf n_*\in\arg\max_{\|\mathbf n\|=1}\ta(\mathbf n)$, not an argmax of the combined damage expression. In P1's coordinates, $\mathbf n=(\sin\theta_p\cos\phi,\sin\theta_p\sin\phi,\cos\theta_p)$. Numerical plane sampling approximates this continuous optimisation; an angular grid is not part of P1. For a tie with differing $\sigma_{n,\max}$, P1 is under-specified. An implementation must state its tie policy and cannot call it an original rule.
+
+\lab{Strength and life} On a selected plane, P1 Eq. (5) defines $\rho=\sigma_{n,\max}/\ta$, dimensionless when $\ta>0$. Equations (7)--(9) use a reference shear amplitude and inverse W\"ohler slope depending on $\rho$:
+\begin{equation}
+\tau_{A,\mathrm{Ref}}(\rho)=\tau_{A,\mathrm{Ref}}(0)+\rho[\tau_{A,\mathrm{Ref}}(1)-\tau_{A,\mathrm{Ref}}(0)],\quad
+N_f=N_{\mathrm{Ref}}\left[\frac{\tau_{A,\mathrm{Ref}}(\rho)}{\ta}\right]^{k_\tau(\rho)}. \label{eq:modified-wohler}
+\end{equation}
+The first relation is P1 Eq. (8). P1 p. 70 states that $k_\tau$ is also represented by a linear function when only axial and torsional curves exist, so its endpoint interpolation is $k_{\tau,0}+\rho(k_{\tau,1}-k_{\tau,0})$. This slope interpolation is stated in prose, not given an equation number. Both endpoint strengths and slopes must refer to a common $N_{\mathrm{Ref}}$, and the test definitions and fitted life interval must be recorded. Do not infer slopes from Table 1.
+
+If the reference values are fully reversed fatigue limits $\sigma_A$ and $\tau_A$, the axial maximum-shear plane has $\tau_{A,\mathrm{Ref}}(1)=\sigma_A/2$, while torsion has $\tau_{A,\mathrm{Ref}}(0)=\tau_A$. P1 Eqs. (10)--(11) become
+\begin{equation}
+c=\tau_A-\frac{\sigma_A}{2},\quad
+D=\ta+c\rho=\ta+c\frac{\sigma_{n,\max}}{\ta},\quad
+U=\frac{D}{\tau_A};\qquad U\leq1\ \text{at the specified fatigue limit}. \label{eq:endurance-index}
+\end{equation}
+$D$ has stress units and $U$ is a dimensionless utilisation, introduced here for transparent testing. P1's inequality is the $D\leq\tau_A$ part. It does not imply a generic repository damage-life master curve. The local assumptions are high-cycle behaviour, predominantly elastic macroscopic response, homogeneous isotropic material, smooth/plain surface stress, and Stage I shear-dominated initiation (P1 pp. 65--68). The paper also considers blunt notches, but this dossier does not specify that branch.
+
+\sct{D  Independent benchmark register}\phantomsection\label{sec:benchmarks}
+All tensors below are in MPa and use $(x,y,z)$. Let $E_{xx}=\mathbf e_x\mathbf e_x^T$ and $H_{ij}=\mathbf e_i\mathbf e_j^T+\mathbf e_j\mathbf e_i^T$. The values $\sigma_A=215.8\MPa$ and $\tau_A=127.2\MPa$ are the ``carbon steel 0.35\% C'' smooth-specimen row of P1 Table 1. They serve only as published material inputs. All computed outputs below are \emph{independent mathematical examples}, not numerical results reported in P1 or experimental validation. Here $c=19.3\MPa$ and $N_{\mathrm{Ref}}$ is the life at which those limits were reported. No slope or numerical $N_f$ is claimed.
+
+\small
+\begin{longtable}{@{}p{9mm}p{70mm}p{77mm}@{}}
+\toprule ID & Harmonic coefficients and critical plane & Intermediates and expected result\\\midrule
+\endhead
+B1 & $\sigma_s=215.8E_{xx}$; $\sigma_m=\sigma_c=0$. Any $|n_x|=1/\sqrt2$, with the remaining unit component perpendicular to $x$. & $\ta=107.9$, $\sigma_{n,\max}=107.9$, $\rho=1$. $D=127.2\MPa$, $U=1.000000$.\\
+B2 & $\sigma_s=127.2H_{xy}$; $\sigma_m=\sigma_c=0$. $\mathbf n=\mathbf e_x$ or $\mathbf e_y$, up to sign. & $\ta=127.2$, $\sigma_{n,\max}=0$, $\rho=0$. $D=127.2\MPa$, $U=1.000000$.\\
+B3 & $\sigma_s=200E_{xx}+80H_{xy}$; other coefficients zero. $\mathbf n=(\cos\alpha,\sin\alpha,0)$, $2\alpha=-\tan^{-1}(100/80)$, or its orthogonal plane. & $\ta=\sqrt{100^2+80^2}=128.062485$; $\sigma_{n,\max}=100$; $\rho=0.780869$. $D=143.133253\MPa$, $U=1.125261$.\\
+B4 & $\sigma_s=220E_{xx}$, $\sigma_c=80H_{xy}$, $\sigma_m=0$. Quarter-cycle phase shift; listed planes $\mathbf n=(\mathbf e_x\pm\mathbf e_y)/\sqrt2$. & $\ta=110$; $\sn=110\sin\theta\pm80\cos\theta$; $\sigma_{n,\max}=136.014705$; $\rho=1.236497$. $D=133.864398\MPa$, $U=1.052393$ on those planes.\\
+B5 & $\sigma_m=100E_{xx}$, $\sigma_s=200E_{xx}$, $\sigma_c=0$; $|n_x|=1/\sqrt2$. & $\ta=100$, $\sigma_{n,m}=50$, $\sigma_{n,a}=100$, $\sigma_{n,\max}=150$, $\rho=1.5$. $D=128.950000\MPa$, $U=1.013758$.\\
+B6 & $\sigma_s=100H_{xz}$, $\sigma_c=60H_{yz}$, $\sigma_m=0$; $\mathbf n=\mathbf e_z$ is a maximum-shear plane. & $\boldsymbol\tau=100\mathbf e_x\sin\theta+60\mathbf e_y\cos\theta$. MCC $=100$, RSS/MCE $=116.619038$, $\sigma_{n,\max}=0$. $D=100\MPa$, $U=0.786164$.\\
+B7 & $\sigma_s=160E_{xx}$, $\sigma_c=100H_{xy}$. $\mathbf e_x$ and $\mathbf e_y$ are tied maximum-shear normals. & $\ta=100$ on both. $\mathbf e_x$ gives $\sigma_{n,\max}=160$, $D=130.88\MPa$. $\mathbf e_y$ gives $\sigma_{n,\max}=0$, $D=100\MPa$. P1 has no tie rule.\\
+B8 & $\sigma_s=pI$, $p>0$, other coefficients zero; any plane. Include $p=0$ as the zero-load limit. & $\ta=0$ on every plane. $\rho=\sigma_{n,\max}/\ta$ is undefined ($\sigma_{n,\max}=p$ if $p>0$). No finite P1 output.\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\lab{B4 plane-search qualification} The tabulated B4 result is an exact prescribed-plane value, not a unique global $D$. At quadrature, the maximum instantaneous shear is $\max(110,80)=110\MPa$. Every plane with $|n_x|=1/\sqrt2$ attains that global MCC amplitude at the axial peak. The additional maximiser $\mathbf n=(\mathbf e_x+\mathbf e_z)/\sqrt2$ has $\sigma_{n,\max}=110\MPa$, $\rho=1$, $D=129.3\MPa$ and $U=1.016509$. More generally, the normal maximum on this family lies between $110$ and $\sqrt{18500}\MPa$, giving $129.3\leq D\leq133.864398\MPa$ for the stated material. This independent tie analysis qualifies the previous B4 global-plane interpretation without changing its original prescribed-plane result; P1 supplies no tie rule.
+
+\lab{Reproducibility and tolerance} B1--B6 are exact prescribed-plane analytical targets; the printed decimals are rounded. Use $10^{-8}\MPa$ absolute and $10^{-10}$ relative for an exact per-plane harmonic formula in float64, with an absolute check applied near zero. For a finite plane grid, those tolerances apply only when the stated exact plane is explicitly included. Otherwise perform a mesh-refinement or optimisation-convergence study and report its observed error separately. The independent global-search target is the maximum $\ta$; B4 and B7 have no unique global $D$ under the unaugmented original plane rule. For B7, verify both candidate-plane results to $10^{-8}\MPa$ and recognise non-uniqueness. For B8, require an explicit unsupported/undefined outcome, not a finite scientific reference. The machine-readable cases include constant hydrostatic mean stress $\sigma_m=100I\MPa$, the original-type alternating hydrostatic history $\sigma_s=100I\MPa$, and zero loading. Each retains $\ta=0$ and undefined $\rho$, $D$ and $U$. The chosen positive value is an illustrative numerical test input, not a material property or a reported published result. A plane-normal sign reversal, tangent-basis rotation, global rigid rotation, time-origin shift and addition of a constant mean shear vector should leave B1--B6's $\ta$ unchanged, with physically appropriate changes only to normal stress when the added stress has a normal projection.
+
+For B3, the instantaneous principal-span theorem gives $\ta=\max_\theta(\lambda_1-\lambda_3)/2=\sqrt{(200/2)^2+80^2}$. For B4 and B7 the same theorem gives $\max(\sigma_{xx,a}/2,\tau_{xy,a})$ at quadrature; it follows because the harmonic shear path is centrally symmetric and its MCC centre is its mean. In B4 the axial peak controls; in B7 the torsion peak controls and produces the two tied planes. B6 is an intentionally full-rank ellipse that distinguishes the two amplitude definitions.
+
+\sct{E  Applicability, calibration and unresolved domain}\phantomsection\label{sec:applicability}
+P1 explicitly includes in-phase and out-of-phase constant-amplitude loading (abstract, pp. 68--69), and $\sigma_{n,\max}$ incorporates normal mean stress through Eq. (1). For smooth specimens the 2002 endpoint calibration requires matching fully reversed axial and torsional fatigue strengths; native life additionally requires both stress-life curves and their inverse slopes. A fatigue limit may be a test- or convention-dependent reference life, so its cycle count must be supplied rather than guessed. Failures used for fitting and run-outs must be kept distinct; neither Table 1 nor this investigation supplies independently held-out validation records.
+
+For $c>0$, P1's linear reference strength $\tau_A-c\rho$ becomes non-positive at $\rho\geq\tau_A/c$; this is $6.590674$ for the Table 1 material. The 2005 abstract discusses a critical-plane applicability limit, but its full text was not checked here. The numerical value above is merely the zero of P1 Eq. (8), not a verified 2005 cutoff. Negative $\rho$, strong compression, and high tensile mean stress extrapolate beyond the two calibration endpoints. The 2002 paper does not supply a complete admissibility policy for these regimes. No restriction to $0\leq\rho\leq1$ should be silently inferred either, since P1 discusses out-of-phase loading and mean stress.
+
+\sct{F  WG4.3 integration assessment}\phantomsection\label{sec:integration}
+At the inspected \texttt{main} revision, \href{https://github.com/andreachiocca/multiaxial-fatigue/blob/1ffb8896d1447e9f9f40f37f0c8c7dd08a563251/fatigue/imp/experimental_data.py}{\texttt{experimental\_data.py}} preserves $S_m,S_s,S_c$ for one harmonic and supplies symmetric stress tensors. \href{https://github.com/andreachiocca/multiaxial-fatigue/blob/1ffb8896d1447e9f9f40f37f0c8c7dd08a563251/fatigue/planes/sampling.py}{\texttt{sampling.py}} provides orthonormal candidate bases, with the normal as column three. \href{https://github.com/andreachiocca/multiaxial-fatigue/blob/1ffb8896d1447e9f9f40f37f0c8c7dd08a563251/fatigue/eval/evaluator.py}{\texttt{evaluator.py}} rotates tensors with $R^T\sigma R$ and reconstructs scalar normal extrema. These components are reusable after checking full-coverage and convergence requirements.
+
+The new \href{https://github.com/andreachiocca/multiaxial-fatigue/blob/1ffb8896d1447e9f9f40f37f0c8c7dd08a563251/fatigue/models/utils/shear_amplitude.py}{\texttt{shear\_amplitude.py}} computes exact harmonic \texttt{mcc\_harmonic} (the major singular value) and \texttt{mce\_harmonic}/RSS. It is deliberately unused by production criteria. The general evaluator's harmonic override uses $\sqrt{\|\mathbf a\|^2+\|\mathbf b\|^2}$ and encodes synthetic endpoint shear values for the existing two-loadstep critical-plane interface. B6 gives $116.619038\MPa$ there versus P1's $100\MPa$. The adapter therefore should not be assumed to implement P1 merely by adding an N04 plane formula. The repository's controlled Findley comparison is separate and need not be changed for this task.
+
+The \href{https://github.com/andreachiocca/multiaxial-fatigue/blob/1ffb8896d1447e9f9f40f37f0c8c7dd08a563251/fatigue/models/base.py}{\texttt{FatigueModel}} case interface accepts harmonics and can return \texttt{life\_cycles}; \href{https://github.com/andreachiocca/multiaxial-fatigue/blob/1ffb8896d1447e9f9f40f37f0c8c7dd08a563251/docs/adding-methods.md}{method guidance} directs native-life outputs away from a generic damage master curve. Material import already recognises fully reversed axial and torsional fatigue limits, but the two \emph{matched} stress-life slopes and their reference life require a documented source and calibration interface. The calibration store fingerprints numerical formulations and uses failures only; changing MCC/MCE identity or the tie policy must invalidate affected calibration records, without altering unrelated methods. The catalogue records N04 as missing, not as a broken implementation.
+
+\sct{G  Evidence gaps and discrepancy log}\phantomsection\label{sec:gaps}
+\begin{enumerate}
+\item \textbf{Source or variant ambiguity, verified.} P1 specifies maximum shear amplitude but no choice among equal-maximising planes. B7 demonstrates a $30.88\MPa$ difference in $D$ between its two listed planes. The new B4 qualification shows that its previously tabulated $D$ is also one prescribed-plane value in a tied global family. The scientific owner must approve a deterministic tie policy or a set-valued diagnostic before a unique output is promised.
+\item \textbf{Missing evidence, verified.} P1 Table 1 supplies fatigue limits but not the two complete curve slopes for the selected material. Obtain consistent axial/torsional failure data or documented curves at common $N_{\mathrm{Ref}}$ before claiming numerical native life benchmarks. The original full texts of P2--P4 are needed only if their extensions are requested; they are not prerequisites for the restricted P1 branch.
+\item \textbf{Implementation convention, verified.} WG4.3's general harmonic critical-plane path uses RSS/MCE while P1 uses MCC. B6 is a $16.619038\MPa$ per-plane counterexample. Select the existing MCC utility for N04, and identify its version in calibration metadata.
+\item \textbf{Missing evidence, significant.} P1 does not define $\rho$ at zero shear or a comprehensive policy beyond calibrated $\rho$ values. B8 must be rejected or flagged as outside the faithful 2002 calculation. The high-ratio and compressive-mean admissibility policy needs scientific approval.
+\item \textbf{Outside scope.} Blunt notches, stress gradients, welded joints, low/medium-cycle plastic response and variable-amplitude histories are not specified here for N04.
+\end{enumerate}
+
+\clearpage
+\sct{H  Developer handoff and decision}\phantomsection\label{sec:handoff}
+\begin{enumerate}
+\item Specify N04 explicitly as \emph{Susmel and Lazzarin 2002, smooth-specimen, constant-amplitude, linear-elastic high-cycle branch}. Accept symmetric physical stress harmonics, documented $\sigma_A,\tau_A$ at a common reference life, and, only for native life, matched axial/torsional stress-life slopes. Do not use a generic fitted damage curve as a surrogate for P1 Eq. (7).
+\item On each candidate plane use D2--D4, maximise MCC shear amplitude, then evaluate the signed normal maximum and D5 or D6 on that plane. Resolve tied planes by an explicitly approved convention. Reject zero shear and non-positive reference strength until a documented extension exists. Record the finite plane search and demonstrate convergence.
+\item Use B1--B6 as mandatory independent prescribed-plane numerical checks, B4 and B7 as tie-policy checks, and B8 as a domain check. Add frame, time-origin and tangent-basis invariance, grid refinement, and recalibration-identity tests. Preserve the pre-existing Findley branch and its ongoing development.
+\end{enumerate}
+\textbf{Final recommendation. READY FOR RESTRICTED IMPLEMENTATION.} A faithful fatigue-limit comparison and a native-life calculation with separately supplied matched curves are scientifically specified for this limited scope. The Scientific Reviewer should review the tie policy, calibrated life inputs and N04-specific numerical test results before broader claims. No new criterion review is initiated by this dossier.
+
+\phantomsection\label{sec:references}
+\begingroup\small\setlength{\parskip}{0pt}
+\bibliographystyle{plain}
+\bibliography{references}
+\endgroup
+
+\vfill
+{\footnotesize\color{ink}Evidence codes follow FABER WG4.3 Scientific Review and Evidence Protocol v1.1: P, original publication; I, independent derivation; R, repository observation. Numerical verification is not predictive validation.}\par
+\end{document}

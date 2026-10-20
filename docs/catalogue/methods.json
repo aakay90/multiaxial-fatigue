@@ -1560,7 +1560,8 @@
             "doi": "https://doi.org/10.1046/j.1460-2695.2002.00462.x",
             "reference_status": "Exact-title Crossref metadata checked; inherited prior-review method attribution; saved metadata in docs/research/doi-records.json",
             "bibliographic_record": "https://api.crossref.org/works/10.1046%2Fj.1460-2695.2002.00462.x",
-            "formulation_evidence": "Prior-review preliminary; obtain original paper before coding",
+            "formulation_evidence": "The 2002 original publication was examined in the N04 scientific review. Independent B1-B8 analytical benchmarks support a restricted implementation specification, not experimental predictive validation",
+            "scientific_review": "docs/scientific-reviews/N04-susmel/README.md",
             "principle": "Critical-plane stress ratio selects a fatigue curve; CA P/NP, F/L.",
             "loading_scope": "Critical-plane stress ratio selects a fatigue curve; CA P/NP, F/L.",
             "prediction_capability": "Critical-plane stress ratio selects a fatigue curve; CA P/NP, F/L.",
@@ -1592,7 +1593,7 @@
             "roadmap_rank": 8,
             "development_track": "prioritized_addition",
             "development_reason": "Established critical-plane life framework; ratio-dependent resistance adds substantial engineering capability.",
-            "reference_action": "DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria."
+            "reference_action": "Use the N04 scientific dossier for the 2002 formulation and independent benchmarks. Resolve maximum-shear-plane ties, zero-shear handling and matched axial/torsional stress-life curves before numerical implementation."
         },
         {
             "id": "N05",

@@ -211,7 +211,8 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Reference | A bi‐parametric Wöhler curve for high cycle multiaxial fatigue assessment, Fatigue & Fracture of Engineering Materials & Structures |
 | DOI | https://doi.org/10.1046/j.1460-2695.2002.00462.x |
 | Reference evidence | Exact-title Crossref metadata checked; inherited prior-review method attribution; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Prior-review preliminary; obtain original paper before coding |
+| Formulation evidence | The 2002 original publication was examined in the N04 scientific review. Independent B1-B8 analytical benchmarks support a restricted implementation specification, not experimental predictive validation |
+| Scientific review dossier | [docs/scientific-reviews/N04-susmel/README.md](../../docs/scientific-reviews/N04-susmel/README.md) |
 | Principle | Critical-plane stress ratio selects a fatigue curve; CA P/NP, F/L. |
 | Loading scope | Critical-plane stress ratio selects a fatigue curve; CA P/NP, F/L. |
 | Inputs / material parameters | S; normal/shear reference S–N curves, fatigue limits, published stress-ratio bounds. |
@@ -224,7 +225,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
 | Missing tasks | Dual-curve calibration, ratio cutoff/validity, native life mapping. No universal transfer of welded FAT curves to smooth specimens. |
-| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Reference retrieval action | Use the N04 scientific dossier for the 2002 formulation and independent benchmarks. Resolve maximum-shear-plane ties, zero-shear handling and matched axial/torsional stress-life curves before numerical implementation. |
 | Development disposition | prioritized_addition; Established critical-plane life framework; ratio-dependent resistance adds substantial engineering capability. |
 | Roadmap rank | 8 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |

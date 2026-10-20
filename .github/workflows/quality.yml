@@ -12,6 +12,7 @@ jobs:
           python-version: '3.11'
       - run: python tools/generate_method_docs.py --check
       - run: python tools/check_docs.py
+      - run: python tools/check_scientific_reviews.py
   tests:
     runs-on: ubuntu-latest
     steps:

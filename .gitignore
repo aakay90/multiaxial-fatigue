@@ -14,3 +14,11 @@ Results/current/
 Results/validation/
 .coverage
 htmlcov/
+docs/scientific-reviews/**/*.aux
+docs/scientific-reviews/**/*.bbl
+docs/scientific-reviews/**/*.blg
+docs/scientific-reviews/**/*.fdb_latexmk
+docs/scientific-reviews/**/*.fls
+docs/scientific-reviews/**/*.log
+docs/scientific-reviews/**/*.out
+docs/scientific-reviews/**/*.synctex.gz

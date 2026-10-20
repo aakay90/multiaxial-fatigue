@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.1",
+  "method_id": "N04-susmel",
+  "formulation": "Susmel and Lazzarin (2002) modified Woehler curve, smooth-specimen high-cycle fatigue-limit branch",
+  "readiness": "READY FOR RESTRICTED IMPLEMENTATION",
+  "provenance": {
+    "published_input": "Susmel and Lazzarin (2002), Table 1: carbon steel 0.35% C, smooth specimen",
+    "doi": "10.1046/j.1460-2695.2002.00462.x",
+    "expected_values": "Independent analytical derivations in N04-susmel.tex, section D; not publication-reported numerical results or external implementation output",
+    "equation_labels": ["eq:stress-history", "eq:traction", "eq:normal-extrema", "eq:mcc-amplitude", "eq:endurance-index"]
+  },
+  "conventions": {
+    "stress_unit": "MPa",
+    "phase_unit": "rad",
+    "history": "sigma(theta) = sigma_m + sigma_s sin(theta) + sigma_c cos(theta)",
+    "tensor_order": ["x", "y", "z"],
+    "off_diagonal": "physical Cauchy shear stress, not engineering shear strain",
+    "critical_plane": "global maximiser of MCC shear amplitude; n and -n denote one plane",
+    "tau_a": "minimum-circumscribed-circle radius of complete shear-vector path",
+    "rho": "sigma_n_max / tau_a, only when tau_a > 0",
+    "D": "tau_a + (tau_A - sigma_A/2) * rho, in MPa",
+    "U": "D / tau_A, dimensionless",
+    "zero_tensor": [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+    "verification_modes": {
+      "prescribed_plane": "Evaluate the exact harmonic formula on each numerical representative normal in critical_planes; compare stress-valued intermediates and D with absolute and relative float64 tolerances.",
+      "global_plane_search": "Optimise tau_a over unoriented unit normals. Compare the maximum tau_a target only after convergence; evaluate D on a maximising plane subject to the case's final_result_policy. A finite grid alone has no fixed 1e-8 MPa accuracy guarantee."
+    },
+    "tolerance": {
+      "absolute_stress_MPa": 1e-8,
+      "relative_positive_quantity": 1e-10,
+      "scope": "Exact prescribed-plane and closed-form float64 harmonic evaluation only; near zero use absolute tolerance.",
+      "global_search": "Demonstrate orientation-search convergence separately; no universal angular-grid tolerance is specified."
+    }
+  },
+  "material": {
+    "sigma_A_MPa": 215.8,
+    "tau_A_MPa": 127.2,
+    "c_MPa": 19.3,
+    "reference_life_cycles": null,
+    "note": "Table 1 supplies fatigue-limit strengths, not matched curve slopes or a numerical native-life benchmark."
+  },
+  "benchmarks": [
+    {
+      "id": "B1",
+      "description": "Fully reversed uniaxial tension-compression",
+      "loading": {"sigma_m_MPa": [[0,0,0],[0,0,0],[0,0,0]], "sigma_s_MPa": [[215.8,0,0],[0,0,0],[0,0,0]], "sigma_c_MPa": [[0,0,0],[0,0,0],[0,0,0]]},
+      "critical_planes": {"definition": "Any unit n with |n_x|=1/sqrt(2)", "representative_normals": [[0.7071067811865476,0.7071067811865476,0]], "uniqueness": "family, all same result"},
+      "expected": {"tau_a_MPa": 107.9, "sigma_n_max_MPa": 107.9, "rho": 1, "D_MPa": 127.2, "U": 1},
+      "verification": {"prescribed_plane": {"normals_ref": "critical_planes.representative_normals", "expected_ref": "expected", "tolerance_ref": "conventions.tolerance"}, "global_plane_search": {"max_tau_a_MPa": 107.9, "final_result_policy": "same on all maximum-shear planes", "tolerance_ref": "conventions.tolerance.global_search"}},
+      "derivation": "On a maximum-shear axial plane, tau_a=sigma_A/2 and sigma_n,max=sigma_A/2; D=tau_A.",
+      "source": "P1 Table 1 material input; P1 Eqs. (5), (10)-(11); independent plane calculation",
+      "tolerance_ref": "conventions.tolerance"
+    },
+    {
+      "id": "B2",
+      "description": "Fully reversed torsion",
+      "loading": {"sigma_m_MPa": [[0,0,0],[0,0,0],[0,0,0]], "sigma_s_MPa": [[0,127.2,0],[127.2,0,0],[0,0,0]], "sigma_c_MPa": [[0,0,0],[0,0,0],[0,0,0]]},
+      "critical_planes": {"definition": "n=e_x or n=e_y, up to sign", "representative_normals": [[1,0,0],[0,1,0]], "uniqueness": "two equivalent outcomes"},
+      "expected": {"tau_a_MPa": 127.2, "sigma_n_max_MPa": 0, "rho": 0, "D_MPa": 127.2, "U": 1},
+      "verification": {"prescribed_plane": {"normals_ref": "critical_planes.representative_normals", "expected_ref": "expected", "tolerance_ref": "conventions.tolerance"}, "global_plane_search": {"max_tau_a_MPa": 127.2, "final_result_policy": "same on all maximum-shear planes", "tolerance_ref": "conventions.tolerance.global_search"}},
+      "derivation": "Both listed planes have maximum shear amplitude tau_A and zero normal traction.",
+      "source": "P1 Table 1 material input; P1 Eqs. (5), (10)-(11); independent plane calculation",
+      "tolerance_ref": "conventions.tolerance"
+    },
+    {
+      "id": "B3",
+      "description": "Proportional combined axial-torsional loading",
+      "loading": {"sigma_m_MPa": [[0,0,0],[0,0,0],[0,0,0]], "sigma_s_MPa": [[200,80,0],[80,0,0],[0,0,0]], "sigma_c_MPa": [[0,0,0],[0,0,0],[0,0,0]]},
+      "critical_planes": {"definition": "n=(cos(alpha),sin(alpha),0), 2*alpha=-atan(100/80), or its orthogonal plane", "representative_normals": [[0.9013032363068559,-0.4331887304891343,0],[0.4331887304891343,0.9013032363068559,0]], "angle_alpha_rad": -0.448027692285672, "uniqueness": "two equivalent outcomes"},
+      "expected": {"tau_a_MPa": 128.06248474865697, "sigma_n_max_MPa": 100, "rho": 0.7808688094430304, "D_MPa": 143.13325277090746, "U": 1.1252614211549328},
+      "exact_expressions": {"tau_a_MPa": "sqrt(16400)", "sigma_n_max_MPa": "100", "D_MPa": "sqrt(16400) + 19.3*100/sqrt(16400)"},
+      "verification": {"prescribed_plane": {"normals_ref": "critical_planes.representative_normals", "expected_ref": "expected", "tolerance_ref": "conventions.tolerance"}, "global_plane_search": {"max_tau_a_MPa": 128.06248474865697, "final_result_policy": "same on all maximum-shear planes", "tolerance_ref": "conventions.tolerance.global_search"}},
+      "derivation": "tau_a=sqrt((200/2)^2+80^2)=sqrt(16400); sigma_n,max=100 on both orthogonal maximum-shear planes; D=tau_a+19.3*(100/tau_a).",
+      "source": "P1 Table 1 material input and Eqs. (5), (10)-(11); independent harmonic plane derivation",
+      "tolerance_ref": "conventions.tolerance"
+    },
+    {
+      "id": "B4",
+      "description": "Combined axial-torsional loading with 90-degree phase shift",
+      "loading": {"sigma_m_MPa": [[0,0,0],[0,0,0],[0,0,0]], "sigma_s_MPa": [[220,0,0],[0,0,0],[0,0,0]], "sigma_c_MPa": [[0,80,0],[80,0,0],[0,0,0]]},
+      "critical_planes": {"definition": "All unit normals with |n_x|=1/sqrt(2) maximise MCC shear amplitude; the two listed xy normals give the previously reported prescribed-plane result", "representative_normals": [[0.7071067811865476,0.7071067811865476,0],[0.7071067811865476,-0.7071067811865476,0]], "uniqueness": "continuum of global maximisers with non-unique D"},
+      "expected": {"tau_a_MPa": 110, "normal_history_MPa": "110 sin(theta) +/- 80 cos(theta)", "sigma_n_max_MPa": 136.01470508735443, "rho": 1.2364973189759494, "D_MPa": 133.86439825623583, "U": 1.0523930680521685},
+      "additional_global_maximiser": {"normal": [0.7071067811865476,0,0.7071067811865476], "tau_a_MPa": 110, "sigma_n_max_MPa": 110, "rho": 1, "D_MPa": 129.3, "U": 1.0165094339622642},
+      "global_D_range_MPa": [129.3,133.86439825623583],
+      "exact_expressions": {"tau_a_MPa": "110", "sigma_n_max_MPa": "sqrt(18500)", "D_MPa": "110 + 19.3*sqrt(18500)/110"},
+      "verification": {"prescribed_plane": {"normals_ref": "critical_planes.representative_normals", "expected_ref": "expected", "additional_normal_ref": "additional_global_maximiser", "tolerance_ref": "conventions.tolerance"}, "global_plane_search": {"max_tau_a_MPa": 110, "final_result_policy": "non-unique D; keep the original xy prescribed-plane result and the additional xz tied-plane result distinct", "tolerance_ref": "conventions.tolerance.global_search"}},
+      "derivation": "tau_a=max(220/2,80)=110; sigma_n,max=sqrt(110^2+80^2); D=110+19.3*sigma_n,max/110.",
+      "source": "P1 Table 1 material input and Eqs. (1), (5), (10)-(11); independent quadrature calculation",
+      "tolerance_ref": "conventions.tolerance"
+    },
+    {
+      "id": "B5",
+      "description": "Fully reversed axial component with tensile mean normal stress",
+      "loading": {"sigma_m_MPa": [[100,0,0],[0,0,0],[0,0,0]], "sigma_s_MPa": [[200,0,0],[0,0,0],[0,0,0]], "sigma_c_MPa": [[0,0,0],[0,0,0],[0,0,0]]},
+      "critical_planes": {"definition": "Any unit n with |n_x|=1/sqrt(2)", "representative_normals": [[0.7071067811865476,0.7071067811865476,0]], "uniqueness": "family, all same result"},
+      "expected": {"tau_a_MPa": 100, "sigma_n_mean_MPa": 50, "sigma_n_amplitude_MPa": 100, "sigma_n_max_MPa": 150, "rho": 1.5, "D_MPa": 128.95, "U": 1.01375786163522},
+      "verification": {"prescribed_plane": {"normals_ref": "critical_planes.representative_normals", "expected_ref": "expected", "tolerance_ref": "conventions.tolerance"}, "global_plane_search": {"max_tau_a_MPa": 100, "final_result_policy": "same on all maximum-shear planes", "tolerance_ref": "conventions.tolerance.global_search"}},
+      "derivation": "Mean normal stress=100/2; alternating normal and shear amplitudes=200/2; D=100+19.3*1.5.",
+      "source": "P1 Table 1 material input and Eqs. (1), (5), (10)-(11); independent mean-stress calculation",
+      "tolerance_ref": "conventions.tolerance"
+    },
+    {
+      "id": "B6",
+      "description": "Two-dimensional shear ellipse distinguishing MCC from RSS/MCE",
+      "loading": {"sigma_m_MPa": [[0,0,0],[0,0,0],[0,0,0]], "sigma_s_MPa": [[0,0,100],[0,0,0],[100,0,0]], "sigma_c_MPa": [[0,0,0],[0,0,60],[0,60,0]]},
+      "critical_planes": {"definition": "n=e_z is a maximum-shear plane", "representative_normals": [[0,0,1]], "uniqueness": "other maximisers need not be excluded for this exact-plane check"},
+      "expected": {"shear_vector_history_MPa": "100 e_x sin(theta) + 60 e_y cos(theta)", "tau_a_MCC_MPa": 100, "tau_a_RSS_MCE_MPa": 116.61903789690601, "sigma_n_max_MPa": 0, "rho": 0, "D_MPa": 100, "U": 0.7861635220125786},
+      "exact_expressions": {"tau_a_MCC_MPa": "100", "tau_a_RSS_MCE_MPa": "sqrt(13600)"},
+      "verification": {"prescribed_plane": {"normals_ref": "critical_planes.representative_normals", "expected_ref": "expected", "tolerance_ref": "conventions.tolerance"}, "global_plane_search": {"max_tau_a_MPa": 100, "final_result_policy": "same on all maximum-shear planes", "tolerance_ref": "conventions.tolerance.global_search"}},
+      "derivation": "The Gram matrix is diag(100^2,60^2); MCC radius=100, whereas RSS/MCE=sqrt(100^2+60^2).",
+      "source": "P1 geometric MCC definition and Table 1 material input; independent harmonic-ellipse calculation",
+      "tolerance_ref": "conventions.tolerance"
+    },
+    {
+      "id": "B7",
+      "description": "Tied maximum-shear planes with non-unique final assessment",
+      "loading": {"sigma_m_MPa": [[0,0,0],[0,0,0],[0,0,0]], "sigma_s_MPa": [[160,0,0],[0,0,0],[0,0,0]], "sigma_c_MPa": [[0,100,0],[100,0,0],[0,0,0]]},
+      "critical_planes": {"definition": "n=e_x and n=e_y are tied global maximum-shear planes", "representative_normals": [[1,0,0],[0,1,0]], "uniqueness": "not unique under the original paper; no tie rule supplied"},
+      "expected": {"tau_a_MPa_on_both": 100, "candidate_results": [{"normal": [1,0,0], "sigma_n_max_MPa": 160, "rho": 1.6, "D_MPa": 130.88, "U": 1.0289308176100629}, {"normal": [0,1,0], "sigma_n_max_MPa": 0, "rho": 0, "D_MPa": 100, "U": 0.7861635220125786}], "unique_D_MPa": null},
+      "verification": {"prescribed_plane": {"normals_ref": "critical_planes.representative_normals", "expected_ref": "expected.candidate_results", "tolerance_ref": "conventions.tolerance"}, "global_plane_search": {"max_tau_a_MPa": 100, "final_result_policy": "non-unique D; retain both tied-plane candidate outcomes", "tolerance_ref": "conventions.tolerance.global_search"}},
+      "derivation": "Global maximum shear=max(160/2,100)=100; the two tied planes have different normal maxima, so the final index is set-valued without a tie policy.",
+      "source": "P1 maximum-shear plane definition and Table 1 material input; independent tied-plane construction",
+      "tolerance_ref": "conventions.tolerance",
+      "test_requirement": "Verify both candidate-plane values to absolute 1e-8 MPa; do not assert one original-method output."
+    },
+    {
+      "id": "B8",
+      "description": "Zero-shear hydrostatic harmonic, including zero-load limit",
+      "loading": {"parameter": {"symbol": "p", "unit": "MPa", "domain": "p>0; also test p=0"}, "sigma_m_MPa": [[0,0,0],[0,0,0],[0,0,0]], "sigma_s_MPa": [["p",0,0],[0,"p",0],[0,0,"p"]], "sigma_c_MPa": [[0,0,0],[0,0,0],[0,0,0]]},
+      "critical_planes": {"definition": "any plane; all have zero shear", "representative_normals": [[1,0,0]], "uniqueness": "all tied"},
+      "expected": {"tau_a_MPa": 0, "sigma_n_max_MPa": "p for p>0, 0 for p=0", "rho": null, "D_MPa": null, "U": null, "status": "undefined in original ratio-based formulation"},
+      "instances": [
+        {"id": "B8-positive-hydrostatic-mean", "p_MPa": 100, "loading": {"sigma_m_MPa": [[100,0,0],[0,100,0],[0,0,100]], "sigma_s_MPa": [[0,0,0],[0,0,0],[0,0,0]], "sigma_c_MPa": [[0,0,0],[0,0,0],[0,0,0]]}, "expected": {"tau_a_MPa": 0, "sigma_n_max_MPa": 100, "rho": null, "D_MPa": null, "U": null, "status": "undefined in original ratio-based formulation"}},
+        {"id": "B8-positive-hydrostatic-amplitude", "p_MPa": 100, "loading": {"sigma_m_MPa": [[0,0,0],[0,0,0],[0,0,0]], "sigma_s_MPa": [[100,0,0],[0,100,0],[0,0,100]], "sigma_c_MPa": [[0,0,0],[0,0,0],[0,0,0]]}, "expected": {"tau_a_MPa": 0, "sigma_n_max_MPa": 100, "rho": null, "D_MPa": null, "U": null, "status": "undefined in original ratio-based formulation"}},
+        {"id": "B8-zero-load", "p_MPa": 0, "loading": {"sigma_m_MPa": [[0,0,0],[0,0,0],[0,0,0]], "sigma_s_MPa": [[0,0,0],[0,0,0],[0,0,0]], "sigma_c_MPa": [[0,0,0],[0,0,0],[0,0,0]]}, "expected": {"tau_a_MPa": 0, "sigma_n_max_MPa": 0, "rho": null, "D_MPa": null, "U": null, "status": "undefined in original ratio-based formulation"}}
+      ],
+      "verification": {"prescribed_plane": {"normals_ref": "critical_planes.representative_normals", "expected_ref": "instances[].expected", "tolerance_ref": "conventions.tolerance"}, "global_plane_search": {"max_tau_a_MPa": 0, "final_result_policy": "undefined rho, D and U for both numerical instances", "tolerance_ref": "conventions.tolerance.global_search"}},
+      "derivation": "For sigma(theta)=p I sin(theta), every plane has zero shear traction; rho divides by tau_a=0. At p=0, rho=0/0 is also undefined.",
+      "source": "P1 Eq. (5) ratio and Eq. (10)-(11); independent zero-shear limit. The p=100 MPa numerical instances are illustrative inputs, not published values.",
+      "test_requirement": "Require an explicit unsupported/undefined-domain outcome, never a fabricated finite damage value."
+    }
+  ]
+}

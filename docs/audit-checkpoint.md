@@ -1,6 +1,22 @@
 # Development continuation checkpoint
 
-## Current phase, Findley production amplitude assessment (Phase 3B)
+## Current status, Findley Phase 3B and Susmel N04 documentation
+
+Updated 20 October 2026. Findley Phase 3B was merged into `main` through
+[PR #11](https://github.com/andreachiocca/multiaxial-fatigue/pull/11) at
+`356357bf162991fb24583b3376490049c9655ef0`. Its numerical implementation,
+regression tests and checkpoint remain intact. The Susmel N04 scientific dossier
+is in [PR #10](https://github.com/andreachiocca/multiaxial-fatigue/pull/10),
+which remains open for human review. This merge reconciles the two checkpoint
+entries without changing the five dossier files, Findley numerical source,
+calibration records, experimental data or reference results. Susmel remains
+`not_implemented` and `not_tested` in the method catalogue. No Phase 4 or Susmel
+implementation is started here.
+
+The next action is human review of PR #10 after its documentation, regression
+and GitHub quality checks pass. Do not merge automatically.
+
+## Completed phase, Findley production amplitude assessment (Phase 3B)
 
 Updated 20 October 2026. Branch `feat/findley-amplitude-assessment` starts from
 main `ab0e828a216622bc8a26ed39c04b1377ebf8aeae`, the merge of PR #9. PRs
@@ -75,10 +91,58 @@ The published tree matches all ten tested local file blobs and differs from
 main only in those files. Both GitHub quality workflows passed for this
 commit, push run 39387667205 and PR run 39387737462. This following
 checkpoint-only status update changes no numerical source, test or calibration
-fingerprint. The exact next action is human review of PR #11. Leave it open;
-do not merge or start Phase 4 automatically.
+fingerprint. PR #11 was subsequently merged into `main` at
+`356357bf162991fb24583b3376490049c9655ef0`. Phase 4 has not started.
 
-## Current phase, configurable Findley calibration (Phase 3A)
+## Documentation phase, Susmel N04 scientific review
+
+Updated 20 October 2026. This documentation branch starts from verified `main`
+`ab0e828a216622bc8a26ed39c04b1377ebf8aeae`, the merge of Findley Phase 3A
+PR #9. No open repository PR was found at the baseline. The earlier Phase 3A
+section below is retained as a historical record; its statement that PR #9 is
+open is superseded by the merge. Findley Phase 3B and other numerical development
+are outside this task.
+
+The supplied N04 dossier is integrated as five byte-identical files under
+`docs/scientific-reviews/N04-susmel/`. The new reviews index explains the common
+LaTeX, Markdown, BibTeX, JSON and PDF convention. The catalogue source links N04
+to the dossier, records the original-paper review and independent B1-B8 analytical
+benchmarks, and retains `not_implemented` and `not_tested`. Only its derived
+catalogue documentation is regenerated. A dependency-free dossier check and CI
+step validate required files, method identity and distinct benchmark IDs. Temporary
+LaTeX outputs are ignored. No fatigue criterion, calibration record, benchmark
+value, experimental data or numerical reference result is modified.
+
+Publication screening found no private PragTic code, third-party article PDF,
+private experimental data, embedded PDF attachments, internal paths or credentials
+in the five public files. The four citations and DOI metadata were checked against
+the supplied source register and publisher records. The source dossier describes
+the repository at an earlier commit; its dated implementation assessment is
+preserved, not presented as a current code audit.
+
+Local checks completed before publication: `python tools/generate_method_docs.py`
+and `--check` passed for 161 records; `python tools/check_scientific_reviews.py`
+passed for one dossier; a structured JSON check confirmed B1-B8, both B7 outcomes
+and undefined B8 values. `latexmk -pdf -interaction=nonstopmode -halt-on-error
+-outdir=/tmp/wg43-n04-build N04-susmel.tex` completed with BibTeX and no
+unresolved citations or references. The supplied and rebuilt five-page PDFs have
+identical extracted text and rendered pixels, so the supplied PDF is retained.
+The first published documentation commit is
+`bdd72e0657c78b142bafbe3b225c3702c1dabd65`. Its branch
+[Quality checks run](https://github.com/andreachiocca/multiaxial-fatigue/actions/runs/39385413635)
+passed both jobs. GitHub Actions ran `python tools/generate_method_docs.py
+--check`, `python tools/check_docs.py`, `python tools/check_scientific_reviews.py`,
+`python -m pip check`, `python -m ruff check .` and `python tools/run_tests.py`.
+These are documentation and software regression checks, not independent Susmel
+predictive validation. A protected-path review of the 16-file commit confirmed
+that numerical source, calibration records, experimental inputs and reference
+results were untouched.
+
+PR #10 was subsequently opened for review. Its documentation branch is now
+updated against the Findley Phase 3B merge. Do not merge automatically or begin
+Susmel development.
+
+## Previous phase, configurable Findley calibration (Phase 3A)
 
 Updated 19 October 2026. Branch `feat/findley-amplitude-calibration` starts at
 verified main `1ffb8896d1447e9f9f40f37f0c8c7dd08a563251`, the merge of PR #8.
