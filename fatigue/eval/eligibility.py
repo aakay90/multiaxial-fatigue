@@ -110,11 +110,17 @@ def calibration_readiness(data, material, method, *, shear_amplitude_algorithm="
             'design_failures': len(points)}
 
 
-def assess_eligibility(*, data, material, method, settings, folder='Calibrations', calibration_id=None):
+def assess_eligibility(*, data, material, method, settings, folder='Calibrations', calibration_id=None,
+                       shear_amplitude_algorithm='method_default'):
     """Separate stored-calibration availability, possible fitting and comparisons."""
     base = method.removesuffix('_ext')
+    from fatigue.eval.findley_calibration import check_amplitude_methods, require_stress_harmonics
+    check_amplitude_methods([base], shear_amplitude_algorithm)
+    evaluation_path = (('legacy' if shear_amplitude_algorithm == 'method_default' else 'harmonic')
+                       if base == 'FIN' else None)
     try:
-        ready = calibration_readiness(data, material, method)
+        ready = calibration_readiness(data, material, method,
+                                      shear_amplitude_algorithm=shear_amplitude_algorithm)
     except (KeyError, ValueError) as exc:
         return {'material': material, 'method': method, 'status': 'unsupported',
                 'prediction_available': False, 'quantitative_comparison_available': False,
@@ -128,7 +134,9 @@ def assess_eligibility(*, data, material, method, settings, folder='Calibrations
     calibration_error = None
     try:
         record, curve, _ = load_calibration(data=data, material=material, model=base,
-            settings=settings, folder=folder, calibration_id=calibration_id)
+            settings=settings, folder=folder, calibration_id=calibration_id,
+            shear_amplitude_algorithm=shear_amplitude_algorithm,
+            required_evaluation_path=evaluation_path)
     except (ValueError, OSError) as exc:
         calibration_error = str(exc)
     missing, issues, approximations = input_requirements(data, material, base,
@@ -146,6 +154,11 @@ def assess_eligibility(*, data, material, method, settings, folder='Calibrations
         result['reasons'].append('Missing or invalid inputs: ' + ', '.join(missing))
     for cid, case in data[material]['cases'].items():
         reasons = case_issue(case, strain=base not in STRESS_ONLY)
+        if base == 'FIN' and shear_amplitude_algorithm != 'method_default':
+            try:
+                require_stress_harmonics(case, material, cid)
+            except ValueError as exc:
+                reasons.append(str(exc))
         if reasons:
             result['excluded_cases'].append({'case_id': cid, 'reasons': reasons})
         else:

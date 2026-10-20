@@ -2,6 +2,10 @@
 from __future__ import annotations
 
 import os
+import hashlib
+import json
+import warnings
+from pathlib import Path
 import numpy as np
 
 import fatigue.imp.experimental_data as exp
@@ -11,6 +15,10 @@ from fatigue.eval.calibration_store import load_calibration, material_parameters
 from fatigue.report.export_csv import save_fatigue_csv
 from fatigue.models.registry import get_models
 from fatigue.models.base import model_output_quantity
+from fatigue.eval.findley_calibration import (
+    FindleyCalibrationModel, amplitude_identity, check_amplitude_methods,
+    require_stress_harmonics,
+)
 
 
 # ----------------------------
@@ -29,6 +37,7 @@ STDNUM = 0
 MAKE_PLOTS = True
 CALIBRATIONS_DIR = "Calibrations"
 CALIBRATION_ID = None
+SHEAR_AMPLITUDE_ALGORITHM = "method_default"
 SHOW_RUNOUTS = True
 PLOT_DIR = None
 
@@ -94,6 +103,10 @@ def classify_loading_type(*, H: dict, meta: dict, tol: float = 1e-6, phase_tol_d
 
 
 def main(data=None):
+    base_name, variant_key = _variant_from_model_name(MODEL_NAME)
+    check_amplitude_methods([base_name], SHEAR_AMPLITUDE_ALGORITHM)
+    amplitude = amplitude_identity(SHEAR_AMPLITUDE_ALGORITHM) if base_name == "FIN" else None
+    evaluation_path = amplitude["evaluation_path"] if amplitude else None
     # ----------------------------
     # 1) Plane sampling
     # ----------------------------
@@ -112,7 +125,6 @@ def main(data=None):
     # ----------------------------
     mat_prop = exp.get_material_properties(data, material=MATERIAL_NAME)
 
-    base_name, variant_key = _variant_from_model_name(MODEL_NAME)
     model = get_models([base_name])[0]
     quantity = model_output_quantity(model)
     if quantity == "life_cycles":
@@ -126,17 +138,26 @@ def main(data=None):
     from fatigue.eval.eligibility import assess_eligibility, warn_unavailable
     eligibility = assess_eligibility(data=data, material=MATERIAL_NAME, method=MODEL_NAME,
         settings=curve_settings(DCMESH_N1, DCMESH_N2, STDNUM), folder=CALIBRATIONS_DIR,
-        calibration_id=CALIBRATION_ID)
+        calibration_id=CALIBRATION_ID, shear_amplitude_algorithm=SHEAR_AMPLITUDE_ALGORITHM)
     if not eligibility['prediction_available']:
         warn_unavailable(eligibility)
         return eligibility
+    if evaluation_path == "harmonic":
+        for excluded in eligibility["excluded_cases"]:
+            for reason in excluded["reasons"]:
+                if "explicit amplitude calibration requires stored" in reason:
+                    warnings.warn(f"Skipping {MATERIAL_NAME}/{MODEL_NAME} case "
+                                  f"{excluded['case_id']}: {reason}", RuntimeWarning,
+                                  stacklevel=2)
     for approximation in eligibility['approximations']:
         print(f"Approximation for {MATERIAL_NAME}/{MODEL_NAME}: {approximation}")
 
     record, stored_curve, calibration_path = load_calibration(
         data=data, material=MATERIAL_NAME, model=base_name,
         settings=curve_settings(DCMESH_N1, DCMESH_N2, STDNUM),
-        folder=CALIBRATIONS_DIR, calibration_id=CALIBRATION_ID)
+        folder=CALIBRATIONS_DIR, calibration_id=CALIBRATION_ID,
+        shear_amplitude_algorithm=SHEAR_AMPLITUDE_ALGORITHM,
+        required_evaluation_path=evaluation_path)
     print(f"Calibration record {calibration_path}")
     params = material_parameters(mat_prop, record["parameters"])
     Sig0, Tau0 = params["Sig0"], params["Tau0"]
@@ -153,8 +174,9 @@ def main(data=None):
     # ----------------------------
     # Only the requested model contributes to this run's CSV. For a CP "_ext"
     # variant, calibrate its base model (which returns both variants).
-    base_name, variant_key = _variant_from_model_name(MODEL_NAME)
-    model = get_models([base_name])[0]
+    model = (FindleyCalibrationModel(SHEAR_AMPLITUDE_ALGORITHM)
+             if base_name == "FIN" and evaluation_path == "harmonic"
+             else get_models([base_name])[0])
 
     if base_name in {"BP", "CAIM"} and (Sig0 is None or Tau0 is None):
         from fatigue.models.integral_methods.bohme_papuga import _strengths
@@ -269,6 +291,9 @@ def main(data=None):
     for case_id in data_no_uniax[MATERIAL_NAME]["cases"].keys():
         if case_id not in eligibility["eligible_case_ids"]:
             continue
+        if evaluation_path == "harmonic":
+            require_stress_harmonics(data_no_uniax[MATERIAL_NAME]["cases"][case_id],
+                                     MATERIAL_NAME, case_id)
         observation = data_no_uniax[MATERIAL_NAME]["cases"][case_id]["meta"]
         status = observation.get("test_status", "failure")
         if status not in {"failure", "runout"}:
@@ -293,7 +318,6 @@ def main(data=None):
 
         F = float(res.values[variant_key])
         if not np.isfinite(F) or F <= 0:
-            import warnings
             warnings.warn(f"Skipping non-positive/non-finite prediction for {MATERIAL_NAME}/{MODEL_NAME}/{case_id}")
             continue
         statuses.append(status)
@@ -347,7 +371,6 @@ def main(data=None):
             show=PLOT_DIR is None,
         )
         if PLOT_DIR is not None:
-            from pathlib import Path
             import matplotlib.pyplot as plt
             directory = Path(PLOT_DIR)
             directory.mkdir(parents=True, exist_ok=True)
@@ -385,6 +408,8 @@ def main(data=None):
         "calibration_file": str(calibration_path),
     }
 
+    result_label = (f"{base_name}.{amplitude['algorithm']}{variant_key}"
+                    if amplitude and evaluation_path == "harmonic" else MODEL_NAME)
     csv_path = save_fatigue_csv(
         out_dir=RESULTS_DIR,
         method_name=MODEL_NAME,        # keep filename compatibility
@@ -409,9 +434,35 @@ def main(data=None):
         basquin_meta=basquin_meta,
         material_meta=material_meta,
         extra_meta=extra_meta,
+        result_label=result_label,
     )
     from fatigue.report.subsets import attach_observation_ids
     attach_observation_ids(csv_path, data[MATERIAL_NAME])
+    if amplitude:
+        metadata = {
+            "schema_version": 1,
+            "method": MODEL_NAME,
+            "result_label": result_label,
+            "selected_option": SHEAR_AMPLITUDE_ALGORITHM,
+            "resolved_algorithm": amplitude["algorithm"],
+            "definition_version": amplitude["definition_version"],
+            "evaluation_path": evaluation_path,
+            "calibration_id": record["calibration_id"],
+            "calibration_file": str(calibration_path),
+            "calibration_created_at": record["created_at"],
+            "calibration_source": record["source"],
+            "calibration_parameter_origin": record["parameter_origin"],
+            "calibration_input_fingerprint": record["input_fingerprint"],
+            "calibration_formulation_fingerprint": record["formulation_fingerprints"]["FIN"],
+            "calibration_amplitude_settings": record.get("amplitude_settings", {}).get("FIN"),
+            "calibration_software": record["software"],
+            "curve_settings": record["curve_settings"],
+            "procedure_version": record["procedure_version"],
+            "implementation_revision": record["implementation_revision"],
+            "csv_sha256": hashlib.sha256(Path(csv_path).read_bytes()).hexdigest(),
+        }
+        Path(csv_path).with_suffix(".meta.json").write_text(
+            json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print("Saved:", csv_path)
     return {**eligibility, "csv_path": str(csv_path), "status": "evaluated"}
 
@@ -426,12 +477,16 @@ if __name__ == "__main__":
     parser.add_argument("--data-folder", default=DATA_FOLDER)
     parser.add_argument("--calibrations-dir", default=CALIBRATIONS_DIR)
     parser.add_argument("--calibration-id")
+    parser.add_argument("--shear-amplitude-algorithm", default=SHEAR_AMPLITUDE_ALGORITHM,
+                        choices=("method_default", "mcc_harmonic", "mce_harmonic", "rss"),
+                        help="Findley-only shear amplitude selection")
     parser.add_argument("--hide-runouts", action="store_true")
     parser.add_argument("--plot-dir", help="Save plots without an interactive window")
     args = parser.parse_args()
     MODEL_NAME, MATERIAL_NAME, RESULTS_DIR = args.model, args.material, args.results_dir
     DATA_FOLDER, CALIBRATIONS_DIR, CALIBRATION_ID = args.data_folder, args.calibrations_dir, args.calibration_id
     SHOW_RUNOUTS = not args.hide_runouts
+    SHEAR_AMPLITUDE_ALGORITHM = args.shear_amplitude_algorithm
     PLOT_DIR = args.plot_dir
     MAKE_PLOTS = not args.no_plots
     main()

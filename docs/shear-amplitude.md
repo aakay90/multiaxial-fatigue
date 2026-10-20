@@ -6,8 +6,8 @@ The existing evaluator, plane-history utilities and Böhme–Papuga implementati
 do not import the new module. Phase 2 adds a separate Findley damage-parameter
 entry point for numerical comparisons, without changing production predictions.
 Phase 3A uses that interface for configurable Findley calibration in Script 0.
-Production Findley assessment continues to evaluate MCE and load MCE-compatible
-records only.
+Phase 3B connects the same evaluation to Script 1 for Findley only. Its omitted
+option preserves the historical assessment path.
 
 ## Definition and API
 
@@ -205,7 +205,7 @@ This separate entry point is intentional. Calibration fingerprints hash entire
 production source files, including `fin.py`, the evaluator and adapter. Keeping
 them unchanged preserves both established results and existing record identities.
 No algorithm parameter is added to the general adapter, production registry or
-material dictionary. Script 0 has a Findley-specific calibration option, described
+material dictionary. Scripts 0 and 1 have Findley-specific options, described
 below. Other criteria cannot inherit this selection.
 The diagnostic function does not load or apply a damage-life curve. In particular,
 an MCE-calibrated curve must not be applied to MCC damage parameters.
@@ -235,9 +235,57 @@ source identity and all existing input/procedure/settings compatibility checks.
 
 The [calibration workflow](calibration-workflow.md#findley-amplitude-selection)
 provides commands, record fields, compatibility rules and a complete numerical
-example. Script 1 and the production Findley registry remain unchanged. Their
-ordinary calibration lookups require MCE before choosing the newest compatible
-record, including when an explicit ID is supplied. MCC records cannot supply that
-assessment. Production MCC life prediction and its configuration require separate
-Phase 3B approval. Neither calibration agreement nor these software checks establish
+example. Script 1 now selects the same algorithm used to calibrate the Findley
+curve. Default assessment requires the legacy MCE path; explicit MCC, MCE and RSS
+require the harmonic path. The production Findley model and registry remain
+unchanged. Neither calibration agreement nor these software checks establish
 independent experimental validation of alternative-amplitude Findley.
+
+## Production Findley assessment
+
+Script 1 uses the existing singular `--model` argument and accepts the
+Findley-only `--shear-amplitude-algorithm` option:
+
+```bash
+python 1_run_material.py --material Al7075_T6 --model FIN --no-plots
+python 1_run_material.py --material Al7075_T6 --model FIN --no-plots \
+  --shear-amplitude-algorithm mcc_harmonic
+python 1_run_material.py --material Al7075_T6 --model FIN --no-plots \
+  --shear-amplitude-algorithm mce_harmonic
+```
+
+Omitting the option is `method_default`. It evaluates through the historical FIN
+adapter and accepts only verified legacy-path MCE records, including historical
+records without amplitude metadata. Explicit `mcc_harmonic`, `mce_harmonic`
+and `rss` use the Phase 2 evaluator, with `rss` resolved to `mce_harmonic`.
+They require a calibration record for both the resolved algorithm and the
+`harmonic` evaluation path. A matching algorithm name alone does not make a
+legacy MCE curve interchangeable with an explicit MCE assessment. All existing
+material, failure-input, grid, fitting, version and source-provenance checks still
+apply. Script 1 never calibrates automatically.
+
+Explicit assessment checks each original case for complete finite `S_sin` and
+`S_cos` stress tensors before tensor extraction. Unsupported cases are excluded
+with a case-specific reason; a missing compatible calibration prevents prediction.
+Selections for other methods are rejected. FIN and FIN_ext use the same complete
+Findley plane maximum, with the existing variant-specific master curve.
+
+Default CSV names and columns remain unchanged. Explicit results use labels such
+as `FIN.mcc_harmonic`, `FIN.mce_harmonic` and
+`FIN.mcc_harmonic_ext` in the filename and `Method` column. This permits
+side-by-side comparison without confusing MCC with MCE. Each Findley CSV has an
+adjacent `.meta.json` file recording the selected option, resolved algorithm,
+definition version, evaluation path, selected calibration ID, relevant provenance
+and CSV checksum. The `rss` alias shares the explicit MCE result label. Comparison
+readers continue to consume the unchanged CSV schema and ignore the sidecar.
+
+On the archived `Al7075_T6` workbook, a reproducibility run using `n1=3`,
+`n2=6` and matched `k_FI=0.75` found 19 rows with different MCC/MCE damage
+parameters. `Plain_multi_32` gave 170.000000 MPa under MCC and
+195.830052 MPa under MCE. An independent per-plane SVD calculation verifies
+the selected damage values. This comparison checks the numerical route, not
+experimental predictive accuracy; its coarse grid is not a convergence claim.
+Using the production CLI's default 522-plane grid on the same archived
+`Al7075_T6` workbook and separately calibrated explicit records produced no
+MCC/MCE difference in the 101 exported rows. Equal selected maxima on that
+grid do not make the two per-plane amplitude definitions interchangeable.

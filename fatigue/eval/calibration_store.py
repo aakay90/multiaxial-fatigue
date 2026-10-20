@@ -128,7 +128,8 @@ def findley_amplitude_settings(selection: str = "method_default") -> dict[str, s
     return {**settings, "implementation_fingerprint": fingerprint}
 
 
-def _formulation_matches(record: dict, model: str, selection: str) -> bool:
+def _formulation_matches(record: dict, model: str, selection: str,
+                         required_evaluation_path: str | None = None) -> bool:
     """Check only dependencies relevant to the requested method and amplitude."""
     stored = record["formulation_fingerprints"].get(model)
     if model != "FIN":
@@ -138,8 +139,11 @@ def _formulation_matches(record: dict, model: str, selection: str) -> bool:
     if amplitude is None:
         # Other material, procedure and implementation checks remain in the
         # loader. Also require the historical source identity to match today.
-        return (requested == "mce_harmonic" and stored in LEGACY_FINDLEY_FORMULATIONS
+        return (required_evaluation_path in (None, "legacy")
+                and requested == "mce_harmonic" and stored in LEGACY_FINDLEY_FORMULATIONS
                 and stored == formulation_fingerprint("FIN"))
+    if required_evaluation_path is not None and amplitude["evaluation_path"] != required_evaluation_path:
+        return False
     if amplitude["algorithm"] != requested or amplitude["definition_version"] != DEFINITION_VERSION:
         return False
     actual_selection = "method_default" if amplitude["evaluation_path"] == "legacy" else requested
@@ -365,14 +369,20 @@ def _reject_json_number(value):
 
 
 def load_calibration(*, data, material, model, settings, folder=DEFAULT_FOLDER, calibration_id=None,
-                     shear_amplitude_algorithm="method_default"):
+                     shear_amplitude_algorithm="method_default", required_evaluation_path=None):
     """Select the newest compatible record, requiring MCE for ordinary FIN calls.
 
     Explicit harmonic requests are available to calibration code. Omitted
     selection continues to require MCE, including for an explicitly supplied ID.
     Algorithm compatibility is checked before creation time is considered.
+    Assessment callers may also require the exact legacy or harmonic path;
+    calibration callers retain their established lookup behavior.
     """
     check_amplitude_methods([model], shear_amplitude_algorithm)
+    if required_evaluation_path not in (None, "legacy", "harmonic"):
+        raise ValueError(f"Unknown Findley evaluation path {required_evaluation_path!r}")
+    if model != "FIN" and required_evaluation_path is not None:
+        raise ValueError("An evaluation path may be required only for FIN")
     directory = Path(folder) / _identity(material)
     paths = [directory / (_identity(calibration_id) + ".json")] if calibration_id else sorted(directory.glob("*.json"))
     compatible = []
@@ -382,20 +392,27 @@ def load_calibration(*, data, material, model, settings, folder=DEFAULT_FOLDER, 
         matches = (record["material_id"] == material and record["input_fingerprint"] == fingerprint
                    and record["procedure_version"] == PROCEDURE_VERSION
                    and record["implementation_revision"] == IMPLEMENTATION_REVISION
-                   and _formulation_matches(record, model, shear_amplitude_algorithm)
+                   and _formulation_matches(record, model, shear_amplitude_algorithm,
+                                            required_evaluation_path)
                    and record["curve_settings"] == settings and model in record["curves"])
         if matches:
             compatible.append((record["created_at"], record["calibration_id"], record, path))
         elif calibration_id:
             raise ValueError(f"Calibration {calibration_id} is incompatible with {material}/{model}, "
-                             f"amplitude {resolve_findley_algorithm(shear_amplitude_algorithm) if model == 'FIN' else 'method default'}, "
+                             f"amplitude {resolve_findley_algorithm(shear_amplitude_algorithm) if model == 'FIN' else 'method default'}"
+                             f"{' on the ' + required_evaluation_path + ' path' if required_evaluation_path else ''}, "
                              "inputs, formulation or curve settings")
     if not compatible:
         parameter = METHOD_PARAMETERS.get(model)
-        amplitude_note = f" using {resolve_findley_algorithm(shear_amplitude_algorithm)}" if model == "FIN" else ""
+        amplitude_note = (f" using {resolve_findley_algorithm(shear_amplitude_algorithm)}"
+                          f"{' on the ' + required_evaluation_path + ' path' if required_evaluation_path else ''}"
+                          if model == "FIN" else "")
+        selection_note = (f" --shear-amplitude-algorithm {shear_amplitude_algorithm}"
+                          if model == "FIN" and shear_amplitude_algorithm != "method_default" else "")
         raise ValueError(f"No compatible calibration for {material}/{model}{amplitude_note}"
                          f" (coefficient {parameter or 'none'} and master curve required). "
-                         f"Run python 0_calibrate_material_params.py --material '{material}' --models {model}. "
+                         f"Run python 0_calibrate_material_params.py --material '{material}' --models {model}"
+                         f"{selection_note}. "
                          "Changed failure data, properties or fitting settings require a new record.")
     _, _, record, path = max(compatible, key=lambda item: (item[0], item[1]))
     curve = record["curves"][model]
