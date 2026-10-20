@@ -9,6 +9,14 @@ coefficients from Excel. `2_compare_results.py` generates comparison plots and
 failure-only error statistics. The [calibration workflow](calibration-workflow.md)
 documents record selection, historical coefficients and run-out conventions.
 
+For FIN only, Script 1 may route explicit harmonic MCC/MCE requests through the
+verified Findley callable used in calibration. It requires matching algorithm and
+evaluation-path provenance before life prediction. Default FIN still uses the
+unchanged registry model and legacy MCE record path. Explicit FIN outputs have an
+algorithm-qualified filename and `Method` label, with a `.meta.json` provenance
+sidecar; the CSV column schema and unrelated methods are unchanged. See
+[production Findley assessment](shear-amplitude.md#production-findley-assessment).
+
 | Path | Role |
 | --- | --- |
 | `fatigue/imp/experimental_data.py` | Workbook import, material properties, stress/strain tensors and harmonics |

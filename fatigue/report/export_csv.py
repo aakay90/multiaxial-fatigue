@@ -154,8 +154,12 @@ def save_fatigue_csv(
     basquin_meta: dict | None = None,   # kept for backward compatibility (ignored)
     material_meta: dict | None = None,  # kept for backward compatibility (ignored)
     extra_meta: dict | None = None,     # kept for backward compatibility (ignored)
+    result_label: str | None = None,
 ) -> str:
     """Export a lightweight results CSV.
+
+    ``result_label`` changes the displayed method and filename only; the
+    scientific reference and method-family classification use ``method_name``.
 
     Output columns:
       Material, Method_family, Method, Metric_mode, Loading_type,
@@ -177,7 +181,10 @@ def save_fatigue_csv(
       * Parameters Error_dp / Error_dp_design are deprecated aliases kept only to avoid breaking older scripts.
     """
     os.makedirs(out_dir, exist_ok=True)
-    filename = f"{method_name}_{material_name}.csv"
+    label = result_label or method_name
+    if not label or any(c in label for c in "/\\"):
+        raise ValueError("Invalid result label")
+    filename = f"{label}_{material_name}.csv"
     path = os.path.join(out_dir, filename)
 
     reference = method_reference(method_name)
@@ -321,7 +328,7 @@ def save_fatigue_csv(
                     [
                         material_name,
                         family,
-                        method_name,
+                        label,
                         mode,
                         str(loading_type_design[i]) if loading_type_design is not None and i < len(loading_type_design) else "UNKNOWN",
                         float(ne),
@@ -347,7 +354,7 @@ def save_fatigue_csv(
                 [
                     material_name,
                     family,
-                    method_name,
+                    label,
                     mode,
                     str(loading_type[i]) if i < len(loading_type) else "UNKNOWN",
                     float(ne),
