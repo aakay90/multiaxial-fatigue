@@ -33,11 +33,19 @@ and undefined B8 values. `latexmk -pdf -interaction=nonstopmode -halt-on-error
 -outdir=/tmp/wg43-n04-build N04-susmel.tex` completed with BibTeX and no
 unresolved citations or references. The supplied and rebuilt five-page PDFs have
 identical extracted text and rendered pixels, so the supplied PDF is retained.
-The repository-wide documentation and numerical regression checks remain to be
-verified by branch CI before opening the PR.
+The first published documentation commit is
+`bdd72e0657c78b142bafbe3b225c3702c1dabd65`. Its branch
+[Quality checks run](https://github.com/andreachiocca/multiaxial-fatigue/actions/runs/39385413635)
+passed both jobs. GitHub Actions ran `python tools/generate_method_docs.py
+--check`, `python tools/check_docs.py`, `python tools/check_scientific_reviews.py`,
+`python -m pip check`, `python -m ruff check .` and `python tools/run_tests.py`.
+These are documentation and software regression checks, not independent Susmel
+predictive validation. A protected-path review of the 16-file commit confirmed
+that numerical source, calibration records, experimental inputs and reference
+results were untouched.
 
-Next action: publish only the focused documentation branch, verify branch CI,
-then open one review-only PR into `main`. Do not merge or begin Susmel development.
+Next action: verify CI for this checkpoint-only status update, then open one
+review-only PR into `main`. Do not merge or begin Susmel development.
 
 ## Current phase, configurable Findley calibration (Phase 3A)
 
