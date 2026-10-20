@@ -62,14 +62,21 @@ These are grid-dependent numerical observations, not experimental predictive
 validation or evidence that the amplitude definitions are interchangeable.
 
 Ruff 0.14.2 is not installed and package download was blocked by the container's
-HTTP proxy. Do not report local Ruff as passed; require the GitHub quality
-workflow before review. No source workbook, historical calibration JSON or
-saved result CSV was modified. Changed tracked files are Script 1, the
-calibration store, eligibility, CSV exporter, README, the shear-amplitude,
-calibration-workflow and architecture guides, this checkpoint, and the new
-`tests/test_findley_assessment.py`. Remaining work is final diff/check review,
-publication of a verified commit and focused PR, followed by human review.
-Do not merge or start Phase 4 automatically.
+HTTP proxy. Local Ruff was not run; the GitHub quality workflow passed Ruff,
+tests and catalogue/documentation checks. No source workbook, historical
+calibration JSON or saved result CSV was modified. Changed tracked files are
+Script 1, the calibration store, eligibility, CSV exporter, README, the
+shear-amplitude, calibration-workflow and architecture guides, this checkpoint,
+and the new `tests/test_findley_assessment.py`.
+
+The first verified commit is `3cbcb3722b6930d6bdbf175e910efbc18c035097`
+on [PR #11](https://github.com/andreachiocca/multiaxial-fatigue/pull/11).
+The published tree matches all ten tested local file blobs and differs from
+main only in those files. Both GitHub quality workflows passed for this
+commit, push run 39387667205 and PR run 39387737462. This following
+checkpoint-only status update changes no numerical source, test or calibration
+fingerprint. The exact next action is human review of PR #11. Leave it open;
+do not merge or start Phase 4 automatically.
 
 ## Current phase, configurable Findley calibration (Phase 3A)
 
