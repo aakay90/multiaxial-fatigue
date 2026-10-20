@@ -1,6 +1,100 @@
 # Development continuation checkpoint
 
-## Current documentation task, Susmel N04 scientific review
+## Current status, Findley Phase 3B and Susmel N04 documentation
+
+Updated 20 October 2026. Findley Phase 3B was merged into `main` through
+[PR #11](https://github.com/andreachiocca/multiaxial-fatigue/pull/11) at
+`356357bf162991fb24583b3376490049c9655ef0`. Its numerical implementation,
+regression tests and checkpoint remain intact. The Susmel N04 scientific dossier
+is in [PR #10](https://github.com/andreachiocca/multiaxial-fatigue/pull/10),
+which remains open for human review. This merge reconciles the two checkpoint
+entries without changing the five dossier files, Findley numerical source,
+calibration records, experimental data or reference results. Susmel remains
+`not_implemented` and `not_tested` in the method catalogue. No Phase 4 or Susmel
+implementation is started here.
+
+The next action is human review of PR #10 after its documentation, regression
+and GitHub quality checks pass. Do not merge automatically.
+
+## Completed phase, Findley production amplitude assessment (Phase 3B)
+
+Updated 20 October 2026. Branch `feat/findley-amplitude-assessment` starts from
+main `ab0e828a216622bc8a26ed39c04b1377ebf8aeae`, the merge of PR #9. PRs
+#7, #8 and #9 are merged. The baseline 101-test suite passed locally, with
+three pre-existing skips. PR #10 is open for the independent Susmel N04
+documentation and has no overlapping Findley source ownership. Direct Git
+transport is unavailable in this container; source files were reconstructed
+from verified GitHub blobs, with exact-byte checks on the numerical files and
+four archived workbooks needed by the tests. No Susmel file is modified.
+
+Phase 3B integrates Script 1 only for FIN/FIN_ext. Its omitted
+`--shear-amplitude-algorithm` option uses the unchanged production FIN model
+and verified legacy MCE calibration path. Explicit `mcc_harmonic`,
+`mce_harmonic` and `rss` use the Phase 2 evaluator through the established
+Findley calibration callable. The original stress sine/cosine tensors are
+required before endpoint extraction; unsupported cases are excluded with a
+diagnostic. RSS resolves to harmonic MCE. Other methods reject an explicit
+override. No automatic calibration or general registry override is introduced.
+
+Assessment lookup now optionally requires the recorded evaluation path as well
+as the resolved algorithm. Default requires `legacy`; explicit choices require
+`harmonic`. This is an additional strict assessment constraint, not a
+fingerprint exception or a change to the calibration API's existing default
+lookup. Material, failure-input, grid, fitting, procedure, version and source
+checks remain in force. The production FIN, harmonic evaluator, shared
+evaluator, adapter, registry and amplitude library remain byte-identical to
+main, preserving their stored formulation identities.
+
+Default CSV names, columns and numerical values are unchanged. Explicit CSVs
+use `FIN.mcc_harmonic`/`FIN.mce_harmonic` in the filename and `Method` field;
+the `_ext` suffix remains available. Each Findley CSV has a `.meta.json`
+sidecar with selected option, resolved algorithm/version, evaluation path,
+calibration ID, input/formulation provenance, settings and CSV checksum.
+The existing comparison reader accepts these files without schema changes.
+
+Five new focused assessment tests pass. They cover path-specific record
+selection and ID rejection, legacy-record isolation, MCC/MCE/RSS output
+metadata, FIN_ext labels, unsupported methods and unknown identifiers, raw
+history rejection before fallback, comparison-reader compatibility and an
+independent per-plane SVD reference for non-proportional production assessment.
+The complete suite passes 106 tests, with the same three expected skips.
+Default AISI316L FIN CSV and unrelated FS CSV each compare byte-for-byte with
+the original main runner on the archived workbooks. Documentation checks pass
+1,396 local links; the generated method catalogue check passes 161 records,
+117 counted candidates and 51/51 review entries. `git diff --check` passes;
+a protected-source diff confirms unchanged model, evaluator, adapter, registry,
+experimental, calibration, result and scientific-review paths.
+
+Temporary Script 0 and Script 1 CLI runs on AISI316L and Al7075_T6 produced
+separate compatible MCC/MCE records and result files at the production
+522-plane grid. AISI316L exported 44 rows and Al7075_T6 101 rows. Both
+algorithms selected `k_FI=0.75` for each material under the coarse
+five-point, one-refinement calibration search. Their production-grid selected
+damage values coincided on all exported rows, despite distinct algorithm and
+record identities. A matched `n1=3, n2=6` Al7075_T6 integration check found
+19 differing rows; `Plain_multi_32` gave MCC 170.000000 MPa and MCE
+195.830052 MPa. The latter case is independently checked by per-plane SVD.
+These are grid-dependent numerical observations, not experimental predictive
+validation or evidence that the amplitude definitions are interchangeable.
+
+Ruff 0.14.2 is not installed and package download was blocked by the container's
+HTTP proxy. Local Ruff was not run; the GitHub quality workflow passed Ruff,
+tests and catalogue/documentation checks. No source workbook, historical
+calibration JSON or saved result CSV was modified. Changed tracked files are
+Script 1, the calibration store, eligibility, CSV exporter, README, the
+shear-amplitude, calibration-workflow and architecture guides, this checkpoint,
+and the new `tests/test_findley_assessment.py`.
+
+The first verified commit is `3cbcb3722b6930d6bdbf175e910efbc18c035097`
+on [PR #11](https://github.com/andreachiocca/multiaxial-fatigue/pull/11).
+The published tree matches all ten tested local file blobs and differs from
+main only in those files. Both GitHub quality workflows passed for this
+commit, push run 39387667205 and PR run 39387737462. This following
+checkpoint-only status update changes no numerical source, test or calibration
+fingerprint. PR #11 was subsequently merged into `main` at
+`356357bf162991fb24583b3376490049c9655ef0`. Phase 4 has not started.
+
+## Documentation phase, Susmel N04 scientific review
 
 Updated 20 October 2026. This documentation branch starts from verified `main`
 `ab0e828a216622bc8a26ed39c04b1377ebf8aeae`, the merge of Findley Phase 3A
@@ -44,10 +138,11 @@ predictive validation. A protected-path review of the 16-file commit confirmed
 that numerical source, calibration records, experimental inputs and reference
 results were untouched.
 
-Next action: verify CI for this checkpoint-only status update, then open one
-review-only PR into `main`. Do not merge or begin Susmel development.
+PR #10 was subsequently opened for review. Its documentation branch is now
+updated against the Findley Phase 3B merge. Do not merge automatically or begin
+Susmel development.
 
-## Current phase, configurable Findley calibration (Phase 3A)
+## Previous phase, configurable Findley calibration (Phase 3A)
 
 Updated 19 October 2026. Branch `feat/findley-amplitude-calibration` starts at
 verified main `1ffb8896d1447e9f9f40f37f0c8c7dd08a563251`, the merge of PR #8.

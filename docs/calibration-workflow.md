@@ -201,10 +201,10 @@ Findley harmonic records only. Other methods retain their existing hashes.
 
 | Requested Findley algorithm | Record | Behaviour, subject to all other checks |
 |---|---|---|
-| Default, MCE or RSS | Verified historical MCE without amplitude metadata | Accept |
+| Default | Verified historical MCE without amplitude metadata | Accept in assessment |
 | MCC | Historical MCE | Reject |
 | MCC | Compatible new MCC | Accept |
-| Default, MCE or RSS | Compatible new MCE | Accept |
+| Default, MCE or RSS | Compatible new MCE | Calibration API accepts by resolved algorithm; assessment additionally requires the matching evaluation path |
 | MCE | MCC, even if newer or explicitly requested by ID | Reject |
 | MCC or MCE | Different definition or relevant implementation | Reject |
 
@@ -221,12 +221,41 @@ numerical fits coincide. Explicit coefficient reuse through `--reuse-calibration
 also requires a matching amplitude definition. Optimisation metadata and downstream
 curve metadata must agree. Historical files and IDs remain immutable.
 
-Script 1, eligibility and batch/review assessments call the loader without an
-override and therefore require MCE for FIN. Algorithm compatibility is checked
-before creation time or ID. A newer MCC record cannot displace MCE; an explicit
-MCC ID or an MCC-only archive gives a controlled compatibility error. Script 1
-performs no automatic recalibration and offers no MCC prediction option. New MCC
-damage-life curves require a separately approved Phase 3B assessment integration.
+Script 1 requires an exact evaluation path in addition to the resolved algorithm.
+Its default requires `legacy` MCE; explicit MCC, MCE and RSS require `harmonic`.
+This stricter assessment lookup prevents even a compatible explicit MCE record
+from replacing a historical default record, and prevents a legacy MCE record from
+supplying the explicit path. Compatibility is checked before creation time or ID.
+The calibration API retains its established algorithm-level lookup when no path
+is requested. Script 1 performs no automatic recalibration.
+
+### Assessment commands and outputs
+
+Use matching grid and master-curve settings for calibration and assessment.
+The following commands show the three choices with the existing singular
+`--model` option. Calibrate explicit paths first if their records do not exist.
+Use separate result directories or the distinct explicit result labels when
+comparing predictions.
+
+```bash
+python 1_run_material.py --material Al7075_T6 --model FIN --no-plots
+python 1_run_material.py --material Al7075_T6 --model FIN --no-plots \
+  --shear-amplitude-algorithm mcc_harmonic
+python 1_run_material.py --material Al7075_T6 --model FIN --no-plots \
+  --shear-amplitude-algorithm mce_harmonic
+```
+
+The default remains `FIN_Al7075_T6.csv`. Explicit files are named, for
+example, `FIN.mcc_harmonic_Al7075_T6.csv` and
+`FIN.mce_harmonic_Al7075_T6.csv`; FIN_ext retains its `_ext` suffix after the
+algorithm identifier. CSV columns are unchanged. An adjacent `.meta.json`
+sidecar gives the selected option, canonical algorithm, definition version,
+evaluation path, calibration ID, input/formulation fingerprints, settings and
+CSV SHA-256. Comparison and plotting readers continue to use the CSV files,
+whose `Method` values distinguish the algorithms. The `rss` alias resolves to
+the explicit MCE filename and may replace that result in the same directory.
+Neither differing damage values nor different fitted curves alone establish
+better predictive accuracy without independent validation.
 
 ### Complete numerical example
 

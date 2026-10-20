@@ -108,6 +108,23 @@ relevant inputs or numerical formulations change. No manual coefficient transfer
 through Excel is required. The four initial migration records retain the previous
 coefficients and analysis results, with their legacy provenance stated explicitly.
 
+Findley assessment has a method-specific harmonic shear-amplitude option. The
+omitted option preserves historical MCE assessment; explicit MCC or MCE requires
+a separately compatible calibration made with the same option:
+
+```bash
+python 1_run_material.py --material Al7075_T6 --model FIN --no-plots
+python 0_calibrate_material_params.py --material Al7075_T6 --models FIN --shear-amplitude-algorithm mcc_harmonic
+python 1_run_material.py --material Al7075_T6 --model FIN --no-plots --shear-amplitude-algorithm mcc_harmonic
+python 0_calibrate_material_params.py --material Al7075_T6 --models FIN --shear-amplitude-algorithm mce_harmonic
+python 1_run_material.py --material Al7075_T6 --model FIN --no-plots --shear-amplitude-algorithm mce_harmonic
+```
+
+Script 1 never calibrates automatically. Explicit results have
+algorithm-qualified names and adjacent provenance metadata. See
+[production Findley assessment](docs/shear-amplitude.md#production-findley-assessment)
+for restrictions and output conventions.
+
 Run-outs are imported using the existing Yes/No flag, excluded from all fitting
 and ordinary error statistics, and displayed as open markers with arrows indicating
 lower-bound lives. Use `--hide-runouts` to hide them or `--plot-dir PATH` to save
