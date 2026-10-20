@@ -59,6 +59,8 @@ def validate(data):
         assert not m['doi'] or m['doi'].startswith('https://doi.org/')
         for p in ([m['module']] if m['module'] else []) + m['test_files']:
             assert (ROOT / p).is_file(), f'Missing evidence path: {p}'
+        if m.get('scientific_review'):
+            assert (ROOT / m['scientific_review']).is_file(), f'Missing scientific review: {m["scientific_review"]}'
         if m['registry_name']:
             assert m['enabled'] == (m['registry_name'] in active)
         if m['implementation_status'] == 'fully_implemented':
@@ -134,6 +136,8 @@ def catalogue(entries, detailed=False, family_filter=None):
         for m in group:
             txt += f'\n### {m["id"]}\n\n**{m["name"]}** — {m["authors_year"]}\n\n'
             details = [('Primary / secondary family', m['primary_family'] + '; ' + ', '.join(m['secondary_classifications'])),('Record / counting',m['record_type']+'; '+m['count_reason']),('Reference',m['reference']),('DOI',m['doi'] or 'No verified original DOI available'),('Reference evidence',m['reference_status']),('Formulation evidence',m['formulation_evidence']),('Principle',m['principle']),('Loading scope',m['loading_scope']),('Inputs / material parameters',m['required_inputs']),('Output',m['prediction_capability']),('Implementation / evidence',LABEL[m['implementation_status']]+'; '+m['completeness_evidence']),('Validation / evidence',m['validation_status']+'; '+m['validation_evidence']),('Python implementation',pathlink(m['module'])+'; '+m['symbol']),('Automated tests',', '.join(pathlink(p) for p in m['test_files']) or 'None for this candidate'),('Limitations',m['limitations']),('Current FABER phase',m['current_project_scope']),('External source discovery',external_links(m)),('Missing tasks',m['missing_tasks']),('Reference retrieval action',m['reference_action']),('Development disposition',m['development_track']+'; '+m['development_reason']),('Roadmap rank',m['roadmap_rank']),('Reuse',m['reuse']),('Feasibility / effort / priority',m['feasibility']+' / '+m['complexity']+' / '+m['priority']),('Provenance / prior status',m['source_record_id']+'; '+m['review_status']),('Related catalogue ID',f'[{m["canonical_id"]}](#{m["canonical_id"].lower()})' if m['canonical_id'] else 'None recorded'),('GitHub Issue / prepared brief',issue_links(m))]
+            if m.get('scientific_review'):
+                details.insert(6, ('Scientific review dossier', pathlink(m['scientific_review'])))
             if not detailed:
                 page = 'docs/methods/' + m['primary_family'].lower().replace(' / ', '-').replace(' ', '-') + '.md'
                 details = [('Reference / DOI',m['reference']+'; '+(m['doi'] or 'Original DOI unverified')),
@@ -141,12 +145,15 @@ def catalogue(entries, detailed=False, family_filter=None):
                            ('Current FABER phase',m['current_project_scope']),
                            ('External sources',external_links(m)),
                            ('Complete scientific and implementation record',f'[Inputs, formulation, scope, code, tests, validation, missing work and Issues]({page}#{m["id"].lower()})')]
+                if m.get('scientific_review'):
+                    details.insert(1, ('Scientific review dossier', pathlink(m['scientific_review'])))
             txt += table(['Field', 'Evidence / task'], details)
     return txt
 
 
 def issue(m):
     source = '../../'
+    review = f'- Scientific review: {pathlink(m["scientific_review"], source)}.\n' if m.get('scientific_review') else ''
     return f'''# {m['id']}: {m['name']}
 
 **Prepared Issue body; not an open GitHub Issue.** Before posting, search open and closed Issues for the permanent ID and aliases. Do not create a duplicate. Suggested labels: `method:{m['primary_family'].lower().replace(' ', '-')}`, `status:{'missing' if m['implementation_status']=='not_implemented' else 'review' if m['implementation_status']=='requires_review' else 'partial'}`, `help-wanted`, `validation-needed`. No `good-first-issue` claim is made.
@@ -160,7 +167,7 @@ def issue(m):
 - DOI: {m['doi'] or 'Original DOI not verified; retrieve the traceable primary source before coding.'}
 - Reference evidence: {m['reference_status']}.
 - Mathematical evidence: {m['formulation_evidence']}.
-- Principle: {m['principle']}.
+{review}- Principle: {m['principle']}.
 - Loading scope: {m['loading_scope']}.
 
 ## Available components and remaining work
@@ -371,7 +378,9 @@ def main():
     outputs['docs/catalogue/external_sources.csv'] = extbuf.getvalue()
     rows = []
     for m in entries:
-        rows.append({k:json.dumps(v, ensure_ascii=False) if isinstance(v,(list,dict)) else v for k,v in m.items()})
+        row = {k:json.dumps(v, ensure_ascii=False) if isinstance(v,(list,dict)) else v for k,v in m.items()}
+        row['scientific_review'] = m.get('scientific_review', '')
+        rows.append(row)
     buf = io.StringIO(newline=''); w = csv.DictWriter(buf,fieldnames=list(rows[0]),lineterminator='\n');w.writeheader();w.writerows(rows)
     outputs['docs/catalogue/methods.csv'] = buf.getvalue()
     index = '# Prepared contribution Issues\n\nThese versioned briefs are ready for maintainer review and posting. **No live Issues or labels have been created.** The connector available during preparation had no Issue/label creation operation. Search existing Issues by permanent ID and aliases before posting; add the returned Issue URL to `docs/catalogue/methods.json` and regenerate.\n\n'

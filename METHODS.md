@@ -134,6 +134,7 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 | Field | Evidence / task |
 | --- | --- |
 | Reference / DOI | A bi‐parametric Wöhler curve for high cycle multiaxial fatigue assessment, Fatigue & Fracture of Engineering Materials & Structures; https://doi.org/10.1046/j.1460-2695.2002.00462.x |
+| Scientific review dossier | [docs/scientific-reviews/N04-susmel/README.md](docs/scientific-reviews/N04-susmel/README.md) |
 | WG4.3 completeness / validation | Not implemented; not_tested |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External sources | no_accessible_source_identified; not integrated or independently validated |

@@ -1,5 +1,44 @@
 # Development continuation checkpoint
 
+## Current documentation task, Susmel N04 scientific review
+
+Updated 20 October 2026. This documentation branch starts from verified `main`
+`ab0e828a216622bc8a26ed39c04b1377ebf8aeae`, the merge of Findley Phase 3A
+PR #9. No open repository PR was found at the baseline. The earlier Phase 3A
+section below is retained as a historical record; its statement that PR #9 is
+open is superseded by the merge. Findley Phase 3B and other numerical development
+are outside this task.
+
+The supplied N04 dossier is integrated as five byte-identical files under
+`docs/scientific-reviews/N04-susmel/`. The new reviews index explains the common
+LaTeX, Markdown, BibTeX, JSON and PDF convention. The catalogue source links N04
+to the dossier, records the original-paper review and independent B1-B8 analytical
+benchmarks, and retains `not_implemented` and `not_tested`. Only its derived
+catalogue documentation is regenerated. A dependency-free dossier check and CI
+step validate required files, method identity and distinct benchmark IDs. Temporary
+LaTeX outputs are ignored. No fatigue criterion, calibration record, benchmark
+value, experimental data or numerical reference result is modified.
+
+Publication screening found no private PragTic code, third-party article PDF,
+private experimental data, embedded PDF attachments, internal paths or credentials
+in the five public files. The four citations and DOI metadata were checked against
+the supplied source register and publisher records. The source dossier describes
+the repository at an earlier commit; its dated implementation assessment is
+preserved, not presented as a current code audit.
+
+Local checks completed before publication: `python tools/generate_method_docs.py`
+and `--check` passed for 161 records; `python tools/check_scientific_reviews.py`
+passed for one dossier; a structured JSON check confirmed B1-B8, both B7 outcomes
+and undefined B8 values. `latexmk -pdf -interaction=nonstopmode -halt-on-error
+-outdir=/tmp/wg43-n04-build N04-susmel.tex` completed with BibTeX and no
+unresolved citations or references. The supplied and rebuilt five-page PDFs have
+identical extracted text and rendered pixels, so the supplied PDF is retained.
+The repository-wide documentation and numerical regression checks remain to be
+verified by branch CI before opening the PR.
+
+Next action: publish only the focused documentation branch, verify branch CI,
+then open one review-only PR into `main`. Do not merge or begin Susmel development.
+
 ## Current phase, configurable Findley calibration (Phase 3A)
 
 Updated 19 October 2026. Branch `feat/findley-amplitude-calibration` starts at
