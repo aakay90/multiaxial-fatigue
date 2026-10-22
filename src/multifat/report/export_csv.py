@@ -1,4 +1,4 @@
-# fatigue/report/export_csv.py
+# multifat/report/export_csv.py
 from __future__ import annotations
 
 import csv
@@ -7,8 +7,9 @@ from pathlib import Path
 from typing import Optional
 
 import numpy as np
-from fatigue.eval.metrics import log10_dp_ratio
-from fatigue.models.references import method_reference, IMPLEMENTATION_REVISION
+from multifat.eval.metrics import log10_dp_ratio
+from multifat.models.references import method_reference, IMPLEMENTATION_REVISION
+from multifat.report.subsets import IDENTITY_COLUMNS
 
 
 def _strip_variant(method_name: str) -> str:
@@ -19,7 +20,7 @@ def _strip_variant(method_name: str) -> str:
 
 
 def _family_from_module(mod: str) -> str:
-    """Extract family from a module path like 'fatigue.models.cp_methods.fin'."""
+    """Extract family from a module path like 'multifat.models.cp_methods.fin'."""
     if not isinstance(mod, str) or not mod:
         return "UNKNOWN"
     parts = mod.split(".")
@@ -38,7 +39,7 @@ def infer_method_family(method_name: str) -> str:
 
     Priority:
       1) Use the central registry (most reliable, no filesystem assumptions).
-      2) Fallback to filesystem search under fatigue/models using fatigue.__path__.
+      2) Fallback to filesystem search under multifat/models using multifat.__path__.
 
     Returns a folder-like name, e.g. 'cp_methods', 'invariant_methods', 'energy_based_methods'.
     """
@@ -46,7 +47,7 @@ def infer_method_family(method_name: str) -> str:
 
     # --- 1) Registry-based inference (works even for namespace packages) ---
     try:
-        from fatigue.models import registry as reg  # type: ignore
+        from multifat.models import registry as reg  # type: ignore
 
         try:
             cp = reg._available_cp_methods()  # type: ignore[attr-defined]
@@ -86,15 +87,15 @@ def infer_method_family(method_name: str) -> str:
 
     # --- 2) Filesystem fallback (best-effort) ---
     try:
-        import fatigue  # type: ignore
+        import multifat  # type: ignore
 
         roots = []
-        if hasattr(fatigue, "__path__"):
-            roots = list(fatigue.__path__)  # type: ignore[attr-defined]
+        if hasattr(multifat, "__path__"):
+            roots = list(multifat.__path__)  # type: ignore[attr-defined]
         if roots:
             fatigue_dir = Path(roots[0]).resolve()
-        elif getattr(fatigue, "__file__", None):
-            fatigue_dir = Path(fatigue.__file__).resolve().parent  # type: ignore[arg-type]
+        elif getattr(multifat, "__file__", None):
+            fatigue_dir = Path(multifat.__file__).resolve().parent  # type: ignore[arg-type]
         else:
             return "UNKNOWN"
 
@@ -132,9 +133,6 @@ def save_fatigue_csv(
     N_exp,
     CP,
     N_pred,
-    test_status=None,
-    specimen_ids=None,
-    specimen_ids_design=None,
     N_design=None,
     F_design=None,
     N_pred_design=None,
@@ -151,15 +149,27 @@ def save_fatigue_csv(
     DP_fit_design=None,
     Error_ln_dp_design=None,
     Error_dp_design=None,
-    basquin_meta: dict | None = None,   # kept for backward compatibility (ignored)
+    basquin_meta: dict | None = None,  # kept for backward compatibility (ignored)
     material_meta: dict | None = None,  # kept for backward compatibility (ignored)
-    extra_meta: dict | None = None,     # kept for backward compatibility (ignored)
+    extra_meta: dict | None = None,  # kept for backward compatibility (ignored)
+    # Native life law of the model (MDC, MMCCM, MOREL); adds two columns only when given
+    N_native=None,
+    N_native_design=None,
+    # Run-outs (censored: Nf_exp is the recorded count, a lower bound); appended with Flag = 2
+    N_runout=None,
+    CP_runout=None,
+    N_pred_runout=None,
+    DP_fit_runout=None,
+    loading_type_runout=None,
+    N_native_runout=None,
+    # Identity columns (multifat.report.subsets.IDENTITY_COLUMNS), one dict per row; appended
+    # after all other columns when any of the three is given
+    observation_ids=None,
+    observation_ids_design=None,
+    observation_ids_runout=None,
     result_label: str | None = None,
 ) -> str:
     """Export a lightweight results CSV.
-
-    ``result_label`` changes the displayed method and filename only; the
-    scientific reference and method-family classification use ``method_name``.
 
     Output columns:
       Material, Method_family, Method, Metric_mode, Loading_type,
@@ -169,6 +179,8 @@ def save_fatigue_csv(
     Flag convention:
       0 = design points (if provided)
       1 = other points
+      2 = run-outs: Nf_exp is the recorded cycle count (a lower bound on life), DP_fit is the
+          master curve at that count (an upper bound on DP_e); all error columns are empty
 
     Error_log10_dp = log10(DP_fit / CP_value), for every metric mode.
     DP_fit is DP_e (expected damage at experimental life).
@@ -177,23 +189,20 @@ def save_fatigue_csv(
       - Nf mode:   Error_ln = ln(Nf_exp / Nf_expected)
       - DP_DIFF:   Error_ln_dp = ln(DP_point / DP_fit), where DP_fit is the calibration best-fit evaluated at Nf_exp.
 
+    Models with a native life law add Nf_native and Error_log10_native = log10(Nf_exp / Nf_native).
+    With observation identities, Test_status, Specimen_id, Case_id, Observation_id and
+    Dataset_fingerprint follow as the last columns.
+
     Notes:
       * Parameters Error_dp / Error_dp_design are deprecated aliases kept only to avoid breaking older scripts.
     """
     os.makedirs(out_dir, exist_ok=True)
+    # e.g. FIN.mcc_harmonic for explicit Findley amplitudes; the reference and family stay FIN's
     label = result_label or method_name
-    if not label or any(c in label for c in "/\\"):
-        raise ValueError("Invalid result label")
     filename = f"{label}_{material_name}.csv"
     path = os.path.join(out_dir, filename)
 
     reference = method_reference(method_name)
-    statuses = list(test_status) if test_status is not None else ["failure"] * len(N_exp)
-    specimens = list(specimen_ids) if specimen_ids is not None else [""] * len(N_exp)
-    if len(statuses) != len(N_exp) or len(specimens) != len(N_exp):
-        raise ValueError("Observation status/specimen IDs must match result rows")
-    calibration_id = (extra_meta or {}).get("calibration_id", "")
-    calibration_file = (extra_meta or {}).get("calibration_file", "")
     family = (method_family or infer_method_family(method_name)).strip() or "UNKNOWN"
 
     mode = str(metric_mode or "Nf").strip() or "Nf"
@@ -231,13 +240,21 @@ def save_fatigue_csv(
             if len(loading_type_design) > len(N_design):
                 loading_type_design = loading_type_design[: len(N_design)]
             else:
-                loading_type_design = loading_type_design + ["UNKNOWN"] * (len(N_design) - len(loading_type_design))
+                loading_type_design = loading_type_design + ["UNKNOWN"] * (
+                    len(N_design) - len(loading_type_design)
+                )
 
     # DP-fit and DP-log-ratio error arrays (optional)
     DP_fit = np.asarray(DP_fit, dtype=float).ravel() if DP_fit is not None else None
     Error_ln_dp = np.asarray(Error_ln_dp, dtype=float).ravel() if Error_ln_dp is not None else None
-    DP_fit_design = np.asarray(DP_fit_design, dtype=float).ravel() if DP_fit_design is not None else None
-    Error_ln_dp_design = np.asarray(Error_ln_dp_design, dtype=float).ravel() if Error_ln_dp_design is not None else None
+    DP_fit_design = (
+        np.asarray(DP_fit_design, dtype=float).ravel() if DP_fit_design is not None else None
+    )
+    Error_ln_dp_design = (
+        np.asarray(Error_ln_dp_design, dtype=float).ravel()
+        if Error_ln_dp_design is not None
+        else None
+    )
 
     # If not provided, but basquin_meta contains A_surv and b, compute DP_fit and Error_dp.
     try:
@@ -261,6 +278,7 @@ def save_fatigue_csv(
 
     if DP_fit is None:
         DP_fit = _dp_fit(N_exp)
+
     def _safe_log_ratio(num: np.ndarray, den: np.ndarray) -> np.ndarray:
         num = np.asarray(num, dtype=float)
         den = np.asarray(den, dtype=float)
@@ -276,7 +294,9 @@ def save_fatigue_csv(
         if DP_fit_design is None:
             DP_fit_design = _dp_fit(N_design)
         if Error_ln_dp_design is None and DP_fit_design is not None:
-            Error_ln_dp_design = _safe_log_ratio(np.asarray(F_design, dtype=float), np.asarray(DP_fit_design, dtype=float))
+            Error_ln_dp_design = _safe_log_ratio(
+                np.asarray(F_design, dtype=float), np.asarray(DP_fit_design, dtype=float)
+            )
 
     def _safe_err_ln(nexp: np.ndarray, npred: np.ndarray) -> np.ndarray:
         nexp = np.asarray(nexp, dtype=float)
@@ -286,7 +306,11 @@ def save_fatigue_csv(
         out[m] = np.log(nexp[m] / npred[m])
         return out
 
-    err_other = _safe_err_ln(N_exp, N_pred) if mode.upper() != "DP_DIFF" else np.full_like(N_exp, np.nan, dtype=float)
+    err_other = (
+        _safe_err_ln(N_exp, N_pred)
+        if mode.upper() != "DP_DIFF"
+        else np.full_like(N_exp, np.nan, dtype=float)
+    )
 
     if have_design:
         err_design = (
@@ -297,7 +321,30 @@ def save_fatigue_csv(
     else:
         err_design = None
 
-    with open(path, "w", newline="") as f:
+    native = N_native is not None
+    if native:
+        N_native = np.asarray(N_native, dtype=float).ravel()
+        N_native_design = (
+            np.asarray(N_native_design, dtype=float).ravel()
+            if N_native_design is not None
+            else np.full(len(N_design) if have_design else 0, np.nan)
+        )
+
+    def _native_cols(nexp: float, nn: float) -> list:
+        ok = np.isfinite(nn) and nn > 0.0 and np.isfinite(nexp) and nexp > 0.0
+        return [float(nn), float(np.log10(nexp / nn)) if ok else float("nan")]
+
+    with_ids = any(
+        x is not None for x in (observation_ids, observation_ids_design, observation_ids_runout)
+    )
+
+    def _ids(table, i: int) -> list:
+        if not with_ids:
+            return []
+        row = table[i] if table is not None and i < len(table) else {}
+        return [row.get(c, "") for c in IDENTITY_COLUMNS]
+
+    with open(path, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(
             [
@@ -316,21 +363,36 @@ def save_fatigue_csv(
                 "Error_log10_dp",
                 "Implementation_revision",
                 "Method_reference",
-                "Test_status", "Specimen_id", "Calibration_id", "Calibration_file",
             ]
+            + (["Nf_native", "Error_log10_native"] if native else [])
+            + (IDENTITY_COLUMNS if with_ids else [])
         )
 
         if have_design:
-            for i, (ne, cp, npred, err) in enumerate(zip(N_design, F_design, N_pred_design, err_design)):
-                dp_fit_i = float(DP_fit_design[i]) if DP_fit_design is not None and i < len(DP_fit_design) else float("nan")
-                edp_i = float(Error_ln_dp_design[i]) if Error_ln_dp_design is not None and i < len(Error_ln_dp_design) else float("nan")
+            for i, (ne, cp, npred, err) in enumerate(
+                zip(N_design, F_design, N_pred_design, err_design)
+            ):
+                dp_fit_i = (
+                    float(DP_fit_design[i])
+                    if DP_fit_design is not None and i < len(DP_fit_design)
+                    else float("nan")
+                )
+                edp_i = (
+                    float(Error_ln_dp_design[i])
+                    if Error_ln_dp_design is not None and i < len(Error_ln_dp_design)
+                    else float("nan")
+                )
                 w.writerow(
                     [
                         material_name,
                         family,
                         label,
                         mode,
-                        str(loading_type_design[i]) if loading_type_design is not None and i < len(loading_type_design) else "UNKNOWN",
+                        (
+                            str(loading_type_design[i])
+                            if loading_type_design is not None and i < len(loading_type_design)
+                            else "UNKNOWN"
+                        ),
                         float(ne),
                         float(cp),
                         float(npred),
@@ -341,15 +403,18 @@ def save_fatigue_csv(
                         float(log10_dp_ratio(dp_fit_i, cp)),
                         IMPLEMENTATION_REVISION,
                         reference["url"] or reference["citation"],
-                        "failure", specimen_ids_design[i] if specimen_ids_design is not None else "", calibration_id, calibration_file,
                     ]
+                    + (_native_cols(float(ne), float(N_native_design[i])) if native else [])
+                    + _ids(observation_ids_design, i)
                 )
 
         for i, (ne, cp, npred, err) in enumerate(zip(N_exp, CP, N_pred, err_other)):
             dp_fit_i = float(DP_fit[i]) if DP_fit is not None and i < len(DP_fit) else float("nan")
-            edp_i = float(Error_ln_dp[i]) if Error_ln_dp is not None and i < len(Error_ln_dp) else float("nan")
-            if statuses[i] != "failure":
-                dp_fit_i = edp_i = float("nan")
+            edp_i = (
+                float(Error_ln_dp[i])
+                if Error_ln_dp is not None and i < len(Error_ln_dp)
+                else float("nan")
+            )
             w.writerow(
                 [
                     material_name,
@@ -362,13 +427,38 @@ def save_fatigue_csv(
                     float(npred),
                     dp_fit_i,
                     1,
-                    float(err) if statuses[i] == "failure" else float("nan"),
-                    edp_i if statuses[i] == "failure" else float("nan"),
-                    float(log10_dp_ratio(dp_fit_i, cp)) if statuses[i] == "failure" else float("nan"),
+                    float(err),
+                    edp_i,
+                    float(log10_dp_ratio(dp_fit_i, cp)),
                     IMPLEMENTATION_REVISION,
                     reference["url"] or reference["citation"],
-                    statuses[i], specimens[i], calibration_id, calibration_file,
                 ]
+                + (_native_cols(float(ne), float(N_native[i])) if native else [])
+                + _ids(observation_ids, i)
+            )
+
+        nan = float("nan")
+        for i, ne in enumerate(N_runout if N_runout is not None else []):
+            w.writerow(
+                [
+                    material_name,
+                    family,
+                    label,
+                    mode,
+                    str(loading_type_runout[i]) if loading_type_runout else "UNKNOWN",
+                    float(ne),
+                    float(CP_runout[i]),
+                    float(N_pred_runout[i]),
+                    float(DP_fit_runout[i]),
+                    2,
+                    nan,
+                    nan,
+                    nan,
+                    IMPLEMENTATION_REVISION,
+                    reference["url"] or reference["citation"],
+                ]
+                + ([float(N_native_runout[i]), nan] if native else [])
+                + _ids(observation_ids_runout, i)
             )
 
     return path
