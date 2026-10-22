@@ -1,142 +1,68 @@
-# FABER WG4.3 — Help build a traceable multiaxial fatigue library
+# multifat: a traceable library of multiaxial fatigue criteria
 
-## About the Project — FABER WG4.3
+[![Quality checks](https://github.com/andreachiocca/multiaxial-fatigue/actions/workflows/quality.yml/badge.svg)](https://github.com/andreachiocca/multiaxial-fatigue/actions/workflows/quality.yml)
+![Python 3.10-3.13](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-This work is developed in the context of **FABER Working Group 4.3 (WG4.3)** to support the **preparation of a scientific review article on multiaxial fatigue assessment methods**. The article is not presented here as already published. See the [official WG4.3 activities](https://faber-cost.eu/wg4-fatigue-estimation-categories/wg4-3-multiaxial-high-cycle-fatigue/).
+`multifat` implements published multiaxial high-cycle fatigue criteria (critical-plane, invariant,
+integral and energy-based), checks each against its original paper, and runs all of them on the same
+experimental datasets. One command on a workbook of fatigue tests returns every model's damage
+parameter, predicted life and error statistics.
 
-The repository combines two purposes: **scientific review and comparison**—identify, classify, document, implement and compare published criteria—and **open collaborative development**, where researchers contribute implementations, numerical benchmarks and independent validation. We invite **missing criteria, source-faithful repairs and validation cases** across all methodological families.
-
-Multiaxial fatigue depends on interacting stress/strain components, phase shifts, mean stresses and material response. Published methods use different physical assumptions, plane rules, amplitude definitions and fatigue-life relations. A shared collection makes those differences explicit and helps researchers compare results without treating one numerical convention as universal.
-
-**Present scientific scope:** constant-amplitude multiaxial fatigue, principally HCF, of **plain/smooth geometries**—without explicit geometrical stress concentrations, notches, cracks or significant stress gradients. Both proportional and non-proportional loading are relevant where supported by each method, irrespective of whether its formulation is stress-, strain-, energy-, plane-, invariant- or otherwise based.
-
-**Current software:** single-frequency harmonic stress cycles, elastic strains inferred from stress, damage-parameter assessment, empirical life fitting where valid, and CSV/plot comparisons. **Potential future extensions**, not existing capabilities or formal commitments, include variable-amplitude and richer periodic histories, notches/gradients, complex geometries, structural applications and additional fatigue phenomena. Wider methods remain catalogued but are marked separately from the current phase.
-
-## Help us implement missing fatigue methods
-
-Before starting from scratch, consult the [external source-code inventory](docs/EXTERNAL_IMPLEMENTATIONS.md). It distinguishes inspected source, related/unverified leads and cases with no accessible source identified. A public repository is not automatically licensed for reuse; external code is neither integrated nor scientifically validated merely by being linked here.
-
-Start with the [contribution index](docs/METHOD_INDEX.md), which lists every missing candidate by family, references, loading scope and development disposition. You can implement a criterion, complete a disabled formulation, review equations, supply a missing original reference, improve numerical robustness or validate an existing implementation.
-
-<!-- METHOD_NAVIGATION_START -->
-
-**97 missing method candidates** are available to explore: 85 have preliminary A/B feasibility (a new criterion or manageable extensions). Pick by scientific interest and available references/data; an off-roadmap proposal is welcome.
-
-Browse contribution opportunities by family: [Critical plane](docs/METHOD_INDEX.md#family-critical-plane) · [Energy based](docs/METHOD_INDEX.md#family-energy-based) · [Integral and hybrid](docs/METHOD_INDEX.md#family-integral-and-hybrid) · [Invariant based](docs/METHOD_INDEX.md#family-invariant-based) · [Mesoscopic and damage](docs/METHOD_INDEX.md#family-mesoscopic-and-damage) · [Nonlocal and gradient](docs/METHOD_INDEX.md#family-nonlocal-and-gradient) · [Probabilistic](docs/METHOD_INDEX.md#family-probabilistic) · [Specialized](docs/METHOD_INDEX.md#family-specialized) · [Strain based](docs/METHOD_INDEX.md#family-strain-based) · [Stress based](docs/METHOD_INDEX.md#family-stress-based) · [Tensor and path based](docs/METHOD_INDEX.md#family-tensor-and-path-based).
-
-**Available in the current API:** [FS](METHODS.md#i_fs), [FIN](METHODS.md#i_fin), [SWT](METHODS.md#i_swt), [MATAKE](METHODS.md#i_matake), [MCD](METHODS.md#i_mcd), [MGSE_YU](METHODS.md#i_mgse_yu), [MGSE_ZHU](METHODS.md#i_mgse_zhu), [MSWT](METHODS.md#i_mswt), [MKBM](METHODS.md#i_mkbm), [LIU2021](METHODS.md#i_liu2021), [LI](METHODS.md#i_li), [GSE](METHODS.md#i_gse), [GSA](METHODS.md#i_gsa), [BP](METHODS.md#i_bp), [CAIM](METHODS.md#i_caim). Each link states the implemented scope and evidence; active does not automatically mean source completeness is established.
-
-<!-- METHOD_NAVIGATION_END -->
-
-**Choose a method → Read its original reference → Inspect requirements → Find or propose an Issue → Implement → Test and validate → Submit a PR.**
-
-1. Select a permanent method ID in the [complete catalogue](METHODS.md) or [suggested roadmap](ROADMAP.md). Off-roadmap methods are welcome.
-2. Follow its DOI or traceable citation; check the exact formulation, version and errata. Unverified references are labelled explicitly.
-3. Read its inputs, missing components, reusable code and validation needs. Obtain the original full text and suitable numerical data before coding.
-4. Use its **Search Issues** link to avoid duplication, then **Propose task** or use an existing [prepared brief](docs/contribution-issues/README.md). Prepared briefs are documents, not open Issues.
-5. Follow the [ten-step contribution guide](CONTRIBUTING.md), implement the bounded formulation, add independent checks and submit a PR linked to the method ID.
-
-## Current implementation coverage
-
-[**Complete method catalogue**](METHODS.md) · [**All contribution opportunities**](docs/METHOD_INDEX.md) · [**Prioritized roadmap**](ROADMAP.md) · [**Count reconciliation**](docs/COUNT_RECONCILIATION.md)
-
-<!-- METHOD_PROGRESS_START -->
-
-| Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
-| --- | --- | --- | --- | --- | --- |
-| Critical plane | 3 | 1 | 14 | 0 | 18 |
-| Energy based | 3 | 2 | 15 | 3 | 23 |
-| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
-| Invariant based | 0 | 1 | 12 | 0 | 13 |
-| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
-| Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
-| Probabilistic | 0 | 0 | 5 | 0 | 5 |
-| Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 2 | 0 | 11 | 2 | 15 |
-| Stress based | 0 | 0 | 13 | 0 | 13 |
-| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
-| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
-
-<!-- METHOD_PROGRESS_END -->
-
-**Complete** means essential components are implemented and tested for the explicitly named **repository scope**, which may include documented adaptations. **Partial** means known essential gaps; those archived methods are disabled. **Requires review** means active code exists but source completeness is not established. **Validation is independent:** no method is currently claimed independently validated against published or experimental datasets merely because its tests pass.
-
-Each record has one primary family for counting and may have secondary classifications. For example, an energy criterion can also use a critical plane. The [catalogue](METHODS.md) records those overlaps, original versus adapted formulations, `_ext` variants, code, tests and missing work.
-
-These counts cover the complete catalogue, including potential future geometry/loading tracks. Check each record’s **current FABER phase** before proposing near-term work; catalogue inclusion is not a claim of present plain-geometry compatibility.
-
-## Why are there about 100 candidates but only about 20 roadmap entries?
-
-<!-- METHOD_RECONCILIATION_START -->
-
-The catalogue contains **97 missing method/scoped candidates**; the roadmap selects **22** for an initial, dependency-aware programme. The other **75 remain available for proposals**. The complete index retains **161 research records**, including **117 identifiable method/scoped records** and **44 bundles, related sources, unresolved overlaps/leads and wider workstreams** outside that progress denominator. These are not 161 independent fatigue theories.
-
-<!-- METHOD_RECONCILIATION_END -->
-
-The 51-publication FABER review and extended searches contain original criteria, modifications, comparisons and duplicate/related papers. An exact final count of independent theories remains unresolved where original sources or equivalence checks are missing. The [reconciliation](docs/COUNT_RECONCILIATION.md) accounts for every ID and its selection, deferral or relationship; no candidate disappears because it is difficult or outside the critical-plane family.
-
-## Browse methods and evidence
-
-Use the [method index](docs/METHOD_INDEX.md) to browse **available API methods**, **repairs**, **source reviews**, **missing methods by family**, **validation evidence** and **loading scope**. The [full catalogue](METHODS.md) provides authors, references/DOIs, principles, material parameters, outputs and known limitations without requiring source-code browsing. The [structured CSV](docs/catalogue/methods.csv) supports sorting/filtering; [JSON](docs/catalogue/methods.json) is the maintained source of truth.
-
-The [roadmap](ROADMAP.md) explains its selection criteria, dependencies and how to propose another method. The [research provenance](docs/research/README.md) preserves the original review, 51/51 publication dispositions, assessment and saved bibliographic evidence. A matching DOI identifies a publication; it does not establish a complete reproducible algorithm.
+The project supports **FABER Working Group 4.3**
+([WG4.3 activities](https://faber-cost.eu/wg4-fatigue-estimation-categories/wg4-3-multiaxial-high-cycle-fatigue/))
+on its review article in multiaxial fatigue assessment, still in preparation. Scope:
+constant-amplitude, mainly high-cycle fatigue of plain (smooth) specimens under proportional and
+non-proportional loading, without notches, cracks or significant stress gradients.
 
 ## Quick start
 
-Use Python 3.10+ from the repository root:
+> [!TIP]
+> For an end-to-end walkthrough covering input data preparation, command-line workflows, and Python API usage, see the **[User Guide](docs/user-guide.md)**.
+
+Python 3.10+ and [uv](https://docs.astral.sh/uv/), from the repository root:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-python -m pip install -r requirements.txt
-python 0_calibrate_material_params.py --models BP --material AISI316L
-python 1_run_material.py --model BP --material AISI316L --results-dir Results/current --no-plots
-MPLBACKEND=Agg python -m unittest discover -s tests -v
+uv sync
+uv run multifat-pipeline --material AISI316L --jobs 4
 ```
 
-For contributor checks, install `requirements-dev.txt`, then run
-`python -m ruff check .`, `python tools/generate_method_docs.py --check` and
-`python tools/check_docs.py`. CI runs these checks and the unit tests. The
-documentation check verifies local destinations; external links and frozen
-research documents are excluded.
+`multifat-pipeline` takes a workbook path, `--material NAME` (the file name without its ordering
+number, e.g. `AISI316L` for `8_AISI316L.xlsx`) or `--all`. For each material it
 
-Excel contains material properties and experimental observations. Script 0 writes
-a new, traceable JSON calibration under `Calibrations/<material>/`; earlier records
-remain available. Script 1 automatically selects a compatible record or accepts
-`--calibration-id ID`. It reports the file used and requires recalibration when
-relevant inputs or numerical formulations change. No manual coefficient transfer
-through Excel is required. The four initial migration records retain the previous
-coefficients and analysis results, with their legacy provenance stated explicitly.
+1. validates the workbook against the [workbook format](docs/workbook-format.md) and writes
+   `<MATERIAL>_validation.txt`;
+2. calibrates only the constants that the models need and the workbook lacks, writing them to
+   `<MATERIAL>_calibration.json` with the run's provenance (workbook hash, failure-only
+   `failure_fingerprint`, code revision, settings). The workbook is never modified; `--constants
+   FILE` reads them from a `Calibrations/` record or an earlier sidecar instead;
+3. runs every registered model and its `_ext` variant, one CSV per model. Run-outs stay censored
+   observations (`Flag = 2`), outside every fit and statistic, and every row keeps its specimen
+   and observation identity;
+4. compares the results (statistics, plots and LaTeX tables) and, across workbooks, writes the
+   method-by-material eligibility matrix.
 
-Findley assessment has a method-specific harmonic shear-amplitude option. The
-omitted option preserves historical MCE assessment; explicit MCC or MCE requires
-a separately compatible calibration made with the same option:
+A workbook of fatigue-limit states only (every plain row a run-out at the endurance basis, both
+R = -1 limits in the Summary) is assessed by each model's fatigue index error instead of a life
+curve (`FatigueLimit/`). `multifat-compare --common-methods A B` compares methods on the failures
+they all assess. See [dataset workflow](docs/dataset-workflow.md).
 
-```bash
-python 1_run_material.py --material Al7075_T6 --model FIN --no-plots
-python 0_calibrate_material_params.py --material Al7075_T6 --models FIN --shear-amplitude-algorithm mcc_harmonic
-python 1_run_material.py --material Al7075_T6 --model FIN --no-plots --shear-amplitude-algorithm mcc_harmonic
-python 0_calibrate_material_params.py --material Al7075_T6 --models FIN --shear-amplitude-algorithm mce_harmonic
-python 1_run_material.py --material Al7075_T6 --model FIN --no-plots --shear-amplitude-algorithm mce_harmonic
-```
+Outputs go to `Results/current/`. A model that cannot run on a material (missing constants,
+unidentifiable fit) is listed as skipped in `<MATERIAL>_run_report.tsv` with its reason. The others
+still run.
 
-Script 1 never calibrates automatically. Explicit results have
-algorithm-qualified names and adjacent provenance metadata. See
-[production Findley assessment](docs/shear-amplitude.md#production-findley-assessment)
-for restrictions and output conventions.
+Run single steps with `multifat-run --model BP --material AISI316L` (workbook constants only),
+`multifat-calibrate` or `multifat-compare`. Without uv, `python -m pip install -e .` installs the
+same console scripts. The numbered scripts in `scripts/` (from
+`scripts/0_calibrate_material_params.py` to `scripts/3_pipeline.py`) are thin shims for them.
 
-Run-outs are imported using the existing Yes/No flag, excluded from all fitting
-and ordinary error statistics, and displayed as open markers with arrows indicating
-lower-bound lives. Use `--hide-runouts` to hide them or `--plot-dir PATH` to save
-analysis plots. Adding run-outs alone does not invalidate a calibration. See the
-[calibration workflow](docs/calibration-workflow.md) and
-[experimental-data convention](Experimental_Data/README.md) for details.
-
-The workbook run writes a new result under `Results/current/`. It reports when optional material properties are estimated. For a minimal direct calculation using the current API, run:
+### Python API
 
 ```python
 import numpy as np
-from fatigue.models.registry import get_models
+from multifat.models.registry import get_models
 
 model = get_models(["BP"])[0]
 zero = np.zeros((3, 3))
@@ -149,41 +75,195 @@ result = model.evaluate_case(
 print(f"BP utilization: {result.values['']:.6f}")  # 1.000000
 ```
 
-These illustrative strengths are in MPa: reversed strengths are amplitudes; R=0 strengths are maximum stresses. BP is stress based; the strain arguments are unused here. This calculation is an analytical fatigue-limit check, not an experimental life prediction. See [BP/CAIM usage and conventions](docs/bp-caim-usage.md) for parameter estimates and integration details.
+Stresses are in MPa. Reversed strengths are amplitudes and R = 0 strengths are maximum stresses.
+`model.evaluate_case(...)` returns a `CaseResult` holding the scalar **Damage Parameter ($DP$)**:
+an equivalent stress in MPa for stress models such as Findley and Crossland, an energy density in
+MJ/m³ for SWT, a dimensionless fatigue index for endurance criteria such as BP and CAIM. Fatigue
+life $N_f$ comes from mapping $DP$ through the material's calibrated uniaxial Basquin curve
+($DP = A \cdot N_f^b$), or from the method's native life law where the source gives one (MDC,
+MMCCM, MOREL). See [BP/CAIM usage](docs/bp-caim-usage.md) and
+[architecture](docs/architecture.md).
+
+## Visual results gallery
+
+`examples/` holds a self-contained visualization suite. Every figure uses publication formatting
+(Times New Roman, Computer Modern math, factor-of-2 scatter bounds) and is reproduced with one
+command:
+
+```bash
+uv run python examples/generate_gallery.py
+```
+
+### 1. Critical-plane damage landscapes
+Orientation-dependent damage distributions $\mathrm{DP}(\theta)$ under in-phase ($\delta = 0^\circ$)
+versus non-proportional $90^\circ$ out-of-phase biaxial loading ($\sigma_a = 240\,\mathrm{MPa},
+\tau_a = 150\,\mathrm{MPa}$; illustrative loading, not a material benchmark; $k_{FI} = 0.28$, $k_{FS} = 0.50$,
+$S_y = 750\,\mathrm{MPa}$, $E = 206\,\mathrm{GPa}$, $\nu = 0.30$), showing how the phase shift moves
+the critical plane and changes each criterion's damage peaks:
+
+![Critical Plane Damage Landscapes](docs/images/critical_plane_polar.png)
+
+### 2. Multiaxial fatigue life prediction correlation
+Experimental versus predicted fatigue life ($N_{f,\mathrm{exp}}$ vs $N_{f,\mathrm{pred}}$) for the
+plain axial and torsion tests of 42CrMo4-QT (`Experimental_Data/6_42CrMo4_QT.xlsx`; run-outs
+excluded; no combined-loading tests in the workbook), against the Factor-of-2 ($F2$) and Factor-of-3
+($F3$) scatter bands. Predictions come from the current pipeline
+(`examples/build_predictions_csv.py`):
+
+![Fatigue Life Prediction Correlation](docs/images/life_prediction_correlation.png)
+
+### 3. Model benchmark & error dispersion
+Cross-criterion comparison ranking models by log-error standard deviation
+$s_{\ln} = \mathrm{std}(\ln(N_{f,\mathrm{exp}} / N_{f,\mathrm{pred}}))$ alongside systematic bias
+$\mu_{\ln}$ (positive = conservative). Every test here is axial or torsional and all criteria are
+calibrated on the same limits, so the ranking says nothing about multiaxial or non-proportional
+performance:
+
+![Comparative Benchmark of Multiaxial Fatigue Criteria](docs/images/model_benchmark_error.png)
+
+### 4. Biaxial fatigue limit failure envelopes
+Normalized failure boundaries ($\sigma_a / \sigma_{-1}$ vs $\tau_a / \tau_{-1}$) for fully reversed
+proportional loading, calibrated on the 42CrMo4-QT fatigue limits ($\sigma_{-1} = 433$ MPa,
+$\tau_{-1} = 344$ MPa): Gough-Pollard ellipse, maximum shear stress (Tresca, calibrated on
+$\sigma_{-1}$), Crossland and Findley. Only the two calibration points are shown: the dataset has no
+combined-loading fatigue-limit tests.
+
+![Multiaxial Fatigue Limit Envelopes](docs/images/fatigue_limit_envelopes.png)
+
+## Method coverage
+
+<!-- METHOD_NAVIGATION_START -->
+
+**81 missing method candidates** are available to explore: 69 have preliminary A/B feasibility (a new criterion or manageable extensions). Pick by scientific interest and available references/data; an off-roadmap proposal is welcome.
+
+Browse contribution opportunities by family: [Critical plane](docs/METHOD_INDEX.md#family-critical-plane) · [Energy based](docs/METHOD_INDEX.md#family-energy-based) · [Integral and hybrid](docs/METHOD_INDEX.md#family-integral-and-hybrid) · [Invariant based](docs/METHOD_INDEX.md#family-invariant-based) · [Mesoscopic and damage](docs/METHOD_INDEX.md#family-mesoscopic-and-damage) · [Nonlocal and gradient](docs/METHOD_INDEX.md#family-nonlocal-and-gradient) · [Probabilistic](docs/METHOD_INDEX.md#family-probabilistic) · [Specialized](docs/METHOD_INDEX.md#family-specialized) · [Strain based](docs/METHOD_INDEX.md#family-strain-based) · [Stress based](docs/METHOD_INDEX.md#family-stress-based) · [Tensor and path based](docs/METHOD_INDEX.md#family-tensor-and-path-based).
+
+**Available in the current API:** [FS](METHODS.md#i_fs), [FIN](METHODS.md#i_fin), [SWT](METHODS.md#i_swt), [MATAKE](METHODS.md#i_matake), [MCD](METHODS.md#i_mcd), [MGSE_YU](METHODS.md#i_mgse_yu), [MGSE_ZHU](METHODS.md#i_mgse_zhu), [MSWT](METHODS.md#i_mswt), [MKBM](METHODS.md#i_mkbm), [LIU2021](METHODS.md#i_liu2021), [LI](METHODS.md#i_li), [GSE](METHODS.md#i_gse), [GSA](METHODS.md#i_gsa), [BP](METHODS.md#i_bp), [CAIM](METHODS.md#i_caim), [DANGVAN](METHODS.md#i_dangvan), [OTT](METHODS.md#i_ott), [SWTD](METHODS.md#i_swtd), [CROSSLAND](METHODS.md#n01), [SINES](METHODS.md#n02), [PAPADOPOULOS](METHODS.md#n03), [MWCM](METHODS.md#n04), [VHN](METHODS.md#n20), [PBP](METHODS.md#n37), [PCR](METHODS.md#g01), [PI](METHODS.md#g02), [MDC](METHODS.md#g06), [MMMH](METHODS.md#g07), [COIN](METHODS.md#g08), [VSE](METHODS.md#g15), [EK](METHODS.md#g16), [MMCCM](METHODS.md#g22), [MOREL](METHODS.md#g23), [RFB](METHODS.md#g41). Each link states the implemented scope and evidence; active does not automatically mean source completeness is established.
+
+<!-- METHOD_NAVIGATION_END -->
+
+Each registered method has a paper-reproduction test in `tests/methods/` and is checked against its
+original publication (transcribed tables in `tests/data/papers/`, each citing DOI, table and page).
+Departures from the source (shear-amplitude rule, elastic strains, repository adaptations) are
+listed per method in the [method audit](docs/method-audit.md) and the
+[complete catalogue](METHODS.md).
+
+<!-- METHOD_PROGRESS_START -->
+
+| Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
+| --- | --- | --- | --- | --- | --- |
+| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Energy based | 6 | 1 | 13 | 3 | 23 |
+| Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
+| Invariant based | 5 | 0 | 8 | 0 | 13 |
+| Mesoscopic and damage | 2 | 0 | 6 | 0 | 8 |
+| Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
+| Probabilistic | 0 | 0 | 5 | 0 | 5 |
+| Specialized | 0 | 0 | 3 | 0 | 3 |
+| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Tensor and path based | 1 | 0 | 2 | 0 | 3 |
+| **TOTAL** | 29 | 2 | 81 | 5 | 117 |
+
+<!-- METHOD_PROGRESS_END -->
+
+**Complete** means the essential components are implemented and tested within the stated repository
+scope, which may include documented adaptations. **Partial** means known essential gaps, and those
+methods are disabled. **Requires review** means active code whose source completeness is not
+established. A passing test is numerical verification, not independent validation against
+experimental data.
+
+<!-- METHOD_RECONCILIATION_START -->
+
+The catalogue contains **81 missing method/scoped candidates**; the roadmap selects **6** for an initial, dependency-aware programme. The other **75 remain available for proposals**. The complete index retains **161 research records**, including **117 identifiable method/scoped records** and **44 bundles, related sources, unresolved overlaps/leads and wider workstreams** outside that progress denominator. These are not 161 independent fatigue theories.
+
+<!-- METHOD_RECONCILIATION_END -->
+
+The [count reconciliation](docs/COUNT_RECONCILIATION.md) accounts for every catalogue ID. The
+[method index](docs/METHOD_INDEX.md) lists missing methods by family, with references and loading
+scope. The [roadmap](ROADMAP.md) gives the suggested order. `docs/catalogue/methods.json` is the
+source of truth.
+
+## Add a method
+
+1. Pick an ID in the [catalogue](METHODS.md) or the [roadmap](ROADMAP.md) (off-roadmap proposals are
+   welcome) and read its original paper. Check the
+   [external implementations](docs/EXTERNAL_IMPLEMENTATIONS.md) first, keeping their licences in
+   mind.
+2. Put a critical-plane criterion in `src/multifat/models/cp_methods/`, a direct one in
+   `invariant_methods/`, `energy_based_methods/` or `integral_methods/`, and register it in
+   `src/multifat/models/registry.py`. The interfaces are in
+   [adding methods](docs/adding-methods.md).
+3. Add a paper-reproduction test in `tests/methods/` and the citation in
+   `src/multifat/models/references.py`, then update the catalogue and regenerate the docs.
+4. Follow [CONTRIBUTING](CONTRIBUTING.md) for the checks and the evidence a PR needs.
+
+## Add a workbook
+
+1. Copy an existing workbook in `Experimental_Data/` and name it after the material (an ordering
+   number such as `16_` may precede the name).
+2. Fill the `Summary` sheet and one `Dataset` row per test. Only Young's modulus and Poisson's
+   ratio are required. Without them only stress-only models run, and each other constant is needed
+   only by the models that use it. The [workbook format](docs/workbook-format.md) lists the headers,
+   units and required constants. The design set needs at least two uniaxial R = -1 tests with
+   distinct lives.
+3. Run `uv run multifat-pipeline --material <MATERIAL>` and read `<MATERIAL>_validation.txt` and
+   `<MATERIAL>_run_report.tsv`.
+4. Record where every value comes from (paper, table, page) in
+   [Experimental_Data/PROVENANCE.md](Experimental_Data/PROVENANCE.md).
 
 ## Software map
 
 | Component | Responsibility |
 |---|---|
-| `0_calibrate_material_params.py`, `1_run_material.py`, `2_compare_results.py` | Export JSON calibrations, assess workbook cases using compatible records, compare results |
-| `fatigue/imp/`, `fatigue/planes/` | Import loading/material data and sample candidate planes |
-| `fatigue/models/` | Criterion implementations, plane adapter, registry and source metadata |
-| `fatigue/eval/`, `fatigue/report/` | Evaluate/calibrate damage curves and export results |
-| `tests/` | Analytical/regression cases and optional material sweep |
-| `Calibrations/`, `Experimental_Data/` | Versioned calibration history and material/experimental inputs |
+| `src/multifat/cli/` | `multifat-pipeline`, `-calibrate`, `-run`, `-compare` (shims `scripts/0_`-`scripts/3_*.py`) |
+| `src/multifat/imp/`, `src/multifat/planes/` | Workbook contract and import (`imp/schema.py`); candidate planes |
+| `src/multifat/models/` | Criteria, plane adapter, registry and source metadata |
+| `src/multifat/eval/` | Plane search, calibration, material fits, life curves, fatigue index error |
+| `src/multifat/report/` | CSV export, observation identities and common subsets |
+| `tests/` | Paper reproductions, analytical and regression tests, optional material sweep |
+| `tools/` | Doc generators, documentation check, regression snapshot, dataset install and audit |
 
-A physical harmonic cycle is represented by mean, sine and cosine **3×3 tensors**. The workbook importer derives isotropic elastic strains. Plane methods return damage and a selection metric; case-level methods can use the full harmonic tensors directly. Reuse projections, plane searches and sphere quadrature only when they match the original criterion. Details are in [architecture](docs/architecture.md) and [adding methods](docs/adding-methods.md).
+A harmonic load cycle is represented by mean, sine and cosine 3×3 stress tensors. Elastic strains
+follow from the workbook E and ν. Critical-plane methods search the plane with a grid plus
+analytical seeds and local refinement. See [architecture](docs/architecture.md) for the structure
+and [notation](docs/notation.md) for the symbols.
 
 ## Scope and maturity
 
-General nonsinusoidal periodic paths, constitutive plasticity, mesh/control-volume processing and probabilistic calibration are future work. Legacy CP shear amplitudes use an RSS ellipse convention; BP/CAIM use the major semi-axis. Material fallbacks and repository adaptations are explicit in the [method audit](docs/method-audit.md). Keep these differences when reproducing a paper.
+Single-frequency harmonic cycles, elastic strains, damage-parameter assessment, a fitted life curve
+per method and native life laws where the source gives one (MDC, MMCCM, MOREL). General periodic
+paths, variable amplitude, plasticity, notches and gradients, and probabilistic methods are future
+work, and the corresponding catalogue entries stay listed. Out-of-phase shear ranges follow each
+source where it prescribes one (longest chord for FS, MKBM, LI, LIU2021). The other critical-plane
+methods keep the RSS convention.
 
-Historical `Results/*.csv` predate the numerical audit and are excluded from current comparisons by default. Recalibrate affected parameters before ranking methods. Current exports preserve `log10(DP_e/DP)` for all slopes; unreliable life inversions remain suppressed. Run `python 2_compare_results.py --results_dir Results/current --out_dir Results/Comparison` to compare fresh runs.
+The CSVs in `Results/archive/pre-audit/` predate the numerical audit and are kept as history only
+(see [Results/README.md](Results/README.md)). The experimental collection is the revised
+October 2026 set (upstream 71eaac3, 15 workbooks, of which 7 fatigue-limit sets and 2 notched-only).
+The provenance of each workbook, with its open questions, is in
+[Experimental_Data/PROVENANCE.md](Experimental_Data/PROVENANCE.md).
 
-The repository is public and welcomes scientific contributions. A software license has not yet been selected, so reuse terms still need a maintainer decision. No copyrighted article PDFs are distributed here.
+## Development
 
-When referencing calculations, cite the repository URL and exact commit, along
-with each criterion's original publication from the catalogue. The review
-article is in preparation; no article DOI or software release DOI is assigned
-here. See the [cleanup audit](docs/repository-cleanup.md) for preserved archives,
-branch classifications and remaining maintenance decisions.
+```bash
+uv run pytest
+uv run ruff check .
+uv run black --check .
+uv run python tools/generate_method_docs.py --check
+uv run python tools/generate_workbook_docs.py --check
+uv run python tools/check_docs.py
+```
 
-## Dataset eligibility and matched comparisons
+CI runs these on Python 3.10-3.13 (plus Windows on 3.12). A change that can alter numerical outputs
+also needs `uv run python tools/regression_snapshot.py run/compare` (see
+[CONTRIBUTING](CONTRIBUTING.md)). The research provenance behind the catalogue (51-publication
+review, assessment, saved bibliographic records) is frozen in
+[docs/research](docs/research/README.md). Changes are listed in the [CHANGELOG](CHANGELOG.md).
 
-The revised workbook importer preserves unavailable properties and reports
-method-specific reasons for skipped assessments. Generate a compatibility matrix
-with `python 3_review_subsets.py`; add `--run` to assess compatible combinations
-without automatic calibration. Script 2 accepts `--common-methods BP SWT` and
-`--comparison-metric life` or `damage` for comparisons on identical failure
-observations. See the [dataset workflow](docs/dataset-workflow.md) for source
-identity restrictions, calibration settings and reproducible examples.
+## Licence and citation
+
+Copyright (c) 2026 Andrea Chiocca, Michele Sgamma and Tommaso Grossi. `multifat` is released under
+the [MIT License](LICENSE). No copyrighted article PDFs are distributed here. When referencing
+calculations, cite the software as described in [CITATION.cff](CITATION.cff) with the exact commit,
+together with each criterion's original publication from the catalogue.

@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software, please cite it as below, with the exact commit you used, and cite the
+  original publication of every criterion you report (see METHODS.md).
+type: software
+title: "multifat: a traceable library of multiaxial fatigue criteria"
+abstract: >-
+  Published multiaxial high-cycle fatigue criteria (critical-plane, invariant, integral and
+  energy-based), each checked against its original publication, evaluated on common experimental
+  datasets through a one-command pipeline. Developed within FABER COST Action Working Group 4.3.
+authors:
+  - family-names: Chiocca
+    given-names: Andrea
+  - family-names: Grossi
+    given-names: Tommaso
+license: MIT
+repository-code: "https://github.com/andreachiocca/multiaxial-fatigue"
+keywords:
+  - multiaxial fatigue
+  - high-cycle fatigue
+  - critical plane
+  - fatigue criteria
+  - mechanical engineering

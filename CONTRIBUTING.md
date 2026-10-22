@@ -1,85 +1,93 @@
 # Contributing to WG4.3
 
-This framework supports preparation of the **FABER WG4.3 scientific review article** and collaborative comparison of published multiaxial fatigue criteria. The present phase is **constant-amplitude loading of plain/smooth geometries**, P/NP where the selected law supports it, without explicit notches, cracks or significant gradients. Wider loading/geometry work remains a potential future track, not an existing capability or committed deliverable.
+This framework supports the **FABER WG4.3 scientific review article** and the collaborative comparison of published multiaxial fatigue criteria. The present phase covers **constant-amplitude loading of plain/smooth geometries**, P/NP where the selected law supports it, without explicit notches, cracks or significant gradients. Wider loading and geometry work is a possible future track, not a current capability or a committed deliverable.
 
 ## Check external code before starting from scratch
 
-Consult the [external-code inventory](docs/EXTERNAL_IMPLEMENTATIONS.md) and the method’s discovery metadata. An external implementation remains external until independently reviewed, integrated and tested; it does not change WG4.3 completeness or validation.
+Consult the [external-code inventory](docs/EXTERNAL_IMPLEMENTATIONS.md) and the method’s discovery metadata. An external implementation stays external until independently reviewed, integrated and tested. It does not change WG4.3 completeness or validation.
 
-For any proposed reuse or translation, record the exact file/revision, method/version correspondence, original paper, loading/material/geometry assumptions, dependencies, tests and license grant. Public code without an explicit applicable license is not permission to copy, translate or redistribute. GPL obligations differ from MIT/ISC notices, and this repository’s own license is still undecided: resolve compatibility with maintainers before integration. Where permission is absent, link the source and seek permission or derive an independent implementation from the scientific formulation with appropriate review. Do not port unknown-license code under a new license.
+For any reuse or translation, record the exact file/revision, method/version correspondence, original paper, loading/material/geometry assumptions, dependencies, tests and license grant. Public code without an explicit license is not permission to copy, translate or redistribute. This repository uses the MIT License ([LICENSE](LICENSE)), and contributions are accepted on the same terms. Permissively licensed code (MIT, BSD, ISC, Apache-2.0) is compatible if its notices are kept. GPL-licensed and unlicensed code is not. Without permission, link the source and ask for it, or derive an independent implementation from the published formulation and review it. Do not relicense code of unknown origin.
 
-Compare intermediate quantities and source-specific plane/amplitude conventions, not only final life. External tests and published claims are evidence leads, not scientific validation of a port. Attach provenance and notices to the eventual PR. For geometry/gradient/spectral software, first establish whether a faithful smooth-point CA subcase exists; do not silently import a broader physical model.
+Compare intermediate quantities and source-specific plane/amplitude conventions, not only final life. External tests and published claims are evidence leads, not validation of a port. Attach provenance and notices to the PR. For geometry/gradient/spectral software, first establish whether a faithful smooth-point CA subcase exists. Do not import a broader physical model silently.
 
-Start with [METHODS.md](METHODS.md), the [suggested roadmap](ROADMAP.md) and [prepared Issues](docs/contribution-issues/README.md). Contributions can implement a method, resolve a source ambiguity, build a reproducible benchmark, validate existing code or improve documentation. Priority is advisory, not a project assignment.
+Start with [METHODS.md](METHODS.md), the [suggested roadmap](ROADMAP.md) and [prepared Issues](docs/contribution-issues/README.md). Contributions can implement a method, resolve a source ambiguity, build a reproducible benchmark, validate existing code or improve documentation. Priority is advisory, not an assignment.
 
 ## Ten steps from a method to a PR
 
-1. **Choose an ID.** Browse [all missing methods by family](docs/METHOD_INDEX.md#missing-methods-by-family), repairs or source-review tasks. The roadmap is a suggested sequence; you may propose another catalogued method. For a genuinely new candidate, establish its relationship to existing entries before assigning a new permanent ID.
-2. **Find or propose the task.** Use the entry’s Search Issues link, check aliases and closed Issues, and claim an existing task or open a scoped proposal. The Propose task link opens the method-specific template with its ID/title. Prepared briefs are not live Issues.
-3. **Confirm the primary formulation.** Obtain the exact original article, relevant errata/supplements and traceable citation. DOI metadata confirms identity, not equations. An unresolved variant needs reference work before numerical implementation. Do not upload copyrighted papers without redistribution rights.
-4. **Write a bounded specification.** State CA P/NP/mean-stress scope, material domain, equations, amplitude/range and shear conventions, required measurements and output (limit, damage parameter, native life or probability). Record repository adaptations separately from the original law.
-5. **Inspect reusable components.** Read only the [model interface guide](docs/adding-methods.md), one nearby implementation and relevant projection/search helpers. Verify that reuse preserves the source plane rule and physical simultaneous path. List any input, native-life or spatial/statistical prerequisite.
-6. **Implement and integrate.** Place the law in the appropriate model family, declare parameters, register it and add runtime citation metadata. Follow the paths/interfaces below; propose major prerequisites separately. A contributor need not understand all plotting/calibration code to implement one criterion.
-7. **Document inputs and limits.** Add material fields only when needed. State units, provenance, measured versus estimated constants, supported loading and explicitly unsupported cases. Never silently omit work terms or replace the native life law with a generic fit.
-8. **Numerically verify.** Add focused analytical/degenerate, phase/mean/frame checks as appropriate, unsupported-input checks and search/integration convergence. Compute at least one reference result independently of the implementation.
-9. **Validate and report evidence.** Reproduce a published case with its material/loading data and intermediate values where available. Keep calibration separate from validation; state inaccessible data or remaining predictive-validation gaps. Run the regression and documentation checks below.
-10. **Update and submit.** Update the JSON catalogue, source/test/evidence and actual Issue links; regenerate documentation. Submit a PR using the template, citing the permanent ID and acceptance checklist. A maintainer reviews scoped completeness and validation independently; passing unit tests alone does not promote scientific validation.
+1. **Choose an ID.** Browse [all missing methods by family](docs/METHOD_INDEX.md#missing-methods-by-family), repairs or source-review tasks. The roadmap is a suggested sequence, though another catalogued method is also acceptable. A genuinely new candidate needs its relationship to existing entries established before it gets a permanent ID.
+2. **Find or propose the task.** Use the entry’s Search Issues link, check aliases and closed Issues, then claim a task or open a scoped proposal. The Propose task link opens the method-specific template with its ID and title. Prepared briefs are not live Issues.
+3. **Confirm the primary formulation.** Obtain the exact original article, relevant errata or supplements, and a traceable citation. DOI metadata confirms identity, not equations. An unresolved variant needs reference work before implementation. Do not upload copyrighted papers without redistribution rights.
+4. **Write a bounded specification.** State CA P/NP/mean-stress scope, material domain, equations, amplitude, range and shear conventions, required measurements and the output (limit, damage parameter, native life or probability). Record repository adaptations separately from the original law.
+5. **Inspect reusable components.** Read the [model interface guide](docs/adding-methods.md), one nearby implementation and the relevant projection/search helpers. Reuse must preserve the source plane rule and the physical simultaneous path. List any input, native-life or spatial/statistical prerequisite.
+6. **Implement and integrate.** Place the law in its model family, declare parameters, register it and add runtime citation metadata. Follow the paths and interfaces below, and propose major prerequisites separately.
+7. **Document inputs and limits.** Add material fields only when needed. State units, provenance, measured versus estimated constants, supported loading and explicitly unsupported cases. Never omit work terms silently or replace a native life law with a generic fit.
+8. **Numerically verify.** Add focused analytical, degenerate, phase, mean-stress and frame checks, unsupported-input checks and search or integration convergence. Compute at least one reference result independently of the implementation.
+9. **Validate and report evidence.** Reproduce a published case with its material and loading data and, where available, its intermediate values. Keep calibration separate from validation, and state inaccessible data or remaining predictive gaps. Run the regression and documentation checks below.
+10. **Update and submit.** Update the JSON catalogue, source, tests, evidence and actual Issue links, then regenerate the documentation. Submit a PR from the template, citing the permanent ID and acceptance checklist. A maintainer reviews completeness and validation independently; passing unit tests alone does not promote either.
 
 ## Develop locally
 
-Use Python 3.10+ and install `requirements.txt` as in the README. Branch from current `main`. Run entry scripts from the repository root. Preserve experimental workbooks and archived `Results/*.csv`; direct test output to a temporary directory. Do not commit generated caches, private data or article PDFs.
+Use Python 3.10+ and `uv sync` as in the README (or `pip install -e .`). Branch from current `main` and run entry scripts from the repository root. Preserve the experimental workbooks and `Results/archive/`. Fresh outputs go to `Results/current/` (ignored by Git), test output to a temporary directory. Do not commit generated caches, private data or article PDFs.
 
-Follow [the architecture](docs/architecture.md) and [adding methods](docs/adding-methods.md):
+Follow [the architecture](docs/architecture.md), [adding methods](docs/adding-methods.md) and the
+[notation table](docs/notation.md):
 
-- Plane-level criteria belong in `fatigue/models/cp_methods/`, implement `CriticalPlaneMethod.evaluate_on_plane` and return `CPPlaneResult(damage, metric)`. A scan may only be reused when it matches the source's plane rule.
-- Direct criteria belong in the appropriate `invariant_methods/`, `energy_based_methods/` or `integral_methods/` folder. Implement `FatigueModel.evaluate_case` and return `CaseResult`; consume physical `harmonics` when timing/phase matters.
-- Register in `fatigue/models/registry.py`. Add runtime citation metadata in `fatigue/models/references.py`. Add inputs through `fatigue/imp/experimental_data.py` and the runner only when needed. Follow existing names and `_ext` conventions.
-- A new physical model or data structure needs its own explicit proposal. The plane/scalar interface does not justify dropping source requirements. Keep BP/CAIM distinct and preserve all-slope `log10(DP_e/DP)` reporting and life-suppression rules.
+- Plane-level criteria belong in `src/multifat/models/cp_methods/`, implement `CriticalPlaneMethod.evaluate_on_plane` and return `CPPlaneResult(damage, metric)`. A scan may be reused only when it matches the source's plane rule.
+- Direct criteria belong in `invariant_methods/`, `energy_based_methods/` or `integral_methods/`. Implement `FatigueModel.evaluate_case` and return `CaseResult`. Consume the physical `harmonics` when timing or phase matters.
+- Register in `src/multifat/models/registry.py` and add runtime citation metadata in `src/multifat/models/references.py`. Declare every constant the model reads: required ones in `required_params()`, those read with `params.get` in `optional_params`. A new workbook constant also needs its accepted headers in `src/multifat/imp/schema.py`. Follow existing names and `_ext` conventions.
+- A new physical model or data structure needs its own proposal. The plane/scalar interface does not justify dropping source requirements. Keep BP/CAIM distinct and preserve all-slope `log10(DP_e/DP)` reporting and the life-suppression rules.
 
-The current legacy CP RSS ellipse convention differs from BP/CAIM's major-axis/MCC convention. Strain shear is tensorial in tensors and engineering shear in relevant scalar ranges. Record amplitude versus range, cycles versus reversals, units, stress sign, plane normal, coordinate basis and all empirical material fallbacks.
+Declare a CP method's out-of-phase shear rule with `np_shear_rule` (`"rss"` legacy default or `"longest_chord"`). BP/CAIM use the major-axis/MCC convention. Strain shear is tensorial in tensors and engineering shear in the relevant scalar ranges. Record amplitude versus range, cycles versus reversals, units, stress sign, plane normal, coordinate basis and every empirical material fallback.
+
+Ruff checks syntax errors, unused imports, redefinitions and undefined names. Black owns formatting (`uv run black .`). The one-off formatting commit is in `.git-blame-ignore-revs` (use `git config blame.ignoreRevsFile .git-blame-ignore-revs`). The documentation checker covers maintained local links and fragments; external availability and frozen research prose need separate review. Runtime and `dev` dependencies live in `pyproject.toml`, pinned by `uv.lock`.
 
 ## Evidence required in a PR
 
-Provide source/version, supported scope, equations implemented, parameter provenance, numerical choices, limitations and a reproducible validation command. Cite relevant original equation numbers without copying excessive text. Include focused checks for pure axial/torsion, degeneracy, mean stress, phase and coordinate/time-origin invariance as appropriate. Demonstrate search/quadrature convergence where relevant.
+Provide the source and version, supported scope, equations implemented, parameter provenance, numerical choices, limitations and a reproducible validation command. Cite the original equation numbers without copying excessive text. Include focused checks for pure axial/torsion, degeneracy, mean stress, phase, and coordinate or time-origin invariance, and show search or quadrature convergence where it matters.
 
-Reference cases should include the article's material data, actual repeated path, intermediate quantities and expected output. Calculate at least one result independently of the implementation. Separate calibration data from validation data. Record measurement uncertainty and inaccessible data honestly. A passing test of the coded equation is numerical verification; it does not establish predictive accuracy.
+Reference cases should include the material data, the actual repeated path, intermediate quantities and the expected output, with at least one result calculated independently. Keep calibration and validation data separate, and record measurement uncertainty and inaccessible data honestly. A passing test of the coded equation is numerical verification, not predictive accuracy.
 
 Run:
 
 ```bash
-python -m pip install -r requirements-dev.txt
-python -m ruff check .
-MPLBACKEND=Agg python -m unittest discover -s tests -v
-python tools/generate_method_docs.py
-python tools/generate_method_docs.py --check
-python tools/check_docs.py
+uv sync
+uv run ruff check .
+uv run black --check .
+MPLBACKEND=Agg uv run pytest
+uv run python tools/generate_method_docs.py
+uv run python tools/generate_method_docs.py --check
+uv run python tools/generate_workbook_docs.py --check
+uv run python tools/check_docs.py
 git diff --check
-# For changes affecting shared numerical behavior, also consider:
-# python tests/run_material_validation.py /tmp/wg43-validation
 ```
 
-The broad sweep is appropriate for shared numerical changes; routine documentation changes do not require regenerating all experimental results. Include commands, results and known warnings in the PR.
+Include commands, results and known warnings in the PR. Routine documentation changes do not require regenerating experimental results.
 
-Ruff checks unused imports, redefinitions and undefined names. No mass formatting
-migration is required. The documentation checker covers maintained local links
-and fragments; external availability and frozen research prose need separate
-review. Runtime dependencies remain in `requirements.txt`; development tooling
-is isolated in `requirements-dev.txt`. Preserve the historical CSVs described
-in [Results/README.md](Results/README.md).
+### Changes that can alter numerical outputs
+
+Shared code (plane search, calibration, import, export, a model's equations) must be checked against the previous outputs before merge:
+
+```bash
+git stash   # or check out the base commit in a worktree
+uv run python tools/regression_snapshot.py run /tmp/snap-base --jobs 4
+git stash pop
+uv run python tools/regression_snapshot.py run /tmp/snap-new --jobs 4
+uv run python tools/regression_snapshot.py compare /tmp/snap-base /tmp/snap-new
+```
+
+The snapshot runs every registered model and `_ext` variant on every workbook, the calibration and the comparison, and hashes every output (about 15 minutes on a laptop). A refactor must be output-identical. An intended numerical change goes in its own commit, with the changed outputs and the reason in the PR (which models, which materials, by how much). The end-to-end sweep `uv run python tests/run_material_validation.py /tmp/wg43-validation` checks finite outputs and row counts on all materials.
+
+### Workbook contributions
+
+Workbooks follow the [workbook format](docs/workbook-format.md). Record the source of every value (paper, table or figure, page, tabulated or digitised) in [Experimental_Data/PROVENANCE.md](Experimental_Data/PROVENANCE.md). To change an existing workbook, edit it in Excel or another tool that keeps formulas and cached values (an openpyxl save drops the cached values the importer reads), add an Excel comment with the source and the old value to each changed cell, and treat the change as numerical (snapshot above).
 
 ## Update the catalogue
 
-Experimental inputs and fitted coefficients use separate sources. Preserve the
-Excel observation-status convention, use the central failure-only selectors and
-export fitted values through Script 0. Run-outs must not contribute to coefficient
-optimisation, master curves or ordinary error statistics. New calibrated parameters
-need explicit units and JSON validation. Add a failure-only versus failure-plus-run-out
-regression when changing calibration data flow. See the
-[workflow](docs/calibration-workflow.md) for historical selection and compatibility.
+Experimental inputs and fitted coefficients use separate sources. Preserve the Excel observation-status convention and keep run-outs out of coefficient optimisation, master curves and ordinary error statistics (they are exported as `Flag = 2` rows). Calibrated constants belong in the calibration sidecar, never the workbook. Changing the calibration data flow needs a failure-only versus failure-plus-run-out regression; see the [calibration workflow](docs/calibration-workflow.md) for the records in `Calibrations/`.
 
-`docs/catalogue/methods.json` is the current source of truth. Keep permanent IDs, add canonical relationships and optional secondary classifications, and count each identifiable scoped method once by its primary family. Exclude unresolved bundles/overlaps from progress totals until reconciled. The archived research CSV is provenance, not another live status source.
+`docs/catalogue/methods.json` is the source of truth. Keep permanent IDs, add canonical relationships and optional secondary classifications, and count each identifiable scoped method once by its primary family. Exclude unresolved bundles and overlaps from progress totals until reconciled. The archived research CSV is provenance, not a live status source.
 
-Update implementation status, declared scope, module/symbol, tests, remaining work, validation evidence and actual Issue URL. Generate `METHODS.md`, `ROADMAP.md`, the CSV, README counts and prepared briefs using `tools/generate_method_docs.py`. CI checks output freshness and evidence paths against the registry. Do not edit generated files independently. Roadmap selection is stored in each JSON record as `roadmap_rank`, `development_track` and `development_reason`; every record needs an explicit disposition. Unscheduled candidates must remain in the catalogue. The generator’s Issue-ID list controls only which prepared briefs are emitted, not which methods contributors may choose.
+Update implementation status, declared scope, module and symbol, tests, remaining work, validation evidence and the actual Issue URL, then generate `METHODS.md`, `ROADMAP.md`, the CSV, the README counts and the prepared briefs with `tools/generate_method_docs.py`. CI checks output freshness and evidence paths against the registry. Do not edit generated files independently. Roadmap selection lives in each JSON record as `roadmap_rank`, `development_track` and `development_reason`, and every record needs an explicit disposition. Unscheduled candidates stay in the catalogue. The generator’s Issue-ID list controls which prepared briefs are emitted, not which methods contributors may choose.
 
 ### Ready for “fully implemented”
 
@@ -92,8 +100,8 @@ Update implementation status, declared scope, module/symbol, tests, remaining wo
 - [ ] Existing numerical regression checks pass and generated docs are current.
 - [ ] Completeness reviewed by a maintainer; uncertain completeness remains `requires_review`.
 
-Validation is a separate promotion: `not_tested` → `basic_numerical_tests` → `reference_examples_reproduced` → `independently_validated`. Reference reproduction needs independently calculated published examples; independent validation needs traceable published/experimental data beyond self-consistency tests. A complete scoped implementation may still have only basic numerical evidence.
+Validation is a separate promotion: `not_tested` → `basic_numerical_tests` → `reference_examples_reproduced` → `independently_validated`. Reference reproduction needs independently calculated published examples. Independent validation needs traceable published or experimental data beyond self-consistency tests. A complete scoped implementation may still rest on basic numerical evidence.
 
 ## Submit
 
-Open a PR linking the permanent method ID and relevant Issue. Summarize the resulting scientific capability, scope, departures and evidence. Use separate reviewable prerequisites for large workstreams. Do not re-enable disabled proxies until their recorded audit gaps are resolved. No repository license has yet been selected; maintainer agreement on licensing remains necessary for clear reuse terms. This documentation does not grant a new software license.
+Open a PR linking the permanent method ID and the relevant Issue. Summarize the scientific capability, scope, departures and evidence. Split large workstreams into separate reviewable prerequisites. Do not re-enable disabled proxies until their recorded audit gaps are resolved. By submitting, you agree to license your contribution under the MIT License.
