@@ -1,0 +1,38 @@
+{
+ "schema_version": 1,
+ "workbook": "7_982FA.xlsx",
+ "base_sha256": "f786dc8e99f598dd860489031456360e78753e674c95c41536b60ac983ecb620",
+ "expected_fingerprint": "9abfb930bb0a584cd71aa8a11ce9165df5b7fd7446c24688b045e34504b22059",
+ "operations": [
+  {
+   "op": "set_summary",
+   "row": 2,
+   "column": "F",
+   "field": "Poisson's ratio (-)",
+   "from": "Null",
+   "to": 0.3,
+   "decision": "d059",
+   "source": "Dubbel, 21st ed. (2004), Part C, Hooke's law, PDF p. 123"
+  },
+  {
+   "op": "set_summary",
+   "row": 5,
+   "column": "F",
+   "field": "Poisson's ratio (-)",
+   "from": "Null",
+   "to": 0.3,
+   "decision": "d059",
+   "source": "Dubbel, 21st ed. (2004), Part C, Hooke's law, PDF p. 123"
+  },
+  {
+   "op": "set_summary",
+   "row": 6,
+   "column": "F",
+   "field": "Poisson's ratio (-)",
+   "from": "Null",
+   "to": 0,
+   "decision": "d059",
+   "source": "Dubbel, 21st ed. (2004), Part C, Hooke's law, PDF p. 123"
+  }
+ ]
+}

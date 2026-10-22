@@ -1,0 +1,19 @@
+# Papadopoulos, I.V. (1999), "Multiaxial fatigue limit criterion of metals: a mesoscopic scale approach", in Dang Van & Papadopoulos (eds), High-Cycle Metal Fatigue, CISM Courses and Lectures 392, Springer, doi:10.1007/978-3-7091-2474-1_3, Zotero key HBKMWBNC.
+# Table 3, PDF p.48 (book p.136): Table 3: In-phase and out-of-phase bending and torsion fatigue limit data
+# Crop: _audit-trail/phase2/crops/HBKMWBNC/p48.png
+# Table header (as printed): Material: 30NCD16 steel; t_-1=410 MPa; f_-1=660 MPa; Ref. [20].
+# Text (p.136): Table 3 reports the Table 2 data together with out-of-phase bending and torsion data.
+# Text (p.137): ellipse arc Eq. (5.28) drawn for Sigma_xx,m = 300 MPa (Fig. 17); test data fall within the +/-5% error band.
+# gamma_xy is printed without a unit; Fig. 17 legend gives gamma = 0, 45, 60, 90 deg, so degrees assumed.
+# Printed symbols are Sigma for all stress components; sqrt_T_a2 = sqrt(<T_a^2>); I_pct = I (%) as printed.
+row,sigma_xx_a,sigma_xy_a,gamma_xy,sigma_xx_m,sigma_xy_m,sqrt_T_a2,sigma_H_max,I_pct
+1,485,280,0,0,0,396,162,1.7
+2,211,365,0,300,0,385,170,-0.7
+3,480,277,0,300,0,392,260,3.9
+4,590,148,0,300,0,371,297,0
+5,480,277,90,0,0,392,160,0.7
+6,480,277,45,300,0,392,260,3.9
+7,470,270,60,300,0,383,257,1.6
+8,473,273,90,300,0,386,258,2.5
+9,565,141,45,300,0,355,288,-4.0
+10,540,135,90,300,0,340,280,-8.0

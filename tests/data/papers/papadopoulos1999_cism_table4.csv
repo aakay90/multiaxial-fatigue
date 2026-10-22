@@ -1,0 +1,13 @@
+# Papadopoulos, I.V. (1999), "Multiaxial fatigue limit criterion of metals: a mesoscopic scale approach", in Dang Van & Papadopoulos (eds), High-Cycle Metal Fatigue, CISM Courses and Lectures 392, Springer, doi:10.1007/978-3-7091-2474-1_3, Zotero key HBKMWBNC.
+# Table 4, PDF p.50 (book p.138): Table 4: Fatigue limit data of two out-of-phase normal stresses
+# Crop: _audit-trail/phase2/crops/HBKMWBNC/p50.png
+# Table header (as printed): Material: 25CrMo4 steel; t_-1=228 MPa; s_-1=361 MPa; Ref. [22].
+# Text (p.138): Sigma_xx,a = Sigma_yy,a in every test; mean stresses are the same for all four tests with Sigma_xx,m = 2*Sigma_m and Sigma_yy,m = Sigma_m.
+# Text (p.137): the data are Mielke's biaxial out-of-phase normal stress tests reported in Zenner et al. [22] (text there says "Table 1 below"; the data are this Table 4).
+# gamma_yy is printed without a unit; text (p.139) gives gamma_yy = 180 deg, so degrees assumed.
+# Printed symbols are Sigma for all stress components; sqrt_T_a2 = sqrt(<T_a^2>); I_pct = I (%) as printed.
+row,sigma_xx_a,sigma_yy_a,gamma_yy,sigma_xx_m,sigma_yy_m,sqrt_T_a2,sigma_H_max,I_pct
+1,261,261,0,340,170,151,344,-9.0
+2,275,275,60,340,170,194,328,8.0
+3,240,240,90,340,170,195,283,6.0
+4,196,196,180,340,170,196,170,-1.8

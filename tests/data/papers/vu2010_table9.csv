@@ -1,0 +1,10 @@
+# Vu, Halm & Nadot (2010) Int J Fatigue 32:1004-1014, doi:10.1016/j.ijfatigue.2009.11.006, Zotero 2J7T4PF3.
+# Table 9, PDF p.7 (journal p.1010): Tension fatigue strength of 30NCD16 steel (f_-1 = 560 MPa, t_-1 = 428 MPa, R_m = 1200 MPa) [11].
+# Crop: _audit-trail/phase2/crops/2J7T4PF3/p7_0.05-0.17-0.95-0.27.png
+# Material constants as printed: f_-1 = 560 MPa, t_-1 = 428 MPa, R_m = 1200 MPa; source reference [11] (reference list entry not transcribed).
+# Column headers as printed: Sigma_xx,a (MPa); Sigma_xx,m (MPa); Sigma_xy,a (MPa); Sigma_xy,m (MPa); delta_xy (deg); I^a (%) ... I^e (%).
+# Footnote: none printed.
+row,sigma_xx_a,sigma_xx_m,sigma_xy_a,sigma_xy_m,delta_xy,I_a,I_b,I_c,I_d,I_e
+1,235,745,0,0,0,-25.5,-12.0,-25.5,1.4,1.4
+2,251,704,0,0,0,-24.4,-11.7,-24.4,0.7,0.7
+3,527,222,0,0,0,3.8,7.8,3.8,6.4,6.4

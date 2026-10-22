@@ -1,0 +1,30 @@
+# Robert, J.-L., Fogue, M., Bahuaud, J. (1994), "Fatigue Life Prediction Under Periodical or Random Multiaxial Stress States", Automation in Fatigue and Fracture: Testing and Analysis, ASTM STP 1231, pp. 369-387, doi:10.1520/STP13959S, Zotero key 2XJVX5XJ.
+# Table 3, PDF p.17 (book p.385): TABLE 3—Froustey-Lasserre's tests (third group) [11]. Stresses sigma_11a, sigma_11m, sigma_12a, sigma_12m (MPa); phase delta_12 (deg); validity parameter I.
+# Crop: _audit-trail/phase2/crops/2XJVX5XJ/p17_0.00-0.00-1.00-1.00.png
+# Footnote a: Material = 30 NCD16, N = 1 000 000 cycles, sigma_-1 = 695 MPa, tau_-1 = 415 MPa, and sigma_0 = 1040 MPa.
+# Notes: printed ellipsis "..." (not applicable) transcribed as empty cells. No illegible cells. Values copied as printed, not recomputed.
+row,sigma_11a,sigma_11m,sigma_12a,sigma_12m,delta_12,I
+1,485,0,280,0,0,0.97
+2,630,300,0,0,,1.05
+3,550,450,0,0,,1.01
+4,525,510,0,0,,1.00
+5,535,600,0,0,,1.06
+6,480,0,277,0,90,0.90
+7,0,300,395,0,,1.08
+8,211,300,365,0,0,1.06
+9,222,300,385,0,90,1.09
+10,480,300,277,0,0,1.10
+11,480,300,277,0,45,1.04
+12,470,300,271,0,60,1.04
+13,473,300,273,0,90,1.03
+14,590,300,148,0,0,1.06
+15,565,300,141,0,45,1.01
+16,540,300,135,0,90,0.96
+17,455,300,263,200,0,1.07
+18,465,300,269,200,90,1.02
+19,0,450,395,0,,1.15
+20,415,450,240,0,0,1.04
+21,405,450,234,0,90,0.97
+22,0,600,350,0,,1.11
+23,370,600,214,0,0,1.02
+24,390,600,225,0,90,1.02

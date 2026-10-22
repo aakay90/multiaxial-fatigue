@@ -1,0 +1,10 @@
+# Vu, Halm & Nadot (2010) Int J Fatigue 32:1004-1014, doi:10.1016/j.ijfatigue.2009.11.006, Zotero 2J7T4PF3.
+# Table 14, PDF p.11 (journal p.1014): Asynchronous tension-torsion fatigue strength of 39NiCrMo3 steel (f_-1 = 367.5 MPa, t_-1 = 265 MPa, R_m = 856 MPa) [2].
+# Crop: _audit-trail/phase2/crops/2J7T4PF3/p11_0.05-0.08-0.50-0.18.png
+# Material constants as printed: f_-1 = 367.5 MPa, t_-1 = 265 MPa, R_m = 856 MPa; source reference [2] (Bernasconi, Foletti & Papadopoulos 2008; reference list entry not transcribed).
+# Column headers as printed: Sigma_xx,a (MPa); Sigma_xx,m (MPa); Sigma_xy,a (MPa); Sigma_xy,m (MPa); delta_xy (deg); lambda_xy (frequency ratio); I^e (%).
+# Footnote: none printed.
+row,sigma_xx_a,sigma_xx_m,sigma_xy_a,sigma_xy_m,delta_xy,lambda_xy,I_e
+1,294.5,0,170.0,0,0,1,5.4
+2,259.5,0,150.0,0,0,2,5.1
+3,266.0,0,153.6,0,0,3,10.5

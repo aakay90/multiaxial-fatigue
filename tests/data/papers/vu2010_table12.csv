@@ -1,0 +1,15 @@
+# Vu, Halm & Nadot (2010) Int J Fatigue 32:1004-1014, doi:10.1016/j.ijfatigue.2009.11.006, Zotero 2J7T4PF3.
+# Table 12, PDF p.9 (journal p.1012): Biaxial normal stresses-torsion fatigue strength of 25CrMo4 steel (f_-1 = 361 MPa, t_-1 = 228 MPa, R_m = 780 MPa) [16].
+# Crop: _audit-trail/phase2/crops/2J7T4PF3/p9_0.05-0.74-0.95-0.83.png, p9_0.05-0.82-0.95-0.90.png
+# Material constants as printed: f_-1 = 361 MPa, t_-1 = 228 MPa, R_m = 780 MPa; source reference [16] (Mielke; reference list entry not transcribed).
+# Column headers as printed: Sigma_xx,a (MPa); Sigma_xx,m (MPa); Sigma_yy,a (MPa); Sigma_yy,m (MPa); delta_yy (deg); Sigma_xy,a (MPa); Sigma_xy,m (MPa); delta_x (deg); I^e (%).
+# Footnote as printed: "I^e proposed criterion (8)."
+row,sigma_xx_a,sigma_xx_m,sigma_yy_a,sigma_yy_m,delta_yy,sigma_xy_a,sigma_xy_m,delta_x,I_e
+1,261,340,261,170,0,0,0,0,2.1
+2,275,340,275,170,60,0,0,0,15.0
+3,240,340,240,170,90,0,0,0,14.2
+4,196,340,196,170,180,0,0,0,5.2
+5,220,340,0,170,0,110,0,60,2.2
+6,233,340,0,170,0,117,0,90,5.1
+7,155,340,0,170,0,155,0,60,4.5
+8,159,340,0,170,0,159,0,90,6.2
