@@ -16,18 +16,18 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 3 | 1 | 14 | 0 | 18 |
-| Energy based | 3 | 2 | 15 | 3 | 23 |
-| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
-| Invariant based | 0 | 1 | 12 | 0 | 13 |
-| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
+| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Energy based | 6 | 1 | 13 | 3 | 23 |
+| Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
+| Invariant based | 5 | 0 | 8 | 0 | 13 |
+| Mesoscopic and damage | 2 | 0 | 6 | 0 | 8 |
 | Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 2 | 0 | 11 | 2 | 15 |
-| Stress based | 0 | 0 | 13 | 0 | 13 |
-| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
-| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
+| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Tensor and path based | 1 | 0 | 2 | 0 | 3 |
+| **TOTAL** | 29 | 2 | 81 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -45,10 +45,10 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 
 | ID | Method / scope | Implementation | Validation | Priority | Counted |
 | --- | --- | --- | --- | --- | --- |
-| [I_DANGVAN](../../METHODS.md#i_dangvan) | Dang Van | Partially implemented | not_tested | High | Yes |
+| [I_DANGVAN](../../METHODS.md#i_dangvan) | Dang Van | Fully implemented | reference_examples_reproduced | High | Yes |
 | [N35](../../METHODS.md#n35) | (V)HCF-DAM, prescribed proportional blocks | Not implemented | not_tested | Low | Yes |
 | [N36](../../METHODS.md#n36) | Tanaka–Mura–Wu HCF crack-nucleation model | Not implemented | not_tested | Low | Yes |
-| [G23](../../METHODS.md#g23) | Morel mesoscopic constant-amplitude life model | Not implemented | not_tested | High | Yes |
+| [G23](../../METHODS.md#g23) | Morel mesoscopic constant-amplitude life model | Fully implemented | reference_examples_reproduced | High | Yes |
 | [G36](../../METHODS.md#g36) | Chaudonneret multiaxial continuum damage | Not implemented | not_tested | Medium | Yes |
 | [G37](../../METHODS.md#g37) | Lemaitre–Sermage–Desmorat two-scale damage | Not implemented | not_tested | Medium | Yes |
 | [G38](../../METHODS.md#g38) | Monchiet–Charkaluk–Kondo PSB damage criterion | Not implemented | not_tested | Medium | Yes |
@@ -60,30 +60,30 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 
 | Field | Evidence / task |
 | --- | --- |
-| Primary / secondary family | Mesoscopic and damage; disabled; source retained |
+| Primary / secondary family | Mesoscopic and damage;  |
 | Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | Dang Van (1973), Sur la résistance à la fatigue des métaux, Sciences et Technique de l'Armement 47, 647–722 |
 | DOI | No verified original DOI available |
 | Reference evidence | Original source has no verified DOI in registry |
-| Formulation evidence | Inherited repository audit, not repeated |
-| Principle | Dang Van (1973), Sur la résistance à la fatigue des métaux, Sciences et Technique de l'Armement 47, 647–722 |
-| Loading scope | No currently supported executable scope; archived proxy must not be used. |
-| Inputs / material parameters | Physical simultaneous stress cycle; fatigue-limit calibration and mesoscopic/shakedown parameters for selected original version |
+| Formulation evidence | Checked against the source PDF in Phase 2 (2026-10-17); see docs/method-audit.md |
+| Principle | Dang Van criterion in the form restated by Böhme, Papuga & Lange (2026) Eq. (3): kappa max tau_a + (3 - 1.5 kappa) sigma_H,max, kappa = s_-1/t_-1 |
+| Loading scope | Single-frequency harmonic CA, proportional and phase-shifted NP; MCC shear amplitude per plane. |
+| Inputs / material parameters | Sigm1, Taum1. |
 | Output | Damage parameter; fitted life where valid |
-| Implementation / evidence | Partially implemented; known_essential_gaps |
-| Validation / evidence | not_tested; tests/test_method_audit.py verifies disabled-name guards only. This is not numerical verification or scientific validation of the archived criterion. Restoration needs original-paper examples. |
-| Python implementation | [fatigue/models/cp_methods/dangvan.py](../../fatigue/models/cp_methods/dangvan.py); DangVan |
-| Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
-| Limitations | Combines shear amplitude with independently reconstructed hydrostatic endpoints, losing their time relationship and corrupting the trace for out-of-phase histories. |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_dangvan.py: Böhme et al. (2026) Eq. (16) closed forms and Table 4 DV statistics over 18 cases (Max and SD within 0.07 of print). |
+| Python implementation | [src/multifat/models/cp_methods/dangvan.py](../../src/multifat/models/cp_methods/dangvan.py); DangVan |
+| Automated tests | [tests/methods/test_dangvan.py](../../tests/methods/test_dangvan.py), [tests/test_method_audit.py](../../tests/test_method_audit.py) |
+| Limitations | Documented variant: Dang Van (1993, 1999) defines the criterion through mesoscopic shakedown without closed-form a, b; this is the Papuga-Halama / Böhme 2026 calibration. 24x48 sphere grid with pattern refinement. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | possible_or_related_source; [EXT07](../../docs/EXTERNAL_IMPLEMENTATIONS.md#ext07); not integrated or independently validated |
-| Missing tasks | Combines shear amplitude with independently reconstructed hydrostatic endpoints, losing their time relationship and corrupting the trace for out-of-phase histories. Restore only after source-faithful repair and regression/reference checks. |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation. |
-| Development disposition | repair; Archived implementation has a known essential gap and remains disabled. Combines shear amplitude with independently reconstructed hydrostatic endpoints, losing their time relationship and corrupting the trace for out-of-phase histories. Restore only after source-faithful repair and regression/reference checks. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
 | Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | I_DANGVAN; Previously attempted, disabled |
+| Provenance / prior status | I_DANGVAN; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Prepared brief](../../docs/contribution-issues/I_DANGVAN.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_DANGVAN+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_DANGVAN%5D+Dang+Van) (no live Issue linked) |
 
@@ -160,29 +160,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Mesoscopic and damage; Mesoscopic |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | A FATIGUE LIFE PREDICTION METHOD BASED ON A MESOSCOPIC APPROACH IN CONSTANT AMPLITUDE MULTIAXIAL LOADING, Fatigue & Fracture of Engineering Materials & Structures |
 | DOI | https://doi.org/10.1046/j.1460-2695.1998.00452.x |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
-| Principle | CA fatigue life derived from mesoscopic cyclic plasticity/damage reasoning. |
-| Loading scope | CA multiaxial; enforce original path domain |
-| Inputs / material parameters | Stress cycle and mesoscopic fatigue calibration |
-| Output | Native fatigue life |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; Original 1998 predictions; 2000 companion examples |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | B only for faithful published CA evaluator; general internal-state integration C |
+| Formulation evidence | Checked against Morel (1998) Eqs. (9)-(11), (27)-(38) and the worked example on the PDF (2026-10-17) |
+| Principle | Endurance T_S + a P_max <= b (Eqs. 9-11), limit loading T_Slim (Eq. 33), phase coefficient H = T_S/C_A (Eq. 35) and native life N = p ln(C_A/(C_A - tau_lim)) + q tau_lim/(C_A - tau_lim) - r/C_A (Eq. 38). |
+| Loading scope | Single-frequency harmonic CA; mean stress through P_max; p, q, r fitted on the uniaxial R = -1 design tests above the Morel limit |
+| Inputs / material parameters | Sigm1, Taum1; p, q, r fitted by the run (least squares on relative life error). |
+| Output | Damage T_S/T_Slim (= Papadopoulos 2001 index) with the universal fit; native life Eq. (38) in Nf_native |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_morel.py: worked example p.252-253 (T_S, a, T_Slim; b = 775 misprint; C_A 285.0 vs printed 282 strict xfail), T_S/T_Slim = Papadopoulos 2001 Eq. (41), Eq. (38) and its least-squares fit. p, q, r are not printed, so no published life is reproduced. |
+| Python implementation | [src/multifat/models/integral_methods/morel.py](../../src/multifat/models/integral_methods/morel.py); Morel |
+| Automated tests | [tests/methods/test_morel.py](../../tests/methods/test_morel.py) |
+| Limitations | p, q, r are not printed in the paper; the repo fits them on the design tests (objective not stated in the source). Tests below the Morel limit have infinite native life. Damage parameter duplicates PAPADOPOULOS. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Published CA reduction, threshold and life constants |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Broadens the programme to mesoscopic constant-amplitude life prediction. |
-| Roadmap rank | 11 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | G23; New distinct formulation candidate |
+| Provenance / prior status | G23; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G23+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG23%5D+Morel+mesoscopic+constant-amplitude+life+model) (no live Issue linked) |
 

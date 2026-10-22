@@ -16,18 +16,18 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 3 | 1 | 14 | 0 | 18 |
-| Energy based | 3 | 2 | 15 | 3 | 23 |
-| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
-| Invariant based | 0 | 1 | 12 | 0 | 13 |
-| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
+| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Energy based | 6 | 1 | 13 | 3 | 23 |
+| Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
+| Invariant based | 5 | 0 | 8 | 0 | 13 |
+| Mesoscopic and damage | 2 | 0 | 6 | 0 | 8 |
 | Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 2 | 0 | 11 | 2 | 15 |
-| Stress based | 0 | 0 | 13 | 0 | 13 |
-| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
-| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
+| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Tensor and path based | 1 | 0 | 2 | 0 | 3 |
+| **TOTAL** | 29 | 2 | 81 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 

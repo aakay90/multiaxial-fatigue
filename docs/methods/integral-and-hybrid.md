@@ -16,18 +16,18 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 3 | 1 | 14 | 0 | 18 |
-| Energy based | 3 | 2 | 15 | 3 | 23 |
-| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
-| Invariant based | 0 | 1 | 12 | 0 | 13 |
-| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
+| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Energy based | 6 | 1 | 13 | 3 | 23 |
+| Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
+| Invariant based | 5 | 0 | 8 | 0 | 13 |
+| Mesoscopic and damage | 2 | 0 | 6 | 0 | 8 |
 | Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 2 | 0 | 11 | 2 | 15 |
-| Stress based | 0 | 0 | 13 | 0 | 13 |
-| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
-| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
+| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Tensor and path based | 1 | 0 | 2 | 0 | 3 |
+| **TOTAL** | 29 | 2 | 81 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -47,13 +47,13 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | --- | --- | --- | --- | --- | --- |
 | [I_BP](../../METHODS.md#i_bp) | Böhme–Papuga | Fully implemented | basic_numerical_tests | Existing | Yes |
 | [I_CAIM](../../METHODS.md#i_caim) | Critical–integral approach (CAIM) | Fully implemented | basic_numerical_tests | Existing | Yes |
-| [N03](../../METHODS.md#n03) | Papadopoulos, specified 2001 formulation | Not implemented | not_tested | High | Yes |
+| [N03](../../METHODS.md#n03) | Papadopoulos, specified 2001 formulation | Fully implemented | reference_examples_reproduced | High | Yes |
 | [N15](../../METHODS.md#n15) | Original Liu–Zenner integral criterion | Not implemented | not_tested | Medium | Yes |
 | [N17](../../METHODS.md#n17) | Mean-shear-sensitive weighted-plane criterion, CA branch | Not implemented | not_tested | High | Yes |
 | [N50](../../METHODS.md#n50) | Grubisic–Simbürger formulation | Not implemented | not_tested | Low | Yes |
 | [N53](../../METHODS.md#n53) | Substitute-amplitude/NP-damage method, CA branch | Not implemented | not_tested | Medium | Yes |
-| [G02](../../METHODS.md#g02) | Papuga–Růžička integral criterion (PI; later PIN) | Not implemented | not_tested | High | Yes |
-| [G41](../../METHODS.md#g41) | Robert–Fogue–Bahuaud integral life criterion | Not implemented | not_tested | High | Yes |
+| [G02](../../METHODS.md#g02) | Papuga–Růžička integral criterion (PI; later PIN) | Fully implemented | reference_examples_reproduced | High | Yes |
+| [G41](../../METHODS.md#g41) | Robert–Fogue–Bahuaud integral life criterion | Fully implemented | reference_examples_reproduced | High | Yes |
 | [L01](../../METHODS.md#l01) | Kenmeugne–Vidal-Salle–Robert–Bahuaud selective integral (Fatigue 1996) | Not implemented | not_tested | Low | unresolved_lead |
 | [L02](../../METHODS.md#l02) | Fogue–Bahuaud early global criterion | Not implemented | not_tested | Low | unresolved_lead |
 | [L06](../../METHODS.md#l06) | Grubisic–Simbürger original | Not implemented | not_tested | Low | related_publication |
@@ -76,7 +76,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Dimensionless fatigue-limit utilization; optional empirical fitted life |
 | Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_bohme_papuga.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/integral_methods/bohme_papuga.py](../../fatigue/models/integral_methods/bohme_papuga.py); BohmePapuga |
+| Python implementation | [src/multifat/models/integral_methods/bohme_papuga.py](../../src/multifat/models/integral_methods/bohme_papuga.py); BohmePapuga |
 | Automated tests | [tests/test_bohme_papuga.py](../../tests/test_bohme_papuga.py) |
 | Limitations | Single harmonic; MCC major semi-axis; 24x48 sphere quadrature; R=0 strengths may be estimated, not measured. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -109,7 +109,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Dimensionless fatigue-limit utilization; optional empirical fitted life |
 | Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_caim.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. Independent dense angular calculation of supplied MATLAB equations; not experimental validation. |
-| Python implementation | [fatigue/models/integral_methods/caim.py](../../fatigue/models/integral_methods/caim.py); CAIM |
+| Python implementation | [src/multifat/models/integral_methods/caim.py](../../src/multifat/models/integral_methods/caim.py); CAIM |
 | Automated tests | [tests/test_caim.py](../../tests/test_caim.py) |
 | Limitations | Single harmonic; numerical multi-start maximum refinement; 24x48 quadrature; MATLAB grid not reproduced exactly; R=0 estimates documented. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -131,29 +131,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Integral and hybrid;  |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | Long life fatigue under multiaxial loading, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/s0142-1123(01)00059-7 |
 | Reference evidence | Exact-title Crossref metadata checked; inherited prior-review method attribution; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Prior-review preliminary; obtain original paper before coding |
-| Principle | Mesoscopic resolved-shear/orientation treatment plus hydrostatic contribution; CA P/NP, F. |
-| Loading scope | Mesoscopic resolved-shear/orientation treatment plus hydrostatic contribution; CA P/NP, F. |
-| Inputs / material parameters | S; f−1/t−1 within published material domain. |
-| Output | Mesoscopic resolved-shear/orientation treatment plus hydrostatic contribution; CA P/NP, F. |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; See prior feasibility assessment |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Established mesoscopic alternative, useful for mean-shear comparisons. |
+| Formulation evidence | Checked against Papadopoulos (2001) Eqs. (10), (14)-(25), (39)-(58) and Papadopoulos (1999, CISM 392) Eqs. (4.11)-(4.13), (5.17)-(5.22), (5.46) on the PDFs (2026-10-17) |
+| Principle | Generalised shear stress amplitude T_a (RMS over the lines of a plane of the resolved shear amplitude), maximised over planes, plus maximum hydrostatic stress; multiaxial S-N curve through the iso-life planes of Eq. (39)-(41). |
+| Loading scope | Single-frequency harmonic CA, proportional and phase-shifted NP; T_a^2 = \|t_s\|^2 + \|t_c\|^2 exact for a single harmonic; sigma_H,m below gamma/alpha. |
+| Inputs / material parameters | Sigm1, Taum1. |
+| Output | Equivalent torsion amplitude gamma_N / t_-1 (Eq. 41); fitted life where valid |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_papadopoulos.py: 2001 closed forms Eqs. (14), (15), (20), (21), Eq. (10) by quadrature, Eq. (54)/(58) coefficients and the Eq. (55) bending S-N curve; the 1999 volumetric form against CISM Tables 1-4 (23 tests) and the Papadopoulos et al. (1997) Table 1 column (36/43 rows to print precision, 7 strict xfails). |
+| Python implementation | [src/multifat/models/integral_methods/papadopoulos.py](../../src/multifat/models/integral_methods/papadopoulos.py); Papadopoulos |
+| Automated tests | [tests/methods/test_papadopoulos.py](../../tests/methods/test_papadopoulos.py) |
+| Limitations | The 2001 paper prints no per-test values (figures only). Eq. (46) and CISM Eq. (5.19) carry misprints (see docs/method-audit.md). The 1999 volumetric form is provided as a tested function, not a registered model. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | possible_or_related_source; [EXT07](../../docs/EXTERNAL_IMPLEMENTATIONS.md#ext07); not integrated or independently validated |
-| Missing tasks | Correct directional integral/extremum definitions and calibration; reuse sphere quadrature, not BP coefficients. |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Adds a recognized mesoscopic/orientation-based endurance assessment beyond a maximum-plane scalar. |
-| Roadmap rank | 5 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | N03; Already reviewed, not implemented |
+| Provenance / prior status | N03; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Prepared brief](../../docs/contribution-issues/N03.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N03+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN03%5D+Papadopoulos%2C+specified+2001+formulation) (no live Issue linked) |
 
@@ -296,29 +296,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Integral and hybrid; Integral |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | Two new multiaxial criteria for high cycle fatigue computation, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/j.ijfatigue.2007.02.015 |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
-| Principle | Aggregates directional contributions instead of selecting only one damaging plane. |
-| Loading scope | CA P/NP; mean-shear extension separately identified |
-| Inputs / material parameters | Stress cycle; original fatigue-strength calibration |
-| Output | Fatigue limit / utilization |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; Published examples plus quadrature convergence |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Shared 2008 paper with G01; 2019 PIN extension DOI 10.1051/matecconf/201930016010 |
+| Formulation evidence | Checked against Papuga & Ruzicka (2008) Eqs. (16), (17) and Appendices A, B on the PDF (2026-10-17) |
+| Principle | sqrt(1/(4 pi) int int [a_I C_a^2 + b_I (N_a + f_-1/t_-1 N_m)] sin psi) over all planes (Eq. 16), a_I = 5 kappa^2/2, b_I = f_-1 (3 - kappa^2). |
+| Loading scope | Single-frequency harmonic CA, proportional and phase-shifted NP; kappa^2 < 3. |
+| Inputs / material parameters | Sigm1, Taum1. |
+| Output | Fatigue index LHS / f_-1; fitted life where valid |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_papuga_ruzicka.py: Appendix A sphere averages and the axial calibration; documents that Eq. (A.2) integrates N_a with sign, so with N_a >= 0 reversed torsion gives +5.6 % at kappa = 1.6. |
+| Python implementation | [src/multifat/models/integral_methods/papuga_ruzicka.py](../../src/multifat/models/integral_methods/papuga_ruzicka.py); PapugaIntegral |
+| Automated tests | [tests/methods/test_papuga_ruzicka.py](../../tests/methods/test_papuga_ruzicka.py) |
+| Limitations | Implemented as printed with N_a >= 0: the torsion calibration of Appendix A holds only for a signed N_a, so reversed torsion is over-predicted by sqrt(1 + (3 - kappa^2) 4/(3 pi kappa)) - 1. 48 x 192 sphere quadrature. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Directional integral and version-specific coefficients |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Adds orientation-integral coverage using existing quadrature with its own coefficients; shares the G01 source. |
-| Roadmap rank | 4 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | G02; New distinct formulation candidate |
+| Provenance / prior status | G02; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Prepared brief](../../docs/contribution-issues/G02.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G02+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG02%5D+Papuga%E2%80%93R%C5%AF%C5%BEi%C4%8Dka+integral+criterion+%28PI%3B+later+PIN%29) (no live Issue linked) |
 
@@ -329,29 +329,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Integral and hybrid; Integral |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | Fatigue Life Prediction Under Periodical or Random Multiaxial Stress States, Automation in Fatigue and Fracture: Testing and Analysis |
 | DOI | https://doi.org/10.1520/stp13959s |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
-| Principle | Quadratic mean of a damage indicator over material planes. |
-| Loading scope | Periodic multiaxial CA; also random after counting |
-| Inputs / material parameters | Physical stress cycle; plane-level fatigue calibration |
-| Output | Native fatigue life |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; Original periodic multiaxial test validation |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | 1994 practical paper; Robert 1992 thesis is earlier source; group family, do not count Fogue alias separately |
+| Formulation evidence | Checked against Robert, Fogue & Bahuaud (1994) Eqs. (8), (15)-(27) and the Appendix on the PDF (2026-10-17) |
+| Principle | Root mean square over all planes of the damage indicator E_h = a max tau_a + b sigma_n,a + d sigma_n,m (Eq. 15 with c = 0), normalised by s_-1 (Eqs. 8, 16). |
+| Loading scope | Single-frequency harmonic CA, proportional and phase-shifted NP; 0.577 < t_-1/s_-1 < 0.866. |
+| Inputs / material parameters | Sigm1, Taum1; Sig0 (R = 0 fatigue limit as maximum stress) or Su for the Böhme et al. (2026) Eq. (1) estimate. |
+| Output | Validity parameter I = E (Eq. 27); fitted life where valid (the paper maps life through strengths at N, not implemented) |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_robert_fogue_bahuaud.py: Appendix solves Eqs. (20), (21), (24); calibration points; Haigh curves Eqs. (19), (23); Tables 1-3 validity parameter on 52/59 tests to print rounding (7 strict xfails: 0.006-0.015 off, Table 3 row 11 inconsistent with its phase series). |
+| Python implementation | [src/multifat/models/integral_methods/robert_fogue_bahuaud.py](../../src/multifat/models/integral_methods/robert_fogue_bahuaud.py); RobertFogueBahuaud |
+| Automated tests | [tests/methods/test_robert_fogue_bahuaud.py](../../tests/methods/test_robert_fogue_bahuaud.py) |
+| Limitations | Fatigue limits instead of strengths at a given life N (the paper's life mapping, Eq. 3, and the random-loading counting variable, Eqs. 4-7, are not implemented). Source misprints: Eq. (16) 1/pi for 1/(4 pi), Appendix a without 1/2 under the root, Eq. (18) E for E^2. 48 x 192 sphere quadrature. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Sphere integral, native life mapping and exact weights |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Expands integral coverage to a native-life approach rather than a fitted damage index alone. |
-| Roadmap rank | 6 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. BP sphere quadrature and projection helpers; preserve source-specific weights. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | G41; New distinct formulation candidate |
+| Provenance / prior status | G41; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G41+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG41%5D+Robert%E2%80%93Fogue%E2%80%93Bahuaud+integral+life+criterion) (no live Issue linked) |
 

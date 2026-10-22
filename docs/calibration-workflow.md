@@ -1,8 +1,17 @@
 # Calibration history and experimental run-outs
 
+> **In this repository.** This document tracks upstream PRs #5-#6 (commits dc4fe6d-f0df0a7, and the
+> Findley amplitude section of PR #9, 36ff0a1, 0105b69) and
+> describes the Script 0 / Script 1 workflow that produced the records in `Calibrations/`. That versioned
+> store is not used here: `multifat-pipeline` calibrates missing constants in one run and writes them, with
+> their provenance, to `<MATERIAL>_calibration.json`; the records are read as inputs with
+> `multifat-pipeline --constants` (see [`Calibrations/README.md`](../Calibrations/README.md)). Upstream file
+> paths (`fatigue/...`) and script options refer to upstream commit 71eaac3. The run-out conventions
+> (failure-only fits, censored rows in plots, no errors for run-outs) hold here too.
+
 Excel supplies the material and experimental inputs. Script 0 determines method
 coefficients and master curves, stores them in JSON and preserves earlier records.
-Equivalent reruns reuse the existing record rather than creating a duplicate.
+Equivalent reruns reuse the existing record instead of creating a duplicate.
 Script 1 loads a compatible record, evaluates cases and exports results. Script 2
 compares results and produces plots. No coefficient transfer through Excel is required.
 This workflow retains the present FABER WG4.3 scope of constant-amplitude loading
@@ -16,6 +25,9 @@ method coefficients on uniaxial tension and torsion failures, with the existing
 load-ratio fallback rules. Script 1 separately fitted the selected damage–life
 curve using reversed axial failures. Both stages are now initiated by Script 0.
 
+Symbols (`DP`, `N`, `A`, `b`, the plane coefficients) are the ones of
+[notation.md](notation.md); the table below names the stored quantities, not new ones.
+
 | Quantity | Meaning and provenance | Storage |
 |---|---|---|
 | Elastic constants, yield/ultimate strengths, supplied fatigue strengths and strain-life properties | Material inputs, including existing optional-property estimates where explicitly reported | Excel |
@@ -23,7 +35,7 @@ curve using reversed axial failures. Both stages are now initiated by Script 0.
 | `k_FS`, `k_FI`, `L_LI`, `k_MGSE`, `a_MSWT` | Dimensionless coefficients of the existing FS, Findley, Li, MGSE_ZHU and scalar MSWT implementations | JSON |
 | `A`, `b`, `A_surv` | Master curve `DP = A*N**b` and its existing damage-space shift | JSON, separately for standard and `_ext` variants |
 | `STD`, `STD_ln_DP`, `R2_log`, `n` | Fit diagnostics and number of usable failure observations | JSON |
-| Plane grid, search bounds, refinement counts, selection tolerances and scatter settings | Numerical/calibration settings rather than material properties | JSON metadata and versioned procedure |
+| Plane grid, search bounds, refinement counts, selection tolerances and scatter settings | Numerical calibration settings, distinct from material properties | JSON metadata and versioned procedure |
 | `alpha_w`, `xi_ZHU` | Retired-model constants transferred from the former Summary; original provenance/units unverified | JSON legacy metadata; unused by active methods |
 
 Coefficient-optimisation diagnostic curves and the downstream master curves are
@@ -34,13 +46,13 @@ and master curves use `FIN`. `_ext` is a separate stored curve, not a new materi
 
 ```bash
 # Fit the requested coefficient and both FS curve variants.
-python 0_calibrate_material_params.py --material 42CrMo4_QT --models FS
-python 1_run_material.py --material 42CrMo4_QT --model FS_ext --results-dir Results/current --plot-dir Results/current/plots
+python scripts/0_calibrate_material_params.py --material 42CrMo4_QT --models FS
+python scripts/1_run_material.py --material 42CrMo4_QT --model FS_ext --results-dir Results/current --plot-dir Results/current/plots
 
 # BP/CAIM require no fitted method coefficients, but still need master curves.
-python 0_calibrate_material_params.py --material 42CrMo4_QT --models BP CAIM
-python 1_run_material.py --material 42CrMo4_QT --model BP --results-dir Results/current --no-plots
-python 2_compare_results.py --results_dir Results/current --out_dir Results/Comparison
+python scripts/0_calibrate_material_params.py --material 42CrMo4_QT --models BP CAIM
+python scripts/1_run_material.py --material 42CrMo4_QT --model BP --results-dir Results/current --no-plots
+python scripts/2_compare_results.py --results_dir Results/current --out_dir Results/Comparison
 ```
 
 Omitting `--models` calibrates all active methods; omitting `--material` selects
@@ -49,10 +61,46 @@ all workbooks. Searches can be expensive. `--n1`, `--n2`, `--plane-stride`,
 Changing them is a numerical choice that must be reported. An optimisation without a finite objective, or an invalid required curve,
 prevents a successful record from being written. No default coefficient is silently substituted.
 
+> **In this repository.** There is no store record to withhold: `multifat-pipeline` calibrates in
+> one run and writes `<MATERIAL>_calibration.json` whatever the outcome, so the sentence above
+> becomes "no default coefficient is substituted silently". A block with no finite objective keeps
+> running on the constant's default value and the run report says so; the section below defines the
+> vocabulary that records it.
+
+## Calibration status
+
+> **In this repository.** `multifat-calibrate` prints, and `<MATERIAL>_calibration.json` stores as
+> `status` (with a one-line `reason`), exactly one outcome per material. The same value is copied to
+> the `calibration_status` column of the eligibility matrix and to
+> `Comparison/calibration_status.csv`. Upstream's `status` key means `"success"` on a stored record;
+> the two vocabularies are unrelated.
+
+| Status | Meaning | `multifat-calibrate` |
+|---|---|---|
+| `calibrated` | Every requested block was fitted | exit code 0 |
+| `not_applicable` | No plain failure rows to calibrate on: a fatigue-limit dataset takes its constants from the R = -1 limits, a notched-only dataset has none to calibrate | exit code 0 |
+| `infeasible` | A block has no finite objective over its search range, or the workbook has no usable uniaxial subset to fit on. `reason` keeps the failure message; `infeasible` records the block, the parameter and a one-line diagnostic (for example `DP increases with life for all L_LI in [0, 5] (slope +0.09 to +0.41)`), computed only when the fit fails | exit code 1 |
+| `error` | An unexpected exception, kept with its traceback in the log | exit code 1 |
+
+Calibration stays all-or-nothing per material: an `infeasible` material yields exactly the constants
+it yielded before the status existed, so `1_Ti6Al4V` keeps its Basquin and strain-life estimates and
+loses the plane constants of every block, not only the one that failed. Models that read a lost
+constant with a fallback still run, and the run report marks them `ok (default constant)` with a note
+naming the block and the default value; models that require it stay `skipped` with the same pointer
+appended to their reason. Block isolation (`partial`) is reserved for a later change and is not
+produced.
+
+Each material is independent: one `infeasible` or `error` material does not stop the batch, the
+materials after it are calibrated as usual, and the process exits 1 so a script can detect the
+failure. Per material, `multifat-pipeline --material NAME` still completes and records the outcome.
+A workbook the pipeline rejects before calibration (`10_En3B`, `11_GJS600` here: no usable test rows)
+has no sidecar and does not reach one of these four statuses; the eligibility matrix reports it as
+`out_of_scope`.
+
 ## Record structure and units
 
 Schema version 1 is checked by `validate_record` in
-[`calibration_store.py`](../fatigue/eval/calibration_store.py). Files are written
+[`calibration_store.py`](https://github.com/andreachiocca/multiaxial-fatigue/blob/71eaac3/fatigue/eval/calibration_store.py). Files are written
 through a temporary file and published atomically without replacing an existing ID.
 Floating-point values retain Python/JSON round-trip precision. Required coefficients
 and curve values must be finite. Undefined optional scatter or correlation diagnostics
@@ -111,7 +159,7 @@ histories, model, plane grid, curve scatter setting, procedure version, implemen
 revision and numerical source fingerprints to agree. Source hashes normalise line
 endings and path separators. They include the selected criterion and shared numerical
 helpers. Maintainers must increment the procedure version if fitting-selection rules
-change. A corrupt record produces an error rather than silently selecting another file.
+change. A corrupt record produces an error instead of silently selecting another file.
 
 The input fingerprint excludes run-outs, unknown-status observations, specimen/row
 IDs, workbook formatting and file timestamps. It conservatively includes all failed
@@ -146,7 +194,14 @@ schema-version-1 files to remain readable without rewriting them.
 
 ## Findley amplitude selection
 
-Findley calibration accepts the following Script 0 option. The mathematical
+> **In this repository.** The option is `multifat-calibrate --shear-amplitude-algorithm`; it sets the
+> Findley shear amplitude (MCE or MCC) in the k_FI calibration through the plane shear rule of the
+> established search and returns `amplitude_settings` with the result. No record is written, so the
+> store-specific text below (Script 0/1, JSON signatures, compatibility table, fingerprints) describes
+> upstream only; `multifat-pipeline --constants` rejects a record whose Findley amplitude is not MCE
+> and does not expose the option. See [harmonic shear amplitudes](shear-amplitude.md#findley-calibration-selection).
+
+Upstream's Findley calibration accepts the following Script 0 option. The mathematical
 definitions and amplitude/range conventions are given in
 [harmonic shear amplitudes](shear-amplitude.md). Selection affects both optimisation
 of `k_FI` on the established axial/torsional failure subset and master-curve fitting
@@ -154,9 +209,9 @@ on the established reversed axial failure subset. The complete Findley expressio
 is maximised on every candidate plane with the same selected amplitude.
 
 ```bash
-python 0_calibrate_material_params.py --material Al7075_T6 --models FIN \
+python scripts/0_calibrate_material_params.py --material Al7075_T6 --models FIN \
   --shear-amplitude-algorithm mcc_harmonic
-python 0_calibrate_material_params.py --material Al7075_T6 --models FIN \
+python scripts/0_calibrate_material_params.py --material Al7075_T6 --models FIN \
   --shear-amplitude-algorithm mce_harmonic
 ```
 
@@ -201,10 +256,10 @@ Findley harmonic records only. Other methods retain their existing hashes.
 
 | Requested Findley algorithm | Record | Behaviour, subject to all other checks |
 |---|---|---|
-| Default | Verified historical MCE without amplitude metadata | Accept in assessment |
+| Default, MCE or RSS | Verified historical MCE without amplitude metadata | Accept |
 | MCC | Historical MCE | Reject |
 | MCC | Compatible new MCC | Accept |
-| Default, MCE or RSS | Compatible new MCE | Calibration API accepts by resolved algorithm; assessment additionally requires the matching evaluation path |
+| Default, MCE or RSS | Compatible new MCE | Accept |
 | MCE | MCC, even if newer or explicitly requested by ID | Reject |
 | MCC or MCE | Different definition or relevant implementation | Reject |
 
@@ -221,41 +276,12 @@ numerical fits coincide. Explicit coefficient reuse through `--reuse-calibration
 also requires a matching amplitude definition. Optimisation metadata and downstream
 curve metadata must agree. Historical files and IDs remain immutable.
 
-Script 1 requires an exact evaluation path in addition to the resolved algorithm.
-Its default requires `legacy` MCE; explicit MCC, MCE and RSS require `harmonic`.
-This stricter assessment lookup prevents even a compatible explicit MCE record
-from replacing a historical default record, and prevents a legacy MCE record from
-supplying the explicit path. Compatibility is checked before creation time or ID.
-The calibration API retains its established algorithm-level lookup when no path
-is requested. Script 1 performs no automatic recalibration.
-
-### Assessment commands and outputs
-
-Use matching grid and master-curve settings for calibration and assessment.
-The following commands show the three choices with the existing singular
-`--model` option. Calibrate explicit paths first if their records do not exist.
-Use separate result directories or the distinct explicit result labels when
-comparing predictions.
-
-```bash
-python 1_run_material.py --material Al7075_T6 --model FIN --no-plots
-python 1_run_material.py --material Al7075_T6 --model FIN --no-plots \
-  --shear-amplitude-algorithm mcc_harmonic
-python 1_run_material.py --material Al7075_T6 --model FIN --no-plots \
-  --shear-amplitude-algorithm mce_harmonic
-```
-
-The default remains `FIN_Al7075_T6.csv`. Explicit files are named, for
-example, `FIN.mcc_harmonic_Al7075_T6.csv` and
-`FIN.mce_harmonic_Al7075_T6.csv`; FIN_ext retains its `_ext` suffix after the
-algorithm identifier. CSV columns are unchanged. An adjacent `.meta.json`
-sidecar gives the selected option, canonical algorithm, definition version,
-evaluation path, calibration ID, input/formulation fingerprints, settings and
-CSV SHA-256. Comparison and plotting readers continue to use the CSV files,
-whose `Method` values distinguish the algorithms. The `rss` alias resolves to
-the explicit MCE filename and may replace that result in the same directory.
-Neither differing damage values nor different fitted curves alone establish
-better predictive accuracy without independent validation.
+Script 1, eligibility and batch/review assessments call the loader without an
+override and therefore require MCE for FIN. Algorithm compatibility is checked
+before creation time or ID. A newer MCC record cannot displace MCE; an explicit
+MCC ID or an MCC-only archive gives a controlled compatibility error. Script 1
+performs no automatic recalibration and offers no MCC prediction option. New MCC
+damage-life curves require a separately approved Phase 3B assessment integration.
 
 ### Complete numerical example
 
@@ -294,8 +320,9 @@ independent predictive accuracy. Explicit MCE can differ from historical endpoin
 encoding at float64 rounding or very small shear scales, as documented in the
 [numerical limitations](shear-amplitude.md#controlled-findley-evaluation).
 
-Run `python -m unittest discover -s tests -p test_findley_calibration.py -v` for
-the calibration/JSON/production-safety integration checks.
+Upstream's `tests/test_findley_calibration.py` covers the calibration/JSON/production-safety
+integration checks; here `uv run pytest tests/test_findley_calibration.py` checks the equivalent
+parts that exist (selection, rules against the harmonic evaluator, calibration, pipeline guard).
 
 ## Run-out interpretation and plots
 
@@ -324,7 +351,7 @@ plots are omitted. No censored-data regression or survival-analysis model is add
 
 The computational family does not determine the output quantity. In particular,
 the current non-critical-plane BP and CAIM implementations return dimensionless
-damage parameters, rather than fatigue lives. All 15 currently enabled base
+damage parameters instead of fatigue lives. All 15 currently enabled base
 methods retain their existing damage-parameter workflow.
 
 | Model output | Pipeline behaviour | Comparison |

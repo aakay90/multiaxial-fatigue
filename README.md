@@ -259,7 +259,7 @@ CI runs these on Python 3.10-3.13 (plus Windows on 3.12). A change that can alte
 also needs `uv run python tools/regression_snapshot.py run/compare` (see
 [CONTRIBUTING](CONTRIBUTING.md)). The research provenance behind the catalogue (51-publication
 review, assessment, saved bibliographic records) is frozen in
-[docs/research](docs/research/README.md). Changes are listed in the [CHANGELOG](CHANGELOG.md).
+[docs/research](docs/research/README.md). Changes are listed in the [CHANGELOG](CHANGELOG.md), and project decisions in the [decision log](docs/decision-log.md).
 
 ## Licence and citation
 

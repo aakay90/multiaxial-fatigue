@@ -4,15 +4,15 @@
 
 ## Scope and scientific reference
 
-- Primary family: Invariant based; secondary: disabled; source retained.
-- Status: Partially implemented; enabled: False.
+- Primary family: Invariant based; secondary: none recorded.
+- Status: Fully implemented; enabled: True.
 - Authors/year: Sigbjørn Tveit, Aase Reyes, Emrah Erduran (2024).
 - Reference: A continuum approach to multiaxial high-cycle fatigue modeling for ductile metallic materials, Results in Engineering.
 - DOI: https://doi.org/10.1016/j.rineng.2024.102171
 - Reference evidence: Exact-title Crossref work record; implementation attribution subject to audit caveats; saved metadata in docs/research/doi-records.json.
-- Mathematical evidence: Inherited repository audit, not repeated.
+- Mathematical evidence: Checked against the source PDF in Phase 2 (2026-10-17); see docs/method-audit.md.
 - Principle: Tveit et al. (2024), A continuum approach to multiaxial high-cycle fatigue modeling for ductile metallic materials.
-- Loading scope: No currently supported executable scope; archived proxy must not be used..
+- Loading scope: Single-frequency harmonic CA, proportional and phase-shifted NP via the minimum circumscribed Hershey-Hosford ball; calibrated range 0.5 <= t_-1/s_-1 <= 0.5852 (capped m = 2.767 above)..
 
 ## Available components and remaining work
 
@@ -20,15 +20,15 @@ FABER phase: Plain/smooth CA candidate or scoped point formulation; original loa
 
 External source discovery: no_accessible_source_identified; not integrated or independently validated. Consult the linked inventory for exact variant, language, license, evidence and reuse restrictions. External code does not count as integrated WG4.3 implementation.
 
-Only a proportional cycle reduction; non-proportional extension is unverified and fatigue-ratio calibration silently falls back to m=2 outside its supported range. Restore only after source-faithful repair and regression/reference checks.
+No known essential coding gap within the declared repository scope. The incremental continuum model is out of scope.
 
-Existing implementation: [fatigue/models/invariant_methods/ottosen.py](../../fatigue/models/invariant_methods/ottosen.py); symbol `OttosenReduced`. Existing tests: [tests/test_method_audit.py](../../tests/test_method_audit.py).
+Existing implementation: [src/multifat/models/invariant_methods/ottosen.py](../../src/multifat/models/invariant_methods/ottosen.py); symbol `OttosenReduced`. Existing tests: [tests/methods/test_ottosen.py](../../tests/methods/test_ottosen.py), [tests/test_method_audit.py](../../tests/test_method_audit.py).
 
 Reuse: Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing.
 
-Expected inputs: Physical stress cycle; calibrated fatigue ratio and exact proportional-reduction constants/domain. Expected output: Damage parameter; fitted life where valid.
+Expected inputs: Sigm1, Taum1; A_OTT or an R = 0 strength (Sig0, or Su for the Böhme 2026 estimate); optional m_OTT.. Expected output: Damage parameter; fitted life where valid.
 
-Known restrictions: Only a proportional cycle reduction; non-proportional extension is unverified and fatigue-ratio calibration silently falls back to m=2 outside its supported range.
+Known restrictions: Reduced cycle-based form of Tveit et al. (2024), not the incremental back-stress model; out-of-phase rows agree with Tveit's incremental results within about 0.7 points (7/10). Materials with t_-1/s_-1 > 0.5852 use the capped exponent outside the calibrated range.
 
 ## Acceptance criteria
 
@@ -42,7 +42,7 @@ Known restrictions: Only a proportional cycle reduction; non-proportional extens
 - [ ] Update `docs/catalogue/methods.json`, attach Issue/PR and validation evidence, regenerate documentation and pass `python tools/generate_method_docs.py --check`.
 - [ ] Review implementation completeness separately from validation; never promote validation merely because numerical tests pass.
 
-Validation lead: tests/test_method_audit.py verifies disabled-name guards only. This is not numerical verification or scientific validation of the archived criterion. Restoration needs original-paper examples.
+Validation lead: tests/methods/test_ottosen.py: Tveit et al. (2024) Table A.1, all 47 in-phase rows to print rounding (modified and original model), out-of-phase rows within 0.8 points except three unresolved 30NCD16 rows.
 
 Dependencies: confirm source/version and measured parameters first; consult [ROADMAP.md](../../ROADMAP.md) for shared cycle, quadrature, native-life and data prerequisites. G01/G02 share a paper but retain distinct laws; other candidate dependencies require specification, not automatic coupling.
 

@@ -1,37 +1,70 @@
-# Adding a fatigue method
+# How to add a fatigue method
 
-The user-facing method name is registered in `fatigue/models/registry.py`. The runner selects and calibrates the single `MODEL_NAME` near the top of `1_run_material.py`. The `_ext` suffix selects the extreme critical-plane variant; the runner calibrates its base method name.
+Names in this package are the symbols of the source papers; the table is in
+[notation.md](notation.md). Read it before naming anything in a new implementation.
+
+The method name that users see is the `name` attribute of the class registered in `src/multifat/models/registry.py`. A single model runs through `multifat-run --model NAME --material MAT`, whereas `multifat-pipeline` runs every model. Selection of the extreme critical-plane variant is done by the `_ext` suffix: the maximum damage over planes is taken there in place of the damage on the selected plane, and calibration happens together with the base method.
 
 ## Critical-plane method
 
-1. Add a class in `fatigue/models/cp_methods/`. Follow an existing class such as `FatemiSocie` in `fs.py` and the `CriticalPlaneMethod` protocol in `fatigue/models/base.py`.
-2. Provide `name`, `required_params()`, and `evaluate_on_plane(*, S0r, E0r, S1r, E1r, params) -> CPPlaneResult`. Return finite `damage` and `metric`; the evaluator selects the plane with the highest metric. The local plane normal is the `z` axis, and the relevant in-plane shear components are `xz` and `yz`.
-3. Import and register the class in `_available_cp_methods()` in `fatigue/models/registry.py`. The `CPModelAdapter` exposes the standard and `_ext` values.
-4. Select it with `MODEL_NAME` in `1_run_material.py` and run it on a material. Check finite positive values on the uniaxial design subset and compare proportional and non-proportional cases. The evaluator handles phase shifts for critical-plane methods.
+1. Place a new class inside `src/multifat/models/cp_methods/`, using an existing one such as `FatemiSocie` (`fs.py`) and the `CriticalPlaneMethod` protocol defined in `src/multifat/models/base.py` as templates.
+2. Implement `name`, `required_params()` and `evaluate_on_plane(*, S0r, E0r, S1r, E1r, params) -> CPPlaneResult`. Both `damage` and `metric` must be returned as finite values, since the plane search picks whichever plane attains the highest metric. The local plane normal coincides with the `z` axis, while `xz` and `yz` are the in-plane shear components.
+3. Class attributes are optional: `np_shear_rule` (defaults to `"rss"`, or takes `"longest_chord"` where the source prescribes it), `ext_variant = False` where an `_ext` variant would make no sense, and `optional_params` (see below).
+4. Import the class and register it in `_available_cp_methods()`. The standard and `_ext` values are exposed by `CPModelAdapter`, which also runs the refined plane search (`best_cp_for_case` in `eval/evaluator.py`; the refinement itself lives in `eval/plane_search.py`). Any test that evaluates a single prescribed plane has to pass `refine=False`.
 
 ## Direct method
 
-1. Add a class in `fatigue/models/invariant_methods/`, `fatigue/models/energy_based_methods/`, or `fatigue/models/integral_methods/`. Follow an existing model and the `FatigueModel` protocol in `fatigue/models/base.py`.
-2. Provide `name`, `required_params()`, and `evaluate_case(*, S0, E0, S1, E1, params, R_list=None, harmonics=None) -> CaseResult`. A damage-parameter result uses `values={"": damage}`. A direct model must explicitly use `harmonics` if its calculation needs phase information.
-3. Import and register the class in `_available_direct_models()` in `fatigue/models/registry.py`, then select it with `MODEL_NAME` in `1_run_material.py`.
+1. Put the class in `src/multifat/models/invariant_methods/`, `energy_based_methods/` or `integral_methods/`, following an existing model plus the `FatigueModel` protocol in `src/multifat/models/base.py`.
+2. Supply `name`, `required_params()` and `evaluate_case(*, S0, E0, S1, E1, params, R_list=None, harmonics=None) -> CaseResult`, returning `values={"": damage}`. Wherever the calculation requires phase information, rely on `harmonics` (`S_mean`, `S_sin`, `S_cos`).
+3. Register the imported class in `_available_direct_models()`.
 
-For a model that already predicts life, declare `output_quantity = "life_cycles"`
-on the model and return `CaseResult(values={"": N}, output_quantity="life_cycles")`.
-Convert reversals to cycles within the method according to its published convention.
-Script 1 then compares the native life directly, without a damage master curve.
-Use `output_quantity = "index"` for an output without a supported damage–life
-relation; generic fitting and conversion are refused. See the output table in the
-[calibration workflow](calibration-workflow.md). Computational family and output
-quantity are separate properties. No cycle-valued criterion is currently enabled.
+## Parameters
 
-An independently measured material parameter belongs in Excel `Summary` and its
-import mapping. A coefficient fitted by the framework belongs in JSON. Extend
-Script 0, `METHOD_PARAMETERS`, units and record validation for a new fitted
-coefficient, rather than introducing another editable Excel field. Update the
-shared `material_parameters()` mapping for measured inputs, declare required
-parameters and add failure-only calibration checks. See the
-[calibration workflow](calibration-workflow.md).
+Every constant the model reads has to be declared: the required ones belong in `required_params()`, while those fetched through `params.get` go in `optional_params = {"name": "default or fallback, source"}`. When a required constant is absent, `MissingParamsError` is raised and the pipeline marks the model as skipped. Adding a new workbook constant requires an entry in `src/multifat/imp/schema.py` (the accepted headers); a Summary column carrying exactly the name of a declared parameter is forwarded with no code change. `docs/workbook-format.md` is regenerated by `tools/generate_workbook_docs.py`.
 
-For a new method family, update `_family_cmap_name()` in `2_compare_results.py` if the plots need a distinct color palette. If calibration produces NaN, check the method's values on the design subset and its required parameters first.
+## Native life law
 
-Register each method's original citation in `fatigue/models/references.py` and add analytical tests. Document any departure from the original plane rule or loading-history assumptions in `docs/method-audit.md`. Do not restore a disabled method without resolving its recorded numerical issue.
+Should the source define a life law of its own, implement `native_life(aux, params, fit=None)`, plus `life_fit(aux, N, params)` in those cases where its constants are fitted, and store the per-case inputs in `CaseResult.aux`. Next to the universal fitted curve, the CSV then carries `Nf_native` and `Error_log10_native`. Reference implementations are `cp_methods/mdc.py` and `integral_methods/morel.py`.
+
+## Evidence
+
+The original citation is registered in `src/multifat/models/references.py`; a paper-reproduction test then goes in `tests/methods/`, with the transcribed table placed in `tests/data/papers/` (header citing DOI, table, page). Update `docs/catalogue/methods.json` and run `tools/generate_method_docs.py`. Any departure from the source's plane rule or loading assumptions must be documented in `docs/method-audit.md`. A disabled method is not to be restored before its recorded numerical issue has been resolved.
+
+## Docstrings
+
+1. One sentence, noun phrase or imperative. No "as given by", no "in order to", no "Compute".
+   `"""Eq. (64)."""` is a complete docstring for a function that evaluates one equation.
+2. Module docstring, in this order: first line = model and citation; then the governing equations
+   in a literal block using the paper's symbols; then a paragraph headed `Repository choices:`
+   for everything that differs from the paper. The string starts on the first line of the file,
+   before `from __future__ import annotations`.
+3. Section names follow numpydoc: `Parameters`, `Returns`, `Notes`, `References`. Never `Remarks`.
+4. Cite as `Author et al. (year), Eq. (n), p. m`. Python source and the tables generated from it
+   spell the name `Boehme`; hand-written documentation, including the method catalogue, keeps
+   `Böhme` (notation.md rule 5).
+5. Error messages state the violated condition and name the symbol. Keep an existing message
+   unless it is wrong: messages are searched in logs and in `_calibration.json`.
+
+## Notation guard
+
+`tests/test_notation.py` fails on:
+
+- a retired synonym used as a parameter or local name, on a module-level `_old = _new` alias, on
+  a module docstring that does not start on the first line, and on a string statement left
+  outside a docstring slot;
+- `Böhme` in Python source or in a table generated from it (rule 5), and `Boehme` outside a code
+  span in a hand-written page (`README.md`, `CONTRIBUTING.md`, `docs/**/*.md`, except the tables
+  generated from the source, such as `docs/workbook-format.md`);
+- an override whose parameters differ from the method it overrides;
+- a banned docstring phrase (`as given by`, `in order to`, `Compute`, `Remarks`);
+- a departures paragraph headed anything but `Repository choices:` (`Repository convention:`,
+  `Implementation notes`, `Notes on implementation`);
+- a parameter of a public function or method in `eval/` or `models/` that appears neither in
+  [notation.md](notation.md) nor in `tests/data/notation_allow.txt`, where each group of names
+  carries the reason it is not vocabulary. The allow list is exactly the complement of the table,
+  so an entry whose name no longer appears also fails. Nested helpers are implementation detail
+  and are not checked.
+
+The retired names are read from [notation.md](notation.md): extend that table when a new concept
+enters the package. A name that is only an argument of the interface (a callback, a plotting
+option, a search accumulator) belongs in the allow list instead.

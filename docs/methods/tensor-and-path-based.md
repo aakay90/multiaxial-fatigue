@@ -16,18 +16,18 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 3 | 1 | 14 | 0 | 18 |
-| Energy based | 3 | 2 | 15 | 3 | 23 |
-| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
-| Invariant based | 0 | 1 | 12 | 0 | 13 |
-| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
+| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Energy based | 6 | 1 | 13 | 3 | 23 |
+| Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
+| Invariant based | 5 | 0 | 8 | 0 | 13 |
+| Mesoscopic and damage | 2 | 0 | 6 | 0 | 8 |
 | Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 2 | 0 | 11 | 2 | 15 |
-| Stress based | 0 | 0 | 13 | 0 | 13 |
-| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
-| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
+| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Tensor and path based | 1 | 0 | 2 | 0 | 3 |
+| **TOTAL** | 29 | 2 | 81 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -46,7 +46,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | ID | Method / scope | Implementation | Validation | Priority | Counted |
 | --- | --- | --- | --- | --- | --- |
 | [N32](../../METHODS.md#n32) | Multiaxial Fatigue Space (MFS) | Not implemented | not_tested | Low | Yes |
-| [N37](../../METHODS.md#n37) | Projection-by-Projection (PbP), harmonic CA scope | Not implemented | not_tested | Medium | Yes |
+| [N37](../../METHODS.md#n37) | Projection-by-Projection (PbP), harmonic CA scope | Fully implemented | reference_examples_reproduced | Medium | Yes |
 | [N49](../../METHODS.md#n49) | Deperrois/Freitas path-amplitude formulations | Not implemented | not_tested | Low | bundle |
 | [G32](../../METHODS.md#g32) | Stefanov curvilinear integral / IDD family | Not implemented | not_tested | Medium | Yes |
 
@@ -90,29 +90,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Tensor and path based;  |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | A stress invariant based criterion to estimate fatigue damage under multiaxial loading, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/j.ijfatigue.2007.11.006 |
 | Reference evidence | Exact-title Crossref metadata checked; inherited prior-review method attribution; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Prior-review preliminary; obtain original paper before coding |
-| Principle | Deviatoric projections and calibrated interaction of projection damage; one repeated harmonic cycle, Dmg/L. |
-| Loading scope | Deviatoric projections and calibrated interaction of projection damage; one repeated harmonic cycle, Dmg/L. |
-| Inputs / material parameters | S; axial/torsional master curves and mean/hydrostatic calibration. |
-| Output | Deviatoric projections and calibrated interaction of projection damage; one repeated harmonic cycle, Dmg/L. |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; See prior feasibility assessment |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Alternative to plane scans. Full VA multiaxial counting architecture is C; 2009 largely develops the same framework. |
+| Formulation evidence | Checked against Cristofori, Susmel & Tovo (2008) Eqs. (4)-(13), (A.3) on the PDF (2026-10-17) |
+| Principle | Covariance-axis projections of the deviatoric path combined quadratically (Gamma); mean stress through rho = sqrt(3) sigma_H,max/Gamma and a reference strength linear in rho. |
+| Loading scope | Single-frequency harmonic CA; Gamma = sqrt(J2(A) + J2(B)) (projection basis drops out for one harmonic). |
+| Inputs / material parameters | Sigm1, Taum1. |
+| Output | Fatigue-limit index Gamma / sqrt(J2A,rho); fitted life where valid (native life Eqs. 9-11 needs k_rho and N_A) |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_pbp.py: the covariance-projection procedure equals the closed form; calibration; phase independence in bending-torsion; mean stress via rho. The paper prints Woehler constants and figures only. |
+| Python implementation | [src/multifat/models/invariant_methods/pbp.py](../../src/multifat/models/invariant_methods/pbp.py); ProjectionByProjection |
+| Automated tests | [tests/methods/test_pbp.py](../../tests/methods/test_pbp.py) |
+| Limitations | Fatigue-limit form only; source issues Eq. (2) sign, Eqs. (4)-(5) missing 1/T, Eq. (B.5) missing sqrt(3), N_A undefined. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Covariance/eigenbasis, source-defined cycle treatment and projection interaction; native life calculation. |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Adds projection-based interaction and life prediction; may reuse tensor decomposition. |
-| Roadmap rank | 13 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
-| Provenance / prior status | N37; Already reviewed, not implemented |
+| Provenance / prior status | N37; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N37+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN37%5D+Projection-by-Projection+%28PbP%29%2C+harmonic+CA+scope) (no live Issue linked) |
 

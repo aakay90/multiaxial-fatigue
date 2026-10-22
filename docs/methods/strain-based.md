@@ -16,18 +16,18 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 3 | 1 | 14 | 0 | 18 |
-| Energy based | 3 | 2 | 15 | 3 | 23 |
-| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
-| Invariant based | 0 | 1 | 12 | 0 | 13 |
-| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
+| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Energy based | 6 | 1 | 13 | 3 | 23 |
+| Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
+| Invariant based | 5 | 0 | 8 | 0 | 13 |
+| Mesoscopic and damage | 2 | 0 | 6 | 0 | 8 |
 | Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 2 | 0 | 11 | 2 | 15 |
-| Stress based | 0 | 0 | 13 | 0 | 13 |
-| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
-| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
+| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Tensor and path based | 1 | 0 | 2 | 0 | 3 |
+| **TOTAL** | 29 | 2 | 81 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -58,7 +58,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | [N52](../../METHODS.md#n52) | Itoh NP strain correction / criterion | Not implemented | not_tested | Low | Yes |
 | [N54](../../METHODS.md#n54) | Equivalent-strain and maximum-shear-strain baselines | Not implemented | not_tested | Low | bundle |
 | [N57](../../METHODS.md#n57) | Combined deviatoric strain amplitudes | Not implemented | not_tested | Low | Yes |
-| [G22](../../METHODS.md#g22) | Modified Manson–Coffin Curve Method (MMCCM) | Not implemented | not_tested | High | Yes |
+| [G22](../../METHODS.md#g22) | Modified Manson–Coffin Curve Method (MMCCM) | Fully implemented | reference_examples_reproduced | High | Yes |
 | [G40](../../METHODS.md#g40) | Shang–Wang critical-plane damage model | Not implemented | not_tested | Medium | Yes |
 | [G47](../../METHODS.md#g47) | Gates–Fatemi revised FS normalization | Not implemented | not_tested | Medium | Yes |
 | [G48](../../METHODS.md#g48) | Sharifimehr–Fatemi normal/shear interaction extension | Not implemented | not_tested | Medium | Yes |
@@ -81,7 +81,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/fs.py](../../fatigue/models/cp_methods/fs.py); FatemiSocie |
+| Python implementation | [src/multifat/models/cp_methods/fs.py](../../src/multifat/models/cp_methods/fs.py); FatemiSocie |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Uses monotonic Sy as cyclic-yield approximation; elastic importer; tension-only normal term; RSS ellipse shear convention. Native general elastoplastic FS life framework is outside the declared scope. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -114,7 +114,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Requires review; source_completeness_unestablished |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/mkbm.py](../../fatigue/models/cp_methods/mkbm.py); MKBM |
+| Python implementation | [src/multifat/models/cp_methods/mkbm.py](../../src/multifat/models/cp_methods/mkbm.py); MKBM |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Source reproduction and plane rule not fully established; no cyclic plasticity input from importer. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -147,7 +147,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Requires review; source_completeness_unestablished |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/liu2021.py](../../fatigue/models/cp_methods/liu2021.py); Liu2021 |
+| Python implementation | [src/multifat/models/cp_methods/liu2021.py](../../src/multifat/models/cp_methods/liu2021.py); Liu2021 |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Original Eq. (27), normal strain/range interpretation and plane rule require full-source review. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -180,7 +180,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/gsa.py](../../fatigue/models/cp_methods/gsa.py); GSA |
+| Python implementation | [src/multifat/models/cp_methods/gsa.py](../../src/multifat/models/cp_methods/gsa.py); GSA |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Scalar form checked through Yu Eq. (4); measured strength coefficients optional; empirical steel/von-Mises fallbacks are not measured properties. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -499,29 +499,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Strain based; Strain critical plane / native life |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | The Modified Manson–Coffin Curve Method to estimate fatigue lifetime under complex constant and variable amplitude multiaxial fatigue loading, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/j.ijfatigue.2015.10.005 |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
-| Principle | Strain-based critical-plane lifetime framework using modified reference curves. |
-| Loading scope | CA P/NP; general cycles with prescribed response |
-| Inputs / material parameters | Stabilized strain/stress cycles; axial/torsional strain-life properties |
-| Output | Native fatigue life |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; Original CA examples before any VA extension |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Related to MWCM but not an equivalent stress-life formula |
+| Formulation evidence | Checked against Wang & Susmel (2016) Eqs. (1)-(8) on the PDF (2026-10-18) |
+| Principle | Manson-Coffin curve with constants interpolated in rho = sigma_n,max/tau_a on the maximum shear strain amplitude plane (largest rho among ties). |
+| Loading scope | CA, single-harmonic NP via the longest-chord shear rule; workbook elastic strains. |
+| Inputs / material parameters | E, nu, sigma_f, epsilon_f, b_fat, c_fat, tau_f, gamma_f, b0, c0 (no estimation fallback); optional nu_p (default 0.5). |
+| Output | Native life N_f (Eq. 2, bisection); damage parameter 1/N_f |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_mmccm.py: Eq. (2) reduces to Eqs. (3), (4) at rho = 1, 0; Eqs. (7)-(8) interpolation; life inversion; plane search and largest-rho tie rule; Table 1 Eq. (25) estimate (450.3 vs printed 451). Predictions are figures only. |
+| Python implementation | [src/multifat/models/cp_methods/mmccm.py](../../src/multifat/models/cp_methods/mmccm.py); MMCCM |
+| Automated tests | [tests/methods/test_mmccm.py](../../tests/methods/test_mmccm.py) |
+| Limitations | Strain-life constants absent from the current workbooks (runs stop with an explicit error; Phase 3). No rho cut-off in the paper; past a pole of Eqs. (7)-(8) the damage is infinite; no _ext variant. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Dual strain-life curve solver and exact plane rule |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Adds a recognized strain-life curve framework once prescribed stabilized strains and dual curves are supported. |
-| Roadmap rank | 16 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | G22; New distinct formulation candidate |
+| Provenance / prior status | G22; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G22+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG22%5D+Modified+Manson%E2%80%93Coffin+Curve+Method+%28MMCCM%29) (no live Issue linked) |
 

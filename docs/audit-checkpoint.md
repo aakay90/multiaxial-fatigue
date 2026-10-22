@@ -1,5 +1,50 @@
 # Development continuation checkpoint
 
+## Milestone, multifat architecture integration (22 October 2026)
+
+Branch `dev/tg-developments`, local and not pushed. Upstream `main` at `ba84152` (PRs #10 and #11)
+is merged as `aca31b0`. Further commits on this branch: the overlay layer for the five workbooks
+edited after supply (`5b1a852`), the explicit Findley assessment for FIN and FIN_ext (`994981e`),
+and this combined `AGENTS.md` with the checkpoint. The default paths are unchanged.
+
+Carried over: the N04 scientific dossier (five files, check tool, CI step). Susmel N04 stays
+implemented here with the MWCM record (enabled, tested), as decided by the user; upstream records
+it as `not_implemented`, so the catalogue differs from upstream on that record. The explicit
+Findley option `--shear-amplitude-algorithm` for FIN and FIN_ext, with its five tests rewritten
+against this architecture. Not carried: the upstream calibration store
+(`fatigue/eval/calibration_store.py`), because this code calibrates Findley inside each run.
+
+Verified on the final code (base `206748c`, the pre-round HEAD; new `6243442`, code-identical to the
+final commit `84edf55`, which changes only this file):
+
+- Full pytest at `84edf55`: 1633 passed, 27 skipped, 41 expected failures (documented misprints).
+  Black, ruff, `check_docs`, `check_scientific_reviews` and both generators pass at `84edf55`.
+- Calibration through the multifat-calibrate CLI, including single-workbook copies: identical to the
+  base for all 15 workbooks. Overlays follow the workbook by content, so a copied `8_AISI316L` gives the
+  base constants.
+- Pipeline over all 15 workbooks (folder import): every calibrated constant and run report identical.
+  The differences are the expected categories only: timestamps, git revision, the five overlaid
+  workbooks' hashes, the new `assumptions_applied` field, timing, output paths and the new
+  `[--no-overlay]` usage text.
+- Regression snapshot: 1,021 run logs identical after traceback-frame normalisation; exit codes
+  identical; the five overlaid workbooks identical cell by cell.
+- Plots: 78 run outcomes identical after path normalisation.
+- Differential harness: 34,070 cases, no value, warning or message differences.
+
+An earlier parity run on `882d662` (before the overlay relocation) gave the same results.
+
+Done in this round: MIT licence (step F, `f590efa`), the Calibrations loading test (step E, `bb546e1`),
+the explicit Findley option with rewritten tests (step B, `994981e`), the [project decision log](decision-log.md)
+recording `d001`–`d071`.
+
+Still open: pushing and the draft PR (decided by the maintainer, not done here);
+`docs/workbook-migration-evidence.json` is not regenerated (no generator found in the tree).
+
+Next exact action: review the draft PR text and decide whether to push
+dev/tg-developments and open the PR.
+
+Path map: `fatigue/` is `src/multifat/` (see `AGENTS.md`).
+
 ## Current status, Findley Phase 3B and Susmel N04 documentation
 
 Updated 20 October 2026. Findley Phase 3B was merged into `main` through

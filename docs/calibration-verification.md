@@ -1,5 +1,13 @@
 # Calibration workflow verification
 
+> **In this repository.** This document tracks upstream PRs #5-#6 (commits dc4fe6d-f0df0a7) and
+> describes the Script 0 / Script 1 workflow that produced the records in `Calibrations/`. That versioned
+> store is not used here: `multifat-pipeline` calibrates missing constants in one run and writes them, with
+> their provenance, to `<MATERIAL>_calibration.json`; the records are read as inputs with
+> `multifat-pipeline --constants` (see [`Calibrations/README.md`](../Calibrations/README.md)). Upstream file
+> paths (`fatigue/...`) and script options refer to upstream commit 71eaac3. The run-out conventions
+> (failure-only fits, censored rows in plots, no errors for run-outs) hold here too.
+
 The comparison uses Git baseline `e70a8af3a7a06cfb49626bff16c04605c884830b`.
 Its source and original workbooks were extracted into a separate temporary
 directory and executed in the same environment as the revised implementation.
@@ -47,14 +55,16 @@ life inversion. Adding them does not improve or worsen an error statistic.
 ## Reproduction
 
 ```bash
-MPLBACKEND=Agg python -m unittest discover -s tests -v
+MPLBACKEND=Agg uv run pytest -q
 MPLBACKEND=Agg python tests/run_material_validation.py /tmp/wg43-validation
 python -m ruff check .
 python -m pip check
 python tools/generate_method_docs.py --check
 python tools/check_docs.py
-python tools/migrate_calibrations.py
 ```
+
+`tools/migrate_calibrations.py` and `tests/compare_material_regression.py` were one-off scripts of
+that verification and are not kept in the repository; the pytest suite covers the same checks.
 
 For an exact comparison against the previous pipeline, extract baseline commit
 `e70a8af3a7a06cfb49626bff16c04605c884830b` into a separate checkout. Run its
@@ -63,7 +73,6 @@ then run the revised sweep from the current root and compare all baseline column
 
 ```bash
 MPLBACKEND=Agg python tests/run_material_validation.py /tmp/wg43-revised-results
-python tests/compare_material_regression.py /tmp/wg43-baseline-results /tmp/wg43-revised-results
 ```
 
 The comparator requires exact agreement, including undefined values, rather than
