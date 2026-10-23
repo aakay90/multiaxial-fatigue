@@ -1,0 +1,16 @@
+# Kujawski (2014) Int J Fatigue, doi:10.1016/j.ijfatigue.2013.12.002, Zotero RKWHX6W4.
+# Table 2, PDF p.6: 7075-T651 Al (E = 71.7 GPa), uniaxial compression-compression first step.
+# eps_a in %, stresses in MPa, SWTD and SWT in MJ/m^3; SWT empty where printed N/A (SWT < 0).
+# Crop: _audit-trail/phase2/crops/RKWHX6W4/p6.png
+eps_a_pct,sigma_a,sigma_m,Nf,swtd,swt
+0.41,305.3,-291.1,498374,0.353,0.058
+0.42,301.4,-292.6,472623,0.362,0.037
+0.39,288.9,-283.5,2781162,0.322,0.021
+0.38,300.8,-310.3,802796,0.332,
+0.38,292.2,-311.8,808885,0.330,
+0.44,289.3,-300.3,397716,0.381,
+0.4,298.3,-299.2,375132,0.345,
+0.36,274.4,-322.1,982635,0.309,
+0.41,308.1,-318.4,1000000,0.370,
+0.42,307.4,-317.2,2000000,0.380,
+0.39,285.8,-290.4,1371663,0.335,

@@ -4,6 +4,7 @@ External links, code spans/fences and frozen literature/provenance documents are
 excluded. This checks the maintained documentation's file and fragment links;
 it does not certify the availability or scientific accuracy of external sources.
 """
+
 from pathlib import Path
 import re
 import subprocess
@@ -14,14 +15,13 @@ FROZEN = {"docs/research", "docs/catalogue"}
 
 
 def prose(text):
-    text = re.sub(r"^```.*?^```[^\n]*", lambda m: "\n" * m[0].count("\n"),
-                  text, flags=re.M | re.S)
+    text = re.sub(r"^```.*?^```[^\n]*", lambda m: "\n" * m[0].count("\n"), text, flags=re.M | re.S)
     return re.sub(r"`[^`\n]+`", "", text)
 
 
 def anchors(text):
     """Explicit anchors and GitHub-style heading slugs, including duplicates."""
-    found = set(re.findall(r'<a\s+(?:id|name)=[\"\']([^\"\']+)', text))
+    found = set(re.findall(r"<a\s+(?:id|name)=[\"\']([^\"\']+)", text))
     counts = {}
     for title in re.findall(r"^#{1,6}\s+(.+?)\s*#*\s*$", text, flags=re.M):
         title = re.sub(r"<[^>]*>", "", title).lower()
@@ -33,9 +33,13 @@ def anchors(text):
 
 
 def main():
-    tracked = subprocess.check_output(
-        ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"], cwd=ROOT
-    ).decode().split("\0")
+    tracked = (
+        subprocess.check_output(
+            ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"], cwd=ROOT
+        )
+        .decode()
+        .split("\0")
+    )
     # Include untracked work in progress, respecting the repository ignore rules.
     paths = sorted(set(tracked))
     errors, checked = [], 0

@@ -1,0 +1,22 @@
+# Robert, J.-L., Fogue, M., Bahuaud, J. (1994), "Fatigue Life Prediction Under Periodical or Random Multiaxial Stress States", Automation in Fatigue and Fracture: Testing and Analysis, ASTM STP 1231, pp. 369-387, doi:10.1520/STP13959S, Zotero key 2XJVX5XJ.
+# Table 2, PDF p.16 (book p.384): TABLE 2—Mielke's tests (second group) [10]. Stresses sigma_11a, sigma_11m, sigma_22a, sigma_22m, sigma_12a, sigma_12m (MPa); phases delta_22, delta_12 (deg); validity parameter I.
+# Crop: _audit-trail/phase2/crops/2XJVX5XJ/p16_0.00-0.00-1.00-1.00.png
+# Footnote a: Material = 25 CrMo4, N = 2 000 000 cycles, sigma_-1 = 361 MPa, tau_-1 = 228 MPa, and sigma_0 = 600 MPa.
+# Notes: header prints the phase column as delta_22 (subscript 22); named delta_2 here per the transcription spec. Printed ellipsis "..." (not applicable) transcribed as empty cells. No illegible cells. Values copied as printed, not recomputed.
+row,sigma_11a,sigma_11m,sigma_22a,sigma_22m,sigma_12a,sigma_12m,delta_2,delta_12,I
+1,362,-170,0,0,0,0,,,0.91
+2,336,150,0,0,0,0,,,1.01
+3,338,-338,0,0,0,0,,,0.76
+4,261,450,0,0,0,0,,,0.98
+5,289,340,146,170,0,0,0,,1.01
+6,261,340,261,170,0,0,0,,1.05
+7,275,340,275,170,0,0,60,,1.17
+8,240,340,240,170,0,0,90,,1.15
+9,196,340,196,170,0,0,180,,1.11
+10,270,0,0,0,135,0,,0,0.95
+11,261,0,0,0,131,0,,60,0.90
+12,277,0,0,0,139,0,,90,0.94
+13,220,340,0,170,110,0,,60,1.01
+14,233,340,0,170,117,0,,90,1.05
+15,155,340,0,170,155,0,,60,1.04
+16,161,340,0,170,161,0,,90,1.07

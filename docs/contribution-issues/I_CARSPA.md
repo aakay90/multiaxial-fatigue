@@ -22,7 +22,7 @@ External source discovery: possible_or_related_source; [EXT06](../EXTERNAL_IMPLE
 
 Missing the published critical-plane orientation construction; maximum-shear/max-damage scans are not that criterion. Restore only after source-faithful repair and regression/reference checks.
 
-Existing implementation: [fatigue/models/cp_methods/car_spa.py](../../fatigue/models/cp_methods/car_spa.py); symbol `CarSpa`. Existing tests: [tests/test_method_audit.py](../../tests/test_method_audit.py).
+Existing implementation: [src/multifat/models/cp_methods/car_spa.py](../../src/multifat/models/cp_methods/car_spa.py); symbol `CarSpa`. Existing tests: [tests/test_method_audit.py](../../tests/test_method_audit.py).
 
 Reuse: Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits.
 

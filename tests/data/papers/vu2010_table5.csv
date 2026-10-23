@@ -1,0 +1,16 @@
+# Vu, Halm & Nadot (2010), Int J Fatigue 32:1004-1014, doi:10.1016/j.ijfatigue.2009.11.006, Zotero key 2J7T4PF3
+# Table 5, PDF p.6 (journal p.1009): Fatigue strength of mild steel (f_-1 = 235.4 MPa, t_-1 = 137.3 MPa, R_m = 518.8 MPa) [6].
+# Crop: _audit-trail/phase2/crops/2J7T4PF3/p6_0.05-0.55-0.95-0.70.png
+# Material constants as printed: f_-1 = 235.4 MPa; t_-1 = 137.3 MPa; R_m = 518.8 MPa; source [6].
+# Column headers as printed: Sigma_xx,a (MPa); Sigma_xx,m (MPa); Sigma_xy,a (MPa); Sigma_xy,m (MPa); delta_xy (deg); I^a (%); I^b (%); I^c (%); I^d (%); I^e (%).
+# Printed minus signs (U+2212) are written as ASCII '-'.
+# I^a..I^e legend is printed only under Table 1 (PDF p.5), not under this table.
+row,sigma_xx_a,sigma_xx_m,sigma_xy_a,sigma_xy_m,delta_xy,I_a,I_b,I_c,I_d,I_e
+1,235.6,0,48.9,0,0,6.3,7.2,6.3,6.2,6.2
+2,187.3,0,93.6,0,0,5.0,7.8,5.0,5.0,4.9
+3,101.3,0,122.3,0,0,-0.8,2.6,-0.8,-0.5,-0.8
+4,194.2,0,97.1,0,60,-5.1,-1.7,8.9,3.6,3.8
+5,108.9,0,131.5,0,60,-0.5,4.7,6.6,3.0,4.6
+6,235.6,0,48.9,0,90,0.1,0.1,6.3,3.9,4.6
+7,208.1,0,104.1,0,90,-11.6,-11.6,16.7,8.6,4.5
+8,112.6,0,136,0,90,-0.5,5.9,10.3,5.0,6.8

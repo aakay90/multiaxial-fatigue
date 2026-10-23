@@ -16,18 +16,18 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 3 | 1 | 14 | 0 | 18 |
-| Energy based | 3 | 2 | 15 | 3 | 23 |
-| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
-| Invariant based | 0 | 1 | 12 | 0 | 13 |
-| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
+| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Energy based | 6 | 1 | 13 | 3 | 23 |
+| Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
+| Invariant based | 5 | 0 | 8 | 0 | 13 |
+| Mesoscopic and damage | 2 | 0 | 6 | 0 | 8 |
 | Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 2 | 0 | 11 | 2 | 15 |
-| Stress based | 0 | 0 | 13 | 0 | 13 |
-| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
-| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
+| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Tensor and path based | 1 | 0 | 2 | 0 | 3 |
+| **TOTAL** | 29 | 2 | 81 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -63,22 +63,22 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Reference | A probabilistic model for multiaxial high cycle fatigue, Fatigue & Fracture of Engineering Materials & Structures |
 | DOI | https://doi.org/10.1111/j.1460-2695.2006.01087.x |
 | Reference evidence | Exact-title Crossref metadata checked; inherited prior-review method attribution; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Prior-review preliminary; obtain original paper before coding |
+| Formulation evidence | Checked against Doudard, Hild & Calloch (2007) Eqs. (13)-(22), (26)-(36) and Tables 1-2 on the PDF (2026-10-18); Eq. (14) prints cos(zeta) for sin(zeta), Eqs. (A4)-(A5) print 2/pi for 1/(2 pi) |
 | Principle | Orientation-integrated slip-site activation and weakest-link probability; CA P/NP, F distribution and calibrated L. |
 | Loading scope | Orientation-integrated slip-site activation and weakest-link probability; CA P/NP, F distribution and calibrated L. |
 | Inputs / material parameters | S; G, ν; Weibull/activation parameters, known specimen/effective volume; critical energy for L. |
 | Output | Orientation-integrated slip-site activation and weakest-link probability; CA P/NP, F distribution and calibrated L. |
 | Implementation / evidence | Not implemented; preliminary_literature_assessment |
 | Validation / evidence | not_tested; See prior feasibility assessment |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
+| Python implementation | [src/multifat/models/integral_methods/doudard.py](../../src/multifat/models/integral_methods/doudard.py); kappa, failure_probability, fatigue_limit, stromeyer_life |
+| Automated tests | [tests/methods/test_doudard.py](../../tests/methods/test_doudard.py) |
 | Limitations | Reliability/scatter capability rather than another deterministic DP. Full heterogeneous effective-volume calculation is C. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Probabilistic calibration, directional integration and native probability/life outputs. |
+| Missing tasks | Kernel in src/multifat/models/integral_methods/doudard.py (tests/methods/test_doudard.py): kappa(m) of Eq. (36) by quadrature for any single-harmonic stress (tension closed form exact), Eqs. (15), (19), (20), (22), (26). Printed kappa(16) 3.6 / 1.0 / 1.6 / 9.6 vs computed 3.357 / 0.9415 / 1.459 / 9.137 (unresolved, xfail); Table 1 tension mean within 1.4 %. Disposition (2026-10-18): stays an unregistered kernel; registration needs V/V0, S0 and A' per specimen, which the workbooks do not carry, and its output is a failure probability. The kappa(16) gap stays an open xfail; structural H~_m beyond homogeneous stress (Phase 4). |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
 | Development disposition | prioritized_addition; Bounded homogeneous-volume scope introduces probabilistic outputs and appropriate calibration. |
-| Roadmap rank | 18 |
+| Roadmap rank | 2 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Low |
 | Provenance / prior status | N34; Already reviewed, not implemented |
@@ -129,22 +129,22 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Reference | Probabilistic approach in high‐cycle multiaxial fatigue: volume and surface effects, Fatigue & Fracture of Engineering Materials & Structures |
 | DOI | https://doi.org/10.1111/j.1460-2695.2004.00823.x |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
+| Formulation evidence | Checked against Flaceliere & Morel (2004) Eqs. (3), (12)-(14) on the PDF (2026-10-18); Eq. (14) round-section factors confirmed for rotating bending (cycle maximum sigma r/R) |
 | Principle | Surface/volume and microscopic variability determine fatigue-strength scatter. |
 | Loading scope | CA multiaxial; geometry and surface/volume scope matter |
 | Inputs / material parameters | Stress field or homogeneous known support; statistical material calibration |
 | Output | Failure probability; finite-life extension |
 | Implementation / evidence | Not implemented; preliminary_literature_assessment |
 | Validation / evidence | not_tested; 2004 experiments; 2005 finite-life scatter paper |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
+| Python implementation | [src/multifat/models/integral_methods/flaceliere_morel.py](../../src/multifat/models/integral_methods/flaceliere_morel.py); heterogeneity_factor, failure_probability, median_strength |
+| Automated tests | [tests/methods/test_tier3_kernels.py](../../tests/methods/test_tier3_kernels.py) |
 | Limitations | Homogeneous known-support subcase potentially B after full equations; supplement 10.1016/j.ijfatigue.2005.01.009 |
 | Current FABER phase | Full spatial surface/volume framework is future work; a homogeneous plain-volume restriction requires original-source review. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Probability estimation, run-outs and spatial integration |
+| Missing tasks | Kernel in src/multifat/models/integral_methods/flaceliere_morel.py (tests/methods/test_tier3_kernels.py): H_m closed forms Eq. (14) against numerical integration, P_F Eq. (13), median strength. The paper does not report V or V0 sigma_u^m for its specimens, so no printed P_F can be reproduced; calibration and volume data. Disposition (2026-10-18): stays an unregistered kernel; registration needs the stressed volume V and V0 sigma_u^m for each specimen geometry, which the workbooks do not carry, and its output is a failure probability, not a damage parameter. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
 | Development disposition | prioritized_addition; Extends the programme to volume/surface effects and fatigue-strength scatter after statistical prerequisites. |
-| Roadmap rank | 21 |
+| Roadmap rank | 5 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / Medium |
 | Provenance / prior status | G24; New significant extension / related family |

@@ -16,18 +16,18 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 3 | 1 | 14 | 0 | 18 |
-| Energy based | 3 | 2 | 15 | 3 | 23 |
-| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
-| Invariant based | 0 | 1 | 12 | 0 | 13 |
-| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
+| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Energy based | 6 | 1 | 13 | 3 | 23 |
+| Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
+| Invariant based | 5 | 0 | 8 | 0 | 13 |
+| Mesoscopic and damage | 2 | 0 | 6 | 0 | 8 |
 | Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 2 | 0 | 11 | 2 | 15 |
-| Stress based | 0 | 0 | 13 | 0 | 13 |
-| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
-| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
+| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Tensor and path based | 1 | 0 | 2 | 0 | 3 |
+| **TOTAL** | 29 | 2 | 81 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -49,7 +49,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | [I_MATAKE](../../METHODS.md#i_matake) | Matake (tension-only repository adaptation) | Fully implemented | basic_numerical_tests | Existing | Yes |
 | [I_MCD](../../METHODS.md#i_mcd) | McDiarmid (surface-crack repository scope) | Fully implemented | basic_numerical_tests | Existing | Yes |
 | [I_CARSPA](../../METHODS.md#i_carspa) | Carpinteri–Spagnoli | Partially implemented | not_tested | High | Yes |
-| [N04](../../METHODS.md#n04) | Modified Wöhler Curve Method / Susmel–Lazzarin | Not implemented | not_tested | High | Yes |
+| [N04](../../METHODS.md#n04) | Modified Wöhler Curve Method / Susmel–Lazzarin | Fully implemented | reference_examples_reproduced | High | Yes |
 | [N05](../../METHODS.md#n05) | Wang maximum-shear-plane HCF criterion | Not implemented | not_tested | High | Yes |
 | [N06](../../METHODS.md#n06) | Nonlinear critical-plane HCF criterion | Not implemented | not_tested | High | Yes |
 | [N07](../../METHODS.md#n07) | Sectional critical-plane criterion | Not implemented | not_tested | High | Yes |
@@ -60,9 +60,9 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | [R01](../../METHODS.md#r01) | Original Carpinteri–Spagnoli | Not implemented | not_tested | High | related_publication |
 | [R02](../../METHODS.md#r02) | Dang Van elastic-shakedown CA formulation | Not implemented | not_tested | High | related_publication |
 | [R04](../../METHODS.md#r04) | Modified Carpinteri–Spagnoli (reviewed comparison) | Not implemented | not_tested | High | related_scope |
-| [G01](../../METHODS.md#g01) | Papuga–Růžička critical-plane criterion (PCR; later PCRN) | Not implemented | not_tested | High | Yes |
+| [G01](../../METHODS.md#g01) | Papuga–Růžička critical-plane criterion (PCR; later PCRN) | Fully implemented | reference_examples_reproduced | High | Yes |
 | [G03](../../METHODS.md#g03) | Papuga QCP mean-stress development | Not implemented | not_tested | Medium | Yes |
-| [G06](../../METHODS.md#g06) | Margetin–Ďurka–Chmelko (MDC) | Not implemented | not_tested | High | Yes |
+| [G06](../../METHODS.md#g06) | Margetin–Ďurka–Chmelko (MDC) | Fully implemented | reference_examples_reproduced | High | Yes |
 | [G10](../../METHODS.md#g10) | Abasolo–Pallares-Santasmartas–Eizmendi exponent criterion | Not implemented | not_tested | Medium | Yes |
 | [G33](../../METHODS.md#g33) | Zhai–Zou–Hu–Chen–Jin shakedown-constrained Walker model | Not implemented | not_tested | Medium | Yes |
 | [G43](../../METHODS.md#g43) | Xu et al. mean-stress/biaxiality modification | Not implemented | not_tested | Low | Yes |
@@ -86,7 +86,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/fin.py](../../fatigue/models/cp_methods/fin.py); Findley |
+| Python implementation | [src/multifat/models/cp_methods/fin.py](../../src/multifat/models/cp_methods/fin.py); Findley |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Signed normal maximum retained; RSS ellipse shear convention; finite plane grid, not continuous global optimization. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -119,7 +119,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/matake.py](../../fatigue/models/cp_methods/matake.py); Matake |
+| Python implementation | [src/multifat/models/cp_methods/matake.py](../../src/multifat/models/cp_methods/matake.py); Matake |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Tension-only normal term is an adaptation; RSS ellipse convention; not an unrestricted reproduction of original mean-stress behavior. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -152,7 +152,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/mcdiarmid.py](../../fatigue/models/cp_methods/mcdiarmid.py); McDiarmid |
+| Python implementation | [src/multifat/models/cp_methods/mcdiarmid.py](../../src/multifat/models/cp_methods/mcdiarmid.py); McDiarmid |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Common surface-crack form only; no crack-type-specific calibration; tension-only normal convention. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -185,7 +185,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; fitted life where valid |
 | Implementation / evidence | Partially implemented; known_essential_gaps |
 | Validation / evidence | not_tested; tests/test_method_audit.py verifies disabled-name guards only. This is not numerical verification or scientific validation of the archived criterion. Restoration needs original-paper examples. |
-| Python implementation | [fatigue/models/cp_methods/car_spa.py](../../fatigue/models/cp_methods/car_spa.py); CarSpa |
+| Python implementation | [src/multifat/models/cp_methods/car_spa.py](../../src/multifat/models/cp_methods/car_spa.py); CarSpa |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Missing the published critical-plane orientation construction; maximum-shear/max-damage scans are not that criterion. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -207,30 +207,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Critical plane;  |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | A bi‐parametric Wöhler curve for high cycle multiaxial fatigue assessment, Fatigue & Fracture of Engineering Materials & Structures |
 | DOI | https://doi.org/10.1046/j.1460-2695.2002.00462.x |
 | Reference evidence | Exact-title Crossref metadata checked; inherited prior-review method attribution; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | The 2002 original publication was examined in the N04 scientific review. Independent B1-B8 analytical benchmarks support a restricted implementation specification, not experimental predictive validation |
-| Scientific review dossier | [docs/scientific-reviews/N04-susmel/README.md](../../docs/scientific-reviews/N04-susmel/README.md) |
-| Principle | Critical-plane stress ratio selects a fatigue curve; CA P/NP, F/L. |
-| Loading scope | Critical-plane stress ratio selects a fatigue curve; CA P/NP, F/L. |
-| Inputs / material parameters | S; normal/shear reference S–N curves, fatigue limits, published stress-ratio bounds. |
-| Output | Critical-plane stress ratio selects a fatigue curve; CA P/NP, F/L. |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; See prior feasibility assessment |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Established life-based method rather than fitting one generic DP curve. |
+| Formulation evidence | Checked against Susmel & Lazzarin (2002) Eqs. (5)-(13) on the PDF (2026-10-17) |
+| Principle | tau_a / tau_A,Ref(rho) on the maximum shear amplitude plane, rho = sigma_n,max / tau_a, tau_A,Ref linear in rho between the torsional and axial fatigue limits (Eqs. 8-11, 13). |
+| Loading scope | Single-frequency harmonic CA, proportional and phase-shifted NP; minimum circumscribed circle shear amplitude; high-cycle (fatigue-limit) form. |
+| Inputs / material parameters | Sigm1, Taum1. |
+| Output | Index tau_a / tau_A,Ref(rho) = E + 1 (Eq. 13); fitted life where valid |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_mwcm.py: Eq. (8) reference points, calibration in reversed axial loading and torsion, Eq. (13), mean normal stress and cut-off. The paper prints series constants and error bands only. |
+| Python implementation | [src/multifat/models/cp_methods/mwcm.py](../../src/multifat/models/cp_methods/mwcm.py); MWCM |
+| Automated tests | [tests/methods/test_mwcm.py](../../tests/methods/test_mwcm.py) |
+| Limitations | No _ext variant (rho diverges where tau_a vanishes). The tie rule between planes of equal maximum tau_a is not given in the paper and drives the result on degenerate cases (Papadopoulos 1997 tests: +173 % on one row with the larger-damage rule). Infinite past rho = tau_A/(tau_A - sigma_A/2). The finite-life curve, Eq. (7), needs k_tau(rho) and is not implemented. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Dual-curve calibration, ratio cutoff/validity, native life mapping. No universal transfer of welded FAT curves to smooth specimens. |
-| Reference retrieval action | Use the N04 scientific dossier for the 2002 formulation and independent benchmarks. Resolve maximum-shear-plane ties, zero-shear handling and matched axial/torsional stress-life curves before numerical implementation. |
-| Development disposition | prioritized_addition; Established critical-plane life framework; ratio-dependent resistance adds substantial engineering capability. |
-| Roadmap rank | 8 |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
+| Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | N04; Already reviewed, not implemented |
+| Provenance / prior status | N04; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Prepared brief](../../docs/contribution-issues/N04.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N04+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN04%5D+Modified+W%C3%B6hler+Curve+Method+%2F+Susmel%E2%80%93Lazzarin) (no live Issue linked) |
 
@@ -571,29 +570,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Critical plane; Stress critical plane |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | Two new multiaxial criteria for high cycle fatigue computation, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/j.ijfatigue.2007.02.015 |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
-| Principle | Combined shear/normal stress damage-plane formulation; retain published coefficient domains. |
-| Loading scope | CA P/NP; means through selected version |
-| Inputs / material parameters | Physical stress cycle; reversed and mean-stress fatigue calibration |
-| Output | Fatigue limit / utilization |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; Original paper cases; axial/torsion and mean-stress limits |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | 2008 original; 2019 mean-stress revision and erratum mandatory; not BP |
+| Formulation evidence | Checked against Papuga & Ruzicka (2008) Eqs. (16), (17) and Appendices A, B on the PDF (2026-10-17) |
+| Principle | Maximum over planes of sqrt(a_c C_a^2 + b_c (N_a + t_-1/f_0 N_m)) with kappa-branch coefficients (Eq. 17); C_a = minimum circumscribed circle radius. |
+| Loading scope | Single-frequency harmonic CA, proportional and phase-shifted NP. |
+| Inputs / material parameters | Sigm1, Taum1; Sig0 (R = 0 fatigue limit as maximum stress) or Su for the Böhme et al. (2026) Eq. (1) estimate. |
+| Output | Fatigue index LHS / f_-1; fitted life where valid |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_papuga_ruzicka.py: Appendix B calibrations (reversed axial and torsion = f_-1) in both kappa branches, branch continuity, rotation invariance, out-of-phase maximum against a dense sweep. The paper prints group statistics only (Table 2). |
+| Python implementation | [src/multifat/models/integral_methods/papuga_ruzicka.py](../../src/multifat/models/integral_methods/papuga_ruzicka.py); PapugaCriticalPlane |
+| Automated tests | [tests/methods/test_papuga_ruzicka.py](../../tests/methods/test_papuga_ruzicka.py) |
+| Limitations | Per-test values of the 119-test set are in Papuga's thesis, not in the paper. f_0 defaults to the Böhme 2026 estimate when Sig0 is missing (the paper used Morrow or SWT estimates). Negative radicands (compressive mean) are clipped to 0. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Versioned coefficient calibration; original shear-amplitude rule |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Recognized stress-plane formulation in a shared original paper; provides a comparator independent of BP. |
-| Roadmap rank | 3 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | G01; New distinct formulation candidate |
+| Provenance / prior status | G01; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Prepared brief](../../docs/contribution-issues/G01.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G01+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG01%5D+Papuga%E2%80%93R%C5%AF%C5%BEi%C4%8Dka+critical-plane+criterion+%28PCR%3B+later+PCRN%29) (no live Issue linked) |
 
@@ -637,29 +636,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Critical plane; Stress critical plane / native life |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | Multiaxial fatigue criterion based on parameters from torsion and axial S-N curve, Frattura ed Integrità Strutturale |
 | DOI | https://doi.org/10.3221/igf-esis.37.20 |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
-| Principle | Uses torsion and axial S–N parameters in the multiaxial criterion. |
-| Loading scope | CA axial/torsion P/NP as validated |
-| Inputs / material parameters | Stress cycle; separate axial and torsion S–N curves |
-| Output | Native fatigue life |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; Original S355 examples; pure axial/torsion curves |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Not a generic Matake relabeling; companion validation 10.1016/j.ijfatigue.2020.105532 |
+| Formulation evidence | Checked against Margetin, Durka & Chmelko (2016) Eqs. (4)-(10) and Tables 2-4 on the PDF (2026-10-17) |
+| Principle | tau_r = sqrt(k sigma_a,cr^2 + tau_a,cr^2) on the maximum shear amplitude plane, k from the axial and torsional Basquin curves (stress-level dependent), equated to the torsional Basquin curve (Eq. 8). |
+| Loading scope | CA, fully reversed (no mean-stress term in the source); proportional in the source, NP via the repository shear rule. |
+| Inputs / material parameters | sigma_f, b_fat, tau_f, b0 (axial and torsional Basquin constants); not in the current workbooks. |
+| Output | Equivalent shear amplitude tau_r (MPa) and native life from the torsional Basquin curve |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_mdc.py: boundary conditions (Eqs. 5, 6) and Table 4 Nf_com for all 14 tests within 0.3 % in tau_r (sigma_max read as the critical-plane normal stress amplitude); repository MCD reproduces the Nf_mcd column within 4 % in life. |
+| Python implementation | [src/multifat/models/cp_methods/mdc.py](../../src/multifat/models/cp_methods/mdc.py); MDC |
+| Automated tests | [tests/methods/test_mdc.py](../../tests/methods/test_mdc.py) |
+| Limitations | Eqs. (7)-(8) write sigma_max for the sigma_a,cr of Eq. (4) (no mean-stress effect). Requires Basquin constants that the current workbooks do not contain; the Uniform Material Law fallback (b0 = b) would make k constant and is not used. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Dual-curve calibration and life solution |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Adds dual axial/torsional S–N calibration and native-life prediction. |
-| Roadmap rank | 7 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | G06; New distinct formulation candidate |
+| Provenance / prior status | G06; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G06+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG06%5D+Margetin%E2%80%93%C4%8Eurka%E2%80%93Chmelko+%28MDC%29) (no live Issue linked) |
 

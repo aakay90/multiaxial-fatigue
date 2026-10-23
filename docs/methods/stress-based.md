@@ -16,18 +16,18 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 3 | 1 | 14 | 0 | 18 |
-| Energy based | 3 | 2 | 15 | 3 | 23 |
-| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
-| Invariant based | 0 | 1 | 12 | 0 | 13 |
-| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
+| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Energy based | 6 | 1 | 13 | 3 | 23 |
+| Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
+| Invariant based | 5 | 0 | 8 | 0 | 13 |
+| Mesoscopic and damage | 2 | 0 | 6 | 0 | 8 |
 | Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 2 | 0 | 11 | 2 | 15 |
-| Stress based | 0 | 0 | 13 | 0 | 13 |
-| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
-| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
+| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Tensor and path based | 1 | 0 | 2 | 0 | 3 |
+| **TOTAL** | 29 | 2 | 81 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -54,7 +54,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | [N40](../../METHODS.md#n40) | Maximum principal stress / Rankine baseline | Not implemented | not_tested | Low | Yes |
 | [G04](../../METHODS.md#g04) | Kakuno–Kawada | Not implemented | not_tested | Medium | Yes |
 | [G05](../../METHODS.md#g05) | Manson–McKnight–Papuga (MMP) | Not implemented | not_tested | Medium | Yes |
-| [G07](../../METHODS.md#g07) | Modified Mohr–Mises hypothesis (MMMH) | Not implemented | not_tested | High | Yes |
+| [G07](../../METHODS.md#g07) | Modified Mohr–Mises hypothesis (MMMH) | Fully implemented | basic_numerical_tests | High | Yes |
 | [G09](../../METHODS.md#g09) | Moment-adapted COIN LiWI (MA-COIN LiWI) | Not implemented | not_tested | Medium | Yes |
 | [G13](../../METHODS.md#g13) | Braccesi–Cianetti–Lori–Pioli equivalent uniaxial process | Not implemented | not_tested | Medium | Yes |
 | [G34](../../METHODS.md#g34) | Böhme–Vinogradov–Papuga–Berto gear model (BO) | Not implemented | not_tested | Low | overlap_review |
@@ -365,29 +365,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Stress based; Equivalent stress |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | A time dependent equivalent stress function for proportional and non-proportional transient loaded and notched metallic components, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/j.ijfatigue.2017.06.003 |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
-| Principle | Time-dependent equivalent-stress construction for proportional and non-proportional histories. |
-| Loading scope | Periodic CA P/NP; wider transient scope |
-| Inputs / material parameters | Stress history; material strength-ratio and mean-stress data |
-| Output | Equivalent stress; life through downstream law |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; Original 2017 examples; 2020 component validation |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | 2017 local scope B; full notch/plastic workflow C. Supplement 10.1016/j.ijfatigue.2020.105643 |
+| Formulation evidence | Checked against Mertens & Liebich (2017) Eqs. (1), (4), (5), (8), (9), (20)-(25) and Tab. 1 step 9 on the PDF (2026-10-18); endurance-limit mean-stress sensitivity from Dubbel (2004), chapter E1 |
+| Principle | Time-dependent Mohr-Mises equivalent stress sigma_eq,MMM(eta) = V sqrt((4 - k_a^2) M_M^2 + k_a^2 R_M^2) (Eqs. 1, 4, 9), amplitude Eq. (25) (= COIN with k_phi = 0.5 for one harmonic) and equivalent mean Eqs. (22)-(24). |
+| Loading scope | Single-frequency harmonic CA, proportional and phase-shifted NP, with mean stresses; smooth surface (m_a = n_el = m_o1 = m_a1 = 1). |
+| Inputs / material parameters | Sigm1, Taum1 (k_a = Sigm1/Taum1); M from Sig0 (workbook, else Böhme et al. 2026 Eq. 1 from Su) or an M_MMMH column. |
+| Output | Equivalent stress amplitude and mean stress on an endurance-limit Haigh line; life through the fitted universal curve. |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | basic_numerical_tests; tests/methods/test_mmmh.py: COIN equivalence on random NP histories, stated special cases, Eq. (24) against a literal Eqs. (20)-(23) implementation, Haigh calibration points. The paper prints no numerical examples. |
+| Python implementation | [src/multifat/models/invariant_methods/mmmh.py](../../src/multifat/models/invariant_methods/mmmh.py); MMMH |
+| Automated tests | [tests/methods/test_mmmh.py](../../tests/methods/test_mmmh.py) |
+| Limitations | The paper's load-cycle dependent Haigh diagrams need M_N from Mertens & Hahn (Konstruktion 1997) and Hahn (dissertation TU Berlin 1995), which are not available; the endurance-limit Haigh line with M = 2 s_-1/s_0 - 1 (Dubbel 2004, E1) is used instead (paper p. 17 allows guideline values at the endurance limit), linear over all mean stresses. s_0 from the workbook, else Böhme et al. (2026) Eq. (1). Notch support factors are not used (plain specimens). The 2017 paper prints no numerical examples. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Exact time-equivalence algorithm; periodic-cycle input |
+| Missing tasks | No known essential coding gap within the declared repository scope. Load-cycle dependent M_N (refs. [16, 23] of the paper) would replace the endurance-limit Haigh line when those sources are obtained. Supplement 10.1016/j.ijfatigue.2020.105643. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Adds a time-dependent equivalent-stress approach; exercises physical-cycle support beyond plane extrema. |
-| Roadmap rank | 9 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | G07; New distinct formulation candidate |
+| Provenance / prior status | G07; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G07+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG07%5D+Modified+Mohr%E2%80%93Mises+hypothesis+%28MMMH%29) (no live Issue linked) |
 

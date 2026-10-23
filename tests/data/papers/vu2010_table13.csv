@@ -1,0 +1,11 @@
+# Vu, Halm & Nadot (2010) Int J Fatigue 32:1004-1014, doi:10.1016/j.ijfatigue.2009.11.006, Zotero 2J7T4PF3.
+# Table 13, PDF p.10 (journal p.1013): Asynchronous tension-torsion fatigue strength of 25CrMo4 steel (f_-1 = 340 MPa, t_-1 = 228 MPa, R_m = 780 MPa) [19].
+# Crop: _audit-trail/phase2/crops/2J7T4PF3/p10_0.05-0.84-0.95-0.90.png, p10_0.05-0.89-0.95-0.95.png
+# Material constants as printed: f_-1 = 340 MPa, t_-1 = 228 MPa, R_m = 780 MPa; source reference [19] (Mamiya et al. / Dang Van and Papadopoulos predictions; reference list entry not transcribed).
+# Column headers as printed: Sigma_xx,a (MPa); Sigma_xx,m (MPa); Sigma_xy,a (MPa); Sigma_xy,m (MPa); delta_xy (deg); lambda_xy (frequency ratio, printed as lambda_xy); I^b (%); I^c (%); I^e (%).
+# Footnote as printed: "I^b Dang Van, I^c Papadopolous, I^e proposed criterion (8)." Only I^b, I^c and I^e are printed; I^a and I^d are absent.
+row,sigma_xx_a,sigma_xx_m,sigma_xy_a,sigma_xy_m,delta_xy,lambda_xy,I_b,I_c,I_e
+1,210,0,105,0,0,0.25,-21.5,-4.2,-6.6
+2,220,0,110,0,0,2,-26.3,-6.3,-4.5
+3,242,0,121,0,90,2,-18.1,-4.9,1.6
+4,196,0,98,0,0,8,-25.4,-8.9,-7.9

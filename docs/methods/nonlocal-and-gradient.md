@@ -16,18 +16,18 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 3 | 1 | 14 | 0 | 18 |
-| Energy based | 3 | 2 | 15 | 3 | 23 |
-| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
-| Invariant based | 0 | 1 | 12 | 0 | 13 |
-| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
+| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Energy based | 6 | 1 | 13 | 3 | 23 |
+| Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
+| Invariant based | 5 | 0 | 8 | 0 | 13 |
+| Mesoscopic and damage | 2 | 0 | 6 | 0 | 8 |
 | Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 2 | 0 | 11 | 2 | 15 |
-| Stress based | 0 | 0 | 13 | 0 | 13 |
-| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
-| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
+| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Tensor and path based | 1 | 0 | 2 | 0 | 3 |
+| **TOTAL** | 29 | 2 | 81 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -301,22 +301,22 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Reference | A volumetric energy based high cycle multiaxial fatigue citerion, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/s0142-1123(03)00048-3 |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
+| Formulation evidence | Checked against Banvillet, Palin-Luc & Lasserre (2003) Eqs. (3)-(10), (13), (29) and Tables 1-2 on the PDF (2026-10-18); Eq. (10) (y*/R)^2 inverted, Eq. (13) omits the 1/3 of sigma_kk |
 | Principle | Fatigue assessment using energy in a volume influencing crack initiation. |
 | Loading scope | CA multiaxial; spatially varying cyclic fields |
 | Inputs / material parameters | Spatial stress/strain energy, volume geometry, fatigue thresholds |
 | Output | Fatigue limit / energy utilization |
 | Implementation / evidence | Not implemented; preliminary_literature_assessment |
 | Validation / evidence | not_tested; 1998/2003 original specimen geometries and thresholds |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
+| Python implementation | [src/multifat/models/energy_based_methods/banvillet.py](../../src/multifat/models/energy_based_methods/banvillet.py); tension_torsion_index, beta_from_limits, triaxiality_function, banvillet_thresholds |
+| Automated tests | [tests/methods/test_banvillet.py](../../tests/methods/test_banvillet.py), [tests/methods/test_tier3_kernels.py](../../tests/methods/test_tier3_kernels.py) |
 | Limitations | Grouped original energy concept and 2003 volumetric development; reviewed Saintier 2013 is later related work Earlier Palin-Luc–Lasserre 1998 DOI 10.1016/S0997-7538(98)80084-3 |
 | Current FABER phase | Future geometry/gradient/structural extension; not part of the present plain/smooth, no-gradient phase. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | FE field import, quadrature and influence-volume construction |
+| Missing tasks | Kernel in src/multifat/models/energy_based_methods/banvillet.py (tests/methods/test_tier3_kernels.py): thresholds Eqs. (8)-(9), uniaxial work Eq. (29), homogeneous uniaxial limit and rotating-bending V* average; Table 2 rows 1-3 REP 10.4 / 11.3 / 2.4 vs printed 10.2 / 11.1 / 2.3. Triaxiality F (Eq. 14), beta from Eq. (15) (printed 0.96 / -1.45 / 3.09 and sigma* 441 / 230 / 204 MPa reproduced) and the solid-cylinder tension + torsion closed form, Eqs. (20)-(28), in tests/methods/test_banvillet.py (V* average by quadrature, Fig. 6 intercepts). Disposition (2026-10-18): stays an unregistered kernel. Registration needs the rotating-bending limit s_RotBen,-1 (absent from every workbook), the specimen section (solid bar or thin-walled tube) in the workbook contract and the R > 0 branch of Eq. (29) for shear; other multiaxial states need the W_g field over V* from finite elements. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
 | Development disposition | prioritized_addition; Retains volumetric energy as an important major-extension target despite substantial FE/data prerequisites. |
-| Roadmap rank | 19 |
+| Roadmap rank | 3 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / High |
 | Provenance / prior status | G26; Newly located antecedent of reviewed family |
@@ -400,22 +400,22 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Reference | Invariant formulation of a gradient dependent multiaxial high-cycle fatigue criterion, Engineering Fracture Mechanics |
 | DOI | https://doi.org/10.1016/s0013-7944(96)00047-1 |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
+| Formulation evidence | Checked against Papadopoulos & Panoskaltsis (1996) Eqs. (17), (22)-(37) on the PDF (2026-10-18); p.521 prints sqrt(J2a) = s sqrt(3) for s/sqrt(3) |
 | Principle | Gradient-dependent extension formulated through invariants. |
 | Loading scope | CA multiaxial; original gradient/loading restrictions apply |
 | Inputs / material parameters | Local stress cycle and externally supplied stress gradients; length parameters |
 | Output | Fatigue limit |
 | Implementation / evidence | Not implemented; preliminary_literature_assessment |
 | Validation / evidence | not_tested; Original bending/torsion/gradient cases; zero-gradient recovery |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
+| Python implementation | [src/multifat/models/invariant_methods/papadopoulos_panoskaltsis.py](../../src/multifat/models/invariant_methods/papadopoulos_panoskaltsis.py); pp_index, pp_beta |
+| Automated tests | [tests/methods/test_papadopoulos_panoskaltsis.py](../../tests/methods/test_papadopoulos_panoskaltsis.py) |
 | Limitations | B external-gradient postprocessor; complete FE workflow C; not Luu 2014 |
 | Current FABER phase | Future geometry/gradient/structural extension; not part of the present plain/smooth, no-gradient phase. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Gradient input convention and calibration; exact invariant definitions |
+| Missing tasks | Kernel in src/multifat/models/invariant_methods/papadopoulos_panoskaltsis.py (tests/methods/test_papadopoulos_panoskaltsis.py), explicit grad P_max input; closed forms Eqs. (22)-(37) reproduced. Disposition (2026-10-18): stays an unregistered kernel. With G = 0 (homogeneous stress) Eq. (17) is the Crossland form sqrt(J2,a) + alpha P_max <= t_-1 already registered as N01; the gradient term needs grad P_max per test, which the workbooks do not carry. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
 | Development disposition | prioritized_addition; Bounded externally supplied-gradient scope is a practical first step toward spatial fatigue methods. |
-| Roadmap rank | 17 |
+| Roadmap rank | 1 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
 | Provenance / prior status | G29; New distinct formulation candidate |
@@ -433,22 +433,22 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Reference | Fatigue strength of structural components under multi-axial loading in terms of local energy density averaged on a control volume, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/j.ijfatigue.2010.11.019 |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
+| Formulation evidence | Checked against Berto & Lazzarin (2011) Eqs. (7), (8a), (8b) and the AISI 416 values p.1063 on the PDF (2026-10-18) |
 | Principle | Local strain energy averaged over a material control volume. |
 | Loading scope | CA multiaxial notches/components; follow phase/mean restrictions |
 | Inputs / material parameters | Local elastic fields; control radius/volume; energy resistance curve |
 | Output | Fatigue strength / life through energy curve |
 | Implementation / evidence | Not implemented; preliminary_literature_assessment |
 | Validation / evidence | not_tested; Original component/notch benchmarks |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
+| Python implementation | [src/multifat/models/energy_based_methods/sed_berto_lazzarin.py](../../src/multifat/models/energy_based_methods/sed_berto_lazzarin.py); averaged_sed, control_radii |
+| Automated tests | [tests/methods/test_sed_berto_lazzarin.py](../../tests/methods/test_sed_berto_lazzarin.py) |
 | Limitations | Averaged SED is not a pointwise elastic-energy scalar; welded precursor is supplementary |
 | Current FABER phase | Future geometry/gradient/structural extension; not part of the present plain/smooth, no-gradient phase. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Spatial field integration and notch geometry |
+| Missing tasks | Kernel in src/multifat/models/energy_based_methods/sed_berto_lazzarin.py (tests/methods/test_sed_berto_lazzarin.py) with explicit NSIF inputs; R1 0.132 / R3 0.774 mm vs printed 0.13 / 0.78. Delta K1A = 512 is 0.5 % below Eq. (6a) with Table 1 (unresolved). Disposition (2026-10-18): outside the present plain-specimen scope (notched track); stays an unregistered kernel. Registration needs notch geometry and NSIF inputs; on plain specimens the averaged SED reduces to the local value. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
 | Development disposition | prioritized_addition; Adds widely used control-volume energy assessment for components; deliberately retained despite high effort. |
-| Roadmap rank | 20 |
+| Roadmap rank | 4 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Spatial/statistical data layers are currently absent. |
 | Feasibility / effort / priority | C / High (new data/model infrastructure) / High |
 | Provenance / prior status | G30; New distinct formulation candidate |

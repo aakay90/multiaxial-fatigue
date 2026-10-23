@@ -1,0 +1,19 @@
+# Margetin, Durka, Chmelko (2016) Frattura ed Integrita Strutturale 37:146-152, doi:10.3221/IGF-ESIS.37.20, Zotero VWAAQW5Q.
+# Table 4 p.150 (PDF p.5): proportional tension-torsion, S355J2+C, fully reversed; Nf_com = Eq. (8) with the P = 50 % constants of Table 2 (p.149):
+# tau'_f = 550 MPa, b_tau = -0.0736, sigma'_f = 636 MPa, b_sigma = -0.0531. Nf_find, Nf_mcd: Eqs. (9), (10) with Table 3 (k_fin 0.131, tau*_f 555 MPa, k_mcd 244 MPa) and sigma_u = 680 MPa.
+# Transcribed from the PDF text layer (digital PDF), checked against the page. Row 14 Nf_exp is a run-out (2000000*).
+n,tau_a,sigma_a,Nf_exp,Nf_com,Nf_find,Nf_mcd
+1,159,204,650800,643902,485504,291483
+2,180,204,172700,202990,154283,94670
+3,167,204,597300,415031,313706,189936
+4,209,163,105300,96899,65261,42766
+5,183,163,536120,449372,283251,181345
+6,196,163,198810,205010,133788,86699
+7,209,122,193800,165247,113010,77586
+8,201,122,301140,267920,178905,122110
+9,193,122,375630,441567,287341,194911
+10,185,122,996040,740543,468583,315769
+11,209,82,231490,226301,178946,129725
+12,201,82,572500,375732,291264,210195
+13,193,82,952600,635892,482358,346420
+14,185,82,2000000,1098588,813741,581393

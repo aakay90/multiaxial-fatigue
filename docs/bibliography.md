@@ -102,7 +102,7 @@ Original article: https://doi.org/10.1016/S0142-1123(00)00075-X
 
 Dang Van (1973), Sur la résistance à la fatigue des métaux, Sciences et Technique de l'Armement 47, 647–722.
 
-No DOI is asserted; the full bibliographic citation above identifies the original publication.
+Implemented form and calibration: Böhme, Papuga & Lange (2026), Eq. (3), https://doi.org/10.1111/ffe.70244
 
 ## OTT
 
@@ -121,6 +121,18 @@ Original article: https://doi.org/10.1016/j.ijfatigue.2013.12.002
 Zhu et al. (2019), A novel energy-based equivalent damage parameter for multiaxial fatigue life prediction.
 
 Original article: https://doi.org/10.1016/j.ijfatigue.2018.11.025
+
+## CROSSLAND
+
+Crossland (1956), Effect of large hydrostatic pressures on the torsional fatigue strength of an alloy steel, Proceedings of the International Conference on Fatigue of Metals.
+
+Implemented as restated by Papadopoulos et al. (1997), Eqs. (44), (65)-(66): https://doi.org/10.1016/S0142-1123(96)00064-3
+
+## SINES
+
+Sines (1959), Behavior of metals under complex static and alternating stresses, in Metal Fatigue, McGraw-Hill.
+
+Implemented as restated by Papadopoulos et al. (1997), Eqs. (44), (62)-(64): https://doi.org/10.1016/S0142-1123(96)00064-3
 
 ## Additional formulation sources
 

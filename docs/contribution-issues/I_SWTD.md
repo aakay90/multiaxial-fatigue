@@ -4,15 +4,15 @@
 
 ## Scope and scientific reference
 
-- Primary family: Energy based; secondary: disabled; source retained.
-- Status: Partially implemented; enabled: False.
+- Primary family: Energy based; secondary: none recorded.
+- Status: Fully implemented; enabled: True.
 - Authors/year: Daniel Kujawski (2014).
 - Reference: A deviatoric version of the SWT parameter, International Journal of Fatigue.
 - DOI: https://doi.org/10.1016/j.ijfatigue.2013.12.002
 - Reference evidence: Exact-title Crossref work record; implementation attribution subject to audit caveats; saved metadata in docs/research/doi-records.json.
-- Mathematical evidence: Inherited repository audit, not repeated.
+- Mathematical evidence: Checked against the source PDF in Phase 2 (2026-10-17); see docs/method-audit.md.
 - Principle: Kujawski (2014), A deviatoric version of the SWT parameter.
-- Loading scope: No currently supported executable scope; archived proxy must not be used..
+- Loading scope: Single-frequency harmonic CA, proportional and phase-shifted NP (NP rule is a repository adaptation); physical stress and strain tensors..
 
 ## Available components and remaining work
 
@@ -20,15 +20,15 @@ FABER phase: Plain/smooth CA candidate or scoped point formulation; original loa
 
 External source discovery: no_accessible_source_identified; not integrated or independently validated. Consult the linked inventory for exact variant, language, license, evidence and reuse restrictions. External code does not count as integrated WG4.3 implementation.
 
-Separately sorted stress and strain eigenvalues do not preserve paired physical directions; also ignores harmonic histories. Restore only after source-faithful repair and regression/reference checks.
+No known essential coding gap within the declared repository scope. A published NP procedure would replace the chord adaptation.
 
-Existing implementation: [fatigue/models/energy_based_methods/swtd.py](../../fatigue/models/energy_based_methods/swtd.py); symbol `SWTD`. Existing tests: [tests/test_method_audit.py](../../tests/test_method_audit.py).
+Existing implementation: [src/multifat/models/energy_based_methods/swtd.py](../../src/multifat/models/energy_based_methods/swtd.py); symbol `SWTD`. Existing tests: [tests/methods/test_swtd.py](../../tests/methods/test_swtd.py), [tests/test_method_audit.py](../../tests/test_method_audit.py).
 
 Reuse: Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits.
 
-Expected inputs: Synchronized stress/strain tensors; physically paired deviatoric directions and reference fatigue curve. Expected output: Damage parameter; fitted life where valid.
+Expected inputs: Synchronized stress and strain tensors (two load steps or single-harmonic representation); no material constants.. Expected output: Damage parameter; fitted life where valid.
 
-Known restrictions: Separately sorted stress and strain eigenvalues do not preserve paired physical directions; also ignores harmonic histories.
+Known restrictions: Kujawski (2014) gives no non-proportional procedure: NP histories take the largest Eq. (25) value over the diametral chords of the path. The paper's multiaxial table (paths B-D) follows no single reading of Eq. (25); path A uses gamma/sqrt(3) as strain.
 
 ## Acceptance criteria
 
@@ -42,7 +42,7 @@ Known restrictions: Separately sorted stress and strain eigenvalues do not prese
 - [ ] Update `docs/catalogue/methods.json`, attach Issue/PR and validation evidence, regenerate documentation and pass `python tools/generate_method_docs.py --check`.
 - [ ] Review implementation completeness separately from validation; never promote validation merely because numerical tests pass.
 
-Validation lead: tests/test_method_audit.py verifies disabled-name guards only. This is not numerical verification or scientific validation of the archived criterion. Restoration needs original-paper examples.
+Validation lead: tests/methods/test_swtd.py: Kujawski (2014) Table 2 (10/11 rows within 0.7 %, row 11 misprint) and Table 3 path A (with the paper's gamma/sqrt(3) convention).
 
 Dependencies: confirm source/version and measured parameters first; consult [ROADMAP.md](../../ROADMAP.md) for shared cycle, quadrature, native-life and data prerequisites. G01/G02 share a paper but retain distinct laws; other candidate dependencies require specification, not automatic coupling.
 

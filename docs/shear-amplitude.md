@@ -1,142 +1,78 @@
 # Harmonic shear amplitudes and controlled Findley evaluation
 
-Phase 1 provides a numerical utility without changing any fatigue criterion,
-plane-selection rule, calibration record, experimental input or reporting format.
-The existing evaluator, plane-history utilities and Böhme–Papuga implementation
-do not import the new module. Phase 2 adds a separate Findley damage-parameter
-entry point for numerical comparisons, without changing production predictions.
-Phase 3A uses that interface for configurable Findley calibration in Script 0.
-Phase 3B connects the same evaluation to Script 1 for Findley only. Its omitted
-option preserves the historical assessment path.
+Provenance: upstream pull requests #7 through #9 (commits 88229e9, 176ce53, 36ff0a1), carried into `multifat` together with their tests: the utility (88229e9, 2a17791), the standalone Findley evaluation `fin_harmonic.py` (176ce53, 50dabaf), and the Findley calibration amplitude (36ff0a1, 0105b69). Import statements were altered, and both the calibration integration and the snapshot values in the tests were adapted, as detailed below.
+
+Phase 1 introduces a numerical utility; no fatigue criterion, plane-selection rule, calibration record, experimental input or reporting format is changed. Neither the current evaluator nor the plane-history utilities or the Böhme–Papuga implementation import the new module. Phase 2 supplies a distinct entry point for the Findley damage parameter, intended for numerical comparisons; production predictions remain unaffected. Phase 3A makes the Findley calibration amplitude configurable (`multifat-calibrate`, discussed below). The production Findley assessment keeps evaluating MCE and keeps accepting only MCE-compatible constants.
 
 ## Definition and API
 
-For a complete single-frequency trajectory in a common two-dimensional tangent
-basis,
+For a complete single-frequency trajectory expressed in a common two-dimensional tangent basis,
 
 \[
 \boldsymbol\tau(t)=\boldsymbol\tau_m+\mathbf a\sin t+\mathbf b\cos t,
 \qquad A=[\mathbf a\;\mathbf b],
 \]
 
-the singular values \(s_1\geq s_2\) of \(A\) are the ellipse semiaxes. The API returns
-an amplitude in the units supplied by the caller.
+the singular values \(s_1\geq s_2\) of \(A\) are the ellipse semiaxes. An amplitude expressed in the units supplied by the caller is what the API returns.
 
 | Identifier | Returned amplitude | Harmonic equivalence |
 |---|---|---|
-| `mcc_harmonic` | \(s_1\) | Minimum circumscribed circle radius and half the longest chord |
-| `mce_harmonic` | \(\sqrt{s_1^2+s_2^2}=\sqrt{\|a\|^2+\|b\|^2}\) | Existing harmonic RSS definition |
-| `rss` | Alias of `mce_harmonic` | Identical numerical implementation |
+| `mcc_harmonic` | \(s_1\) | Radius of the minimum circumscribed circle, also half the longest chord |
+| `mce_harmonic` | \(\sqrt{s_1^2+s_2^2}=\sqrt{\|a\|^2+\|b\|^2}\) | RSS definition already used for harmonic amplitudes |
+| `rss` | Alias for `mce_harmonic` | Identical numerical implementation |
 
 ```python
-from fatigue.models.utils.shear_amplitude import shear_amplitude
+from multifat.models.utils.shear_amplitude import shear_amplitude
 
 mcc = shear_amplitude([10, 0], [0, 5], algorithm="mcc_harmonic")  # 10
 mce = shear_amplitude([10, 0], [0, 5], algorithm="mce_harmonic")  # sqrt(125)
 ```
 
-Inputs have shape `(2,)`, or identical batch shapes `(..., 2)`. A single pair
-returns `float`; a batch returns an array with the last axis removed. Inputs
-must be finite real numeric coefficients representable in float64. Shape
-broadcasting, complex values and unknown identifiers are rejected. `method_default`
-is deliberately not an algorithm. No global user option is introduced.
+Accepted inputs take shape `(2,)` or identical batch shapes `(..., 2)`. One coefficient pair yields a `float`; a batch yields an array whose last axis has been removed. Coefficients must be finite, real and representable in float64. Broadcasting between shapes, complex values and unrecognised identifiers are refused. `method_default` is intentionally excluded as an algorithm identifier, and no global user option is added.
 
-The mean vector is the ellipse centre, so it is not an amplitude input. Its norm
-is a separate scalar. Neither amplitude is generally the maximum instantaneous
-magnitude of the translated trajectory. For example, a circle of radius 10 with
-mean `(30, -40)` has MCC 10, MCE \(10\sqrt2\), mean magnitude 50 and maximum total
-magnitude 60. A shear range is twice the chosen amplitude. The function does not
-convert strain conventions. Tensorial shear strain must be converted by the
-caller when an engineering shear measure is required.
+Because the mean vector locates the ellipse centre, it is not an input to the amplitude. Its norm is a separate scalar quantity. In general, neither amplitude equals the largest instantaneous magnitude of the translated trajectory. Take a circle of radius 10 whose mean is `(30, -40)`: MCC is 10, MCE is \(10\sqrt2\), the mean magnitude is 50 and the maximum total magnitude is 60. Twice the selected amplitude gives a shear range. Strain conventions are not converted by the function; a caller needing an engineering shear measure must convert tensorial shear strain beforehand.
 
 ## Numerical formulation
 
-MCC uses the larger eigenvalue of the 2 by 2 Gram matrix, without subtracting
-nearly equal quantities. Each input pair is first divided by the largest absolute
-coefficient, then the square root of
+MCC takes the larger eigenvalue of the 2 by 2 Gram matrix and never subtracts nearly equal quantities. Each input pair is first divided by its largest absolute coefficient; the square root of
 
 \[
 \lambda_+=\tfrac12\left(a\cdot a+b\cdot b+
 \operatorname{hypot}(a\cdot a-b\cdot b,2a\cdot b)\right)
 \]
 
-is multiplied by that scale. MCE uses the scaled Frobenius norm. This avoids
-squaring the original coefficients and protects very small and very large paths.
-Only exact zero is classified as a zero path. There is no absolute physical
-cutoff, eigenvalue clipping tolerance or iterative optimisation.
+is then multiplied by that scale. MCE instead uses the scaled Frobenius norm. Squaring the original coefficients is thereby avoided, and paths at very small or very large scales remain safe. A path counts as zero only when it is exactly zero. No absolute physical cutoff, eigenvalue clipping tolerance or iterative optimisation is involved.
 
-Calculations use float64. Contributions lost by underflow after normalisation
-cannot alter the leading amplitude at float64 precision. Subnormal results retain
-float64 rounding; a result beyond its finite range raises `OverflowError`.
-No relative accuracy guarantee is possible below the subnormal spacing.
-The algorithms cover complete harmonic ellipses and their line/point limits.
-They are not enclosing-circle/ellipse solvers for arbitrary sampled paths,
-partial cycles or multiple frequencies. No minor-semiaxis estimate is returned.
+Calculations run in float64. After normalisation, contributions lost to underflow cannot affect the leading amplitude at float64 precision. Subnormal outcomes keep float64 rounding, while a result outside the finite range raises `OverflowError`. Below the subnormal spacing, no relative accuracy can be guaranteed. Complete harmonic ellipses, together with their line and point limits, are covered by these algorithms. They are not enclosing-circle or enclosing-ellipse solvers for arbitrary sampled paths, partial cycles or multiple frequencies, and no estimate of the minor semiaxis is returned.
 
-A local comparison on 100,000 random matrices, using the median of five batches
-of three evaluations, measured approximately 0.020 s for this MCC implementation
-and 0.062 s for NumPy SVD. This observation motivates the simple closed form;
-it is not a portable timing guarantee. Tests compare both amplitudes against
-SVD on 1,000 matrices independently of the analytical examples.
+In a local comparison over 100,000 random matrices, with the median taken across five batches of three evaluations, this MCC implementation measured approximately 0.020 s, against 0.062 s for NumPy SVD. That observation is what motivates the simple closed form; it should not be read as a portable timing guarantee. Independently of the analytical examples, the tests compare both amplitudes with SVD on 1,000 matrices.
 
 ## Source interpretation and verification
 
-The scientific reference is Eva Cízová, *Parameters of Stress Tensor History and
-Their Impact on Fatigue Life*, Czech Technical University in Prague, 2021,
-supervised by Jan Papuga. Equation numbering follows the supplied searchable
-reference extracted from that thesis. The full PDF was not available in this
-session, so no independent page/image verification of its equations is claimed.
+The scientific source is the 2021 thesis by Eva Cízová, *Parameters of Stress Tensor History and Their Impact on Fatigue Life* (Czech Technical University in Prague), supervised by Jan Papuga. Equation numbers follow the searchable reference extracted from that thesis and supplied for this work. The complete PDF could not be obtained in this session; consequently no independent page-level or image-level verification of the equations is claimed.
 
-- Eq. (2.1) defines longest-chord amplitude; Eqs. (2.5)-(2.6) define MCC.
-- Eq. (2.9) supplies the MCE semiaxis combination. Eqs. (3.26), (3.27) and (3.29)
-  are referenced in the supplied summary for the harmonic ellipse identities.
-- Section 2.5 describes moment of inertia with path-length weighting. It is a
-  different amplitude definition and is not implemented here.
+- The longest-chord amplitude is defined in Eq. (2.1), while Eqs. (2.5)-(2.6) define MCC.
+- The MCE semiaxis combination comes from Eq. (2.9). The supplied summary cites Eqs. (3.26), (3.27) and (3.29) for the harmonic ellipse identities.
+- Section 2.5 presents a moment-of-inertia definition weighted by path length. That is a different amplitude definition and is not implemented here.
 
-The MATLAB appendix was inspected directly. Its algebraic `Ca.m` files under
-`Programy_DP/Nová kritéria` and the circle/ellipse directory are byte-identical
-(SHA-256 `e96f70827fc0ce5c158ab56ade21af3a9eb8e4b72e47f205c5f3c93ab08092e5`).
-They define `Cl=f*sin(t)+g*cos(t)` and `Cr=p*sin(t)+q*cos(t)`, so the Python input
-mapping is `a=(f,p)`, `b=(g,q)`. The active expression returns the major semiaxis
-(MCC). The commented `sqrt(a1^2+a2^2)` alternative is MCE. `MOI/Ca.m` instead
-uses temporal quadrature weighted by path speed.
+The MATLAB appendix was inspected directly. The algebraic `Ca.m` files it contains, both under `Programy_DP/Nová kritéria` and in the circle/ellipse directory, are byte-identical (SHA-256 `e96f70827fc0ce5c158ab56ade21af3a9eb8e4b72e47f205c5f3c93ab08092e5`). They define `Cl=f*sin(t)+g*cos(t)` and `Cr=p*sin(t)+q*cos(t)`; consequently the Python inputs map as `a=(f,p)` and `b=(g,q)`. The expression actually used returns the major semiaxis (MCC), and the commented `sqrt(a1^2+a2^2)` alternative corresponds to MCE. `MOI/Ca.m` works differently, using temporal quadrature weighted by path speed.
 
-Two source-equation reconstructions use `phi=0`, `theta=pi/4`, torsional phase
-`pi/2`, zero radial/hoop amplitudes, axial amplitude 20 and torsional amplitude
-\(10\sqrt2\) or \(5\sqrt2\). The resulting coefficients are respectively
-`a=(0,-10), b=(-10,0)` and `a=(0,-10), b=(-5,0)`. Expected MCC/MCE amplitudes are
-10 / \(\sqrt{200}\) and 10 / \(\sqrt{125}\). Automated tests reproduce the
-MATLAB algebra in Python and agree to 13 decimal places. A MATLAB/Octave runtime
-was not available, so this is an equation-level comparison, not execution of
-MATLAB. The appendix result file `FatLimResultsAll.mat` contains a 286 by 60
-comparison array; its criterion-level results were not used as isolated amplitude
-benchmarks. No thesis experimental data are redistributed.
+Two reconstructions of the source equations take `phi=0`, `theta=pi/4`, torsional phase `pi/2`, zero radial and hoop amplitudes, an axial amplitude of 20, and a torsional amplitude of \(10\sqrt2\) or \(5\sqrt2\). The corresponding coefficients are `a=(0,-10), b=(-10,0)` and `a=(0,-10), b=(-5,0)`. The expected MCC/MCE amplitudes are 10 / \(\sqrt{200}\) and 10 / \(\sqrt{125}\). Automated tests re-implement the MATLAB algebra in Python and match it to 13 decimal places. No MATLAB or Octave runtime was available, so the comparison is made directly at equation level instead of executing MATLAB. The appendix result file `FatLimResultsAll.mat` holds a 286 by 60 comparison array, whose criterion-level results were not treated as isolated amplitude benchmarks. None of the thesis experimental data are redistributed.
 
-PragTic `solve.cpp` was inspected for `MCCM_IM` and `MCEM_IM`. Those routines
-accept sampled polygons and iteratively determine centres and amplitudes;
-`MCEM_IM` combines fitted axes through their quadratic norm. Their tolerances,
-convergence behaviour and general-path algorithms are not ported or validated
-by this phase. The provided files were supplied by Jan Papuga for WG4.3 study
-and adaptation. The new implementation follows the stated harmonic identities;
-no external solver implementation or source archive is copied into the package.
+The PragTic `solve.cpp` file was inspected with respect to `MCCM_IM` and `MCEM_IM`. Those routines take sampled polygons and determine centres and amplitudes iteratively, with `MCEM_IM` combining the fitted axes through their quadratic norm. This phase neither ports nor validates their tolerances, convergence behaviour or general-path algorithms. Jan Papuga supplied the files for WG4.3 study and adaptation. The new implementation follows the harmonic identities stated above, and no external solver implementation or source archive has been copied into the package.
 
-Run `python -m unittest discover -s tests -p test_shear_amplitude.py -v` for the
-12 focused checks. They include exact zero, proportional/degenerate paths,
-circles/ellipses, rotations/reflections, phase shifts, translated means, direct
-time sampling, longest chords, extreme scales, invalid inputs, batch evaluation,
-source-equation reconstructions and agreement with existing RSS and BP helpers.
-Run `MPLBACKEND=Agg python tools/run_tests.py` for existing fatigue regressions too.
+Focused checks are run with `uv run pytest tests/test_shear_amplitude.py`. They cover exact zero, proportional and degenerate paths, circles and ellipses, rotations and reflections, phase shifts, translated means, direct time sampling, longest chords, extreme scales, invalid inputs, batch evaluation, reconstructions of the source equations, and agreement with the existing RSS and BP helpers. The full suite is invoked by `uv run pytest`.
+
+## Relation to the critical-plane shear rules
+
+On every plane, the critical-plane evaluator already applies an ellipse-aware shear range, chosen per method through `np_shear_rule` (`multifat.eval.evaluator.SHEAR_RULES`). The `longest_chord` rule is twice the `mcc_harmonic` amplitude, whereas `rss` (the default) is twice `mce_harmonic`. `tests/test_shear_amplitude.py::test_longest_chord_rule_is_twice_mcc` verifies both on a single plane, and `tests/test_np_shear_rule.py` records which method uses which rule, and why. As in the upstream design, this utility remains independent of that code path.
 
 ## Controlled Findley evaluation
 
-The method-specific function `evaluate_findley` in
-`fatigue/models/cp_methods/fin_harmonic.py` accepts the existing CP adapter case
-arguments (`S0`, `E0`, `S1`, `E1`, `params`, `R_list`, `harmonics`) and the optional
-keyword `shear_amplitude_algorithm`. It returns the existing `CaseResult`, with
-stress-valued damage parameters, not fatigue life.
+The method-specific function `evaluate_findley`, located in `src/multifat/models/cp_methods/fin_harmonic.py`, takes the case arguments already used by the CP adapter (`S0`, `E0`, `S1`, `E1`, `params`, `R_list`, `harmonics`) plus the optional keyword `shear_amplitude_algorithm`. It returns the existing `CaseResult`, whose damage parameters are stress values, not fatigue lives.
 
 ```python
-from fatigue.models.cp_methods.fin_harmonic import evaluate_findley
+from multifat.models.cp_methods.fin_harmonic import evaluate_findley
 
 # case contains the existing CP adapter arguments, including params['k_FI'].
 legacy = evaluate_findley(**case)
@@ -145,36 +81,13 @@ mcc = evaluate_findley(**case, shear_amplitude_algorithm="mcc_harmonic")
 print(mcc.values[""], mcc.values["_ext"])  # FIN and FIN_ext damage parameters
 ```
 
-Omitted selection (`None`) delegates exactly to the unchanged production FIN
-adapter. This preserves the existing harmonic MCE/RSS convention and, if harmonic
-coefficients are unavailable, the existing two-endpoint calculation. `None` is
-an interface sentinel, not another numerical amplitude algorithm. Every explicit
-selection, including MCE or its `rss` alias, requires both finite, real 3 by 3
-stress tensors `harmonics['S_sin']` and `harmonics['S_cos']`. Partial or absent
-coefficients raise `ValueError`; two endpoints cannot establish phase information.
-No `method_default` identifier is accepted.
+When the selection is omitted (`None`), the call delegates exactly to the production FIN adapter, which is unchanged. The existing harmonic MCE/RSS convention is thus preserved, together with the existing two-endpoint calculation whenever harmonic coefficients are unavailable. `None` acts as an interface sentinel, not as a further numerical amplitude algorithm. Any explicit selection, including MCE and its `rss` alias, needs both `harmonics['S_sin']` and `harmonics['S_cos']` as finite, real 3 by 3 stress tensors. Coefficients that are partial or absent raise `ValueError`, since two endpoints cannot carry phase information. The identifier `method_default` is not accepted.
 
-Stress tensors and coefficient tensors share a global basis. Each orthonormal
-matrix in `R_list` has the candidate-plane axes as columns, with its third column
-as the normal. After transformation by \(R^T S R\), the local xz/yz entries of
-each coefficient tensor form the two input vectors to the shared amplitude
-function. Strain tensors retain the adapter interface but do not enter Findley.
-The midpoint `(S0 + S1)/2` defines the mean stress, as in the production evaluator;
-a separate `S_mean` entry is not read. The coefficient tensors, not the synthetic
-endpoint shear range, determine explicit harmonic amplitudes.
+A single global basis is shared by the stress tensors and the coefficient tensors. Every orthonormal matrix in `R_list` stores the candidate-plane axes as its columns, the third column being the normal. Once transformed by \(R^T S R\), the local xz and yz entries of each coefficient tensor become the two input vectors passed to the shared amplitude function. Strain tensors keep the adapter interface but play no role in Findley. As in the production evaluator, the mean stress is defined by the midpoint `(S0 + S1)/2`; a distinct `S_mean` entry is never read. Explicit harmonic amplitudes are determined by the coefficient tensors, not by the synthetic endpoint shear range.
 
-On **every** candidate plane the function evaluates
-\(P=\tau_a+k_{\mathrm{FI}}\sigma_{n,\max}\), then maximises this complete
-expression. The existing normal-extrema helper is reused without alteration,
-including signed compression. It gives
-\(\sigma_{n,\max}=\sigma_{n,m}+\sqrt{\sigma_{n,s}^2+\sigma_{n,c}^2}\)
-independently of the selected shear algorithm. Mean shear does not enter the
-amplitude. No factor of two is applied to amplitude in the Findley expression.
-Both output keys contain the same maximum because Findley selects planes by
-damage itself; no artificial distinction between FIN and FIN_ext is introduced.
+For **each** candidate plane, the function first evaluates \(P=\tau_a+k_{\mathrm{FI}}\sigma_{n,\max}\) and then maximises that complete expression. The normal-extrema helper already in place is reused unmodified, signed compression included. It returns \(\sigma_{n,\max}=\sigma_{n,m}+\sqrt{\sigma_{n,s}^2+\sigma_{n,c}^2}\) regardless of which shear algorithm was chosen. Mean shear plays no part in the amplitude, and no factor of two multiplies the amplitude inside the Findley expression. Since Findley itself selects planes according to damage, both output keys hold the same maximum; no artificial difference between FIN and FIN_ext is created.
 
-For a prescribed plane with mean normal stress 7, normal sine/cosine coefficients
-3 and 4, and \(k_{\mathrm{FI}}=0.2\), the normal contribution is 2.4.
+With a prescribed plane whose mean normal stress is 7, whose normal sine and cosine coefficients are 3 and 4, and with \(k_{\mathrm{FI}}=0.2\), the normal contribution amounts to 2.4.
 
 | Shear semiaxes | MCC amplitude | MCE amplitude | MCC Findley | MCE Findley |
 |---|---:|---:|---:|---:|
@@ -182,110 +95,29 @@ For a prescribed plane with mean normal stress 7, normal sine/cosine coefficient
 | 10, 5 | 10 | 11.180340 | 12.4 | 13.580340 |
 | 10, 0 | 10 | 10 | 12.4 | 12.4 |
 
-The automated two-plane example additionally reverses the ranking. On normal z,
-a circle of radius 10 and mean normal 7 gives MCC/MCE damage 11.4/15.542136.
-On normal x, a line of amplitude \(\sqrt{164}\) and mean normal 5 gives
-13.806248 for either algorithm. Thus MCC selects normal x and MCE selects normal z.
-Replacing amplitude only after an MCE search would give the wrong MCC result.
-The tests also compare 30 random planes with independent SVD and normal-traction
-projections, and check default snapshots, phase/basis invariance, mean stresses,
-endpoint rejection, small/large shear scales and other-method isolation.
-Run `python -m unittest discover -s tests -p test_findley_harmonic.py -v`.
+The automated two-plane example goes further and reverses the ranking. Along normal z, taking a circle of radius 10 with mean normal 7 yields MCC/MCE damage of 11.4/15.542136. Along normal x, a line of amplitude \(\sqrt{164}\) with mean normal 5 gives 13.806248 under either algorithm. MCC therefore selects normal x, while MCE selects normal z. Substituting the amplitude only after an MCE search would produce an incorrect MCC result. The tests also compare 30 random planes against independent SVD and normal-traction projections, and they verify default snapshots, phase and basis invariance, mean stresses, endpoint rejection, small and large shear scales, and isolation from other methods. Tests are run with `uv run pytest tests/test_findley_harmonic.py`. Between the supplied planes, the production adapter additionally refines the critical plane (F2); its default is therefore compared against the supplied-plane values (`refine=False`) and never falls below them. The non-proportional FS snapshot follows the longest-chord rule (F3) instead of the RSS value used upstream.
 
-Only the supplied finite plane set is searched. The input assumptions and
-arbitrary-path restrictions of the shared library still apply. Explicit MCE and
-legacy harmonic MCE agree within float64 rounding for ordinary stress scales;
-explicit evaluation avoids the legacy synthetic-shear endpoint cutoff and mean
-subtraction. The omitted-selection path remains exactly unchanged. Normal-extrema
-arithmetic retains the existing float64 limits, including overflow when normal
-coefficients are squared at extreme scales. These are numerical verifications,
-not independent experimental validation of alternative-amplitude Findley.
+The search is confined to the finite plane set supplied. The input assumptions and arbitrary-path restrictions of the shared library continue to hold. At ordinary stress scales, explicit MCE and legacy harmonic MCE agree to within float64 rounding; the explicit route bypasses the legacy synthetic-shear endpoint cutoff and the mean subtraction. The omitted-selection path is left exactly as it was. Arithmetic in the normal-extrema helper keeps the existing float64 limits, overflow included, when normal coefficients are squared at extreme scales. These checks are numerical verifications; they do not constitute independent experimental validation of Findley with alternative amplitudes.
 
-This separate entry point is intentional. Calibration fingerprints hash entire
-production source files, including `fin.py`, the evaluator and adapter. Keeping
-them unchanged preserves both established results and existing record identities.
-No algorithm parameter is added to the general adapter, production registry or
-material dictionary. Scripts 0 and 1 have Findley-specific options, described
-below. Other criteria cannot inherit this selection.
-The diagnostic function does not load or apply a damage-life curve. In particular,
-an MCE-calibrated curve must not be applied to MCC damage parameters.
+The separate entry point is deliberate. Upstream calibration fingerprints hash whole production source files; keeping the entry point separate leaves production results unchanged here. Neither the general adapter, nor the production registry, nor the material dictionary gains an algorithm parameter (the module is unregistered, and production code does not import it). A Findley-specific calibration option in `multifat-calibrate` is described below. This selection cannot be inherited by other criteria. The diagnostic function neither loads nor applies a damage-life curve. In particular, an MCE-calibrated curve must not be used with MCC damage parameters.
 
 ## Findley calibration selection
 
-Script 0 accepts `--shear-amplitude-algorithm method_default|mcc_harmonic|mce_harmonic`.
-It also accepts `rss` as a canonicalised MCE alias. The default preserves the
-historical numerical path, including its endpoint fallback. Explicit selections
-require stored stress sine and cosine tensors for every selected coefficient and
-master-curve failure observation. Checking the original case avoids silently
-using the proportional fallback supplied by the general tensor extractor.
+`multifat-calibrate --shear-amplitude-algorithm method_default|mcc_harmonic|mce_harmonic` (with `rss` also accepted as a canonicalised MCE alias) sets the shear amplitude used by the Findley criterion during k_FI calibration, through `calibrate_material_params(..., shear_amplitude_algorithm=...)`. The default follows the established MCE path, whose results are unchanged. An explicit selection requires the stored stress sine and cosine tensors for every uniaxial tension and torsion failure employed; inspecting the original case in this way avoids the proportional endpoint fallback of the general tensor extractor. Only the `FI` block is affected, and the remaining constants are calibrated exactly as before. The result records `amplitude_settings` (`FIN`: the resolved algorithm, `DEFINITION_VERSION`, and the evaluation path).
 
-`fatigue/eval/findley_calibration.py` supplies the configured case-level callable
-to both calibration stages. Every candidate plane is evaluated using the same
-selected amplitude in coefficient optimisation and curve fitting. The existing
-selection rules, normal-stress maximum, coefficient bounds, scatter objective,
-failure-only fitting and plane-grid settings are retained. An explicit override
-for another method is rejected; unavailable batch pairs are reported and skipped.
+Upstream commits 36ff0a1 and 0105b69 perform calibration with a separate Findley model and a versioned JSON store. In the present implementation the choice is instead the plane shear rule of the established search (`np_shear_rule` in `multifat.eval.evaluator.SHEAR_RULES`). As in production Findley, MCE is `rss`, the root-sum-square of the shear semiaxes. MCC corresponds to `longest_chord`, half the longest chord of the shear path, that is, the major semiaxis (`FindleyMCC` in `multifat/eval/findley_calibration.py`). Both choices therefore share the refined plane search, the plane pools and the bounds of the calibration. `tests/test_findley_calibration.py` verifies the rules against `evaluate_findley` (MCC and MCE) on prescribed planes, including the reversed plane ranking reported above.
 
-New Findley records store method-scoped `amplitude_settings`, including the resolved
-algorithm, `DEFINITION_VERSION` from the shared library (`harmonic-shear-v1`), the
-evaluation path and implementation fingerprint. The fingerprint and metadata also
-distinguish records in calibration history, even when proportional cases give
-identical fitted values. Metadata-free legacy MCE requires verified historical
-source identity and all existing input/procedure/settings compatibility checks.
+For axial and torsion calibration failures the shear path degenerates to a line; MCC and MCE are then equal and the fitted k_FI is the same (as in the upstream example). The choice becomes relevant for non-proportional calibration data. Production Findley (`multifat-run`, `multifat-pipeline`) evaluates MCE, so a k_FI calibrated with MCC must not be used there. The option is not exposed by `multifat-pipeline`, and `--constants` rejects any record whose `amplitude_settings.FIN.algorithm` is neither absent nor `mce_harmonic`. Predicting life with MCC in production would require an integration approved separately. Upstream's record format and numerical example are given in the [calibration workflow](calibration-workflow.md#findley-amplitude-selection). Neither the calibration agreement nor the software checks presented here establish independent experimental validation of Findley with alternative amplitudes.
+## Explicit amplitude in production assessment
 
-The [calibration workflow](calibration-workflow.md#findley-amplitude-selection)
-provides commands, record fields, compatibility rules and a complete numerical
-example. Script 1 now selects the same algorithm used to calibrate the Findley
-curve. Default assessment requires the legacy MCE path; explicit MCC, MCE and RSS
-require the harmonic path. The production Findley model and registry remain
-unchanged. Neither calibration agreement nor these software checks establish
-independent experimental validation of alternative-amplitude Findley.
+`multifat-run` takes `--shear-amplitude-algorithm {method_default,mcc_harmonic,mce_harmonic,rss}`
+for FIN and FIN_ext only; any other model rejects an explicit value. `method_default` (the default)
+is the production path and its output is unchanged. An explicit selection calibrates the Findley
+constant k_FI with the same criterion it assesses with, so the two cannot disagree; `rss` resolves to
+`mce_harmonic`. Its results are written as `FIN.mcc_harmonic` / `FIN.mce_harmonic` (`_ext` kept), so
+`multifat-compare` reads them by name, and a `.meta.json` next to each CSV records the selected option,
+the resolved algorithm, the evaluation path, the definition version and the SHA-256 of the CSV.
 
-## Production Findley assessment
-
-Script 1 uses the existing singular `--model` argument and accepts the
-Findley-only `--shear-amplitude-algorithm` option:
-
-```bash
-python 1_run_material.py --material Al7075_T6 --model FIN --no-plots
-python 1_run_material.py --material Al7075_T6 --model FIN --no-plots \
-  --shear-amplitude-algorithm mcc_harmonic
-python 1_run_material.py --material Al7075_T6 --model FIN --no-plots \
-  --shear-amplitude-algorithm mce_harmonic
-```
-
-Omitting the option is `method_default`. It evaluates through the historical FIN
-adapter and accepts only verified legacy-path MCE records, including historical
-records without amplitude metadata. Explicit `mcc_harmonic`, `mce_harmonic`
-and `rss` use the Phase 2 evaluator, with `rss` resolved to `mce_harmonic`.
-They require a calibration record for both the resolved algorithm and the
-`harmonic` evaluation path. A matching algorithm name alone does not make a
-legacy MCE curve interchangeable with an explicit MCE assessment. All existing
-material, failure-input, grid, fitting, version and source-provenance checks still
-apply. Script 1 never calibrates automatically.
-
-Explicit assessment checks each original case for complete finite `S_sin` and
-`S_cos` stress tensors before tensor extraction. Unsupported cases are excluded
-with a case-specific reason; a missing compatible calibration prevents prediction.
-Selections for other methods are rejected. FIN and FIN_ext use the same complete
-Findley plane maximum, with the existing variant-specific master curve.
-
-Default CSV names and columns remain unchanged. Explicit results use labels such
-as `FIN.mcc_harmonic`, `FIN.mce_harmonic` and
-`FIN.mcc_harmonic_ext` in the filename and `Method` column. This permits
-side-by-side comparison without confusing MCC with MCE. Each Findley CSV has an
-adjacent `.meta.json` file recording the selected option, resolved algorithm,
-definition version, evaluation path, selected calibration ID, relevant provenance
-and CSV checksum. The `rss` alias shares the explicit MCE result label. Comparison
-readers continue to consume the unchanged CSV schema and ignore the sidecar.
-
-On the archived `Al7075_T6` workbook, a reproducibility run using `n1=3`,
-`n2=6` and matched `k_FI=0.75` found 19 rows with different MCC/MCE damage
-parameters. `Plain_multi_32` gave 170.000000 MPa under MCC and
-195.830052 MPa under MCE. An independent per-plane SVD calculation verifies
-the selected damage values. This comparison checks the numerical route, not
-experimental predictive accuracy; its coarse grid is not a convergence claim.
-Using the production CLI's default 522-plane grid on the same archived
-`Al7075_T6` workbook and separately calibrated explicit records produced no
-MCC/MCE difference in the 101 exported rows. Equal selected maxima on that
-grid do not make the two per-plane amplitude definitions interchangeable.
+Cases without stored stress sine and cosine tensors cannot be assessed on the explicit path; they are
+skipped with a `RuntimeWarning`. The option is not exposed by `multifat-pipeline`, which evaluates
+production Findley (MCE) only.

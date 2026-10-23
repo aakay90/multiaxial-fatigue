@@ -1,0 +1,11 @@
+# Vu, Halm & Nadot (2010), Int J Fatigue 32:1004-1014, doi:10.1016/j.ijfatigue.2009.11.006, Zotero key 2J7T4PF3
+# Table 6, PDF p.6 (journal p.1009): Fatigue strength of C20 steel (f_-1 = 332 MPa, t_-1 = 186 MPa, R_m = 520 MPa) [11].
+# Crop: _audit-trail/phase2/crops/2J7T4PF3/p6_0.05-0.72-0.95-0.84.png
+# Material constants as printed: f_-1 = 332 MPa; t_-1 = 186 MPa; R_m = 520 MPa; source [11].
+# Column headers as printed: Sigma_xx,a (MPa); Sigma_xx,m (MPa); Sigma_xy,a (MPa); Sigma_xy,m (MPa); delta_xy (deg); I^a (%); I^b (%); I^c (%); I^d (%); I^e (%).
+# Printed minus signs (U+2212) are written as ASCII '-'.
+# I^a..I^e legend is printed only under Table 1 (PDF p.5), not under this table.
+row,sigma_xx_a,sigma_xx_m,sigma_xy_a,sigma_xy_m,delta_xy,I_a,I_b,I_c,I_d,I_e
+1,246,0,138,0,0,4.2,7.4,4.2,3.9,4.3
+2,246,0,138,0,45,-3.9,-0.1,4.2,-0.1,1.9
+3,264,0,148,0,90,-20.5,-11.9,11.8,2.3,-2.5

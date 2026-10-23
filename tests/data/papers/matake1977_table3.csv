@@ -1,0 +1,23 @@
+# Matake (1977) Bull. JSME 20(141):257-263, doi:10.1299/jsme1958.20.257, Zotero E6ADU97M.
+# Table 3, PDF p.4 (printed p.260): fatigue limits under fully reversed in-phase bending + torsion,
+# kg/mm^2. theta is the grip angle (0 = torsion, 90 = bending); tau_max and sigma_n are the author's
+# values on the maximum-shear plane. Paper misprint: high strength steel, theta = 22.5, prints
+# sigma = 19.0; sigma_n = 9.9, tau_max = 26.0 and tau/sigma = cos(theta)/(2 sin(theta)) all require
+# sigma = 19.8, which is used below (printed value kept in sigma_printed).
+material,theta_deg,tau,sigma,tau_max,sigma_n,sigma_printed
+brass,0,7.50,0,7.50,0,0
+brass,22.5,5.54,4.64,6.00,2.30,4.64
+brass,41,3.77,6.56,5.00,3.28,6.56
+brass,90,0,8.50,4.25,4.25,8.50
+high_strength_steel,0,28.0,0,28.0,0,0
+high_strength_steel,22.5,24.0,19.8,26.0,9.9,19.0
+high_strength_steel,41,17.4,30.2,23.0,15.1,30.2
+high_strength_steel,90,0,47.0,23.5,23.5,47.0
+nodular_cast_iron,0,19.0,0,19.0,0,0
+nodular_cast_iron,22.5,12.9,10.8,14.0,5.4,10.8
+nodular_cast_iron,41,9.8,17.0,13.0,8.5,17.0
+nodular_cast_iron,90,0,20.0,10.0,10.0,20.0
+block_d,0,14.0,0,14.0,0,0
+block_d,22.5,12.0,10.0,13.0,5.0,10.0
+block_d,41,8.7,15.0,11.5,7.5,15.0
+block_d,90,0,22.0,11.0,11.0,22.0

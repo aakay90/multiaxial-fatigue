@@ -16,18 +16,18 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 3 | 1 | 14 | 0 | 18 |
-| Energy based | 3 | 2 | 15 | 3 | 23 |
-| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
-| Invariant based | 0 | 1 | 12 | 0 | 13 |
-| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
+| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Energy based | 6 | 1 | 13 | 3 | 23 |
+| Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
+| Invariant based | 5 | 0 | 8 | 0 | 13 |
+| Mesoscopic and damage | 2 | 0 | 6 | 0 | 8 |
 | Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 2 | 0 | 11 | 2 | 15 |
-| Stress based | 0 | 0 | 13 | 0 | 13 |
-| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
-| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
+| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Tensor and path based | 1 | 0 | 2 | 0 | 3 |
+| **TOTAL** | 29 | 2 | 81 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -51,8 +51,8 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | [I_MSWT](../../METHODS.md#i_mswt) | Scalar modified SWT reported by Zhu (2018) | Requires review | basic_numerical_tests | Existing | Yes |
 | [I_LI](../../METHODS.md#i_li) | Li et al. (2021) improved strain energy density | Requires review | basic_numerical_tests | Existing | Yes |
 | [I_GSE](../../METHODS.md#i_gse) | Ince–Glinka generalized strain energy | Fully implemented | basic_numerical_tests | Existing | Yes |
-| [I_SWTD](../../METHODS.md#i_swtd) | Deviatoric SWT | Partially implemented | not_tested | High | Yes |
-| [I_ZHU_EDP](../../METHODS.md#i_zhu_edp) | Zhu equivalent damage parameter | Partially implemented | not_tested | High | Yes |
+| [I_SWTD](../../METHODS.md#i_swtd) | Deviatoric SWT | Fully implemented | reference_examples_reproduced | High | Yes |
+| [I_ZHU_EDP](../../METHODS.md#i_zhu_edp) | Zhu equivalent damage parameter | Partially implemented | basic_numerical_tests | High | Yes |
 | [N21](../../METHODS.md#n21) | Equivalent Second Moment of Load Path (ESMLP) | Not implemented | not_tested | Medium | Yes |
 | [N22](../../METHODS.md#n22) | Moment of Load Path (MLP), closed CA stress-path branch | Not implemented | not_tested | Medium | Yes |
 | [N26](../../METHODS.md#n26) | Negative-mean-stress modified SWT | Not implemented | not_tested | Low | Yes |
@@ -62,8 +62,8 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | [N56](../../METHODS.md#n56) | Chu-modified SWT, exact referenced variant | Not implemented | not_tested | Low | unresolved_lead |
 | [R03](../../METHODS.md#r03) | Deviatoric SWT | Not implemented | not_tested | High | related_publication |
 | [G14](../../METHODS.md#g14) | Glinka–Shen–Plumtree energy criterion | Not implemented | not_tested | High | overlap_review |
-| [G15](../../METHODS.md#g15) | Liu virtual strain energy (VSE modes I/II) | Not implemented | not_tested | High | Yes |
-| [G16](../../METHODS.md#g16) | Ellyin–Kujawski multiaxial energy criterion | Not implemented | not_tested | High | Yes |
+| [G15](../../METHODS.md#g15) | Liu virtual strain energy (VSE modes I/II) | Fully implemented | reference_examples_reproduced | High | Yes |
+| [G16](../../METHODS.md#g16) | Ellyin–Kujawski multiaxial energy criterion | Fully implemented | reference_examples_reproduced | High | Yes |
 | [G17](../../METHODS.md#g17) | Garud plastic-work approach | Not implemented | not_tested | Low | Yes |
 | [G18](../../METHODS.md#g18) | Łagoda–Macha–Będkowski critical-plane energy | Not implemented | not_tested | Medium | Yes |
 | [G19](../../METHODS.md#g19) | Li–Qiu–Tong–Gao virtual-SED criterion | Not implemented | not_tested | Medium | overlap_review |
@@ -96,7 +96,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/swt.py](../../fatigue/models/cp_methods/swt.py); SWT |
+| Python implementation | [src/multifat/models/cp_methods/swt.py](../../src/multifat/models/cp_methods/swt.py); SWT |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Repository multiaxial extension of the uniaxial parameter; negative normal maxima clipped; no independently verified general NP SWT formulation. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -129,7 +129,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/mgse_yu.py](../../fatigue/models/cp_methods/mgse_yu.py); MGSE_Yu |
+| Python implementation | [src/multifat/models/cp_methods/mgse_yu.py](../../src/multifat/models/cp_methods/mgse_yu.py); MGSE_Yu |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Maximum-damage scan is an explicit adaptation of the near-maximum-shear plane description; RSS ellipse convention. Original restricted search is outside the declared scope. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -162,7 +162,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Requires review; source_completeness_unestablished |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/mgse_zhu.py](../../fatigue/models/cp_methods/mgse_zhu.py); MGSE_Zhu |
+| Python implementation | [src/multifat/models/cp_methods/mgse_zhu.py](../../src/multifat/models/cp_methods/mgse_zhu.py); MGSE_Zhu |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Weighting and original plane rule require full-source verification. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -195,7 +195,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Requires review; source_completeness_unestablished |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/mswt.py](../../fatigue/models/cp_methods/mswt.py); MSWT |
+| Python implementation | [src/multifat/models/cp_methods/mswt.py](../../src/multifat/models/cp_methods/mswt.py); MSWT |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Scalar reported form only; attribution/scope review pending; not Jiang incremental plasticity. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -228,7 +228,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Requires review; source_completeness_unestablished |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/li.py](../../fatigue/models/cp_methods/li.py); LI |
+| Python implementation | [src/multifat/models/cp_methods/li.py](../../src/multifat/models/cp_methods/li.py); LI |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Exact coefficient formulation remains provisional pending original full text. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -261,7 +261,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Output | Damage parameter; empirical fitted life only where curve inversion is valid |
 | Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
 | Validation / evidence | basic_numerical_tests; docs/method-audit.md and tests/test_method_audit.py. Analytical/regression evidence only; no independent published/experimental dataset reproduction claimed. |
-| Python implementation | [fatigue/models/cp_methods/gse.py](../../fatigue/models/cp_methods/gse.py); GSE |
+| Python implementation | [src/multifat/models/cp_methods/gse.py](../../src/multifat/models/cp_methods/gse.py); GSE |
 | Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
 | Limitations | Scalar form checked through Yu Eq. (3); imported elastic histories give zero plastic contribution. General stabilized loops not imported. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
@@ -282,30 +282,30 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 
 | Field | Evidence / task |
 | --- | --- |
-| Primary / secondary family | Energy based; disabled; source retained |
+| Primary / secondary family | Energy based;  |
 | Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | A deviatoric version of the SWT parameter, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/j.ijfatigue.2013.12.002 |
 | Reference evidence | Exact-title Crossref work record; implementation attribution subject to audit caveats; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Inherited repository audit, not repeated |
+| Formulation evidence | Checked against the source PDF in Phase 2 (2026-10-17); see docs/method-audit.md |
 | Principle | Kujawski (2014), A deviatoric version of the SWT parameter |
-| Loading scope | No currently supported executable scope; archived proxy must not be used. |
-| Inputs / material parameters | Synchronized stress/strain tensors; physically paired deviatoric directions and reference fatigue curve |
+| Loading scope | Single-frequency harmonic CA, proportional and phase-shifted NP (NP rule is a repository adaptation); physical stress and strain tensors. |
+| Inputs / material parameters | Synchronized stress and strain tensors (two load steps or single-harmonic representation); no material constants. |
 | Output | Damage parameter; fitted life where valid |
-| Implementation / evidence | Partially implemented; known_essential_gaps |
-| Validation / evidence | not_tested; tests/test_method_audit.py verifies disabled-name guards only. This is not numerical verification or scientific validation of the archived criterion. Restoration needs original-paper examples. |
-| Python implementation | [fatigue/models/energy_based_methods/swtd.py](../../fatigue/models/energy_based_methods/swtd.py); SWTD |
-| Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
-| Limitations | Separately sorted stress and strain eigenvalues do not preserve paired physical directions; also ignores harmonic histories. |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_swtd.py: Kujawski (2014) Table 2 (10/11 rows within 0.7 %, row 11 misprint) and Table 3 path A (with the paper's gamma/sqrt(3) convention). |
+| Python implementation | [src/multifat/models/energy_based_methods/swtd.py](../../src/multifat/models/energy_based_methods/swtd.py); SWTD |
+| Automated tests | [tests/methods/test_swtd.py](../../tests/methods/test_swtd.py), [tests/test_method_audit.py](../../tests/test_method_audit.py) |
+| Limitations | Kujawski (2014) gives no non-proportional procedure: NP histories take the largest Eq. (25) value over the diametral chords of the path. The paper's multiaxial table (paths B-D) follows no single reading of Eq. (25); path A uses gamma/sqrt(3) as strain. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Separately sorted stress and strain eigenvalues do not preserve paired physical directions; also ignores harmonic histories. Restore only after source-faithful repair and regression/reference checks. |
+| Missing tasks | No known essential coding gap within the declared repository scope. A published NP procedure would replace the chord adaptation. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | repair; Archived implementation has a known essential gap and remains disabled. Separately sorted stress and strain eigenvalues do not preserve paired physical directions; also ignores harmonic histories. Restore only after source-faithful repair and regression/reference checks. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
 | Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | I_SWTD; Previously attempted, disabled |
+| Provenance / prior status | I_SWTD; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Prepared brief](../../docs/contribution-issues/I_SWTD.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_SWTD+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_SWTD%5D+Deviatoric+SWT) (no live Issue linked) |
 
@@ -326,15 +326,15 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Inputs / material parameters | Physical stabilized stress/strain cycle; actual elastoplastic work W0, published NP path factor and material calibration |
 | Output | Damage parameter; fitted life where valid |
 | Implementation / evidence | Partially implemented; known_essential_gaps |
-| Validation / evidence | not_tested; tests/test_method_audit.py verifies disabled-name guards only. This is not numerical verification or scientific validation of the archived criterion. Restoration needs original-paper examples. |
-| Python implementation | [fatigue/models/energy_based_methods/zhu_edp.py](../../fatigue/models/energy_based_methods/zhu_edp.py); ZhuEDP |
-| Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
-| Limitations | An acknowledged proxy: omits elastoplastic work W0 and substitutes a phase proxy for the published non-proportional factor. |
+| Validation / evidence | basic_numerical_tests; tests/methods/test_zhu_edp.py: kernel special cases stated on p.14 (uniaxial, pure shear, 45-degree path misprint) and a circular path. |
+| Python implementation | [src/multifat/models/energy_based_methods/zhu_edp.py](../../src/multifat/models/energy_based_methods/zhu_edp.py); ZhuEDP |
+| Automated tests | [tests/methods/test_zhu_edp.py](../../tests/methods/test_zhu_edp.py), [tests/test_method_audit.py](../../tests/test_method_audit.py) |
+| Limitations | Eq. (23) needs the measured non-proportional factor F_NP (Eq. 22, stabilised stress amplitudes) and the uniaxial elastoplastic work dW_0 (cyclic-curve constants H_c, h_c); the workbook has elastic tensors only. The Eq. (19)-(23) kernel is implemented with explicit inputs. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | An acknowledged proxy: omits elastoplastic work W0 and substitutes a phase proxy for the published non-proportional factor. Restore only after source-faithful repair and regression/reference checks. |
+| Missing tasks | Provide stabilised stress responses and cyclic-curve constants per material, then wire the kernel into the case-level model. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | repair; Archived implementation has a known essential gap and remains disabled. An acknowledged proxy: omits elastoplastic work W0 and substitutes a phase proxy for the published non-proportional factor. Restore only after source-faithful repair and regression/reference checks. |
+| Development disposition | repair; Kernel implemented; the case-level model stays disabled until stabilised stresses and cyclic-curve constants are available. |
 | Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
@@ -646,29 +646,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Energy based; Energy / fracture mode |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | A Method Based on Virtual Strain-Energy Parameters for Multiaxial Fatigue Life Prediction, Advances in Multiaxial Fatigue |
 | DOI | https://doi.org/10.1520/stp24796s |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
-| Principle | Virtual strain-energy parameters for specified cracking modes. |
-| Loading scope | CA P/NP; supplied stabilized response |
-| Inputs / material parameters | Stress/strain cycle; axial/shear strain-life data; fracture-mode choice |
-| Output | Fatigue life |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; Original 304 stainless and SAE1045 examples |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | K. C. Liu 1993, not LIU2021, LI or Liu–Mahadevan. Do not arbitrarily maximize both mode formulas |
+| Formulation evidence | Checked against Liu (1993) Eqs. (4)-(11) on the PDF (2026-10-18) |
+| Principle | Virtual strain energy Delta sigma_n Delta eps_n + Delta tau Delta(gamma/2) on the plane maximising its tensile (mode I, Eq. 8) or shear (mode II, Eq. 9) part. |
+| Loading scope | CA, workbook elastic strains (plastic term of Eq. 6 absent); out-of-phase via the longest-chord shear rule (paper's rules verbal). |
+| Inputs / material parameters | Stress and strain cycle (E, nu for the workbook strains). |
+| Output | Energy damage parameter (MPa); fitted life where valid |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_liu_vse.py: Eq. (11) uniaxial, mode II = half of mode I in uniaxial elastic loading, equal modes in torsion, Eq. (7) >= Eq. (8). Results in the paper are figures only. |
+| Python implementation | [src/multifat/models/cp_methods/liu_vse.py](../../src/multifat/models/cp_methods/liu_vse.py); LiuVSE |
+| Automated tests | [tests/methods/test_liu_vse.py](../../tests/methods/test_liu_vse.py) |
+| Limitations | One registry name VSE: mode I by default, mode II (Type A) with vse_mode = 2; no rule for the mode in the paper. _ext = Eq. (7) read literally. Elastic strains only. Fig. 9 printed coefficients inconsistent with the plot. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Mode-specific energy evaluator and native life inversion |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Introduces fracture-mode-dependent virtual energy and native energy-life relations. |
-| Roadmap rank | 14 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | G15; New distinct formulation candidate |
+| Provenance / prior status | G15; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G15+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG15%5D+Liu+virtual+strain+energy+%28VSE+modes+I%2FII%29) (no live Issue linked) |
 
@@ -679,29 +679,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Energy based; Energy |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | A Multiaxial Fatigue Criterion Including Mean-Stress Effect, Advances in Multiaxial Fatigue |
 | DOI | https://doi.org/10.1520/stp24795s |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
-| Principle | Cyclic energy and mean-stress effects with multiaxial constraint. |
-| Loading scope | CA supplied stabilized P/NP cycles; mean stresses |
-| Inputs / material parameters | Cyclic stress/strain loops; energy-life properties and constraint parameters |
-| Output | Crack-initiation life |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; Original 1993 examples and pure axial/torsion limits |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Group earlier Ellyin/Golos energy developments; keep 1974 elastic criterion as ancestry, not assumed equivalent |
+| Formulation evidence | Checked against Ellyin & Kujawski (1993) Eqs. (5b), (9)-(18) and Fig. 2 on the PDF (2026-10-18) |
+| Principle | psi = dW_d (1 + alpha sigma_m / sigma_bar) / p_bar^n (Eqs. 11, 15, 16): distortional strain energy range, constraint factor p_bar = (1 + nu_bar) eps_max / gamma_max (Eqs. 12-14), sigma_m = sum of principal static stresses (Eq. 5b). |
+| Loading scope | High-cycle elastic form (paper Eqs. 17-18); single-frequency harmonic CA; non-proportional loading by repo adaptation (maxima over the period) |
+| Inputs / material parameters | E, nu; optional alpha_EK (0.5), n_EK (1); optional K_prime, n_prime (cyclic Ramberg-Osgood) add the plastic Masing term. |
+| Output | Damage parameter with the universal DP-N fit |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_ellyin_kujawski.py: p_bar = 1, 1 + nu, 1 - nu (p.60); Eq. (13) -> nu_e for elastic strains; Eq. (18) uniaxial mean-stress curve; torsion/tension ratio sqrt((1 + nu)/3) (n = 1) and 1/sqrt(3) (n = 0); no per-test values printed. Plastic term: Masing energy and p_bar = 1 in uniaxial loading, nu_bar = Eq. (13). |
+| Python implementation | [src/multifat/models/energy_based_methods/ellyin_kujawski.py](../../src/multifat/models/energy_based_methods/ellyin_kujawski.py); EllyinKujawski |
+| Automated tests | [tests/methods/test_ellyin_kujawski.py](../../tests/methods/test_ellyin_kujawski.py) |
+| Limitations | Elastic distortional energy unless K_prime, n_prime are supplied (never estimated); with them, stress control and Prandtl-Reuss plastic strains are assumed and nu_bar is strain-weighted (= Eq. 13 in uniaxial loading). Non-proportional loading not covered by the paper. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Elastic/plastic energy separation and energy-life calibration |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Adds multiaxial cyclic energy with mean stress and constraint effects. |
-| Roadmap rank | 15 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | G16; New distinct formulation candidate |
+| Provenance / prior status | G16; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G16+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG16%5D+Ellyin%E2%80%93Kujawski+multiaxial+energy+criterion) (no live Issue linked) |
 
@@ -881,7 +881,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Reference | Energy‐based time derivative damage accumulation model under uniaxial and multiaxial random loadings, Fatigue & Fracture of Engineering Materials & Structures |
 | DOI | https://doi.org/10.1111/ffe.13591 |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
+| Formulation evidence | Checked against Tien et al. (2021) Eqs. (3)-(23), (28) on the PDF (2026-10-18): Eq. (12) integrates to 2 alpha D^(+(B/2+d)) (U_max^d - U_min^d) but Eq. (14)/(15) print alpha D^(-(B/2+d)); Eq. (8) misses d, Eq. (11) factor 2 underived, Eq. (19) misses N_f, Eqs. (24)-(27) absent |
 | Principle | Energy-based derivative formulation accumulates fatigue damage in time. |
 | Loading scope | Repeated CA paths applicable; original wider random loading |
 | Inputs / material parameters | Synchronized stress/strain information and damage parameters per source |
@@ -893,10 +893,10 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Limitations | B for prescribed repeating cycle and published time-integration law; no inferred Miner substitute. General coupled response generation C. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | confirmed_source_available; [EXT04](../../docs/EXTERNAL_IMPLEMENTATIONS.md#ext04); not integrated or independently validated |
-| Missing tasks | Stateful integration, derivative discretization and calibration |
+| Missing tasks | Spec only (decision D1: no closed form, no material constants and no predicted lives printed; Tables 3-4 are experimental). Inputs: U(t) (total vs elastic undefined), E, sigma_y, Basquin p, q (m = -1/q, B = m - 2d, d = 0.01), D0, 100-reversal memory window; multiaxial U_eq = U_ten + s U_tor + k U_H needs ref. [11]. Resolve the Eq. (12)/(14) rate sign from EXT04 (Fatigue_Model_D.m computes U_eq only; damage update in another file, not inspected; licence not established) before coding; stateful integration (Phase 4). Disposition (2026-10-18): outside the current scope; no code until the Eq. (12)/(14) rate sign is resolved with the authors and a published prediction is available as an oracle. Ask the EXT04 authors before porting their code (licence not stated). |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
 | Development disposition | prioritized_addition; Explores energy-damage evolution over a repeated cycle after stateful integration support; verify its CA reduction before coding. |
-| Roadmap rank | 22 |
+| Roadmap rank | 6 |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
 | Provenance / prior status | G35; New distinct formulation candidate |

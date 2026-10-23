@@ -22,7 +22,7 @@ External source discovery: no_accessible_source_identified; not integrated or in
 
 Exact coefficient formulation remains provisional pending original full text. Add an independently calculated original-paper case before declaring complete.
 
-Existing implementation: [fatigue/models/cp_methods/li.py](../../fatigue/models/cp_methods/li.py); symbol `LI`. Existing tests: [tests/test_method_audit.py](../../tests/test_method_audit.py).
+Existing implementation: [src/multifat/models/cp_methods/li.py](../../src/multifat/models/cp_methods/li.py); symbol `LI`. Existing tests: [tests/test_method_audit.py](../../tests/test_method_audit.py).
 
 Reuse: Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits.
 

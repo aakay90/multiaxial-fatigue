@@ -20,15 +20,15 @@ FABER phase: Plain/smooth CA candidate or scoped point formulation; original loa
 
 External source discovery: no_accessible_source_identified; not integrated or independently validated. Consult the linked inventory for exact variant, language, license, evidence and reuse restrictions. External code does not count as integrated WG4.3 implementation.
 
-An acknowledged proxy: omits elastoplastic work W0 and substitutes a phase proxy for the published non-proportional factor. Restore only after source-faithful repair and regression/reference checks.
+Provide stabilised stress responses and cyclic-curve constants per material, then wire the kernel into the case-level model.
 
-Existing implementation: [fatigue/models/energy_based_methods/zhu_edp.py](../../fatigue/models/energy_based_methods/zhu_edp.py); symbol `ZhuEDP`. Existing tests: [tests/test_method_audit.py](../../tests/test_method_audit.py).
+Existing implementation: [src/multifat/models/energy_based_methods/zhu_edp.py](../../src/multifat/models/energy_based_methods/zhu_edp.py); symbol `ZhuEDP`. Existing tests: [tests/methods/test_zhu_edp.py](../../tests/methods/test_zhu_edp.py), [tests/test_method_audit.py](../../tests/test_method_audit.py).
 
 Reuse: Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits.
 
 Expected inputs: Physical stabilized stress/strain cycle; actual elastoplastic work W0, published NP path factor and material calibration. Expected output: Damage parameter; fitted life where valid.
 
-Known restrictions: An acknowledged proxy: omits elastoplastic work W0 and substitutes a phase proxy for the published non-proportional factor.
+Known restrictions: Eq. (23) needs the measured non-proportional factor F_NP (Eq. 22, stabilised stress amplitudes) and the uniaxial elastoplastic work dW_0 (cyclic-curve constants H_c, h_c); the workbook has elastic tensors only. The Eq. (19)-(23) kernel is implemented with explicit inputs.
 
 ## Acceptance criteria
 
@@ -42,7 +42,7 @@ Known restrictions: An acknowledged proxy: omits elastoplastic work W0 and subst
 - [ ] Update `docs/catalogue/methods.json`, attach Issue/PR and validation evidence, regenerate documentation and pass `python tools/generate_method_docs.py --check`.
 - [ ] Review implementation completeness separately from validation; never promote validation merely because numerical tests pass.
 
-Validation lead: tests/test_method_audit.py verifies disabled-name guards only. This is not numerical verification or scientific validation of the archived criterion. Restoration needs original-paper examples.
+Validation lead: tests/methods/test_zhu_edp.py: kernel special cases stated on p.14 (uniaxial, pure shear, 45-degree path misprint) and a circular path.
 
 Dependencies: confirm source/version and measured parameters first; consult [ROADMAP.md](../../ROADMAP.md) for shared cycle, quadrature, native-life and data prerequisites. G01/G02 share a paper but retain distinct laws; other candidate dependencies require specification, not automatic coupling.
 

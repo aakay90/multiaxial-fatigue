@@ -1,0 +1,12 @@
+# Vu, Halm & Nadot (2010), Int J Fatigue 32:1004-1014, doi:10.1016/j.ijfatigue.2009.11.006, Zotero key 2J7T4PF3
+# Table 7, PDF p.6 (journal p.1009): Fatigue strength of EN-GJS800-2 steel (f_-1 = 294 MPa, t_-1 = 220 MPa, R_m = 795 MPa) [11].
+# Crop: _audit-trail/phase2/crops/2J7T4PF3/p6_0.05-0.84-0.95-0.96.png
+# Material constants as printed: f_-1 = 294 MPa; t_-1 = 220 MPa; R_m = 795 MPa; source [11].
+# Column headers as printed: Sigma_xx,a (MPa); Sigma_xx,m (MPa); Sigma_xy,a (MPa); Sigma_xy,m (MPa); delta_xy (deg); I^a (%); I^b (%); I^c (%); I^d (%); I^e (%).
+# Printed minus signs (U+2212) are written as ASCII '-'.
+# I^a..I^e legend is printed only under Table 1 (PDF p.5), not under this table.
+row,sigma_xx_a,sigma_xx_m,sigma_xy_a,sigma_xy_m,delta_xy,I_a,I_b,I_c,I_d,I_e
+1,228,0,132,0,0,2.5,5.0,2.5,4.5,1.6
+2,245,0,142,0,90,-16.4,-7.8,10.1,7.6,8.6
+3,199,0,147,0,0,0.3,3.1,0.3,3.9,-0.3
+4,184,225,0,0,0,-19.9,-12.0,-19.9,-5.0,-5.1

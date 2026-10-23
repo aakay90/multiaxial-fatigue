@@ -12,7 +12,13 @@ def main():
     if not reviews:
         raise SystemExit("No scientific review dossiers found")
     for path in reviews:
-        required = {"README.md", f"{path.name}.tex", "references.bib", "benchmarks.json", f"{path.name}.pdf"}
+        required = {
+            "README.md",
+            f"{path.name}.tex",
+            "references.bib",
+            "benchmarks.json",
+            f"{path.name}.pdf",
+        }
         missing = required - {item.name for item in path.iterdir()}
         if missing:
             raise SystemExit(f"{path.name}: missing {', '.join(sorted(missing))}")
@@ -24,7 +30,11 @@ def main():
         if data.get("method_id") != path.name or not isinstance(cases, list) or not cases:
             raise SystemExit(f"{path.name}: method ID or benchmark list is invalid")
         ids = [case.get("id") for case in cases if isinstance(case, dict)]
-        if len(ids) != len(cases) or any(not isinstance(case_id, str) or not case_id for case_id in ids) or len(ids) != len(set(ids)):
+        if (
+            len(ids) != len(cases)
+            or any(not isinstance(case_id, str) or not case_id for case_id in ids)
+            or len(ids) != len(set(ids))
+        ):
             raise SystemExit(f"{path.name}: benchmark IDs must be nonempty and unique")
     print(f"{len(reviews)} scientific review dossier(s); required files and benchmark JSON OK")
 

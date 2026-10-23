@@ -16,18 +16,18 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 3 | 1 | 14 | 0 | 18 |
-| Energy based | 3 | 2 | 15 | 3 | 23 |
-| Integral and hybrid | 2 | 0 | 7 | 0 | 9 |
-| Invariant based | 0 | 1 | 12 | 0 | 13 |
-| Mesoscopic and damage | 0 | 1 | 7 | 0 | 8 |
+| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Energy based | 6 | 1 | 13 | 3 | 23 |
+| Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
+| Invariant based | 5 | 0 | 8 | 0 | 13 |
+| Mesoscopic and damage | 2 | 0 | 6 | 0 | 8 |
 | Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 2 | 0 | 11 | 2 | 15 |
-| Stress based | 0 | 0 | 13 | 0 | 13 |
-| Tensor and path based | 0 | 0 | 3 | 0 | 3 |
-| **TOTAL** | 10 | 5 | 97 | 5 | 117 |
+| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Tensor and path based | 1 | 0 | 2 | 0 | 3 |
+| **TOTAL** | 29 | 2 | 81 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -45,18 +45,18 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 
 | ID | Method / scope | Implementation | Validation | Priority | Counted |
 | --- | --- | --- | --- | --- | --- |
-| [I_OTT](../../METHODS.md#i_ott) | Ottosen/Tveit proportional reduction (archived scope) | Partially implemented | not_tested | High | Yes |
-| [N01](../../METHODS.md#n01) | Crossland | Not implemented | not_tested | High | Yes |
-| [N02](../../METHODS.md#n02) | Sines | Not implemented | not_tested | High | Yes |
+| [I_OTT](../../METHODS.md#i_ott) | Ottosen/Tveit proportional reduction (archived scope) | Fully implemented | reference_examples_reproduced | High | Yes |
+| [N01](../../METHODS.md#n01) | Crossland | Fully implemented | reference_examples_reproduced | High | Yes |
+| [N02](../../METHODS.md#n02) | Sines | Fully implemented | reference_examples_reproduced | High | Yes |
 | [N08](../../METHODS.md#n08) | Hard-metal deviatoric-amplitude/principal-stress criterion | Not implemented | not_tested | High | Yes |
 | [N09](../../METHODS.md#n09) | Unified equivalent shear stress | Not implemented | not_tested | High | Yes |
 | [N10](../../METHODS.md#n10) | Modified Marin-type mean-shear criterion | Not implemented | not_tested | Medium | Yes |
 | [N18](../../METHODS.md#n18) | Piecewise ruled S–N surface | Not implemented | not_tested | Medium | Yes |
 | [N19](../../METHODS.md#n19) | Improved Gough / Nishihara–Kawamoto criterion | Not implemented | not_tested | Medium | Yes |
-| [N20](../../METHODS.md#n20) | Stress-invariant endurance criterion | Not implemented | not_tested | Medium | Yes |
+| [N20](../../METHODS.md#n20) | Stress-invariant endurance criterion | Fully implemented | reference_examples_reproduced | Medium | Yes |
 | [N33](../../METHODS.md#n33) | Published proportional Hershey–Hosford–Sines reduction | Not implemented | not_tested | Low | related_scope |
 | [N47](../../METHODS.md#n47) | Original Marin mean-stress criterion | Not implemented | not_tested | Low | Yes |
-| [G08](../../METHODS.md#g08) | Complex-invariant linear wave interference (COIN LiWI) | Not implemented | not_tested | High | Yes |
+| [G08](../../METHODS.md#g08) | Complex-invariant linear wave interference (COIN LiWI) | Fully implemented | reference_examples_reproduced | High | Yes |
 | [G11](../../METHODS.md#g11) | Yankin–Mugatarov–Wildemann loading-path criterion | Not implemented | not_tested | Low | Yes |
 | [G12](../../METHODS.md#g12) | Twin-shear unified-yield fatigue model | Not implemented | not_tested | Medium | Yes |
 
@@ -66,30 +66,30 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 
 | Field | Evidence / task |
 | --- | --- |
-| Primary / secondary family | Invariant based; disabled; source retained |
+| Primary / secondary family | Invariant based;  |
 | Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | A continuum approach to multiaxial high-cycle fatigue modeling for ductile metallic materials, Results in Engineering |
 | DOI | https://doi.org/10.1016/j.rineng.2024.102171 |
 | Reference evidence | Exact-title Crossref work record; implementation attribution subject to audit caveats; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Inherited repository audit, not repeated |
+| Formulation evidence | Checked against the source PDF in Phase 2 (2026-10-17); see docs/method-audit.md |
 | Principle | Tveit et al. (2024), A continuum approach to multiaxial high-cycle fatigue modeling for ductile metallic materials |
-| Loading scope | No currently supported executable scope; archived proxy must not be used. |
-| Inputs / material parameters | Physical stress cycle; calibrated fatigue ratio and exact proportional-reduction constants/domain |
+| Loading scope | Single-frequency harmonic CA, proportional and phase-shifted NP via the minimum circumscribed Hershey-Hosford ball; calibrated range 0.5 <= t_-1/s_-1 <= 0.5852 (capped m = 2.767 above). |
+| Inputs / material parameters | Sigm1, Taum1; A_OTT or an R = 0 strength (Sig0, or Su for the Böhme 2026 estimate); optional m_OTT. |
 | Output | Damage parameter; fitted life where valid |
-| Implementation / evidence | Partially implemented; known_essential_gaps |
-| Validation / evidence | not_tested; tests/test_method_audit.py verifies disabled-name guards only. This is not numerical verification or scientific validation of the archived criterion. Restoration needs original-paper examples. |
-| Python implementation | [fatigue/models/invariant_methods/ottosen.py](../../fatigue/models/invariant_methods/ottosen.py); OttosenReduced |
-| Automated tests | [tests/test_method_audit.py](../../tests/test_method_audit.py) |
-| Limitations | Only a proportional cycle reduction; non-proportional extension is unverified and fatigue-ratio calibration silently falls back to m=2 outside its supported range. |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_ottosen.py: Tveit et al. (2024) Table A.1, all 47 in-phase rows to print rounding (modified and original model), out-of-phase rows within 0.8 points except three unresolved 30NCD16 rows. |
+| Python implementation | [src/multifat/models/invariant_methods/ottosen.py](../../src/multifat/models/invariant_methods/ottosen.py); OttosenReduced |
+| Automated tests | [tests/methods/test_ottosen.py](../../tests/methods/test_ottosen.py), [tests/test_method_audit.py](../../tests/test_method_audit.py) |
+| Limitations | Reduced cycle-based form of Tveit et al. (2024), not the incremental back-stress model; out-of-phase rows agree with Tveit's incremental results within about 0.7 points (7/10). Materials with t_-1/s_-1 > 0.5852 use the capped exponent outside the calibrated range. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Only a proportional cycle reduction; non-proportional extension is unverified and fatigue-ratio calibration silently falls back to m=2 outside its supported range. Restore only after source-faithful repair and regression/reference checks. |
+| Missing tasks | No known essential coding gap within the declared repository scope. The incremental continuum model is out of scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | repair; Archived implementation has a known essential gap and remains disabled. Only a proportional cycle reduction; non-proportional extension is unverified and fatigue-ratio calibration silently falls back to m=2 outside its supported range. Restore only after source-faithful repair and regression/reference checks. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
 | Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | I_OTT; Previously attempted, disabled |
+| Provenance / prior status | I_OTT; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Prepared brief](../../docs/contribution-issues/I_OTT.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=I_OTT+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BI_OTT%5D+Ottosen%2FTveit+proportional+reduction+%28archived+scope%29) (no live Issue linked) |
 
@@ -100,29 +100,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Invariant based;  |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | B. Crossland (1956), Effect of large hydrostatic pressures on the torsional fatigue strength of an alloy steel, Proceedings of the International Conference on Fatigue of Metals |
 | DOI | No verified original DOI available |
 | Reference evidence | Original publication/edition not yet verified; no comparator DOI substituted |
-| Formulation evidence | Prior-review preliminary; obtain original paper before coding |
+| Formulation evidence | Checked against Papadopoulos et al. (1997) Eqs. (44), (62)-(66) and Table 1 (2026-10-17); original 1956/1959 sources not obtained |
 | Principle | Deviatoric amplitude plus maximum hydrostatic stress; CA P/NP, F. |
-| Loading scope | Deviatoric amplitude plus maximum hydrostatic stress; CA P/NP, F. |
-| Inputs / material parameters | S; f−1, t−1. |
+| Loading scope | Single-frequency harmonic CA, proportional and phase-shifted NP; sqrt(J2,a) as minimum circumscribed hypersphere. |
+| Inputs / material parameters | Sigm1, Taum1. |
 | Output | Deviatoric amplitude plus maximum hydrostatic stress; CA P/NP, F. |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; See prior feasibility assessment |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Standard invariant benchmark currently absent; clear contrast with critical-plane and integral models. |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_crossland_sines.py: Papadopoulos et al. (1997) Table 1, rows with delta = 0/90/180 to print precision; the table's 14 intermediate-phase rows use sin(delta) for sin^2(delta) of Eq. (44) (strict xfail). |
+| Python implementation | [src/multifat/models/invariant_methods/crossland.py](../../src/multifat/models/invariant_methods/crossland.py); Crossland |
+| Automated tests | [tests/methods/test_crossland_sines.py](../../tests/methods/test_crossland_sines.py) |
+| Limitations | Formulation as restated by Papadopoulos et al. (1997); 42CrMo4 rows 14-15 of their Table 1 differ by 0.3 points (unresolved). |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | confirmed_source_available; [EXT03](../../docs/EXTERNAL_IMPLEMENTATIONS.md#ext03), [EXT07](../../docs/EXTERNAL_IMPLEMENTATIONS.md#ext07); not integrated or independently validated |
-| Missing tasks | Direct invariant evaluator; explicitly selected original NP amplitude definition and endurance normalization. |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation. |
-| Development disposition | prioritized_addition; Established invariant baseline; reuses physical harmonic tensors and adds hydrostatic-maximum assessment. |
-| Roadmap rank | 1 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / High |
-| Provenance / prior status | N01; Already reviewed, not implemented |
+| Provenance / prior status | N01; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Prepared brief](../../docs/contribution-issues/N01.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N01+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN01%5D+Crossland) (no live Issue linked) |
 
@@ -133,29 +133,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Invariant based;  |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | G. Sines (1959), Behavior of metals under complex static and alternating stresses, in Metal Fatigue, McGraw-Hill |
 | DOI | No verified original DOI available |
 | Reference evidence | Original publication/edition not yet verified; no comparator DOI substituted |
-| Formulation evidence | Prior-review preliminary; obtain original paper before coding |
+| Formulation evidence | Checked against Papadopoulos et al. (1997) Eqs. (44), (62)-(66) and Table 1 (2026-10-17); original 1956/1959 sources not obtained |
 | Principle | Deviatoric amplitude plus mean hydrostatic stress; CA, F. |
-| Loading scope | Deviatoric amplitude plus mean hydrostatic stress; CA, F. |
-| Inputs / material parameters | S; reversed torsion and normal mean-stress sensitivity, normally calibrated from appropriate normal-fatigue data. |
+| Loading scope | Single-frequency harmonic CA, proportional and phase-shifted NP; sqrt(J2,a) as minimum circumscribed hypersphere. |
+| Inputs / material parameters | Sigm1, Taum1, Su. |
 | Output | Deviatoric amplitude plus mean hydrostatic stress; CA, F. |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; See prior feasibility assessment |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Separates mean-hydrostatic from peak-hydrostatic effects; pairs naturally with Crossland. |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_crossland_sines.py: Papadopoulos et al. (1997) Table 1, rows with delta = 0/90/180 to print precision; the table's 14 intermediate-phase rows use sin(delta) for sin^2(delta) of Eq. (44) (strict xfail). |
+| Python implementation | [src/multifat/models/invariant_methods/sines.py](../../src/multifat/models/invariant_methods/sines.py); Sines |
+| Automated tests | [tests/methods/test_crossland_sines.py](../../tests/methods/test_crossland_sines.py) |
+| Limitations | Uses the printed Eq. (64) coefficient sqrt(3) f_-1/sigma_f, which equals Sines' Eq. (63) with a Goodman f_0 only when t_-1 = f_-1/sqrt(3). |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | confirmed_source_available; [EXT03](../../docs/EXTERNAL_IMPLEMENTATIONS.md#ext03); not integrated or independently validated |
-| Missing tasks | Explicit calibration of hydrostatic coefficient; measured mean-stress data are absent, despite optional R=0 fields. |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | Traceable citation or source lead is recorded without a verified original DOI. Obtain and confirm the original formulation; a missing DOI alone does not rule out implementation. |
-| Development disposition | prioritized_addition; Complementary invariant baseline isolates hydrostatic mean-stress effects from the Crossland maximum. |
-| Roadmap rank | 2 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | N02; Already reviewed, not implemented |
+| Provenance / prior status | N02; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Prepared brief](../../docs/contribution-issues/N02.md) · [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N02+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN02%5D+Sines) (no live Issue linked) |
 
@@ -331,29 +331,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Invariant based;  |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | Multiaxial fatigue criterion for complex loading based on stress invariants, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/j.ijfatigue.2009.11.006 |
 | Reference evidence | Exact-title Crossref metadata checked; inherited prior-review method attribution; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Prior-review preliminary; obtain original paper before coding |
-| Principle | History-dependent invariant descriptors with calibrated weights; periodic P/NP, F. |
-| Loading scope | History-dependent invariant descriptors with calibrated weights; periodic P/NP, F. |
-| Inputs / material parameters | S; original invariant definitions, material coefficients and endurance threshold calibration. |
-| Output | History-dependent invariant descriptors with calibrated weights; periodic P/NP, F. |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; See prior feasibility assessment |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Computationally compatible despite unclear review equations; do not discard solely for missing threshold detail. |
+| Formulation evidence | Checked against Vu, Halm & Nadot (2010) Eqs. (6)-(21) and Tables 1-12 on the PDF (2026-10-17) |
+| Principle | f = sqrt(gamma1 J'2(t)^2 + gamma2 J2,mean^2 + gamma3 I_f) <= t_-1, maximised over the period; gamma1, gamma2 and I_f by ultimate-strength class (Eqs. 17-20). |
+| Loading scope | Single-frequency harmonic CA, proportional and phase-shifted NP (different frequencies not implemented). |
+| Inputs / material parameters | Sigm1, Taum1, Su (R_m class). |
+| Output | Index f_max / t_-1 (Eq. 21 error index); fitted life where valid |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_vu_halm_nadot.py: Tables 1-12 error index I^e on 117/119 tests within 0.06 points; the two others are table misprints (Table 2 row 9 phase, Table 11 row 1 amplitude) reproduced with the values their own indices imply. The I^a, I^b, I^c columns also validate CROSSLAND, DANGVAN and the Papadopoulos 1999 form. |
+| Python implementation | [src/multifat/models/invariant_methods/vu_halm_nadot.py](../../src/multifat/models/invariant_methods/vu_halm_nadot.py); VuHalmNadot |
+| Automated tests | [tests/methods/test_vu_halm_nadot.py](../../tests/methods/test_vu_halm_nadot.py) |
+| Limitations | Exact single-harmonic J2,mean via the complete elliptic integral. Asynchronous loading (Eqs. 29-39, Tables 13-14) not implemented. gamma1, gamma2 are the paper's two class values. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Physical cycle averages/extrema, parameter fields and admissibility checks. |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Adds invariant descriptors of complex periodic stress paths rather than a single ellipse amplitude. |
-| Roadmap rank | 12 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
-| Provenance / prior status | N20; Already reviewed, not implemented |
+| Provenance / prior status | N20; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N20+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN20%5D+Stress-invariant+endurance+criterion) (no live Issue linked) |
 
@@ -430,29 +430,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Invariant based; Complex invariant / equivalent stress |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | A new equivalent stress approach based on complex invariants: The COIN LiWI method, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/j.ijfatigue.2022.107474 |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
-| Principle | Complex invariants extend linear wave interference with material and phase sensitivity. |
-| Loading scope | CA P/NP; periodic multi-frequency possible; means require downstream treatment |
-| Inputs / material parameters | Stress cycles or complex harmonic amplitudes; tension/shear ratio and phase calibration |
-| Output | Equivalent-stress signal; indirect life |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; Published S460N, AW-5083 and GJS-500-14 examples |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Group 2021 LiWI precursor here. Full notch-strain workflow exceeds local equivalent-stress scope |
+| Formulation evidence | Checked against Schmidt & Kraft (2023) Eqs. (17)-(32) on the PDF (2026-10-17) |
+| Principle | sigma_COIN = sqrt(k_phi H + (1 - k_phi) \|C\|) from the Hermitian and complex squared Mertens invariant forms I1^2 - k_a^2 I2 (Eqs. 27, 30, 32). |
+| Loading scope | Single-frequency harmonic CA, 3-D invariants; no mean-stress term (the paper uses PRAM/PRAJ damage parameters). |
+| Inputs / material parameters | Sigm1, Taum1; optional k_phi (default 1). |
+| Output | Equivalent amplitude sigma_COIN / s_-1; fitted life where valid |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_coin_liwi.py: Eqs. (27), (30); k_phi = 1 (RMS) and 0.5 (static maximum) identities against the time-domain Eq. (21); cancellation case; calibration. The paper reports life statistics only. |
+| Python implementation | [src/multifat/models/invariant_methods/coin_liwi.py](../../src/multifat/models/invariant_methods/coin_liwi.py); CoinLiwi |
+| Automated tests | [tests/methods/test_coin_liwi.py](../../tests/methods/test_coin_liwi.py) |
+| Limitations | k_phi has no identification rule (paper Table 3 fits 0.85-1.10); default 1. No mean-stress term. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | confirmed_source_available; [EXT05](../../docs/EXTERNAL_IMPLEMENTATIONS.md#ext05); not integrated or independently validated |
-| Missing tasks | Complex-invariant utilities; waveform and mean-stress interface |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | prioritized_addition; Adds a mathematically distinct complex-invariant and phase-sensitive formulation. |
-| Roadmap rank | 10 |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
+| Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | G08; New distinct formulation candidate |
+| Provenance / prior status | G08; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G08+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG08%5D+Complex-invariant+linear+wave+interference+%28COIN+LiWI%29) (no live Issue linked) |
 

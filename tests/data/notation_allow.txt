@@ -1,0 +1,36 @@
+# Names outside docs/notation.md, with the reason each is allowed. The guard in
+# tests/test_notation.py fails when a public function or method in eval/ and models/ has a
+# parameter that is in neither place, and when an entry here no longer names a parameter: the
+# list is exactly the complement of the table. A name that names a concept belongs in the table;
+# this file holds machinery (callbacks, plot options, bookkeeping) and the symbols a single
+# criterion takes from its own paper. Several names may share a line when they share a reason.
+
+# Evaluation-layer controls: the plane-set sizes and tolerances, the plane selector, the
+# search-result accumulators and the callbacks that plane_search runs. Implementation controls,
+# not physics.
+BestCP all_damage all_metric atol check_orthonormal critical_only evaluate grid grid_damage
+grid_metric grid_normals method name n_seeds objective pool prepare refine return_normals
+seed_normals shear_rule values
+
+# Workbook and case plumbing: the imported series and models behind a calibration, the block/case
+# selection of the endurance scan, and the components of a constructed proportional case.
+exp material_name models uniax_cases block cases df factor key mean model radial refs shear
+
+# Fit inputs and coefficients, their brackets, and the validation figures.
+A B N N_design N_exp N_pred N_pred_runout N_runout Nmax Nmin F_design F_par F_runout
+N_hi N_lo b b0 sf tf bounds stdnum expected observed
+ax color curve_range error_factors label loglog n_curve return_figax return_warnings show y
+
+# Names a criterion introduces for its own quantities, defined by the equation its module cites.
+A_prime C_A E_amp F1 F_NP G H_c K_prime R1 R3 S_amp S_max S_min T_Slim X Y alpha alpha_w
+axial axial_stress b_sigma b_tau dK1 dK1A dK3 dK3A dW0 d_T dsigma1A dtau3A e1 e3 eps_a f
+gamma_a h h_c h_m history k_a k_phi lambda1 lambda3 n_prime nu_bar p phase_shift probability
+psi q r r_m rho shear_stress sigma sigma_0 sigma_A sigma_T sigma_eq sigma_eq_max sigma_f
+sigma_inf sigma_op sigma_star tau_A tau_f tau_r volume volume_ratio v0_su_m xi
+
+# Shear-amplitude algorithm choice, the harmonic arrays of a plane history, and the scalar
+# argument of the exact-power helper.
+algorithm cosine sine shear_amplitude_algorithm cos sin x
+
+# Generic bookkeeping of the registry, the parameter reader, and the reference table.
+default warn context names

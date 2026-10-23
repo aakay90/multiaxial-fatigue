@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 
-from fatigue.models.integral_methods.bohme_papuga import BohmePapuga, _strengths
+from multifat.models.integral_methods.bohme_papuga import BohmePapuga, _strengths
 
 
 class BohmePapugaTests(unittest.TestCase):
@@ -18,7 +18,10 @@ class BohmePapugaTests(unittest.TestCase):
         if cos is None:
             cos = np.zeros((3, 3))
         return self.model.evaluate_case(
-            S0=mean + sin, S1=mean - sin, E0=None, E1=None,
+            S0=mean + sin,
+            S1=mean - sin,
+            E0=None,
+            E1=None,
             params=params or self.params,
             harmonics={"S_mean": mean, "S_sin": sin, "S_cos": cos},
         ).values[""]
@@ -27,11 +30,12 @@ class BohmePapugaTests(unittest.TestCase):
         zero = np.zeros((3, 3))
         axial = np.diag([1.0, 0.0, 0.0])
         torsion = np.array([[0.0, 1.0, 0.0], [1.0, 0.0, 0.0], [0.0, 0.0, 0.0]])
-        s, t, s0, t0 = (_strengths(self.params))
+        f_m1, t_m1, f_0, t_0 = _strengths(self.params)
         for mean, amplitude in (
-            (zero, s * axial), (zero, t * torsion),
-            (s0 / 2 * axial, s0 / 2 * axial),
-            (t0 / 2 * torsion, t0 / 2 * torsion),
+            (zero, f_m1 * axial),
+            (zero, t_m1 * torsion),
+            (f_0 / 2 * axial, f_0 / 2 * axial),
+            (t_0 / 2 * torsion, t_0 / 2 * torsion),
         ):
             with self.subTest(mean=mean.tolist(), amplitude=amplitude.tolist()):
                 self.assertAlmostEqual(self.damage(mean, amplitude), 1.0, places=9)
@@ -45,9 +49,9 @@ class BohmePapugaTests(unittest.TestCase):
 
     def test_estimated_zero_to_maximum_strengths(self):
         params = {"Sigm1": 240.0, "Taum1": 145.0, "Su": 580.0}
-        s, t, s0, t0 = _strengths(params)
-        self.assertAlmostEqual(s0, 4 * s * 580 / (s + 2 * 580))
-        self.assertAlmostEqual(4 * t / t0 - 2 * s / s0, 1.0)
+        f_m1, t_m1, f_0, t_0 = _strengths(params)
+        self.assertAlmostEqual(f_0, 4 * f_m1 * 580 / (f_m1 + 2 * 580))
+        self.assertAlmostEqual(4 * t_m1 / t_0 - 2 * f_m1 / f_0, 1.0)
 
 
 if __name__ == "__main__":

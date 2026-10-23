@@ -1,0 +1,13 @@
+# Papadopoulos, I.V. (1999), "Multiaxial fatigue limit criterion of metals: a mesoscopic scale approach", in Dang Van & Papadopoulos (eds), High-Cycle Metal Fatigue, CISM Courses and Lectures 392, Springer, doi:10.1007/978-3-7091-2474-1_3, Zotero key HBKMWBNC.
+# Table 1, PDF p.40 (book p.128): Table 1: In-phase (proportional) bending and torsion fatigue limit data
+# Crop: _audit-trail/phase2/crops/HBKMWBNC/p40.png
+# Table header (as printed): Material: 31/2% Ni.Cr.Steel; t_-1=352 MPa; f_-1=541 MPa; Ref [18].
+# Text (p.128): in-phase fully reversed bending and torsion fatigue limit data obtained in the early fifties by Gough, Pollard and Clenshaw [18].
+# Printed symbols are Sigma for all stress components; sigma_xx_a = Sigma_xx,a, sigma_xy_a = Sigma_xy,a, etc. sqrt_T_a2 = sqrt(<T_a^2>).
+# I_pct = I (%) as printed; text Eq. (5.24) defines I = (sqrt(<T_a^2>) + alpha*Sigma_H,max - beta)/beta (%). Values transcribed, not recomputed.
+row,sigma_xx_a,sigma_xy_a,sigma_xx_m,sigma_xy_m,sqrt_T_a2,sigma_H_max,I_pct
+1,541,70,0,0,320,180,2.3
+2,491,144,0,0,318,164,0.6
+3,411,205,0,0,314,137,-2.3
+4,328,285,0,0,342,109,4.0
+5,180,334,0,0,350,60,3.1

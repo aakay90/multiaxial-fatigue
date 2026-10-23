@@ -1,0 +1,9 @@
+# Vu, Halm & Nadot (2010) Int J Fatigue 32:1004-1014, doi:10.1016/j.ijfatigue.2009.11.006, Zotero 2J7T4PF3.
+# Table 8, PDF p.7 (journal p.1010): Rotating bending-torsion fatigue strength of 30NCD16 steel (f_-1 = 658 MPa, t_-1 = 428 MPa, R_m = 1200 MPa) [11].
+# Crop: _audit-trail/phase2/crops/2J7T4PF3/p7_0.05-0.07-0.95-0.14.png
+# Material constants as printed: f_-1 = 658 MPa, t_-1 = 428 MPa, R_m = 1200 MPa; source reference [11] (reference list entry not transcribed).
+# Column headers as printed: Sigma_xx,a (MPa); Sigma_xx,m (MPa); Sigma_xy,a (MPa); Sigma_xy,m (MPa); delta_xy (deg); I^a (%) ... I^e (%). Sigma is printed as a capital Greek sigma (text extraction shows R).
+# Footnote: none printed.
+row,sigma_xx_a,sigma_xx_m,sigma_xy_a,sigma_xy_m,delta_xy,I_a,I_b,I_c,I_d,I_e
+1,337,0,328,0,0,-5.1,-2.0,-5.1,-1.9,-5.0
+2,482,0,234,0,0,-6.8,-4.6,-6.8,-5.3,-6.3

@@ -1,14 +1,14 @@
-# Historical and current results
+# Results
 
-The tracked CSV files directly in this directory are historical exports from
-before the numerical audit. They preserve development evidence, including
-disabled formulations; they are not current validation benchmarks. See the
-[method audit](../docs/method-audit.md) before comparing them.
+Fresh outputs go to `Results/current/`, which Git ignores. `multifat-pipeline` and `multifat-run`
+write there by default. Regenerate every method you compare with the same code revision and the same
+constants; the run report and calibration JSON next to the CSVs record both.
 
-Write fresh outputs to `Results/current/` (ignored by Git), and regenerate all
-methods being compared with the same code revision and parameter assumptions.
-Keep reproducible published validation cases and their provenance with tests;
-do not replace these historical CSVs or commit routine plots and run outputs.
+`archive/pre-audit/` keeps the 88 CSVs that were tracked here before the numerical audit
+(October 2026). They include disabled formulations and pre-audit equations, and the current code does
+not reproduce them. They are history, not benchmarks. `multifat-compare` reads `Results/`
+recursively and drops these rows unless `--include-legacy` is given. See the
+[CHANGELOG](../CHANGELOG.md) for what changed since.
 
-`Results/Comparison/` and `Results/validation/` are also ignored. The optional
-material sweep accepts a separate output directory and preserves this archive.
+`Results/Comparison/` and `Results/validation/` are also ignored. Keep reproducible published
+validation cases with the tests (`tests/methods/`), not here.
