@@ -26,3 +26,21 @@ own results go to `<MATERIAL>_calibration.json` in the results folder, which `--
 accepts. The four records belong to the previous collection (material IDs `42CrMo4_QT`,
 `AISI316L`, `Al7075_T6`, `Ti6Al4V_andrea_(AXIAL)`); the revised workbooks change the material
 inputs, so a record reproduces former constants, not a calibration of the new data.
+
+## Hand-entered TVEIT2025 constants
+
+`<material>/TVEIT2025_stage1.json` holds the constants of the Tveit et al. (2025) model, entered by
+hand (stage 1: the model runs with supplied constants; their calibration is not implemented yet).
+These files use the sidecar layout (`params` and `provenance.workbook`), not the record schema.
+`provenance` states how the constants were obtained. Each file sets:
+
+- `A_TVEIT`, `C_TVEIT`, `K_TVEIT` and `L_TVEIT`;
+- `Sigm1_TVEIT` and `Taum1_TVEIT`, the fatigue limits these constants were calibrated with. They
+  replace the workbook Sigm1 and Taum1 for TVEIT2025 only, because the constants hold only
+  together with them;
+- the numerical settings of the time integration (`npts_TVEIT`, `min_blocks_TVEIT`,
+  `max_blocks_TVEIT`, `tol_alpha_TVEIT`, `tol_damage_TVEIT`), at their default values.
+
+`notes` explains each entry. Edit a copy to change a run:
+
+    multifat-pipeline Experimental_Data/6_42CrMo4_QT.xlsx --models TVEIT2025 --no-calibrate --constants Calibrations/42CrMo4_QT/TVEIT2025_stage1.json

@@ -1,0 +1,32 @@
+{
+    "params": {
+        "Sigm1_TVEIT": 271.6,
+        "Taum1_TVEIT": 144.33756729740645,
+        "A_TVEIT": 0.719608439516333,
+        "C_TVEIT": 1.27624941729079,
+        "K_TVEIT": 2.74613858733688e-05,
+        "L_TVEIT": 9.63123226664139,
+        "npts_TVEIT": 1001,
+        "min_blocks_TVEIT": 8,
+        "max_blocks_TVEIT": 10000,
+        "tol_alpha_TVEIT": 1e-06,
+        "tol_damage_TVEIT": 1e-05
+    },
+    "provenance": {
+        "workbook": "Experimental_Data/8_AISI316L.xlsx",
+        "model": "TVEIT2025",
+        "entered_by": "A. A. Akay, manual entry (stage 1)",
+        "calibration": "PSI reference calibration: C, K and L fitted with Eq. (25) to three axial R = -1 failures (PSI tests PL-012, PL-073, PL-074) with the load-cell-corrected axial stresses (published stress x 1.1558).",
+        "Sigm1_TVEIT, Taum1_TVEIT": "271.6 MPa on the corrected axial-stress scale; Taum1 = 250/sqrt(3) MPa, lambda = -21.6 MPa.",
+        "A": "Anchored on the PSI axial tests with nonzero mean stress.",
+        "stress_scale": "The constants belong to the load-cell-corrected axial stresses (published x 1.1558) of the corrected workbook supplied by PSI (e.g. Uniaxial_2 at 271.6 MPa). With the published axial stresses (e.g. Uniaxial_2 at 235 MPa) the axial lives come out too long. Torsional stresses are the same in both."
+    },
+    "notes": {
+        "Sigm1_TVEIT, Taum1_TVEIT": "fatigue limits [MPa] the constants were calibrated with; they replace the workbook Sigm1 and Taum1 for TVEIT2025 only",
+        "npts_TVEIT": "points per load cycle; 1001 gives lives about 0.02 decade shorter than converged",
+        "min_blocks_TVEIT": "cycles integrated before the stationarity test is applied",
+        "max_blocks_TVEIT": "cycles integrated at most; the life is then extrapolated from the damage of the last cycle (warning in the run notes)",
+        "tol_alpha_TVEIT": "relative change of the back-stress per cycle below which the cycle is stationary",
+        "tol_damage_TVEIT": "relative change of the damage per cycle below which the cycle is stationary"
+    }
+}
