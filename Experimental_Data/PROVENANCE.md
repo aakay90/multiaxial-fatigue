@@ -159,8 +159,8 @@ Source: Arda Akay, 29 October 2026 email and follow-up clarification provided
 3 November 2026, based on original PSI test records. The in-memory overlay
 records both published amplitudes and source-precision values. The original
 `8_AISI316L.xlsx` file remains unchanged and is identified through its
-existing `base_sha256`. The corrected post-overlay dataset fingerprint must
-be regenerated from the importer and replaces the intermediate
+existing `base_sha256`. The corrected post-overlay dataset fingerprint is
+`e245074653e53c978ee11a94812ba9d9fd6e48c0721b98a6f80c5f7a6ee2d9f5` (regenerated from the importer); it supersedes the intermediate
 `d5a42243370f4944595891f69a87d1e47d9532aeca45594749ab15edf7836fef`
 fingerprint. Historical calibration records are not automatically migrated
 to the new dataset fingerprint.

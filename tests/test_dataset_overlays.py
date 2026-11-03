@@ -118,7 +118,10 @@ def test_aisi316l_psi_axial_corrections_are_loaded(specimen, original, corrected
         if item["op"] == "add_case" and item["values"]["Specimen name"] == specimen
     )
     metadata = op["psi_axial_stress_correction"]
-    assert metadata.get("uncorrected_amplitude_MPa", metadata.get("published_rounded_amplitude_MPa")) == original
+    assert (
+        metadata.get("uncorrected_amplitude_MPa", metadata.get("published_rounded_amplitude_MPa"))
+        == original
+    )
     assert metadata["multiplier"] == pytest.approx(1.1558)
     assert op["values"]["Amplitute AXIAL stress  (MPa)"] == pytest.approx(corrected)
     source_amplitude = metadata.get("original_record_amplitude_MPa", original)
