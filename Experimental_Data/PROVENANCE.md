@@ -129,36 +129,45 @@ Known issues:
 
 ## AISI316L.xlsx
 
-### PSI axial amplitude correction (29 October 2026, pending confirmation)
+### PSI stress amplitudes corrected from original records (29 October and 3 November 2026)
 
-Arda Akay reported that six of the eight Janssens PSI observations added by the
-in-memory overlay still carried the uncorrected, published axial stress
-amplitudes. The overlay now applies the reported **1.1558 load-cell factor**
-to `Uniaxial_10` through `Uniaxial_14` and `Non_prop_12`. The applied
-amplitudes (MPa) are 277.4, 300.5, 335.2, 346.7, 381.4 and **269.3
-(provisional)**, respectively, replacing 240, 260, 290, 300, 330 and 233.
-The two torsional-only observations and the 135 MPa shear amplitude in
-`Non_prop_12` are unchanged. The original `8_AISI316L.xlsx` file is
-preserved; the correction is applied at import time. The overlay records
-the original values, multiplier and correspondent's clarification. The
-new corrected dataset fingerprint is
+Following Arda Akay's correspondence, the eight Janssens PSI tests introduced
+by the in-memory overlay have been reconciled with the original records
+rather than using the rounded stresses printed by Janssens et al. (2018).
+Five uniaxial axial amplitudes require the **1.1558 load-cell multiplier**.
+Their new stress amplitudes in MPa are:
+
+| Specimen | Published stress amplitude (MPa) | Corrected axial amplitude (MPa) |
+| --- | ---: | ---: |
+| `Uniaxial_10` | 240 | 277.4 |
+| `Uniaxial_11` | 260 | 300.5 |
+| `Uniaxial_12` | 290 | 335.2 |
+| `Uniaxial_13` | 300 | 346.7 |
+| `Uniaxial_14` | 330 | 381.4 |
+
+For `Non_prop_12`, the **unrounded original axial amplitude is 233.35 MPa**
+(233 MPa as printed). Applying 1.1558 yields **269.70593 MPa**, stored
+at 0.1 MPa precision as **269.7 MPa**. Its original shear amplitude is
+**134.7 MPa** (135 MPa as printed). The original-record torsional amplitudes
+of `Torsional_8` and `Torsional_9` are **150.1 and 155.9 MPa**
+(respectively 150 and 156 MPa as printed). These three shear adjustments
+reflect **publication rounding only**; no axial load-cell correction is
+applied to the shear stress amplitudes. Phase angles and fatigue lives are
+unchanged.
+
+Source: Arda Akay, 29 October 2026 email and follow-up clarification provided
+3 November 2026, based on original PSI test records. The in-memory overlay
+records both published amplitudes and source-precision values. The original
+`8_AISI316L.xlsx` file remains unchanged and is identified through its
+existing `base_sha256`. The corrected post-overlay dataset fingerprint must
+be regenerated from the importer and replaces the intermediate
 `d5a42243370f4944595891f69a87d1e47d9532aeca45594749ab15edf7836fef`
-(recomputed from the importer). The previously recorded fingerprint
-`a63f9325d41155bb7611b2c6272e0bbee9a46e33fefe4bc33faa47f8470f4750`
-is retained in the historical revision below, not reused as the current
-dataset identity.
+fingerprint. Historical calibration records are not automatically migrated
+to the new dataset fingerprint.
 
-**Open check before merging:** Arda's email of 29 October gives 269.7 MPa
-for `Non_prop_12`, whereas the stated multiplier applied to the published
-233 MPa yields 269.3014 MPa. This PR provisionally uses **269.3 MPa** after
-rounding to one decimal. Verify the original unrounded PSI stress or obtain
-Arda's confirmation before treating the non-proportional correction as final.
-The historical fingerprints and fatigue-life calibrations based on the
-uncorrected dataset must not be silently reused.
-
-This correction changes experimental stress histories for all criteria,
-not Tveit alone, and does not resolve the separate Janssens/Braun material
-and batch distinction tracked in Issue #24.
+This correction changes experimental stress histories for all fatigue
+criteria, not only TVEIT2025. The distinct Janssens tube and Braun
+wrought-sheet material/batch sources remain subject to Issue #24.
 
 **Janssens final revision, supplied 28 October 2026.** The final author workbook (`8_AISI316L(1).xlsx`, original SHA-256 `a70a09f76fb8fa22f0d6ef9843512eefd20db8fae980639067ef6d207187a35a`) replaces the previous revision. Its reported R = -1 tensile fatigue limit is 278.5 MPa (previously 241); the torsional limit remains 144 MPa. Its first uniaxial run-out is 17,225,000 cycles (previously 11,000,000), and non-proportional torsional phases in Dataset rows 18-28 are now 90 degrees. The Summary averages and derived values are also updated. All underlying ZIP members of the workbook are preserved verbatim, although the repository copy is recompressed at ZIP-container level. The repository XLSX SHA-256 is `26a97aec4603aa19df29bbd6576c3b72259cc3792eaa6e60df1d5e977f52017c`. Because the 11 phase corrections are now part of the source, the active overlay has 15 remaining operations. The new post-overlay fingerprint is `a63f9325d41155bb7611b2c6272e0bbee9a46e33fefe4bc33faa47f8470f4750` (39 failure observations and 13 run-outs). The previous overlay mapping remains in the historical overlay JSON. No other experimental workbooks are changed.
 

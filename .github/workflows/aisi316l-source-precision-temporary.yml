@@ -1,0 +1,54 @@
+name: Temporary AISI316L final source-precision fingerprint validation
+on:
+  push:
+    branches:
+      - fix/aisi316l-psi-overlay-axial-stresses
+permissions:
+  contents: write
+jobs:
+  verify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - name: Update dataset fingerprint from importer
+        run: |
+          uv run python - <<'PY'
+          import json
+          from pathlib import Path
+          from multifat.imp.experimental_data import load_material_workbook
+          from multifat.report.subsets import dataset_fingerprint
+          path = Path("src/multifat/imp/overlay_files/8_AISI316L.overlay.json")
+          block = load_material_workbook("Experimental_Data/8_AISI316L.xlsx")["AISI316L"]
+          fingerprint = dataset_fingerprint(block)
+          overlay = json.loads(path.read_text(encoding="utf-8"))
+          overlay["expected_fingerprint"] = fingerprint
+          path.write_text(json.dumps(overlay, indent=2) + "\n", encoding="utf-8")
+          provenance = Path("Experimental_Data/PROVENANCE.md")
+          text = provenance.read_text(encoding="utf-8")
+          anchor = "The corrected post-overlay dataset fingerprint must\nbe regenerated from the importer and replaces the intermediate\n"
+          assert anchor in text
+          text = text.replace(
+              anchor,
+              "The corrected post-overlay dataset fingerprint is\n`" + fingerprint +
+              "` (regenerated from the importer); it supersedes the intermediate\n",
+          )
+          provenance.write_text(text, encoding="utf-8")
+          print("Corrected dataset fingerprint:", fingerprint)
+          assert len(block["cases"]) == 39
+          assert len(block["runouts"]) == 13
+          PY
+      - name: Format tests
+        run: uv run black tests/test_dataset_overlays.py
+      - name: Validate corrected overlay
+        run: uv run pytest -q tests/test_dataset_overlays.py
+      - name: Update branch with authoritative fingerprint
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/multifat/imp/overlay_files/8_AISI316L.overlay.json Experimental_Data/PROVENANCE.md tests/test_dataset_overlays.py
+          git diff --cached --quiet && exit 0
+          git commit -m "Update dataset fingerprint and tests for confirmed PSI source values"
+          git push origin HEAD:fix/aisi316l-psi-overlay-axial-stresses

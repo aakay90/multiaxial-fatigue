@@ -107,7 +107,7 @@ def test_modified_workbook_is_not_overlaid(tmp_path):
         ("Uniaxial_12", 290, 335.2),
         ("Uniaxial_13", 300, 346.7),
         ("Uniaxial_14", 330, 381.4),
-        ("Non_prop_12", 233, 269.3),
+        ("Non_prop_12", 233, 269.7),
     ],
 )
 def test_aisi316l_psi_axial_corrections_are_loaded(specimen, original, corrected):
@@ -121,7 +121,8 @@ def test_aisi316l_psi_axial_corrections_are_loaded(specimen, original, corrected
     assert metadata["uncorrected_amplitude_MPa"] == original
     assert metadata["multiplier"] == pytest.approx(1.1558)
     assert op["values"]["Amplitute AXIAL stress  (MPa)"] == pytest.approx(corrected)
-    assert corrected == pytest.approx(round(original * 1.1558, 1))
+    source_amplitude = metadata.get("original_record_amplitude_MPa", original)
+    assert corrected == pytest.approx(round(source_amplitude * 1.1558, 1))
 
     block = load_material_workbook(FOLDER / "8_AISI316L.xlsx")["AISI316L"]
     cases = [case for case in block["cases"].values() if case["meta"]["specimen_id"] == specimen]
@@ -137,9 +138,9 @@ def test_aisi316l_psi_axial_corrections_are_loaded(specimen, original, corrected
 @pytest.mark.parametrize(
     ("specimen", "shear"),
     [
-        ("Torsional_8", 150.0),
-        ("Torsional_9", 156.0),
-        ("Non_prop_12", 135.0),
+        ("Torsional_8", 150.1),
+        ("Torsional_9", 155.9),
+        ("Non_prop_12", 134.7),
     ],
 )
 def test_aisi316l_psi_torsional_amplitudes_are_unchanged(specimen, shear):
@@ -169,4 +170,12 @@ def test_aisi316l_psi_correction_scope_is_six_of_eight_added_cases():
         op["values"]["Specimen name"] for op in corrected
     } == {"Torsional_8", "Torsional_9"}
     nonprop = next(op for op in corrected if op["values"]["Specimen name"] == "Non_prop_12")
-    assert "269.7" in nonprop["psi_axial_stress_correction"]["review_note"]
+    assert nonprop["psi_axial_stress_correction"]["original_record_amplitude_MPa"] == 233.35
+    assert nonprop["psi_axial_stress_correction"]["applied_amplitude_MPa"] == 269.7
+    assert nonprop["psi_shear_source_precision"]["original_record_amplitude_MPa"] == 134.7
+    for spec in ("Torsional_8", "Torsional_9"):
+        op = next(item for item in added if item["values"]["Specimen name"] == spec)
+        assert "psi_axial_stress_correction" not in op
+        assert op["psi_shear_source_precision"]["correction_type"].startswith(
+            "published figure rounding"
+        )
