@@ -2,7 +2,7 @@
   "schema_version": 1,
   "workbook": "8_AISI316L.xlsx",
   "base_sha256": "26a97aec4603aa19df29bbd6576c3b72259cc3792eaa6e60df1d5e977f52017c",
-  "expected_fingerprint": "a63f9325d41155bb7611b2c6272e0bbee9a46e33fefe4bc33faa47f8470f4750",
+  "expected_fingerprint": "e245074653e53c978ee11a94812ba9d9fd6e48c0721b98a6f80c5f7a6ee2d9f5",
   "operations": [
     {
       "op": "set_summary",
@@ -92,9 +92,9 @@
         "B (mm)": "Null",
         "Hole diameter (mm)": 0,
         "Diameter (mm)": 11,
-        "Phase RADIAL load (°)": 0,
-        "Phase AXIAL load (°)": 0,
-        "Phase TORSIONAL load (°)": 0,
+        "Phase RADIAL load (\u00b0)": 0,
+        "Phase AXIAL load (\u00b0)": 0,
+        "Phase TORSIONAL load (\u00b0)": 0,
         "Freq RADIAL load [Hz]": "Null",
         "Freq AXIAL load[Hz]": "Null",
         "Freq TORSIONAL load [Hz]": "Null",
@@ -104,7 +104,7 @@
         "Mean RADIAL stress  (MPa)": 0,
         "Amplitute RADIAL stress  (MPa)": 0,
         "Mean AXIAL stress  (MPa)": 0,
-        "Amplitute AXIAL stress  (MPa)": 240,
+        "Amplitute AXIAL stress  (MPa)": 277.4,
         "derived from (AXIAL/BENDING) load": "AXIAL",
         "Mean SHEAR stress  (MPa)": 0,
         "Amplitute SHEAR stress  (MPa)": 0,
@@ -120,7 +120,13 @@
         "Amplitude von Mises (MPa)": 240
       },
       "decision": "d056",
-      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8"
+      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8",
+      "psi_axial_stress_correction": {
+        "uncorrected_amplitude_MPa": 240,
+        "multiplier": 1.1558,
+        "provenance": "A. A. Akay (Arda), email 2026-10-29; Janssens PSI load-cell stress correction",
+        "rounding": "0.1 MPa (published nominal amplitude multiplied by 1.1558)"
+      }
     },
     {
       "op": "add_case",
@@ -140,9 +146,9 @@
         "B (mm)": "Null",
         "Hole diameter (mm)": 0,
         "Diameter (mm)": 11,
-        "Phase RADIAL load (°)": 0,
-        "Phase AXIAL load (°)": 0,
-        "Phase TORSIONAL load (°)": 0,
+        "Phase RADIAL load (\u00b0)": 0,
+        "Phase AXIAL load (\u00b0)": 0,
+        "Phase TORSIONAL load (\u00b0)": 0,
         "Freq RADIAL load [Hz]": "Null",
         "Freq AXIAL load[Hz]": "Null",
         "Freq TORSIONAL load [Hz]": "Null",
@@ -152,7 +158,7 @@
         "Mean RADIAL stress  (MPa)": 0,
         "Amplitute RADIAL stress  (MPa)": 0,
         "Mean AXIAL stress  (MPa)": 0,
-        "Amplitute AXIAL stress  (MPa)": 260,
+        "Amplitute AXIAL stress  (MPa)": 300.5,
         "derived from (AXIAL/BENDING) load": "AXIAL",
         "Mean SHEAR stress  (MPa)": 0,
         "Amplitute SHEAR stress  (MPa)": 0,
@@ -168,7 +174,13 @@
         "Amplitude von Mises (MPa)": 260
       },
       "decision": "d056",
-      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8"
+      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8",
+      "psi_axial_stress_correction": {
+        "uncorrected_amplitude_MPa": 260,
+        "multiplier": 1.1558,
+        "provenance": "A. A. Akay (Arda), email 2026-10-29; Janssens PSI load-cell stress correction",
+        "rounding": "0.1 MPa (published nominal amplitude multiplied by 1.1558)"
+      }
     },
     {
       "op": "add_case",
@@ -188,9 +200,9 @@
         "B (mm)": "Null",
         "Hole diameter (mm)": 0,
         "Diameter (mm)": 11,
-        "Phase RADIAL load (°)": 0,
-        "Phase AXIAL load (°)": 0,
-        "Phase TORSIONAL load (°)": 0,
+        "Phase RADIAL load (\u00b0)": 0,
+        "Phase AXIAL load (\u00b0)": 0,
+        "Phase TORSIONAL load (\u00b0)": 0,
         "Freq RADIAL load [Hz]": "Null",
         "Freq AXIAL load[Hz]": "Null",
         "Freq TORSIONAL load [Hz]": "Null",
@@ -200,7 +212,7 @@
         "Mean RADIAL stress  (MPa)": 0,
         "Amplitute RADIAL stress  (MPa)": 0,
         "Mean AXIAL stress  (MPa)": 0,
-        "Amplitute AXIAL stress  (MPa)": 290,
+        "Amplitute AXIAL stress  (MPa)": 335.2,
         "derived from (AXIAL/BENDING) load": "AXIAL",
         "Mean SHEAR stress  (MPa)": 0,
         "Amplitute SHEAR stress  (MPa)": 0,
@@ -216,7 +228,13 @@
         "Amplitude von Mises (MPa)": 290
       },
       "decision": "d056",
-      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8"
+      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8",
+      "psi_axial_stress_correction": {
+        "uncorrected_amplitude_MPa": 290,
+        "multiplier": 1.1558,
+        "provenance": "A. A. Akay (Arda), email 2026-10-29; Janssens PSI load-cell stress correction",
+        "rounding": "0.1 MPa (published nominal amplitude multiplied by 1.1558)"
+      }
     },
     {
       "op": "add_case",
@@ -236,9 +254,9 @@
         "B (mm)": "Null",
         "Hole diameter (mm)": 0,
         "Diameter (mm)": 11,
-        "Phase RADIAL load (°)": 0,
-        "Phase AXIAL load (°)": 0,
-        "Phase TORSIONAL load (°)": 0,
+        "Phase RADIAL load (\u00b0)": 0,
+        "Phase AXIAL load (\u00b0)": 0,
+        "Phase TORSIONAL load (\u00b0)": 0,
         "Freq RADIAL load [Hz]": "Null",
         "Freq AXIAL load[Hz]": "Null",
         "Freq TORSIONAL load [Hz]": "Null",
@@ -248,7 +266,7 @@
         "Mean RADIAL stress  (MPa)": 0,
         "Amplitute RADIAL stress  (MPa)": 0,
         "Mean AXIAL stress  (MPa)": 0,
-        "Amplitute AXIAL stress  (MPa)": 300,
+        "Amplitute AXIAL stress  (MPa)": 346.7,
         "derived from (AXIAL/BENDING) load": "AXIAL",
         "Mean SHEAR stress  (MPa)": 0,
         "Amplitute SHEAR stress  (MPa)": 0,
@@ -264,7 +282,13 @@
         "Amplitude von Mises (MPa)": 300
       },
       "decision": "d056",
-      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8"
+      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8",
+      "psi_axial_stress_correction": {
+        "uncorrected_amplitude_MPa": 300,
+        "multiplier": 1.1558,
+        "provenance": "A. A. Akay (Arda), email 2026-10-29; Janssens PSI load-cell stress correction",
+        "rounding": "0.1 MPa (published nominal amplitude multiplied by 1.1558)"
+      }
     },
     {
       "op": "add_case",
@@ -284,9 +308,9 @@
         "B (mm)": "Null",
         "Hole diameter (mm)": 0,
         "Diameter (mm)": 11,
-        "Phase RADIAL load (°)": 0,
-        "Phase AXIAL load (°)": 0,
-        "Phase TORSIONAL load (°)": 0,
+        "Phase RADIAL load (\u00b0)": 0,
+        "Phase AXIAL load (\u00b0)": 0,
+        "Phase TORSIONAL load (\u00b0)": 0,
         "Freq RADIAL load [Hz]": "Null",
         "Freq AXIAL load[Hz]": "Null",
         "Freq TORSIONAL load [Hz]": "Null",
@@ -296,7 +320,7 @@
         "Mean RADIAL stress  (MPa)": 0,
         "Amplitute RADIAL stress  (MPa)": 0,
         "Mean AXIAL stress  (MPa)": 0,
-        "Amplitute AXIAL stress  (MPa)": 330,
+        "Amplitute AXIAL stress  (MPa)": 381.4,
         "derived from (AXIAL/BENDING) load": "AXIAL",
         "Mean SHEAR stress  (MPa)": 0,
         "Amplitute SHEAR stress  (MPa)": 0,
@@ -312,7 +336,13 @@
         "Amplitude von Mises (MPa)": 330
       },
       "decision": "d056",
-      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8"
+      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8",
+      "psi_axial_stress_correction": {
+        "uncorrected_amplitude_MPa": 330,
+        "multiplier": 1.1558,
+        "provenance": "A. A. Akay (Arda), email 2026-10-29; Janssens PSI load-cell stress correction",
+        "rounding": "0.1 MPa (published nominal amplitude multiplied by 1.1558)"
+      }
     },
     {
       "op": "add_case",
@@ -332,9 +362,9 @@
         "B (mm)": "Null",
         "Hole diameter (mm)": 0,
         "Diameter (mm)": 11,
-        "Phase RADIAL load (°)": 0,
-        "Phase AXIAL load (°)": 0,
-        "Phase TORSIONAL load (°)": 0,
+        "Phase RADIAL load (\u00b0)": 0,
+        "Phase AXIAL load (\u00b0)": 0,
+        "Phase TORSIONAL load (\u00b0)": 0,
         "Freq RADIAL load [Hz]": "Null",
         "Freq AXIAL load[Hz]": "Null",
         "Freq TORSIONAL load [Hz]": "Null",
@@ -347,7 +377,7 @@
         "Amplitute AXIAL stress  (MPa)": 0,
         "derived from (AXIAL/BENDING) load": "AXIAL",
         "Mean SHEAR stress  (MPa)": 0,
-        "Amplitute SHEAR stress  (MPa)": 150,
+        "Amplitute SHEAR stress  (MPa)": 150.1,
         "Mean internal PRESSURE  (MPa)": 0,
         "Amplitute internal PRESSURE (MPa)": 0,
         "Mean AXIAL load (N)": "#VALUE!",
@@ -360,7 +390,13 @@
         "Amplitude von Mises (MPa)": 259.8076211353316
       },
       "decision": "d056",
-      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8"
+      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8",
+      "psi_shear_source_precision": {
+        "published_rounded_amplitude_MPa": 150,
+        "original_record_amplitude_MPa": 150.1,
+        "provenance": "Arda Akay, clarification email on original PSI records (2026-11-03)",
+        "correction_type": "published figure rounding only; no load-cell multiplier"
+      }
     },
     {
       "op": "add_case",
@@ -380,9 +416,9 @@
         "B (mm)": "Null",
         "Hole diameter (mm)": 0,
         "Diameter (mm)": 11,
-        "Phase RADIAL load (°)": 0,
-        "Phase AXIAL load (°)": 0,
-        "Phase TORSIONAL load (°)": 0,
+        "Phase RADIAL load (\u00b0)": 0,
+        "Phase AXIAL load (\u00b0)": 0,
+        "Phase TORSIONAL load (\u00b0)": 0,
         "Freq RADIAL load [Hz]": "Null",
         "Freq AXIAL load[Hz]": "Null",
         "Freq TORSIONAL load [Hz]": "Null",
@@ -395,7 +431,7 @@
         "Amplitute AXIAL stress  (MPa)": 0,
         "derived from (AXIAL/BENDING) load": "AXIAL",
         "Mean SHEAR stress  (MPa)": 0,
-        "Amplitute SHEAR stress  (MPa)": 156,
+        "Amplitute SHEAR stress  (MPa)": 155.9,
         "Mean internal PRESSURE  (MPa)": 0,
         "Amplitute internal PRESSURE (MPa)": 0,
         "Mean AXIAL load (N)": "#VALUE!",
@@ -408,7 +444,13 @@
         "Amplitude von Mises (MPa)": 270.19992598074487
       },
       "decision": "d056",
-      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8"
+      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8",
+      "psi_shear_source_precision": {
+        "published_rounded_amplitude_MPa": 156,
+        "original_record_amplitude_MPa": 155.9,
+        "provenance": "Arda Akay, clarification email on original PSI records (2026-11-03)",
+        "correction_type": "published figure rounding only; no load-cell multiplier"
+      }
     },
     {
       "op": "add_case",
@@ -428,9 +470,9 @@
         "B (mm)": "Null",
         "Hole diameter (mm)": 0,
         "Diameter (mm)": 11,
-        "Phase RADIAL load (°)": 0,
-        "Phase AXIAL load (°)": 0,
-        "Phase TORSIONAL load (°)": 90,
+        "Phase RADIAL load (\u00b0)": 0,
+        "Phase AXIAL load (\u00b0)": 0,
+        "Phase TORSIONAL load (\u00b0)": 90,
         "Freq RADIAL load [Hz]": "Null",
         "Freq AXIAL load[Hz]": "Null",
         "Freq TORSIONAL load [Hz]": "Null",
@@ -440,10 +482,10 @@
         "Mean RADIAL stress  (MPa)": 0,
         "Amplitute RADIAL stress  (MPa)": 0,
         "Mean AXIAL stress  (MPa)": 0,
-        "Amplitute AXIAL stress  (MPa)": 233,
+        "Amplitute AXIAL stress  (MPa)": 269.7,
         "derived from (AXIAL/BENDING) load": "AXIAL",
         "Mean SHEAR stress  (MPa)": 0,
-        "Amplitute SHEAR stress  (MPa)": 135,
+        "Amplitute SHEAR stress  (MPa)": 134.7,
         "Mean internal PRESSURE  (MPa)": 0,
         "Amplitute internal PRESSURE (MPa)": 0,
         "Mean AXIAL load (N)": "#VALUE!",
@@ -456,7 +498,21 @@
         "Amplitude von Mises (MPa)": 330.0969554539999
       },
       "decision": "d056",
-      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8"
+      "source": "Janssens 2018 Table 4 p. 4 (N6, N8); Zhu et al. 2019 p. 8; Braun 2024 p. 8",
+      "psi_axial_stress_correction": {
+        "published_rounded_amplitude_MPa": 233,
+        "original_record_amplitude_MPa": 233.35,
+        "multiplier": 1.1558,
+        "applied_amplitude_MPa": 269.7,
+        "provenance": "Arda Akay, clarification email on original PSI records (2026-11-03); originally published as 233 MPa in Janssens et al. (2018)",
+        "rounding": "233.35 * 1.1558 = 269.70593 MPa; use 269.7 MPa, consistent with the source workbook 0.1 MPa precision"
+      },
+      "psi_shear_source_precision": {
+        "published_rounded_amplitude_MPa": 135,
+        "original_record_amplitude_MPa": 134.7,
+        "provenance": "Arda Akay, clarification email on original PSI records (2026-11-03)",
+        "correction_type": "published figure rounding only; no load-cell multiplier"
+      }
     }
   ]
 }
