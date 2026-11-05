@@ -138,6 +138,18 @@ layout, were ported to `multifat`, each port naming its upstream commit.
 
 ### Changed numerically
 
+- `k_MGSE` no longer depends on the model selection: Zhu (2018) Eq. (12) on the Basquin fits is used
+  whenever those fits are identifiable, also in a run that selects MGSE_ZHU without MDC or MMCCM
+  (previously scatter minimisation, e.g. 1.239 instead of 0.988 on Al7075_T6). Full runs are unchanged.
+- L_LI search interval widened from [0, 5] to [0, 20]: the minimum lay outside it on 42CrMo4_QT
+  (L_LI 5.0 -> 7.07, life-scatter STD 1.153 -> 0.942) and 42CrMo4_Reis (5.0 -> 5.36, 0.368 -> 0.341).
+  Interior L_LI values move by at most 3e-6 relative (grid refinement on the wider interval).
+  A scatter minimum on an upper bound that only limits the search (all but a_MSWT = 1) is no longer
+  used: it is recorded as `unidentified`, and models requiring it are skipped with that reason. On
+  Ti6Al4V the wider L_LI interval makes the calibration feasible (L_LI = 11.5) but k_FI and k_FS end
+  at 3, so FIN and FS stay skipped, now with that reason; LI, MGSE_ZHU and MSWT use the calibrated
+  constants instead of their defaults. A model whose master curve gives no life predictions (slope
+  `b >= 0` or `k = -1/b > 15`) is noted in the run report.
 - Design flags of calibrated plane constants: the tension and torsion tests of the scatter
   objective behind a pipeline-calibrated `k_FI`, `k_FS`, `L_LI`, `k_MGSE` or `a_MSWT`, and the
   Basquin tests behind a `k_MGSE` from Zhu (2018) Eq. (12), are now `Flag = 0` for the models that

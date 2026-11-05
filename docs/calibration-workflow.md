@@ -106,8 +106,18 @@ prevents a successful record from being written. No default coefficient is silen
 |---|---|---|
 | `calibrated` | Every requested block was fitted | exit code 0 |
 | `not_applicable` | No plain failure rows to calibrate on: a fatigue-limit dataset takes its constants from the R = -1 limits, a notched-only dataset has none to calibrate | exit code 0 |
-| `infeasible` | A block has no finite objective over its search range, or the workbook has no usable uniaxial subset to fit on. `reason` keeps the failure message; `infeasible` records the block, the parameter and a one-line diagnostic (for example `DP increases with life for all L_LI in [0, 5] (slope +0.09 to +0.41)`), computed only when the fit fails | exit code 1 |
+| `infeasible` | A block has no finite objective over its search range, or the workbook has no usable uniaxial subset to fit on. `reason` keeps the failure message; `infeasible` records the block, the parameter and a one-line diagnostic (for example `DP increases with life for all L_LI in [0, 20] (slope +0.09 to +0.41)`), computed only when the fit fails | exit code 1 |
 | `error` | An unexpected exception, kept with its traceback in the log | exit code 1 |
+
+The search intervals are k_FS, k_FI in [0, 3], L_LI in [0, 20] (widened from [0, 5] in November 2026:
+on both 42CrMo4 datasets the minimum lay just outside it, at 7.07 and 5.36), k_MGSE in [0, 5] and
+a_MSWT in [0, 1]. The lower bound 0 and the upper bound 1 of a_MSWT (a weight) are limits of the
+constants themselves; the other upper bounds only limit the search. A scatter minimum on such a
+search bound is not a calibrated optimum: it is listed under `at_bound` and `unidentified` in the
+sidecar and handed to no model, so a model that requires it is skipped with that reason (Ti6Al4V:
+k_FI and k_FS end at 3 on 0.4 decades of tension lives). A constant on a physical bound is used and
+noted in the run report. A model whose master curve cannot be inverted for life (slope `b >= 0` or
+`k = -1/b > 15`) still runs, with DP errors only; the run report says so.
 
 Calibration stays all-or-nothing per material: an `infeasible` material yields exactly the constants
 it yielded before the status existed, so `1_Ti6Al4V` keeps its Basquin and strain-life estimates and

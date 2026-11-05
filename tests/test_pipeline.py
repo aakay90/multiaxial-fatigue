@@ -94,6 +94,20 @@ def test_workbook_without_design_set_is_rejected(tmp_path):
         run_workbook(wb, models=["FIN"], results_dir=tmp_path / "res")
 
 
+def test_k_mgse_does_not_depend_on_the_model_selection(tmp_path):
+    """Zhu (2018) Eq. (12) on the Basquin fits, whether or not another model needs those fits."""
+    wb = write_workbook(tmp_path / "Mg.xlsx", rows=basquin_rows(sf=1500, b=-0.09, tf=860, b0=-0.07))
+    alone, together = tmp_path / "alone", tmp_path / "together"
+    run_workbook(wb, models=["MGSE_ZHU"], results_dir=alone)
+    run_workbook(wb, models=["MGSE_ZHU", "MDC"], results_dir=together)
+    cal = [
+        json.loads((d / "Mg_calibration.json").read_text(encoding="utf-8"))
+        for d in (alone, together)
+    ]
+    assert cal[0]["source"]["k_MGSE"].startswith("Zhu 2018 Eq. (12)")
+    assert cal[0]["params"]["k_MGSE"] == cal[1]["params"]["k_MGSE"]
+
+
 def test_plane_constant_tests_are_design_points(tmp_path):
     """The tension and torsion tests of the k_FI scatter objective are not assessments."""
     import pandas as pd
@@ -411,3 +425,25 @@ def test_run_workbook_loads_each_workbook_twice_at_most(tmp_path, monkeypatch):
     wb = write_workbook(tmp_path / "A.xlsx")
     run_workbook(wb, models=["CROSSLAND"], results_dir=tmp_path / "res", calibrate=False)
     assert len(calls) <= 2 + 1  # validate, load once, and the one model job (sequential run)
+
+
+def test_run_report_notes_flat_curve_and_bound_constant():
+    """An "ok" result says when it has no life predictions or rests on a bound-limited constant."""
+    from types import SimpleNamespace
+
+    from multifat.cli.pipeline import _life_notes
+    from multifat.cli.run import K_SLOPE_MAX, metric_mode
+    from multifat.models.registry import get_models
+
+    assert metric_mode(-0.1) == ("Nf", pytest.approx(10.0))
+    assert metric_mode(-1.0 / (K_SLOPE_MAX + 1))[0] == "DP_DIFF"
+    assert metric_mode(0.0)[0] == metric_mode(float("nan"))[0] == "DP_DIFF"
+
+    (model,) = get_models(["LI"])
+    flat = SimpleNamespace(fit=lambda suffix: {"b": -0.04})
+    steep = SimpleNamespace(fit=lambda suffix: {"b": -0.1})
+    bound = {"at_bound": {"L_LI": [0.0, 20.0]}}
+    notes = _life_notes(model, flat, "", {"L_LI"}, bound)
+    assert "no life predictions" in notes and "k = -1/b = 25" in notes
+    assert "L_LI at the search bound" in notes
+    assert _life_notes(model, steep, "", set(), bound) == ""
