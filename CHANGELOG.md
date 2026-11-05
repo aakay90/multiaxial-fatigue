@@ -94,10 +94,10 @@ of names and records one distinction FatPy makes; no multifat name was renamed.
 ### Methods
 
 - New criterion `ZHANGYAO`, Zhang & Yao (2011), catalogue N06 (issue #13).
-  - Formulation: a nonlinear combination of the shear amplitude $ and the Goodman-corrected
-    normal stress on the maximum-$ plane.
+  - Formulation: a nonlinear combination of the shear amplitude $C_a$ and the Goodman-corrected
+    normal stress on the maximum-$C_a$ plane.
   - Verification: 50 of the 66 fatigue limits of Tables 3–8 within 0.3 points.
-  - Finding: the maximum-$ plane rule is ill-conditioned for this criterion, so results in
+  - Finding: the maximum-$C_a$ plane rule is ill-conditioned for this criterion, so results in
     out-of-phase loading depend on the tie rule.
   - Guide: `docs/method-guides/ZHANGYAO.md`.
 - New criterion `GAM`, Gonçalves, Araújo & Mamiya (2005), catalogue N08 (issue #13). It is an
