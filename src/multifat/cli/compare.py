@@ -1754,6 +1754,18 @@ def plot_dp_point_vs_fit(
     out_tex.write_text(body.strip(), encoding="utf-8")
 
 
+STATS_COLUMNS = [
+    "Material",
+    "Method",
+    "Metric",
+    "n",
+    "Error_mean",
+    "Error_std",
+    "Within_10pct",
+    "Within_20pct",
+]
+
+
 def compute_stats_table(df: pd.DataFrame, plot_kind: str = "both") -> pd.DataFrame:
     """DP log10 statistics for every slope, plus life errors where they make sense."""
     df = df.copy()
@@ -1780,12 +1792,16 @@ def compute_stats_table(df: pd.DataFrame, plot_kind: str = "both") -> pd.DataFra
             metric_names.append("Error_log10_dp")
         if life_ok and plot_kind in ("both", "life"):
             metric_names.append("Error_ln")
+        if "Error_load" in group:
+            # Load-equivalent error (issue #37): one scale for every method and S-N slope
+            metric_names.append("Error_load")
         for metric_name in metric_names:
             errors = pd.to_numeric(
                 group.get(metric_name, pd.Series(np.nan, index=group.index)),
                 errors="coerce",
             ).to_numpy(dtype=float)
             errors = errors[np.isfinite(errors)]
+            band = np.abs(np.expm1(errors)) if metric_name == "Error_load" else None
             records.append(
                 dict(
                     Material=material,
@@ -1794,25 +1810,24 @@ def compute_stats_table(df: pd.DataFrame, plot_kind: str = "both") -> pd.DataFra
                     n=int(errors.size),
                     Error_mean=float(np.mean(errors)) if errors.size else np.nan,
                     Error_std=(float(np.std(errors, ddof=1)) if errors.size > 1 else np.nan),
+                    # Fractions of tests whose load factor 1/s* is within 10 % and 20 % of 1
+                    Within_10pct=(
+                        float(np.mean(band <= 0.1)) if band is not None and band.size else np.nan
+                    ),
+                    Within_20pct=(
+                        float(np.mean(band <= 0.2)) if band is not None and band.size else np.nan
+                    ),
                 )
             )
     return pd.DataFrame(
         records,
-        columns=["Material", "Method", "Metric", "n", "Error_mean", "Error_std"],
+        columns=STATS_COLUMNS,
     ).sort_values(["Material", "Method", "Metric"])
 
 
 def compute_stats_table_by_role(df: pd.DataFrame, plot_kind: str = "both") -> pd.DataFrame:
     """Separate design residuals from other assessed failures without reclassifying run-outs."""
-    columns = [
-        "Material",
-        "Method",
-        "Metric",
-        "Observation_role",
-        "n",
-        "Error_mean",
-        "Error_std",
-    ]
+    columns = STATS_COLUMNS[:3] + ["Observation_role"] + STATS_COLUMNS[3:]
     if "Flag" in df:
         flag = pd.to_numeric(df["Flag"], errors="coerce")
         partitions = (
@@ -1905,6 +1920,8 @@ def write_stats_table_with_styles(
             metric_cell = r"$\log_{10}(DP_e/DP)$"
         elif metric_raw == "Error_ln_dp":
             metric_cell = r"$Error_{\ln,dp}$"
+        elif metric_raw == "Error_load":
+            metric_cell = r"$\ln(1/s^*)$"
         else:
             metric_cell = r"$Error_{\ln}$"
         color_name = row["PGF_color"]

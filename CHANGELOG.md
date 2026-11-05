@@ -30,6 +30,15 @@ checked against its original publication; changes to numerical outputs are liste
 - Batched plane evaluation and a per-calibration plane cache (bit-identical outputs): a full
   snapshot dropped from about 21 to about 4 minutes before the calibration moved to all planes.
 
+### Load-equivalent error (issue #37)
+
+- Result CSVs gain `Error_load` = ln(1/s*), the log of the factor on the whole load at which the
+  method predicts the observed life (master curve or native law; failures only; not TVEIT2025).
+  It does not depend on the S-N slope (Error_ln = k d e_L) nor on the degree d of the DP
+  (Error_log10_dp = -d e_L / ln 10), so it is the recommended cross-method ranking metric.
+  `multifat-compare` adds its mean, SD and the fractions within +-10 % and +-20 % of the load
+  (`Within_10pct`, `Within_20pct` columns of the statistics tables). Existing columns unchanged.
+
 ### Methods
 
 - Paper-reproduction tests for every registered method in `tests/methods/`, with the transcribed

@@ -248,6 +248,10 @@ class Evaluation:
     aux: list[dict] = field(default_factory=list)
     # Explicit Findley amplitude of the run (see shear_amplitude_for); None for production
     amplitude: dict | None = None
+    # Imported data of the material, for re-evaluating cases at scaled loads (load error)
+    data: Any = None
+    # Fitted constants of the native life law, set by native_lives
+    life_curve: Any = None
     # Aux values of the design points (native-life fit), lined up with cal["series"]["N"]
     design_aux: list[dict] = field(default_factory=list)
     # Cases that fed the material-constant fit: reported as design points (Flag = 0)
@@ -407,6 +411,7 @@ def evaluate_model(
         amplitude=amplitude,
     )
     result.observations = observation_index(data[material])
+    result.data = data
     if require_variant is not None and not native_prediction:
         check_fit(base_name, require_variant, result.cal)
     if hasattr(mdl, "life_fit"):
@@ -516,6 +521,7 @@ def native_lives(ev: Evaluation, variant_key: str, F_d, extra_values):
             [nan_value] * len(F_d),
             [nan_value] * len(ev.runout["values"]),
         )
+    ev.life_curve = life_curve
     dp_aux = ev.design_aux or [{} for _ in range(len(F_d) - len(extra_values))]
     dp_aux = dp_aux + ev.extra["aux"]
 
@@ -583,8 +589,18 @@ def write_native_variant(
     obs = ev.observations
     ids_design = design_identities(ev, variant_key, len(design_cycles)) if obs else None
     os.makedirs(results_dir, exist_ok=True)
+    load_error_d = load_errors(
+        ev,
+        variant_key,
+        design_case_ids(ev, len(design_cycles)),
+        design_cycles,
+        native=True,
+    )
+    load_error = load_errors(ev, variant_key, ev.case_ids, ev.Nexp, native=True)
     return save_fatigue_csv(
         out_dir=str(results_dir),
+        Error_load=load_error,
+        Error_load_design=load_error_d,
         method_name=method_name,
         material_name=ev.material,
         N_exp=ev.Nexp,
@@ -610,6 +626,57 @@ def write_native_variant(
         observation_ids_design=ids_design,
         observation_ids_runout=([obs[("runout", i)] for i in ev.runout["ids"]] if obs else None),
     )
+
+
+def _case_tensors(ev: Evaluation, case_id: int) -> dict:
+    """The load case `case_id` in the layout of ``multifat.eval.endurance``."""
+    S0, E0, S1, E1, H = exp.extract_tensor(
+        ev.data, ev.material, int(case_id), node=1, include_harmonics=True
+    )
+    return {"S0": S0, "E0": E0, "S1": S1, "E1": E1, "H": H, "meta": {}}
+
+
+# Native life laws whose load error is not computed: TVEIT2025 integrates the damage over many
+# cycles per evaluation, so the iteration on the load would be very slow.
+LOAD_ERROR_SKIP = {"TVEIT2025"}
+
+
+def load_errors(ev: Evaluation, variant_key: str, case_ids, lives, *, native: bool) -> list[float]:
+    """Load-equivalent error e_L = ln(1/s*) of each failed case (issue #37); NaN when undefined."""
+    from multifat.eval.endurance import damage
+    from multifat.eval.load_error import master_curve_load_error, native_life_load_error
+
+    if ev.data is None or case_ids is None or ev.base_name in LOAD_ERROR_SKIP:
+        return [float("nan")] * len(lives)
+    errors = []
+    curve = None if native else ev.fit(variant_key)
+    for case_id, Nf in zip(case_ids, lives):
+        case = _case_tensors(ev, case_id)
+        if native:
+            if ev.life_curve is None and hasattr(ev.model, "life_fit"):
+                errors.append(float("nan"))
+                continue
+            errors.append(
+                native_life_load_error(
+                    ev.model, ev.params, case, ev.R_list, ev.life_curve, float(Nf),
+                    variant=variant_key,
+                )
+            )  # fmt: skip
+            continue
+        DP_fit = float(curve["A_surv"]) * float(Nf) ** float(curve["b"])
+        DP = damage(ev.model, ev.params, case, ev.R_list, variant=variant_key)
+        errors.append(
+            master_curve_load_error(
+                ev.model, ev.params, case, ev.R_list, DP, DP_fit, variant=variant_key
+            )
+        )
+    return errors
+
+
+def design_case_ids(ev: Evaluation, n_rows: int):
+    """Case ids of the design rows (standard series, then extra design cases), or None."""
+    case_ids = list(ev.cal.get("design_case_ids", [])) + list(ev.extra["ids"])
+    return case_ids if len(case_ids) == n_rows else None
 
 
 def design_identities(ev: Evaluation, variant_key: str, n_rows: int) -> list[dict] | None:
@@ -811,8 +878,15 @@ def write_variant(
 
     amplitude = ev.amplitude
     label = f"{base_name}.{amplitude['algorithm']}{variant_key}" if amplitude else None
+    n_design = len(np.atleast_1d(N_d))
+    load_error_d = load_errors(
+        ev, variant_key, design_case_ids(ev, n_design), np.atleast_1d(N_d), native=False
+    )
+    load_error = load_errors(ev, variant_key, ev.case_ids, ev.Nexp, native=False)
     csv_path = save_fatigue_csv(
         out_dir=str(results_dir),
+        Error_load=load_error,
+        Error_load_design=load_error_d,
         method_name=model_name,  # keep filename compatibility
         result_label=label,
         material_name=ev.material,
