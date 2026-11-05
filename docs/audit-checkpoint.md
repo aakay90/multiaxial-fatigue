@@ -1,5 +1,25 @@
 # Development continuation checkpoint
 
+## Issue #13 methods merged; integration audit (5 November 2026)
+
+PRs #45 to #49 (GAM, NINIC, GOLOS, MWHS, LIU2025) and #50 (homepage figures) are merged into
+`main`.
+
+An integration audit, `--all` with the new models, found four problems, all fixed before merging:
+1. GOLOS was misclassified as needing strains.
+2. Load-scaling searches failed on trial loads beyond a criterion's domain. Such loads now count
+   as +inf damage and the bracketing accepts an infinite end.
+3. LIU2025 could divide by zero in the Serensen branch. It now raises `LoadingScopeError`.
+4. MWHS was fitted on tension tests although its source calibrates on torsion. It now uses the
+   new `design_loading = "torsion"` option.
+
+Checks: full suite green and CI lint green. The regression snapshot shows no change to existing
+model outputs.
+
+Next exact action: implement further #13 candidates as their papers arrive, refreshing the
+homepage figures each time (rule in `docs/adding-methods.md`). Meanwhile, continue the #32
+guides.
+
 ## Issue #13 new methods from maintainer-supplied papers (5 November 2026)
 
 Five criteria were implemented from the original PDFs, each with a guide, a paper test, a catalogue
