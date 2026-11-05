@@ -96,6 +96,11 @@ checked against its original publication; changes to numerical outputs are liste
     `out_of_scope`) instead of `failed` when a case lies outside the scope.
   - Finding: the text's coefficients for $\kappa = 2$ contradict Eq. (30).
   - Guide: `docs/method-guides/GOLOS.md`.
+- New criterion `MWHS`, the Wu, Li, Fang & Song (2017) modified Wu–Hu–Song strain parameter,
+  catalogue N28 (issue #13).
+  - Formulation: Eq. (19), with the longest-chord shear range.
+  - Verification: Fig. 14 is reproduced, except the normal term at 90°.
+  - Guide: `docs/method-guides/MWHS.md`.
 - Paper-reproduction tests for every registered method in `tests/methods/`, with the transcribed
   tables in `tests/data/papers/` (DOI, table, page). Confirmed paper misprints are strict `xfail`s
   with the reason (e.g. Papadopoulos 1997 Table 1 rows computed with sin δ, P1).

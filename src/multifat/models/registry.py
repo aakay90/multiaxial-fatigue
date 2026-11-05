@@ -31,6 +31,7 @@ from .cp_methods.mwcm import MWCM
 from .cp_methods.mmccm import MMCCM
 from .cp_methods.liu_vse import LiuVSE
 from .cp_methods.ninic import Ninic
+from .cp_methods.mwhs import MWHS
 
 # Additional critical-plane formulations
 from .cp_methods.mgse_yu import MGSE_Yu
@@ -88,6 +89,7 @@ def _available_cp_methods():
         "GSE": GSE(),
         "GSA": GSA(),
         "NINIC": Ninic(),
+        "MWHS": MWHS(),
     }
 
 

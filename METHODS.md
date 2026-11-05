@@ -24,10 +24,10 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Nonlocal and gradient | 0 | 0 | 7 | 0 | 7 |
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
-| Strain based | 3 | 0 | 10 | 2 | 15 |
+| Strain based | 4 | 0 | 9 | 2 | 15 |
 | Stress based | 2 | 0 | 11 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 32 | 2 | 78 | 5 | 117 |
+| **TOTAL** | 33 | 2 | 77 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -1749,7 +1749,7 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 | [I_LIU2021](#i_liu2021) | Liu et al. (2021) modified shear amplitude | Requires review | basic_numerical_tests | Existing | Yes |
 | [I_GSA](#i_gsa) | Ince–Glinka generalized strain amplitude | Fully implemented | basic_numerical_tests | Existing | Yes |
 | [N27](#n27) | Wu–Hu–Song (WHS) | Not implemented | not_tested | Medium | Yes |
-| [N28](#n28) | Modified WHS (MWHS) | Not implemented | not_tested | Medium | Yes |
+| [N28](#n28) | Modified Wu–Hu–Song (MWHS) | Fully implemented | reference_examples_reproduced | Medium | Yes |
 | [N29](#n29) | Original Kandil–Brown–Miller (KBM) | Not implemented | not_tested | Low | Yes |
 | [N31](#n31) | Load-path-sensitive modified fatigue parameter | Not implemented | not_tested | Medium | Yes |
 | [N46](#n46) | Wang–Brown strain-based assessment, selected original version | Not implemented | not_tested | Low | Yes |
@@ -1824,12 +1824,12 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 
 ### N28
 
-**Modified WHS (MWHS)** — ZR Wu, X Li, L Fang, YD Song (2017)
+**Modified Wu–Hu–Song (MWHS)** — ZR Wu, X Li, L Fang, YD Song (2017)
 
 | Field | Evidence / task |
 | --- | --- |
 | Reference / DOI | Evaluation of multiaxial fatigue life prediction criteria for Ni-based superalloy GH4169, Proceedings of the Institution of Mechanical Engineers, Part C: Journal of Mechanical Engineering Science; https://doi.org/10.1177/0954406217708214 |
-| WG4.3 completeness / validation | Not implemented; not_tested |
+| WG4.3 completeness / validation | Fully implemented; reference_examples_reproduced |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External sources | no_accessible_source_identified; not integrated or independently validated |
 | Complete scientific and implementation record | [Inputs, formulation, scope, code, tests, validation, missing work and Issues](docs/methods/strain-based.md#n28) |
