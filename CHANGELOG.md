@@ -38,6 +38,15 @@ checked against its original publication; changes to numerical outputs are liste
   `Survival_probability` column, the sidecar records it, and `multifat-compare` refuses to mix
   probabilities. Native life laws and fatigue-limit indices are not shifted.
 
+### Load-equivalent error (issue #37)
+
+- Result CSVs gain `Error_load` = ln(1/s*), the log of the factor on the whole load at which the
+  method predicts the observed life (master curve or native law; failures only; not TVEIT2025).
+  It does not depend on the S-N slope (Error_ln = k d e_L) nor on the degree d of the DP
+  (Error_log10_dp = -d e_L / ln 10), so it is the recommended cross-method ranking metric.
+  `multifat-compare` adds its mean, SD and the fractions within +-10 % and +-20 % of the load
+  (`Within_10pct`, `Within_20pct` columns of the statistics tables). Existing columns unchanged.
+
 ### Calibration history (issue #15)
 
 - Pipeline calibrations get a persistent `calibration_id` (UTC time + content signature) and are
