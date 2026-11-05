@@ -6,6 +6,8 @@ and README display:
 2. Multiaxial fatigue life prediction correlation (log-log scatter with F2/F3 bands)
 3. Model benchmark error and systematic bias (s_ln dispersion vs mu_ln bias)
 4. Biaxial fatigue limit failure envelopes in normalized stress space
+5. Critical-plane damage on the sphere of plane normals (README header)
+6. Method ranking by the load-equivalent error across materials
 """
 
 import sys
@@ -21,6 +23,8 @@ from examples.plot_benchmark_error import plot_benchmark_error
 from examples.plot_damage_polar import plot_critical_plane_polar
 from examples.plot_fatigue_limit import plot_fatigue_limit_envelopes
 from examples.plot_life_correlation import plot_life_correlation
+from examples.plot_damage_sphere import plot_damage_sphere
+from examples.plot_load_error_ranking import plot_load_error_ranking
 
 DOCS_IMG_DIR = REPO_ROOT / "docs" / "images"
 
@@ -33,20 +37,28 @@ def generate_all_gallery_plots(target_dir: Path = DOCS_IMG_DIR) -> List[Path]:
     print("Generating multiaxial fatigue visual gallery...")
 
     p1 = plot_critical_plane_polar(out_path=target_dir / "critical_plane_polar.png")
-    print(f"  [1/4] Polar damage landscape: {p1}")
+    print(f"  [1/6] Polar damage landscape: {p1}")
     generated.append(p1)
 
     p2 = plot_life_correlation(out_path=target_dir / "life_prediction_correlation.png")
-    print(f"  [2/4] Life prediction correlation: {p2}")
+    print(f"  [2/6] Life prediction correlation: {p2}")
     generated.append(p2)
 
     p3 = plot_benchmark_error(out_path=target_dir / "model_benchmark_error.png")
-    print(f"  [3/4] Model benchmark error: {p3}")
+    print(f"  [3/6] Model benchmark error: {p3}")
     generated.append(p3)
 
     p4 = plot_fatigue_limit_envelopes(out_path=target_dir / "fatigue_limit_envelopes.png")
-    print(f"  [4/4] Fatigue limit envelopes: {p4}")
+    print(f"  [4/6] Fatigue limit envelopes: {p4}")
     generated.append(p4)
+
+    p5 = plot_damage_sphere(out_path=target_dir / "critical_plane_sphere.png")
+    print(f"  [5/6] Critical-plane damage sphere: {p5}")
+    generated.append(p5)
+
+    p6 = plot_load_error_ranking(out_path=target_dir / "load_error_ranking.png")
+    print(f"  [6/6] Load-equivalent error ranking: {p6}")
+    generated.append(p6)
 
     print("Gallery generation complete! All figures saved.")
     return generated
