@@ -31,6 +31,7 @@ The most widely used criteria are documented first.
 | [Ince–Glinka GSE](GSE.md) | `GSE` | Critical plane, energy | $\tau_{\max}\gamma_{a} + \sigma_{n,\max}\varepsilon_{n,a}$ (+ plastic terms) (MPa) | `E`, `nu` |
 | [Ince–Glinka GSA](GSA.md) | `GSA` | Critical plane, strain | $\tau_{\max}\gamma_{a}/\tau_f' + \sigma_{n,\max}\varepsilon_{n,a}/\sigma_f'$ (+ plastic terms) (–) | `E`, `nu`; `sigma_f`, `tau_f` or `Su` |
 | [Liu virtual strain energy](VSE.md) | `VSE`, `VSE_ext` | Critical plane, energy | $\Delta\sigma_n\Delta\varepsilon_n + \Delta\tau\,\Delta(\gamma/2)$ (MPa) | `E`, `nu`; `vse_mode` |
+| [Ninić Damage Function](NINIC.md) | `NINIC` | Critical plane, stress | $\sqrt{(\tau_a/t_{-1})^2 + k(\sigma_{n,\max}/f_{-1})^2}$ (index) | `Sigm1`, `Taum1`; `k_NIN` |
 | [Matake](MATAKE.md) | `MATAKE`, `MATAKE_ext` | Critical plane, stress | $\tau_a + (2t_{-1}/f_{-1} - 1)\,\sigma_{n,\max}$ (MPa) | `Sigm1`, `Taum1` |
 | [McDiarmid](MCD.md) | `MCD`, `MCD_ext` | Critical plane, stress | $\tau_a + t_{-1}\sigma_{n,\max}/(2S_u)$ (MPa) | `Taum1`, `Su` |
 | [Modified Wöhler Curve Method](MWCM.md) | `MWCM` | Critical plane, stress | $\tau_a/\tau_{A,\mathrm{Ref}}(\rho)$ (index) | `Sigm1`, `Taum1` |

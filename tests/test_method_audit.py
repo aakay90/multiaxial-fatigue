@@ -67,6 +67,9 @@ class MethodAuditTests(unittest.TestCase):
             MWCM=ta / (145 - sn / ta * (145 - 240 / 2)),
             MMCCM=1.0 / float(mmccm_life(ga, sn / ta, _mmccm_constants(p))),
             VSE=(2 * sn) * (2 * ea) + (2 * ta) * ga,
+            NINIC=np.sqrt(
+                (ta / 145) ** 2 + (240 / 145) ** 2 * (1 - (120 / 145) ** 2) * (sn / 240) ** 2
+            ),
         )
         self.assertEqual(set(expected), set(_available_cp_methods()))
         for name, value in expected.items():

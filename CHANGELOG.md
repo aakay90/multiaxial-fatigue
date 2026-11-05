@@ -80,6 +80,15 @@ checked against its original publication; changes to numerical outputs are liste
   - Verification: Tables 1–4 reproduce their 14 in-phase rows. The 27 out-of-phase rows of the
     tables used a phase-free peak principal stress, contrary to Eq. (11); they are strict xfails.
   - Guide: `docs/method-guides/GAM.md`.
+- New criterion `NINIC`, the Ninić (2006) Damage Function, catalogue N11 (issue #13).
+  - Formulation: a quadratic combination of $\tau_a/T_e$ and $\sigma_{n,\max}/S_e$, maximised
+    over all planes in three dimensions.
+  - Verification against the tables: 29 of 32 full-search rows of Tables 2–4 within 0.08 points,
+    and Table 5 within 0.6 points.
+  - Printed planes that are not the maximum of $D$, and load misprints, are strict xfails.
+  - Finding: Eq. (4) for $k$ calibrates the uniaxial limit only for $S_e/T_e \ge \sqrt2$, and a
+    warning is issued below that ratio.
+  - Guide: `docs/method-guides/NINIC.md`.
 - Paper-reproduction tests for every registered method in `tests/methods/`, with the transcribed
   tables in `tests/data/papers/` (DOI, table, page). Confirmed paper misprints are strict `xfail`s
   with the reason (e.g. Papadopoulos 1997 Table 1 rows computed with sin δ, P1).
