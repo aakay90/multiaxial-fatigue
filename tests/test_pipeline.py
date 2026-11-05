@@ -261,9 +261,27 @@ def test_constants_from_our_sidecar(tmp_path):
         ),
         encoding="utf-8",
     )
+    # A sidecar without the provenance needed to judge it is rejected (issue #15) ...
+    with pytest.raises(ValueError, match="insufficiently documented"):
+        run_workbook(wb, models=["FIN"], results_dir=tmp_path / "res", constants=side)
+    # ... a documented one is reused
+    from multifat.imp.experimental_data import load_material_workbook
+    from multifat.models.references import IMPLEMENTATION_REVISION
+    from multifat.report.subsets import dataset_fingerprint
+
+    (block,) = load_material_workbook(wb).values()
+    record = json.loads(side.read_text(encoding="utf-8"))
+    record["provenance"].update(
+        implementation_revision=IMPLEMENTATION_REVISION,
+        failure_fingerprint=dataset_fingerprint(block),
+    )
+    side.write_text(json.dumps(record), encoding="utf-8")
     run_workbook(wb, models=["FIN"], results_dir=tmp_path / "res", constants=side)
     out = json.loads((tmp_path / "res" / "Side_calibration.json").read_text(encoding="utf-8"))
     assert out["params"]["k_FI"] == 0.35
+    # same failures, but a record older than the procedure field is flagged, not rejected
+    assert "calibration procedure 1" in out["constants_source"]["warning"]
+    assert "other failure data" not in out["constants_source"]["warning"]
 
 
 def test_record_for_other_material_rejected(tmp_path):
