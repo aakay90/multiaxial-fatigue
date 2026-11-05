@@ -17,6 +17,14 @@ p, q, r are obtained on the design points (uniaxial tension, R = -1) via linear 
 relative life error, since Eq. (38) is linear in p, q, r (repository choice: the paper fits them to one
 S-N curve without stating an objective). Erratum: the worked example reports b = 775 MPa, whereas
 Eq. (10) yields sqrt(pi) 426 = 755 MPa; only 755 reproduces the printed T_Slim = 633 MPa.
+
+Repository choices:
+  - p, q, r fitted by linear least squares on the relative life error of at least three uniaxial
+    R = -1 design tests above the limit (the paper states no objective);
+  - below the limit the native life is infinite and is reported as such;
+  - the critical plane maximises T_S on the sphere grid with pattern-search refinement.
+
+User guide: docs/method-guides/MOREL.md.
 """
 
 from __future__ import annotations
