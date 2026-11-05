@@ -180,7 +180,8 @@ def load_factor(
     lo, hi = (1.0, 2.0) if r1 < 0 else (0.5, 1.0)
     for _ in range(60):  # grow or shrink the bracket until it straddles the root
         r_lo, r_hi = residual(lo), residual(hi)
-        if np.isfinite(r_lo) and np.isfinite(r_hi) and r_lo <= 0.0 <= r_hi:
+        # r_hi may be +inf: a trial load beyond the criterion's domain (scaled_damage)
+        if np.isfinite(r_lo) and not np.isnan(r_hi) and r_lo <= 0.0 <= r_hi:
             break
         lo, hi = (hi, 2.0 * hi) if r1 < 0 else (0.5 * lo, lo)
     else:

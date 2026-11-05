@@ -127,3 +127,22 @@ def test_load_scaling_treats_out_of_scope_trial_loads_as_infinite_damage():
     case = {"S0": S, "S1": -S, "E0": Z, "E1": Z, "H": {"S_mean": Z, "S_sin": S, "S_cos": Z}}
     assert scaled_damage(Bounded(), {}, case, 1.2, None) == pytest.approx(120.0)
     assert scaled_damage(Bounded(), {}, case, 2.0, None) == float("inf")
+
+
+def test_load_factor_brackets_against_an_infinite_upper_end():
+    from multifat.eval.endurance import load_factor
+
+    class Bounded:
+        name = "BOUNDED"
+
+        def evaluate_case(self, *, S0, E0, S1, E1, params, R_list=None, harmonics=None):
+            from multifat.models.base import CaseResult
+
+            amp = float(np.abs(harmonics["S_sin"]).max())
+            if amp > 150.0:
+                raise LoadingScopeError("BOUNDED: beyond the domain")
+            return CaseResult(values={"": amp})
+
+    S = bending_torsion(100.0, 0.0)
+    case = {"S0": S, "S1": -S, "E0": Z, "E1": Z, "H": {"S_mean": Z, "S_sin": S, "S_cos": Z}}
+    assert load_factor(Bounded(), {}, case, 140.0, None) == pytest.approx(1.4, rel=1e-9)
