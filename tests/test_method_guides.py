@@ -106,8 +106,6 @@ PENDING_DOCSTRINGS = {
     "invariant_methods/papadopoulos_panoskaltsis",
     "invariant_methods/pbp",
     "invariant_methods/vu_halm_nadot",
-    "integral_methods/bohme_papuga",
-    "integral_methods/caim",
     "integral_methods/doudard",
     "integral_methods/flaceliere_morel",
     "integral_methods/morel",

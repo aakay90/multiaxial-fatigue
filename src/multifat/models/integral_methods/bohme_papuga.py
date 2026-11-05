@@ -1,7 +1,21 @@
-"""Boehme-Papuga (BP) integral stress criterion.
+"""Boehme-Papuga (BP) integral stress criterion, Boehme & Papuga (2024), doi:10.1111/ffe.14281.
 
-Equation (6) and the BP coefficients in Boehme, Papuga & Lange (2026),
-doi:10.1111/ffe.70244. The input is a single-harmonic stress history.
+Equation (6) and the BP coefficients in Boehme, Papuga & Lange (2026), doi:10.1111/ffe.70244::
+
+    sigma_eq^2 = <a tau_a^2 + b sigma_a^2 + c tau_a tau_m + d sigma_a sigma_m>   (sphere average)
+    a = 9/2 (kappa^2 - 4/3),  b = 3 (3 - kappa^2),  kappa = s_-1 / t_-1
+    c = 5/2 kappa^2 ((2 t_-1 / t_0)^2 - 1),  d = 5 ((2 s_-1 / s_0)^2 - 1 - 2 c / 15)
+
+with s_0, t_0 the R = 0 strengths as maximum stresses, estimated by Eqs. (1)-(2) when missing.
+The returned damage parameter is sigma_eq / s_-1. The input is a single-harmonic stress history.
+
+Repository choices:
+  - tau_a is the minimum-circumscribed-circle radius of the shear ellipse on each plane;
+  - 24 x 48 Gauss-Legendre/azimuth quadrature instead of the MATLAB angular grid;
+  - a negative integral is clipped to zero; the admissible kappa range is not enforced;
+  - the index is used as the damage parameter of the shared master curve DP = A N^b.
+
+User guide: docs/method-guides/BP.md.
 """
 
 from functools import lru_cache
