@@ -473,7 +473,16 @@ def run_workbook(
     requested = select_method_variants(models, all_variants=all_variants)
     selected = list(dict.fromkeys(request.base_name for request in requested))
     data, _ = runmod.load_material(workbook)
-    if not data[material]["cases"]:  # validated: a fatigue-limit dataset
+    # Explicit workflow and observation roles from the shared importer (issue #18)
+    from multifat.imp.classification import classify_dataset
+
+    classification = classify_dataset(data[material], material)
+    (results_dir / f"{material}_classification.json").write_text(
+        json.dumps(classification, indent=1, default=float), encoding="utf-8"
+    )
+    if classification["workflow"] not in ("fatigue_life", "fatigue_limit"):
+        raise WorkbookError(workbook.name, "", "", "; ".join(classification["reasons"]))
+    if classification["workflow"] == "fatigue_limit":
         results, sidecar = _evaluate_fatigue_limit(workbook, material, requested, results_dir, jobs)
         sidecar["provenance"] = provenance(workbook, data, survival_probability)
         sidecar["status"] = "not_applicable"
