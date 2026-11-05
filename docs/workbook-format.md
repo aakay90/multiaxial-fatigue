@@ -141,6 +141,7 @@ constants are missing is skipped and reported; the other models still run.
 | DANGVAN | `Sigm1`, `Taum1` | - |
 | CROSSLAND | `Sigm1`, `Taum1` | - |
 | GAM | `Sigm1`, `Taum1` | - |
+| GOLOS | `Sigm1`, `Taum1` | - |
 | SINES | `Sigm1`, `Su`, `Taum1` | - |
 | PAPADOPOULOS | `Sigm1`, `Taum1` | - |
 | PCR | `Sigm1`, `Taum1` | `Sig0`: Boehme et al. 2026 Eq. (1) from Su and Sigm1; `Su`: only to estimate Sig0 |
