@@ -93,11 +93,8 @@ HELPER_MODULES = {
 # fails if a listed module already complies, so this list can only shrink.
 PENDING_DOCSTRINGS = {
     "cp_methods/car_spa",
-    "cp_methods/gsa",
-    "cp_methods/liu_vse",
     "cp_methods/mdc",
     "cp_methods/mgse_zhu",
-    "cp_methods/mkbm",
     "cp_methods/mmccm",
     "cp_methods/mswt",
     "invariant_methods/coin_liwi",
