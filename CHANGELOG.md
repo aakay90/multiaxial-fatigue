@@ -56,6 +56,14 @@ checked against its original publication; changes to numerical outputs are liste
   flagged. The run report gains a `calibration_id` column; sidecars record
   `calibration_procedure` (2). Numerical results unchanged.
 
+### Dataset workflow classification (issue #18)
+
+- `multifat.imp.classification.classify_dataset` assigns each workbook a workflow
+  (`fatigue_life`, `fatigue_limit`, `ambiguous`, `out_of_scope`) and each plain observation a role
+  (`design`, `assessment`, `censored`, `limit_state`); the pipeline writes
+  `<MATERIAL>_classification.json` and routes on it, with the previous routing preserved.
+  Run-outs below the reference life of the Summary limits are reported (25CrMo4: all 11).
+
 ### Methods
 
 - Paper-reproduction tests for every registered method in `tests/methods/`, with the transcribed
