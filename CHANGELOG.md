@@ -73,6 +73,13 @@ checked against its original publication; changes to numerical outputs are liste
 
 ### Methods
 
+- New criterion `GAM`, Gonçalves, Araújo & Mamiya (2005), catalogue N08 (issue #13). It is an
+  endurance criterion for hard metals.
+  - Formulation: the prismatic-hull deviatoric amplitude plus the maximum principal stress over the
+    cycle, Eq. (11); the constants come from $f_{-1}$ and $t_{-1}$.
+  - Verification: Tables 1–4 reproduce their 14 in-phase rows. The 27 out-of-phase rows of the
+    tables used a phase-free peak principal stress, contrary to Eq. (11); they are strict xfails.
+  - Guide: `docs/method-guides/GAM.md`.
 - Paper-reproduction tests for every registered method in `tests/methods/`, with the transcribed
   tables in `tests/data/papers/` (DOI, table, page). Confirmed paper misprints are strict `xfail`s
   with the reason (e.g. Papadopoulos 1997 Table 1 rows computed with sin δ, P1).

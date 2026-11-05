@@ -139,6 +139,7 @@ constants are missing is skipped and reported; the other models still run.
 | TVEIT2025 | `A_TVEIT`, `C_TVEIT`, `K_TVEIT`, `L_TVEIT` | `Sigm1_TVEIT`: Sigm1 of the workbook; `Taum1_TVEIT`: Taum1 of the workbook; `npts_TVEIT`: 1001; `min_blocks_TVEIT`: 8; `max_blocks_TVEIT`: 10000; `tol_alpha_TVEIT`: 1e-06; `tol_damage_TVEIT`: 1e-05 |
 | DANGVAN | `Sigm1`, `Taum1` | - |
 | CROSSLAND | `Sigm1`, `Taum1` | - |
+| GAM | `Sigm1`, `Taum1` | - |
 | SINES | `Sigm1`, `Su`, `Taum1` | - |
 | PAPADOPOULOS | `Sigm1`, `Taum1` | - |
 | PCR | `Sigm1`, `Taum1` | `Sig0`: Boehme et al. 2026 Eq. (1) from Su and Sigm1; `Su`: only to estimate Sig0 |
