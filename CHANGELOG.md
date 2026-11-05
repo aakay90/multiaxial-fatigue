@@ -47,6 +47,13 @@ checked against its original publication; changes to numerical outputs are liste
   `multifat-compare` adds its mean, SD and the fractions within +-10 % and +-20 % of the load
   (`Within_10pct`, `Within_20pct` columns of the statistics tables). Existing columns unchanged.
 
+### README figures
+
+- Header figure: Findley damage on the sphere of plane normals with the critical plane
+  (`examples/plot_damage_sphere.py`); gallery item 5: all methods ranked by the RMS of the
+  load-equivalent error across the six life datasets (`examples/plot_load_error_ranking.py`, data in
+  `examples/data/load_error_ranking.csv`). Both are produced by `examples/generate_gallery.py`.
+
 ### Methods
 
 - Paper-reproduction tests for every registered method in `tests/methods/`, with the transcribed

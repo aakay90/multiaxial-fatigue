@@ -17,6 +17,12 @@ on its review article in multiaxial fatigue assessment, still in preparation. Sc
 constant-amplitude, mainly high-cycle fatigue of plain (smooth) specimens under proportional and
 non-proportional loading, without notches, cracks or significant stress gradients.
 
+![Findley damage over all material planes](docs/images/critical_plane_sphere.png)
+
+*A critical-plane criterion evaluates the damage on every material plane and selects the most
+damaged one ($\mathbf{n}^*$); here Findley under in-phase and 90° out-of-phase tension-torsion. All
+methods are then compared on one scale: see the [method ranking](#5-method-ranking-by-the-load-equivalent-error).*
+
 ## Quick start
 
 See [method-level comparison capabilities](docs/comparison-capabilities.md) for which models support direct fatigue-life predictions, calibrated life estimates, and meaningful DP-based errors. Use `multifat-compare --plot-kind life`, `--plot-kind damage`, or `--plot-kind both` to choose the output figures.
@@ -131,6 +137,20 @@ $\sigma_{-1}$), Crossland and Findley. Only the two calibration points are shown
 combined-loading fatigue-limit tests.
 
 ![Multiaxial Fatigue Limit Envelopes](docs/images/fatigue_limit_envelopes.png)
+
+### 5. Method ranking by the load-equivalent error
+Every method on every life dataset, on one scale: the load-equivalent error $e_L = \ln(1/s^*)$,
+where $s^*$ is the factor on the whole load at which the method predicts the observed life. Unlike
+the life error, it does not grow with the flatness of the S-N curve nor with the degree of the damage
+parameter, and it also covers native-life methods ([comparison capabilities](docs/comparison-capabilities.md#load-equivalent-error-the-cross-method-ranking-metric)).
+Cells give the RMS of $e_L$ on the assessed failures (bias and scatter; 0.10 is a typical 10 % load
+misjudgement); rows are ordered by mean rank. Constants and master curves are calibrated on each
+dataset's uniaxial R = -1 tests, so this is a like-for-like comparison, not an independent
+validation ([issue #14](https://github.com/andreachiocca/multiaxial-fatigue/issues/14)); on
+Ti6Al4V and Ti6Al4V_Berto all assessed tests are torsional. Data in
+`examples/data/load_error_ranking.csv`, rebuilt with `examples/build_load_error_ranking.py`:
+
+![Method ranking by the load-equivalent error](docs/images/load_error_ranking.png)
 
 ## Method coverage
 
