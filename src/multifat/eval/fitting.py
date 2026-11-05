@@ -51,3 +51,23 @@ def fit_power_law_with_survival_std(Nf, DP, stdnum=0.0):
         n=int(Nf.size),
         R2_log=r2,
     )
+
+
+def stdnum_for_survival(P_s: float) -> float:
+    """Number of standard deviations z = Phi^-1(P_s) for a survival probability P_s.
+
+    Statistical model of the master curve: ln DP = ln A + b ln N + e, with e normal and the
+    standard deviation estimated from the design residuals (STD_ln_DP). For a decreasing curve
+    (b < 0) the curve shifted down by z STD_ln_DP gives, at a given DP, the life
+    N_Ps = N_50 exp(-z STD), i.e. the life that a fraction P_s of specimens exceeds under the same
+    assumption with STD = STD_ln_DP / |b|. P_s is a survival probability of the population, not a
+    confidence level: the scatter is estimated from few tests and no tolerance factor is applied.
+    P_s = 0.5 gives the median curve (z = 0). Only 0.5 <= P_s < 1 is accepted, since the shift is
+    defined downwards.
+    """
+    from statistics import NormalDist
+
+    P_s = float(P_s)
+    if not (np.isfinite(P_s) and 0.5 <= P_s < 1.0):
+        raise ValueError(f"the survival probability P_s must satisfy 0.5 <= P_s < 1; got {P_s}")
+    return float(NormalDist().inv_cdf(P_s))

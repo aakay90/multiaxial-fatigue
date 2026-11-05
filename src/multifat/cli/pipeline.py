@@ -28,6 +28,7 @@ from pathlib import Path
 
 from multifat.cli import run as runmod
 import multifat.imp.experimental_data as exp
+from multifat.eval.fitting import stdnum_for_survival
 from multifat.imp.schema import WorkbookError, material_id, workbook_files
 from multifat.models.errors import MissingParamsError
 
@@ -120,7 +121,18 @@ def _annotate_calibration(outcome: Outcome, model, calibration: dict) -> Outcome
 
 
 def _evaluate_base_core(job: tuple) -> list[Outcome]:
-    workbook, base_name, dest, overrides, design_ids, why, make_plots, calibration, suffixes = job
+    (
+        workbook,
+        base_name,
+        dest,
+        overrides,
+        design_ids,
+        why,
+        make_plots,
+        calibration,
+        suffixes,
+        survival_probability,
+    ) = job
     start = time.perf_counter()
     adopted: list[str] = []
     try:
@@ -155,7 +167,12 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
         # Tests underlying a fitted constant become design points of this model, not predictions.
         design_points = sorted({i for key in adopted for i in design_ids.get(key, [])})
         evaluation = runmod.evaluate_model(
-            data, material, base_name, params, extra_design_ids=design_points
+            data,
+            material,
+            base_name,
+            params,
+            extra_design_ids=design_points,
+            survival_probability=survival_probability,
         )
     except MissingParamsError as exc:
         explanations = sorted({why[key] for key in exc.missing if key in why})
@@ -329,7 +346,7 @@ def load_constants(path: Path, material: str, n_failures: int | None = None) -> 
     return constants, origin
 
 
-def provenance(workbook: Path, data: dict | None = None) -> dict:
+def provenance(workbook: Path, data: dict | None = None, survival_probability: float = 0.5) -> dict:
     """What produced a run: the input file, the observations, the code and the numerical settings."""
     import numpy as np
 
@@ -361,7 +378,8 @@ def provenance(workbook: Path, data: dict | None = None) -> dict:
         "settings": {
             "plane_grid": [runmod.DCMESH_N1, runmod.DCMESH_N2],
             "refined_plane_search": True,
-            "master_curve_stdnum": runmod.STDNUM,
+            "master_curve_stdnum": stdnum_for_survival(survival_probability),
+            "master_curve_survival_probability": survival_probability,
             "flat_curve_k_max": runmod.K_SLOPE_MAX,
         },
     }
@@ -394,7 +412,9 @@ def run_workbook(
     calibrate: bool = True,
     plots: bool = False,
     constants: Path | None = None,
+    survival_probability: float = 0.5,
 ) -> list[Outcome]:
+    stdnum_for_survival(survival_probability)  # reject invalid values before any work
     results_dir.mkdir(parents=True, exist_ok=True)
     material = material_id(workbook.stem)
 
@@ -410,7 +430,7 @@ def run_workbook(
     data, _ = runmod.load_material(workbook)
     if not data[material]["cases"]:  # validated: a fatigue-limit dataset
         results, sidecar = _evaluate_fatigue_limit(workbook, material, requested, results_dir, jobs)
-        sidecar["provenance"] = provenance(workbook, data)
+        sidecar["provenance"] = provenance(workbook, data, survival_probability)
         sidecar["status"] = "not_applicable"
         sidecar["reason"] = "fatigue-limit dataset: constants from the R = -1 limits"
         if constants:
@@ -451,7 +471,7 @@ def run_workbook(
     if supplied:
         sidecar["params"] = {**sidecar.get("params", {}), **supplied}
         sidecar["constants_source"] = source
-    sidecar["provenance"] = provenance(workbook, data)
+    sidecar["provenance"] = provenance(workbook, data, survival_probability)
     (results_dir / f"{material}_calibration.json").write_text(
         json.dumps(sidecar, indent=1, default=float), encoding="utf-8"
     )
@@ -474,6 +494,7 @@ def run_workbook(
             plots,
             calibration,
             tuple(suffixes),
+            survival_probability,
         )
         for base_name, suffixes in suffixes_by_base.items()
     ]
@@ -801,6 +822,13 @@ def main(cli_args=None) -> None:
     parser.add_argument("--no-compare", action="store_true")
     parser.add_argument("--plots", action="store_true")
     parser.add_argument(
+        "--survival-probability",
+        type=float,
+        default=0.5,
+        help="survival probability P_s of the master curves, 0.5 <= P_s < 1 (0.5: median); "
+        "native life laws are not shifted",
+    )
+    parser.add_argument(
         "--constants",
         type=Path,
         default=None,
@@ -854,6 +882,7 @@ def main(cli_args=None) -> None:
                 calibrate=not args.no_calibrate,
                 plots=args.plots,
                 constants=args.constants,
+                survival_probability=args.survival_probability,
             )
         except WorkbookError as exc:
             print(f"   workbook rejected: {exc}")

@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 import warnings
+from statistics import NormalDist
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -22,6 +23,7 @@ from multifat.imp.schema import (
 )
 from multifat.planes.sampling import build_R_list
 from multifat.eval.calibration import collect_uniaxial_series_and_fit
+from multifat.eval.fitting import stdnum_for_survival
 from multifat.report.export_csv import save_fatigue_csv
 from multifat.report.subsets import observation_index
 from multifat.models.errors import MissingParamsError, NativeLifeError
@@ -52,6 +54,8 @@ SHEAR_AMPLITUDE_ALGORITHM = "method_default"
 DCMESH_N1 = 20
 DCMESH_N2 = 2 * DCMESH_N1
 STDNUM = 0
+# Survival probability P_s of the master curve (issue #16); 0.5 is the median curve, STDNUM = 0.
+SURVIVAL_PROBABILITY = 0.5
 MAKE_PLOTS = True
 K_SLOPE_MAX = 15.0
 
@@ -248,6 +252,9 @@ class Evaluation:
     aux: list[dict] = field(default_factory=list)
     # Explicit Findley amplitude of the run (see shear_amplitude_for); None for production
     amplitude: dict | None = None
+    # Master-curve shift: z standard deviations of ln DP, and the survival probability Phi(z)
+    stdnum: float = 0.0
+    survival_probability: float = 0.5
     # Aux values of the design points (native-life fit), lined up with cal["series"]["N"]
     design_aux: list[dict] = field(default_factory=list)
     # Cases that fed the material-constant fit: reported as design points (Flag = 0)
@@ -354,7 +361,8 @@ def evaluate_model(
     R_list=None,
     *,
     require_variant: str | None = None,
-    stdnum: float = STDNUM,
+    stdnum: float | None = None,
+    survival_probability: float | None = None,
     extra_design_ids=(),
     shear_amplitude_algorithm: str = "method_default",
 ) -> Evaluation:
@@ -363,6 +371,12 @@ def evaluate_model(
     `extra_design_ids` lists cases that fed the material constants (e.g. the torsion tests
     behind a fitted tau_f, b0): they are reported as design points rather than predictions.
     """
+    if stdnum is None:
+        if survival_probability is None:
+            survival_probability = SURVIVAL_PROBABILITY
+        stdnum = stdnum_for_survival(survival_probability)
+    elif survival_probability is not None:
+        raise ValueError("give either stdnum or survival_probability, not both")
     if R_list is None:
         R_list = build_R_list(n1=DCMESH_N1, n2=DCMESH_N2)
     amplitude = shear_amplitude_for(base_name, shear_amplitude_algorithm)
@@ -405,6 +419,8 @@ def evaluate_model(
         calibrations[base_name],
         model=mdl,
         amplitude=amplitude,
+        stdnum=float(stdnum),
+        survival_probability=float(NormalDist().cdf(stdnum)),
     )
     result.observations = observation_index(data[material])
     if require_variant is not None and not native_prediction:
@@ -585,6 +601,7 @@ def write_native_variant(
     os.makedirs(results_dir, exist_ok=True)
     return save_fatigue_csv(
         out_dir=str(results_dir),
+        survival_probability=ev.survival_probability,
         method_name=method_name,
         material_name=ev.material,
         N_exp=ev.Nexp,
@@ -787,7 +804,7 @@ def write_variant(
         "A": coef_A,
         "b": exponent_b,
         "A_surv": surv_A,
-        "STDNUM": STDNUM,
+        "STDNUM": ev.stdnum,
     }
     material_meta = {
         "Sy_MPa": ev.params.get("Sy"),
@@ -807,6 +824,7 @@ def write_variant(
     label = f"{base_name}.{amplitude['algorithm']}{variant_key}" if amplitude else None
     csv_path = save_fatigue_csv(
         out_dir=str(results_dir),
+        survival_probability=ev.survival_probability,
         method_name=model_name,  # keep filename compatibility
         result_label=label,
         material_name=ev.material,
@@ -888,6 +906,7 @@ def cli(argv=None) -> None:
     import argparse
 
     global MODEL_NAME, MATERIAL_NAME, RESULTS_DIR, MAKE_PLOTS, SHEAR_AMPLITUDE_ALGORITHM
+    global SURVIVAL_PROBABILITY
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument("--model", default=MODEL_NAME)
     arg_parser.add_argument("--material", default=MATERIAL_NAME)
@@ -899,6 +918,13 @@ def cli(argv=None) -> None:
         help="use the workbooks as supplied, without the overlays",
     )
     arg_parser.add_argument(
+        "--survival-probability",
+        type=float,
+        default=SURVIVAL_PROBABILITY,
+        help="survival probability P_s of the master curve, 0.5 <= P_s < 1 (0.5: median curve); "
+        "native life laws are not shifted",
+    )
+    arg_parser.add_argument(
         "--shear-amplitude-algorithm",
         default=SHEAR_AMPLITUDE_ALGORITHM,
         choices=("method_default", "mcc_harmonic", "mce_harmonic", "rss"),
@@ -907,6 +933,8 @@ def cli(argv=None) -> None:
     opts = arg_parser.parse_args(argv)
     exp.OVERLAYS_ENABLED = not opts.no_overlay
     SHEAR_AMPLITUDE_ALGORITHM = opts.shear_amplitude_algorithm
+    stdnum_for_survival(opts.survival_probability)  # reject invalid values before any work
+    SURVIVAL_PROBABILITY = opts.survival_probability
     MODEL_NAME, MATERIAL_NAME, RESULTS_DIR = opts.model, opts.material, opts.results_dir
     MAKE_PLOTS = not opts.no_plots
     main()

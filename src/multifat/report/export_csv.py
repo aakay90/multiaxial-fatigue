@@ -168,6 +168,9 @@ def save_fatigue_csv(
     observation_ids_design=None,
     observation_ids_runout=None,
     result_label: str | None = None,
+    # Survival probability of the master curve behind Nf_expected and DP_fit (issue #16); adds a
+    # last column when given
+    survival_probability: float | None = None,
 ) -> str:
     """Export a lightweight results CSV.
 
@@ -191,7 +194,8 @@ def save_fatigue_csv(
 
     Models with a native life law add Nf_native and Error_log10_native = log10(Nf_exp / Nf_native).
     With observation identities, Test_status, Specimen_id, Case_id, Observation_id and
-    Dataset_fingerprint follow as the last columns.
+    Dataset_fingerprint follow. With a survival probability, Survival_probability is the last
+    column: the probability P_s of the master curve that Nf_expected and DP_fit refer to.
 
     Notes:
       * Parameters Error_dp / Error_dp_design are deprecated aliases kept only to avoid breaking older scripts.
@@ -344,6 +348,7 @@ def save_fatigue_csv(
         row = table[i] if table is not None and i < len(table) else {}
         return [row.get(c, "") for c in IDENTITY_COLUMNS]
 
+    tail = [float(survival_probability)] if survival_probability is not None else []
     with open(path, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(
@@ -366,6 +371,7 @@ def save_fatigue_csv(
             ]
             + (["Nf_native", "Error_log10_native"] if native else [])
             + (IDENTITY_COLUMNS if with_ids else [])
+            + (["Survival_probability"] if survival_probability is not None else [])
         )
 
         if have_design:
@@ -406,6 +412,7 @@ def save_fatigue_csv(
                     ]
                     + (_native_cols(float(ne), float(N_native_design[i])) if native else [])
                     + _ids(observation_ids_design, i)
+                    + tail
                 )
 
         for i, (ne, cp, npred, err) in enumerate(zip(N_exp, CP, N_pred, err_other)):
@@ -435,6 +442,7 @@ def save_fatigue_csv(
                 ]
                 + (_native_cols(float(ne), float(N_native[i])) if native else [])
                 + _ids(observation_ids, i)
+                + tail
             )
 
         nan = float("nan")
@@ -459,6 +467,7 @@ def save_fatigue_csv(
                 ]
                 + ([float(N_native_runout[i]), nan] if native else [])
                 + _ids(observation_ids_runout, i)
+                + tail
             )
 
     return path
