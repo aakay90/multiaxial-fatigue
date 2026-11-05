@@ -31,7 +31,7 @@ from multifat.cli import run as runmod
 import multifat.imp.experimental_data as exp
 from multifat.eval.fitting import stdnum_for_survival
 from multifat.imp.schema import WorkbookError, material_id, workbook_files
-from multifat.models.errors import MissingParamsError
+from multifat.models.errors import LoadingScopeError, MissingParamsError
 
 DATA_FOLDER = "Experimental_Data"
 RESULTS_DIR = "Results/current"
@@ -47,7 +47,8 @@ class Outcome:
     calibrated: str = ""  # constants taken from the calibration rather than the workbook
     notes: str = ""  # distinct warnings the model raised (e.g. fallback estimates used)
     missing: tuple = ()  # constants the skipped model was missing
-    mode: str = "life"  # "fatigue_index" on a fatigue-limit dataset
+    mode: str = "life"  # "fatigue_index" on a fatigue-limit dataset, "out_of_scope" for a skip
+    # because the loading lies outside the criterion's scope
 
 
 # Optional constants that a calibrated value may fill; required constants are always filled.
@@ -194,6 +195,18 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
                 ),
                 model,
                 calibration,
+            )
+            for suffix in suffixes
+        ]
+    except LoadingScopeError as exc:
+        return [
+            Outcome(
+                base_name + suffix,
+                "skipped",
+                str(exc),
+                0,
+                time.perf_counter() - start,
+                mode="out_of_scope",
             )
             for suffix in suffixes
         ]
@@ -726,6 +739,9 @@ def _fatigue_limit_model(job: tuple) -> tuple[Outcome, dict]:
                 time.perf_counter() - start,
                 missing=tuple(exc.missing),
             )
+        except LoadingScopeError as exc:
+            outcome = Outcome(model_tag, "skipped", str(exc), 0, time.perf_counter() - start)
+            outcome.mode = "out_of_scope"
         except Exception as exc:  # carry on with the remaining models
             outcome = Outcome(
                 model_tag,
@@ -780,6 +796,8 @@ def _eligibility_status(outcome: Outcome, calibrate: bool) -> str:
         return "fatigue_index"
     if outcome.status.startswith("ok"):
         return "available" if outcome.n_cases else "prediction_only"
+    if outcome.mode == "out_of_scope":
+        return "out_of_scope"
     if (
         outcome.status == "skipped"
         and outcome.missing

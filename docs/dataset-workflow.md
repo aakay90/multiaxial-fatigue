@@ -51,7 +51,7 @@ When several workbooks are supplied (or `--all` is used), `Comparison/eligibilit
 | fatigue_index | the model ran on a fatigue-limit dataset (fatigue index error; no failures counted) |
 | calibration_required | `--no-calibrate` was set, and only constants the pipeline can calibrate are missing |
 | insufficient_inputs | a property or constant that the pipeline cannot supply is missing |
-| out_of_scope | the workbook contains notched specimens only |
+| out_of_scope | the workbook contains notched specimens only, or its loading lies outside the declared scope of the criterion (e.g. GOLOS: in-phase, fully reversed bending–torsion only) |
 | failed | the model raised an error (reported, not hidden) |
 
 Availability is not an accuracy ranking. If two selected workbooks share a material ID, the run stops before anything is written.

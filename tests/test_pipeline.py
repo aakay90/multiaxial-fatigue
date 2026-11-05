@@ -465,3 +465,16 @@ def test_run_report_notes_flat_curve_and_bound_constant():
     assert "no life predictions" in notes and "k = -1/b = 25" in notes
     assert "L_LI at the search bound" in notes
     assert _life_notes(model, steep, "", set(), bound) == ""
+
+
+def test_loading_outside_a_criterion_scope_is_skipped_not_failed(tmp_path):
+    """GOLOS is defined for in-phase, fully reversed bending-torsion: 90 deg rows put it out of scope."""
+    out = tmp_path / "res"
+    wb = write_workbook(tmp_path / "Synth.xlsx")
+    (outcome,) = run_workbook(wb, models=["GOLOS"], results_dir=out)
+    assert outcome.status == "skipped" and outcome.mode == "out_of_scope"
+    assert "in-phase" in _report(out / "Synth_run_report.tsv")["GOLOS"]["reason"]
+    in_phase = [r for r in basquin_rows() if r[4] == 0]
+    wb = write_workbook(tmp_path / "InPhase.xlsx", rows=in_phase)
+    (outcome,) = run_workbook(wb, models=["GOLOS"], results_dir=out)
+    assert outcome.status == "ok"

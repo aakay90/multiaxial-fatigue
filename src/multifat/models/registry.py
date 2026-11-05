@@ -53,6 +53,7 @@ from .invariant_methods.tveit2025 import Tveit2025
 from .cp_methods.dangvan import DangVan
 from .invariant_methods.crossland import Crossland
 from .invariant_methods.goncalves_araujo_mamiya import GoncalvesAraujoMamiya
+from .invariant_methods.golos import Golos
 from .invariant_methods.sines import Sines
 from .integral_methods.papadopoulos import Papadopoulos
 from .integral_methods.papuga_ruzicka import PapugaCriticalPlane, PapugaIntegral
@@ -102,6 +103,7 @@ def _available_direct_models():
         "DANGVAN": DangVan(),
         "CROSSLAND": Crossland(),
         "GAM": GoncalvesAraujoMamiya(),
+        "GOLOS": Golos(),
         "SINES": Sines(),
         "PAPADOPOULOS": Papadopoulos(),
         "PCR": PapugaCriticalPlane(),
