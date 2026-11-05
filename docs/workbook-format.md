@@ -132,6 +132,7 @@ constants are missing is skipped and reported; the other models still run.
 | LI | - | `L_LI`: 1.0 |
 | GSE | `E`, `nu` | - |
 | GSA | `E`, `nu` | `sigma_f`: uniform material law from Su and E; `tau_f`: sigma_f / sqrt(3); `Su`: only to estimate sigma_f |
+| NINIC | `Sigm1`, `Taum1` | `k_NIN`: Eq. (4) from Sigm1 and Taum1 |
 | BP | `Sigm1`, `Taum1` | `Sig0`: Boehme et al. 2026 Eq. (1) from Su and Sigm1; `Tau0`: Boehme et al. 2026 Eq. (2); `Su`: only to estimate Sig0 |
 | CAIM | `Sigm1`, `Taum1` | `Sig0`: Boehme et al. 2026 Eq. (1) from Su and Sigm1; `Tau0`: Boehme et al. 2026 Eq. (2); `Su`: only to estimate Sig0 |
 | SWTD | - | - |

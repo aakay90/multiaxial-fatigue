@@ -16,7 +16,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Critical plane | 7 | 1 | 10 | 0 | 18 |
 | Energy based | 6 | 1 | 13 | 3 | 23 |
 | Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
 | Invariant based | 6 | 0 | 7 | 0 | 13 |
@@ -27,7 +27,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Strain based | 3 | 0 | 10 | 2 | 15 |
 | Stress based | 1 | 0 | 12 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 30 | 2 | 80 | 5 | 117 |
+| **TOTAL** | 31 | 2 | 79 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -53,7 +53,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | [N05](../../METHODS.md#n05) | Wang maximum-shear-plane HCF criterion | Not implemented | not_tested | High | Yes |
 | [N06](../../METHODS.md#n06) | Nonlinear critical-plane HCF criterion | Not implemented | not_tested | High | Yes |
 | [N07](../../METHODS.md#n07) | Sectional critical-plane criterion | Not implemented | not_tested | High | Yes |
-| [N11](../../METHODS.md#n11) | Quadratic damage-plane strength criterion | Not implemented | not_tested | Medium | Yes |
+| [N11](../../METHODS.md#n11) | Ninić Damage Function (quadratic damage-plane criterion) | Fully implemented | reference_examples_reproduced | Medium | Yes |
 | [N12](../../METHODS.md#n12) | Revised multiaxial fatigue damage function | Not implemented | not_tested | Medium | Yes |
 | [N16](../../METHODS.md#n16) | Liu–Mahadevan characteristic-plane model, isotropic branch | Not implemented | not_tested | High | Yes |
 | [N25](../../METHODS.md#n25) | A90(T) deviatoric tensile critical-plane model | Not implemented | not_tested | Medium | Yes |
@@ -334,36 +334,36 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 
 ### N11
 
-**Quadratic damage-plane strength criterion** — D NINIC (2006)
+**Ninić Damage Function (quadratic damage-plane criterion)** — D NINIC (2006)
 
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Critical plane;  |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | A stress-based multiaxial high-cycle fatigue damage criterion, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/j.ijfatigue.2005.04.014 |
-| Reference evidence | Exact-title Crossref metadata checked; inherited prior-review method attribution; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Prior-review preliminary; obtain original paper before coding |
-| Principle | Maximum quadratic shear/normal combination; initially published plane-stress CA scope, F. |
-| Loading scope | Maximum quadratic shear/normal combination; initially published plane-stress CA scope, F. |
-| Inputs / material parameters | S; f−1/t−1. |
-| Output | Maximum quadratic shear/normal combination; initially published plane-stress CA scope, F. |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; See prior feasibility assessment |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Simple nonlinear CP benchmark; not CAIM or Findley. |
+| Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
+| Formulation evidence | Checked against Ninić (2006) Eqs. (1)-(4), (13)-(16) and Tables 1-5 on the PDF (2026-11-05) |
+| Principle | D = sqrt((tau_a/T_e)^2 + k (sigma_n,max/S_e)^2) maximised over all planes (three-dimensional search); k from Eq. (4). |
+| Loading scope | Single-harmonic CA, in-phase and out-of-phase; rss shear amplitude on the plane (source silent); endurance criterion. |
+| Inputs / material parameters | Sigm1 (S_e), Taum1 (T_e); optional k_NIN (else Eq. 4). |
+| Output | Damage index (1 at the limit); fitted life via the shared master curve where valid |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_ninic.py: Table 1 k (Eq. 4); Tables 2-4, 29/32 full-search rows within 0.08 points; Table 5 within 0.6 (rounded loads); surface re-evaluation row 2-11; misprints and non-maximal printed planes as strict xfails. |
+| Python implementation | [src/multifat/models/cp_methods/ninic.py](../../src/multifat/models/cp_methods/ninic.py); Ninic |
+| Automated tests | [tests/methods/test_ninic.py](../../tests/methods/test_ninic.py) |
+| Limitations | Endurance criterion: finite lives only through the shared master curve. Eq. (4) calibrates the uniaxial limit only for S_e/T_e >= sqrt(2) (D = sqrt(k) below, warning). Out-of-phase shear amplitude not defined by the source (rss, matching the tables). |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Scalar criterion and ratio guards; preserve published shear-amplitude definition. |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Scalar criterion and ratio guards; preserve published shear-amplitude definition. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
 | Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Medium |
-| Provenance / prior status | N11; Already reviewed, not implemented |
+| Provenance / prior status | N11; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N11+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN11%5D+Quadratic+damage-plane+strength+criterion) (no live Issue linked) |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N11+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN11%5D+Nini%C4%87+Damage+Function+%28quadratic+damage-plane+criterion%29) (no live Issue linked) |
 
 ### N12
 

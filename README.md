@@ -156,11 +156,11 @@ Ti6Al4V and Ti6Al4V_Berto all assessed tests are torsional. Data in
 
 <!-- METHOD_NAVIGATION_START -->
 
-**80 missing method candidates** are available to explore: 68 have preliminary A/B feasibility (a new criterion or manageable extensions). Pick by scientific interest and available references/data; an off-roadmap proposal is welcome.
+**79 missing method candidates** are available to explore: 67 have preliminary A/B feasibility (a new criterion or manageable extensions). Pick by scientific interest and available references/data; an off-roadmap proposal is welcome.
 
 Browse contribution opportunities by family: [Critical plane](docs/METHOD_INDEX.md#family-critical-plane) · [Energy based](docs/METHOD_INDEX.md#family-energy-based) · [Integral and hybrid](docs/METHOD_INDEX.md#family-integral-and-hybrid) · [Invariant based](docs/METHOD_INDEX.md#family-invariant-based) · [Mesoscopic and damage](docs/METHOD_INDEX.md#family-mesoscopic-and-damage) · [Nonlocal and gradient](docs/METHOD_INDEX.md#family-nonlocal-and-gradient) · [Probabilistic](docs/METHOD_INDEX.md#family-probabilistic) · [Specialized](docs/METHOD_INDEX.md#family-specialized) · [Strain based](docs/METHOD_INDEX.md#family-strain-based) · [Stress based](docs/METHOD_INDEX.md#family-stress-based) · [Tensor and path based](docs/METHOD_INDEX.md#family-tensor-and-path-based).
 
-**Available in the current API:** [FS](METHODS.md#i_fs), [FIN](METHODS.md#i_fin), [SWT](METHODS.md#i_swt), [MATAKE](METHODS.md#i_matake), [MCD](METHODS.md#i_mcd), [MGSE_YU](METHODS.md#i_mgse_yu), [MGSE_ZHU](METHODS.md#i_mgse_zhu), [MSWT](METHODS.md#i_mswt), [MKBM](METHODS.md#i_mkbm), [LIU2021](METHODS.md#i_liu2021), [LI](METHODS.md#i_li), [GSE](METHODS.md#i_gse), [GSA](METHODS.md#i_gsa), [BP](METHODS.md#i_bp), [CAIM](METHODS.md#i_caim), [DANGVAN](METHODS.md#i_dangvan), [OTT](METHODS.md#i_ott), [SWTD](METHODS.md#i_swtd), [CROSSLAND](METHODS.md#n01), [SINES](METHODS.md#n02), [PAPADOPOULOS](METHODS.md#n03), [MWCM](METHODS.md#n04), [GAM](METHODS.md#n08), [VHN](METHODS.md#n20), [PBP](METHODS.md#n37), [TVEIT2025](METHODS.md#c02), [PCR](METHODS.md#g01), [PI](METHODS.md#g02), [MDC](METHODS.md#g06), [MMMH](METHODS.md#g07), [COIN](METHODS.md#g08), [VSE](METHODS.md#g15), [EK](METHODS.md#g16), [MMCCM](METHODS.md#g22), [MOREL](METHODS.md#g23), [RFB](METHODS.md#g41). Each link states the implemented scope and evidence; active does not automatically mean source completeness is established.
+**Available in the current API:** [FS](METHODS.md#i_fs), [FIN](METHODS.md#i_fin), [SWT](METHODS.md#i_swt), [MATAKE](METHODS.md#i_matake), [MCD](METHODS.md#i_mcd), [MGSE_YU](METHODS.md#i_mgse_yu), [MGSE_ZHU](METHODS.md#i_mgse_zhu), [MSWT](METHODS.md#i_mswt), [MKBM](METHODS.md#i_mkbm), [LIU2021](METHODS.md#i_liu2021), [LI](METHODS.md#i_li), [GSE](METHODS.md#i_gse), [GSA](METHODS.md#i_gsa), [BP](METHODS.md#i_bp), [CAIM](METHODS.md#i_caim), [DANGVAN](METHODS.md#i_dangvan), [OTT](METHODS.md#i_ott), [SWTD](METHODS.md#i_swtd), [CROSSLAND](METHODS.md#n01), [SINES](METHODS.md#n02), [PAPADOPOULOS](METHODS.md#n03), [MWCM](METHODS.md#n04), [GAM](METHODS.md#n08), [NINIC](METHODS.md#n11), [VHN](METHODS.md#n20), [PBP](METHODS.md#n37), [TVEIT2025](METHODS.md#c02), [PCR](METHODS.md#g01), [PI](METHODS.md#g02), [MDC](METHODS.md#g06), [MMMH](METHODS.md#g07), [COIN](METHODS.md#g08), [VSE](METHODS.md#g15), [EK](METHODS.md#g16), [MMCCM](METHODS.md#g22), [MOREL](METHODS.md#g23), [RFB](METHODS.md#g41). Each link states the implemented scope and evidence; active does not automatically mean source completeness is established.
 
 <!-- METHOD_NAVIGATION_END -->
 
@@ -179,7 +179,7 @@ calibration, and a worked example whose numbers are checked by the test suite.
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Critical plane | 7 | 1 | 10 | 0 | 18 |
 | Energy based | 6 | 1 | 13 | 3 | 23 |
 | Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
 | Invariant based | 6 | 0 | 7 | 0 | 13 |
@@ -190,7 +190,7 @@ calibration, and a worked example whose numbers are checked by the test suite.
 | Strain based | 3 | 0 | 10 | 2 | 15 |
 | Stress based | 1 | 0 | 12 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 30 | 2 | 80 | 5 | 117 |
+| **TOTAL** | 31 | 2 | 79 | 5 | 117 |
 
 <!-- METHOD_PROGRESS_END -->
 
@@ -202,7 +202,7 @@ experimental data.
 
 <!-- METHOD_RECONCILIATION_START -->
 
-The catalogue contains **80 missing method/scoped candidates**; the roadmap selects **6** for an initial, dependency-aware programme. The other **74 remain available for proposals**. The complete index retains **161 research records**, including **117 identifiable method/scoped records** and **44 bundles, related sources, unresolved overlaps/leads and wider workstreams** outside that progress denominator. These are not 161 independent fatigue theories.
+The catalogue contains **79 missing method/scoped candidates**; the roadmap selects **6** for an initial, dependency-aware programme. The other **73 remain available for proposals**. The complete index retains **161 research records**, including **117 identifiable method/scoped records** and **44 bundles, related sources, unresolved overlaps/leads and wider workstreams** outside that progress denominator. These are not 161 independent fatigue theories.
 
 <!-- METHOD_RECONCILIATION_END -->
 

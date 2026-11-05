@@ -16,7 +16,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 6 | 1 | 11 | 0 | 18 |
+| Critical plane | 7 | 1 | 10 | 0 | 18 |
 | Energy based | 6 | 1 | 13 | 3 | 23 |
 | Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
 | Invariant based | 6 | 0 | 7 | 0 | 13 |
@@ -27,7 +27,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Strain based | 3 | 0 | 10 | 2 | 15 |
 | Stress based | 1 | 0 | 12 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 30 | 2 | 80 | 5 | 117 |
+| **TOTAL** | 31 | 2 | 79 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -64,7 +64,7 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 | [N05](#n05) | Wang maximum-shear-plane HCF criterion | Not implemented | not_tested | High | Yes |
 | [N06](#n06) | Nonlinear critical-plane HCF criterion | Not implemented | not_tested | High | Yes |
 | [N07](#n07) | Sectional critical-plane criterion | Not implemented | not_tested | High | Yes |
-| [N11](#n11) | Quadratic damage-plane strength criterion | Not implemented | not_tested | Medium | Yes |
+| [N11](#n11) | Ninić Damage Function (quadratic damage-plane criterion) | Fully implemented | reference_examples_reproduced | Medium | Yes |
 | [N12](#n12) | Revised multiaxial fatigue damage function | Not implemented | not_tested | Medium | Yes |
 | [N16](#n16) | Liu–Mahadevan characteristic-plane model, isotropic branch | Not implemented | not_tested | High | Yes |
 | [N25](#n25) | A90(T) deviatoric tensile critical-plane model | Not implemented | not_tested | Medium | Yes |
@@ -177,12 +177,12 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 
 ### N11
 
-**Quadratic damage-plane strength criterion** — D NINIC (2006)
+**Ninić Damage Function (quadratic damage-plane criterion)** — D NINIC (2006)
 
 | Field | Evidence / task |
 | --- | --- |
 | Reference / DOI | A stress-based multiaxial high-cycle fatigue damage criterion, International Journal of Fatigue; https://doi.org/10.1016/j.ijfatigue.2005.04.014 |
-| WG4.3 completeness / validation | Not implemented; not_tested |
+| WG4.3 completeness / validation | Fully implemented; reference_examples_reproduced |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External sources | no_accessible_source_identified; not integrated or independently validated |
 | Complete scientific and implementation record | [Inputs, formulation, scope, code, tests, validation, missing work and Issues](docs/methods/critical-plane.md#n11) |
