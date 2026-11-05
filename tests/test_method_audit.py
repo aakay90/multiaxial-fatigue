@@ -68,6 +68,7 @@ class MethodAuditTests(unittest.TestCase):
             MMCCM=1.0 / float(mmccm_life(ga, sn / ta, _mmccm_constants(p))),
             VSE=(2 * sn) * (2 * ea) + (2 * ta) * ga,
             LIU2025=np.sqrt(sn**2 + 3 * ta**2),
+            ZHANGYAO=np.sqrt(ta**2 - ta * sn + (145 / 240) ** 2 * (240 + 2 * ta) * sn) / 145,
             MWHS=0.02 + 0.5 * (1 + sn / 250) * np.sqrt(sn * 2 * ea / p["E"]),
             NINIC=np.sqrt(
                 (ta / 145) ** 2 + (240 / 145) ** 2 * (1 - (120 / 145) ** 2) * (sn / 240) ** 2
