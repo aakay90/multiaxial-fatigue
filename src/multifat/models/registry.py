@@ -34,6 +34,7 @@ from .cp_methods.liu_vse import LiuVSE
 from .cp_methods.ninic import Ninic
 from .cp_methods.mwhs import MWHS
 from .cp_methods.liu2025 import Liu2025
+from .cp_methods.zhang_yao import ZhangYao
 
 # Additional critical-plane formulations
 from .cp_methods.mgse_yu import MGSE_Yu
@@ -93,6 +94,7 @@ def _available_cp_methods():
         "NINIC": Ninic(),
         "MWHS": MWHS(),
         "LIU2025": Liu2025(),
+        "ZHANGYAO": ZhangYao(),
     }
 
 

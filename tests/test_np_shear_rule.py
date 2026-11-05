@@ -12,7 +12,7 @@ import pytest
 from multifat.eval.evaluator import prepare_planes, shear_rule_of
 from multifat.models.registry import _available_cp_methods
 
-CHORD = {"FS", "MKBM", "LI", "LIU2021", "MWCM", "MMCCM", "VSE", "MWHS", "LIU2025"}
+CHORD = {"FS", "MKBM", "LI", "LIU2021", "MWCM", "MMCCM", "VSE", "MWHS", "LIU2025", "ZHANGYAO"}
 
 
 def test_rule_assignment():

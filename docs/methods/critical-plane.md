@@ -16,7 +16,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 8 | 1 | 10 | 0 | 19 |
+| Critical plane | 9 | 1 | 9 | 0 | 19 |
 | Energy based | 6 | 1 | 13 | 3 | 23 |
 | Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
 | Invariant based | 6 | 0 | 7 | 0 | 13 |
@@ -27,7 +27,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Strain based | 4 | 0 | 9 | 2 | 15 |
 | Stress based | 2 | 0 | 11 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 34 | 2 | 77 | 5 | 118 |
+| **TOTAL** | 35 | 2 | 76 | 5 | 118 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -51,7 +51,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | [I_CARSPA](../../METHODS.md#i_carspa) | Carpinteri–Spagnoli | Partially implemented | not_tested | High | Yes |
 | [N04](../../METHODS.md#n04) | Modified Wöhler Curve Method / Susmel–Lazzarin | Fully implemented | reference_examples_reproduced | High | Yes |
 | [N05](../../METHODS.md#n05) | Wang maximum-shear-plane HCF criterion | Not implemented | not_tested | High | Yes |
-| [N06](../../METHODS.md#n06) | Nonlinear critical-plane HCF criterion | Not implemented | not_tested | High | Yes |
+| [N06](../../METHODS.md#n06) | Zhang–Yao nonlinear critical-plane HCF criterion | Fully implemented | reference_examples_reproduced | High | Yes |
 | [N07](../../METHODS.md#n07) | Sectional critical-plane criterion | Not implemented | not_tested | High | Yes |
 | [N11](../../METHODS.md#n11) | Ninić Damage Function (quadratic damage-plane criterion) | Fully implemented | reference_examples_reproduced | Medium | Yes |
 | [N12](../../METHODS.md#n12) | Revised multiaxial fatigue damage function | Not implemented | not_tested | Medium | Yes |
@@ -269,36 +269,36 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 
 ### N06
 
-**Nonlinear critical-plane HCF criterion** — CHENG-CHENG ZHANG, WEI-XING YAO (2010)
+**Zhang–Yao nonlinear critical-plane HCF criterion** — CHENG-CHENG ZHANG, WEI-XING YAO (2010)
 
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Critical plane;  |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | An improved multiaxial high-cycle fatigue criterion based on critical plane approach, Fatigue & Fracture of Engineering Materials & Structures |
 | DOI | https://doi.org/10.1111/j.1460-2695.2010.01523.x |
-| Reference evidence | Exact-title Crossref metadata checked; inherited prior-review method attribution; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Prior-review preliminary; obtain original paper before coding |
-| Principle | Nonlinear shear–normal interaction with Goodman-type correction; CA P/NP, F. |
-| Loading scope | Nonlinear shear–normal interaction with Goodman-type correction; CA P/NP, F. |
-| Inputs / material parameters | S; f−1/t−1, Su; domain roughly f−1/t−1 between 1.25 and 2 per review. |
-| Output | Nonlinear shear–normal interaction with Goodman-type correction; CA P/NP, F. |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; See prior feasibility assessment |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Tests nonlinear interaction without constitutive extensions. |
+| Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
+| Formulation evidence | Checked against Zhang & Yao (2011) Eqs. (3), (6)-(10), (A1) and Tables 2-8 on the PDF (2026-11-06) |
+| Principle | sqrt(C_a^2 - C_a N* + (t-1/f-1)^2 (f-1 + 2 C_a) N*) <= t-1 on the maximum shear amplitude plane, N* = N_a/(1 - N_m/sigma_u). |
+| Loading scope | Single-harmonic CA, proportional and out-of-phase, mean stresses; 1.25 < f-1/t-1 < 2 (warning outside). |
+| Inputs / material parameters | Sigm1 (f-1), Taum1 (t-1); Su only with mean normal stresses. |
+| Output | Fatigue index (1 at the limit); fitted life via the shared master curve where valid |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_zhang_yao.py: Tables 3-8, 50/66 fatigue limits within 0.3 points (longest-chord C_a; rss fails); continuum-tie 90 deg rows and unexplained mean-stress rows as strict xfails. |
+| Python implementation | [src/multifat/models/cp_methods/zhang_yao.py](../../src/multifat/models/cp_methods/zhang_yao.py); ZhangYao |
+| Automated tests | [tests/methods/test_zhang_yao.py](../../tests/methods/test_zhang_yao.py) |
+| Limitations | Fatigue-limit criterion (finite life via the master curve). The maximum-C_a plane rule is ill-conditioned: results depend on the tie rule in out-of-phase loading. Some published mean-stress rows not reproduced. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Scalar criterion, material-domain/denominator guards; recover equation from original. |
+| Missing tasks | No known essential coding gap within the declared repository scope. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Scalar criterion, material-domain/denominator guards; recover equation from original. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
 | Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / High |
-| Provenance / prior status | N06; Already reviewed, not implemented |
+| Provenance / prior status | N06; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N06+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN06%5D+Nonlinear+critical-plane+HCF+criterion) (no live Issue linked) |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N06+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN06%5D+Zhang%E2%80%93Yao+nonlinear+critical-plane+HCF+criterion) (no live Issue linked) |
 
 ### N07
 

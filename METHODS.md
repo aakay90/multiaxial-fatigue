@@ -16,7 +16,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 8 | 1 | 10 | 0 | 19 |
+| Critical plane | 9 | 1 | 9 | 0 | 19 |
 | Energy based | 6 | 1 | 13 | 3 | 23 |
 | Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
 | Invariant based | 6 | 0 | 7 | 0 | 13 |
@@ -27,7 +27,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Strain based | 4 | 0 | 9 | 2 | 15 |
 | Stress based | 2 | 0 | 11 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 34 | 2 | 77 | 5 | 118 |
+| **TOTAL** | 35 | 2 | 76 | 5 | 118 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -62,7 +62,7 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 | [I_CARSPA](#i_carspa) | Carpinteri–Spagnoli | Partially implemented | not_tested | High | Yes |
 | [N04](#n04) | Modified Wöhler Curve Method / Susmel–Lazzarin | Fully implemented | reference_examples_reproduced | High | Yes |
 | [N05](#n05) | Wang maximum-shear-plane HCF criterion | Not implemented | not_tested | High | Yes |
-| [N06](#n06) | Nonlinear critical-plane HCF criterion | Not implemented | not_tested | High | Yes |
+| [N06](#n06) | Zhang–Yao nonlinear critical-plane HCF criterion | Fully implemented | reference_examples_reproduced | High | Yes |
 | [N07](#n07) | Sectional critical-plane criterion | Not implemented | not_tested | High | Yes |
 | [N11](#n11) | Ninić Damage Function (quadratic damage-plane criterion) | Fully implemented | reference_examples_reproduced | Medium | Yes |
 | [N12](#n12) | Revised multiaxial fatigue damage function | Not implemented | not_tested | Medium | Yes |
@@ -154,12 +154,12 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 
 ### N06
 
-**Nonlinear critical-plane HCF criterion** — CHENG-CHENG ZHANG, WEI-XING YAO (2010)
+**Zhang–Yao nonlinear critical-plane HCF criterion** — CHENG-CHENG ZHANG, WEI-XING YAO (2010)
 
 | Field | Evidence / task |
 | --- | --- |
 | Reference / DOI | An improved multiaxial high-cycle fatigue criterion based on critical plane approach, Fatigue & Fracture of Engineering Materials & Structures; https://doi.org/10.1111/j.1460-2695.2010.01523.x |
-| WG4.3 completeness / validation | Not implemented; not_tested |
+| WG4.3 completeness / validation | Fully implemented; reference_examples_reproduced |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External sources | no_accessible_source_identified; not integrated or independently validated |
 | Complete scientific and implementation record | [Inputs, formulation, scope, code, tests, validation, missing work and Issues](docs/methods/critical-plane.md#n06) |
