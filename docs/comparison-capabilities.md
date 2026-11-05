@@ -91,6 +91,34 @@ multifat-compare --results_dir Results/current --out_dir Results/Comparison --pl
 multifat-compare --results_dir Results/current --out_dir Results/Comparison --plot-kind both
 ```
 
+## Load-equivalent error: the cross-method ranking metric
+
+`Error_load` $= e_L = \ln(1/s^*)$, where $s^*$ scales the whole load history (means included;
+strains follow elastically) so that the method predicts exactly the observed life: on the master
+curve, $DP(s^*\boldsymbol\sigma) = DP_{fit}(N_{\exp})$; with a native law,
+$N_{native}(s^*\boldsymbol\sigma) = N_{\exp}$. $e_L > 0$ means the method rates the test as more
+damaging than it was (conservative). It is the life-data counterpart of `FI_load` on fatigue-limit
+datasets ([issue #37](https://github.com/andreachiocca/multiaxial-fatigue/issues/37)).
+
+Why it is the metric to rank methods with:
+
+- **Independent of the S–N slope.** For a DP homogeneous of degree $d$ in the loads,
+  $\mathrm{Error\_ln} = k\,d\,e_L$ with $k = -1/b$: the life error is the load error amplified by
+  the flatness of the master curve. On AISI316L ($k \approx 22$) life errors are huge, or undefined
+  (`DP_DIFF`), for every method, whatever its quality.
+- **Independent of the DP's degree.** $\mathrm{Error\_log10\_dp} = -d\,e_L/\ln 10$: quadratic DPs
+  (SWT, energy parameters) look twice as bad in DP space as linear ones of equal accuracy.
+- **One scale for every route:** master-curve and native-life methods, including tests with an
+  infinite native life prediction, which have no finite life error.
+
+Homogeneous DPs use the closed form $e_L = \ln(DP/DP_{fit})/d$; others are solved by iteration on
+the load factor (`multifat.eval.load_error`). Run-outs give bounds only and have no `Error_load`.
+TVEIT2025 is not evaluated (each evaluation integrates many cycles). `multifat-compare` reports
+mean, standard deviation and the fractions of tests within $\pm10\,\%$ and $\pm20\,\%$ of the
+load (`Within_10pct`, `Within_20pct`) for every method. The complexity of a method (constants
+fitted on fatigue data, required inputs) is to be reported alongside, and is best penalised by
+held-out validation (#14).
+
 ## Error statistics and observation roles
 
 For a valid DP comparison, `Error_log10_dp = log10(DP_fit / CP_value)`.
