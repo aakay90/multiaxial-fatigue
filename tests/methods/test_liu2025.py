@@ -142,3 +142,34 @@ def test_mean_shear_beyond_tau_b_is_out_of_scope():
     S1[0, 2] = S1[2, 0] = 500.0  # mean shear 600 MPa on the plane
     with pytest.raises(LoadingScopeError, match="Gerber"):
         Liu2025().evaluate_on_plane(S0r=S0, S1r=S1, E0r=Z, E1r=Z, params={"Su": 900.0, "Tu": 550.0})
+
+
+def test_minimum_normal_stress_beyond_sigma_b_is_out_of_scope():
+    from multifat.models.errors import LoadingScopeError
+
+    S0, S1 = np.diag([0.0, 0.0, 1300.0]), np.diag([0.0, 0.0, 1000.0])  # sigma_min = 1000 > 900
+    with pytest.raises(LoadingScopeError, match="Serensen"):
+        Liu2025().evaluate_on_plane(S0r=S0, S1r=S1, E0r=Z, E1r=Z, params={"Su": 900.0, "Tu": 600.0})
+
+
+def test_fatigue_index_load_search_survives_trial_loads_beyond_sigma_b():
+    """30NCD16 row 24 (sigma_m = 600, tau_a = 350 MPa): FI_load is finite (it stopped before)."""
+    from multifat.eval.endurance import fatigue_index, reference_cases
+
+    S_mean = np.diag([0.0, 600.0, 0.0])
+    S_sin = np.zeros((3, 3))
+    S_sin[0, 1] = S_sin[1, 0] = 350.0
+    case = {
+        "S0": S_mean + S_sin, "S1": S_mean - S_sin, "E0": Z, "E1": Z,
+        "H": {"S_mean": S_mean, "S_sin": S_sin, "S_cos": Z},
+    }  # fmt: skip
+    params = {"Su": 1160.0, "Sigm1": 685.0, "Taum1": 430.0}
+    refs = reference_cases(685.0, 430.0, None, None)
+    (row,) = fatigue_index(Liu2025Adapter(), params, [case], refs, build_R_list(n1=10, n2=20))
+    assert np.isfinite(row["FI_load"]) and np.isfinite(row["FI_axial"])
+
+
+def Liu2025Adapter():
+    from multifat.models.registry import get_models
+
+    return get_models(["LIU2025"])[0]

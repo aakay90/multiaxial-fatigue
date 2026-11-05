@@ -27,7 +27,9 @@ Repository choices:
   - tau_b: workbook column ``Tu``, else estimated as Su / sqrt(3) with a warning (the paper's
     Table 1 ratios tau_b/sigma_b are 0.78, 0.68 and 0.94, so the estimate is coarse); a plane
     with |tau_m| >= tau_b, where Eq. (25) is undefined, raises LoadingScopeError and the model is
-    skipped for that material;
+    skipped for that material; so is a plane whose minimum normal stress reaches sigma_b, where
+    the denominator of Eq. (26) vanishes (in load-scaling searches such trial loads count as
+    infinite damage, see multifat.eval.endurance.scaled_damage);
   - LIU2025_ext is the largest damage parameter over all planes (repository variant); life from
     the shared master curve DP = A N^b instead of the Basquin constants of Eq. (27).
 
@@ -118,6 +120,11 @@ class Liu2025:
         tau_m = 0.5 * np.hypot(S0r[:, 0, 2] + S1r[:, 0, 2], S0r[:, 1, 2] + S1r[:, 1, 2])
         sigma_a = 0.5 * np.abs(S0r[:, 2, 2] - S1r[:, 2, 2])
         sigma_m = 0.5 * (S0r[:, 2, 2] + S1r[:, 2, 2])
+        if np.any((sigma_m > sigma_a) & (su + sigma_a - sigma_m <= 0.0)):
+            raise LoadingScopeError(
+                f"LIU2025: a plane has a minimum normal stress >= sigma_b = {su:g} MPa; the "
+                "Serensen correction, Eq. (26), is undefined"
+            )
         sigma_eq = serensen_amplitude(sigma_a, sigma_m, su)
         if np.any(np.abs(tau_m) >= tu):
             raise LoadingScopeError(
