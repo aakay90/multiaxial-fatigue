@@ -36,6 +36,7 @@ from .cp_methods.mwhs import MWHS
 from .cp_methods.liu2025 import Liu2025
 from .cp_methods.zhang_yao import ZhangYao
 from .cp_methods.wang2022 import Wang2022
+from .cp_methods.kujawski2021 import Kujawski2021
 
 # Additional critical-plane formulations
 from .cp_methods.mgse_yu import MGSE_Yu
@@ -96,6 +97,7 @@ def _available_cp_methods():
         "MWHS": MWHS(),
         "LIU2025": Liu2025(),
         "ZHANGYAO": ZhangYao(),
+        "KUJAWSKI2021": Kujawski2021(),
     }
 
 

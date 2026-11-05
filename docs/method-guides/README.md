@@ -33,6 +33,7 @@ The most widely used criteria are documented first.
 | [Ince–Glinka GSA](GSA.md) | `GSA` | Critical plane, strain | $\tau_{\max}\gamma_{a}/\tau_f' + \sigma_{n,\max}\varepsilon_{n,a}/\sigma_f'$ (+ plastic terms) (–) | `E`, `nu`; `sigma_f`, `tau_f` or `Su` |
 | [Liu virtual strain energy](VSE.md) | `VSE`, `VSE_ext` | Critical plane, energy | $\Delta\sigma_n\Delta\varepsilon_n + \Delta\tau\,\Delta(\gamma/2)$ (MPa) | `E`, `nu`; `vse_mode` |
 | [Liu–Xie–Hao 2025](LIU2025.md) | `LIU2025`, `LIU2025_ext` | Critical plane, stress | $\sqrt{\sigma'^2_{n,a} + 3\tau'^2_a}$, Gerber/Serensen means (MPa) | `Su`; `Tu` |
+| [Kujawski mSWT](KUJAWSKI2021.md) | `KUJAWSKI2021`, `KUJAWSKI2021_ext` | Critical plane, energy-like | $(\sigma_{n,\max} + \lvert\sigma_{n,m}\rvert/3)\,\varepsilon_{n,a}$ for $\sigma_{n,m} < 0$, else SWT (MPa) | `E`, `nu` |
 | [Wang et al. 2022](WANG2022.md) | `WANG2022` | Critical plane, stress | $\sqrt{C_a^2 + k(1 - \sqrt{N_{\max}N_a}/2\sigma_y)^2N_a^2}$ (MPa) | `Sigm1`, `Taum1`, `Sy` |
 | [Zhang–Yao](ZHANGYAO.md) | `ZHANGYAO`, `ZHANGYAO_ext` | Critical plane, stress | $\sqrt{C_a^2 - C_aN^* + (t_{-1}^2/f_{-1}^2)(f_{-1}+2C_a)N^*}/t_{-1}$ (index) | `Sigm1`, `Taum1`; `Su` |
 | [Ninić Damage Function](NINIC.md) | `NINIC` | Critical plane, stress | $\sqrt{(\tau_a/t_{-1})^2 + k(\sigma_{n,\max}/f_{-1})^2}$ (index) | `Sigm1`, `Taum1`; `k_NIN` |
