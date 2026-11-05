@@ -38,6 +38,15 @@ checked against its original publication; changes to numerical outputs are liste
   `Survival_probability` column, the sidecar records it, and `multifat-compare` refuses to mix
   probabilities. Native life laws and fatigue-limit indices are not shifted.
 
+### Calibration history (issue #15)
+
+- Pipeline calibrations get a persistent `calibration_id` (UTC time + content signature) and are
+  archived without overwriting (`--calibration-archive`, default `<results-dir>/calibrations`);
+  equivalent reruns keep their id. `--calibration-id` reuses a record; records lacking provenance
+  or made with another implementation revision are rejected, other data or procedure versions are
+  flagged. The run report gains a `calibration_id` column; sidecars record
+  `calibration_procedure` (2). Numerical results unchanged.
+
 ### Methods
 
 - Paper-reproduction tests for every registered method in `tests/methods/`, with the transcribed
