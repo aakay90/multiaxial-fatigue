@@ -94,6 +94,10 @@ REFERENCES = {
         "Ninic (2006), A stress-based multiaxial high-cycle fatigue damage criterion, Eqs. (1)-(4)",
         "10.1016/j.ijfatigue.2005.04.014",
     ),
+    "GOLOS": (
+        "Golos, Debski & Debski (2014), A stress-based fatigue criterion to assess high-cycle fatigue under in-phase multiaxial loading conditions, Eqs. (29)-(32)",
+        "10.1016/j.tafmec.2014.07.005",
+    ),
     "GAM": (
         "Goncalves, Araujo & Mamiya (2005), Multiaxial fatigue: a stress based criterion for hard metals, Eqs. (11)-(13), (A.17)",
         "10.1016/j.ijfatigue.2004.05.006",

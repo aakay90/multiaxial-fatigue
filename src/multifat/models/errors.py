@@ -12,3 +12,7 @@ class MissingParamsError(ValueError):
 
 class NativeLifeError(ValueError):
     """A model's native life law cannot be fitted on this material (its damage values still can)."""
+
+
+class LoadingScopeError(ValueError):
+    """A case lies outside the loading scope of a criterion (the model is skipped, not failed)."""

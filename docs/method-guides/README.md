@@ -37,6 +37,7 @@ The most widely used criteria are documented first.
 | [Modified Wöhler Curve Method](MWCM.md) | `MWCM` | Critical plane, stress | $\tau_a/\tau_{A,\mathrm{Ref}}(\rho)$ (index) | `Sigm1`, `Taum1` |
 | [Crossland](CROSSLAND.md) | `CROSSLAND` | Stress invariants | $(\sqrt{J_{2,a}} + \kappa\,\sigma_{H,\max})/t_{-1}$ (index) | `Sigm1`, `Taum1` |
 | [Sines](SINES.md) | `SINES` | Stress invariants | $(\sqrt{J_{2,a}} + \kappa\,\sigma_{H,m})/t_{-1}$ (index) | `Sigm1`, `Taum1`, `Su` |
+| [Golos–Dębski–Dębski](GOLOS.md) | `GOLOS` | Limit curve (in-phase bending–torsion) | $A(\sigma/f_{-1})^2 + B\,\sigma/f_{-1} + (\tau/t_{-1})^2$ (index) | `Sigm1`, `Taum1` |
 | [Gonçalves–Araújo–Mamiya](GAM.md) | `GAM` | Stress invariants (prismatic hull) | $(\sqrt{\textstyle\sum a_i^2} + \kappa\,\sigma_{p\max})/\lambda$ (index) | `Sigm1`, `Taum1` |
 | [Dang Van](DANGVAN.md) | `DANGVAN` | Mesoscopic | $\sigma_{eq,DV}/f_{-1}$ (index) | `Sigm1`, `Taum1` |
 | [Papadopoulos](PAPADOPOULOS.md) | `PAPADOPOULOS` | Mesoscopic, integral | $\gamma_N/t_{-1}$, Eq. (41) (index) | `Sigm1`, `Taum1` |

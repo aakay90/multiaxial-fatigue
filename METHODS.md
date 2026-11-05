@@ -25,9 +25,9 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
 | Strain based | 3 | 0 | 10 | 2 | 15 |
-| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Stress based | 2 | 0 | 11 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 31 | 2 | 79 | 5 | 117 |
+| **TOTAL** | 32 | 2 | 78 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -1972,7 +1972,7 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 
 | ID | Method / scope | Implementation | Validation | Priority | Counted |
 | --- | --- | --- | --- | --- | --- |
-| [N13](#n13) | Modified Gough limit curve | Not implemented | not_tested | Medium | Yes |
+| [N13](#n13) | Golos–Dębski–Dębski modified Gough limit curve | Fully implemented | basic_numerical_tests | Medium | Yes |
 | [N14](#n14) | Gough–Pollard and Nishihara–Kawamoto baselines | Not implemented | not_tested | Medium | bundle |
 | [N23](#n23) | Equal-life surface with path correction | Not implemented | not_tested | Medium | Yes |
 | [N24](#n24) | Stress Scale Factor (SSF) family | Not implemented | not_tested | Medium | Yes |
@@ -1990,12 +1990,12 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 
 ### N13
 
-**Modified Gough limit curve** — Krzysztof M. Golos, Daniel K. Debski, Marek A. Debski (2014)
+**Golos–Dębski–Dębski modified Gough limit curve** — Krzysztof M. Golos, Daniel K. Debski, Marek A. Debski (2014)
 
 | Field | Evidence / task |
 | --- | --- |
 | Reference / DOI | A stress-based fatigue criterion to assess high-cycle fatigue under in-phase multiaxial loading conditions, Theoretical and Applied Fracture Mechanics; https://doi.org/10.1016/j.tafmec.2014.07.005 |
-| WG4.3 completeness / validation | Not implemented; not_tested |
+| WG4.3 completeness / validation | Fully implemented; basic_numerical_tests |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External sources | no_accessible_source_identified; not integrated or independently validated |
 | Complete scientific and implementation record | [Inputs, formulation, scope, code, tests, validation, missing work and Issues](docs/methods/stress-based.md#n13) |

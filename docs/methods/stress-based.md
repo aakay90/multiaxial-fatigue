@@ -25,9 +25,9 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
 | Strain based | 3 | 0 | 10 | 2 | 15 |
-| Stress based | 1 | 0 | 12 | 0 | 13 |
+| Stress based | 2 | 0 | 11 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 31 | 2 | 79 | 5 | 117 |
+| **TOTAL** | 32 | 2 | 78 | 5 | 117 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -45,7 +45,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 
 | ID | Method / scope | Implementation | Validation | Priority | Counted |
 | --- | --- | --- | --- | --- | --- |
-| [N13](../../METHODS.md#n13) | Modified Gough limit curve | Not implemented | not_tested | Medium | Yes |
+| [N13](../../METHODS.md#n13) | Golos–Dębski–Dębski modified Gough limit curve | Fully implemented | basic_numerical_tests | Medium | Yes |
 | [N14](../../METHODS.md#n14) | Gough–Pollard and Nishihara–Kawamoto baselines | Not implemented | not_tested | Medium | bundle |
 | [N23](../../METHODS.md#n23) | Equal-life surface with path correction | Not implemented | not_tested | Medium | Yes |
 | [N24](../../METHODS.md#n24) | Stress Scale Factor (SSF) family | Not implemented | not_tested | Medium | Yes |
@@ -63,36 +63,36 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 
 ### N13
 
-**Modified Gough limit curve** — Krzysztof M. Golos, Daniel K. Debski, Marek A. Debski (2014)
+**Golos–Dębski–Dębski modified Gough limit curve** — Krzysztof M. Golos, Daniel K. Debski, Marek A. Debski (2014)
 
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Stress based;  |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | A stress-based fatigue criterion to assess high-cycle fatigue under in-phase multiaxial loading conditions, Theoretical and Applied Fracture Mechanics |
 | DOI | https://doi.org/10.1016/j.tafmec.2014.07.005 |
-| Reference evidence | Exact-title Crossref metadata checked; inherited prior-review method attribution; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Prior-review preliminary; obtain original paper before coding |
-| Principle | Fatigue-limit-ratio-dependent in-phase interaction curve; proportional CA, F. |
-| Loading scope | Fatigue-limit-ratio-dependent in-phase interaction curve; proportional CA, F. |
-| Inputs / material parameters | Axial/bending and torsional amplitudes; corresponding f−1/t−1. |
-| Output | Fatigue-limit-ratio-dependent in-phase interaction curve; proportional CA, F. |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; See prior feasibility assessment |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Cheap baseline for a wider strength-ratio range. |
+| Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
+| Formulation evidence | Checked against Golos, Dębski & Dębski (2014) Eqs. (26)-(32) on the PDF (2026-11-05) |
+| Principle | Corrected Gough ellipse A (sigma/f-1)^2 + B sigma/f-1 + (tau/t-1)^2 = 1 with A, B linear in f-1/t-1 (Eqs. 30-32). |
+| Loading scope | In-phase, fully reversed bending-torsion (any plane stress with principal amplitudes of opposite sign, reduced frame-invariantly); other cases are skipped as out of scope. |
+| Inputs / material parameters | Sigm1 (f-1), Taum1 (t-1). |
+| Output | Limit-curve index (1 on the curve); fitted life via the shared master curve where valid |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | basic_numerical_tests; tests/methods/test_golos.py: A + B = 1, Eq. (30) special cases (kappa = sqrt3, 4/3), Eq. (31) accuracy, frame-invariant reduction, scope rejection; tests/test_pipeline.py: out-of-scope skip. Paper validation is graphical; Table 2 not reproducible. |
+| Python implementation | [src/multifat/models/invariant_methods/golos.py](../../src/multifat/models/invariant_methods/golos.py); Golos |
+| Automated tests | [tests/methods/test_golos.py](../../tests/methods/test_golos.py) |
+| Limitations | In-phase fully reversed bending-torsion only (no mean stress, no phase effect); index not homogeneous in the load; text statement for kappa = 2 inconsistent with Eq. (30). |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Closed-form evaluator and explicit proportional/mean-stress applicability checks. |
+| Missing tasks | Reproduce Table 2 if the experimental point sets of Figs. 2-7 are obtained. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Closed-form evaluator and explicit proportional/mean-stress applicability checks. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
 | Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / Medium |
-| Provenance / prior status | N13; Already reviewed, not implemented |
+| Provenance / prior status | N13; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N13+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN13%5D+Modified+Gough+limit+curve) (no live Issue linked) |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N13+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN13%5D+Golos%E2%80%93D%C4%99bski%E2%80%93D%C4%99bski+modified+Gough+limit+curve) (no live Issue linked) |
 
 ### N14
 

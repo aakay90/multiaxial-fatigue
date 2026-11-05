@@ -89,6 +89,13 @@ checked against its original publication; changes to numerical outputs are liste
   - Finding: Eq. (4) for $k$ calibrates the uniaxial limit only for $S_e/T_e \ge \sqrt2$, and a
     warning is issued below that ratio.
   - Guide: `docs/method-guides/NINIC.md`.
+- New criterion `GOLOS`, the Golos, Dębski & Dębski (2014) modified Gough limit curve, catalogue
+  N13 (issue #13).
+  - Scope: the curve is defined for in-phase, fully reversed bending–torsion only. A new
+    `LoadingScopeError` makes the pipeline report such a model as `skipped` (eligibility
+    `out_of_scope`) instead of `failed` when a case lies outside the scope.
+  - Finding: the text's coefficients for $\kappa = 2$ contradict Eq. (30).
+  - Guide: `docs/method-guides/GOLOS.md`.
 - Paper-reproduction tests for every registered method in `tests/methods/`, with the transcribed
   tables in `tests/data/papers/` (DOI, table, page). Confirmed paper misprints are strict `xfail`s
   with the reason (e.g. Papadopoulos 1997 Table 1 rows computed with sin δ, P1).
