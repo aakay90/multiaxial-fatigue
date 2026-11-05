@@ -25,8 +25,9 @@ Repository choices:
     -dsigma_n/2 < sigma_n,m < 0, and its hyperbolic branch would make a fully compressive cycle
     damaging;
   - tau_b: workbook column ``Tu``, else estimated as Su / sqrt(3) with a warning (the paper's
-    Table 1 ratios tau_b/sigma_b are 0.78, 0.68 and 0.94, so the estimate is coarse);
-    |tau_max,m| >= tau_b gives an infinite damage parameter;
+    Table 1 ratios tau_b/sigma_b are 0.78, 0.68 and 0.94, so the estimate is coarse); a plane
+    with |tau_m| >= tau_b, where Eq. (25) is undefined, raises LoadingScopeError and the model is
+    skipped for that material;
   - LIU2025_ext is the largest damage parameter over all planes (repository variant); life from
     the shared master curve DP = A N^b instead of the Basquin constants of Eq. (27).
 
@@ -43,6 +44,7 @@ import numpy as np
 from multifat.models.utils.batch import check_planes
 
 from ..base import CPPlaneResult
+from ..errors import LoadingScopeError
 
 SERENSEN = np.sqrt(2.0) - 1.0  # (2 S_-1 - S_0)/S_0 with S_0 = sqrt(2) S_-1, Eqs. (23)-(24)
 
@@ -117,5 +119,10 @@ class Liu2025:
         sigma_a = 0.5 * np.abs(S0r[:, 2, 2] - S1r[:, 2, 2])
         sigma_m = 0.5 * (S0r[:, 2, 2] + S1r[:, 2, 2])
         sigma_eq = serensen_amplitude(sigma_a, sigma_m, su)
+        if np.any(np.abs(tau_m) >= tu):
+            raise LoadingScopeError(
+                f"LIU2025: a plane carries a mean shear stress >= tau_b = {tu:g} MPa; the Gerber "
+                "correction, Eq. (25), is undefined (supply Tu if it was estimated from Su)"
+            )
         tau_eq = gerber_amplitude(tau_a, tau_m, tu)
         return np.sqrt(sigma_eq**2 + 3.0 * tau_eq**2), tau_a

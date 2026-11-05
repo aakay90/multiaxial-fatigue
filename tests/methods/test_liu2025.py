@@ -132,3 +132,13 @@ def test_tu_estimate_warns():
     S[0, 2] = S[2, 0] = 50.0
     with pytest.warns(RuntimeWarning, match="Tu"):
         Liu2025().evaluate_on_plane(S0r=S, S1r=-S, E0r=Z, E1r=Z, params={"Su": 900.0})
+
+
+def test_mean_shear_beyond_tau_b_is_out_of_scope():
+    from multifat.models.errors import LoadingScopeError
+
+    S0, S1 = np.zeros((3, 3)), np.zeros((3, 3))
+    S0[0, 2] = S0[2, 0] = 700.0
+    S1[0, 2] = S1[2, 0] = 500.0  # mean shear 600 MPa on the plane
+    with pytest.raises(LoadingScopeError, match="Gerber"):
+        Liu2025().evaluate_on_plane(S0r=S0, S1r=S1, E0r=Z, E1r=Z, params={"Su": 900.0, "Tu": 550.0})
