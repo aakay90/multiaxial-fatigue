@@ -9,6 +9,13 @@ kappa = 3 t_-1/f_0 - sqrt(3), together with the Goodman estimate
 f_0 = f_-1/(1 + f_-1/sigma_f), but only when t_-1 = f_-1/sqrt(3) (the torsion-to-bending
 ratio implied by Sines' criterion). The repository implementation adheres to the printed
 Eq. (64), hence kappa is independent of t_-1. The fatigue index returned is LHS / t_-1.
+
+Repository choices:
+  - the printed Eq. (64) coefficient, so reversed tension at f_-1 gives f_-1 / (sqrt(3) t_-1);
+  - the fatigue-limit index is used as the damage parameter of the shared master curve
+    DP = A N^b for finite-life comparisons.
+
+User guide: docs/method-guides/SINES.md.
 """
 
 from __future__ import annotations

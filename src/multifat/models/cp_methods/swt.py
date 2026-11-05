@@ -1,4 +1,22 @@
-# fatigue_cp/methods/swt.py
+"""Smith, Watson & Topper (1970), J. Mater. 5:767-778: SWT parameter, critical-plane extension.
+
+p. 769: the damage function is sigma_max eps_a, used as sqrt(sigma_max eps_a E)::
+
+    sigma_max eps_a = constant at a given life        sigma_max > 0
+
+On each candidate plane DP = sigma_max d_eps / 2 (MPa), with sigma_max the largest normal stress
+over the cycle and d_eps the normal strain range; the selection metric is d_eps (plane of maximum
+normal strain range) and SWT_ext takes the largest DP over the planes.
+
+Repository choices:
+  - the product sigma_max eps_a, not its square root (monotone: fitted lives are unchanged);
+  - sigma_max is clipped at zero, so a fully compressive cycle gives DP = 0;
+  - the critical-plane extension is not in the 1970 paper; strains are linear-elastic; life from
+    the shared master curve DP = A N^b.
+
+User guide: docs/method-guides/SWT.md.
+"""
+
 from __future__ import annotations
 from typing import Mapping
 import numpy as np

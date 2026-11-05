@@ -196,6 +196,18 @@ layout, were ported to `multifat`, each port naming its upstream commit.
 - The review found one logic difference, `pipeline.py` treating an empty constant mapping as absent
   and reloading it from the workbook: it is kept (`is None`) and pinned by
   `test_empty_data_mapping_is_used_as_given`.
+- Method guides (issue #32), `docs/method-guides/`: a template, an index with the conventions
+  shared by every method (load history, plane search and shear-amplitude rules, master curve,
+  calibration of plane constants) and one guide each for FIN, FS, SWT, MATAKE, MCD, MWCM,
+  CROSSLAND, SINES, DANGVAN and PAPADOPOULOS: original formulation in LaTeX, repository
+  implementation and its departures, constants, original versus repository calibration, an
+  executable worked example checked against a hand calculation, comparison capabilities and
+  verification evidence. `tests/test_method_guides.py` runs every example and compares its printed
+  output, checks the section order, the registry names on the command lines and the index, and
+  ratchets the `Repository choices:` paragraph of the method-module docstrings (25 modules still
+  pending). Module docstrings added or completed for FIN, FS, SWT, MATAKE, MCD, MWCM, CROSSLAND,
+  SINES, DANGVAN and PAPADOPOULOS. Documentation only: `regression_snapshot.py` compares identical
+  to `5cd5124`.
 
 ### Repository
 

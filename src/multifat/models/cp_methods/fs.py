@@ -1,4 +1,26 @@
-# fatigue_cp/methods/fs.py
+"""Fatemi & Socie (1988), FFEMS 11, doi:10.1111/j.1460-2695.1988.tb01169.x: critical-plane strain
+criterion.
+
+Eq. (8), on the plane of maximum shear strain amplitude::
+
+    (Delta gamma_max / 2) (1 + n sigma_n^max / sigma_y) = constant
+
+with Delta gamma_max / 2 the engineering shear strain amplitude, sigma_n^max the maximum normal
+stress on that plane and n (``k_FS``) a material constant.
+
+The plane damage parameter is DP = d_gam (1 + k_FS sigma_max / Sy): the range of the tensorial
+shear strain on the plane equals the engineering shear amplitude, so no factor two is applied.
+The selection metric is d_gam; FS_ext takes the largest DP over the planes.
+
+Repository choices:
+  - sigma_max is clipped at zero (compression never lowers DP);
+  - the workbook (monotonic) yield strength Sy replaces the cyclic yield strength;
+  - out-of-phase shear range: longest chord of the shear-strain path (``longest_chord``);
+  - strains are linear-elastic; life from the shared master curve DP = A N^b instead of Eq. (9).
+
+User guide: docs/method-guides/FS.md.
+"""
+
 from __future__ import annotations
 from typing import Mapping, Tuple
 import numpy as np

@@ -1,4 +1,26 @@
-# fatigue_cp/methods/fin.py
+"""Findley (1959), J. Eng. Ind., doi:10.1115/1.4008327: stress-based critical-plane criterion.
+
+Eqs. (2), (8)-(10), p. 302, on the plane of orientation theta::
+
+    tau_thetaA + k sigma_thetaM = f        maximised over the planes
+
+with tau_thetaA the shear stress amplitude, sigma_thetaM the maximum normal stress on the plane
+and k a material constant. Fully reversed torsion and bending give f = t_-1 sqrt(1 + k^2)
+(Eq. 19) and f = f_-1 (k + sqrt(1 + k^2)) / 2 (Eq. 24).
+
+The plane damage parameter is DP = d_tau / 2 + k_FI sigma_max (MPa), with the selection metric
+equal to DP, so FIN and FIN_ext coincide.
+
+Repository choices:
+  - sigma_max keeps its sign (compression lowers DP); no clipping;
+  - out-of-phase shear amplitude: root-sum-square of the shear-ellipse semi-axes (the default
+    ``rss`` rule of ``multifat.eval.evaluator.SHEAR_RULES``); the paper treats in-phase loading;
+  - life from the shared master curve DP = A N^b, and k_FI calibrated by minimising the life
+    scatter of tension and torsion failures (``multifat.cli.calibrate``).
+
+User guide: docs/method-guides/FIN.md.
+"""
+
 from __future__ import annotations
 from typing import Mapping, Tuple
 import numpy as np

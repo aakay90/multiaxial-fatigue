@@ -12,6 +12,14 @@ as in BP and CAIM).
 
 This is a case-level model (it uses the whole single-harmonic history) and returns sigma_eq,DV / s_-1,
 like the other criteria of Boehme et al. (2026).
+
+Repository choices:
+  - the amplitude-plus-maximum variant of Eq. (3), not the maximum over time of the mesoscopic
+    sum; identical for proportional loading, conservative for single-harmonic out-of-phase
+    loading when a = 3 (t_-1/s_-1 - 1/2) > 0;
+  - the index is used as the damage parameter of the shared master curve DP = A N^b.
+
+User guide: docs/method-guides/DANGVAN.md.
 """
 
 from __future__ import annotations

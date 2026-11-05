@@ -28,7 +28,7 @@ Should the source define a life law of its own, implement `native_life(aux, para
 
 ## Evidence
 
-The original citation is registered in `src/multifat/models/references.py`; a paper-reproduction test then goes in `tests/methods/`, with the transcribed table placed in `tests/data/papers/` (header citing DOI, table, page). Update `docs/catalogue/methods.json` and run `tools/generate_method_docs.py`. Any departure from the source's plane rule or loading assumptions must be documented in `docs/method-audit.md`. A disabled method is not to be restored before its recorded numerical issue has been resolved.
+The original citation is registered in `src/multifat/models/references.py`; a paper-reproduction test then goes in `tests/methods/`, with the transcribed table placed in `tests/data/papers/` (header citing DOI, table, page). Update `docs/catalogue/methods.json` and run `tools/generate_method_docs.py`. Any departure from the source's plane rule or loading assumptions must be documented in `docs/method-audit.md`. Write a [method guide](method-guides/TEMPLATE.md) for the new method (equations, repository choices, calibration and an executable worked example) and list it in the [guide index](method-guides/README.md); `tests/test_method_guides.py` runs its example and requires the module docstring's `Repository choices:` paragraph. A disabled method is not to be restored before its recorded numerical issue has been resolved.
 
 ## Docstrings
 

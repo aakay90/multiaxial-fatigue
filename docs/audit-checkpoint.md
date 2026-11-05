@@ -1,5 +1,33 @@
 # Development continuation checkpoint
 
+## Issue #32 method guides, first ten methods (5 November 2026)
+
+Branch `claude/multiaxial-fatigue-repo-ml3b4w`, from `main` at `5cd5124`. Documentation only;
+TVEIT2025 is deliberately untouched (another contributor is working on it).
+
+Done: `docs/method-guides/` with a template, an index of the shared conventions and guides for
+FIN, FS, SWT, MATAKE, MCD, MWCM, CROSSLAND, SINES, DANGVAN and PAPADOPOULOS. Each separates the
+published formulation from the repository implementation (`Repository choices`), states the
+original and the repository calibration, and has a worked example whose numbers are asserted
+against hand calculations and whose printed output is compared by `tests/test_method_guides.py`.
+Module docstrings were added or completed for the same ten modules. The new test also ratchets the
+`Repository choices:` paragraph of the method modules: 25 modules are listed as pending.
+README, user guide (FAQ and test counts), `adding-methods.md` and CHANGELOG link the guides.
+
+Verified: the guide CLI commands run on `Al7075_T6` (all ten models `ok`; `--constants` reuse of
+the sidecar works); full test suite, black, ruff, `check_docs`, `generate_method_docs --check`;
+`regression_snapshot.py` against `5cd5124`: 0 differing outputs and logs.
+
+Scientific finding, not changed (affects issue #14): the torsion failures used to calibrate the
+plane constants `k_FI`, `k_FS`, `L_LI`, `k_MGSE`, `a_MSWT` are not in `design_case_ids`, so they
+are exported as `Flag = 1` assessment rows (e.g. 12 torsion tests of `Al7075_T6` for FIN). Their
+errors are not independent of the calibration. Fixing the flags changes reported statistics and
+needs the maintainer's decision; the guides state it.
+
+Remaining (issue #32): guides for the other registered methods (next: BP, CAIM, PCR, PI, GSE,
+GSA, VSE, MOREL, then the rest; TVEIT2025 only after its owner's work lands), and the 25 pending
+docstrings. Next exact action: write the BP and CAIM guides from the template.
+
 ## Main after Tveit integration (29 October 2026)
 
 PR #28 was merged into PR #27, and PR #27 was merged into `main` at

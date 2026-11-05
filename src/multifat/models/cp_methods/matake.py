@@ -1,4 +1,22 @@
-# multifat/models/cp_methods/matake.py
+"""Matake (1977), Bull. JSME, doi:10.1299/jsme1958.20.257: critical-plane fatigue-limit criterion.
+
+Eq. (1), p. 5, on the plane of maximum shear stress amplitude, with the coefficient of the
+Appendix, p. 7 (line through (0, t_-1) and (f_-1/2, f_-1/2))::
+
+    tau_a + mu sigma_n,max = t_-1,        mu = 2 t_-1 / f_-1 - 1
+
+The plane damage parameter is DP = d_tau / 2 + mu sigma_max (MPa), equal to t_-1 at both
+fully reversed limits; the selection metric is d_tau and MATAKE_ext takes the largest DP.
+
+Repository choices:
+  - sigma_max is clipped at zero (tension-only normal stress);
+  - out-of-phase shear amplitude: the default ``rss`` rule; Papadopoulos et al. (1997) restate
+    Matake with the circumscribed-circle amplitude instead;
+  - life from the shared master curve DP = A N^b.
+
+User guide: docs/method-guides/MATAKE.md.
+"""
+
 from __future__ import annotations
 
 from typing import Mapping, Tuple

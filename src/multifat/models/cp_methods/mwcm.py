@@ -1,4 +1,3 @@
-# multifat/models/cp_methods/mwcm.py
 """Modified Wöhler Curve Method, Susmel & Lazzarin (2002), Fatigue Fract Engng Mater Struct
 25:63-78, doi:10.1046/j.1460-2695.2002.00462.x (roadmap N04), high-cycle formulation, Eqs. (5)-(13):
 
@@ -12,8 +11,14 @@ plane (without clipping: a compressive mean makes rho < 0). The damage measure i
 tau_a / tau_A,Ref(rho) = E + 1 from the error index of Eq. (13); it becomes infinite as soon as
 tau_A,Ref(rho) <= 0, i.e. for rho >= tau_A/(tau_A - sigma_A/2) (the paper applies Eq. 11 for rho > 1
 without imposing a cut-off). The finite-life branch of Eq. (7) would require k_tau(rho) derived from
-the two Wöhler slopes and is not implemented. Whenever the plane metric ties, the larger damage is
-selected (the paper does not specify a rule).
+the two Wöhler slopes and is not implemented.
+
+Repository choices:
+  - planes tying in tau_a resolve to the larger damage (the paper does not specify a rule);
+  - no ``_ext`` variant, since rho diverges where tau_a vanishes;
+  - high-cycle form only; life from the shared master curve DP = A N^b.
+
+User guide: docs/method-guides/MWCM.md.
 """
 
 from __future__ import annotations
