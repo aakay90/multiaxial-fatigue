@@ -94,14 +94,14 @@ of names and records one distinction FatPy makes; no multifat name was renamed.
 ### Methods
 
 - New criterion `ZHANGYAO`, Zhang & Yao (2011), catalogue N06 (issue #13).
-  - Formulation: a nonlinear combination of the shear amplitude $ and the Goodman-corrected
-    normal stress on the maximum-$ plane.
+  - Formulation: a nonlinear combination of the shear amplitude $C_a$ and the Goodman-corrected
+    normal stress on the maximum-$C_a$ plane.
   - Verification: 50 of the 66 fatigue limits of Tables 3–8 within 0.3 points.
-  - Finding: the maximum-$ plane rule is ill-conditioned for this criterion, so results in
+  - Finding: the maximum-$C_a$ plane rule is ill-conditioned for this criterion, so results in
     out-of-phase loading depend on the tie rule.
   - Guide: `docs/method-guides/ZHANGYAO.md`.
 - New criterion `WANG2022`, Wang et al. (2022), catalogue N05 (issue #13).
-  - Formulation: the equivalent shear stress on the maximum-$ plane, with life from the
+  - Formulation: the equivalent shear stress on the maximum-$C_a$ plane, with life from the
     torsional S–N curve; its master curve is fitted on the torsion failures.
   - Verification: the predicted lives of Tables 4–5 are reproduced within 1 %.
   - Finding: Eq. (18) as printed makes a tensile mean stress beneficial. By maintainer decision,
