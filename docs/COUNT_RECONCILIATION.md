@@ -4,7 +4,7 @@ Generated from `catalogue/methods.json`; every inherited permanent ID is checked
 
 ## Answer to “about 100 reviewed, but about 20 in the roadmap?”
 
-The **78 missing method/scoped candidates** describe the implementation backlog. The **6 roadmap entries** are an intentionally selected initial development sequence. The other **72** are retained, individually accounted for and open to proposals. The prior 23-step research shortlist was itself selective; the published initial roadmap had 22 additions. Neither was the literature census. The only difference between the earlier 23-entry shortlist and the 22-entry published sequence is **G14, Glinka–Shen–Plumtree**: it remains in the catalogue as an overlap-review record pending an equation-level comparison with GSE/GSA. This is not proof that the laws are equivalent. The missing explanation is corrected here.
+The **77 missing method/scoped candidates** describe the implementation backlog. The **6 roadmap entries** are an intentionally selected initial development sequence. The other **71** are retained, individually accounted for and open to proposals. The prior 23-step research shortlist was itself selective; the published initial roadmap had 22 additions. Neither was the literature census. The only difference between the earlier 23-entry shortlist and the 22-entry published sequence is **G14, Glinka–Shen–Plumtree**: it remains in the catalogue as an overlap-review record pending an equation-level comparison with GSE/GSA. This is not proof that the laws are equivalent. The missing explanation is corrected here.
 
 There is no evidence of an inherited record being lost: all **161/161 IDs** survive, and all **51/51 numbered FABER publications** have dispositions. The weakness was that the selection policy and the nonselected backlog were not prominent enough. This update adds explicit development dispositions and browse links; it does not fabricate additional fatigue laws.
 
@@ -20,7 +20,7 @@ There is no evidence of an inherited record being lost: all **161/161 IDs** surv
 | L | Historical bibliographic/identity leads | 14 | 0 | 14 |
 | TOTAL | — | 161 | 117 | 44 |
 
-**161 = 117 + 44; 117 = 20 implementation records + 97 missing candidates; 97 = 6 prioritized additions + 72 nonselected candidates.** Of the 97 missing candidates, 66 have preliminary A/B feasibility and 12 have C feasibility. Feasibility does not certify available measured data, equations or a reproducible algorithm.
+**161 = 117 + 44; 117 = 20 implementation records + 97 missing candidates; 97 = 6 prioritized additions + 71 nonselected candidates.** Of the 97 missing candidates, 65 have preliminary A/B feasibility and 12 have C feasibility. Feasibility does not certify available measured data, equations or a reproducible algorithm.
 
 ## What these numbers do and do not count
 
@@ -45,8 +45,8 @@ Broader workstreams are excluded from the narrow method-progress denominator bec
 | Track | Records |
 | --- | --- |
 | application_comparison | 1 |
-| available_not_scheduled | 63 |
-| available_validate | 32 |
+| available_not_scheduled | 62 |
+| available_validate | 33 |
 | broader_workstream | 10 |
 | deferred_major_extension | 9 |
 | identity_or_relationship_review | 30 |
@@ -108,7 +108,7 @@ Use the catalogue link for full references, loading/data scope and scientific li
 | [N25](../METHODS.md#n25) — A90(T) deviatoric tensile critical-plane model | method_candidate | Yes | Not implemented | available_not_scheduled | Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Deviatoric directional pairing, sectional search and original life equation; measured cyclic strains for plastic use. |
 | [N26](../METHODS.md#n26) — Negative-mean-stress modified SWT | method_candidate | Yes | Not implemented | available_not_scheduled | Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New scalar correction with exact branch/sign rules. A general multiaxial plane rule is not established by this review. |
 | [N27](../METHODS.md#n27) — Wu–Hu–Song (WHS) | method_candidate | Yes | Not implemented | available_not_scheduled | Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New coefficient calibration; prescribed cyclic strains if inelastic; native life law. |
-| [N28](../METHODS.md#n28) — Modified WHS (MWHS) | method_candidate | Yes | Not implemented | available_not_scheduled | Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Scalar criterion first; measured cyclic response and native life calibration for reproducing GH4169 tests. |
+| [N28](../METHODS.md#n28) — Modified Wu–Hu–Song (MWHS) | implementation | Yes | Fully implemented | available_validate | Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
 | [N29](../METHODS.md#n29) — Original Kandil–Brown–Miller (KBM) | method_candidate | Yes | Not implemented | available_not_scheduled | Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original parameter/plane definition and life solver; genuine total strains for elastoplastic use. |
 | [N30](../METHODS.md#n30) — Normalized energy critical-plane parameter | method_candidate | Yes | Not implemented | available_not_scheduled | Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Published Mohr-circle/plane construction, coefficient fields already partly supported, native life relation. |
 | [N31](../METHODS.md#n31) — Load-path-sensitive modified fatigue parameter | method_candidate | Yes | Not implemented | available_not_scheduled | Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Validate review's claimed correlation-based factor against original; path integration and native life mapping. |

@@ -28,6 +28,7 @@ The most widely used criteria are documented first.
 | [Fatemi–Socie](FS.md) | `FS`, `FS_ext` | Critical plane, strain | $\gamma_a\,(1 + k\,\sigma_{n,\max}/\sigma_y)$ (–) | `k_FS`, `Sy`, `E`, `nu` |
 | [Smith–Watson–Topper](SWT.md) | `SWT`, `SWT_ext` | Critical plane, energy-like | $\sigma_{n,\max}\,\varepsilon_{n,a}$ (MPa) | `E`, `nu` |
 | [Modified Kandil–Brown–Miller](MKBM.md) | `MKBM`, `MKBM_ext` | Critical plane, strain | $\gamma_a + (1 + \sigma_{n,\max}/S_y)\,\varepsilon_{n,a}$ (–) | `Sy`, `E`, `nu` |
+| [Modified Wu–Hu–Song](MWHS.md) | `MWHS`, `MWHS_ext` | Critical plane, strain | $\gamma_a + \tfrac12(1 + \sigma_{n,\max}/S_y)\sqrt{\sigma_{n,\max}\Delta\varepsilon_n/E}$ (–) | `Sy`, `E`, `nu` |
 | [Ince–Glinka GSE](GSE.md) | `GSE` | Critical plane, energy | $\tau_{\max}\gamma_{a} + \sigma_{n,\max}\varepsilon_{n,a}$ (+ plastic terms) (MPa) | `E`, `nu` |
 | [Ince–Glinka GSA](GSA.md) | `GSA` | Critical plane, strain | $\tau_{\max}\gamma_{a}/\tau_f' + \sigma_{n,\max}\varepsilon_{n,a}/\sigma_f'$ (+ plastic terms) (–) | `E`, `nu`; `sigma_f`, `tau_f` or `Su` |
 | [Liu virtual strain energy](VSE.md) | `VSE`, `VSE_ext` | Critical plane, energy | $\Delta\sigma_n\Delta\varepsilon_n + \Delta\tau\,\Delta(\gamma/2)$ (MPa) | `E`, `nu`; `vse_mode` |
@@ -100,7 +101,9 @@ $R = -1$ (`Flag = 0` in the CSV, together with any other test that fitted a cons
 \mathrm{DP} = A\,N_f^{\,b}, \qquad \hat N_f = \left(\mathrm{DP}/A\right)^{1/b},
 ```
 
-by least squares in $\ln \mathrm{DP}$ versus $\ln N_f$ (`multifat.eval.fitting`). All other failures
+by least squares in $\ln \mathrm{DP}$ versus $\ln N_f$ (`multifat.eval.fitting`). A method whose source fits its life
+curve on torsion tests declares `design_loading = "torsion"`; its master curve is then fitted on
+the fully reversed pure torsion failures instead (currently [MWHS](MWHS.md)). All other failures
 (`Flag = 1`) are predicted with the inverted curve. Run-outs (`Flag = 2`) are evaluated but never
 enter a fit or an error statistic. This is an **assessment-layer** life law shared by all methods,
 not the life law of the original author. The life error is

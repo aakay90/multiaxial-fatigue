@@ -16,3 +16,7 @@ class NativeLifeError(ValueError):
 
 class LoadingScopeError(ValueError):
     """A case lies outside the loading scope of a criterion (the model is skipped, not failed)."""
+
+
+class DesignSetError(ValueError):
+    """A material lacks the design tests a model's master curve is fitted on (model skipped)."""
