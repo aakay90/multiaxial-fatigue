@@ -39,6 +39,7 @@ normal(s) themselves.
 | Axial repeated limit (maximum stress) | f_0, s_0 | `f_0` | Sig0 | MPa |
 | Torsional repeated limit (maximum stress) | t_0 | `t_0` | Tau0 | MPa |
 | Ultimate tensile strength | sigma_f, S_u | `su` | Su | MPa |
+| Ultimate torsional strength | tau_b, T_u | `tu` | Tu | MPa |
 | Normal stress amplitude / mean on a plane | sigma_a, sigma_m | `sigma_a`, `sigma_m` | - | MPa |
 | Shear stress amplitude / mean on a plane | tau_a, tau_m | `tau_a`, `tau_m` | - | MPa |
 | Hydrostatic amplitude / mean / maximum | sigma_H,a, sigma_H,m | `sigma_H_a`, `sigma_H_m`, `sigma_H_max` | - | MPa |

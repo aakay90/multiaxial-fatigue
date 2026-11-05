@@ -16,7 +16,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 7 | 1 | 10 | 0 | 18 |
+| Critical plane | 8 | 1 | 10 | 0 | 19 |
 | Energy based | 6 | 1 | 13 | 3 | 23 |
 | Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
 | Invariant based | 6 | 0 | 7 | 0 | 13 |
@@ -27,11 +27,11 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Strain based | 4 | 0 | 9 | 2 | 15 |
 | Stress based | 2 | 0 | 11 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 33 | 2 | 77 | 5 | 117 |
+| **TOTAL** | 34 | 2 | 77 | 5 | 118 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
-All 161 inherited records remain traceable. 44 bundles, overlap checks, related publications, unresolved leads and broad workstreams are excluded from progress totals. Absence from those totals is not a scientific rejection. The [51-publication coverage register](docs/research/Review_51_Coverage.csv) preserves every supplied review entry.
+All 162 inherited records remain traceable. 44 bundles, overlap checks, related publications, unresolved leads and broad workstreams are excluded from progress totals. Absence from those totals is not a scientific rejection. The [51-publication coverage register](docs/research/Review_51_Coverage.csv) preserves every supplied review entry.
 
 Browse [contribution opportunities and status/loading/validation views](docs/METHOD_INDEX.md), or inspect the [complete count reconciliation and record dispositions](docs/COUNT_RECONCILIATION.md). Roadmap selection never removes an entry here.
 
@@ -78,6 +78,7 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 | [G33](#g33) | Zhai–Zou–Hu–Chen–Jin shakedown-constrained Walker model | Not implemented | not_tested | Medium | Yes |
 | [G43](#g43) | Xu et al. mean-stress/biaxiality modification | Not implemented | not_tested | Low | Yes |
 | [G50](#g50) | Wang–Shang–Wang ductile/brittle HCF criterion | Not implemented | not_tested | Medium | overlap_review |
+| [N58](#n58) | Liu–Xie–Hao equivalent stress on the maximum shear stress amplitude plane | Fully implemented | reference_examples_reproduced | Medium | Yes |
 
 ### I_FIN
 
@@ -342,6 +343,18 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External sources | not_individually_searched; not integrated or independently validated |
 | Complete scientific and implementation record | [Inputs, formulation, scope, code, tests, validation, missing work and Issues](docs/methods/critical-plane.md#g50) |
+
+### N58
+
+**Liu–Xie–Hao equivalent stress on the maximum shear stress amplitude plane** — Xiao-Yong Liu, Jiamiao Xie, Wenqian Hao (2025)
+
+| Field | Evidence / task |
+| --- | --- |
+| Reference / DOI | A Multiaxial High-Cycle Fatigue Life Evaluation Model Based on the Critical Plane Method, Journal of Materials Engineering and Performance; https://doi.org/10.1007/s11665-025-11163-z |
+| WG4.3 completeness / validation | Fully implemented; reference_examples_reproduced |
+| Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
+| External sources | no_accessible_source_identified; not integrated or independently validated |
+| Complete scientific and implementation record | [Inputs, formulation, scope, code, tests, validation, missing work and Issues](docs/methods/critical-plane.md#n58) |
 
 <a id="family-energy-based"></a>
 

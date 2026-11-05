@@ -101,6 +101,12 @@ checked against its original publication; changes to numerical outputs are liste
   - Formulation: Eq. (19), with the longest-chord shear range.
   - Verification: Fig. 14 is reproduced, except the normal term at 90°.
   - Guide: `docs/method-guides/MWHS.md`.
+- New criterion `LIU2025`, Liu, Xie & Hao (2025), a new catalogue record N58 from a
+  maintainer-supplied paper (issue #13).
+  - Formulation: a von Mises-like combination of the corrected plane amplitudes on the maximum
+    shear plane, with Gerber and Serensen mean-stress corrections.
+  - Verification: Fig. 3 is reproduced except two points.
+  - Guide: `docs/method-guides/LIU2025.md`.
 - Paper-reproduction tests for every registered method in `tests/methods/`, with the transcribed
   tables in `tests/data/papers/` (DOI, table, page). Confirmed paper misprints are strict `xfail`s
   with the reason (e.g. Papadopoulos 1997 Table 1 rows computed with sin δ, P1).
