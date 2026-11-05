@@ -329,6 +329,28 @@ def load_constants(path: Path, material: str, n_failures: int | None = None) -> 
     return constants, origin
 
 
+def supplied_design_ids(path: Path, data_block: dict, supplied: dict) -> tuple[dict, str]:
+    """Design tests of supplied constants, from a sidecar made on the same failures.
+
+    A sidecar written by this pipeline records the tests behind each fitted constant. They are
+    reused only when its ``failure_fingerprint`` equals that of the current data, since case
+    indices are not stable across workbook revisions. Upstream records carry no case indices.
+    Returns ({constant: case ids}, note for the sidecar or "").
+    """
+    from multifat.report.subsets import dataset_fingerprint
+
+    record = json.loads(Path(path).read_text(encoding="utf-8"))
+    recorded = record.get("design_case_ids") or {}
+    wanted = {k: [int(i) for i in v] for k, v in recorded.items() if k in supplied}
+    unknown = "the tests behind the supplied constants are unknown; they stay Flag = 1"
+    if "params" not in record:
+        return {}, unknown
+    fingerprint = (record.get("provenance") or {}).get("failure_fingerprint")
+    if fingerprint != dataset_fingerprint(data_block):
+        return {}, "sidecar made on other failures: " + unknown
+    return wanted, ""
+
+
 def provenance(workbook: Path, data: dict | None = None) -> dict:
     """What produced a run: the input file, the observations, the code and the numerical settings."""
     import numpy as np
@@ -450,6 +472,10 @@ def run_workbook(
         sidecar["reason"] = "calibration not requested (--no-calibrate)"
     if supplied:
         sidecar["params"] = {**sidecar.get("params", {}), **supplied}
+        reused, note = supplied_design_ids(constants, data[material], supplied)
+        sidecar["design_case_ids"] = {**sidecar.get("design_case_ids", {}), **reused}
+        if note:
+            source = {**source, "design_rows": note}
         sidecar["constants_source"] = source
     sidecar["provenance"] = provenance(workbook, data)
     (results_dir / f"{material}_calibration.json").write_text(

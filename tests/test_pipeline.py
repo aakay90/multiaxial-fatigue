@@ -94,6 +94,46 @@ def test_workbook_without_design_set_is_rejected(tmp_path):
         run_workbook(wb, models=["FIN"], results_dir=tmp_path / "res")
 
 
+def test_plane_constant_tests_are_design_points(tmp_path):
+    """The tension and torsion tests of the k_FI scatter objective are not assessments."""
+    import pandas as pd
+
+    keep = [i for i, h in enumerate(SUMMARY_HEADERS) if not h.startswith("k FI")]
+    wb = write_workbook(
+        tmp_path / "Flags.xlsx",
+        summary_headers=[SUMMARY_HEADERS[i] for i in keep],
+        summary_values=[SUMMARY_VALUES[i] for i in keep],
+        rows=basquin_rows(sf=1500, b=-0.09, tf=860, b0=-0.07),
+    )
+    out = tmp_path / "res"
+    run_workbook(wb, models=["FIN"], results_dir=out)
+    cal = json.loads((out / "Flags_calibration.json").read_text(encoding="utf-8"))
+    sel = cal["selection"]
+    torsion = sel["torsion_case_ids"]
+    assert torsion, "the synthetic workbook must have torsion failures"
+    assert cal["design_case_ids"]["k_FI"] == sorted(sel["tension_case_ids"] + torsion)
+    df = pd.read_csv(out / "FIN_Flags.csv")
+    assert len(df[(df.Flag == 0) & (df.Loading_type == "Torsion")]) == len(torsion)
+    assert (df[df.Flag == 1].Loading_type != "Torsion").all()
+
+    # Reusing the sidecar on the same failures keeps the design rows ...
+    reuse = tmp_path / "reuse"
+    run_workbook(wb, models=["FIN"], results_dir=reuse, constants=out / "Flags_calibration.json")
+    again = pd.read_csv(reuse / "FIN_Flags.csv")
+    assert (again.Flag.to_numpy() == df.Flag.to_numpy()).all()
+
+    # ... but a sidecar made on other failures cannot say which rows they are.
+    other = json.loads((out / "Flags_calibration.json").read_text(encoding="utf-8"))
+    other["provenance"]["failure_fingerprint"] = "0" * 64
+    stale = tmp_path / "stale.json"
+    stale.write_text(json.dumps(other), encoding="utf-8")
+    run_workbook(wb, models=["FIN"], results_dir=tmp_path / "stale", constants=stale)
+    side = json.loads((tmp_path / "stale" / "Flags_calibration.json").read_text(encoding="utf-8"))
+    assert "other failures" in side["constants_source"]["design_rows"]
+    flagged = pd.read_csv(tmp_path / "stale" / "FIN_Flags.csv")
+    assert not len(flagged[(flagged.Flag == 0) & (flagged.Loading_type == "Torsion")])
+
+
 def test_fitted_basquin_constants_feed_mdc_and_flag_their_tests(tmp_path):
     import pandas as pd
 

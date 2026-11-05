@@ -854,6 +854,14 @@ def calibrate_workbook(
             )
             out["params"]["k_MGSE"] = mgse_k
             out["source"]["k_MGSE"] = "Zhu 2018 Eq. (12), elastic terms, mean over N = 1e4..2e6"
+            # Derived from the four Basquin constants, hence from the tests behind them.
+            out["design_case_ids"]["k_MGSE"] = sorted(
+                {
+                    i
+                    for name in ("sigma_f", "b_fat", "tau_f", "b0")
+                    for i in out["design_case_ids"].get(name, [])
+                }
+            )
         su, E = props["Tensile_strength_MPa"], props["E_MPa"]
         for name, value in (strain_life_fill(su, E) if has_elastic else {}).items():
             out["params"][name] = value
@@ -927,6 +935,14 @@ def calibrate_workbook(
                 sel["tension_info"]["fallback_used"] or sel["torsion_info"]["fallback_used"]
             ),
         }
+        # Every test of the scatter objective fed the constant: a model that adopts it must report
+        # these tests as design points (Flag = 0), not as independent assessments.
+        objective_ids = sorted(
+            set(out["selection"]["tension_case_ids"]) | set(out["selection"]["torsion_case_ids"])
+        )
+        for name in out["scatter_STD"]:
+            if out["source"].get(name, "").startswith("scatter minimisation"):
+                out["design_case_ids"][name] = objective_ids
     return out
 
 

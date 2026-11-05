@@ -138,6 +138,14 @@ layout, were ported to `multifat`, each port naming its upstream commit.
 
 ### Changed numerically
 
+- Design flags of calibrated plane constants: the tension and torsion tests of the scatter
+  objective behind a pipeline-calibrated `k_FI`, `k_FS`, `L_LI`, `k_MGSE` or `a_MSWT`, and the
+  Basquin tests behind a `k_MGSE` from Zhu (2018) Eq. (12), are now `Flag = 0` for the models that
+  adopt the constant; they were `Flag = 1` assessment rows, so the assessment statistics included
+  the tests that fitted the constant. On the five life datasets 410 rows of FIN, FS, LI, MGSE_ZHU,
+  MSWT and their `_ext` change flag; constants, master curves and predicted lives are unchanged
+  (differences at most 6.7e-14 relative, from the design-row code path). `--constants` with a
+  sidecar of this pipeline keeps its design tests when the `failure_fingerprint` matches.
 - F1: result CSVs are written as UTF-8 (only text fields changed; SWT results now enter the
   comparison on Windows).
 - F2: the critical-plane search refines the grid maximum (grid + analytical seeds + local
