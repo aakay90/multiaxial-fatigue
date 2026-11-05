@@ -30,6 +30,14 @@ checked against its original publication; changes to numerical outputs are liste
 - Batched plane evaluation and a per-calibration plane cache (bit-identical outputs): a full
   snapshot dropped from about 21 to about 4 minutes before the calibration moved to all planes.
 
+### Survival probability (issue #16)
+
+- `--survival-probability P_s` on `multifat-run` and `multifat-pipeline` (0.5 <= P_s < 1, default 0.5
+  = median, unchanged results): the master curve is shifted by z = Phi^-1(P_s) standard deviations of
+  the ln DP residuals (`multifat.eval.fitting.stdnum_for_survival`). Every result CSV ends with a
+  `Survival_probability` column, the sidecar records it, and `multifat-compare` refuses to mix
+  probabilities. Native life laws and fatigue-limit indices are not shifted.
+
 ### Load-equivalent error (issue #37)
 
 - Result CSVs gain `Error_load` = ln(1/s*), the log of the factor on the whole load at which the

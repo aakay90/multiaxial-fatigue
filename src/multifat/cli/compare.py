@@ -577,7 +577,16 @@ def collect_all_results(results_dir: Path) -> pd.DataFrame:
 
     if not frames:
         raise RuntimeError(f"CSV files exist under {results_dir}, but none held readable data.")
-    return pd.concat(frames, ignore_index=True)
+    frame = pd.concat(frames, ignore_index=True)
+    if "Survival_probability" in frame.columns:
+        # Results made before the column existed are median curves (P_s = 0.5).
+        levels = sorted(frame["Survival_probability"].fillna(0.5).unique())
+        if len(levels) > 1:
+            raise ValueError(
+                f"{results_dir} mixes master curves of survival probabilities {levels}: their "
+                "lives and DP errors are not comparable; compare one survival probability at a time"
+            )
+    return frame
 
 
 def annotate_comparison_capabilities(frame: pd.DataFrame) -> pd.DataFrame:

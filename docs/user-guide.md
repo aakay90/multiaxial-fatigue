@@ -132,7 +132,14 @@ uv run multifat-run --model SINES --material 42CrMo4_QT --no-plots
 
 # Run Findley with explicit shear amplitude algorithm
 uv run multifat-run --model FIN --material 42CrMo4_QT --shear-amplitude-algorithm mce_harmonic
+
+# Design curve with a 90 % survival probability instead of the median (also on multifat-pipeline)
+uv run multifat-run --model SINES --material 42CrMo4_QT --survival-probability 0.9
 ```
+
+`--survival-probability` shifts the fitted master curve by $\Phi^{-1}(P_s)$ standard deviations of
+its residuals, assuming normal scatter; it is a survival probability, not a confidence level, and it
+does not apply to native life laws. See the [method audit](method-audit.md#damage-space-error-for-every-slope).
 
 ### 2. Parameter Calibrator (`multifat-calibrate`)
 To compute the material constants that the models need, without evaluating them:
