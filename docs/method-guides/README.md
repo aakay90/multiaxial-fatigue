@@ -128,6 +128,10 @@ design tests only when it was made on the same failures; for constants from the 
 upstream record the tests are unknown and stay `Flag = 1`. The held-out validation protocol is
 tracked in [issue #14](https://github.com/andreachiocca/multiaxial-fatigue/issues/14).
 
+To rank methods against each other use the load-equivalent error `Error_load`, which does not
+depend on the slope of the master curve nor on the degree of the DP
+([comparison capabilities](../comparison-capabilities.md#load-equivalent-error-the-cross-method-ranking-metric)).
+
 Calibration is not validation: an error statistic computed on tests that fed a constant or the
 master curve measures the fit, not the predictive accuracy.
 
