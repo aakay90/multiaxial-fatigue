@@ -125,7 +125,9 @@ Cross-criterion comparison ranking models by log-error standard deviation
 $s_{\ln} = \mathrm{std}(\ln(N_{f,\mathrm{exp}} / N_{f,\mathrm{pred}}))$ alongside systematic bias
 $\mu_{\ln}$ (positive = conservative). Every test here is axial or torsional and all criteria are
 calibrated on the same limits, so the ranking says nothing about multiaxial or non-proportional
-performance:
+performance. Methods without finite life predictions on this dataset are not shown: MOREL (its
+native life law predicts an infinite life below its limit for some failed tests) and MWHS (its
+torsion-calibrated master curve is too flat, so only damage errors are reported):
 
 ![Comparative Benchmark of Multiaxial Fatigue Criteria](docs/images/model_benchmark_error.png)
 
@@ -145,7 +147,7 @@ the life error, it does not grow with the flatness of the S-N curve nor with the
 parameter, and it also covers native-life methods ([comparison capabilities](docs/comparison-capabilities.md#load-equivalent-error-the-cross-method-ranking-metric)).
 Cells give the RMS of $e_L$ on the assessed failures (bias and scatter; 0.10 is a typical 10 % load
 misjudgement); rows are ordered by mean rank. Constants and master curves are calibrated on each
-dataset's uniaxial R = -1 tests, so this is a like-for-like comparison, not an independent
+dataset's uniaxial R = -1 tests (on its torsion tests for MWHS, as in its source), so this is a like-for-like comparison, not an independent
 validation ([issue #14](https://github.com/andreachiocca/multiaxial-fatigue/issues/14)); on
 Ti6Al4V and Ti6Al4V_Berto all assessed tests are torsional. Data in
 `examples/data/load_error_ranking.csv`, rebuilt with `examples/build_load_error_ranking.py`:

@@ -41,6 +41,14 @@ def plot_benchmark_error(
         pd.to_numeric(base_df["Nf_exp"], errors="coerce").notna()
         & pd.to_numeric(base_df["Nf_expected"], errors="coerce").notna()
     ]
+    # A method that predicts an infinite (or non-positive) life for a failed test, e.g. a native
+    # life law below its fatigue limit, has no finite log-error statistics: it is left out of
+    # this panel rather than shown with the finite rows only.
+    pred_all = pd.to_numeric(base_df["Nf_expected"], errors="coerce")
+    nonfinite = sorted(base_df.loc[~np.isfinite(pred_all) | (pred_all <= 0), "Method"].unique())
+    if nonfinite:
+        print(f"left out (non-finite predicted life on some test): {', '.join(nonfinite)}")
+        base_df = base_df[~base_df["Method"].isin(nonfinite)]
     n_tests = int(base_df.groupby("Method").size().max())
 
     family_labels: Dict[str, str] = {
