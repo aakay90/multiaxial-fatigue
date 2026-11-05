@@ -108,7 +108,6 @@ PENDING_DOCSTRINGS = {
     "invariant_methods/vu_halm_nadot",
     "integral_methods/doudard",
     "integral_methods/flaceliere_morel",
-    "integral_methods/morel",
     "integral_methods/robert_fogue_bahuaud",
     "energy_based_methods/banvillet",
     "energy_based_methods/ellyin_kujawski",
