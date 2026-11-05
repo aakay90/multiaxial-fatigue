@@ -1,5 +1,31 @@
 # Development continuation checkpoint
 
+## Open work after PR #33 (5 November 2026)
+
+Open PRs, each from `main` at `2efee9f` and independent:
+
+- #34 (`claude/multiaxial-fatigue-repo-ml3b4w`): calibration integrity. Design flags of the tests
+  behind calibrated plane constants; `k_MGSE` from Zhu Eq. (12) regardless of the model selection;
+  L_LI searched in [0, 20]; constants stopped by an arbitrary search bound are `unidentified` and
+  not used; run-report notes for flat master curves. Changes calibration outputs (see CHANGELOG,
+  *Changed numerically*); `regression_snapshot.py` outputs identical, `calibrate.log` differs as
+  documented.
+- #35 (`docs/method-guides-batch2`): guides for BP, CAIM, PCR, PI, MOREL (15/35 methods).
+- #36 (`feat/survival-probability`): issue #16, `--survival-probability`; closes #16.
+
+Each branch was checked with the full suite, black, ruff, `check_docs` and the regression snapshot
+against `5cd5124`. Issues #14 and #32 carry progress comments; #16 is closed by #36.
+
+Open scientific points, not changed:
+- `zhu_k_mgse` averages Eq. (12) over N = 1e4..2e6, whereas `docs/calibration-source-audit.md`
+  records 5,000-50,000 cycles for metals in Zhu et al. (2018), Section 4.1. Needs the paper.
+- Flat scatter minima (e.g. Ti6Al4V k_MGSE on [2, 5], a_MSWT on [0.5, 1]) still take the smallest
+  point of the plateau; they could be treated as `unidentified` like bound hits.
+- TVEIT2025 within-cycle failure interpolation (see below): owned by another contributor.
+
+Next exact action: after the three PRs are merged, continue #32 with GSE, GSA and VSE, then the
+remaining critical-plane energy methods; then issue #18 (fatigue-limit vs fatigue-life workflows).
+
 ## Issue #32 method guides, first ten methods (5 November 2026)
 
 Branch `claude/multiaxial-fatigue-repo-ml3b4w`, from `main` at `5cd5124`. Documentation only;
@@ -18,11 +44,11 @@ Verified: the guide CLI commands run on `Al7075_T6` (all ten models `ok`; `--con
 the sidecar works); full test suite, black, ruff, `check_docs`, `generate_method_docs --check`;
 `regression_snapshot.py` against `5cd5124`: 0 differing outputs and logs.
 
-Scientific finding, not changed (affects issue #14): the torsion failures used to calibrate the
-plane constants `k_FI`, `k_FS`, `L_LI`, `k_MGSE`, `a_MSWT` are not in `design_case_ids`, so they
-are exported as `Flag = 1` assessment rows (e.g. 12 torsion tests of `Al7075_T6` for FIN). Their
-errors are not independent of the calibration. Fixing the flags changes reported statistics and
-needs the maintainer's decision; the guides state it.
+Design flags of calibrated plane constants (affects issue #14), fixed after PR #33 was merged:
+the tests of the scatter objective behind `k_FI`, `k_FS`, `L_LI`, `k_MGSE`, `a_MSWT`, and the
+Basquin tests behind a Zhu `k_MGSE`, were exported as `Flag = 1`. They are now design rows; 410
+rows of the five life datasets change flag, nothing else (6.7e-14 relative rounding). The guides
+no longer carry the warning.
 
 Remaining (issue #32): guides for the other registered methods (next: BP, CAIM, PCR, PI, GSE,
 GSA, VSE, MOREL, then the rest; TVEIT2025 only after its owner's work lands), and the 25 pending

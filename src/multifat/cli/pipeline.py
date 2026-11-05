@@ -17,6 +17,7 @@ import argparse
 import datetime
 import hashlib
 import json
+import math
 import platform
 import subprocess
 import time
@@ -217,6 +218,7 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
                     evaluation.n_cases,
                     time.perf_counter() - start,
                     fitted_label,
+                    notes=_life_notes(model, evaluation, suffix, adopted, calibration),
                 )
             )
         except Exception as exc:
@@ -229,6 +231,26 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
                 )
             )
     return [_annotate_calibration(outcome, model, calibration) for outcome in results]
+
+
+def _life_notes(model, evaluation, suffix: str, adopted, calibration: dict) -> str:
+    """Run-report notes on what an "ok" result cannot support: no life, or a bound-limited constant."""
+    from multifat.models.comparison import capabilities_for_model
+
+    notes = []
+    if capabilities_for_model(model).life_prediction != "native":
+        mode, slope_k = runmod.metric_mode(evaluation.fit(suffix)["b"])
+        if mode == "DP_DIFF":
+            shape = (
+                f"k = -1/b = {slope_k:.3g} > {runmod.K_SLOPE_MAX:g}"
+                if math.isfinite(slope_k)
+                else "b >= 0"
+            )
+            notes.append(f"no life predictions: master curve too flat ({shape}); DP errors only")
+    for name in sorted(set(adopted) & set(calibration.get("at_bound", {}))):
+        low, high = calibration["at_bound"][name]
+        notes.append(f"{name} at the search bound of [{low:g}, {high:g}]: not a calibrated optimum")
+    return " | ".join(notes)
 
 
 def _constants_calibration_can_supply(model) -> set[str]:
@@ -329,6 +351,28 @@ def load_constants(path: Path, material: str, n_failures: int | None = None) -> 
     return constants, origin
 
 
+def supplied_design_ids(path: Path, data_block: dict, supplied: dict) -> tuple[dict, str]:
+    """Design tests of supplied constants, from a sidecar made on the same failures.
+
+    A sidecar written by this pipeline records the tests behind each fitted constant. They are
+    reused only when its ``failure_fingerprint`` equals that of the current data, since case
+    indices are not stable across workbook revisions. Upstream records carry no case indices.
+    Returns ({constant: case ids}, note for the sidecar or "").
+    """
+    from multifat.report.subsets import dataset_fingerprint
+
+    record = json.loads(Path(path).read_text(encoding="utf-8"))
+    recorded = record.get("design_case_ids") or {}
+    wanted = {k: [int(i) for i in v] for k, v in recorded.items() if k in supplied}
+    unknown = "the tests behind the supplied constants are unknown; they stay Flag = 1"
+    if "params" not in record:
+        return {}, unknown
+    fingerprint = (record.get("provenance") or {}).get("failure_fingerprint")
+    if fingerprint != dataset_fingerprint(data_block):
+        return {}, "sidecar made on other failures: " + unknown
+    return wanted, ""
+
+
 def provenance(workbook: Path, data: dict | None = None) -> dict:
     """What produced a run: the input file, the observations, the code and the numerical settings."""
     import numpy as np
@@ -370,7 +414,7 @@ def provenance(workbook: Path, data: dict | None = None) -> dict:
 def _calibration_state(sidecar: dict, needed: set[str]) -> dict:
     """What an infeasible calibration lost, for the models that depended on the lost constants."""
     if sidecar.get("status") != "infeasible":
-        return {}
+        return {"at_bound": sidecar.get("at_bound", {})} if sidecar.get("at_bound") else {}
     from multifat.cli.calibrate import CALIBRATED
 
     info = sidecar.get("infeasible") or {}
@@ -381,6 +425,7 @@ def _calibration_state(sidecar: dict, needed: set[str]) -> dict:
         "diagnostic": info.get("diagnostic") or "",
         "reason": sidecar.get("reason", ""),
         "lost": lost,
+        "at_bound": sidecar.get("at_bound", {}),
     }
 
 
@@ -437,7 +482,9 @@ def run_workbook(
         sidecar = calibrate_workbook(
             workbook,
             planes=bool(needed & set(CALIBRATED.values())),
-            constants=bool(needed - set(CALIBRATED.values())),
+            # k_MGSE comes from Zhu (2018) Eq. (12) on the Basquin fits whenever they are
+            # identifiable, so it must not depend on which other models were requested.
+            constants=bool(needed - set(CALIBRATED.values())) or "k_MGSE" in needed,
         )
     elif calibrate:
         sidecar["status"] = "not_applicable"
@@ -450,6 +497,10 @@ def run_workbook(
         sidecar["reason"] = "calibration not requested (--no-calibrate)"
     if supplied:
         sidecar["params"] = {**sidecar.get("params", {}), **supplied}
+        reused, note = supplied_design_ids(constants, data[material], supplied)
+        sidecar["design_case_ids"] = {**sidecar.get("design_case_ids", {}), **reused}
+        if note:
+            source = {**source, "design_rows": note}
         sidecar["constants_source"] = source
     sidecar["provenance"] = provenance(workbook, data)
     (results_dir / f"{material}_calibration.json").write_text(

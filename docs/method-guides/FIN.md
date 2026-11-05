@@ -121,8 +121,8 @@ Strains are not used: FIN runs on workbooks without `E` and `nu`.
 
 The value, the objective (`scatter_STD`), the flat range of the objective (`plateau`) and the IDs
 of the tension and torsion tests used (`selection`) are written to `<MATERIAL>_calibration.json`.
-The torsion tests used for $k_\mathrm{FI}$ appear as `Flag = 1` rows in the result CSV: their
-errors are not independent of the calibration.
+The tension and torsion tests used for $k_\mathrm{FI}$ are reported as design rows (`Flag = 0`) in
+the result CSV, so they do not enter the assessment statistics.
 
 ## Worked example
 
