@@ -58,6 +58,7 @@ normal(s) themselves.
 | Damage parameter, selection metric | DP | `DP`, `metric` | - | model |
 | Per-plane damage and metric arrays | - | `damage`, `metric` | - | model |
 | Number of cycles to failure | N_f | `Nf` | Nf_cycles | cycles |
+| Survival probability of a fitted master curve | P_s | `P_s` | - | - |
 | Weights of tau_a^2, sigma_a^2, tau_a tau_m, sigma_a sigma_m in BP / CAIM | a_BP..d_BP, a_CAIM..d_CAIM | `a_BP`, `b_BP`, `c_BP`, `d_BP`, `a_CAIM`, `b_CAIM`, `c_CAIM`, `d_CAIM` | - | - |
 | Tension/torsion fatigue-limit ratio and its square | kappa, kappa^2 | `kappa`, `kappa_sq` | - | - |
 | Per-case inputs of a native life law | - | `aux` | - | model |

@@ -163,7 +163,8 @@ def test_pipeline_csv_has_identities(tmp_path):
     path = write_workbook(tmp_path / "W.xlsx")
     run_workbook(path, models=["CROSSLAND"], results_dir=tmp_path / "res", calibrate=False)
     df = pd.read_csv(tmp_path / "res" / "CROSSLAND_W.csv")
-    assert list(df.columns[-5:]) == IDENTITY_COLUMNS
+    # identities, then the survival probability of the master curve (issue #16) as last column
+    assert list(df.columns[-6:-1]) == IDENTITY_COLUMNS and df.columns[-1] == "Survival_probability"
     assert df.Observation_id.is_unique and df.Dataset_fingerprint.nunique() == 1
     assert set(df.loc[df.Flag == 2, "Test_status"]) == {"runout"}
     assert set(df.loc[df.Flag != 2, "Test_status"]) == {"failure"}
