@@ -95,9 +95,8 @@ is the engineering shear strain **amplitude**, so no factor 2 is applied. DP is 
    tension and torsion limits. For elastic strains this has the closed form
    $k_\mathrm{FS} = 2\,(2t_{-1}/f_{-1} - 1)\,S_y/f_{-1}$ (see the worked example).
 
-The value and the tests used are written to `<MATERIAL>_calibration.json`. The torsion tests used
-for $k_\mathrm{FS}$ are reported as `Flag = 1` rows: their errors are not independent of the
-calibration.
+The value and the tests used are written to `<MATERIAL>_calibration.json`. The tension and torsion
+tests used for $k_\mathrm{FS}$ are reported as design rows (`Flag = 0`).
 
 ## Worked example
 

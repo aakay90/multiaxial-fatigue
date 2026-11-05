@@ -18,11 +18,11 @@ Verified: the guide CLI commands run on `Al7075_T6` (all ten models `ok`; `--con
 the sidecar works); full test suite, black, ruff, `check_docs`, `generate_method_docs --check`;
 `regression_snapshot.py` against `5cd5124`: 0 differing outputs and logs.
 
-Scientific finding, not changed (affects issue #14): the torsion failures used to calibrate the
-plane constants `k_FI`, `k_FS`, `L_LI`, `k_MGSE`, `a_MSWT` are not in `design_case_ids`, so they
-are exported as `Flag = 1` assessment rows (e.g. 12 torsion tests of `Al7075_T6` for FIN). Their
-errors are not independent of the calibration. Fixing the flags changes reported statistics and
-needs the maintainer's decision; the guides state it.
+Design flags of calibrated plane constants (affects issue #14), fixed after PR #33 was merged:
+the tests of the scatter objective behind `k_FI`, `k_FS`, `L_LI`, `k_MGSE`, `a_MSWT`, and the
+Basquin tests behind a Zhu `k_MGSE`, were exported as `Flag = 1`. They are now design rows; 410
+rows of the five life datasets change flag, nothing else (6.7e-14 relative rounding). The guides
+no longer carry the warning.
 
 Remaining (issue #32): guides for the other registered methods (next: BP, CAIM, PCR, PI, GSE,
 GSA, VSE, MOREL, then the rest; TVEIT2025 only after its owner's work lands), and the 25 pending
