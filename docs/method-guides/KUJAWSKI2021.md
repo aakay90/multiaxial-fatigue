@@ -151,6 +151,9 @@ $\sqrt{110\cdot 200} = 148.3$ MPa for SWT. The compression–compression cycle
 uv run multifat-pipeline --material Al7075_T6 --models KUJAWSKI2021 --all-variants --results-dir Results/current/guides
 ```
 
+None of the supplied workbooks has a compressive normal mean on the critical plane, so on all of
+them `KUJAWSKI2021` gives exactly the `SWT` damage parameters and lives.
+
 ## Comparison capabilities and outputs
 
 - **Life:** master curve on $W_D$ (`Nf_expected`).
