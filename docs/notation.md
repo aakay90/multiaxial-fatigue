@@ -124,3 +124,42 @@ one of them is reintroduced as a local name or parameter.
 
 The same rule covers private function aliases: the package has no `_old = _new` lines, so every
 helper has exactly one name and the tests import that name.
+
+## FatPy nomenclature
+
+`multifat` is expected to merge into FatPy, the Python
+package of COST Action CA23109 (FABER). FatPy's draft nomenclature (`nomenclature_v01`, 2025)
+names material and experiment quantities in snake case, built from a shared abbreviation list
+(`fat`, `lim`, `ten`, `tor`, `ben`, `coef`, `exp`, `amp`, `eq`, …). The table records the FatPy
+key of each multifat name that has one, so that results and workbooks can be translated at the
+merge. **The Python names above stay the reference inside multifat**: this is a correspondence,
+not a rename.
+
+Units differ for one quantity. multifat keeps every stress and modulus in MPa, while FatPy v01
+gives Young's modulus in GPa (but the shear modulus in MPa): $E_\text{FatPy} = E/1000$.
+
+| multifat name | FatPy key (v01) | FatPy unit | Note |
+|---|---|---|---|
+| `E` | `elastic_modulus` | GPa | multifat: MPa |
+| `nu` | `poissons_ratio` | - | |
+| `nu_p` | `poissons_ratio_pl` | - | |
+| `Sy` | `yield_strength` | MPa | |
+| `Su` | `ult_tensile_strength` | MPa | |
+| `Tu` | - | - | no FatPy key yet (torsional ultimate strength) |
+| `Sigm1` | `fat_lim_ten_m1` or `fat_lim_ben_m1` | MPa | push-pull or bending, per the Summary column `Axial fatigue limit loading` (see `docs/workbook-format.md`); unrecorded sources stay unresolved |
+| `Taum1` | `fat_lim_tor_m1` | MPa | |
+| `Sig0` | `fat_lim_ten_0` | MPa | multifat stores the maximum stress of the R = 0 cycle; FatPy v01 does not state amplitude or maximum |
+| `Tau0` | `fat_lim_tor_0` | MPa | as `Sig0` |
+| `sigma_f`, `b_fat` | `fat_strength_coef`, `fat_strength_exp` | MPa, - | |
+| `epsilon_f`, `c_fat` | `fat_ductility_coef`, `fat_ductility_exp` | - | |
+| `tau_f`, `b0` | `fat_strength_coef_tor`, `fat_strength_exp_tor` | MPa, - | |
+| `gamma_f`, `c0` | `fat_ductility_coef_tor`, `fat_ductility_exp_tor` | - | |
+| `K_prime`, `n_prime` | `cyc_hard_coeff`, `cyc_hard_ext` | MPa, - | FatPy key spellings as in v01 |
+| `Nf` | `tot_fat_life` | cycles | |
+| `sigma_a`, `sigma_m` | `stress_amp`, `mean_stress` | MPa | load-level amplitude and mean (multifat also uses them on a plane) |
+| `phase_shift` | `phase_shift` | degrees | |
+| `k_FS`, `k_FI`, `L_LI`, `k_MGSE`, `a_MSWT`, … | - | - | method constants: no FatPy key yet |
+
+FatPy v01 has no key for a run-out (censored observation) flag, for the torsional ultimate
+strength, or for method constants. New multifat names should be built from the FatPy
+abbreviation list when no paper symbol applies.

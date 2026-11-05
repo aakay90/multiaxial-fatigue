@@ -56,6 +56,16 @@ When a new need does not fit, add a small, documented extension point that the o
 inherit by default, rather than a branch on a model name. Keep outputs backward compatible:
 append CSV columns, and prove existing numbers unchanged with the regression snapshot.
 
+The project is expected to merge into FatPy, the FABER (COST CA23109) Python package. Move
+towards it without restructuring:
+
+- Keep the existing names. The *FatPy nomenclature* table of `docs/notation.md` records the
+  FatPy key of each multifat name.
+- Build new names from the FatPy abbreviation list (`fat`, `lim`, `ten`, `tor`, `ben`, `coef`,
+  `exp`, `amp`, `eq`, …) when no paper symbol applies.
+- Keep MPa internally; FatPy v01 gives E in GPa.
+- Open questions about the FatPy draft are in `docs/research/fatpy-nomenclature-v01-feedback.md`.
+
 ### 3. Document so a user can trust and reproduce the result
 
 Each method needs:
