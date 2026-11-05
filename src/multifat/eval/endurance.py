@@ -30,7 +30,7 @@ from multifat.imp.experimental_data import build_stress_tensor, stress_to_strain
 ENDURANCE_CONSTANTS = {
     "k_FS": (0.0, 3.0),
     "k_FI": (0.0, 3.0),
-    "L_LI": (0.0, 5.0),
+    "L_LI": (0.0, 20.0),
     "k_MGSE": (0.0, 5.0),
     "a_MSWT": (0.0, 1.0),
 }

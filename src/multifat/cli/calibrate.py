@@ -464,7 +464,7 @@ def calibrate_material_params(
     blocks: Optional[Iterable[str]] = None,
     bounds_k_FS: Tuple[float, float] = (0.0, 3.0),
     bounds_k_FI: Tuple[float, float] = (0.0, 3.0),
-    bounds_L_LI: Tuple[float, float] = (0.0, 5.0),
+    bounds_L_LI: Tuple[float, float] = (0.0, 20.0),
     bounds_k_MGSE: Tuple[float, float] = (0.0, 5.0),
     bounds_a_MSWT: Tuple[float, float] = (0.0, 1.0),
     shear_amplitude_algorithm: str = "method_default",
@@ -767,9 +767,31 @@ def calibrate_material_params(
         ),
     }
 
+    # Search bounds, so that a constant stopped by a bound can be reported as such.
+    for block, method_name in (
+        ("FS", "FS"),
+        ("FI", "FIN"),
+        ("LI", "LI"),
+        ("MGSE_ZHU", "MGSE_ZHU"),
+        ("MSWT", "MSWT"),
+    ):
+        if out[block] is not None:
+            out[block]["bounds"] = tuple(float(x) for x in param_sweep[method_name][1])
     if "FI" in requested_blocks:
         out["amplitude_settings"] = {"FIN": amplitude}
     return out
+
+
+# Upper bounds that are limits of the constant itself rather than of the search: a_MSWT weights
+# the normal and shear terms (Zhu et al. 2018), so a_MSWT = 1 is an admissible optimum. The lower
+# bound 0 is physical for every constant (no negative normal-stress or energy weight).
+PHYSICAL_UPPER = {"a_MSWT": 1.0}
+
+
+def stopped_by_search_bound(name: str, value: float, bounds) -> bool:
+    """True when a scatter minimum sits on an upper bound that limits only the search."""
+    high = float(bounds[1])
+    return bool(np.isclose(value, high)) and high != PHYSICAL_UPPER.get(name)
 
 
 CALIBRATED = {
@@ -854,6 +876,14 @@ def calibrate_workbook(
             )
             out["params"]["k_MGSE"] = mgse_k
             out["source"]["k_MGSE"] = "Zhu 2018 Eq. (12), elastic terms, mean over N = 1e4..2e6"
+            # Derived from the four Basquin constants, hence from the tests behind them.
+            out["design_case_ids"]["k_MGSE"] = sorted(
+                {
+                    i
+                    for name in ("sigma_f", "b_fat", "tau_f", "b0")
+                    for i in out["design_case_ids"].get(name, [])
+                }
+            )
         su, E = props["Tensile_strength_MPa"], props["E_MPa"]
         for name, value in (strain_life_fill(su, E) if has_elastic else {}).items():
             out["params"][name] = value
@@ -916,8 +946,21 @@ def calibrate_workbook(
             out["scatter_STD"][name] = float(cal[block]["scatter_STD"])
             out["plateau"][name] = [float(lo), float(hi)]
             if name not in out["params"]:
-                out["params"][name] = float(cal[block][name])
+                value = float(cal[block][name])
                 note = f" (flat minimum on [{lo:.4g}, {hi:.4g}]: smallest point)" if hi > lo else ""
+                low, high = cal[block]["bounds"]
+                if np.isclose(value, low) or np.isclose(value, high):
+                    out.setdefault("at_bound", {})[name] = [low, high]
+                    note += f" (at the search bound of [{low:.4g}, {high:.4g}])"
+                if stopped_by_search_bound(name, value, (low, high)):
+                    # Stopped by an arbitrary search limit: the minimum lies outside the interval,
+                    # so the value is not a calibrated optimum and is not handed to any model.
+                    out.setdefault("unidentified", {})[name] = (
+                        f"scatter minimum at the upper search bound {high:g} "
+                        "(not identifiable from these tests)"
+                    )
+                    continue
+                out["params"][name] = value
                 out["source"][name] = "scatter minimisation on uniaxial + torsion tests" + note
         sel = cal["selection"]
         out["selection"] = {
@@ -927,6 +970,14 @@ def calibrate_workbook(
                 sel["tension_info"]["fallback_used"] or sel["torsion_info"]["fallback_used"]
             ),
         }
+        # Every test of the scatter objective fed the constant: a model that adopts it must report
+        # these tests as design points (Flag = 0), not as independent assessments.
+        objective_ids = sorted(
+            set(out["selection"]["tension_case_ids"]) | set(out["selection"]["torsion_case_ids"])
+        )
+        for name in out["scatter_STD"]:
+            if out["source"].get(name, "").startswith("scatter minimisation"):
+                out["design_case_ids"][name] = objective_ids
     return out
 
 
@@ -1080,6 +1131,10 @@ def main(argv=None) -> None:
             if cal[block] is not None and cal[block]["plateau"][1] > cal[block]["plateau"][0]:
                 lo, hi = cal[block]["plateau"]
                 print(f"  {name}: flat minimum on [{lo:.4g}, {hi:.4g}] (not identifiable)")
+            if cal[block] is not None and stopped_by_search_bound(
+                name, cal[block][name], cal[block]["bounds"]
+            ):
+                print(f"  {name}: at the upper search bound (not identifiable, not used)")
         # Scatter summary
         print("\nScatter STD (lnN residuals)")
         if cal["FS"] is not None:

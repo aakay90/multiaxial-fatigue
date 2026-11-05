@@ -34,6 +34,11 @@ The most widely used criteria are documented first.
 | [Sines](SINES.md) | `SINES` | Stress invariants | $(\sqrt{J_{2,a}} + \kappa\,\sigma_{H,m})/t_{-1}$ (index) | `Sigm1`, `Taum1`, `Su` |
 | [Dang Van](DANGVAN.md) | `DANGVAN` | Mesoscopic | $\sigma_{eq,DV}/f_{-1}$ (index) | `Sigm1`, `Taum1` |
 | [Papadopoulos](PAPADOPOULOS.md) | `PAPADOPOULOS` | Mesoscopic, integral | $\gamma_N/t_{-1}$, Eq. (41) (index) | `Sigm1`, `Taum1` |
+| [Böhme–Papuga](BP.md) | `BP` | Integral | $\sqrt{\langle a\tau_a^2 + b\sigma_{n,a}^2 + c\tau_a\tau_m + d\sigma_{n,a}\sigma_{n,m}\rangle}/s_{-1}$ (index) | `Sigm1`, `Taum1`, `Sig0`/`Tau0` or `Su` |
+| [CAIM](CAIM.md) | `CAIM` | Critical plane + integral | $\sqrt{\max(a\tau_a^2 + b\sigma_{n,a}^2) + \langle c\tau_a\tau_m + d\sigma_{n,a}\sigma_{n,m}\rangle}/s_{-1}$ (index) | as BP |
+| [Papuga–Růžička PCr](PCR.md) | `PCR` | Critical plane, stress | $\max\sqrt{a_c C_a^2 + b_c(N_a + t_{-1}N_m/f_0)}/f_{-1}$ (index) | `Sigm1`, `Taum1`, `Sig0` or `Su` |
+| [Papuga–Růžička PI](PI.md) | `PI` | Integral | $\sqrt{\langle a_I C_a^2 + b_I(N_a + \kappa N_m)\rangle}/f_{-1}$ (index) | `Sigm1`, `Taum1` |
+| [Morel](MOREL.md) | `MOREL` | Mesoscopic, native life | $T_S/T_{S,\lim}$ (index); life from Eq. (38) | `Sigm1`, `Taum1`; $p, q, r$ fitted |
 
 Guides still to be written follow the same [template](TEMPLATE.md). Until a guide exists, use the
 method's entry in the [catalogue](../../METHODS.md), its line in the
@@ -82,7 +87,7 @@ Each critical-plane method returns two values:
 
 Unless a method declares its own life law (MDC, MMCCM, MOREL, TVEIT2025), the life is obtained
 from a power-law master curve fitted to the **design set**: the uniaxial tension failures at
-$R = -1$ (`Flag = 0` in the CSV),
+$R = -1$ (`Flag = 0` in the CSV, together with any other test that fitted a constant of the method),
 
 ```math
 \mathrm{DP} = A\,N_f^{\,b}, \qquad \hat N_f = \left(\mathrm{DP}/A\right)^{1/b},
@@ -116,11 +121,12 @@ usually matches two fatigue limits; each guide states the difference. On a fatig
 (run-outs only), a missing plane constant is chosen so that the R = -1 tension and torsion limits
 give the same DP (`multifat.eval.endurance`).
 
-> [!IMPORTANT]
-> The torsion failures used to calibrate a plane constant are currently reported as `Flag = 1`
-> (assessment) rows, not as design rows. Their errors are therefore not independent of the
-> calibration. Use `summary_error_stats_by_role.csv` with this in mind; the held-out validation
-> protocol is tracked in [issue #14](https://github.com/andreachiocca/multiaxial-fatigue/issues/14).
+The tests of the scatter objective (tension and torsion) are reported as design rows
+(`Flag = 0`) of every model that adopts the calibrated constant, as are the Basquin tests behind
+constants derived from Basquin fits. With `--constants`, a sidecar of this pipeline carries its
+design tests only when it was made on the same failures; for constants from the workbook or an
+upstream record the tests are unknown and stay `Flag = 1`. The held-out validation protocol is
+tracked in [issue #14](https://github.com/andreachiocca/multiaxial-fatigue/issues/14).
 
 Calibration is not validation: an error statistic computed on tests that fed a constant or the
 master curve measures the fit, not the predictive accuracy.

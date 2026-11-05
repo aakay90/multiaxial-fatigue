@@ -74,9 +74,9 @@ def test_infeasible_li_is_named_with_its_slope_range(tmp_path):
     exc = caught.value
     assert exc.block == "LI"
     assert exc.parameter == "L_LI"
-    assert exc.bounds == (0.0, 5.0)
+    assert exc.bounds == (0.0, 20.0)
     assert str(exc).startswith("No finite calibration objective")
-    assert "DP increases with life for all L_LI in [0, 5]" in str(exc)
+    assert "DP increases with life for all L_LI in [0, 20]" in str(exc)
     assert "slope +" in exc.diagnostic
     assert str(exc).endswith(exc.diagnostic)
 
@@ -221,3 +221,14 @@ def test_pipeline_marks_the_default_after_an_infeasible_calibration(tmp_path):
     assert report["LI"]["status"] == "ok (default constant)"
     assert "default 1.0 used" in report["LI"]["notes"]
     assert "calibration infeasible at FS" in report["FS"]["reason"]
+
+
+def test_constant_on_an_arbitrary_search_bound_is_not_used():
+    """An upper search limit is not an optimum; a physical limit (a_MSWT = 1) is."""
+    from multifat.cli.calibrate import stopped_by_search_bound
+
+    assert stopped_by_search_bound("k_FI", 3.0, (0.0, 3.0))
+    assert stopped_by_search_bound("L_LI", 20.0, (0.0, 20.0))
+    assert not stopped_by_search_bound("a_MSWT", 1.0, (0.0, 1.0))
+    assert not stopped_by_search_bound("k_FI", 0.0, (0.0, 3.0))  # k = 0 is admissible
+    assert not stopped_by_search_bound("k_FI", 0.9, (0.0, 3.0))

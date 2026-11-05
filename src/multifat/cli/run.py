@@ -646,6 +646,23 @@ def design_identities(ev: Evaluation, variant_key: str, n_rows: int) -> list[dic
     return [ev.observations[("case", i)] for i in case_ids]
 
 
+def metric_mode(exponent_b) -> tuple[str, float]:
+    """("Nf", k) when the master curve DP = A N^b can be inverted for life, else ("DP_DIFF", k).
+
+    k = -1/b; a non-negative, nonfinite or flat slope (k > K_SLOPE_MAX) gives no usable life.
+    """
+    try:
+        b_float = float(exponent_b)
+    except (TypeError, ValueError):
+        return "DP_DIFF", np.inf
+    if (not np.isfinite(b_float)) or b_float >= 0.0:
+        return "DP_DIFF", np.inf
+    slope_k = -1.0 / b_float
+    if np.isfinite(slope_k) and slope_k > K_SLOPE_MAX:
+        return "DP_DIFF", slope_k
+    return "Nf", slope_k
+
+
 def write_variant(
     ev: Evaluation,
     variant_key: str,
@@ -674,18 +691,7 @@ def write_variant(
     # When k gets very large (nearly flat curve), the predicted N is meaningless.
     # Then switch to the DP log-ratio metric:
     #   Error_ln_dp = ln(DP_point / DP_fit(Nf_exp))
-    error_mode = "Nf"
-    slope_k = np.inf
-    try:
-        b_float = float(exponent_b)
-        if (not np.isfinite(b_float)) or (b_float >= 0.0) or (b_float == 0.0):
-            error_mode = "DP_DIFF"
-        else:
-            slope_k = -1.0 / b_float
-            if np.isfinite(slope_k) and slope_k > K_SLOPE_MAX:
-                error_mode = "DP_DIFF"
-    except Exception:
-        error_mode = "DP_DIFF"
+    error_mode, slope_k = metric_mode(exponent_b)
 
     if verbose:
         print(
