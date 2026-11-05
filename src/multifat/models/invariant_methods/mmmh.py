@@ -43,7 +43,7 @@ import numpy as np
 
 from ..base import CaseResult
 from .coin_liwi import coin_amplitude
-from .stress_invariants import harmonic_parts
+from .stress_invariants import harmonic_parts, peak_principal_stress
 
 
 def mmmh_amplitude(S_sin, S_cos, k_a: float) -> float:
@@ -79,37 +79,11 @@ def mmmh_mean_proportional(S_mean, S_amp) -> float:
     return float(top_mean - half_range)
 
 
-def _peak_principal_stress(S_mean, S_sin, S_cos, n_samples: int = 720) -> float:
-    """max over eta of the largest principal stress of S_mean + S_sin sin(eta) + S_cos cos(eta)."""
-
-    def largest_eig(phase):
-        phase = np.atleast_1d(phase)
-        tensor = (
-            S_mean + np.sin(phase)[:, None, None] * S_sin + np.cos(phase)[:, None, None] * S_cos
-        )
-        return np.linalg.eigvalsh(tensor)[:, -1]
-
-    samples = np.linspace(0.0, 2.0 * np.pi, n_samples, endpoint=False)
-    largest = largest_eig(samples)
-    # coincident maxima give the same value, which is all this needs
-    top = int(np.argmax(largest))
-    spacing = samples[1] - samples[0]
-    lo, hi = samples[top] - spacing, samples[top] + spacing
-    for _ in range(60):  # golden-section search inside the bracket
-        left = hi - 0.618034 * (hi - lo)
-        right = lo + 0.618034 * (hi - lo)
-        if largest_eig(left)[0] >= largest_eig(right)[0]:
-            hi = right
-        else:
-            lo = left
-    return max(float(largest[top]), float(largest_eig(0.5 * (lo + hi))[0]))
-
-
 def mmmh_mean(S_mean, S_sin, S_cos) -> float:
     """sigma_eq,m of Eq. (24) (smooth: m_o1 = m_a1 = n_el = 1) for a single-harmonic cycle."""
     S_mean, S_sin, S_cos = (np.asarray(comp, dtype=float) for comp in (S_mean, S_sin, S_cos))
-    peak_total = _peak_principal_stress(S_mean, S_sin, S_cos)  # Eq. (22)
-    peak_oscillating = _peak_principal_stress(np.zeros((3, 3)), S_sin, S_cos)  # Eq. (23), see above
+    peak_total = peak_principal_stress(S_mean, S_sin, S_cos)  # Eq. (22)
+    peak_oscillating = peak_principal_stress(np.zeros((3, 3)), S_sin, S_cos)  # Eq. (23), see above
     return float(peak_total - peak_oscillating)
 
 

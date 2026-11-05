@@ -90,6 +90,10 @@ REFERENCES = {
         "Crossland (1956), Effect of large hydrostatic pressures on the torsional fatigue strength of an alloy steel; as restated by Papadopoulos et al. (1997), A comparative study of multiaxial high-cycle fatigue criteria for metals, Eqs. (44), (65)-(66)",
         "10.1016/S0142-1123(96)00064-3",
     ),
+    "GAM": (
+        "Goncalves, Araujo & Mamiya (2005), Multiaxial fatigue: a stress based criterion for hard metals, Eqs. (11)-(13), (A.17)",
+        "10.1016/j.ijfatigue.2004.05.006",
+    ),
     "SINES": (
         "Sines (1959), Behavior of metals under complex static and alternating stresses; as restated by Papadopoulos et al. (1997), A comparative study of multiaxial high-cycle fatigue criteria for metals, Eqs. (44), (62)-(64)",
         "10.1016/S0142-1123(96)00064-3",

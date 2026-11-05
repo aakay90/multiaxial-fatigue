@@ -36,6 +36,7 @@ The most widely used criteria are documented first.
 | [Modified Wöhler Curve Method](MWCM.md) | `MWCM` | Critical plane, stress | $\tau_a/\tau_{A,\mathrm{Ref}}(\rho)$ (index) | `Sigm1`, `Taum1` |
 | [Crossland](CROSSLAND.md) | `CROSSLAND` | Stress invariants | $(\sqrt{J_{2,a}} + \kappa\,\sigma_{H,\max})/t_{-1}$ (index) | `Sigm1`, `Taum1` |
 | [Sines](SINES.md) | `SINES` | Stress invariants | $(\sqrt{J_{2,a}} + \kappa\,\sigma_{H,m})/t_{-1}$ (index) | `Sigm1`, `Taum1`, `Su` |
+| [Gonçalves–Araújo–Mamiya](GAM.md) | `GAM` | Stress invariants (prismatic hull) | $(\sqrt{\textstyle\sum a_i^2} + \kappa\,\sigma_{p\max})/\lambda$ (index) | `Sigm1`, `Taum1` |
 | [Dang Van](DANGVAN.md) | `DANGVAN` | Mesoscopic | $\sigma_{eq,DV}/f_{-1}$ (index) | `Sigm1`, `Taum1` |
 | [Papadopoulos](PAPADOPOULOS.md) | `PAPADOPOULOS` | Mesoscopic, integral | $\gamma_N/t_{-1}$, Eq. (41) (index) | `Sigm1`, `Taum1` |
 | [Böhme–Papuga](BP.md) | `BP` | Integral | $\sqrt{\langle a\tau_a^2 + b\sigma_{n,a}^2 + c\tau_a\tau_m + d\sigma_{n,a}\sigma_{n,m}\rangle}/s_{-1}$ (index) | `Sigm1`, `Taum1`, `Sig0`/`Tau0` or `Su` |
