@@ -269,6 +269,16 @@ layout, were ported to `multifat`, each port naming its upstream commit.
   pending). Module docstrings added or completed for FIN, FS, SWT, MATAKE, MCD, MWCM, CROSSLAND,
   SINES, DANGVAN and PAPADOPOULOS. Documentation only: `regression_snapshot.py` compares identical
   to `5cd5124`.
+- Method guides for the strain and energy critical-plane criteria MKBM, VSE, GSE and GSA (issue
+  #32). Each guide gives the torsion-to-tension limit ratio that the criterion implies with elastic
+  strains, in closed form: about 0.68 for MKBM at $f/S_y = 0.75$, 0.88 or 0.62 for VSE (mode I or
+  II), 0.63 for GSE and 0.55 for GSA. The guides also document two properties of the criteria:
+  - VSE has no mean-stress effect;
+  - GSA lives do not depend on $\sigma_f'$ when strains are elastic and $\tau_f'$ takes its
+    default.
+
+  The MKBM, VSE and GSA module docstrings now carry a `Repository choices:` paragraph, so 19
+  modules remain pending. Documentation only, no numerical change.
 
 ### Repository
 
