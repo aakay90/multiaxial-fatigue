@@ -338,3 +338,74 @@ def test_excel_lock_files_ignored(tmp_path):
     (tmp_path / "~$A.xlsx").write_bytes(b"lock")
     assert list(import_experimental_data_grouped_by_material(tmp_path)) == ["A"]
     assert resolve_workbook("A", tmp_path) == tmp_path / "A.xlsx"
+
+
+def test_axial_limit_loading_is_recorded_with_each_source(tmp_path):
+    """FatPy separates push-pull (fat_lim_ten_m1) from bending (fat_lim_ben_m1) limits."""
+    from multifat.cli.run import validate_workbook
+    from multifat.imp.experimental_data import axial_limit_loading
+
+    base = ["Synthetic steel", 206000, 0.3, 900, 750]
+    rows = [
+        ["doi-a", "A", 2018, *base, 420, 300, 2e6, -1, "Rotating bending"],
+        ["doi-b", "B", 2020, *base, 440, 320, 2e6, -1, "rotating  bending"],
+    ]
+    path = write_revised_workbook(
+        tmp_path / "Synthetic_steel.xlsx",
+        _tension_rows(),
+        summary_rows=rows,
+        extra_summary_headers=["Axial fatigue limit loading"],
+    )
+    block = _one(path)
+    assert [s["loading"] for s in block["fatigue_limit_sources"]["Sigm1"]] == [
+        "rotating bending",
+        "rotating bending",
+    ]
+    assert axial_limit_loading(block) == "rotating bending"
+    assert block["material"]["Tensile_fatigue_limit_MPa"] == 430  # the values are unchanged
+    assert any("rotating bending" in line for line in validate_workbook(path).info)
+
+    rows[1][-1] = "push-pull"
+    mixed = write_revised_workbook(
+        tmp_path / "Mixed_steel.xlsx",
+        _tension_rows(),
+        summary_rows=rows,
+        extra_summary_headers=["Axial fatigue limit loading"],
+    )
+    assert axial_limit_loading(_one(mixed)) == "mixed"
+
+
+def test_axial_limit_loading_unrecorded_or_unrecognised(tmp_path):
+    from multifat.imp.experimental_data import axial_limit_loading
+
+    path = write_revised_workbook(tmp_path / "Synthetic_steel.xlsx", _tension_rows())
+    block = _one(path)
+    assert block["fatigue_limit_sources"]["Sigm1"][0]["loading"] is None
+    assert axial_limit_loading(block) is None
+
+    rows = [
+        [
+            "doi-a",
+            "A",
+            2018,
+            "Synthetic steel",
+            206000,
+            0.3,
+            900,
+            750,
+            420,
+            300,
+            2e6,
+            -1,
+            "fretting",
+        ]
+    ]
+    odd = write_revised_workbook(
+        tmp_path / "Odd_steel.xlsx",
+        _tension_rows(),
+        summary_rows=rows,
+        extra_summary_headers=["Axial fatigue limit loading"],
+    )
+    block = _one(odd)
+    assert block["fatigue_limit_sources"]["Sigm1"][0]["loading"] is None
+    assert any("not recognised" in issue for issue in block["identity_issues"])

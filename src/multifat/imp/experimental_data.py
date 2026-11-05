@@ -192,6 +192,40 @@ def _summary_sources(ws, header_row: int, avg_row: int) -> list[dict]:
     return rows
 
 
+# Optional Summary column: how the axial R = -1 fatigue limit of a source row was obtained.
+# FatPy's nomenclature separates push-pull (fat_lim_ten_m1) from bending (fat_lim_ben_m1); a
+# bending limit is usually higher than the push-pull one (stress gradient), so the distinction is
+# recorded with every source. Matched on the normalised header (it must not contain "tensile
+# fatigue limit", the substring that locates the limit values).
+AXIAL_LIMIT_LOADING_HEADERS = ("axial fatigue limit loading",)
+AXIAL_LIMIT_LOADINGS = {
+    "push-pull": "push-pull",
+    "push pull": "push-pull",
+    "tension-compression": "push-pull",
+    "tension": "push-pull",
+    "axial": "push-pull",
+    "rotating bending": "rotating bending",
+    "plane bending": "plane bending",
+    "bending": "bending",
+}
+
+
+def axial_limit_loading_value(raw) -> str | None:
+    """Normalised loading of an axial fatigue limit; None when not recorded or not recognised."""
+    if is_nullish(raw):
+        return None
+    return AXIAL_LIMIT_LOADINGS.get(norm_text(raw))
+
+
+def axial_limit_loading(block: dict) -> str | None:
+    """Loading behind the selected Sigm1: one value, "mixed" for several, None if unrecorded."""
+    sources = (block.get("fatigue_limit_sources") or {}).get("Sigm1") or []
+    found = {s.get("loading") for s in sources}
+    if None in found or not found:
+        return None
+    return found.pop() if len(found) == 1 else "mixed"
+
+
 def _summary_fatigue_limits(
     material: str, ws, header_row: int, avg_row: int
 ) -> tuple[list[str], dict[str, str], dict[str, float], dict[str, list[dict]]]:
@@ -213,6 +247,7 @@ def _summary_fatigue_limits(
             f"file material {material} conflicts with Summary names {declared}; "
             "fatigue limits are read from this workbook, but source identity needs review"
         )
+    loading_column = next((headers[h] for h in AXIAL_LIMIT_LOADING_HEADERS if h in headers), None)
     issues: dict[str, str] = {}
     selected: dict[str, float] = {}
     provenance: dict[str, list[dict]] = {}
@@ -254,6 +289,15 @@ def _summary_fatigue_limits(
                         "authors": row.get("Authors"),
                     }
                 )
+                if key == "Sigm1":
+                    raw_loading = row.get(loading_column) if loading_column else None
+                    loading = axial_limit_loading_value(raw_loading)
+                    if loading is None and not is_nullish(raw_loading):
+                        identity.append(
+                            f"row {row['_row']}: axial fatigue limit loading {raw_loading!r} not "
+                            f"recognised (use one of {sorted(set(AXIAL_LIMIT_LOADINGS.values()))})"
+                        )
+                    compatible[-1]["loading"] = loading
         if compatible:
             selected[key] = math.fsum(item["value_MPa"] for item in compatible) / len(compatible)
             provenance[key] = compatible

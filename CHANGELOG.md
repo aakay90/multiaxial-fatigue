@@ -71,6 +71,26 @@ checked against its original publication; changes to numerical outputs are liste
   load-equivalent error across the six life datasets (`examples/plot_load_error_ranking.py`, data in
   `examples/data/load_error_ranking.csv`). Both are produced by `examples/generate_gallery.py`.
 
+### FatPy alignment
+
+multifat is expected to merge into FatPy (COST CA23109). This change documents the correspondence
+of names and records one distinction FatPy makes; no multifat name was renamed.
+
+- `docs/notation.md` has a *FatPy nomenclature* table. It lists the FatPy key (nomenclature v01)
+  of each multifat name that has one, and the units that differ (FatPy gives E in GPa; multifat
+  stays in MPa).
+- A new optional Summary column, `Axial fatigue limit loading`, records for each source row how
+  the axial R = -1 fatigue limit was obtained: `push-pull`, `rotating bending`, `plane bending`
+  or `bending`.
+  - The value is kept with the `Sigm1` source and reported in the validation summary.
+  - It maps the limit onto `fat_lim_ten_m1` or `fat_lim_ben_m1`.
+  - Limit values, and so numerical outputs, are unchanged.
+- `docs/research/fatpy-nomenclature-v01-feedback.md` lists, for the FatPy coordinator:
+  - keys that are missing (run-out flag, torsional ultimate strength, per-component loads,
+    method constants);
+  - ambiguities and unit inconsistencies;
+  - spelling issues.
+
 ### Methods
 
 - New criterion `GAM`, Gonçalves, Araújo & Mamiya (2005), catalogue N08 (issue #13). It is an

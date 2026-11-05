@@ -214,6 +214,12 @@ def validate_workbook(fp: str | Path) -> ValidationReport:
         return report
     mat_key = material_id(fp.stem)
     entry = workbook[mat_key]
+    if entry.get("fatigue_limit_sources", {}).get("Sigm1"):
+        loading = exp.axial_limit_loading(entry)
+        report.info.append(
+            "axial R = -1 fatigue limit obtained in: "
+            + (loading or "not recorded (Summary column 'Axial fatigue limit loading')")
+        )
     if not entry["cases"]:
         from multifat.eval.endurance import is_fatigue_limit_dataset
 
