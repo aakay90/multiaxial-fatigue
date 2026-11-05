@@ -25,6 +25,32 @@ This workflow retains the present FABER WG4.3 scope of constant-amplitude loadin
 and smooth/plain geometries. It does not introduce a new fatigue formulation or
 censored-data regression.
 
+## Calibration history in the pipeline (issue #15)
+
+Every `<MATERIAL>_calibration.json` written by `multifat-pipeline` with fitted constants carries a
+persistent `calibration_id` = `<UTC time>_<12 hex digits>`, and a copy is archived as
+`<archive>/<MATERIAL>/<calibration_id>.json` (archive: `--calibration-archive DIR`, default
+`<results-dir>/calibrations`). The hex digits are the start of the SHA-256 of the record without
+its creation time, Git state and file paths (`multifat.cli.records.content_signature`): an
+equivalent rerun finds its earlier record and keeps that id, a different calibration gets a new
+file. Archived files are created exclusively and never replaced. The run report names the record
+in its `calibration_id` column, and `calibration_procedure` records the version of the calibration
+rules (2 since PR #34).
+
+Reuse a record with `--calibration-id ID` (one workbook; the same archive) or `--constants FILE`.
+A pipeline record is **rejected** when its provenance lacks `implementation_revision` or
+`failure_fingerprint` (insufficiently documented) or when it was made with another implementation
+revision of the methods (its constants belong to other formulations). It is used **with a
+warning** in `constants_source.warning` when it was made on other failure data (transferred, not
+calibrated) or with another calibration-procedure version. Upstream `Calibrations/` records keep
+their own schema and checks; missing legacy provenance is never inferred.
+
+```bash
+uv run multifat-pipeline --material AISI316L --calibration-archive Calibrations
+uv run multifat-pipeline --material AISI316L --calibration-archive Calibrations \
+    --calibration-id 20261105T101500123456Z_0123456789ab
+```
+
 ## Public method and plane-selection variants
 
 The name without a suffix selects **each method's declared default**: `FS` evaluates

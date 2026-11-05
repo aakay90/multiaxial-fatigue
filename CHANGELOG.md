@@ -47,6 +47,15 @@ checked against its original publication; changes to numerical outputs are liste
   `multifat-compare` adds its mean, SD and the fractions within +-10 % and +-20 % of the load
   (`Within_10pct`, `Within_20pct` columns of the statistics tables). Existing columns unchanged.
 
+### Calibration history (issue #15)
+
+- Pipeline calibrations get a persistent `calibration_id` (UTC time + content signature) and are
+  archived without overwriting (`--calibration-archive`, default `<results-dir>/calibrations`);
+  equivalent reruns keep their id. `--calibration-id` reuses a record; records lacking provenance
+  or made with another implementation revision are rejected, other data or procedure versions are
+  flagged. The run report gains a `calibration_id` column; sidecars record
+  `calibration_procedure` (2). Numerical results unchanged.
+
 ### Methods
 
 - Paper-reproduction tests for every registered method in `tests/methods/`, with the transcribed
