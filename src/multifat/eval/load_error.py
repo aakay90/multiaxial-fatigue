@@ -28,7 +28,7 @@ import math
 
 import numpy as np
 
-from multifat.eval.endurance import damage, load_factor, scaled_case
+from multifat.eval.endurance import load_factor, scaled_case, scaled_damage
 
 HOMOGENEITY_TOL = 1e-9
 
@@ -37,8 +37,8 @@ def homogeneity_degree(model, params: dict, case: dict, R_list, DP: float, *, va
     """Degree d with DP(s x) = s^d DP(x), checked at s = 2 and 1/2, or None."""
     if not (np.isfinite(DP) and DP > 0):
         return None
-    up = damage(model, params, scaled_case(case, 2.0), R_list, variant=variant)
-    down = damage(model, params, scaled_case(case, 0.5), R_list, variant=variant)
+    up = scaled_damage(model, params, case, 2.0, R_list, variant=variant)
+    down = scaled_damage(model, params, case, 0.5, R_list, variant=variant)
     if not (np.isfinite(up) and np.isfinite(down) and up > 0 and down > 0):
         return None
     d_up, d_down = math.log2(up / DP), math.log2(DP / down)
@@ -73,7 +73,7 @@ def master_curve_load_error(
         return math.log(DP / DP_fit) / degree
 
     def g(x: float) -> float:
-        value = damage(model, params, scaled_case(case, math.exp(x)), R_list, variant=variant)
+        value = scaled_damage(model, params, case, math.exp(x), R_list, variant=variant)
         return math.log(value) - math.log(DP_fit) if value > 0 else -np.inf
 
     s = _solve_in_log(g)

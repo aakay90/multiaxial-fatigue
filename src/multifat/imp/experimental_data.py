@@ -829,6 +829,46 @@ def extract_uniaxial_tension(
     return out
 
 
+def extract_pure_torsion(
+    data: Dict[str, Any],
+    *,
+    node: int = 1,
+    rtol_R: float = 1e-3,
+    atol_R: float = 1e-6,
+    rtol_pure: float = 1e-3,
+    atol_pure: float = 1e-6,
+) -> Dict[str, Any]:
+    """Experimental points of fully reversed pure torsion (R = -1), the torsional design set.
+
+    Counterpart of ``extract_uniaxial_tension`` for criteria whose source calibrates the life
+    curve on torsion tests (``design_loading = "torsion"``): the shear component tau_xy is the only
+    stress, with tau(min) / tau(max) = -1. The output has the same layout, with ``tau_a_MPa``.
+    """
+    out: Dict[str, Any] = {}
+    for material_name, mat_block in data.items():
+        points: List[Dict[str, float]] = []
+        for case_id, case in mat_block.get("cases", {}).items():
+            Smax = np.asarray(case[node][1]["stress"], dtype=float)
+            Smin = np.asarray(case[node][2]["stress"], dtype=float)
+            tmax, tmin = float(Smax[0, 1]), float(Smin[0, 1])
+            if abs(tmax) < atol_R or not np.isclose(tmin / tmax, -1.0, rtol=rtol_R, atol=atol_R):
+                continue
+            other = Smax.copy()
+            other[0, 1] = other[1, 0] = 0.0
+            if float(np.max(np.abs(other))) > rtol_pure * abs(tmax) + atol_pure:
+                continue
+            points.append(
+                {
+                    "case_id": int(case_id),
+                    "Nf_cycles": float(case["meta"]["Nf_cycles"]),
+                    "tau_a_MPa": 0.5 * abs(tmax - tmin),
+                }
+            )
+        if points:
+            out[material_name] = {"material": mat_block.get("material", {}), "points": points}
+    return out
+
+
 def exclude_subdataset(
     data: Dict[str, Any],
     excluded: Dict[str, Any],

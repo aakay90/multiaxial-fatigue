@@ -20,8 +20,11 @@ Repository choices:
   - ``MWHS`` takes the plane of largest shear strain range (ties: larger DP); ``MWHS_ext`` the
     largest DP over all planes (repository variant);
   - workbook (monotonic) Sy for sigma_y; elastic workbook strains (the source fits measured
-    elastic-plastic strains); life from the shared master curve DP = A N^b instead of the
-    torsional Coffin-Manson curve of Eq. (19).
+    elastic-plastic strains);
+  - life: the shared power-law master curve DP = A N^b fitted, like the right-hand side of
+    Eq. (19), on the fully reversed pure torsion failures (``design_loading = "torsion"``); the
+    uniaxial tests are predictions. The plastic term of the torsional Coffin-Manson curve is
+    not represented by the single power law.
 
 User guide: docs/method-guides/MWHS.md.
 """
@@ -42,6 +45,9 @@ class MWHS:
 
     name = "MWHS"
     np_shear_rule = "longest_chord"
+    # Eq. (19) relates the parameter to the torsional strain-life curve, whose constants come from
+    # torsion tests only: the master curve is fitted on the pure torsion R = -1 failures.
+    design_loading = "torsion"
 
     def required_params(self) -> set[str]:
         return {"Sy", "E"}

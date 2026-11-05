@@ -26,7 +26,7 @@ from multifat.eval.calibration import collect_uniaxial_series_and_fit
 from multifat.eval.fitting import stdnum_for_survival
 from multifat.report.export_csv import save_fatigue_csv
 from multifat.report.subsets import observation_index
-from multifat.models.errors import MissingParamsError, NativeLifeError
+from multifat.models.errors import DesignSetError, MissingParamsError, NativeLifeError
 from multifat.eval.findley_calibration import (
     FindleyCalibrationUnavailable,
     amplitude_identity,
@@ -95,6 +95,17 @@ def _split_model_variant(model_tag: str) -> tuple[str, str]:
 
     request = resolve_method_tag(model_tag)
     return request.base_name, request.suffix
+
+
+DESIGN_LOADINGS = ("tension", "torsion")
+
+
+def design_loading_of(model) -> str:
+    """Design set of a model's master curve: R = -1 uniaxial tension unless it declares torsion."""
+    loading = getattr(model, "design_loading", "tension")
+    if loading not in DESIGN_LOADINGS:
+        raise ValueError(f"{model.name}: unknown design_loading {loading!r}")
+    return loading
 
 
 def classify_loading_type(
@@ -259,6 +270,8 @@ class Evaluation:
     data: Any = None
     # Fitted constants of the native life law, set by native_lives
     life_curve: Any = None
+    # Design set of the master curve: "tension" (default) or "torsion" (model.design_loading)
+    design_loading: str = "tension"
     # Aux values of the design points (native-life fit), lined up with cal["series"]["N"]
     design_aux: list[dict] = field(default_factory=list)
     # Cases that fed the material-constant fit: reported as design points (Flag = 0)
@@ -392,11 +405,21 @@ def evaluate_model(
         raise MissingParamsError(mdl.name, absent)
 
     native_prediction = capabilities_for_model(mdl).life_prediction == "native"
-    uniax_rminus1 = exp.extract_uniaxial_tension(data)
+    design_loading = design_loading_of(mdl)
+    if design_loading == "torsion":
+        # The source fits the life curve on torsion tests (e.g. MWHS, Wu et al. 2017 Eq. 19).
+        uniax_rminus1 = exp.extract_pure_torsion(data)
+    else:
+        uniax_rminus1 = exp.extract_uniaxial_tension(data)
     if material not in uniax_rminus1 and native_prediction:
         # A native-life model needs no axial R=-1 subset or DP master curve.
         uniax_rminus1 = {material: {"points": []}}
     if material not in uniax_rminus1:
+        if design_loading == "torsion":
+            raise DesignSetError(
+                f"No design points for '{material}': {base_name} fits its master curve on pure "
+                "torsion R = -1 tests, as its source does, and the workbook has none"
+            )
         raise ValueError(
             f"No design points for '{material}': the calibration needs uniaxial tension R = -1 tests"
         )
@@ -426,6 +449,7 @@ def evaluate_model(
         stdnum=float(stdnum),
         survival_probability=float(NormalDist().cdf(stdnum)),
     )
+    result.design_loading = design_loading
     result.observations = observation_index(data[material])
     result.data = data
     if require_variant is not None and not native_prediction:
@@ -770,8 +794,9 @@ def write_variant(
     N_d = series["N"]
     F_d = series["CP"] if variant_key == "" else series["CP_ext"]
 
-    # Loading type of the design points (uniaxial tension R=-1 by construction)
-    loading_type_design = ["Tensile"] * int(len(np.atleast_1d(N_d)))
+    # Loading type of the design points (R = -1 tension, or torsion for design_loading = "torsion")
+    design_label = "Torsion" if ev.design_loading == "torsion" else "Tensile"
+    loading_type_design = [design_label] * int(len(np.atleast_1d(N_d)))
     extra_values = [v[variant_key] for v in ev.extra["values"]]
     if extra_values:
         N_d = np.concatenate([np.asarray(N_d, dtype=float), ev.extra["Nexp"]])
