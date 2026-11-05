@@ -18,6 +18,7 @@ from typing import Iterable
 from .cp_adapter import CPModelAdapter
 from .base import FatigueModel
 from .comparison import DEFAULT_CAPABILITIES
+from .errors import LoadingScopeError
 from .references import ensure_enabled, method_reference
 
 # CP (critical-plane) plane-level methods
@@ -225,6 +226,10 @@ def stress_only_models() -> frozenset[str]:
             v = res.values.get("")
             if v is not None and np.isfinite(v):
                 out.add(name)
+        except LoadingScopeError:
+            # The probe load lies outside the criterion's scope (e.g. GOLOS, in-phase only): it was
+            # rejected before any strain was read, so the model needs no strain.
+            out.add(name)
         except Exception:
             pass
     return frozenset(out)
