@@ -47,6 +47,23 @@ checked against its original publication; changes to numerical outputs are liste
   `multifat-compare` adds its mean, SD and the fractions within +-10 % and +-20 % of the load
   (`Within_10pct`, `Within_20pct` columns of the statistics tables). Existing columns unchanged.
 
+### Calibration history (issue #15)
+
+- Pipeline calibrations get a persistent `calibration_id` (UTC time + content signature) and are
+  archived without overwriting (`--calibration-archive`, default `<results-dir>/calibrations`);
+  equivalent reruns keep their id. `--calibration-id` reuses a record; records lacking provenance
+  or made with another implementation revision are rejected, other data or procedure versions are
+  flagged. The run report gains a `calibration_id` column; sidecars record
+  `calibration_procedure` (2). Numerical results unchanged.
+
+### Dataset workflow classification (issue #18)
+
+- `multifat.imp.classification.classify_dataset` assigns each workbook a workflow
+  (`fatigue_life`, `fatigue_limit`, `ambiguous`, `out_of_scope`) and each plain observation a role
+  (`design`, `assessment`, `censored`, `limit_state`); the pipeline writes
+  `<MATERIAL>_classification.json` and routes on it, with the previous routing preserved.
+  Run-outs below the reference life of the Summary limits are reported (25CrMo4: all 11).
+
 ### README figures
 
 - Header figure: Findley damage on the sphere of plane normals with the critical plane

@@ -458,6 +458,7 @@ def run_workbook(
     plots: bool = False,
     constants: Path | None = None,
     survival_probability: float = 0.5,
+    calibration_archive: Path | None = None,
 ) -> list[Outcome]:
     stdnum_for_survival(survival_probability)  # reject invalid values before any work
     results_dir.mkdir(parents=True, exist_ok=True)
@@ -473,7 +474,16 @@ def run_workbook(
     requested = select_method_variants(models, all_variants=all_variants)
     selected = list(dict.fromkeys(request.base_name for request in requested))
     data, _ = runmod.load_material(workbook)
-    if not data[material]["cases"]:  # validated: a fatigue-limit dataset
+    # Explicit workflow and observation roles from the shared importer (issue #18)
+    from multifat.imp.classification import classify_dataset
+
+    classification = classify_dataset(data[material], material)
+    (results_dir / f"{material}_classification.json").write_text(
+        json.dumps(classification, indent=1, default=float), encoding="utf-8"
+    )
+    if classification["workflow"] not in ("fatigue_life", "fatigue_limit"):
+        raise WorkbookError(workbook.name, "", "", "; ".join(classification["reasons"]))
+    if classification["workflow"] == "fatigue_limit":
         results, sidecar = _evaluate_fatigue_limit(workbook, material, requested, results_dir, jobs)
         sidecar["provenance"] = provenance(workbook, data, survival_probability)
         sidecar["status"] = "not_applicable"
@@ -490,6 +500,20 @@ def run_workbook(
         return results
     n_fail = len(data[material]["cases"])
     supplied, source = load_constants(constants, material, n_fail) if constants else ({}, None)
+    if source is not None and source.get("kind") == "multifat calibration sidecar":
+        from multifat.cli.records import check_record_compatibility, record_warnings
+
+        record = json.loads(Path(constants).read_text(encoding="utf-8"))
+        problems = check_record_compatibility(record, data[material])
+        if problems:
+            raise ValueError(f"{constants}: not reusable here: {'; '.join(problems)}")
+        notes = record_warnings(record, data[material])
+        if record.get("calibration_id"):
+            source["calibration_id"] = record["calibration_id"]
+        if notes:
+            source["warning"] = "; ".join(
+                [source["warning"], *notes] if "warning" in source else notes
+            )
     needed = (
         (_absent_suppliable_constants(workbook, selected, data) - set(supplied))
         if calibrate
@@ -523,6 +547,13 @@ def run_workbook(
             source = {**source, "design_rows": note}
         sidecar["constants_source"] = source
     sidecar["provenance"] = provenance(workbook, data, survival_probability)
+    from multifat.cli.records import CALIBRATION_PROCEDURE, archive_record
+
+    sidecar["calibration_procedure"] = CALIBRATION_PROCEDURE
+    if sidecar.get("params"):
+        # A persistent, never-overwritten copy; the results refer to it by calibration_id
+        archive = calibration_archive or results_dir / "calibrations"
+        sidecar["calibration_id"], _, _ = archive_record(sidecar, archive, material)
     (results_dir / f"{material}_calibration.json").write_text(
         json.dumps(sidecar, indent=1, default=float), encoding="utf-8"
     )
@@ -555,13 +586,17 @@ def run_workbook(
     else:
         results = [item for job in queue for item in _evaluate_base(job)]
 
-    _dump_run_report(results_dir, material, results)
+    _dump_run_report(results_dir, material, results, sidecar.get("calibration_id", ""))
     return results
 
 
-def _dump_run_report(dest: Path, material: str, results: list[Outcome]) -> None:
+def _dump_run_report(
+    dest: Path, material: str, results: list[Outcome], calibration_id: str = ""
+) -> None:
     sep = "\t"
+    # calibration_id: the archived calibration record the constants come from (issue #15)
     head = ["model", "status", "reason", "calibrated", "n_cases", "seconds", "notes"]
+    head.append("calibration_id")
     lines = [sep.join(head)]
     for outcome in results:
         row = [
@@ -574,6 +609,7 @@ def _dump_run_report(dest: Path, material: str, results: list[Outcome]) -> None:
             str(outcome.n_cases),
             f"{outcome.seconds:.1f}",
             " ".join(outcome.notes.split()),
+            calibration_id,
         ]
         lines.append(sep.join(row))
     (dest / f"{material}_run_report.tsv").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -873,6 +909,17 @@ def main(cli_args=None) -> None:
     parser.add_argument("--no-compare", action="store_true")
     parser.add_argument("--plots", action="store_true")
     parser.add_argument(
+        "--calibration-archive",
+        type=Path,
+        default=None,
+        help="folder of the persistent calibration records (default: <results-dir>/calibrations)",
+    )
+    parser.add_argument(
+        "--calibration-id",
+        default=None,
+        help="reuse the archived calibration record ID of the (single) workbook's material",
+    )
+    parser.add_argument(
         "--survival-probability",
         type=float,
         default=0.5,
@@ -904,6 +951,18 @@ def main(cli_args=None) -> None:
         parser.error("supply a workbook path, --material NAME or --all")
     if args.constants is not None and len(workbooks) != 1:
         parser.error("--constants accepts exactly one workbook (constants belong to one material)")
+    if args.calibration_id is not None:
+        if args.constants is not None or len(workbooks) != 1:
+            parser.error("--calibration-id needs exactly one workbook and no --constants")
+        from multifat.cli.records import find_record
+
+        archive = args.calibration_archive or args.results_dir / "calibrations"
+        try:
+            args.constants = find_record(
+                archive, material_id(workbooks[0].stem), args.calibration_id
+            )
+        except FileNotFoundError as exc:
+            parser.error(str(exc))
     if args.results_dir.resolve() == Path.cwd().resolve():
         parser.error("--results-dir must be a subdirectory, not the working directory")
     selected = None if args.models == "all" else [m.strip() for m in args.models.split(",")]
@@ -934,6 +993,7 @@ def main(cli_args=None) -> None:
                 plots=args.plots,
                 constants=args.constants,
                 survival_probability=args.survival_probability,
+                calibration_archive=args.calibration_archive,
             )
         except WorkbookError as exc:
             print(f"   workbook rejected: {exc}")

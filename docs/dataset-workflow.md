@@ -61,6 +61,28 @@ uv run multifat-pipeline --all --jobs 8 --results-dir Results/current
 uv run multifat-pipeline --material 42CrMo4_QT --models BP,SWT --no-calibrate
 ```
 
+## Workflow classification (issue #18)
+
+The shared importer's block is classified before any assessment
+(`multifat.imp.classification.classify_dataset`), and `multifat-pipeline` writes the result to
+`<MATERIAL>_classification.json` and routes on it:
+
+| `workflow` | Rule | Assessment |
+|---|---|---|
+| `fatigue_life` | >= 2 uniaxial tension R = -1 failures with distinct lives | master curve on the design set; other failures assessed; run-outs censored |
+| `fatigue_limit` | no plain failure, run-outs, both R = -1 limits usable | run-outs judged as limit states by the fatigue index |
+| `ambiguous` | failures without a design set, or run-outs without usable limits | none; the reasons are reported and the workbook is rejected |
+| `out_of_scope` | no plain observation (e.g. notched only) | none |
+
+Every plain observation gets one role (`design`, `assessment`, `censored`, `limit_state`) with its
+observation identity. A run-out is never a failure. In a `fatigue_life` (mixed) workbook run-outs
+stay censored life observations and are not taken as established fatigue limits; in a
+`fatigue_limit` workbook, run-outs stopped below the reference life of the Summary limits are
+listed in `diagnostics` as finite-cycle survivals. The rules reproduce the previous routing for all
+fifteen supplied workbooks. Finding: all 11 run-outs of 25CrMo4 stopped below the 2e6-cycle
+reference of its limits, so its fatigue index errors compare finite-cycle survivals with endurance
+limits (data review, issue #24).
+
 ## Fatigue-limit datasets
 
 A workbook whose plain rows are all run-outs and whose Summary provides both R = -1 fatigue limits constitutes a set of limit states. Every model is then judged through its fatigue index error (Böhme & Papuga 2024, Eqs. 8-9): FI_axial = DP(case) / DP(axial R = -1 at Sigm1) - 1, and FI_torsion with the torsional limit. FI_load = 1/s - 1, where s is the factor on all loads at which DP(s * case) matches the axial reference, is the stress-scaled index for any damage parameter (it equals FI_axial for criteria linear in the loads, and sqrt(DP/DP_ref) - 1 for SWT-type parameters). A missing plane constant is set so that both limits yield the same DP; models that need life constants are skipped. Results are written to `FatigueLimit/<METHOD>_<MATERIAL>_FI.csv` and `<MATERIAL>_fatigue_index_summary.csv` (statistics over finite values; rows where a model is infinite by design on some loads, such as MWCM past its rho cut-off, are counted in `n_nonfinite`); the life comparison ignores that folder. See `multifat.eval.endurance`.
