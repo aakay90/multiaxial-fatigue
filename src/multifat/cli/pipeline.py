@@ -251,6 +251,10 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
                     notes=_life_notes(model, evaluation, suffix, adopted, calibration),
                 )
             )
+        except LoadingScopeError as exc:  # e.g. a run-out outside the criterion's scope
+            results.append(
+                Outcome(label, "skipped", str(exc), calibrated=fitted_label, mode="out_of_scope")
+            )
         except Exception as exc:
             results.append(
                 Outcome(
