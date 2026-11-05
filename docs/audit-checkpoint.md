@@ -1,5 +1,21 @@
 # Development continuation checkpoint
 
+## Issue #32 guides MKBM, VSE, GSE, GSA; issue #13 candidates (5 November 2026)
+
+- PR #44 (`docs/guides-strain-energy`) adds four guides: MKBM, VSE, GSE and GSA.
+  - It completes the `mkbm`, `liu_vse` and `gsa` docstrings; 19 modules remain in
+    `PENDING_DOCSTRINGS`.
+  - Checks: guide, notation and method tests pass (536); black, ruff and `check_docs` are clean.
+  - Documentation only; the regression snapshot was not run.
+- Issue #13: the prioritised candidate list is posted as a comment on the issue.
+  - Batch 1: N08, N06, N11, N05, N13, N28, N26.
+  - Batch 2: G05, N24, N32, G32, N16.
+  - Blocker: coding waits for the original PDFs from the maintainer.
+
+Next exact action: #32 guides for LI, LIU2021, MGSE_YU, MGSE_ZHU, MSWT and MMCCM, then the
+invariant and integral families. Implement the #13 candidates as their PDFs arrive. TVEIT2025
+stays untouched.
+
 ## Open work after PR #33 (5 November 2026)
 
 Open PRs, each from `main` at `2efee9f` and independent:
