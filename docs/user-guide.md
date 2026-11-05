@@ -37,7 +37,7 @@ cd multiaxial-fatigue
 # Install dependencies and sync virtual environment
 uv sync
 
-# Run the test suite (1,100+ tests including paper-reproduction checks)
+# Run the test suite (about 1,700 tests, including paper-reproduction checks)
 uv run pytest
 ```
 
@@ -176,7 +176,7 @@ Before contributing code, running sweeps or committing changes, verify the imple
 # Run paper-reproduction unit tests only
 uv run pytest tests/methods -q
 
-# Run full test suite (~1,600 tests)
+# Run full test suite (about 1,700 tests)
 uv run pytest -q
 
 # Code formatting & lint checks (Black owns layout, Ruff checks correctness)
@@ -281,4 +281,4 @@ Specimens that reached run-out (`Run out = Yes` in the `Dataset` sheet) are **ce
 - **Every parameter calibration, Basquin fit and error statistic excludes them**, so predictions are not skewed.
 
 ### Where can I find mathematical details for a specific criterion?
-For every implemented criterion, the governing equations and the primary DOI are cross-referenced in [`METHODS.md`](../METHODS.md) and [`docs/method-audit.md`](method-audit.md). Reproducible paper-validation test cases are located in `tests/methods/`.
+Start from the [method guides](method-guides/README.md): one page per criterion with the published equations, the repository implementation and its departures from the source, the calibration and a worked example. For every implemented criterion, the primary DOI and the implementation evidence are also cross-referenced in [`METHODS.md`](../METHODS.md) and [`docs/method-audit.md`](method-audit.md). Reproducible paper-validation test cases are located in `tests/methods/`.

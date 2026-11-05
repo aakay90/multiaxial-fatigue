@@ -5,6 +5,13 @@ Eqs. (65)-(66) on p. 9:
 
 where sigma_H,max = sigma_H,a + sigma_H,m (Eq. 45). The returned fatigue index is LHS / lambda
 (equal to 1 on the fatigue limit; Papadopoulos' error index is I = 100 (index - 1), Eq. 85).
+
+Repository choices:
+  - sqrt(J2,a) is the exact enclosing radius of the single-harmonic deviatoric ellipse;
+  - the fatigue-limit index is used as the damage parameter of the shared master curve
+    DP = A N^b for finite-life comparisons (not part of Crossland's criterion).
+
+User guide: docs/method-guides/CROSSLAND.md.
 """
 
 from __future__ import annotations

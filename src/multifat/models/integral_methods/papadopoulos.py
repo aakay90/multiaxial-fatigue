@@ -23,6 +23,13 @@ Volumetric form, Papadopoulos (1999, CISM Courses 392, doi:10.1007/978-3-7091-24
     sqrt(<T_a^2>) = sqrt(J2(A) + J2(B)) for S(t) = M + A sin wt + B cos wt: Eq. (5.20) in phase,
     Eq. (5.46) out of phase. Eq. (5.19) prints 1/(4 pi) whereas integrating cos^2(chi) in Eq. (5.18)
     yields 1/(8 pi); only the latter recovers Eq. (5.20).
+
+Repository choices:
+  - the registered model is the 2001 index gamma_N / t_-1 of Eq. (41), with the max over planes
+    that Eq. (40) omits; the 1999 volumetric form is a tested function, not a registered model;
+  - the index is used as the damage parameter of the shared master curve DP = A N^b.
+
+User guide: docs/method-guides/PAPADOPOULOS.md.
 """
 
 from __future__ import annotations

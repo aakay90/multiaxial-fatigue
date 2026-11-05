@@ -1,4 +1,23 @@
-# multifat/models/cp_methods/mcdiarmid.py
+"""McDiarmid (1991), FFEMS 14, doi:10.1111/j.1460-2695.1991.tb00673.x: critical-plane criterion.
+
+Eqs. (7)-(8), p. 437, on the plane of maximum shear stress amplitude::
+
+    tau_a / t_A,B + sigma_n,max / (2 sigma_u) = 1,        0 <= sigma_n,max <= sigma_u
+
+with sigma_u the ultimate tensile strength and t_A,B the shear fatigue strength of case-A or
+case-B cracks. The plane damage parameter is DP = d_tau / 2 + t_-1 / (2 Su) sigma_max (MPa),
+equal to t_-1 on the limit; the selection metric is d_tau and MCD_ext takes the largest DP.
+
+Repository choices:
+  - case A only, with t_A = t_-1 (Taum1);
+  - sigma_max is clipped at zero and the upper validity bound is not enforced;
+  - the out-of-phase plane association of the source (plane of maximum principal-stress range)
+    is not implemented; the default ``rss`` shear amplitude is used;
+  - life from the shared master curve DP = A N^b.
+
+User guide: docs/method-guides/MCD.md.
+"""
+
 from __future__ import annotations
 
 from typing import Mapping, Tuple
