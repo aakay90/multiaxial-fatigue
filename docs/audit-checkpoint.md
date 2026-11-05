@@ -1,5 +1,39 @@
 # Development continuation checkpoint
 
+## Issue #13 new methods from maintainer-supplied papers (5 November 2026)
+
+Five criteria were implemented from the original PDFs, each with a guide, a paper test, a catalogue
+record and an audit row. They are stacked PRs; merge them in the order listed.
+
+| Order | Method | PR | Branch | Paper check |
+| --- | --- | --- | --- | --- |
+| 1 | GAM (N08) | #45 | `feat/gam-criterion` | Tables 1-4: in-phase rows exact; out-of-phase rows used a phase-free peak, contrary to Eq. (11) (xfail) |
+| 2 | NINIC (N11) | #46 | `feat/ninic-criterion` | Tables 2-4: 29/32 rows within 0.08; Eq. (4) valid only for S_e/T_e >= sqrt(2) |
+| 3 | GOLOS (N13) | stacked | `feat/golos-criterion` | Eq. (30) identities |
+| 4 | MWHS (N28) | stacked | `feat/mwhs-criterion` | Fig. 14 reproduced, except 90 deg of (b) |
+| 5 | LIU2025 (new record N58) | stacked | `feat/liu2025-criterion` | Fig. 3 reproduced, except 2 points |
+
+Notes on the GOLOS and LIU2025 branches:
+- The GOLOS branch adds `LoadingScopeError`. The pipeline reports a model that raises it as
+  skipped, with eligibility `out_of_scope`.
+- GOLOS is out of scope on every supplied workbook.
+- LIU2025 is out of scope on 42CrMo4_QT and Ti6Al4V_Berto because of the estimated Tu.
+
+Checks: full suite green, apart from one shear-rule registry test, which was fixed and re-run.
+Regression snapshots show no change to existing model outputs.
+
+Next exact action: implement the remaining #13 candidates as their PDFs arrive. Requested:
+- Zhang & Yao 2010;
+- Wang et al. 2022;
+- Kujawski 2021;
+- Papuga & Fojtík 2017;
+- Anes et al. 2014;
+- Lu & Martínez-Esnaola 2021;
+- Stefanov 1993;
+- Liu & Mahadevan 2005.
+
+Meanwhile, continue the #32 guides (LI, LIU2021, MGSE_YU, MGSE_ZHU, MSWT, MMCCM).
+
 ## Issue #32 guides MKBM, VSE, GSE, GSA; issue #13 candidates (5 November 2026)
 
 - PR #44 (`docs/guides-strain-energy`) adds four guides: MKBM, VSE, GSE and GSA.
