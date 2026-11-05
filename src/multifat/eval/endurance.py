@@ -100,6 +100,22 @@ def damage(model, params: dict, case: dict, R_list, *, variant: str = "") -> flo
     return float(result.values.get(variant, np.nan))
 
 
+def scaled_damage(model, params: dict, case: dict, factor: float, R_list, *, variant: str = ""):
+    """DP of `factor` x case; +inf where the scaled load leaves the criterion's domain.
+
+    Load-scaling searches (FI_load, the load-equivalent error) try loads that were never applied,
+    e.g. a mean stress beyond the ultimate strength. A LoadingScopeError there means the trial
+    load lies above every admissible damage level, so the search backtracks instead of stopping.
+    A scope error on the case itself is not caught here (the model is then skipped).
+    """
+    from multifat.models.errors import LoadingScopeError
+
+    try:
+        return damage(model, params, scaled_case(case, factor), R_list, variant=variant)
+    except LoadingScopeError:
+        return float("inf")
+
+
 def _root_in_interval(f, lo: float, hi: float, f_lo: float, tol: float = 1e-13) -> float:
     """Bisection for the root of f inside [lo, hi], which must bracket a sign change (relative `tol`)."""
     for _ in range(200):
@@ -154,7 +170,7 @@ def load_factor(
     """Factor s for which DP(s * case) = target (DP grows with the loads), or NaN."""
 
     def residual(s: float) -> float:
-        return damage(model, params, scaled_case(case, s), R_list, variant=variant) - target
+        return scaled_damage(model, params, case, s, R_list, variant=variant) - target
 
     r1 = residual(1.0)
     if not np.isfinite(r1) or not np.isfinite(target) or target <= 0:
