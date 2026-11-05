@@ -100,6 +100,9 @@ checked against its original publication; changes to numerical outputs are liste
   catalogue N28 (issue #13).
   - Formulation: Eq. (19), with the longest-chord shear range.
   - Verification: Fig. 14 is reproduced, except the normal term at 90°.
+  - Calibration: as in the source, the master curve is fitted on the fully reversed pure torsion
+    failures. A model now declares this with `design_loading = "torsion"`, which is read through
+    `extract_pure_torsion`. A workbook without such tests skips the model (`DesignSetError`).
   - Guide: `docs/method-guides/MWHS.md`.
 - Paper-reproduction tests for every registered method in `tests/methods/`, with the transcribed
   tables in `tests/data/papers/` (DOI, table, page). Confirmed paper misprints are strict `xfail`s

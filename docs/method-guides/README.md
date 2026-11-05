@@ -101,7 +101,9 @@ $R = -1$ (`Flag = 0` in the CSV, together with any other test that fitted a cons
 \mathrm{DP} = A\,N_f^{\,b}, \qquad \hat N_f = \left(\mathrm{DP}/A\right)^{1/b},
 ```
 
-by least squares in $\ln \mathrm{DP}$ versus $\ln N_f$ (`multifat.eval.fitting`). All other failures
+by least squares in $\ln \mathrm{DP}$ versus $\ln N_f$ (`multifat.eval.fitting`). A method whose source fits its life
+curve on torsion tests declares `design_loading = "torsion"`; its master curve is then fitted on
+the fully reversed pure torsion failures instead (currently [MWHS](MWHS.md)). All other failures
 (`Flag = 1`) are predicted with the inverted curve. Run-outs (`Flag = 2`) are evaluated but never
 enter a fit or an error statistic. This is an **assessment-layer** life law shared by all methods,
 not the life law of the original author. The life error is

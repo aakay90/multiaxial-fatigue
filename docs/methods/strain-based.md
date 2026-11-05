@@ -245,10 +245,10 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Inputs / material parameters | Sy, E, nu. |
 | Output | Strain damage parameter; fitted life via the shared master curve where valid |
 | Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
-| Validation / evidence | reference_examples_reproduced; tests/methods/test_mwhs.py: Fig. 14(a) at seven phase angles within 2 %, Fig. 14(b) 0-75 deg within 5 % (90 deg strict xfail); elastic closed forms. Life results are figures only. |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_mwhs.py: Fig. 14(a) at seven phase angles within 2 %, Fig. 14(b) 0-75 deg within 5 % (90 deg strict xfail); elastic closed forms. Life results are figures only. tests/test_pipeline.py: torsion design set (design_loading = 'torsion'). |
 | Python implementation | [src/multifat/models/cp_methods/mwhs.py](../../src/multifat/models/cp_methods/mwhs.py); MWHS |
 | Automated tests | [tests/methods/test_mwhs.py](../../tests/methods/test_mwhs.py) |
-| Limitations | Proposed for LCF with measured elastic-plastic strains; workbook strains are elastic. Life from the master curve, not the torsional Coffin-Manson curve. Fig. 14b at 90 deg not reproduced. |
+| Limitations | Proposed for LCF with measured elastic-plastic strains; workbook strains are elastic. Master curve fitted on the pure torsion R = -1 failures, as the source's torsional strain-life curve (single power law, no plastic term). Fig. 14b at 90 deg not reproduced. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
 | Missing tasks | No known essential coding gap within the declared repository scope. |

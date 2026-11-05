@@ -65,8 +65,11 @@ DP is dimensionless.
 - *Monotonic yield strength and elastic strains.* The workbook `Sy` is used for $\sigma_y$, and
   strains are elastic. The source applies the parameter to measured elastic–plastic strains in the
   low-cycle regime.
-- *Life.* The shared master curve replaces the torsional Coffin–Manson curve of Eq. (19)
-  ([README](README.md#from-damage-parameter-to-life-the-master-curve)).
+- *Life.* A power-law master curve $\mathrm{DP} = A N_f^b$ replaces the torsional Coffin–Manson
+  curve of Eq. (19). As in the source, it is fitted on the **fully reversed pure torsion failures**
+  (`design_loading = "torsion"`), not on the tension tests used by the other methods
+  ([README](README.md#from-damage-parameter-to-life-the-master-curve)). The single power law
+  has no separate plastic term.
 
 ## Material constants and inputs
 
@@ -78,9 +81,19 @@ DP is dimensionless.
 
 ## Calibration
 
-MWHS has no fitted criterion constant; this is its stated advantage over WHS. In the source, the
-torsional Coffin–Manson constants $\tau_f'$, $b_0$, $\gamma_f'$, $c_0$ give the life. The repository
-fits the master curve $A$, $b$ on the uniaxial R = -1 design tests instead.
+MWHS has no fitted criterion constant; this is its stated advantage over WHS. The life follows
+from torsion tests alone.
+
+1. **Original procedure.** The torsional Coffin–Manson constants $\tau_f'$, $b_0$, $\gamma_f'$, $c_0$,
+   fitted on pure torsion tests, give the life (Eq. 19). The uniaxial tests then validate the
+   parameter (Fig. 13).
+2. **Repository.** The master curve $A$, $b$ is fitted on the fully reversed pure torsion failures
+   of the workbook, which are reported as design rows (`Flag = 0`). The uniaxial tension tests are
+   predictions (`Flag = 1`), as in the paper. A workbook without at least two such torsion
+   failures with distinct lives skips MWHS, with the reason in the run report.
+
+MWHS therefore uses a design set different from the other methods. Comparisons restricted to
+common observations (`--common-methods`) report this, and should be run with `--flag_filter other`.
 
 With elastic strains, the uniaxial parameter on the 45° plane is
 
@@ -162,7 +175,8 @@ uv run multifat-pipeline --material Al7075_T6 --models MWHS --all-variants --res
 
 ## Comparison capabilities and outputs
 
-- **Life:** master curve (`Nf_expected`), not the torsional strain–life curve.
+- **Life:** master curve (`Nf_expected`) fitted on the torsion failures, not the torsional
+  strain–life curve with its plastic term.
 - **DP comparison:** supported. DP is not homogeneous in the load, so use `Error_load` to compare
   with other methods.
 - **`_ext`:** available; maximum DP over planes.

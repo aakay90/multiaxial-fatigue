@@ -478,3 +478,32 @@ def test_loading_outside_a_criterion_scope_is_skipped_not_failed(tmp_path):
     wb = write_workbook(tmp_path / "InPhase.xlsx", rows=in_phase)
     (outcome,) = run_workbook(wb, models=["GOLOS"], results_dir=out)
     assert outcome.status == "ok"
+
+
+def test_torsion_design_set_for_models_calibrated_on_torsion(tmp_path):
+    """MWHS fits its master curve on the pure torsion R = -1 failures (Wu et al. 2017, Eq. 19)."""
+    import pandas as pd
+
+    from multifat.imp.experimental_data import extract_pure_torsion, load_material_workbook
+
+    wb = write_workbook(tmp_path / "Synth.xlsx")
+    (block,) = load_material_workbook(wb).values()
+    torsion = extract_pure_torsion({"Synth": block})["Synth"]["points"]
+    assert len(torsion) == 5  # the five torsion rows of basquin_rows()
+    out = tmp_path / "res"
+    (mwhs, fin) = run_workbook(wb, models=["MWHS", "FIN"], results_dir=out)
+    assert mwhs.status == "ok" and fin.status == "ok"
+    rows = pd.read_csv(out / "MWHS_Synth.csv")
+    design = rows[rows.Flag == 0]
+    assert len(design) == len(torsion) and set(design.Loading_type) == {"Torsion"}
+    assert (rows.query("Loading_type == 'Tensile' and Test_status == 'failure'").Flag == 1).all()
+    fin_design = pd.read_csv(out / "FIN_Synth.csv").query("Flag == 0")
+    assert set(fin_design.Loading_type) == {"Tensile"}  # FIN keeps the tension design set
+    assert not set(fin_design.Case_id) & set(design.Case_id)
+
+
+def test_missing_torsion_design_set_is_a_skip(tmp_path):
+    no_torsion = [r for r in basquin_rows() if not (r[8] == 0 and r[10] != 0)]
+    wb = write_workbook(tmp_path / "Synth.xlsx", rows=no_torsion)
+    (outcome,) = run_workbook(wb, models=["MWHS"], results_dir=tmp_path / "res")
+    assert outcome.status == "skipped" and "torsion" in outcome.reason

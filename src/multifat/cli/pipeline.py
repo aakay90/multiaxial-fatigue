@@ -31,7 +31,7 @@ from multifat.cli import run as runmod
 import multifat.imp.experimental_data as exp
 from multifat.eval.fitting import stdnum_for_survival
 from multifat.imp.schema import WorkbookError, material_id, workbook_files
-from multifat.models.errors import LoadingScopeError, MissingParamsError
+from multifat.models.errors import DesignSetError, LoadingScopeError, MissingParamsError
 
 DATA_FOLDER = "Experimental_Data"
 RESULTS_DIR = "Results/current"
@@ -196,6 +196,11 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
                 model,
                 calibration,
             )
+            for suffix in suffixes
+        ]
+    except DesignSetError as exc:
+        return [
+            Outcome(base_name + suffix, "skipped", str(exc), 0, time.perf_counter() - start)
             for suffix in suffixes
         ]
     except LoadingScopeError as exc:
