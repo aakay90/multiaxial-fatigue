@@ -35,6 +35,7 @@ from .cp_methods.ninic import Ninic
 from .cp_methods.mwhs import MWHS
 from .cp_methods.liu2025 import Liu2025
 from .cp_methods.zhang_yao import ZhangYao
+from .cp_methods.wang2022 import Wang2022
 
 # Additional critical-plane formulations
 from .cp_methods.mgse_yu import MGSE_Yu
@@ -109,6 +110,7 @@ def _available_direct_models():
         "TVEIT2025": Tveit2025(),
         "DANGVAN": DangVan(),
         "CROSSLAND": Crossland(),
+        "WANG2022": Wang2022(),
         "GAM": GoncalvesAraujoMamiya(),
         "GOLOS": Golos(),
         "SINES": Sines(),

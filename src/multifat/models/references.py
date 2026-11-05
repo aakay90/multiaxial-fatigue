@@ -90,6 +90,10 @@ REFERENCES = {
         "Crossland (1956), Effect of large hydrostatic pressures on the torsional fatigue strength of an alloy steel; as restated by Papadopoulos et al. (1997), A comparative study of multiaxial high-cycle fatigue criteria for metals, Eqs. (44), (65)-(66)",
         "10.1016/S0142-1123(96)00064-3",
     ),
+    "WANG2022": (
+        "Wang, Sun, Liu, Liu & Shang (2022), Multiaxial high-cycle fatigue failure and life prediction based on critical plane method, Eqs. (10), (15), (18)-(24)",
+        "10.1177/10567895221091308",
+    ),
     "ZHANGYAO": (
         "Zhang & Yao (2011), An improved multiaxial high-cycle fatigue criterion based on critical plane approach, Eqs. (3), (6), (7), (A1)",
         "10.1111/j.1460-2695.2010.01523.x",
