@@ -148,6 +148,7 @@ constants are missing is skipped and reported; the other models still run.
 | TVEIT2025 | `A_TVEIT`, `C_TVEIT`, `K_TVEIT`, `L_TVEIT` | `Sigm1_TVEIT`: Sigm1 of the workbook; `Taum1_TVEIT`: Taum1 of the workbook; `npts_TVEIT`: 1001; `min_blocks_TVEIT`: 8; `max_blocks_TVEIT`: 10000; `tol_alpha_TVEIT`: 1e-06; `tol_damage_TVEIT`: 1e-05 |
 | DANGVAN | `Sigm1`, `Taum1` | - |
 | CROSSLAND | `Sigm1`, `Taum1` | - |
+| WANG2022 | `Sigm1`, `Sy`, `Taum1` | - |
 | GAM | `Sigm1`, `Taum1` | - |
 | GOLOS | `Sigm1`, `Taum1` | - |
 | SINES | `Sigm1`, `Su`, `Taum1` | - |

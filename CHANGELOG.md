@@ -100,6 +100,13 @@ of names and records one distinction FatPy makes; no multifat name was renamed.
   - Finding: the maximum-$C_a$ plane rule is ill-conditioned for this criterion, so results in
     out-of-phase loading depend on the tie rule.
   - Guide: `docs/method-guides/ZHANGYAO.md`.
+- New criterion `WANG2022`, Wang et al. (2022), catalogue N05 (issue #13).
+  - Formulation: the equivalent shear stress on the maximum-$C_a$ plane, with life from the
+    torsional S–N curve; its master curve is fitted on the torsion failures.
+  - Verification: the predicted lives of Tables 4–5 are reproduced within 1 %.
+  - Finding: Eq. (18) as printed makes a tensile mean stress beneficial. By maintainer decision,
+    loading with a mean normal stress on the critical plane is out of scope.
+  - Guide: `docs/method-guides/WANG2022.md`.
 - New criterion `GAM`, Gonçalves, Araújo & Mamiya (2005), catalogue N08 (issue #13). It is an
   endurance criterion for hard metals.
   - Formulation: the prismatic-hull deviatoric amplitude plus the maximum principal stress over the

@@ -16,7 +16,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 9 | 1 | 9 | 0 | 19 |
+| Critical plane | 10 | 1 | 8 | 0 | 19 |
 | Energy based | 6 | 1 | 13 | 3 | 23 |
 | Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
 | Invariant based | 6 | 0 | 7 | 0 | 13 |
@@ -27,7 +27,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Strain based | 4 | 0 | 9 | 2 | 15 |
 | Stress based | 2 | 0 | 11 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 35 | 2 | 76 | 5 | 118 |
+| **TOTAL** | 36 | 2 | 75 | 5 | 118 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -50,7 +50,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | [I_MCD](../../METHODS.md#i_mcd) | McDiarmid (surface-crack repository scope) | Fully implemented | basic_numerical_tests | Existing | Yes |
 | [I_CARSPA](../../METHODS.md#i_carspa) | Carpinteri–Spagnoli | Partially implemented | not_tested | High | Yes |
 | [N04](../../METHODS.md#n04) | Modified Wöhler Curve Method / Susmel–Lazzarin | Fully implemented | reference_examples_reproduced | High | Yes |
-| [N05](../../METHODS.md#n05) | Wang maximum-shear-plane HCF criterion | Not implemented | not_tested | High | Yes |
+| [N05](../../METHODS.md#n05) | Wang–Sun–Liu–Liu–Shang maximum-shear-plane HCF criterion | Fully implemented | reference_examples_reproduced | High | Yes |
 | [N06](../../METHODS.md#n06) | Zhang–Yao nonlinear critical-plane HCF criterion | Fully implemented | reference_examples_reproduced | High | Yes |
 | [N07](../../METHODS.md#n07) | Sectional critical-plane criterion | Not implemented | not_tested | High | Yes |
 | [N11](../../METHODS.md#n11) | Ninić Damage Function (quadratic damage-plane criterion) | Fully implemented | reference_examples_reproduced | Medium | Yes |
@@ -236,36 +236,36 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 
 ### N05
 
-**Wang maximum-shear-plane HCF criterion** — Yang Wang, Guo-Qin Sun, Jinfeng Liu, Xiaodong Liu, Deguang Shang (2022)
+**Wang–Sun–Liu–Liu–Shang maximum-shear-plane HCF criterion** — Yang Wang, Guo-Qin Sun, Jinfeng Liu, Xiaodong Liu, Deguang Shang (2022)
 
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Critical plane;  |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | Multiaxial high-cycle fatigue failure and life prediction based on critical plane method, International Journal of Damage Mechanics |
 | DOI | https://doi.org/10.1177/10567895221091308 |
-| Reference evidence | Exact-title Crossref metadata checked; inherited prior-review method attribution; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Prior-review preliminary; obtain original paper before coding |
-| Principle | Combined shear and normal mean/amplitude contribution on maximum-shear plane; CA P/NP, F; L calibration. |
-| Loading scope | Combined shear and normal mean/amplitude contribution on maximum-shear plane; CA P/NP, F; L calibration. |
-| Inputs / material parameters | S; f−1/t−1; reference S–N data. |
-| Output | Combined shear and normal mean/amplitude contribution on maximum-shear plane; CA P/NP, F; L calibration. |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; See prior feasibility assessment |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Compact mean-normal-sensitive alternative to Findley/Matake, not the existing MSWT. |
+| Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
+| Formulation evidence | Checked against Wang et al. (2022) Eqs. (10), (15), (18)-(24) and Tables 1-7 on the scanned PDF (2026-11-06) |
+| Principle | t_eq,a = sqrt(C_a^2 + k (1 - sqrt(N_max N_a)/(2 sigma_y))^2 N_a^2) on the maximum shear amplitude plane, k from both reversed limits; torsional S-N life. |
+| Loading scope | Fully reversed single-harmonic CA, proportional and out-of-phase; a mean normal stress on the critical plane is out of scope (printed Eq. 18 makes a tensile mean beneficial). |
+| Inputs / material parameters | Sigm1, Taum1 (t-1/f-1 > 0.5), Sy. |
+| Output | Equivalent shear stress (MPa); life via a master curve fitted on pure torsion failures |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_wang2022.py: predicted lives of Tables 4-5 (22 tests) within 1 %; 6082-T6 and SM45C rows partly reproduced, unresolved rows strict xfails; mean-stress rows out of scope. |
+| Python implementation | [src/multifat/models/cp_methods/wang2022.py](../../src/multifat/models/cp_methods/wang2022.py); Wang2022 |
+| Automated tests | [tests/methods/test_wang2022.py](../../tests/methods/test_wang2022.py) |
+| Limitations | Fully reversed loading only (maintainer decision: printed Eq. 18 makes a tensile mean beneficial). Needs sigma_y. Power-law master curve on torsion failures instead of the three-parameter law. Fig. 3 not reproducible (no sigma_y in Table 1). |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | New criterion and exact coefficient/sign checks; use the published amplitude convention. |
+| Missing tasks | Resolve the mean-stress formulation with the authors; the SM45C mean-stress lives are not reproduced. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. New criterion and exact coefficient/sign checks; use the published amplitude convention. |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
 | Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | A / Low (preliminary; source-specific amplitude/calibration may increase effort) / High |
-| Provenance / prior status | N05; Already reviewed, not implemented |
+| Provenance / prior status | N05; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N05+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN05%5D+Wang+maximum-shear-plane+HCF+criterion) (no live Issue linked) |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N05+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN05%5D+Wang%E2%80%93Sun%E2%80%93Liu%E2%80%93Liu%E2%80%93Shang+maximum-shear-plane+HCF+criterion) (no live Issue linked) |
 
 ### N06
 
