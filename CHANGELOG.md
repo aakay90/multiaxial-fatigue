@@ -107,6 +107,13 @@ of names and records one distinction FatPy makes; no multifat name was renamed.
   - Finding: Eq. (18) as printed makes a tensile mean stress beneficial. By maintainer decision,
     loading with a mean normal stress on the critical plane is out of scope.
   - Guide: `docs/method-guides/WANG2022.md`.
+- New criterion `KUJAWSKI2021`, Kujawski (2021) mSWT, catalogue N26 (issue #13).
+  - Formulation: the SWT product with the maximum stress augmented by $|\sigma_m|/3$ when the
+    mean stress is negative (Eq. 11b), applied on the planes of the SWT critical-plane extension
+    (maintainer decision; the paper is uniaxial).
+  - Verification: closed forms of Eqs. (11a)–(13b) and identity with `SWT` without a
+    compressive normal mean; the paper validates on figures only.
+  - Guide: `docs/method-guides/KUJAWSKI2021.md`.
 - New criterion `GAM`, Gonçalves, Araújo & Mamiya (2005), catalogue N08 (issue #13). It is an
   endurance criterion for hard metals.
   - Formulation: the prismatic-hull deviatoric amplitude plus the maximum principal stress over the

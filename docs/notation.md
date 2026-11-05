@@ -44,7 +44,7 @@ normal(s) themselves.
 | Shear stress amplitude / mean on a plane | tau_a, tau_m | `tau_a`, `tau_m` | - | MPa |
 | Hydrostatic amplitude / mean / maximum | sigma_H,a, sigma_H,m | `sigma_H_a`, `sigma_H_m`, `sigma_H_max` | - | MPa |
 | Largest normal stress on a plane | sigma_n,max | `sigma_n_max` | - | MPa |
-| Largest normal stress over the two load steps (SWT, MSWT) | sigma_max | `sigma_max` | - | MPa |
+| Largest normal stress over the two load steps (SWT, MSWT, KUJAWSKI2021) | sigma_max | `sigma_max` | - | MPa |
 | Normal stress on a plane at load step 0 / 1 | - | `sigma_z0`, `sigma_z1` | - | MPa |
 | Stress components on the free surface | sigma_x, sigma_y, sigma_z, tau_xy | `sigma_x`, `sigma_y`, `sigma_z`, `tau_xy` | - | MPa |
 | Mean-stress sensitivity (Dubbel) | M | `M` | - | - |

@@ -50,6 +50,7 @@ class MethodAuditTests(unittest.TestCase):
             FS=ga * (1 + 0.5 * sn / 250),
             FIN=ta + 0.2 * sn,
             SWT=sn * ea,
+            KUJAWSKI2021=sn * ea,  # no mean: identical to SWT
             MATAKE=ta + (2 * 145 / 240 - 1) * sn,
             MCD=ta + 145 / (2 * 600) * sn,
             MGSE_YU=ta * ga + sn * ea,
