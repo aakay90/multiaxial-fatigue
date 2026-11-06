@@ -70,6 +70,7 @@ from .invariant_methods.coin_liwi import CoinLiwi
 from .invariant_methods.mmmh import MMMH
 from .invariant_methods.mmp import MMP
 from .invariant_methods.ssf import SSF
+from .cp_methods.liu_mahadevan import LiuMahadevan
 from .integral_methods.morel import Morel
 from .energy_based_methods.ellyin_kujawski import EllyinKujawski
 
@@ -128,6 +129,7 @@ def _available_direct_models():
         "MMMH": MMMH(),
         "MMP": MMP(),
         "SSF": SSF(),
+        "LIUMAHADEVAN": LiuMahadevan(),
         "MOREL": Morel(),
         "EK": EllyinKujawski(),
     }

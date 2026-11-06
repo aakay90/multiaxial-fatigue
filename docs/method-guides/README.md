@@ -34,6 +34,7 @@ The most widely used criteria are documented first.
 | [Liu virtual strain energy](VSE.md) | `VSE`, `VSE_ext` | Critical plane, energy | $\Delta\sigma_n\Delta\varepsilon_n + \Delta\tau\,\Delta(\gamma/2)$ (MPa) | `E`, `nu`; `vse_mode` |
 | [Liu–Xie–Hao 2025](LIU2025.md) | `LIU2025`, `LIU2025_ext` | Critical plane, stress | $\sqrt{\sigma'^2_{n,a} + 3\tau'^2_a}$, Gerber/Serensen means (MPa) | `Su`; `Tu` |
 | [Kujawski mSWT](KUJAWSKI2021.md) | `KUJAWSKI2021`, `KUJAWSKI2021_ext` | Critical plane, energy-like | $(\sigma_{n,\max} + \lvert\sigma_{n,m}\rvert/3)\,\varepsilon_{n,a}$ for $\sigma_{n,m} < 0$, else SWT (MPa) | `E`, `nu` |
+| [Liu–Mahadevan](LIUMAHADEVAN.md) | `LIUMAHADEVAN` | Critical plane, stress (native life) | $\sqrt{[\sigma_{a,c}(1+\eta\sigma_{m,c}/f)/f]^2 + (\tau_{a,c}/t)^2 + k(\sigma^H_a/f)^2}/\beta$ (index) | `Sigm1`, `Taum1`, `sigma_f`, `b_fat`, `tau_f`, `b0` |
 | [Wang et al. 2022](WANG2022.md) | `WANG2022` | Critical plane, stress | $\sqrt{C_a^2 + k(1 - \sqrt{N_{\max}N_a}/2\sigma_y)^2N_a^2}$ (MPa) | `Sigm1`, `Taum1`, `Sy` |
 | [Zhang–Yao](ZHANGYAO.md) | `ZHANGYAO`, `ZHANGYAO_ext` | Critical plane, stress | $\sqrt{C_a^2 - C_aN^* + (t_{-1}^2/f_{-1}^2)(f_{-1}+2C_a)N^*}/t_{-1}$ (index) | `Sigm1`, `Taum1`; `Su` |
 | [Ninić Damage Function](NINIC.md) | `NINIC` | Critical plane, stress | $\sqrt{(\tau_a/t_{-1})^2 + k(\sigma_{n,\max}/f_{-1})^2}$ (index) | `Sigm1`, `Taum1`; `k_NIN` |

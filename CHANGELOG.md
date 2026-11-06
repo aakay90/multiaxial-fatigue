@@ -107,6 +107,18 @@ of names and records one distinction FatPy makes; no multifat name was renamed.
   - Finding: Eq. (18) as printed makes a tensile mean stress beneficial. By maintainer decision,
     loading with a mean normal stress on the critical plane is out of scope.
   - Guide: `docs/method-guides/WANG2022.md`.
+- The native-life load error (`Error_load`) is NaN, instead of a failed model, when a trial load
+  leaves the model's declared scope (`LoadingScopeError`), as the master-curve search already
+  does.
+- New criterion `LIUMAHADEVAN`, Liu & Mahadevan (2005), catalogue N16 (issue #13).
+  - Formulation: normal, shear and hydrostatic amplitudes on the plane at a material angle from
+    the maximum normal stress amplitude plane, with a normal mean-stress factor. Its native life
+    law (Eq. 23) uses the tension and torsion Basquin curves.
+  - Maintainer decisions: the worst plane on the $\alpha$-cone in 3D, the rss shear amplitude and
+    the native life.
+  - Verification: Eq. (19) and both reversed limits are exact (for $t_{-1}/f_{-1} \ge 0.5$). The
+    published Figs. 2–5 are reproduced only in part (strict xfails, unresolved).
+  - Guide: `docs/method-guides/LIUMAHADEVAN.md`.
 - New criterion `SSF`, stress scale factor of Anes et al. (2014), catalogue N24 (issue #13).
   - Formulation: an equivalent shear stress with an ssf surface depending on the axial stress
     and the amplitude ratio, evaluated along the cycle; life on the pure-shear S–N curve.

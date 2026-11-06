@@ -96,6 +96,28 @@ def test_native_life_load_error_reaches_the_observed_life():
     )
 
 
+def test_native_life_load_error_is_nan_when_a_trial_load_leaves_the_scope():
+    """A LoadingScopeError at a trial load makes e_L undefined (NaN), not a failed model."""
+    from multifat.models.base import CaseResult
+    from multifat.models.errors import LoadingScopeError
+
+    class ScopedLife:
+        name = "SCOPED"
+
+        def evaluate_case(self, *, S0, E0, S1, E1, params, R_list=None, harmonics=None):
+            amplitude = float(np.max(np.abs(harmonics["S_sin"])))
+            if amplitude > 300.0:
+                raise LoadingScopeError("SCOPED: above 300 MPa")
+            return CaseResult(values={"": amplitude}, aux={})
+
+        def native_life(self, aux, params, fit=None):
+            return (500.0 / aux["dp"]) ** 10
+
+    case = _case(axial=250.0, shear=0.0, mean=(0.0, 0.0, 0.0))
+    assert math.isnan(native_life_load_error(ScopedLife(), {}, case, None, None, 1.0))
+    assert np.isfinite(native_life_load_error(ScopedLife(), {}, case, None, None, 2.0**10))
+
+
 def test_pipeline_exports_the_load_error(tmp_path):
     from multifat.cli.pipeline import run_workbook
     from workbook_factory import write_workbook

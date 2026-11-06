@@ -28,6 +28,8 @@ import math
 
 import numpy as np
 
+from multifat.models.errors import LoadingScopeError
+
 from multifat.eval.endurance import load_factor, scaled_case, scaled_damage
 
 HOMOGENEITY_TOL = 1e-9
@@ -85,9 +87,21 @@ def master_curve_load_error(
 def native_life_load_error(
     model, params: dict, case: dict, R_list, fit, Nf: float, *, variant: str = ""
 ):
-    """e_L for a native life law: N_native(s* x) = N_exp, by bisection in ln s."""
+    """e_L for a native life law: N_native(s* x) = N_exp, by bisection in ln s.
+
+    NaN when undefined, including when a trial load leaves the model's declared scope
+    (LoadingScopeError): the native life is then not available at that load.
+    """
     if not (np.isfinite(Nf) and Nf > 0):
         return float("nan")
+    try:
+        return _native_life_load_error(model, params, case, R_list, fit, Nf, variant)
+    except LoadingScopeError:
+        return float("nan")
+
+
+def _native_life_load_error(model, params, case, R_list, fit, Nf, variant):
+    """Bracketing and bisection of ``native_life_load_error``."""
 
     def log_life(x: float) -> float:
         scaled = scaled_case(case, math.exp(x))
