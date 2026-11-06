@@ -163,5 +163,6 @@ constants are missing is skipped and reported; the other models still run.
 | MMMH | `Sigm1`, `Taum1` | `M_MMMH`: 2 Sigm1/Sig0 - 1 (Dubbel 2004, E1: mean-stress sensitivity between R = -1 and 0); `Sig0`: Boehme et al. 2026 Eq. (1) from Su and Sigm1; `Su`: only to estimate Sig0 |
 | MMP | `Sigm1`, `Taum1` | `Sig0`: Boehme et al. 2026 Eq. (1) from Su and Sigm1; `Tau0`: 4 Taum1/Tau0 - 2 Sigm1/Sig0 = 1 (Zenner; Papuga & Fojtik 2017 Eq. 23); `Su`: only to estimate Sig0 |
 | SSF | `a_SSF`, `b_SSF`, `c_SSF`, `d_SSF`, `f_SSF`, `g_SSF`, `h_SSF`, `i_SSF` | - |
+| LIUMAHADEVAN | `Sigm1`, `Taum1`, `b0`, `b_fat`, `sigma_f`, `tau_f` | - |
 | MOREL | `Sigm1`, `Taum1` | - |
 | EK | `E`, `nu` | `alpha_EK`: 0.5 (per the paper, Eq. 18); `n_EK`: 1.0 (per the paper, p.61); `K_prime`: none: elastic form (supplying n_prime adds the plastic Masing term); `n_prime`: none: elastic form (supplying K_prime adds the plastic Masing term) |

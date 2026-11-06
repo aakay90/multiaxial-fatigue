@@ -16,7 +16,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 
 | Primary family | Fully implemented¹ | Partial | Missing | Requires review | Total |
 | --- | --- | --- | --- | --- | --- |
-| Critical plane | 10 | 1 | 8 | 0 | 19 |
+| Critical plane | 11 | 1 | 7 | 0 | 19 |
 | Energy based | 7 | 1 | 12 | 3 | 23 |
 | Integral and hybrid | 5 | 0 | 4 | 0 | 9 |
 | Invariant based | 6 | 0 | 7 | 0 | 13 |
@@ -27,7 +27,7 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Strain based | 4 | 0 | 9 | 2 | 15 |
 | Stress based | 4 | 0 | 9 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 39 | 2 | 72 | 5 | 118 |
+| **TOTAL** | 40 | 2 | 71 | 5 | 118 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -55,7 +55,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | [N07](../../METHODS.md#n07) | Sectional critical-plane criterion | Not implemented | not_tested | High | Yes |
 | [N11](../../METHODS.md#n11) | Ninić Damage Function (quadratic damage-plane criterion) | Fully implemented | reference_examples_reproduced | Medium | Yes |
 | [N12](../../METHODS.md#n12) | Revised multiaxial fatigue damage function | Not implemented | not_tested | Medium | Yes |
-| [N16](../../METHODS.md#n16) | Liu–Mahadevan characteristic-plane model, isotropic branch | Not implemented | not_tested | High | Yes |
+| [N16](../../METHODS.md#n16) | Liu–Mahadevan critical-plane criterion and life model | Fully implemented | basic_numerical_tests | High | Yes |
 | [N25](../../METHODS.md#n25) | A90(T) deviatoric tensile critical-plane model | Not implemented | not_tested | Medium | Yes |
 | [R01](../../METHODS.md#r01) | Original Carpinteri–Spagnoli | Not implemented | not_tested | High | related_publication |
 | [R02](../../METHODS.md#r02) | Dang Van elastic-shakedown CA formulation | Not implemented | not_tested | High | related_publication |
@@ -401,36 +401,36 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 
 ### N16
 
-**Liu–Mahadevan characteristic-plane model, isotropic branch** — Y LIU, S MAHADEVAN (2005)
+**Liu–Mahadevan critical-plane criterion and life model** — Y LIU, S MAHADEVAN (2005)
 
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Critical plane;  |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | Multiaxial high-cycle fatigue criterion and life prediction for metals, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/j.ijfatigue.2005.01.003 |
-| Reference evidence | Exact-title Crossref metadata checked; inherited prior-review method attribution; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Prior-review preliminary; obtain original paper before coding |
-| Principle | Material-dependent characteristic plane combining normal, shear and hydrostatic amplitudes; proportional CA first, F/L. |
-| Loading scope | Material-dependent characteristic plane combining normal, shear and hydrostatic amplitudes; proportional CA first, F/L. |
-| Inputs / material parameters | S; axial/torsional S–N curves and fatigue limits; mean-stress sensitivity. |
-| Output | Material-dependent characteristic plane combining normal, shear and hydrostatic amplitudes; proportional CA first, F/L. |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; See prior feasibility assessment |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Distinct crack-plane mechanism; foundation for the Wei random-spectrum extension. |
+| Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
+| Formulation evidence | Checked against Liu & Mahadevan (2005) Eqs. (6)-(25), Tables 1-6 and Figs. 1-9 on the PDF (2026-11-06) |
+| Principle | sqrt([sigma_a,c(1+eta sigma_m,c/f)/f]^2 + (tau_a,c/t)^2 + k(sigma^H_a/f)^2) = beta on the plane at the material angle alpha(t/f) from the maximum normal stress amplitude plane; native life with f_N, t_N S-N curves (Eq. 23). |
+| Loading scope | CA single-harmonic, proportional and non-proportional, normal mean stress (Eq. 21 factor); repository validity t/f >= 0.5. |
+| Inputs / material parameters | Sigm1, Taum1 (index); sigma_f, b_fat, tau_f, b0 (life; fitted from the workbook's R = -1 tension and torsion failures when absent). |
+| Output | Native life (Eq. 23) with Basquin tension and torsion curves; fatigue-limit index as diagnostic |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | basic_numerical_tests; tests/methods/test_liu_mahadevan.py: Eq. (19)/Table 1, both reversed limits, Eq. (23) inversion; Figs. 2-5 reproduced only for hard steel at 0/60/90 deg (other groups strict xfails, unresolved). |
+| Python implementation | [src/multifat/models/cp_methods/liu_mahadevan.py](../../src/multifat/models/cp_methods/liu_mahadevan.py); LiuMahadevan |
+| Automated tests | [tests/methods/test_liu_mahadevan.py](../../tests/methods/test_liu_mahadevan.py) |
+| Limitations | 3D plane rule (worst plane on the alpha-cone) and rss shear amplitude are repository choices; Figs. 2-5 largely not reproduced (unresolved); t/f < 0.5 rejected; Basquin S-N curves; life validation data (Figs. 10-13) not available. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | possible_or_related_source; [EXT11](../../docs/EXTERNAL_IMPLEMENTATIONS.md#ext11); not integrated or independently validated |
-| Missing tasks | Characteristic-plane construction, life-dependent strengths and implicit life solution. Original must establish supported NP scope. |
+| Missing tasks | Resolve the Figs. 2-5 gap (out-of-phase rows) with the authors; validate the life model on the paper's data sets. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Characteristic-plane construction, life-dependent strengths and implicit life solution. Original must establish supported NP scope. |
+| Development disposition | available_validate; Implemented within the named repository scope; the published fatigue-limit comparison is only partly reproduced. |
 | Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. Tensor rotations and candidate plane search where the source plane rule permits. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / High |
-| Provenance / prior status | N16; Already reviewed, not implemented |
+| Provenance / prior status | N16; Already implemented, active |
 | Related catalogue ID | None recorded |
-| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N16+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN16%5D+Liu%E2%80%93Mahadevan+characteristic-plane+model%2C+isotropic+branch) (no live Issue linked) |
+| GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=N16+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BN16%5D+Liu%E2%80%93Mahadevan+critical-plane+criterion+and+life+model) (no live Issue linked) |
 
 ### N25
 

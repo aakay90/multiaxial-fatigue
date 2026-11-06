@@ -180,7 +180,7 @@ They implement `evaluate_case` and return a `CaseResult`.
 
 ### Comparison capabilities
 
-Native-life models (MOREL, MDC, MMCCM, TVEIT2025) declare `comparison_capabilities`
+Native-life models (MOREL, MDC, MMCCM, TVEIT2025, LIUMAHADEVAN) declare `comparison_capabilities`
 (`models/comparison.py`). All other models use the shared master curve.
 
 ### Errors that mean "skip this model", not "fail"
