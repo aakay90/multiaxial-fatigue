@@ -40,6 +40,7 @@ The most widely used criteria are documented first.
 | [Matake](MATAKE.md) | `MATAKE`, `MATAKE_ext` | Critical plane, stress | $\tau_a + (2t_{-1}/f_{-1} - 1)\,\sigma_{n,\max}$ (MPa) | `Sigm1`, `Taum1` |
 | [McDiarmid](MCD.md) | `MCD`, `MCD_ext` | Critical plane, stress | $\tau_a + t_{-1}\sigma_{n,\max}/(2S_u)$ (MPa) | `Taum1`, `Su` |
 | [Modified Wöhler Curve Method](MWCM.md) | `MWCM` | Critical plane, stress | $\tau_a/\tau_{A,\mathrm{Ref}}(\rho)$ (index) | `Sigm1`, `Taum1` |
+| [Stress scale factor](SSF.md) | `SSF` | Equivalent shear stress | $\max_t[\lvert\tau\rvert + \mathrm{ssf}(\sigma,\lambda)\lvert\sigma\rvert]$ (MPa) | `a_SSF` … `i_SSF` (published for 42CrMo4_Reis) |
 | [Manson–McKnight–Papuga](MMP.md) | `MMP` | Equivalent stress | $\sigma_a^w(\sigma_a + \beta_P\sigma_m)^{1-w}/f_{-1}$ (index) | `Sigm1`, `Taum1`; `Sig0` or `Su`; `Tau0` |
 | [Crossland](CROSSLAND.md) | `CROSSLAND` | Stress invariants | $(\sqrt{J_{2,a}} + \kappa\,\sigma_{H,\max})/t_{-1}$ (index) | `Sigm1`, `Taum1` |
 | [Sines](SINES.md) | `SINES` | Stress invariants | $(\sqrt{J_{2,a}} + \kappa\,\sigma_{H,m})/t_{-1}$ (index) | `Sigm1`, `Taum1`, `Su` |

@@ -341,7 +341,9 @@ def load_constants(path: Path, material: str, n_failures: int | None = None) -> 
     An upstream record (``Calibrations/<material>/<id>.json``, A. Chiocca, dc4fe6d) keeps its
     constants under ``parameters``; its a_MSWT uses the weighting of the former workbooks and is
     converted with a' = a/(2 - a) (Jiang 2000 Eq. 6, as in 23e1dfe). The sidecar written here keeps
-    them in ``params``. Returns (constants, description of the source for the new sidecar).
+    them in ``params``. A published-constants file keeps constants printed in a paper under
+    ``published_constants``, with ``material_id`` and ``reference``. Returns (constants,
+    description of the source for the new sidecar).
     """
     path = Path(path)
     blob = path.read_bytes()
@@ -368,6 +370,12 @@ def load_constants(path: Path, material: str, n_failures: int | None = None) -> 
             weight = constants["a_MSWT"]
             constants["a_MSWT"] = weight / (2.0 - weight)
             origin["note"] = f"a_MSWT {weight} converted to the printed weighting a/(2 - a)"
+    elif "published_constants" in record:
+        # Constants printed in a publication (e.g. the SSF surface of Anes et al. 2014): not a
+        # calibration of these data, so no fingerprint; the record names its source and material.
+        declared_material = record.get("material_id")
+        constants = {k: float(v) for k, v in record["published_constants"].items()}
+        origin.update(kind="published constants", reference=record.get("reference"))
     elif "params" in record:
         declared_material = (
             material_id(Path(record.get("provenance", {}).get("workbook", "")).stem) or None
