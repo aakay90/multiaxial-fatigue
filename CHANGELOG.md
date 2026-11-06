@@ -107,6 +107,16 @@ of names and records one distinction FatPy makes; no multifat name was renamed.
   - Finding: Eq. (18) as printed makes a tensile mean stress beneficial. By maintainer decision,
     loading with a mean normal stress on the critical plane is out of scope.
   - Guide: `docs/method-guides/WANG2022.md`.
+- New criterion `SSF`, stress scale factor of Anes et al. (2014), catalogue N24 (issue #13).
+  - Formulation: an equivalent shear stress with an ssf surface depending on the axial stress
+    and the amplitude ratio, evaluated along the cycle; life on the pure-shear S–N curve.
+  - By maintainer decision only the published 42CrMo4 surface is available
+    (`Calibrations/42CrMo4_Reis/SSF_published.json`). On that workbook the results are in-sample.
+  - Verification: Tables 5–8 reproduced from the Table 4 trend lines (two misprinted cells), and
+    Eq. (31) within 0.06 of Table 9.
+  - Guide: `docs/method-guides/SSF.md`.
+- `--constants` accepts a published-constants record (`published_constants`, `material_id`,
+  `reference`): constants printed in a paper, not a calibration of the data.
 - New criterion `MMP`, Manson–McKnight–Papuga, Papuga & Fojtík (2017), catalogue G05 (issue #13).
   - Formulation: a von Mises-type equivalent amplitude and mean with weighted shear terms,
     combined by a Walker correction with the mean-stress factor $\beta_P$ (variant MMP_WP).

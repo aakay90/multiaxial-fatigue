@@ -25,9 +25,9 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
 | Strain based | 4 | 0 | 9 | 2 | 15 |
-| Stress based | 3 | 0 | 10 | 0 | 13 |
+| Stress based | 4 | 0 | 9 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 38 | 2 | 73 | 5 | 118 |
+| **TOTAL** | 39 | 2 | 72 | 5 | 118 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -1988,7 +1988,7 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 | [N13](#n13) | Golos–Dębski–Dębski modified Gough limit curve | Fully implemented | basic_numerical_tests | Medium | Yes |
 | [N14](#n14) | Gough–Pollard and Nishihara–Kawamoto baselines | Not implemented | not_tested | Medium | bundle |
 | [N23](#n23) | Equal-life surface with path correction | Not implemented | not_tested | Medium | Yes |
-| [N24](#n24) | Stress Scale Factor (SSF) family | Not implemented | not_tested | Medium | Yes |
+| [N24](#n24) | Stress Scale Factor (SSF) equivalent shear stress | Fully implemented | reference_examples_reproduced | Medium | Yes |
 | [N38](#n38) | von Mises equivalent-amplitude baseline | Not implemented | not_tested | Medium | Yes |
 | [N39](#n39) | Tresca equivalent-amplitude baseline | Not implemented | not_tested | Low | Yes |
 | [N40](#n40) | Maximum principal stress / Rankine baseline | Not implemented | not_tested | Low | Yes |
@@ -2039,12 +2039,12 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 
 ### N24
 
-**Stress Scale Factor (SSF) family** — V. Anes, L. Reis, B. Li, M. Fonte, M. de Freitas (2014)
+**Stress Scale Factor (SSF) equivalent shear stress** — V. Anes, L. Reis, B. Li, M. Fonte, M. de Freitas (2014)
 
 | Field | Evidence / task |
 | --- | --- |
 | Reference / DOI | New approach for analysis of complex multiaxial loading paths, International Journal of Fatigue; https://doi.org/10.1016/j.ijfatigue.2013.05.004 |
-| WG4.3 completeness / validation | Not implemented; not_tested |
+| WG4.3 completeness / validation | Fully implemented; reference_examples_reproduced |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External sources | no_accessible_source_identified; not integrated or independently validated |
 | Complete scientific and implementation record | [Inputs, formulation, scope, code, tests, validation, missing work and Issues](docs/methods/stress-based.md#n24) |

@@ -50,3 +50,12 @@ These files use the sidecar layout (`params` and `provenance.workbook`), not the
 The stage-1 TVEIT2025 constants are source-specific, manually supplied coefficients; they are neither independently validated nor transferable between experimental campaigns. The AISI316L record proposed in the contributor branch is deliberately withheld from this integration: its PSI load-cell-corrected axial stress scale (x1.1558) and reference fatigue limit (271.6 MPa) do not match the current Janssens workbook/reference (278.5 MPa). A source-compatible workbook and reviewed calibration are needed before enabling this record. Do not change the reference limit without re-estimating A, C, K, L.
 
 For TVEIT2025, the model declares `ComparisonCapabilities(life_prediction="native", dp_comparison=False)`. The pipeline exports `Metric_mode=Nf_direct`, with `Nf_expected=Nf_native` for compatibility with fatigue-life plots; the diagnostic fatigue index remains in `CP_value` but `DP_fit` and its error are undefined. Other methods retain the normal calibrated master-curve comparison. Select `multifat-compare --results_dir Results/current --out_dir Results/current/Comparison --plot-kind life` for fatigue-life plots, `--plot-kind damage` for DP-only plots, or `--plot-kind both` (default). Tveit is included only in life plots. A `native_life_prediction_summary.csv` counts infinite-life predictions for failed specimens and run-outs, which are not converted into finite logarithmic residuals. The method is still at stage 1 and its constants are not independently validated.
+## Published constants
+
+`<material>/<MODEL>_published.json` holds constants printed in a paper, entered by hand. The
+layout is `published_constants`, `material_id` (checked against the workbook) and `reference`;
+`notes` states scope and caveats. These are not calibrations of the workbook data, so they carry
+no failure fingerprint. `42CrMo4_Reis/SSF_published.json` is the stress scale factor surface of
+Anes et al. (2014), Eq. (31), which was fitted on the tests of that workbook (in-sample).
+
+    multifat-pipeline --material 42CrMo4_Reis --models SSF --constants Calibrations/42CrMo4_Reis/SSF_published.json

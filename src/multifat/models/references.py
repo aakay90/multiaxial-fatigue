@@ -154,6 +154,10 @@ REFERENCES = {
         "Cristofori, Susmel & Tovo (2008), A stress invariant based criterion to estimate fatigue damage under multiaxial loading, Eqs. (4)-(13)",
         "10.1016/j.ijfatigue.2007.11.006",
     ),
+    "SSF": (
+        "Anes, Reis, Li, Fonte & de Freitas (2014), New approach for analysis of complex multiaxial loading paths, Eqs. (29)-(31)",
+        "10.1016/j.ijfatigue.2013.05.004",
+    ),
     "MMP": (
         "Papuga & Fojtik (2017), Multiaxial fatigue strength of common structural steel and the response of some estimation methods, Eqs. (19)-(25)",
         "10.1016/j.ijfatigue.2017.07.001",
