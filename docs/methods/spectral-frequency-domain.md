@@ -25,9 +25,9 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
 | Strain based | 4 | 0 | 9 | 2 | 15 |
-| Stress based | 2 | 0 | 11 | 0 | 13 |
+| Stress based | 3 | 0 | 10 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 37 | 2 | 74 | 5 | 118 |
+| **TOTAL** | 38 | 2 | 73 | 5 | 118 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 

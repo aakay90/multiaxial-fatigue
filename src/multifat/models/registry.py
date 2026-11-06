@@ -68,6 +68,7 @@ from .invariant_methods.vu_halm_nadot import VuHalmNadot
 from .invariant_methods.pbp import ProjectionByProjection
 from .invariant_methods.coin_liwi import CoinLiwi
 from .invariant_methods.mmmh import MMMH
+from .invariant_methods.mmp import MMP
 from .integral_methods.morel import Morel
 from .energy_based_methods.ellyin_kujawski import EllyinKujawski
 
@@ -124,6 +125,7 @@ def _available_direct_models():
         "PBP": ProjectionByProjection(),
         "COIN": CoinLiwi(),
         "MMMH": MMMH(),
+        "MMP": MMP(),
         "MOREL": Morel(),
         "EK": EllyinKujawski(),
     }

@@ -154,6 +154,10 @@ REFERENCES = {
         "Cristofori, Susmel & Tovo (2008), A stress invariant based criterion to estimate fatigue damage under multiaxial loading, Eqs. (4)-(13)",
         "10.1016/j.ijfatigue.2007.11.006",
     ),
+    "MMP": (
+        "Papuga & Fojtik (2017), Multiaxial fatigue strength of common structural steel and the response of some estimation methods, Eqs. (19)-(25)",
+        "10.1016/j.ijfatigue.2017.07.001",
+    ),
     "MMMH": (
         "Mertens & Liebich (2017), A time dependent equivalent stress function for proportional and non-proportional transient loaded and notched metallic components, Eqs. (1), (4), (20)-(25), smooth surface; endurance-limit Haigh line with M of Dubbel (2004) E1",
         "10.1016/j.ijfatigue.2017.06.003",
