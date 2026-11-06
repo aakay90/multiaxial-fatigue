@@ -191,7 +191,10 @@ Limitations:
 - partial reproduction of the published comparison;
 - 3D plane rule, shear amplitude and S–N form are repository choices;
 - $t_{-1}/f_{-1} \ge 0.5$;
-- slow load-error search (the life is re-solved at each trial load).
+- slow load-error search (the life is re-solved at each trial load);
+- a load error is undefined (NaN) when a trial load moves the life where $t_N/f_N < 0.5$: on
+  Ti6Al4V_Berto (torsion slope $-0.035$ against $-0.11$ in tension) this happens for 17 of the 31
+  assessed failures.
 
 ## References
 
