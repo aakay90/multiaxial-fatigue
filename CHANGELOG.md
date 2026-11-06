@@ -107,6 +107,12 @@ of names and records one distinction FatPy makes; no multifat name was renamed.
   - Finding: Eq. (18) as printed makes a tensile mean stress beneficial. By maintainer decision,
     loading with a mean normal stress on the critical plane is out of scope.
   - Guide: `docs/method-guides/WANG2022.md`.
+- New criterion `MMP`, Manson–McKnight–Papuga, Papuga & Fojtík (2017), catalogue G05 (issue #13).
+  - Formulation: a von Mises-type equivalent amplitude and mean with weighted shear terms,
+    combined by a Walker correction with the mean-stress factor $\beta_P$ (variant MMP_WP).
+  - Verification: all 24 load cases of Table 11 within 0.1 point of the fatigue index error.
+  - By maintainer decision, missing $f_0$ and $t_0$ are estimated (as for `PCR` and `MMMH`).
+  - Guide: `docs/method-guides/MMP.md`.
 - New criterion `KUJAWSKI2021`, Kujawski (2021) mSWT, catalogue N26 (issue #13).
   - Formulation: the SWT product with the maximum stress augmented by $|\sigma_m|/3$ when the
     mean stress is negative (Eq. 11b), applied on the planes of the SWT critical-plane extension

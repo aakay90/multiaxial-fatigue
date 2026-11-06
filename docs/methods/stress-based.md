@@ -25,9 +25,9 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
 | Strain based | 4 | 0 | 9 | 2 | 15 |
-| Stress based | 2 | 0 | 11 | 0 | 13 |
+| Stress based | 3 | 0 | 10 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 37 | 2 | 74 | 5 | 118 |
+| **TOTAL** | 38 | 2 | 73 | 5 | 118 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -53,7 +53,7 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | [N39](../../METHODS.md#n39) | Tresca equivalent-amplitude baseline | Not implemented | not_tested | Low | Yes |
 | [N40](../../METHODS.md#n40) | Maximum principal stress / Rankine baseline | Not implemented | not_tested | Low | Yes |
 | [G04](../../METHODS.md#g04) | Kakuno–Kawada | Not implemented | not_tested | Medium | Yes |
-| [G05](../../METHODS.md#g05) | Manson–McKnight–Papuga (MMP) | Not implemented | not_tested | Medium | Yes |
+| [G05](../../METHODS.md#g05) | Manson–McKnight–Papuga (MMP) | Fully implemented | reference_examples_reproduced | Medium | Yes |
 | [G07](../../METHODS.md#g07) | Modified Mohr–Mises hypothesis (MMMH) | Fully implemented | basic_numerical_tests | High | Yes |
 | [G09](../../METHODS.md#g09) | Moment-adapted COIN LiWI (MA-COIN LiWI) | Not implemented | not_tested | Medium | Yes |
 | [G13](../../METHODS.md#g13) | Braccesi–Cianetti–Lori–Pioli equivalent uniaxial process | Not implemented | not_tested | Medium | Yes |
@@ -332,29 +332,29 @@ Browse [contribution opportunities and status/loading/validation views](../../do
 | Field | Evidence / task |
 | --- | --- |
 | Primary / secondary family | Stress based; Equivalent stress |
-| Record / counting | method_candidate; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
+| Record / counting | implementation; One identifiable method or scoped formulation; not a claim of independent theoretical novelty. |
 | Reference | Multiaxial fatigue strength of common structural steel and the response of some estimation methods, International Journal of Fatigue |
 | DOI | https://doi.org/10.1016/j.ijfatigue.2017.07.001 |
 | Reference evidence | Verified exact-title Crossref work record; saved metadata in docs/research/doi-records.json |
-| Formulation evidence | Preliminary; full equation-level verification pending |
-| Principle | Revised Manson–McKnight equivalent-stress estimation within a multiaxial strength comparison. |
-| Loading scope | CA P/NP within published test paths |
-| Inputs / material parameters | Stress component cycles; axial/torsion fatigue properties |
-| Output | Equivalent stress / fatigue strength |
-| Implementation / evidence | Not implemented; preliminary_literature_assessment |
-| Validation / evidence | not_tested; Original common structural-steel dataset |
-| Python implementation | None;  |
-| Automated tests | None for this candidate |
-| Limitations | Group original MMK and MMP as a development family; do not treat 2017 as original MMK MMP reported in this 2017 paper; original MMK is older |
+| Formulation evidence | Checked against Papuga & Fojtik (2017) Eqs. (19)-(27) and Tables 7-11 on the PDF (2026-11-06) |
+| Principle | Walker-corrected von Mises-type equivalent stress: sigma_a^w (sigma_a + beta_P sigma_m)^(1-w) <= f_-1, kappa-weighted shear amplitude, X_m-weighted mean shear, beta_P from the principal stress extremes. |
+| Loading scope | CA single-harmonic, proportional and non-proportional (phase-blind, as stated in the paper), any mean stress. |
+| Inputs / material parameters | Sigm1, Taum1; Sig0 and Tau0 (estimated from Su and Eq. 23 when missing). |
+| Output | Fatigue index D_p/f_-1; life via the shared master curve |
+| Implementation / evidence | Fully implemented; complete_for_declared_repository_scope |
+| Validation / evidence | reference_examples_reproduced; tests/methods/test_mmp.py: Table 11 MMP_WP (24 load cases, both surfaces) within 0.1 point of Delta FI; Table 10 constants; the four calibration limits. |
+| Python implementation | [src/multifat/models/invariant_methods/mmp.py](../../src/multifat/models/invariant_methods/mmp.py); MMP |
+| Automated tests | [tests/methods/test_mmp.py](../../tests/methods/test_mmp.py) |
+| Limitations | Phase-blind for non-proportional loading (paper's own limitation). Sig0/Tau0 estimated when missing. Fatigue-limit criterion; life via the master curve. |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External source discovery | no_accessible_source_identified; not integrated or independently validated |
-| Missing tasks | Original component/mean definitions; native calibration |
+| Missing tasks | Independent validation on further data sets. |
 | Reference retrieval action | DOI/publication identity is recorded; obtain the original full text, applicable version/errata and numerical examples. Metadata identity does not establish complete equations or independence from related criteria. |
-| Development disposition | available_not_scheduled; Retained contribution candidate outside the initial dependency-aware, cross-family sequence; priority is advisory and contributors may propose it. Original component/mean definitions; native calibration |
+| Development disposition | available_validate; Already complete within the named repository scope; contributions should improve independent validation or explicitly extend the scope. |
 | Roadmap rank | — |
 | Reuse | Physical harmonic tensors; direct FatigueModel interface; original-law-specific postprocessing. |
 | Feasibility / effort / priority | B / Medium (preliminary; exact scope and data determine effort) / Medium |
-| Provenance / prior status | G05; New significant extension / related family |
+| Provenance / prior status | G05; Already implemented, active |
 | Related catalogue ID | None recorded |
 | GitHub Issue / prepared brief | [Search Issues](https://github.com/andreachiocca/multiaxial-fatigue/issues?q=G05+in%3Atitle%2Cbody) · [Propose task](https://github.com/andreachiocca/multiaxial-fatigue/issues/new?template=method.md&title=%5BG05%5D+Manson%E2%80%93McKnight%E2%80%93Papuga+%28MMP%29) (no live Issue linked) |
 

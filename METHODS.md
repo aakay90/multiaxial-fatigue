@@ -25,9 +25,9 @@ CA = constant amplitude; P/NP = proportional/non-proportional. Repeating arbitra
 | Probabilistic | 0 | 0 | 5 | 0 | 5 |
 | Specialized | 0 | 0 | 3 | 0 | 3 |
 | Strain based | 4 | 0 | 9 | 2 | 15 |
-| Stress based | 2 | 0 | 11 | 0 | 13 |
+| Stress based | 3 | 0 | 10 | 0 | 13 |
 | Tensor and path based | 1 | 0 | 2 | 0 | 3 |
-| **TOTAL** | 37 | 2 | 74 | 5 | 118 |
+| **TOTAL** | 38 | 2 | 73 | 5 | 118 |
 
 ¹Complete only for the explicitly declared scope. Primary families are counted once; secondary tags do not change totals. Counts refer to identifiable method/scoped-candidate records, not a proof of independent theoretical novelty.
 
@@ -1993,7 +1993,7 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 | [N39](#n39) | Tresca equivalent-amplitude baseline | Not implemented | not_tested | Low | Yes |
 | [N40](#n40) | Maximum principal stress / Rankine baseline | Not implemented | not_tested | Low | Yes |
 | [G04](#g04) | Kakuno–Kawada | Not implemented | not_tested | Medium | Yes |
-| [G05](#g05) | Manson–McKnight–Papuga (MMP) | Not implemented | not_tested | Medium | Yes |
+| [G05](#g05) | Manson–McKnight–Papuga (MMP) | Fully implemented | reference_examples_reproduced | Medium | Yes |
 | [G07](#g07) | Modified Mohr–Mises hypothesis (MMMH) | Fully implemented | basic_numerical_tests | High | Yes |
 | [G09](#g09) | Moment-adapted COIN LiWI (MA-COIN LiWI) | Not implemented | not_tested | Medium | Yes |
 | [G13](#g13) | Braccesi–Cianetti–Lori–Pioli equivalent uniaxial process | Not implemented | not_tested | Medium | Yes |
@@ -2104,7 +2104,7 @@ Browse [contribution opportunities and status/loading/validation views](docs/MET
 | Field | Evidence / task |
 | --- | --- |
 | Reference / DOI | Multiaxial fatigue strength of common structural steel and the response of some estimation methods, International Journal of Fatigue; https://doi.org/10.1016/j.ijfatigue.2017.07.001 |
-| WG4.3 completeness / validation | Not implemented; not_tested |
+| WG4.3 completeness / validation | Fully implemented; reference_examples_reproduced |
 | Current FABER phase | Plain/smooth CA candidate or scoped point formulation; original loading, material and response requirements still apply. |
 | External sources | no_accessible_source_identified; not integrated or independently validated |
 | Complete scientific and implementation record | [Inputs, formulation, scope, code, tests, validation, missing work and Issues](docs/methods/stress-based.md#g05) |
