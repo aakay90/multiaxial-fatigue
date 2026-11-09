@@ -1,5 +1,30 @@
 # Development continuation checkpoint
 
+## PR #64 review response (9 November 2026)
+
+Maintainer review of #64 (six points), addressed on `feat/fe-and-time-history-inputs`:
+
+- **Reverted `main` content restored.** Commit `a28f3c2` had rewritten the G32 and N32 catalogue
+  records back to "obtain original paper" / `available_not_scheduled`, and the 6 November section
+  "Issue #13 methods from the second paper batch" was missing from this file. Both are back as on
+  `main`; `METHODS.md`, `docs/methods/*`, `docs/catalogue/methods.csv`, `docs/COUNT_RECONCILIATION.md`
+  and `docs/METHOD_INDEX.md` were regenerated with `tools/generate_method_docs.py`.
+- **`origin/main` merged** (`baee2f4`, includes #67), by merge commit; both sides kept in this file.
+  Outside the FE and history work, the branch now differs from `main` only in `CLAUDE.md` and
+  `AGENTS.md`.
+- **FE benchmark figure.** `examples/plot_fe_benchmark_maps.py` evaluates FIN, SWT, CROSSLAND and FS
+  (and von Mises); TVEIT2025 is refused on FE histories (native life law,
+  `docs/load-histories.md`). The #67 change cannot alter the figure, so it was not regenerated.
+- **Regression snapshot** (`tools/regression_snapshot.py run --jobs 4`, calibration included, run on
+  WorkstationUniTN): `main` at `baee2f4` against the merged branch: 2,273 output files and 554 log
+  files, 0 differences. The source outside `fe/` and `history/` is identical to `main`.
+- **Project instructions.** `CLAUDE.md` and `AGENTS.md` gain the FE and history layout and the FE
+  adapter rules. The text pointing at the removed `axis-fem` fixtures was stale and now says that
+  no real Abaqus output is in the repository.
+
+Remaining: update the PR description, push the merge, and ping the maintainer (point 6). The merge
+stays with the maintainer's last read.
+
 ## Milestone, solver importers and review fixes (6 November 2026)
 
 Approved scope: `docs/superpowers/plans/2026-11-06-solver-importers-handoff.md`;

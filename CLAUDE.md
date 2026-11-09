@@ -239,8 +239,10 @@ Also:
 tensor tables to atomic FE CSV; native solid RST is optional (`ansys` extra, inspected reader 0.56).
 Use the shared CSV aliases and require explicit units, global frame, averaging and state metadata.
 Native RST is stress-only, one material, default solids, real static/transient. ODB and DAT are
-unsupported. Real MIT Abaqus fixtures are in `tests/data/solvers/axis-fem`; Ansys text samples are
-hand-written; the real RST test uses `MULTIFAT_TEST_RST` and never downloads during ordinary tests.
+unsupported. No real Abaqus output is in the repository (its real-report test is an `xfail` until
+one is generated on a licensed machine); the in-house Ansys holed-plate benchmark is in
+`tests/data/solvers/ansys`; the real RST test uses `MULTIFAT_TEST_RST` and never downloads during
+ordinary tests.
 See `docs/fe-csv-format.md` and `docs/load-histories.md`. CSV/PVD conversion must preserve source
 files and existing destinations on refusal. Strain-reading criteria require a shared scalar
 stress/strain path for exact counting. Continue from `docs/audit-checkpoint.md`.

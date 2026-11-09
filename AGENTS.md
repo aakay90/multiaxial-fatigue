@@ -40,9 +40,11 @@ environment. MIT licence (see `LICENSE`).
   converters; optional native RST uses `ansys-mapdl-reader` (extra `ansys`, inspected 0.56 API).
   Output is atomic FE CSV, never direct HDF5; aliases come from `fe.csvio`. Preserve explicit units,
   global frame, averaging and state metadata. Native RST is stress-only, default solids, one material,
-  real static/transient. No ODB reader. MIT real Abaqus fixtures: `tests/data/solvers/axis-fem`.
-  Ansys text samples are hand-written. Real RST test is opt-in via `MULTIFAT_TEST_RST`; ordinary
-  tests never download or execute third-party content.
+  real static/transient. No ODB reader. No real Abaqus output is in the repository (third-party
+  fixtures were removed); the Abaqus parser is tested on synthetic reports and its real-report test
+  is an `xfail` until a file is generated on a licensed machine. The in-house Ansys holed-plate
+  benchmark is in `tests/data/solvers/ansys`. Real RST test is opt-in via `MULTIFAT_TEST_RST`;
+  ordinary tests never download or execute third-party content.
 - `src/multifat/history`: general load histories (`signal.py` contract, `channels.py`, `proportionality.py`,
   `rainflow.py`, `events.py`, `accumulate.py` Basquin and Miner, `eligibility.py`, `assess.py`,
   `nodes.py` node histories, unit cases and `assess_nodes`); imported by nothing else; spec in
