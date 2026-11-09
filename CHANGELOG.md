@@ -285,7 +285,7 @@ layout, were ported to `multifat`, each port naming its upstream commit.
 
 ### Changed numerically
 
-- **TVEIT2025: end of the block integration** (issue #NN, approved by the maintainer). The
+- **TVEIT2025: end of the block integration** (issue #66, approved by the maintainer). The
   stopping rule compared only two consecutive blocks, so during a slow shakedown it stopped while
   the damage per block was still decaying to zero and extrapolated 9e7 to 2.4e9 cycles instead of
   an infinite life. Now a block without any damage increment is a shakedown (infinite life), and

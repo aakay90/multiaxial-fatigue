@@ -2,7 +2,7 @@
 
 ## TVEIT2025 end of the block integration (9 November 2026)
 
-Branch `tveit2025-end-rule` from `main` at `0cf9091`, by the model's owner (issue #NN, approved
+Branch `tveit2025-end-rule` from `main` at `0cf9091`, by the model's owner (issue #66, approved
 by the maintainer). Only `invariant_methods/tveit2025.py` changes in the source:
 
 - **Shakedown and steady state.** A block without damage increment is a shakedown (infinite life);
