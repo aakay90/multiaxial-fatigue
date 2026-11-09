@@ -294,8 +294,10 @@ layout, were ported to `multifat`, each port naming its upstream commit.
   reproduces 16 of 16 histories integrated to 50,000 blocks without a stopping rule
   (`tests/test_tveit2025_end_rule.py`). With the stage-1 constants the failures predicted
   infinite go from 3 to 18 (42CrMo4_QT), 2 to 14 (Al7075_T6) and 2 to 26 (Ti6Al4V_Berto);
-  Ti6Al4V does not change; other lives move by less than 1 %. Error_load changes by at most
-  0.006. New settings defaults: `min_blocks_TVEIT` 400, `max_blocks_TVEIT` 60000,
+  Ti6Al4V does not change. Nine Al7075_T6 tests loaded exactly at the model's fatigue limit stay
+  finite but move from 4.5e8-1.9e9 to 4.6e9-8.0e9 cycles; all other lives move by at most 1 %.
+  The load-equivalent error, computed from per-path curves outside the pipeline, changes by at
+  most 0.006. New settings defaults: `min_blocks_TVEIT` 400, `max_blocks_TVEIT` 60000,
   `tol_alpha_TVEIT` 0.01 (net drift over 200 blocks, relative to the path length),
   `tol_damage_TVEIT` 0.001 (mean damage per block between two windows); the four
   `TVEIT2025_stage1.json` files carry them.
