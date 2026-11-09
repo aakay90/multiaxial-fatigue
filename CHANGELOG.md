@@ -301,6 +301,13 @@ layout, were ported to `multifat`, each port naming its upstream commit.
   `tol_alpha_TVEIT` 0.01 (net drift over 200 blocks, relative to the path length),
   `tol_damage_TVEIT` 0.001 (mean damage per block between two windows); the four
   `TVEIT2025_stage1.json` files carry them.
+- **TVEIT2025: a creeping back-stress is no longer taken for a steady state** (follow-up to #67,
+  found by the automated review). A back-stress that swings in every block can creep one way while
+  its net drift over 200 blocks stays below 1 % of its path length; the peak of beta then sinks
+  until a shakedown. The steady state is now refused while the trend of that peak reaches zero before
+  the extrapolated failure and within the remaining blocks. Al7075_T6 stage-1 constants, torsion
+  99.996 MPa with a constant out-of-plane shear of 0.895 MPa: 4.6e9 cycles before, infinite life
+  (shakedown at block 2446) now. The 16 long histories are reproduced as before.
 - **TVEIT2025: within-cycle failure time.** A failure inside a block is placed in the increment
   that crosses D = 1: (i - 1 + f)/(npts - 1) of the cycle, where the code counted one increment
   more ((i + f)/(npts - 1)). Lives shorten by at most 1/(npts - 1) = 0.001 cycle
