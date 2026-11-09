@@ -1,5 +1,26 @@
 # Development continuation checkpoint
 
+## TVEIT2025 end of the block integration (9 November 2026)
+
+Branch `tveit2025-end-rule` from `main` at `0cf9091`, by the model's owner (issue #66, approved
+by the maintainer). Only `invariant_methods/tveit2025.py` changes in the source:
+
+- **Shakedown and steady state.** A block without damage increment is a shakedown (infinite life);
+  a cyclic steady state needs no net back-stress drift over 200 blocks and a stable mean damage
+  per block. It replaces the consecutive-block test, which stopped during slow shakedowns.
+- **Within-cycle failure time.** It now counts i - 1 + f increments (the open point recorded
+  below under PR #27 is resolved).
+- **Settings.** The defaults of the five numerical settings change, and the four
+  `TVEIT2025_stage1.json` files carry the new values.
+
+Checks:
+- 16 of 16 histories integrated to 50,000 blocks are reproduced (`tests/test_tveit2025_end_rule.py`);
+- the Figs. 5-6 paper curves still hold within 1 %;
+- the regression snapshot shows no change outside TVEIT2025.
+
+Open: #60 (TVEIT2025 constants rejected by `--constants`). If #64 is merged first, re-merge `main`
+here.
+
 ## Issue #13 methods from the second paper batch (6 November 2026)
 
 Merged, each with paper tests, guide, catalogue record, audit row, regression snapshot (no change
