@@ -217,6 +217,56 @@ issue 20 (time-history contract, remaining range rules, maxima over all load cas
 
 Next exact action: review the branch, then decide on the snapshot run and the pull request.
 
+## TVEIT2025 end of the block integration (9 November 2026)
+
+Branch `tveit2025-end-rule` from `main` at `0cf9091`, by the model's owner (issue #66, approved
+by the maintainer). Only `invariant_methods/tveit2025.py` changes in the source:
+
+- **Shakedown and steady state.** A block without damage increment is a shakedown (infinite life);
+  a cyclic steady state needs no net back-stress drift over 200 blocks and a stable mean damage
+  per block. It replaces the consecutive-block test, which stopped during slow shakedowns.
+- **Within-cycle failure time.** It now counts i - 1 + f increments (the open point recorded
+  below under PR #27 is resolved).
+- **Settings.** The defaults of the five numerical settings change, and the four
+  `TVEIT2025_stage1.json` files carry the new values.
+
+Checks:
+- 16 of 16 histories integrated to 50,000 blocks are reproduced (`tests/test_tveit2025_end_rule.py`);
+- the Figs. 5-6 paper curves still hold within 1 %;
+- the regression snapshot shows no change outside TVEIT2025.
+
+Open: #60 (TVEIT2025 constants rejected by `--constants`). If #64 is merged first, re-merge `main`
+here.
+
+
+## Issue #13 methods from the second paper batch (6 November 2026)
+
+Merged, each with paper tests, guide, catalogue record, audit row, regression snapshot (no change
+to existing outputs) and refreshed homepage figures:
+
+| PR | Method | Paper check |
+| --- | --- | --- |
+| #54 | ZHANGYAO (N06) | Tables 3-8: 50/66 within 0.3 points; tied-plane and mean-stress rows strict xfails |
+| #55 | WANG2022 (N05) | Tables 4-5 lives within 1 %; mean normal stress out of scope (printed Eq. 18) |
+| #56 | KUJAWSKI2021 (N26) | closed forms only; equals SWT on every supplied workbook |
+| #58 | MMP (G05) | Table 11, 24 cases within 0.1 point |
+| #59 | SSF (N24) | Tables 5-8 from Table 4; published 42CrMo4 surface only (in-sample) |
+| #62 | LIUMAHADEVAN (N16) | Eq. (19), both limits exact; Figs. 2-5 reproduced in part (strict xfails, unresolved) |
+
+Also: `--constants` accepts published-constants records (SSF); the native-life load error is NaN
+when a trial load leaves the model's scope.
+
+Postponed by maintainer decision (catalogue `source_review`): G32 Stefanov 1993 (off-radial
+R-function only in the 1980 dissertation) and N32 Lu & Martinez-Esnaola 2021 (reference plane chosen
+against observed lives, in-sample coefficients, no per-test data).
+
+Open: #60 (TVEIT2025 constants rejected by `--constants`, assigned to its owner), #61 (family
+taxonomy).
+
+Next exact action: implement the next #13 batch listed in the 6 November comment on #13 as the
+papers arrive (N34, G24, G38, N36, G29, G11, N09, N17, N15, N53, G04, N19).
+
+
 ## Issue #13 methods merged; integration audit (5 November 2026)
 
 PRs #45 to #49 (GAM, NINIC, GOLOS, MWHS, LIU2025) and #50 (homepage figures) are merged into

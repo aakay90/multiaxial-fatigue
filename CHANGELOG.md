@@ -285,6 +285,26 @@ layout, were ported to `multifat`, each port naming its upstream commit.
 
 ### Changed numerically
 
+- **TVEIT2025: end of the block integration** (issue #66, approved by the maintainer). The
+  stopping rule compared only two consecutive blocks, so during a slow shakedown it stopped while
+  the damage per block was still decaying to zero and extrapolated 9e7 to 2.4e9 cycles instead of
+  an infinite life. Now a block without any damage increment is a shakedown (infinite life), and
+  a cyclic steady state is accepted from block 400 on only when the back-stress has no net drift
+  over 200 blocks and the mean damage per block is stable (`tveit2025.py` docstring). The rule
+  reproduces 16 of 16 histories integrated to 50,000 blocks without a stopping rule
+  (`tests/test_tveit2025_end_rule.py`). With the stage-1 constants the failures predicted
+  infinite go from 3 to 18 (42CrMo4_QT), 2 to 14 (Al7075_T6) and 2 to 26 (Ti6Al4V_Berto);
+  Ti6Al4V does not change. Nine Al7075_T6 tests loaded exactly at the model's fatigue limit stay
+  finite but move from 4.5e8-1.9e9 to 4.6e9-8.0e9 cycles; all other lives move by at most 1 %.
+  The load-equivalent error, computed from per-path curves outside the pipeline, changes by at
+  most 0.006. New settings defaults: `min_blocks_TVEIT` 400, `max_blocks_TVEIT` 60000,
+  `tol_alpha_TVEIT` 0.01 (net drift over 200 blocks, relative to the path length),
+  `tol_damage_TVEIT` 0.001 (mean damage per block between two windows); the four
+  `TVEIT2025_stage1.json` files carry them.
+- **TVEIT2025: within-cycle failure time.** A failure inside a block is placed in the increment
+  that crosses D = 1: (i - 1 + f)/(npts - 1) of the cycle, where the code counted one increment
+  more ((i + f)/(npts - 1)). Lives shorten by at most 1/(npts - 1) = 0.001 cycle
+  (`docs/audit-checkpoint.md`).
 - `k_MGSE` no longer depends on the model selection: Zhu (2018) Eq. (12) on the Basquin fits is used
   whenever those fits are identifiable, also in a run that selects MGSE_ZHU without MDC or MMCCM
   (previously scatter minimisation, e.g. 1.239 instead of 0.988 on Al7075_T6). Full runs are unchanged.
