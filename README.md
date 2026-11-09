@@ -269,7 +269,7 @@ methods keep the RSS convention.
 
 The CSVs in `Results/archive/pre-audit/` predate the numerical audit and are kept as history only
 (see [Results/README.md](Results/README.md)). The experimental collection is the revised
-October 2026 set (upstream 71eaac3, 15 workbooks, of which 7 fatigue-limit sets and 2 notched-only).
+October 2026 set (upstream 71eaac3, 15 workbooks, of which 7 fatigue-limit sets and 2 notched-only), plus `16_42CrMo4_FABEST` from the FABEST database (doi:10.5281/zenodo.23359038).
 The provenance of each workbook, with its open questions, is in
 [Experimental_Data/PROVENANCE.md](Experimental_Data/PROVENANCE.md).
 
