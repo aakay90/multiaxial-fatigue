@@ -32,7 +32,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 # Materials with life data in Experimental_Data (IDs, without the ordering number)
-MATERIALS = ["42CrMo4_QT", "42CrMo4_Reis", "AISI316L", "Al7075_T6", "Ti6Al4V", "Ti6Al4V_Berto"]
+MATERIALS = [
+    "42CrMo4_QT", "42CrMo4_Reis", "42CrMo4_FABEST", "AISI316L", "Al7075_T6", "Ti6Al4V", "Ti6Al4V_Berto",
+]  # fmt: skip
 
 
 def material_args(data_folder: Path | None) -> list[str]:
