@@ -201,8 +201,8 @@ _PROBE_PARAMS = {
     "xi_ZHU": 1.0, "sigma_f": 1200.0, "b_fat": -0.09, "epsilon_f": 0.5, "c_fat": -0.6,
     "tau_f": 700.0, "gamma_f": 0.9, "b0": -0.09, "c0": -0.6,
     "Sigm1_TVEIT": 400.0, "Taum1_TVEIT": 250.0,
-    "npts_TVEIT": 1001.0, "min_blocks_TVEIT": 8.0, "max_blocks_TVEIT": 10000.0,
-    "tol_alpha_TVEIT": 1e-6, "tol_damage_TVEIT": 1e-5,
+    "npts_TVEIT": 1001.0, "min_blocks_TVEIT": 400.0, "max_blocks_TVEIT": 60000.0,
+    "tol_alpha_TVEIT": 0.01, "tol_damage_TVEIT": 1e-3,
 }  # fmt: skip
 
 
