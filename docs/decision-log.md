@@ -73,6 +73,7 @@ ledgers.
 | [`d101`](#d101) | 2026-11-10 | **Active** | Batches | Tests by different author groups are different batches; Santus 2018 and Benedetti 2022 are one batch (`42CrMo4_QT`). Families (42CrMo4, Ti6Al4V) in `examples/data/material_families.json`. |
 | [`d102`](#d102) | 2026-11-10 | **Active** | Cross-batch transfer | `--design-material`: Summary, constants, design set and master curve from one batch, every failure of another assessed. |
 | [`d103`](#d103) | 2026-11-10 | **Active** | Published constants in a transfer | A published-constants record of the design batch (SSF of 42CrMo4_Reis) is accepted with `--design-material`; no other supplied constants. |
+| [`d104`](#d104) | 2026-11-10 | **Proposed** | Statistics of the batch comparison | Effect sizes with joint-bootstrap intervals, a method-free reference and the FABEST series as yardstick; no significance tests. |
 
 ---
 
@@ -501,4 +502,11 @@ ledgers.
 * **Status:** Active
 * **Decision:** With `--design-material A`, `--constants` is accepted only for a published-constants record (`published_constants`) whose `material_id` is A; calibration records and sidecars stay refused. Used for SSF, whose surface is published for the Reis batch (`Calibrations/42CrMo4_Reis/SSF_published.json`): SSF results on 42CrMo4_Reis are in sample, those of the transfers from 42CrMo4_Reis out of sample. Maintainer: only in this context.
 * **Rationale:** A constant printed for the design batch is part of what is known about that batch; the transfer then tests it on another batch of the same steel.
+
+### d104
+* **Date:** 2026-11-10
+* **Topic:** Statistics of the cross-batch comparison
+* **Status:** Proposed (awaiting maintainer review on PR #72)
+* **Decision:** (1) Compare the batches first without any method: Basquin strength at 1e5 cycles per batch, path and series. (2) Use the unnotched R = -1 series of the FABEST source file (one steel, several laboratories and specimen types) as the yardstick for a difference between batches; they are read for this purpose only and are not imported as workbooks. (3) Report effect sizes with intervals: batch offsets from a joint bootstrap that resamples specimens within a batch and uses the same resample for every method. No Kruskal-Wallis or Benjamini-Hochberg tests. (4) Predict the batch offsets and the transfer shifts from the S-N data alone (relative strengths), and report the observed values against them. (5) Run-outs enter a censored-likelihood sensitivity check for the homogeneous damage parameters.
+* **Rationale:** The specimens of one S-N curve are not independent across series, and two or three batches allow no inference on a population of batches; a specimen-level test only says that two series differ. The method-free prediction shows that the transfer shift is the same for every method, so a transfer cannot rank methods.
 

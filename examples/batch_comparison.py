@@ -9,23 +9,32 @@ Every method is run twice on each batch:
   curve of the design batch.
 
 The statistic is the load-equivalent error e = Error_load = ln(1/s*) of the assessed failures
-(Flag 1), grouped by loading path (A, T, AT-IP, AT-NP, with "+mean" for a non-zero mean stress):
+(Flag 1), grouped by loading path (A, T, AT-IP, AT-NP, with "+mean" for a non-zero mean stress).
+The analysis has a method-free part and a method part:
 
+- method-free (``examples/batch_reference.py``): Basquin strength S(1e5) of each batch, path
+  and test series, strength ratios between paths, and the scatter between the series of one
+  steel in the FABEST database, the yardstick for a batch difference;
 - per method, batch and path: n, bias = mean(e) with a 95 % percentile-bootstrap interval, SD,
   RMS and the share within +-20 % of the load;
-- per method and path: Kruskal-Wallis test of equal errors across batches, Benjamini-Hochberg q
-  over the methods;
-- per path: additive decomposition of the cell means,
-  bias_mb = mu + alpha_m + beta_b + (alpha beta)_mb, on the methods present on every batch of
-  that path (batch offsets beta_b, interaction RMS, compared with the standard error of a cell);
-- transfer: the same statistics per design -> target pair, and the RMS change on the tests the
-  own-batch run assesses (paired by Observation_id);
-- a method-free reference: Basquin fits of the R = -1 axial and torsion failures of each batch
-  and their ratio tau_a / sigma_a at 1e5 and 1e6 cycles.
+- per path: additive decomposition of the cell biases,
+  bias_mb = mu + alpha_m + beta_b + (alpha beta)_mb. The batch offsets beta_b get intervals from
+  a joint bootstrap (the same specimens resampled for all methods), the interaction is compared
+  with what sampling alone produces, and each offset is set against its method-free prediction;
+- run-outs: the offsets recomputed with the run-outs as censored observations (sensitivity);
+- transfer: bias and RMS per design -> target pair, the RMS change on the tests the own-batch run
+  assesses (paired by Observation_id), the method-free prediction of the transfer bias, and the
+  load factor that covers 95 % of the tests, own batch against transfer.
+
+Effect sizes with intervals are reported, not p-values: the specimens of one S-N curve share
+the lot, the machine and the laboratory, so a test at specimen level would only say that two
+test series differ, which the intervals show already; the number of batches (two or three) is
+too small for any inference on a population of batches.
 
 The results are written to ``examples/data/batch_comparison/<family>/`` (CSV, LaTeX tables and a
-manifest) and ``docs/images/batch_comparison_<family>_*.png``. The manifest records the
-registered models, the implementation revision and the dataset fingerprints; ``check`` (run by
+manifest) and ``docs/images/batch_comparison_<family>_*.png``
+(figures: ``examples/batch_plots.py``). The manifest records the registered models, the
+implementation revision and the dataset fingerprints; ``check`` (run by
 ``tests/test_batch_comparison.py``) fails when a method or a workbook has changed since, so the
 results are regenerated with every new method or data change:
 
@@ -33,9 +42,6 @@ results are regenerated with every new method or data change:
     uv run python examples/batch_comparison.py run <tmp_dir> --jobs 4   # pipeline runs only
     uv run python examples/batch_comparison.py analyse <tmp_dir>        # statistics and figures
     uv run python examples/batch_comparison.py check                    # committed results current?
-
-Caveats: the points of one S-N curve are not independent (one machine, one lot), so the p-values
-are optimistic; the own-batch errors are measured with a design set from the same batch.
 """
 
 from __future__ import annotations
@@ -55,7 +61,13 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from examples.style import DATA_DIR, DOCS_IMG_DIR, apply_academic_style  # noqa: E402
+from examples.style import (  # noqa: E402
+    BATCH_COLOURS,
+    BATCH_MARKERS,
+    DATA_DIR,
+    DOCS_IMG_DIR,
+    apply_academic_style,
+)
 
 FAMILIES_FILE = DATA_DIR / "material_families.json"
 OUT_ROOT = DATA_DIR / "batch_comparison"
@@ -70,10 +82,6 @@ PATH_NAMES = {
     "Multiaxial non-proportional": "AT-NP",
 }
 PATH_ORDER = ["A", "A+mean", "T", "T+mean", "AT-IP", "AT-IP+mean", "AT-NP", "AT-NP+mean"]
-# Validated categorical palette (dataviz skill, light surface): blue, orange, aqua; markers give
-# the batch identity without colour.
-BATCH_COLOURS = ["#2a78d6", "#eb6834", "#1baf7a", "#6250d6"]
-BATCH_MARKERS = ["o", "s", "^", "D"]
 
 
 # ---- families and inputs -------------------------------------------------------------------
@@ -219,89 +227,183 @@ def cell_statistics(d: pd.DataFrame, keys: list[str]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def benjamini_hochberg(p) -> np.ndarray:
-    """Benjamini-Hochberg adjusted p-values (q), NaN entries left NaN."""
-    p = np.asarray(p, float)
-    q = np.full_like(p, np.nan)
-    ok = np.isfinite(p)
-    if ok.any():
-        order = np.argsort(p[ok])
-        ranked = p[ok][order] * ok.sum() / np.arange(1, ok.sum() + 1)
-        ranked = np.minimum.accumulate(ranked[::-1])[::-1]
-        out = np.empty_like(ranked)
-        out[order] = np.minimum(ranked, 1.0)
-        q[ok] = out
-    return q
+def _complete_matrix(g: pd.DataFrame, present: list[str]):
+    """Errors as {batch: array (specimens, methods)} on the methods finite for every specimen."""
+    wide = (
+        g[g["Batch"].isin(present)]
+        .set_index(["Batch", "Observation_id", "Method"])["Error_load"]
+        .unstack("Method")
+    )
+    wide = wide.loc[:, np.isfinite(wide.to_numpy(float)).all(axis=0)]
+    blocks = {b: wide.loc[b].to_numpy(float) for b in present if b in wide.index.levels[0]}
+    return list(wide.columns), blocks
 
 
-def batch_effect(d: pd.DataFrame) -> pd.DataFrame:
-    """Kruskal-Wallis test of equal errors across batches, per method and path."""
-    from scipy import stats
-
-    rows = []
-    for (method, path), g in d.groupby(["Method", "Path"], sort=True):
-        groups = {
-            b: x["Error_load"].to_numpy(float)[np.isfinite(x["Error_load"].to_numpy(float))]
-            for b, x in g.groupby("Batch")
-        }
-        groups = {b: v for b, v in groups.items() if v.size >= MIN_N}
-        if len(groups) < 2:
-            continue
-        test = stats.kruskal(*groups.values())
-        means = {b: float(v.mean()) for b, v in groups.items()}
-        rows.append(
-            dict(Method=method, Path=path, batches="+".join(groups),
-                 n="+".join(str(v.size) for v in groups.values()),
-                 spread=max(means.values()) - min(means.values()), H=float(test.statistic),
-                 p=float(test.pvalue))
-        )  # fmt: skip
-    t = pd.DataFrame(rows)
-    if len(t):
-        t["q_BH"] = np.nan
-        for path, idx in t.groupby("Path").groups.items():  # one family of tests per path
-            t.loc[idx, "q_BH"] = benjamini_hochberg(t.loc[idx, "p"])
-    return t
+def _additive(means: np.ndarray):
+    """Additive fit of means[..., methods, batches]: (mu, alpha, beta, residual)."""
+    mu = means.mean(axis=(-2, -1), keepdims=True)
+    alpha = means.mean(axis=-1, keepdims=True) - mu
+    beta = means.mean(axis=-2, keepdims=True) - mu
+    return mu, alpha, beta, means - mu - alpha - beta
 
 
-def two_way(cells: pd.DataFrame, batches: list[str]) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Additive decomposition of the cell biases per path (methods present on >= 2 batches).
+def two_way(assessed: pd.DataFrame, batches: list[str]):
+    """Additive decomposition of the cell biases per path, with joint bootstrap intervals.
 
-    Returns the per-path summary (offsets, interaction RMS, cell SE, method-effect SD) and the
-    per-cell interaction residuals.
+    bias_mb = mu + alpha_m + beta_b + (alpha beta)_mb on the methods that are finite for every
+    assessed failure of the batches compared, for every subset of >= 2 batches of a path. The
+    same specimens are resampled for all methods (within each batch), which keeps the
+    correlation between methods: every method sees the same tests, so the batch offsets are far
+    better determined than independent cell intervals would suggest.
+
+    Returns (summary, offsets, residuals):
+
+    - summary, one row per path and subset: n_methods, mu, method_sd, interaction_rms,
+      noise_rms (interaction expected from sampling alone, from the bootstrap), and
+      interaction_excess = sqrt(max(interaction_rms^2 - noise_rms^2, 0));
+    - offsets, long: Path, batches, Batch, n, offset with its 95 % interval;
+    - residuals of the largest subset: Method, Batch, Path, residual.
     """
-    summary, residuals = [], []
-    for path, g in cells[cells["n"] >= MIN_N].groupby("Path", sort=False):
-        full = g.pivot(index="Method", columns="Batch", values="bias")
-        available = [b for b in batches if b in full and full[b].notna().sum() >= 2]
-        # every subset of >= 2 batches, largest first: the methods complete on that subset
+    rng = np.random.default_rng(SEED + 3)
+    summary, offsets, residuals = [], [], []
+    for path, g in assessed.groupby("Path", sort=False):
+        sizes = g[np.isfinite(g["Error_load"])].groupby("Batch")["Observation_id"].nunique()
+        available = [b for b in batches if sizes.get(b, 0) >= MIN_N]
         subsets = [c for k in range(len(available), 1, -1) for c in combinations(available, k)]
         for present in map(list, subsets):
-            row, res = _decompose(g, full[present].dropna(), present, path)
-            if row is None:
+            methods, blocks = _complete_matrix(g, present)
+            if len(methods) < MIN_N or len(blocks) < len(present):
                 continue
+            means = np.stack([blocks[b].mean(axis=0) for b in present], axis=-1)
+            mu, alpha, beta, res = _additive(means)
+            boot = np.stack(
+                [
+                    blocks[b][rng.integers(0, len(blocks[b]), (N_BOOT, len(blocks[b])))].mean(1)
+                    for b in present
+                ],
+                axis=-1,
+            )
+            _, _, beta_b, res_b = _additive(boot)
+            rms2 = float(np.mean(res**2))
+            noise2 = max(float(np.mean(res_b**2)) - rms2, 0.0)
+            tag = "+".join(present)
+            row = dict(Path=path, batches=tag, n_methods=len(methods), mu=float(mu.squeeze()),
+                       method_sd=float(alpha.std(ddof=1)), interaction_rms=np.sqrt(rms2),
+                       noise_rms=np.sqrt(noise2),
+                       interaction_excess=np.sqrt(max(rms2 - noise2, 0.0)))  # fmt: skip
+            for k, b in enumerate(present):
+                lo, hi = np.percentile(beta_b[:, 0, k], [2.5, 97.5])
+                row[f"offset_{b}"] = float(beta[0, k])
+                offsets.append(
+                    dict(Path=path, batches=tag, Batch=b, n=len(blocks[b]),
+                         offset=float(beta[0, k]), offset_lo=lo, offset_hi=hi)
+                )  # fmt: skip
             summary.append(row)
-            if len(present) == len(available):  # residuals of the largest subset only
-                residuals.append(res)
-    return pd.DataFrame(summary), (pd.concat(residuals) if residuals else pd.DataFrame())
+            if len(present) == len(available):
+                long = pd.DataFrame(res, index=methods, columns=present).rename_axis("Method")
+                long = long.reset_index().melt(
+                    id_vars="Method", var_name="Batch", value_name="residual"
+                )
+                residuals.append(long.assign(Path=path))
+    return (
+        pd.DataFrame(summary),
+        pd.DataFrame(offsets),
+        pd.concat(residuals) if residuals else pd.DataFrame(),
+    )
 
 
-def _decompose(g: pd.DataFrame, table: pd.DataFrame, present: list[str], path: str):
-    """One additive fit of a complete method x batch table of biases."""
-    if len(table) < MIN_N:  # too few methods for a method effect and an interaction
-        return None, None
-    sd = g.pivot(index="Method", columns="Batch", values="sd").loc[table.index, present]
-    n = g.pivot(index="Method", columns="Batch", values="n").loc[table.index, present]
-    mu = float(table.to_numpy().mean())
-    alpha = table.mean(axis=1) - mu
-    beta = table.mean(axis=0) - mu
-    res = table - mu - alpha.to_numpy()[:, None] - beta.to_numpy()[None, :]
-    cell_se = float(np.sqrt(np.nanmean((sd**2 / n).to_numpy())))
-    row = dict(Path=path, batches="+".join(present), n_methods=len(table), mu=mu,
-               interaction_rms=float(np.sqrt(np.mean(res.to_numpy() ** 2))),
-               cell_se=cell_se, method_sd=float(alpha.std(ddof=1)))  # fmt: skip
-    row.update({f"offset_{b}": float(beta[b]) for b in present})
-    long = res.reset_index().melt(id_vars="Method", var_name="Batch", value_name="residual")
-    return row, long.assign(Path=path)
+def predicted_offsets(offsets: pd.DataFrame, relative: pd.DataFrame) -> pd.DataFrame:
+    """Add the method-free prediction of each batch offset (column ``predicted``).
+
+    For a method that is homogeneous of degree one in the loads and calibrated on the axial
+    curve of its own batch, the error of a test is e_L = ln c_m + ln[amp / S_A(N)], c_m a
+    constant of the method on the path. Its batch offset is then the mean of ln[amp / S_A(N)]
+    over the tests of the batch, centred over the batches compared: a property of the S-N data
+    alone (``batch_reference.relative_strengths`` with design = target).
+    """
+    if offsets.empty:
+        return offsets
+    own = relative[relative["Design"] == relative["Target"]] if len(relative) else relative
+    q = {(r.Target, r.Path): r.q for r in own.itertuples()}
+    out = offsets.copy()
+    out["predicted"] = np.nan
+    for _, idx in out.groupby(["Path", "batches"]).groups.items():
+        values = [q.get((out.at[i, "Batch"], out.at[i, "Path"])) for i in idx]
+        if all(v is not None for v in values):
+            out.loc[idx, "predicted"] = np.asarray(values) - np.mean(values)
+    return out
+
+
+def censored_mean(failures: np.ndarray, bounds: np.ndarray) -> float:
+    """Mean of a normal sample with right-censored observations (true value > bound), by MLE."""
+    from scipy import optimize, stats
+
+    if bounds.size == 0 or failures.size < MIN_N:
+        return float(failures.mean()) if failures.size else float("nan")
+
+    def negative_log_likelihood(theta):
+        mu, log_sd = theta
+        sd = np.exp(log_sd)
+        return -(stats.norm.logpdf(failures, mu, sd).sum() + stats.norm.logsf(bounds, mu, sd).sum())
+
+    start = [failures.mean(), np.log(max(failures.std(ddof=1), 1e-3))]
+    fit = optimize.minimize(negative_log_likelihood, start, method="Nelder-Mead")
+    return float(fit.x[0])
+
+
+def runout_sensitivity(own: pd.DataFrame, batches: list[str]) -> pd.DataFrame:
+    """Batch offsets with the run-outs entered as censored observations, against failures only.
+
+    A run-out at N_ro bounds the error from below: the test would have failed later, so its
+    e_L exceeds the value computed at N_ro. The bound is available where the damage parameter
+    is homogeneous in the loads (e_L = ln(DP / DP_fit) / d, with d read from the failures of
+    the same file); the other methods are left out of this check. Both offsets are computed on
+    the same methods.
+    """
+    rows = []
+    for (method, batch), g in own.groupby(["Method", "Batch"]):
+        fail = g[(g["Flag"] == 1) & np.isfinite(g["Error_load"]) & (g["Error_load"] != 0)]
+        with np.errstate(divide="ignore", invalid="ignore"):
+            degree = (fail["Error_ln_dp"] / fail["Error_load"]).to_numpy(float)
+        degree = degree[np.isfinite(degree)]
+        if degree.size < MIN_N or np.ptp(degree) > 1e-6 * abs(np.median(degree)):
+            continue  # not homogeneous: no closed-form bound
+        d = float(np.median(degree))
+        ro = g[g["Flag"] == 2]
+        bound = np.log(ro["CP_value"].astype(float) / ro["DP_fit"].astype(float)) / d
+        ro = ro.assign(bound=bound)[np.isfinite(bound)]
+        for path, f in g[g["Flag"] == 1].groupby("Path"):
+            e = f["Error_load"].to_numpy(float)
+            e = e[np.isfinite(e)]
+            c = ro[ro["Path"] == path]["bound"].to_numpy(float)
+            if e.size < MIN_N:
+                continue
+            rows.append(dict(Method=method, Batch=batch, Path=path, n=e.size, n_runouts=c.size,
+                             bias=e.mean(), bias_censored=censored_mean(e, c)))  # fmt: skip
+    cells = pd.DataFrame(rows)
+    out = []
+    if cells.empty:
+        return cells
+    for path, g in cells.groupby("Path", sort=False):
+        table = g.pivot(index="Method", columns="Batch", values=["bias", "bias_censored"])
+        present = [b for b in batches if b in table["bias"].columns]
+        table = table.dropna()
+        if len(present) < 2 or len(table) < MIN_N:
+            continue
+        counts = g.groupby("Batch")["n_runouts"].max()
+        for column in ("bias", "bias_censored"):
+            means = table[column][present].to_numpy(float)
+            beta = means.mean(axis=0) - means.mean()
+            for b, value in zip(present, beta):
+                out.append(dict(Path=path, Batch=b, n_methods=len(table), kind=column,
+                                n_runouts=int(counts.get(b, 0)), offset=float(value)))  # fmt: skip
+    wide = pd.DataFrame(out)
+    if wide.empty:
+        return wide
+    wide = wide.pivot_table(
+        index=["Path", "Batch", "n_methods", "n_runouts"], columns="kind", values="offset"
+    ).reset_index()
+    return wide.rename(columns={"bias": "offset", "bias_censored": "offset_censored"})
 
 
 def transfer_penalty(own: pd.DataFrame, moved: pd.DataFrame) -> pd.DataFrame:
@@ -325,31 +427,66 @@ def transfer_penalty(own: pd.DataFrame, moved: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def batch_reference(batches) -> pd.DataFrame:
-    """Method-free Basquin fits of the R = -1 tension and torsion failures of each batch."""
-    from multifat.cli import run as runmod
-    from multifat.eval.material_fits import reversed_uniaxial_tests
+def transfer_prediction(own_cells, transfer_cells, relative: pd.DataFrame) -> pd.DataFrame:
+    """Transfer bias against its method-free prediction, per design -> target pair and path.
 
+    For a method calibrated on batch A, the bias on the tests of batch B minus its bias on the
+    same path of A is, for a damage parameter homogeneous of degree one, the difference of the
+    relative strengths q(B | A) - q(A | A) of ``batch_reference.relative_strengths``: how the
+    tests of B and of A lie against the axial curve of A. The observed shift is the median over
+    the methods of bias(A -> B, p) - bias(A, p); the bias of A on its own design path is zero by
+    construction.
+    """
+    q = {(r.Design, r.Target, r.Path): r.q for r in relative.itertuples()}
+    own = {(r.Method, r.Batch, r.Path): r.bias for r in own_cells.itertuples()}
     rows = []
-    for b in batches:
-        data, mat = runmod.load_material(b)
-        tests = reversed_uniaxial_tests(data, mat)
-        fits = {}
-        for family, (_, amp, N) in tests.items():
-            if len(amp) < MIN_N:
-                continue
-            slope, intercept = np.polyfit(np.log10(N), np.log10(amp), 1)
-            fits[family] = (10**intercept, slope)
-            rows.append(
-                dict(Batch=b, curve=family, n=len(amp), A_MPa=10**intercept, b=slope,
-                     N_min=min(N), N_max=max(N))
-            )  # fmt: skip
-        if {"tension", "torsion"} <= fits.keys():
-            for N in (1e5, 1e6):
-                ratio = (fits["torsion"][0] * N ** fits["torsion"][1]) / (
-                    fits["tension"][0] * N ** fits["tension"][1]
-                )
-                rows.append(dict(Batch=b, curve=f"tau/sigma at {N:.0e}", n=np.nan, A_MPa=ratio))
+    for (design, target, path), g in transfer_cells.groupby(["Design", "Target", "Path"]):
+        g = g[g["n"] >= MIN_N]
+        shifts = []
+        for r in g.itertuples():
+            base = own.get((r.Method, design, path))
+            if base is None and path in ("A", "T"):
+                base = 0.0  # design path of the method: not assessed on its own batch
+            if base is not None:
+                shifts.append(r.bias - base)
+        if len(shifts) < MIN_N:
+            continue
+        a, b = q.get((design, design, path)), q.get((design, target, path))
+        q1, med, q3 = np.percentile(shifts, [25, 50, 75])
+        rows.append(
+            dict(Design=design, Target=target, Path=path, n_methods=len(shifts), shift=med,
+                 shift_q1=q1, shift_q3=q3,
+                 predicted=b - a if a is not None and b is not None else np.nan,
+                 bias_median=float(g["bias"].median()))
+        )  # fmt: skip
+    return pd.DataFrame(rows)
+
+
+COVERAGE_Z = 1.645  # one-sided 95 % under a normal model of e_L
+
+
+def designer_summary(own: pd.DataFrame, moved: pd.DataFrame) -> pd.DataFrame:
+    """Load factor that covers 95 % of the tests, own batch against transfer, same tests.
+
+    gamma = exp(-(mean - 1.645 SD)) of e_L: the factor by which the load allowed by the method
+    must be divided so that 95 % of the tests are on the safe side, under a normal model of
+    e_L. gamma < 1 means the method is conservative even at that level.
+    """
+    a = own[own["Flag"] == 1][["Method", "Batch", "Observation_id", "Error_load"]]
+    b = moved[moved["Flag"] == 1][["Method", "Batch", "Design", "Observation_id", "Error_load"]]
+    j = b.merge(a, on=["Method", "Batch", "Observation_id"], suffixes=("_transfer", "_own"))
+    j = j[np.isfinite(j["Error_load_transfer"]) & np.isfinite(j["Error_load_own"])]
+    rows = []
+    for (method, design, target), g in j.groupby(["Method", "Design", "Batch"], sort=True):
+        if len(g) < 2 * MIN_N:
+            continue
+
+        def gamma(e):
+            return float(np.exp(-(e.mean() - COVERAGE_Z * e.std(ddof=1))))
+
+        rows.append(dict(Method=method, Design=design, Target=target, n=len(g),
+                         gamma_own=gamma(g["Error_load_own"]),
+                         gamma_transfer=gamma(g["Error_load_transfer"])))  # fmt: skip
     return pd.DataFrame(rows)
 
 
@@ -374,27 +511,43 @@ def analyse(out: Path, family: str) -> Path:
     dest = OUT_ROOT / family
     dest.mkdir(parents=True, exist_ok=True)
 
+    from examples import batch_plots, batch_reference
+
     assessed = own[own["Flag"] == 1]
+    write = dict(index=False, float_format="%.5g")
+    reference = batch_reference.write_reference(
+        dest, batches, fabest=bool(spec.get("fabest_benchmark"))
+    )
     cells = cell_statistics(assessed, ["Method", "Batch", "Path"])
-    effect = batch_effect(assessed)
-    decomposition, residuals = two_way(cells, batches)
+    decomposition, offsets, residuals = two_way(assessed, batches)
+    offsets = predicted_offsets(offsets, reference["relative"])
     if len(residuals):
         cells = cells.merge(residuals, on=["Method", "Batch", "Path"], how="left")
-    write = dict(index=False, float_format="%.5g")
     cells.to_csv(dest / "own_cells.csv", **write)
-    effect.to_csv(dest / "own_batch_effect.csv", **write)
     decomposition.to_csv(dest / "own_two_way.csv", **write)
-    batch_reference(batches).to_csv(dest / "batch_reference.csv", **write)
-    penalty = pd.DataFrame()
+    offsets.to_csv(dest / "own_offsets.csv", **write)
+    runout_sensitivity(own, batches).to_csv(dest / "own_runout_sensitivity.csv", **write)
+    penalty = prediction = designer = pd.DataFrame()
     if not moved.empty:
         tcells = cell_statistics(moved[moved["Flag"] == 1], ["Method", "Design", "Batch", "Path"])
-        tcells.rename(columns={"Batch": "Target"}).to_csv(dest / "transfer_cells.csv", **write)
+        tcells = tcells.rename(columns={"Batch": "Target"})
+        tcells.to_csv(dest / "transfer_cells.csv", **write)
         penalty = transfer_penalty(own, moved)
         penalty.to_csv(dest / "transfer_penalty.csv", **write)
+        prediction = transfer_prediction(cells, tcells, reference["relative"])
+        prediction.to_csv(dest / "transfer_prediction.csv", **write)
+        designer = designer_summary(own, moved)
+        designer.to_csv(dest / "transfer_designer.csv", **write)
+    for stale in ("own_batch_effect.csv", "batch_reference.csv"):  # replaced outputs
+        (dest / stale).unlink(missing_ok=True)
     _latex_tables(dest, decomposition, penalty, batches)
     _figure_bias(cells, batches, family)
     if len(penalty):
         _figure_transfer(penalty, batches, family)
+    batch_plots.all_figures(
+        family, batches, reference=reference, offsets=offsets, cells=cells,
+        penalty=penalty, designer=designer,
+    )  # fmt: skip
     manifest = dict(
         family=family, batches=batches, notes=spec.get("notes", ""),
         constants=spec.get("constants", {}),
@@ -431,7 +584,7 @@ def _latex_tables(dest: Path, decomposition, penalty, batches) -> None:
         r"\hline",
         "Path & Batches & Methods & "
         + " & ".join(rf"$\beta_{{\mathrm{{{_short(b, family)}}}}}$" for b in batches)
-        + r" & Interaction RMS & Cell SE & Method SD \\",
+        + r" & Interaction RMS & Sampling noise & Method SD \\",
         r"\hline",
     ]
     for _, r in decomposition.iterrows():
@@ -440,7 +593,7 @@ def _latex_tables(dest: Path, decomposition, penalty, batches) -> None:
         )
         lines.append(
             f"{r['Path']} & {r['batches'].count('+') + 1} & {r['n_methods']} & {offsets} & "
-            f"{r['interaction_rms']:.3f} & {r['cell_se']:.3f} & {r['method_sd']:.3f} \\\\"
+            f"{r['interaction_rms']:.3f} & {r['noise_rms']:.3f} & {r['method_sd']:.3f} \\\\"
         )
     lines += [r"\hline", r"\end{tabular}"]
     (dest / "own_two_way.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")

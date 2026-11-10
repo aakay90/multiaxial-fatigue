@@ -1,9 +1,0 @@
-Batch,curve,n,A_MPa,b,N_min,N_max
-Ti6Al4V,tension,6,545.26,-0.0020719,42965,1.0524e+05
-Ti6Al4V,torsion,4,1156.3,-0.069154,68593,4.2164e+05
-Ti6Al4V,tau/sigma at 1e+05,,0.97963,,,
-Ti6Al4V,tau/sigma at 1e+06,,0.83942,,,
-Ti6Al4V_Berto,tension,9,2299.9,-0.1106,11031,8.0842e+05
-Ti6Al4V_Berto,torsion,8,673.92,-0.034835,11669,5.3761e+05
-Ti6Al4V_Berto,tau/sigma at 1e+05,,0.70105,,,
-Ti6Al4V_Berto,tau/sigma at 1e+06,,0.83467,,,

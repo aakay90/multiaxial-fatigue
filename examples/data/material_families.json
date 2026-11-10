@@ -1,5 +1,5 @@
 {
- "_doc": "Batches of one material compared by examples/batch_comparison.py (issue #71). The unit is a workbook (material ID). Tests by different author groups are different batches, except Santus 2018 and Benedetti 2022 (one batch, decision d101). 'constants' maps a batch to a published-constants record (Calibrations/) used on its own run and when it is the design batch of a transfer.",
+ "_doc": "Batches of one material compared by examples/batch_comparison.py (issue #71). The unit is a workbook (material ID). Tests by different author groups are different batches, except Santus 2018 and Benedetti 2022 (one batch, decision d101). 'constants' maps a batch to a published-constants record (Calibrations/) used on its own run and when it is the design batch of a transfer. 'fabest_benchmark': true adds the scatter between the same-steel series of the FABEST source file as a yardstick.",
  "42CrMo4": {
   "batches": [
    "42CrMo4_QT",
@@ -9,7 +9,8 @@
   "constants": {
    "42CrMo4_Reis": "Calibrations/42CrMo4_Reis/SSF_published.json"
   },
-  "notes": "42CrMo4 +QT. 42CrMo4_QT: Santus 2018 and Benedetti 2022, one batch (d101); 42CrMo4_Reis: Anes/Reis 2014; 42CrMo4_FABEST: FABEST PBS series. SSF runs only with the surface published for the Reis batch: in sample on Reis, out of sample when Reis is the design batch."
+  "notes": "42CrMo4 +QT. 42CrMo4_QT: Santus 2018 and Benedetti 2022, one batch (d101); 42CrMo4_Reis: Anes/Reis 2014; 42CrMo4_FABEST: FABEST PBS series. SSF runs only with the surface published for the Reis batch: in sample on Reis, out of sample when Reis is the design batch.",
+  "fabest_benchmark": true
  },
  "Ti6Al4V": {
   "batches": [

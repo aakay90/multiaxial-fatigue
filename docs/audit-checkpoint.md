@@ -30,6 +30,15 @@ Ti6Al4V family added. `eval/load_error.py` secant bounded (|ln s| <= 10, bisecti
 snapshot of the branch before and after, 0 of 2991 outputs differ. Results regenerated for both
 families.
 
+Statistical redesign (same day, decision d104 proposed): `examples/batch_reference.py` (method-free
+strengths, relative strengths, FABEST yardstick), joint-bootstrap offsets, censored run-out check,
+transfer prediction and load factor in `examples/batch_comparison.py`, figures in
+`examples/batch_plots.py`; Kruskal-Wallis/BH removed. No pipeline or model code changed, so no
+regression snapshot was needed; results regenerated from the runs of the previous step (same
+commit of `src/`). Tests: `tests/test_batch_comparison.py` (11). Findings: batches differ mainly
+in axial strength; the transfer shift is method-free (observed = predicted to 0.001); Santus and
+Benedetti axial series differ by 10 %; Meneghetti tau/sigma is about 1 (data question, #24).
+
 Remaining: maintainer review of the PR; #24 decision on the `1_Ti6Al4V` Summary, which averages
 Meneghetti and Delahay properties although every failure is Meneghetti's (limit-based methods: RMS
 0.29 with it, 0.04 with Berto's limits).

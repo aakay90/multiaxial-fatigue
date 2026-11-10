@@ -26,6 +26,14 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
   `examples/data/batch_comparison/`, figures `docs/images/batch_comparison_*.png`, guide
   `docs/batch-comparison.md`. `tests/test_batch_comparison.py` fails when a method or a family
   workbook changes until the results are regenerated.
+- Statistical design revised (decision d104). New method-free part (`examples/batch_reference.py`):
+  Basquin strength at 1e5 cycles per batch, path and series; the scatter between the same-steel
+  series of the FABEST database as the yardstick of a batch difference; the relative strengths
+  that predict the batch offsets and the transfer shifts without any method. The batch offsets
+  get joint-bootstrap intervals (same specimens for all methods); the Kruskal–Wallis and
+  Benjamini–Hochberg tests are removed in favour of effect sizes; run-outs enter a censored
+  sensitivity check; a load factor covering 95 % of the tests compares own batch and transfer.
+  Six new figures per family (`examples/batch_plots.py`).
 - A transfer accepts `--constants` only for a published-constants record of the design batch
   (decision d103): SSF is assessed on FABEST and QT with the surface published for Reis.
 - Second family Ti6Al4V (`Ti6Al4V`, `Ti6Al4V_Berto`). Batches are author groups, Santus 2018 and

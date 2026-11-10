@@ -1,46 +1,80 @@
-# Cross-batch comparison of the methods
+# Cross-batch comparison
 
-Issue [#71](https://github.com/andreachiocca/multiaxial-fatigue/issues/71). Several workbooks are
-batches of the same material. This page asks two questions of every method:
+Issue [#71](https://github.com/andreachiocca/multiaxial-fatigue/issues/71). Several workbooks hold
+tests on the same material from different sources. This page asks:
 
-1. Does its error, measured on each batch with that batch's own calibration, change from one
-   batch to the next? If so, is the change specific to the method, or is it common to all methods?
-2. How well does it predict one batch from the constants, design set and master curve of another
-   batch (cross-batch transfer)?
+1. Do the batches of one material differ consistently, before any fatigue criterion is applied?
+2. Does a method's error change from batch to batch when it is calibrated on each batch in
+   turn, and is the change specific to the method?
+3. What happens when a batch is predicted from another batch (cross-batch transfer)?
 
-The first question measures how well a method fits a batch. The second measures how well it
-predicts a batch it was not calibrated on, which is what a user relying on handbook data does
-(CLAUDE.md, §1: "an error statistic on calibration tests measures the fit, not predictive
-accuracy").
+## Short answer (42CrMo4, three batches)
 
-## Families
+- **The batches differ mainly in their axial strength.** At $10^5$ cycles the axial strengths
+  are 478, 530 and 642 MPa (QT, Reis, FABEST). The torsion strengths are 393, 423 and 427 MPa,
+  and the two batches with multiaxial tests agree within 3 % on both multiaxial paths.
+- **Much of that difference is no larger than the scatter inside one steel.** In the FABEST
+  database, 27 axial series of a single steel, from four laboratories, span 484–658 MPa at
+  $10^5$ cycles. After dividing by the tensile strength, the three batches lie within that
+  range.
+- **Each batch shifts all methods together.** Calibrated on its own batch, every method moves
+  by nearly the same amount from one batch to the next. The shift can be computed from the S-N
+  data alone.
+- **The transfer shift does not depend on the method.** Predicting batch B from batch A changes
+  every method's bias by the same amount, equal to three decimals to a quantity computed from
+  the S-N curves. A transfer therefore tests the data of the two batches, not the methods.
+- **Direction matters for safety.** Calibrating on the softer QT batch is conservative for the
+  other two. Calibrating on Reis or FABEST is non-conservative for QT: the load must be reduced
+  by a further 15–25 % to cover 95 % of the QT tests.
 
-Tests by different author groups are different batches. The only exception is Santus 2018 with
-Benedetti 2022, which are one batch (decision [d101](decision-log.md#d101)). The comparison
-compares workbooks, declared per family in
-[`examples/data/material_families.json`](../examples/data/material_families.json). A family may
-map a batch to a published-constants record (`constants`). That record is used on the batch's own
-run and when the batch is the design side of a transfer (decision
-[d103](decision-log.md#d103)): this is how SSF, published for the Reis batch, is tested on the
-other two.
+These are descriptive results for one steel and three sources. They do not rank the methods in
+general.
 
-| Family | Batch | Source | Su / Sy (MPa) | Specimens | R = −1 failures (axial / torsion) | Multiaxial failures |
+## What is a batch?
+
+Maintainer decision [d101](decision-log.md#d101): tests by different author groups are different
+batches, except Santus 2018 and Benedetti 2022, which are one batch. Families are declared in
+[`examples/data/material_families.json`](../examples/data/material_families.json).
+
+| Family | Batch | Source | Su / Sy (MPa) | Specimens | R = −1 failures (A / T) | Multiaxial failures |
 | --- | --- | --- | --- | --- | --- | --- |
-| 42CrMo4 | `42CrMo4_QT` | Santus 2018 + Benedetti 2022 (one batch, d101) | 875 / 727 | solid, axial d = 5, torsion d = 14 mm | 27 / 9 (+ 9 torsion with mean shear) | none |
+| 42CrMo4 | `42CrMo4_QT` | Santus 2018 + Benedetti 2022 | 875 / 727 | solid, axial d = 5, torsion d = 14 mm | 27 / 9 (+ 9 torsion with mean shear) | none |
 | 42CrMo4 | `42CrMo4_Reis` | Anes/Reis 2014 | 1100 / 980 | solid, d = 6.3 / 7.5 mm | 6 / 5 | 8 in-phase, 6 at 90° |
-| 42CrMo4 | `42CrMo4_FABEST` | FABEST PBS series | 1111 / 1035 | thin-walled tube 8.1/7 mm | 20 / 20 | 18 in-phase, 21 at 90° |
-
-| Ti6Al4V | `Ti6Al4V` | Meneghetti 2018 (failures) + Delahay 2006 (4 run-outs) | Summary averages both: 1035 / 947.5 | — | 6 / 4 (lives over 0.39 / 0.79 decades) | none |
+| 42CrMo4 | `42CrMo4_FABEST` | FABEST, PBS series | 1111 / 1035 | thin-walled tube 8.1/7 mm | 20 / 20 | 18 in-phase, 21 at 90° |
+| Ti6Al4V | `Ti6Al4V` | Meneghetti 2018 (failures) + Delahay 2006 (4 run-outs) | Summary averages both: 1035 / 947.5 | — | 6 / 4 | none |
 | Ti6Al4V | `Ti6Al4V_Berto` | Berto 2015 | 978 / 894 | — | 9 / 8 (+ 31 torsion with mean shear) | none |
 
-By the author rule, `1_Ti6Al4V` mixes two batches. Its failures are all Meneghetti 2018, while
-its Summary averages the Meneghetti and Delahay properties: Su = (980 + 1090)/2 and
-Sigm1 = (500 + 652)/2 = 576 MPa. This is open in
-[#24](https://github.com/andreachiocca/multiaxial-fatigue/issues/24); the workbook is used as
-supplied.
+### What "batch" confounds
 
-The fatigue limits of `42CrMo4_Reis` and `42CrMo4_FABEST` are the authors' strengths at
-$10^6$ cycles (decisions [d100](decision-log.md#d100) and the FABEST conversion).
+A batch defined by its authors differs from the next one in several ways at once. For the three
+42CrMo4 batches (workbooks, `Experimental_Data/PROVENANCE.md` and the FABEST source file):
+
+| Factor | QT | Reis | FABEST | Separable with these data? |
+| --- | --- | --- | --- | --- |
+| Heat treatment (Su, MPa) | 875 | 1100 | 1111 | Partly: strengths can be divided by Su |
+| Specimen | solid; axial d = 5, torsion d = 14 mm | solid; d = 6.3 and 7.5 mm | tube 8.1/7 mm | No: one geometry per batch |
+| Stress gradient in torsion | yes (solid bar) | yes (solid bar) | almost none (thin wall) | No |
+| Shear stress reference | nominal elastic, surface | nominal elastic, surface | "net section", radius not stated (outer or mean: 7 %) | No |
+| Torsion failures above $S_y/\sqrt3$ | 11 % | 0 % | 5 % | — |
+| Surface finish | not recorded | not recorded | turned, two machining variants (FAB06x, FAB07x) | Only inside FABEST |
+| Laboratory and machine | one source group | one source group | PBS, Instron 8874 | Only inside the FABEST database |
+| Frequency (Hz) | 15–20 and 150 | not recorded | 5–39 | No |
+| Fatigue limits in the Summary | 433 / 344 at $2\times10^6$ (paper Table 12: 412 / 328 at $5\times10^6$) | 452 / 372: trend lines at $10^6$, extrapolated | 517 / 367: Basquin at $10^6$, below the run-outs | No: three definitions |
+
+So a difference between two of these batches cannot be assigned to the material. The FABEST
+database is the exception: it holds one steel tested in several laboratories, on several
+specimen types and finishes. It is used below as the yardstick.
+
+Two sub-series show the same thing inside a batch (`reference_series.csv`):
+
+- **QT.** The Santus axial series gives 457 MPa at $10^5$ cycles (95 % interval 437–471). The
+  Benedetti series gives 503 MPa (485–525). The two series of this "one batch" differ by 10 %,
+  more than the two machining variants of FABEST do (2 % axial, 1.5 % torsion, 3.5 % in-phase,
+  6 % out-of-phase).
+- **FABEST.** FAB06x and FAB07x differ in the turning parameters (cutter nose radius 0.4 and
+  0.8 mm, `Production` sheet).
+
+Options for the maintainer are listed under [Open questions](#open-questions).
 
 ## How to run
 
@@ -50,197 +84,291 @@ uv run python examples/batch_comparison.py analyse <tmp_dir>        # analysis o
 uv run python examples/batch_comparison.py check                    # are the committed results current?
 ```
 
-`run` calls `multifat-pipeline` once on the batches (own batch) and once per design batch with
-`--design-material` (transfer). `analyse` writes:
+`run` calls `multifat-pipeline` on each batch (own batch) and once per design batch with
+`--design-material` (transfer). `analyse` writes the tables to
+`examples/data/batch_comparison/<family>/` and the figures to
+`docs/images/batch_comparison_<family>_*.png`.
 
-- `examples/data/batch_comparison/<family>/`: the CSV tables, two LaTeX tables and `manifest.json`;
-- `docs/images/batch_comparison_<family>_bias.png` and `_transfer.png`.
-
-The manifest records the registered models, the implementation revision and the dataset
-fingerprints. `tests/test_batch_comparison.py` fails when one of them changes, so the results are
-regenerated with every new method, change of method revision or change of data
+The manifest records the registered models, the implementation revision, the supplied constants
+and the dataset fingerprints. `tests/test_batch_comparison.py` fails when one of them changes,
+so the results are regenerated with every new method or data change
 ([adding methods](adding-methods.md)).
 
-## Statistics
+| Module | Content |
+| --- | --- |
+| `examples/batch_reference.py` | method-free part: S-N strengths, ratios, FABEST yardstick |
+| `examples/batch_comparison.py` | pipeline runs, method statistics, staleness check |
+| `examples/batch_plots.py` | figures |
 
-All statistics use the load-equivalent error of the assessed failures (Flag 1):
+## Method
+
+### Quantities
+
+The method error is the load-equivalent error of an assessed failure,
 
 $$e_L = \ln\frac{1}{s^*}$$
 
-Here $s^*$ is the load factor that moves the test onto the method's life curve
-([#37](https://github.com/andreachiocca/multiaxial-fatigue/issues/37)). The errors are grouped by
-loading path: `A` (axial), `T` (torsion), `AT-IP` (in-phase tension–torsion), `AT-NP`
-(out-of-phase), with `+mean` for a non-zero mean stress. Batches are compared within a path only:
-pooling paths would compare the batches on different loads (Simpson's paradox).
+where $s^*$ scales the load so that the method predicts the observed life
+([#37](https://github.com/andreachiocca/multiaxial-fatigue/issues/37)). $e_L > 0$ is conservative.
+
+Loading paths: `A` (axial), `T` (torsion), `AT-IP` (in-phase tension–torsion), `AT-NP`
+(out-of-phase), with `+mean` for a non-zero mean stress. Batches are compared within a path
+only; pooling paths would compare the batches on different loads. On both multiaxial paths the
+two batches use the same ratio $\tau_a/\sigma_a = 1/\sqrt3$.
+
+**Load or life domain.** The comparison is made in the load domain. A life error is
+$k\,e_L$, with $k = -1/b$ the slope of the S-N curve, and $k$ differs between batches and paths
+(11–13 on the axial curves, 15–20 in torsion here). A life-domain comparison would mix the batch effect with
+the slope. As a guide, $e_L = 0.1$ is a factor of about 3 in life on the axial curves.
+
+### Method-free part
+
+`batch_reference.py` works on the R = −1 failures only:
+
+- **Strength** $S(10^5)$: Basquin fit of log amplitude on log life, per batch, path and series,
+  with a 95 % bootstrap interval. $10^5$ cycles lies inside the tested lives of every 42CrMo4
+  batch; a strength outside the tested lives is flagged `extrapolated`.
+- **Relative strength** $q(B\,|\,A)$: the mean of $\ln[\,\mathrm{amp}_i / S_{A}(N_i)]$ over the
+  tests of batch B on a path, where $S_A$ is the axial Basquin curve of batch A.
+- **FABEST yardstick**: $S(10^5)$ of every unnotched R = −1 axial and torsion series of the
+  FABEST source file, and the scatter of $\ln S$ between them.
+
+Why $q$ matters: for a damage parameter that is homogeneous of degree one in the loads and
+calibrated on the axial curve of batch A, the error of a test is
+
+$$e_L = \ln c_m + \ln\frac{\mathrm{amp}}{S_A(N)}$$
+
+with $c_m$ a constant of the method on that path. Two consequences follow, with no method
+involved:
+
+- own batch: the batch offsets are $q(b\,|\,b)$, centred over the batches compared;
+- transfer: the bias on B minus the bias on A is $q(B\,|\,A) - q(A\,|\,A)$.
+
+### Method part
 
 | Output | Statistic |
 | --- | --- |
-| `own_cells.csv` | per method, batch and path: $n$, bias $\bar e_L$ with a 95 % percentile-bootstrap interval (4000 resamples, fixed seed), SD, RMS, share within ±20 % of the load, interaction residual |
-| `own_batch_effect.csv` | per method and path: Kruskal–Wallis test of equal $e_L$ across batches ($n \ge 3$ per batch); Benjamini–Hochberg $q$ over the methods of the path |
-| `own_two_way.csv`, `own_two_way.tex` | per path and every subset of $\ge 2$ batches, on the methods present on all of them: additive decomposition of the cell biases |
-| `transfer_cells.csv` | per method, design → target pair and path: the statistics of `own_cells.csv` on every failure of the target |
-| `transfer_penalty.csv`, `transfer_summary.*` | per method and pair: RMS of $e_L$ own batch versus transfer, on the same tests (those the own-batch run assesses, paired by `Observation_id`) |
-| `batch_reference.csv` | method-free: Basquin fits of the R = −1 axial and torsion failures of each batch, and $\tau_a/\sigma_a$ at $10^5$ and $10^6$ cycles |
+| `own_cells.csv` | per method, batch and path: $n$, bias with a 95 % bootstrap interval, SD, RMS, share within ±20 % of the load |
+| `own_two_way.csv`, `own_offsets.csv` | additive decomposition of the cell biases per path, with joint-bootstrap intervals and the method-free prediction of each offset |
+| `own_runout_sensitivity.csv` | offsets with the run-outs entered as censored observations |
+| `transfer_cells.csv`, `transfer_penalty.csv` | transfer statistics, and RMS own batch against transfer on the same tests |
+| `transfer_prediction.csv` | transfer shift (median over the methods) against its method-free prediction |
+| `transfer_designer.csv` | load factor that covers 95 % of the tests, own batch against transfer |
 
-The additive decomposition is
+The decomposition is
 
-$$\bar e_{mb} = \mu + \alpha_m + \beta_b + (\alpha\beta)_{mb}, \qquad \sum_m \alpha_m = \sum_b \beta_b = 0$$
+$$\bar e_{mb} = \mu + \alpha_m + \beta_b + (\alpha\beta)_{mb}$$
 
-In it:
+with $\beta_b$ the batch offset common to all methods, $\alpha_m$ the method effect and
+$(\alpha\beta)_{mb}$ the method × batch interaction. It uses the methods that are finite on
+every assessed failure of the batches compared.
 
-- $\beta_b$ is the **batch offset**, common to all methods;
-- $\alpha_m$ is the method effect;
-- $(\alpha\beta)_{mb}$ is the method × batch interaction.
+### Statistical choices
 
-When the interaction RMS is of the order of the standard error of a cell mean, the batch only
-shifts every method by the same amount, and the ranking of the methods carries over from one
-batch to another. Rank correlations between batches are not reported: ties (the limit-based
-methods share one torsion error) and common offsets make them uninformative.
+- **Joint bootstrap.** All methods are evaluated on the same specimens, so their errors are
+  strongly correlated. The specimens are resampled within each batch and the same resample is
+  used for every method. This gives the interval of each offset and the size of the interaction
+  that sampling alone would produce (`noise_rms`).
+- **Effect sizes with intervals, not p-values.** An earlier version reported Kruskal–Wallis
+  tests with a Benjamini–Hochberg correction. They were removed:
+  - The specimens of one S-N curve share the lot, the machine and the laboratory. A test at
+    specimen level only says that two test series differ, which the intervals already show.
+  - With two or three batches, nothing can be inferred about a population of batches. A
+    random-effect model for the batch would have one or two degrees of freedom. The spread
+    between batches is therefore compared with an external yardstick, the FABEST series, not
+    tested.
+- **What an interval means.** It describes the tests of that batch. It does not include the
+  variation between series, which the FABEST yardstick shows to be larger.
+- **Small cells.** Reis has 5–8 failures per path. Its offsets have intervals of about ±0.03,
+  so a difference below about 0.05 between Reis and another batch cannot be resolved.
+- **Run-outs.** A run-out bounds $e_L$ from below. Where the damage parameter is homogeneous,
+  the bound is $\ln(DP/DP_\mathrm{fit})/d$ at the run-out life, and the bias is re-estimated by
+  maximum likelihood for a normal sample with right-censored values. This is a sensitivity
+  check, limited to the homogeneous methods.
+- **Multiple comparisons.** The conclusions rest on a few quantities: at most three offsets per
+  path and one interaction. The per-method intervals are given for reading, not for selecting
+  significant methods.
+- **Rank correlations between batches** are not reported: ties (the limit-based methods share
+  one torsion error) and the common offsets make them uninformative.
 
-### Cross-batch transfer
+### Kinds of evidence
 
-`multifat-pipeline --material B --design-material A` (decision [d102](decision-log.md#d102)) takes
-everything that describes the material's resistance from A:
-
-- the Summary properties;
-- the calibrated plane constants and the Basquin constants;
-- the design set and the master curve, or the native life fit.
-
-It then assesses every failure of B. The load histories of B, strains included, are those
-imported with B's own E and ν: they describe the tests, not the material model. The design rows
-(Flag 0) of the output are A's tests, identical to A's own run.
-
-### Caveats
-
-- The points of one S-N curve share the lot, the machine and the laboratory. They are not
-  independent, so the p-values and intervals are optimistic.
-- Some cells are small: `42CrMo4_Reis` has 5–8 failures per path.
-- The own-batch errors use a design set from the same batch. Only the transfer measures
-  prediction.
-- A batch offset can come from the material or from the test method. Examples are the specimen
-  geometry (solid or thin-walled), the reference radius of the shear stress, and how the
-  strengths at $10^6$ were obtained. The comparison cannot separate the two.
+| Result | Kind |
+| --- | --- |
+| Transfer reproduces the design batch's own design rows and master curve | numerical verification (`tests/test_transfer.py`) |
+| Statistics recover known offsets, shifts and censored means | numerical verification on synthetic data (`tests/test_batch_comparison.py`) |
+| Strengths, ratios, batch offsets, interaction | descriptive statistics of experimental scatter |
+| Own-batch errors | fit: the design set comes from the same batch |
+| Transfer errors | predictive validation, for these batch pairs only |
 
 ## Results: 42CrMo4
 
-Run of 10 November 2026: 43 methods ran on every batch. The other three:
+Run of 10 November 2026. 43 methods ran on every batch. TVEIT2025 was skipped (constants not
+supplied), GOLOS is out of scope, and SSF runs only where its published surface applies.
 
-- **TVEIT2025:** skipped, because its constants are not supplied.
-- **GOLOS:** skipped, because the loading is outside its scope.
-- **SSF:** runs only where its published surface applies: on Reis (in sample) and on FABEST
-  predicted from Reis (out of sample). The
-tables are in [`examples/data/batch_comparison/42CrMo4/`](../examples/data/batch_comparison/42CrMo4/).
+### The batches without any method
 
-![Own-batch bias per method, batch and loading path](images/batch_comparison_42CrMo4_bias.png)
+![S-N data of the batches](images/batch_comparison_42CrMo4_sn.png)
 
-**1. Own batch: the batch shifts all methods together.** The additive decomposition of the cell
-biases (`own_two_way.tex`):
+![Strength at 1e5 cycles per path](images/batch_comparison_42CrMo4_strength.png)
 
-| Path | Batches | Methods | $\beta_\mathrm{QT}$ | $\beta_\mathrm{Reis}$ | $\beta_\mathrm{FABEST}$ | Interaction RMS | Cell SE | Method SD |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| T | 3 | 33 | +0.097 | +0.015 | −0.112 | 0.043 | 0.022 | 0.141 |
-| AT-IP | 2 | 43 | — | +0.061 | −0.061 | 0.023 | 0.014 | 0.047 |
-| AT-NP | 2 | 42 | — | +0.095 | −0.095 | 0.036 | 0.017 | 0.157 |
+Strength at $10^5$ cycles (`reference_series.csv`, pooled series):
 
-- **The offsets are mostly common to all methods.** The interaction is about twice the standard
-  error of a cell mean, but smaller than the batch offsets and much smaller than the spread
-  between methods (except for in-phase loading).
-- **The batch matters as much as the method under in-phase tension–torsion.** There the batch
-  offset (±0.06, about ±6 % of the load) is larger than the method SD (0.047).
-- **The batch effect is significant almost everywhere.** It is significant for 33/33 methods in
-  torsion, 40/43 in-phase and 41/42 out-of-phase (Benjamini–Hochberg $q < 0.05$).
-- **The largest interactions are:**
-  - MOREL in torsion (FABEST −0.49);
-  - MWCM at 90° on Reis (+0.75);
-  - MWHS, whose design set is the torsion curve and which therefore deviates from the pattern of
-    the axially calibrated methods.
+| Path | QT | Reis | FABEST | Range (ln) |
+| --- | --- | --- | --- | --- |
+| A, MPa | 478 | 530 | 642 | 0.30 |
+| A / Su | 0.546 | 0.482 | 0.578 | 0.18 |
+| T, MPa | 393 | 423 | 427 | 0.08 |
+| AT-IP ($\sigma_a$), MPa | — | 476 | 493 | 0.03 |
+| AT-NP ($\sigma_a$), MPa | — | 496 | 502 | 0.01 |
+| T / A | 0.82 | 0.80 | 0.66 | — |
 
-**2. The offsets follow the batch's own torsion-to-axial strength ratio.** This ratio comes from
-the method-free Basquin fits (`batch_reference.csv`):
+The yardstick, from the FABEST database (`fabest_summary.csv`):
 
-| Batch | $\tau_a/\sigma_a$ at $10^5$ | at $10^6$ | Su (MPa) |
+| Series of one steel | Series | Laboratories | $S(10^5)$, MPa | SD of ln S | Range (ln) |
+| --- | --- | --- | --- | --- | --- |
+| Axial, all unnotched | 27 | 4 | 484–658 | 0.081 | 0.31 |
+| Axial, one drawing (tube 8.1/7 mm) | 7 | 3 | 561–655 | 0.063 | 0.15 |
+| Torsion, all unnotched | 3 | 2 | 397–432 | 0.046 | 0.09 |
+
+Reading:
+
+- **Torsion and multiaxial strengths agree between the batches**, within the scatter between
+  series of one steel.
+- **The axial strength differs by 30 %.** Dividing by Su removes about half of it. What remains
+  (range 0.18) is inside the range of the FABEST series (0.31).
+- **The torsion-to-axial ratio separates the tubes (0.66) from the solid bars (0.80–0.82).** All
+  three are above the von Mises value 0.577. A stress gradient in solid torsion bars raises the
+  nominal torsion strength, which fits the direction of the difference. The ratio is confounded
+  with the batch, so this stays a hypothesis.
+- **The axial strength over Su (0.48–0.58) is plausible for a quenched and tempered steel.**
+
+### Each method calibrated on its own batch
+
+![Batch offsets](images/batch_comparison_42CrMo4_offsets.png)
+
+| Path | Methods | $\beta_\mathrm{QT}$ | $\beta_\mathrm{Reis}$ | $\beta_\mathrm{FABEST}$ | Interaction RMS | From sampling | Method SD |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| T | 33 | +0.097 [0.067, 0.126] | +0.015 [−0.016, 0.044] | −0.112 [−0.137, −0.087] | 0.043 | 0.008 | 0.141 |
+| AT-IP | 43 | — | +0.061 [0.045, 0.077] | −0.061 | 0.023 | 0.004 | 0.047 |
+| AT-NP | 42 | — | +0.095 [0.074, 0.116] | −0.095 | 0.036 | 0.002 | 0.157 |
+
+- **The offsets are well determined** and follow the method-free prediction (crosses in the
+  figure): in torsion +0.113, +0.040 and −0.153 against the observed +0.097, +0.015 and −0.112.
+  The prediction is exact only for methods calibrated on the axial curve; the limit-based
+  methods also depend on the Summary limits.
+- **The interaction is real but small.** It is 5–18 times what sampling would produce, yet two
+  to three times smaller than the offsets and, except in-phase, than the spread between methods.
+- **In-phase, the batch matters as much as the method**: the offset (±0.06) exceeds the method
+  SD (0.047).
+- **Run-outs do not change the picture.** Entering them as censored observations moves the
+  offsets by at most 0.014 (`own_runout_sensitivity.csv`).
+
+![Method biases on one batch against another](images/batch_comparison_42CrMo4_interaction.png)
+
+Each point is a method. A pure batch offset puts all points on a line of unit slope. The
+methods that leave the line most are MOREL (torsion), MWCM and LI (out-of-phase) and MWHS, whose
+design curve is the torsion curve.
+
+### Predicting one batch from another
+
+![Median transfer bias](images/batch_comparison_42CrMo4_transfer_bias.png)
+
+Shift of the bias when batch B is predicted from batch A, median over the methods, against the
+method-free prediction $q(B|A) - q(A|A)$ (`transfer_prediction.csv`):
+
+| Design → target | Path A | Path T | Path AT-IP | Path AT-NP |
+| --- | --- | --- | --- | --- |
+| QT → Reis | +0.112 / +0.112 | +0.044 / +0.044 | — | — |
+| QT → FABEST | +0.298 / +0.298 | +0.039 / +0.039 | — | — |
+| Reis → QT | −0.088 / −0.088 | −0.020 / −0.020 | — | — |
+| Reis → FABEST | +0.191 / +0.191 | −0.007 / −0.007 | +0.029 / +0.030 | −0.015 / −0.015 |
+| FABEST → QT | −0.286 / −0.286 | −0.023 / −0.023 | — | — |
+| FABEST → Reis | −0.189 / −0.189 | +0.006 / +0.006 | −0.030 / −0.030 | +0.012 / +0.012 |
+
+(observed / predicted)
+
+- **The shift is the same for every method** (quartiles within 0.01) and equals the prediction.
+  A transfer between batches measures how the S-N data of the two batches lie against each
+  other. It does not discriminate between methods; their ranking in a transfer is inherited
+  from their own-batch bias.
+- **Nearly all of the shift is on the axial path**, in line with the method-free comparison.
+- **Direction.** From QT to the stronger batches the median bias is +0.24 to +0.25
+  (conservative). From Reis or FABEST to QT it is −0.09 and −0.17 (non-conservative). Between
+  Reis and FABEST it is +0.13 and −0.01.
+
+![Load factor covering 95 % of the tests](images/batch_comparison_42CrMo4_designer.png)
+
+The load factor $\gamma_{95} = \exp[-(\bar e_L - 1.645\,s)]$ is the factor by which the load
+allowed by a method must be divided so that 95 % of the tests are on the safe side, under a
+normal model of $e_L$ (`transfer_designer.csv`, median over the methods, same tests):
+
+| Target | Own batch | From QT | From Reis | From FABEST |
+| --- | --- | --- | --- | --- |
+| QT | 1.10 | — | 1.26 | 1.35 |
+| Reis | 1.08 | 0.92 | — | 1.14 |
+| FABEST | 1.17 | 0.96 | 1.09 | — |
+
+Without tests on the batch, a designer who takes the constants from a stronger lot of the same
+steel needs 15–25 % more margin on the load.
+
+### SSF on a batch it was not fitted on
+
+The SSF surface is published for the Reis batch (decision [d103](decision-log.md#d103)). Applied
+to FABEST with Reis's torsion curve (`transfer_cells.csv`):
+
+| Path ($n$) | SSF bias | SSF RMS | Median RMS, other 43 methods |
 | --- | --- | --- | --- |
-| QT | 0.82 | 0.87 | 875 |
-| Reis | 0.80 | 0.85 | 1100 |
-| FABEST | 0.66 | 0.72 | 1111 |
+| T (20) | −0.003 | 0.040 | 0.089 |
+| AT-IP (18) | +0.002 | 0.040 | 0.192 |
+| AT-NP (21) | −0.028 | 0.075 | 0.167 |
+| A (20) | +0.168 | 0.172 | 0.193 |
 
-The thin-walled FABEST tubes have the lowest ratio; the solid QT and Reis specimens are close to
-each other. Whether this difference is a property of the material or of the specimens (stress
-gradient in solid torsion bars, the shear reference radius of the tubes) cannot be decided from
-these data.
-
-![Own batch against cross-batch prediction, same tests](images/batch_comparison_42CrMo4_transfer.png)
-
-**3. Transfer: prediction is worse than fit, and the direction of the error depends on the
-batch.** These are medians over the 43 methods, on the tests each own-batch run assesses
-(`transfer_penalty.csv`):
-
-| Design → target | RMS own | RMS transfer | Methods worse | Median bias (transfer) |
-| --- | --- | --- | --- | --- |
-| QT → Reis | 0.159 | 0.256 | 100 % | +0.244 |
-| QT → FABEST | 0.096 | 0.265 | 91 % | +0.246 |
-| Reis → FABEST | 0.096 | 0.171 | 84 % | +0.127 |
-| FABEST → Reis | 0.159 | 0.080 | 16 % | −0.012 |
-| Reis → QT | 0.167 | 0.206 | 53 % | −0.088 |
-| FABEST → QT | 0.167 | 0.197 | 65 % | −0.165 |
-
-- **Calibrating on the weaker QT batch (Su 875 MPa) is conservative for the stronger batches.**
-  The bias is about +0.25, i.e. the tests sustain loads about 28 % higher than predicted.
-- **Calibrating on Reis or FABEST is non-conservative for QT.** The bias is −0.09 and −0.17.
-  Using data from a stronger lot of the same steel is the unsafe direction.
-- **Reis and FABEST, the two high-strength batches, transfer well.** Reis predicted from FABEST is
-  even better than Reis on its own: its design set has 6 axial failures over 1.6 decades of life,
-  against FABEST's 20.
-- **The method ranking is fairly stable.** The weighted RMS over the six pairs correlates with
-  the own-batch RMS (Spearman 0.67, `transfer_summary.csv`).
-  - The methods that transfer best are MMMH (RMS 0.135, the same as its own-batch value), BP,
-    GAM, MMP and SWT/KUJAWSKI2021 (0.17).
-  - LI (0.47) and MWCM (0.41) transfer worst.
-
-**4. SSF on a batch it was not fitted on.** The surface published for Reis (Anes et al. 2014) was
-applied to FABEST with Reis's torsion curve, out of sample (`transfer_cells.csv`):
-
-| Path ($n$) | SSF bias | SSF RMS | Median RMS, other 43 methods | SSF rank |
-| --- | --- | --- | --- | --- |
-| T (20) | −0.003 | 0.040 | 0.089 | 1 |
-| AT-IP (18) | +0.002 | 0.040 | 0.192 | 1 |
-| AT-NP (21) | −0.028 | 0.075 | 0.167 | 1 |
-| A (20) | +0.168 | 0.172 | 0.193 | 5 |
-
-On Reis itself, in sample, its RMS is 0.04 on every path. SSF is skipped on QT, whose torsion
-tests with a mean shear are outside the R = −1 scope of its surface.
-
-Part of this success comes from the data. The torsion curves of Reis and FABEST almost coincide
-(423 and 427 MPa at $10^5$ cycles), while their axial curves do not (532 and 643 MPa). A method
-whose design curve is the torsion curve therefore carries the multiaxial behaviour over almost
-unchanged; MWHS, also designed on torsion, behaves likewise. Between these two high-strength
-batches, the axial curve is the part that changes.
-
-These numbers are for one steel and three laboratories. They describe the batch-to-batch
-scatter that a design with handbook data has to cover; they do not rank the methods in general.
+The explanation is in the method-free comparison: the torsion and multiaxial curves of Reis and
+FABEST coincide, and SSF is designed on the torsion curve. Its error appears on the axial path,
+where the two batches differ. On Reis itself (in sample) its RMS is 0.04 on every path. SSF is
+skipped on QT, whose torsion tests with a mean shear are outside its R = −1 scope.
 
 ## Results: Ti6Al4V
 
-![Own batch against cross-batch prediction, Ti6Al4V](images/batch_comparison_Ti6Al4V_transfer.png)
+![Strength per path, Ti6Al4V](images/batch_comparison_Ti6Al4V_strength.png)
 
-All assessed failures are torsional. Only pure torsion is shared by both batches; Berto's 31
-torsion tests with a mean shear appear in `own_cells.csv` but have no counterpart.
+Only pure torsion is assessed on both batches.
 
-- **Decomposition.** There are 31 methods on both batches. The batch offsets are ±0.186, and the
-  interaction RMS is 0.028, below the cell SE of 0.037: the batch shifts every method equally.
-- **Transfer.** These are medians over the methods, on the same tests:
+- **Offsets.** ±0.186 [0.141, 0.232] on 31 methods, against a method-free prediction of ±0.158.
+  The interaction is 0.028, with 0.002 from sampling.
+- **Transfer.** The shift equals the prediction: +0.148 (A) and −0.134 (T) from `Ti6Al4V` to
+  Berto, −0.227 and +0.147 the other way.
+- **The `Ti6Al4V` design set is not identifiable.** Its 6 axial failures span 0.39 decades of
+  life, with a fitted slope $b = -0.002$; its 4 torsion failures give a strength interval of
+  512–4440 MPa. FS, FIN, MDC, MMCCM and LIUMAHADEVAN cannot be calibrated on it.
+- **Two points look like data questions, not batch effects**
+  ([#24](https://github.com/andreachiocca/multiaxial-fatigue/issues/24)):
+  - The Meneghetti torsion amplitudes (474–550 MPa) equal the axial ones (523–550 MPa) at
+    similar lives, a ratio $\tau_a/\sigma_a \approx 1$. Berto's ratio is 0.70. A ratio near 1
+    is unusual for a wrought alloy and should be checked against the paper (for instance,
+    whether the torsion values are equivalent stresses).
+  - The Summary of `1_Ti6Al4V` averages the Meneghetti and Delahay properties, although every
+    failure is Meneghetti's. With it the limit-based methods have an RMS of 0.29 in torsion;
+    with Berto's limits, 0.04.
 
-  | Design → target | RMS own | RMS transfer | Median bias |
-  | --- | --- | --- | --- |
-  | Ti6Al4V → Ti6Al4V_Berto | 0.338 | 0.321 | +0.028 |
-  | Ti6Al4V_Berto → Ti6Al4V | 0.294 | 0.075 | +0.001 |
+## Open questions
 
-- **The Meneghetti design set is barely identifiable.** Its 6 axial failures span 0.39 decades of
-  life, with a fitted slope b = −0.002. As a result:
-  - FS, FIN, MDC, MMCCM and LIUMAHADEVAN skip the transfer from it;
-  - predicting Ti6Al4V from Berto's curve and Summary is better than using its own.
-- **The Summary limits matter for the limit-based methods.** With the averaged
-  Meneghetti + Delahay limits of `1_Ti6Al4V` (576 MPa), their RMS is 0.29. With Berto's limits
-  (475.7 / 388.3 MPa) it is 0.04. This is evidence for #24: the averaged limits do not describe
-  the Meneghetti tests.
+For the maintainer:
 
+1. **Vocabulary.** "Batch" as used here is a source: a material lot and a test series
+   (specimen, machining, laboratory) together. Options:
+   - keep the definition, and state on every result that a batch difference includes the
+     specimen and the laboratory (done on this page);
+   - add a *series* level to the workbooks (FABEST already has `Curve ID`), so that every
+     comparison can report the scatter inside a source.
+2. **Santus and Benedetti.** Their axial series differ by 10 % at $10^5$ cycles, with
+   non-overlapping intervals. Keep them as one batch (d101), or report them as two series of
+   one batch?
+3. **FABEST as a designed comparison.** The database holds the same steel in five laboratories.
+   Importing its other unnotched series
+   ([#65](https://github.com/andreachiocca/multiaxial-fatigue/issues/65)) would be the only way,
+   with the available data, to separate the laboratory and the specimen from the material. The
+   yardstick above reads those series from the source file without importing them. Whether all
+   FABEST series come from one heat should be confirmed with the database authors.
+4. **Ti6Al4V.** The two data questions above.
