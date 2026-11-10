@@ -30,6 +30,10 @@ Repository choices:
         200 blocks (distance to its position 200 blocks earlier <= 0.01 times its path length in
         those blocks; in a steady cycle it moves back and forth, in a shakedown one way only), and
         the mean damage per block of the last 200 blocks is within 0.1 % of the 200 blocks before.
+        A back-stress that swings in every block can still creep one way, and the peak of beta
+        over the block then sinks until a shakedown. So the steady state is not accepted while the
+        trend of that peak (difference of its means over the two windows) reaches zero before the
+        extrapolated failure and within the remaining blocks; the integration goes on instead.
         The life is extrapolated, N = n + (1 - D) / mean dD.
     After 60000 blocks the life is extrapolated in the same way, with a warning. Comparing only
     two consecutive blocks, as before November 2026, stopped during slow shakedowns and returned
@@ -154,8 +158,9 @@ def _block_life(
 
     The integration ends at failure (D >= 1 within a block), at shakedown (a block without any
     damage increment: the back-stress no longer moves, so every later block is the same) or in a
-    cyclic steady state (the back-stress returns to where it was a window earlier and the mean
-    damage per block no longer changes); otherwise after max_blocks blocks.
+    cyclic steady state (the back-stress returns to where it was a window earlier, the mean
+    damage per block no longer changes, and the peak of beta is not heading for zero within reach);
+    otherwise after max_blocks blocks.
     """
     n = comps[0].size
     I1 = (comps[0] + comps[1] + comps[2]).tolist()
@@ -168,11 +173,13 @@ def _block_life(
     D = 0.0
     block_damage: list[float] = []
     block_movement: list[float] = []  # path length of the back-stress within each block
+    block_beta: list[float] = []  # peak of beta over the integrated points of each block
     alpha_end = [list(alpha)]  # back-stress at the end of each block (index 0: the start)
     block = 0
     for block in range(1, max_blocks + 1):
         D_start = D
         movement = 0.0
+        beta_peak = -math.inf
         for i in range(n):
             hxx = s_xx[i] - alpha[0]
             hyy = s_yy[i] - alpha[1]
@@ -185,6 +192,8 @@ def _block_life(
             )
             beta = (sigma_e + A * I1[i] - f_m1) / f_m1
             D_previous = D
+            if i > 0 and beta > beta_peak:
+                beta_peak = beta
             if i > 0 and beta >= 0 and sigma_e > 1e-14:
                 dI1 = I1[i] - I1[i - 1]
                 dxx = s_xx[i] - s_xx[i - 1]
@@ -223,6 +232,7 @@ def _block_life(
         damage = D - D_start
         block_damage.append(damage)
         block_movement.append(movement)
+        block_beta.append(beta_peak)
         alpha_end.append(list(alpha))
         if block >= 2 and damage <= 0.0:
             return TveitLife(math.inf, "shakedown", block)
@@ -234,7 +244,17 @@ def _block_life(
             last = sum(block_damage[-WINDOW:]) / WINDOW
             before = sum(block_damage[-2 * WINDOW : -WINDOW]) / WINDOW
             if drift <= tol_alpha * moved and abs(last - before) <= tol_damage * last:
-                return TveitLife(block + (1 - D) / last, "cyclic_steady_state", block)
+                # A back-stress that swings in every block can still creep one way and end in a
+                # shakedown. Keep integrating when the trend of the peak of beta reaches zero before
+                # the extrapolated failure and within the remaining blocks.
+                slope = (sum(block_beta[-WINDOW:]) - sum(block_beta[-2 * WINDOW : -WINDOW])) / (
+                    WINDOW * WINDOW
+                )
+                remaining = (1 - D) / last
+                if not (
+                    slope < 0.0 and block_beta[-1] / -slope < min(remaining, max_blocks - block)
+                ):
+                    return TveitLife(block + remaining, "cyclic_steady_state", block)
     last = sum(block_damage[-WINDOW:]) / min(WINDOW, len(block_damage))
     if last <= 0.0:
         return TveitLife(math.inf, "max_block_extrapolation", block)
