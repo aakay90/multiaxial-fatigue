@@ -250,6 +250,8 @@ source of truth.
 | `src/multifat/models/` | Criteria, plane adapter, registry and source metadata |
 | `src/multifat/eval/` | Plane search, calibration, material fits, life curves, fatigue index error |
 | `src/multifat/report/` | CSV export, observation identities and common subsets |
+| `src/multifat/history/` | General load histories: time-history contract, rainflow, events, damage per event and Miner accumulation into a life, and an assessment table per FE node ([spec](docs/load-histories.md)) |
+| `src/multifat/fe/` | FE histories: CSV exchange, Abaqus nodal reports, Ansys text and optional native solid RST conversion, HDF5 store and VTK importer ([CSV and solver importers](docs/fe-csv-format.md#solver-importers), [file spec](docs/fe-input-format.md); extras `fe`, `ansys`) |
 | `tests/` | Paper reproductions, analytical and regression tests, optional material sweep |
 | `tools/` | Doc generators, documentation check, regression snapshot, dataset install and audit |
 
@@ -269,7 +271,7 @@ methods keep the RSS convention.
 
 The CSVs in `Results/archive/pre-audit/` predate the numerical audit and are kept as history only
 (see [Results/README.md](Results/README.md)). The experimental collection is the revised
-October 2026 set (upstream 71eaac3, 15 workbooks, of which 7 fatigue-limit sets and 2 notched-only).
+October 2026 set (upstream 71eaac3, 15 workbooks, of which 7 fatigue-limit sets and 2 notched-only), plus `16_42CrMo4_FABEST` from the FABEST database (doi:10.5281/zenodo.23359038).
 The provenance of each workbook, with its open questions, is in
 [Experimental_Data/PROVENANCE.md](Experimental_Data/PROVENANCE.md).
 
