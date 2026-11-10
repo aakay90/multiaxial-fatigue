@@ -62,6 +62,7 @@ confirmed by T. Grossi on 2026-10-19 (decision d061).
 
 - 42CrMo4 and Ti6Al4V: confirm whether the Anes/Reis and Berto rows should remain separated as distinct batch workbooks
   (`14_42CrMo4_Reis.xlsx` and `15_Ti6Al4V_Berto.xlsx`) or consolidated into the primary files.
+  For 42CrMo4 they stay separate: the three workbooks are the batches compared in issue #71.
 - AISI316L: the Braun Summary row gives 387.8 MPa as tensile fatigue limit at R = 0; Braun Fig. 13(i)
   prints it as the stress range Delta sigma_R,50% at 1e6 cycles (amplitude 193.9 MPa). Averaged with
   Janssens' 241 MPa (R = -1) it gives Sigm1 = 314.4 MPa, which the importer does not use (stress-ratio
@@ -144,6 +145,29 @@ transverse hole) and fretting curves. Their axial R = -1 strengths at 1e6 cycles
 - Whether the shear stress of the hollow specimens refers to the outer surface or to the mean wall
   radius ("related to net section") is not stated. Values are used as given.
 
+## 14_42CrMo4_Reis.xlsx: R = -1 fatigue limits (overlay, 2026-11-10)
+
+**Maintainer decision d100 (issue #71).** The Summary had no fatigue limits, so the 22 limit-based
+methods and WANG2022 skipped this batch. As for FABEST, the limits are the authors' strengths at
+N = 1e6 from their own S-N trend lines: Anes, Reis, Li, Fonte, de Freitas, Int. J. Fatigue 62 (2014)
+21-33, doi:10.1016/j.ijfatigue.2013.05.004, Table 5 p. 28, case 1 at N = 1e6:
+
+| Limit | Value | Trend line (Table 4, p. 27) |
+| --- | --- | --- |
+| Sigm1 (push-pull, R = -1) | 452 MPa | sigma_a = 1204.3 N^-0.071 (case 1, pure axial) |
+| Taum1 (R = -1) | 372 MPa | tau_a = 864.78 N^-0.061 (case 2, pure shear) |
+
+The IJF 62 paper analyses the same Reis tests as the two Summary sources (the SSF surface is fitted
+on them, `Calibrations/42CrMo4_Reis/SSF_published.json`).
+
+- The supplied workbook is unchanged. The values are a new Summary source row (row 4, with the
+  column `Axial fatigue limit loading` = push-pull), added by
+  `src/multifat/imp/overlay_files/14_42CrMo4_Reis.overlay.json`; `--no-overlay` returns the
+  workbook without limits.
+- The longest R = -1 failures reach 2.7e5 (axial) and 3.2e5 cycles (torsion), so the values at
+  1e6 extrapolate the authors' trend lines; they are finite-life strengths, not staircase limits.
+- Ratio Taum1/Sigm1 = 0.823, against 0.794 (QT) and 0.709 (FABEST) (issue #71).
+
 ## 42CrMo4_QT.xlsx
 
 | Source (as cited in workbook) | Plain failures | Plain run-outs | Notched | Where the data are printed | How read |
@@ -167,6 +191,9 @@ Material constants printed in the sources:
   σa = 103 + 859.9·N_f^-0.066 MPa; strengths at 5×10^6 cycles: 412 MPa (axial), 328 MPa (torsion).
   The paper says its supplies are distinct from those of its ref. [17]; it does not say they are the Santus
   2018 bars.
+- **Maintainer decision d101 (2026-11-10, issue #71):** the Santus 2018 and Benedetti 2022 tests of this
+  workbook are one batch, and `42CrMo4_QT` is treated as one batch in the cross-batch comparison
+  (`examples/data/material_families.json`).
 
 Known issues:
 
