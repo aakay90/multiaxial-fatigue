@@ -8,6 +8,7 @@ so it follows a copy of that file and never applies to an edited one.
 import hashlib
 import json
 from pathlib import Path
+import warnings
 
 import pytest
 from openpyxl import load_workbook
@@ -17,6 +18,7 @@ from multifat.imp.experimental_data import (
     load_material_workbook,
 )
 from multifat.imp.overlays import OverlayError, apply_overlay_to_workbook, overlay_path
+from multifat.imp.schema import ValidationReport, workbook_files
 from multifat.report.subsets import dataset_fingerprint
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -93,7 +95,43 @@ def test_modified_workbook_is_not_overlaid(tmp_path):
     copy = tmp_path / "8_AISI316L.xlsx"
     wb.save(copy)  # same content, different bytes: no overlay is written against it
     assert overlay_path(copy) is None
-    assert apply_overlay_to_workbook(wb, copy) is None
+    with pytest.warns(RuntimeWarning, match="overlay was not applied"):
+        assert apply_overlay_to_workbook(wb, copy) is None
+
+    report = ValidationReport(file=copy.name)
+    with pytest.warns(RuntimeWarning, match="overlay was not applied"):
+        load_material_workbook(copy, report=report)
+    assert any("overlay was not applied" in warning for warning in report.warnings)
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        load_material_workbook(copy, overlay=False)
+    assert not [w for w in caught if issubclass(w.category, RuntimeWarning)]
+
+    renamed = tmp_path / "other_name.xlsx"
+    wb.save(renamed)
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        assert apply_overlay_to_workbook(wb, renamed) is None
+    assert not [w for w in caught if issubclass(w.category, RuntimeWarning)]
+
+
+def test_experimental_data_manifest_is_current():
+    manifest_path = FOLDER / "MANIFEST.json"
+    assert manifest_path.is_file(), "Experimental_Data/MANIFEST.json is missing"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    files = workbook_files(FOLDER)
+    assert set(manifest) == {p.name for p in files}
+    for path in files:
+        entry = manifest[path.name]
+        assert entry["sha256"] == _sha256(path), (
+            f"{path.name}: SHA-256 differs from MANIFEST.json; "
+            "supplied workbooks must not be edited in place"
+        )
+        (block,) = load_material_workbook(path).values()
+        assert entry["dataset_fingerprint"] == dataset_fingerprint(
+            block
+        ), f"{path.name}: dataset_fingerprint differs from MANIFEST.json"
 
 
 # The five uniaxial and one non-proportional PSI rows were added from the

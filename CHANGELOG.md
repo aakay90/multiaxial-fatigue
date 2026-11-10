@@ -8,6 +8,11 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ### Data
 
+- Workbook integrity checks (issue #75): `Experimental_Data/MANIFEST.json` records the SHA-256 and
+  post-overlay `dataset_fingerprint` of every supplied workbook (`tests/test_dataset_overlays.py`
+  enforces that supplied bytes do not drift without updating the manifest), and loading a file
+  whose hash does not match an overlay while its filename matches one now emits a `RuntimeWarning`
+  and appends a warning to `ValidationReport.warnings`.
 - New workbook `16_42CrMo4_FABEST.xlsx`, a third 42CrMo4 +QT batch, from the FABEST database
   (FAB_v20261014, doi:10.5281/zenodo.23359038, CC BY 4.0; #65). It holds the PBS series of plain hollow
   specimens: 79 failures and 10 run-outs, in axial, torsion, and in-phase and 90° out-of-phase
@@ -27,6 +32,10 @@ checked against its original publication; changes to numerical outputs are liste
 
 ### Packaging and tooling
 
+- Documentation and tool CLI checking (issue #79): `tools/check_docs.py` now parses fenced
+  `tools/*.py` shell invocations against each script's `build_parser()`; `AGENTS.md`,
+  `CONTRIBUTING.md`, `docs/user-guide.md` and `docs/adding-methods.md` are aligned on overlays,
+  the `imp/schema.py` rule, `scripts/` compatibility shims, and `tools/regression_snapshot.py run <dir>`.
 - The package is `multifat` in a `src/` layout with a `pyproject.toml` (hatchling) and a `uv.lock`;
   the requirements files are gone. Console scripts `multifat-calibrate`, `multifat-run`,
   `multifat-compare`, `multifat-pipeline`; the standalone scripts in `scripts/` are thin shims for them.

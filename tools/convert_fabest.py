@@ -27,9 +27,9 @@ Usage: uv run python tools/convert_fabest.py [source.xlsm] [output.xlsx]
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import math
-import sys
 from pathlib import Path
 
 import openpyxl
@@ -176,9 +176,20 @@ def convert(source: Path = SOURCE, output: Path = OUTPUT) -> dict:
     )
 
 
-if __name__ == "__main__":
-    args = [Path(a) for a in sys.argv[1:]]
-    info = convert(*args)
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("source", nargs="?", type=Path, default=SOURCE)
+    parser.add_argument("output", nargs="?", type=Path, default=OUTPUT)
+    return parser
+
+
+def main() -> None:
+    args = build_parser().parse_args()
+    info = convert(args.source, args.output)
     for k, v in info.items():
         print(f"{k}: {v}")
     assert math.isfinite(info["Sigm1"]) and math.isfinite(info["Taum1"])
+
+
+if __name__ == "__main__":
+    main()
