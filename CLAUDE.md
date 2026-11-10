@@ -145,6 +145,9 @@ the generators after touching the catalogue or a model's declared parameters.
      (MWHS).
    - The master curve `DP = A N^b` is fitted on that set (`eval/fitting.py`).
    - Every other case is then evaluated.
+   - Cross-batch transfer (`--design-material A`, `evaluate_model(design_data=...)`, issue #71):
+     the Summary, constants, design set and master curve come from batch A, and only the tests
+     of the other batch are scored; outputs are `<material>_from_<A>`.
 5. **Write** (`run.write_variant`). One CSV per model and variant.
    - `Flag`: 0 = design, 1 = assessed, 2 = run-out.
    - Error columns: `Error_ln`, `Error_log10_dp` and `Error_load`, the load-equivalent error
