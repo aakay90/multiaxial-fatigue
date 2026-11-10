@@ -94,6 +94,21 @@ DP $= \tau_{eqv}$ (MPa), with the cycle sampled at 4096 points:
      therefore **in-sample**: their errors measure the fit, not prediction (the paper's case 6 is
      the only test not used in the fit).
    - The master curve is fitted on the workbook's pure torsion failures.
+3. **Cross-batch use (decision d103, issue #71).** The surface may also be applied to another
+   batch of the same steel through a transfer with 42CrMo4_Reis as the design batch, which is the
+   only context in which the record is used outside its own workbook:
+
+       multifat-pipeline --material 42CrMo4_FABEST --design-material 42CrMo4_Reis --models SSF \
+           --constants Calibrations/42CrMo4_Reis/SSF_published.json
+
+   The master curve is then Reis's pure torsion curve, and the results are **out of sample**.
+   - FABEST reaches axial amplitudes of 800 MPa, beyond the 737 MPa of the fit, so Eq. (31) is
+     extrapolated there; the method warns.
+   - The extrapolated cubic is not monotonic in the load, so the load-error search falls back to
+     bisection (`eval/load_error.py`).
+   - On 42CrMo4_QT, SSF is skipped: its torsion tests with a mean shear are outside the R = −1
+     scope.
+   - Results: [cross-batch comparison](../batch-comparison.md).
 
 ## Worked example
 

@@ -59,3 +59,8 @@ no failure fingerprint. `42CrMo4_Reis/SSF_published.json` is the stress scale fa
 Anes et al. (2014), Eq. (31), which was fitted on the tests of that workbook (in-sample).
 
     multifat-pipeline --material 42CrMo4_Reis --models SSF --constants Calibrations/42CrMo4_Reis/SSF_published.json
+
+A cross-batch transfer with 42CrMo4_Reis as the design batch accepts the same record (decision
+d103, issue #71); it is the only supplied record a transfer accepts:
+
+    multifat-pipeline --material 42CrMo4_FABEST --design-material 42CrMo4_Reis --models SSF --constants Calibrations/42CrMo4_Reis/SSF_published.json

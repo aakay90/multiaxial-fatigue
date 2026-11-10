@@ -70,8 +70,9 @@ ledgers.
 | [`d098`](#d098) | 2026-11-06 | **Active** | Whole-branch safeguards | Validate CSV row width before pandas projection; atomic output; require shared scalar load functions. |
 | [`d099`](#d099) | 2026-11-06 | **Active** | In-house Ansys fatigue benchmark | Repository purged of external repository fixtures; in-house PLANE183 2-step fatigue cycle generated on WorkstationUniTN. |
 | [`d100`](#d100) | 2026-11-10 | **Active** | 42CrMo4_Reis fatigue limits | Sigm1 = 452, Taum1 = 372 MPa: the authors' trend lines at 1e6 (Anes IJF 62 Table 5), by overlay, as for FABEST. |
-| [`d101`](#d101) | 2026-11-10 | **Active** | 42CrMo4 batches | Santus 2018 and Benedetti 2022 are one batch (`42CrMo4_QT`); a batch is one workbook; the family is declared in `examples/data/material_families.json`. |
+| [`d101`](#d101) | 2026-11-10 | **Active** | Batches | Tests by different author groups are different batches; Santus 2018 and Benedetti 2022 are one batch (`42CrMo4_QT`). Families (42CrMo4, Ti6Al4V) in `examples/data/material_families.json`. |
 | [`d102`](#d102) | 2026-11-10 | **Active** | Cross-batch transfer | `--design-material`: Summary, constants, design set and master curve from one batch, every failure of another assessed. |
+| [`d103`](#d103) | 2026-11-10 | **Active** | Published constants in a transfer | A published-constants record of the design batch (SSF of 42CrMo4_Reis) is accepted with `--design-material`; no other supplied constants. |
 
 ---
 
@@ -482,9 +483,9 @@ ledgers.
 
 ### d101
 * **Date:** 2026-11-10
-* **Topic:** Definition of a batch (42CrMo4)
+* **Topic:** Definition of a batch
 * **Status:** Active
-* **Decision:** A batch is one workbook. The Santus 2018 and Benedetti 2022 tests of `42CrMo4_QT` are one batch (maintainer). The 42CrMo4 family is `42CrMo4_QT`, `42CrMo4_Reis`, `42CrMo4_FABEST`, declared in `examples/data/material_families.json`.
+* **Decision:** Tests by different author groups are different batches; the only exception is Santus 2018 and Benedetti 2022 (one batch, `42CrMo4_QT`). The cross-batch comparison compares workbooks: 42CrMo4 (`42CrMo4_QT`, `42CrMo4_Reis`, `42CrMo4_FABEST`) and Ti6Al4V (`Ti6Al4V`, `Ti6Al4V_Berto`), declared in `examples/data/material_families.json`. Open (#24): by this rule `1_Ti6Al4V` mixes two batches, since its failures are Meneghetti 2018 while its Summary averages the Meneghetti and Delahay 2006 properties (Su 1035, Sigm1 576 MPa); `8_AISI316L` combines Janssens and Braun.
 * **Rationale:** The cross-batch statistics (issue #71) need a fixed unit. Benedetti 2022 states that its supplies differ from those of its ref. [17]; the maintainer confirmed the two Trento sources are the same batch.
 
 ### d102
@@ -493,4 +494,11 @@ ledgers.
 * **Status:** Active
 * **Decision:** `multifat-pipeline --material B --design-material A` (`run_workbook(..., design_workbook=A)`, `evaluate_model(..., design_data=...)`) predicts every failure of B with the Summary properties, calibrated constants, design set and master curve (or native life fit) of A. The load histories of B, strains included, are those imported with B's own E and nu. Outputs are `<B>_from_<A>`; the design rows (Flag 0) are A's, every failure of B is assessed (Flag 1). The default run is unchanged (regression snapshot).
 * **Rationale:** An error on the batch the method was calibrated on measures the fit; predicting another batch of the same material measures transfer, which is what a user relying on handbook data does.
+
+### d103
+* **Date:** 2026-11-10
+* **Topic:** Published constants in a cross-batch transfer
+* **Status:** Active
+* **Decision:** With `--design-material A`, `--constants` is accepted only for a published-constants record (`published_constants`) whose `material_id` is A; calibration records and sidecars stay refused. Used for SSF, whose surface is published for the Reis batch (`Calibrations/42CrMo4_Reis/SSF_published.json`): SSF results on 42CrMo4_Reis are in sample, those of the transfers from 42CrMo4_Reis out of sample. Maintainer: only in this context.
+* **Rationale:** A constant printed for the design batch is part of what is known about that batch; the transfer then tests it on another batch of the same steel.
 

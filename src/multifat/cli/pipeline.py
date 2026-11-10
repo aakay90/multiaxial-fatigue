@@ -404,6 +404,20 @@ def load_constants(path: Path, material: str, n_failures: int | None = None) -> 
     return constants, origin
 
 
+def is_published_constants(path: Path, material: str) -> bool:
+    """True for a published-constants record (``published_constants``) of `material`.
+
+    The one kind of supplied record a cross-batch transfer accepts (issue #71): constants printed
+    in a paper for the design batch, such as the SSF surface of 42CrMo4_Reis. Calibration records
+    and sidecars are refused there, since the transfer calibrates the design batch itself.
+    """
+    try:
+        record = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    return "published_constants" in record and record.get("material_id") == material
+
+
 def supplied_design_ids(path: Path, data_block: dict, supplied: dict) -> tuple[dict, str]:
     """Design tests of supplied constants, from a sidecar made on the same failures.
 
@@ -509,10 +523,16 @@ def run_workbook(
     results_dir.mkdir(parents=True, exist_ok=True)
     material = material_id(workbook.stem)
     target_workbook = workbook
+    constants_material = material
     if design_workbook is not None:
-        if constants is not None:
-            raise ValueError("a transfer takes its constants from the design workbook only")
-        material = runmod.transfer_material_id(material, material_id(design_workbook.stem))
+        constants_material = material_id(design_workbook.stem)
+        if constants is not None and not is_published_constants(constants, constants_material):
+            raise ValueError(
+                "a transfer takes its constants from the design workbook; the only supplied "
+                "constants it accepts are a published-constants record of the design material "
+                f"'{constants_material}'"
+            )
+        material = runmod.transfer_material_id(material, constants_material)
         # the design side must hold a valid design set; the target only needs to be readable
         workbook = design_workbook
 
@@ -556,7 +576,9 @@ def run_workbook(
         _dump_run_report(results_dir, material, results)
         return results
     n_fail = len(data[material]["cases"])
-    supplied, source = load_constants(constants, material, n_fail) if constants else ({}, None)
+    supplied, source = (
+        load_constants(constants, constants_material, n_fail) if constants else ({}, None)
+    )
     if source is not None and source.get("kind") == "multifat calibration sidecar":
         from multifat.cli.records import check_record_compatibility, record_warnings
 
@@ -1031,7 +1053,7 @@ def main(cli_args=None) -> None:
         workbooks += workbook_files(DATA_FOLDER)
     if not workbooks:
         parser.error("supply a workbook path, --material NAME or --all")
-    if args.constants is not None and len(workbooks) != 1:
+    if args.constants is not None and len(workbooks) != 1 and args.design_material is None:
         parser.error("--constants accepts exactly one workbook (constants belong to one material)")
     if args.calibration_id is not None:
         if args.constants is not None or len(workbooks) != 1:
@@ -1047,12 +1069,19 @@ def main(cli_args=None) -> None:
             parser.error(str(exc))
     design_workbook = None
     if args.design_material is not None:
-        if args.constants is not None or args.calibration_id is not None:
+        if args.calibration_id is not None:
             parser.error("--design-material takes the constants from the design workbook only")
         try:
             design_workbook = runmod.resolve_workbook(args.design_material, DATA_FOLDER)
         except WorkbookError as exc:
             parser.error(str(exc))
+        if args.constants is not None and not is_published_constants(
+            args.constants, material_id(design_workbook.stem)
+        ):
+            parser.error(
+                "with --design-material, --constants must be a published-constants record of "
+                "the design material"
+            )
         workbooks = [w for w in workbooks if Path(w).resolve() != design_workbook.resolve()]
         if not workbooks:
             parser.error("--design-material needs at least one other workbook to predict")

@@ -4,6 +4,7 @@ The design side supplies the Summary properties, the constants, the design set a
 curve; only the target's tests are assessed. Checked on the 42CrMo4 batches.
 """
 
+import json
 from pathlib import Path
 
 import numpy as np
@@ -16,6 +17,7 @@ from multifat.cli import run as runmod
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "Experimental_Data"
 DESIGN, TARGET = "42CrMo4_QT", "42CrMo4_Reis"
+SSF_REIS = ROOT / "Calibrations" / "42CrMo4_Reis" / "SSF_published.json"
 
 
 @pytest.fixture(scope="module")
@@ -106,12 +108,47 @@ def _own_run(dest: Path, workbook: str) -> Path:
     return dest / "CROSSLAND_42CrMo4_QT.csv"
 
 
-def test_transfer_refuses_supplied_constants(tmp_path):
-    with pytest.raises(ValueError, match="design workbook"):
+def test_transfer_refuses_constants_of_another_material(tmp_path):
+    # a published-constants record of Reis cannot serve a transfer designed on QT
+    with pytest.raises(ValueError, match="published-constants record of the design material"):
         pipeline.run_workbook(
             DATA / "14_42CrMo4_Reis.xlsx",
             models=["CROSSLAND"],
             results_dir=tmp_path,
-            constants=ROOT / "Calibrations" / "42CrMo4_Reis" / "SSF_published.json",
+            constants=SSF_REIS,
             design_workbook=DATA / "6_42CrMo4_QT.xlsx",
         )
+
+
+def test_transfer_refuses_calibration_records(tmp_path):
+    sidecar = tmp_path / "sidecar.json"
+    sidecar.write_text(json.dumps({"params": {"k_FS": 1.0}}), encoding="utf-8")
+    assert not pipeline.is_published_constants(sidecar, DESIGN)
+    with pytest.raises(ValueError, match="published-constants record"):
+        pipeline.run_workbook(
+            DATA / "14_42CrMo4_Reis.xlsx",
+            models=["CROSSLAND"],
+            results_dir=tmp_path,
+            constants=sidecar,
+            design_workbook=DATA / "6_42CrMo4_QT.xlsx",
+        )
+
+
+def test_transfer_takes_published_constants_of_the_design_batch(tmp_path):
+    """SSF: the surface published for the Reis batch, assessed on FABEST (out of sample)."""
+    outcomes = pipeline.run_workbook(
+        DATA / "16_42CrMo4_FABEST.xlsx",
+        models=["SSF"],
+        results_dir=tmp_path,
+        constants=SSF_REIS,
+        design_workbook=DATA / "14_42CrMo4_Reis.xlsx",
+    )
+    assert [o.status for o in outcomes] == ["ok"]
+    sidecar = json.loads(
+        (tmp_path / "42CrMo4_FABEST_from_42CrMo4_Reis_calibration.json").read_text("utf-8")
+    )
+    assert sidecar["constants_source"]["kind"] == "published constants"
+    assert sidecar["params"]["a_SSF"] == 2.69
+    frame = pd.read_csv(tmp_path / "SSF_42CrMo4_FABEST_from_42CrMo4_Reis.csv")
+    assert frame[frame["Flag"] == 1]["Specimen_id"].str.startswith("FAB").all()
+    assert frame[frame["Flag"] == 0]["Specimen_id"].str.startswith("Plain_multiaxial").all()
