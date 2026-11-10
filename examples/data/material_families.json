@@ -1,0 +1,7 @@
+{
+ "_doc": "Batches of one material compared by examples/batch_comparison.py (issue #71). A batch is one workbook (material ID). Add a family only after the batch identities are checked (issue #24).",
+ "42CrMo4": {
+  "batches": ["42CrMo4_QT", "42CrMo4_Reis", "42CrMo4_FABEST"],
+  "notes": "42CrMo4 +QT. 42CrMo4_QT: Santus 2018 and Benedetti 2022, one batch (maintainer decision d101); 42CrMo4_Reis: Anes/Reis 2014; 42CrMo4_FABEST: FABEST PBS series."
+ }
+}

@@ -69,6 +69,9 @@ ledgers.
 | [`d097`](#d097) | 2026-11-06 | **Active** | Solver evidence and untrusted files | Document real versus hand-written coverage; no third-party code execution. |
 | [`d098`](#d098) | 2026-11-06 | **Active** | Whole-branch safeguards | Validate CSV row width before pandas projection; atomic output; require shared scalar load functions. |
 | [`d099`](#d099) | 2026-11-06 | **Active** | In-house Ansys fatigue benchmark | Repository purged of external repository fixtures; in-house PLANE183 2-step fatigue cycle generated on WorkstationUniTN. |
+| [`d100`](#d100) | 2026-11-10 | **Active** | 42CrMo4_Reis fatigue limits | Sigm1 = 452, Taum1 = 372 MPa: the authors' trend lines at 1e6 (Anes IJF 62 Table 5), by overlay, as for FABEST. |
+| [`d101`](#d101) | 2026-11-10 | **Active** | 42CrMo4 batches | Santus 2018 and Benedetti 2022 are one batch (`42CrMo4_QT`); a batch is one workbook; the family is declared in `examples/data/material_families.json`. |
+| [`d102`](#d102) | 2026-11-10 | **Active** | Cross-batch transfer | `--design-material`: Summary, constants, design set and master curve from one batch, every failure of another assessed. |
 
 ---
 
@@ -469,3 +472,25 @@ ledgers.
 * **Status:** Active
 * **Decision:** Purge repository of third-party repository fixtures (`axis-fem` removed). Generate an in-house 2D plane stress holed-plate benchmark using Ansys MAPDL 2026 R1 batch mode on WorkstationUniTN (`PLANE183`, `KEYOPT(3)=3`) under a 2-step alternating fatigue cycle ($Y$-tension 100 MPa then $X$-tension 100 MPa, rotating principal stress directions by $90^\circ$). Support PLANE182/183 elements in `rst.py`. Ingest both `.out` and `.rst` into exchange CSV and HDF5, verified against Howland's finite-width analytical solution ($K_{tg} \approx 3.032$). Mark real Abaqus output tests as xfail TODO pending Abaqus license/installation on workstation.
 * **Rationale:** Eliminates external repository dependencies, guarantees clean provenance, and directly exercises multi-step biaxial fatigue loading.
+
+### d100
+* **Date:** 2026-11-10
+* **Topic:** 42CrMo4_Reis fatigue limits
+* **Status:** Active
+* **Decision:** Sigm1 = 452 MPa and Taum1 = 372 MPa (R = -1, N = 1e6, push-pull): the values of Anes et al., IJF 62 (2014), Table 5 at 1e6, i.e. the authors' pure axial and pure shear trend lines of Table 4. Added as a Summary source row by an overlay; the supplied workbook is unchanged.
+* **Rationale:** Same rule as for FABEST (authors' strengths at 1e6), so that the limit-based methods run on all three 42CrMo4 batches. The values extrapolate the trend lines beyond the longest failures (about 3e5 cycles) and are recorded as finite-life strengths.
+
+### d101
+* **Date:** 2026-11-10
+* **Topic:** Definition of a batch (42CrMo4)
+* **Status:** Active
+* **Decision:** A batch is one workbook. The Santus 2018 and Benedetti 2022 tests of `42CrMo4_QT` are one batch (maintainer). The 42CrMo4 family is `42CrMo4_QT`, `42CrMo4_Reis`, `42CrMo4_FABEST`, declared in `examples/data/material_families.json`.
+* **Rationale:** The cross-batch statistics (issue #71) need a fixed unit. Benedetti 2022 states that its supplies differ from those of its ref. [17]; the maintainer confirmed the two Trento sources are the same batch.
+
+### d102
+* **Date:** 2026-11-10
+* **Topic:** Cross-batch transfer
+* **Status:** Active
+* **Decision:** `multifat-pipeline --material B --design-material A` (`run_workbook(..., design_workbook=A)`, `evaluate_model(..., design_data=...)`) predicts every failure of B with the Summary properties, calibrated constants, design set and master curve (or native life fit) of A. The load histories of B, strains included, are those imported with B's own E and nu. Outputs are `<B>_from_<A>`; the design rows (Flag 0) are A's, every failure of B is assessed (Flag 1). The default run is unchanged (regression snapshot).
+* **Rationale:** An error on the batch the method was calibrated on measures the fit; predicting another batch of the same material measures transfer, which is what a user relying on handbook data does.
+

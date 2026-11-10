@@ -1,5 +1,32 @@
 # Development continuation checkpoint
 
+## Cross-batch comparison, issue #71 (10 November 2026)
+
+Branch `analysis/batch-comparison` from `main` at `c09dc4c`. Maintainer decisions on #71:
+Santus 2018 and Benedetti 2022 are one batch (d101); cross-batch transfer wanted (d102); Reis
+fatigue limits as for FABEST (d100); a standalone example pipeline for the article, regenerated
+whenever a method or the data change.
+
+- **Reis limits (d100):** overlay `14_42CrMo4_Reis.overlay.json` adds a Summary source row with
+  Sigm1 = 452, Taum1 = 372 MPa (Anes IJF 62 Table 5 at 1e6). Test in `tests/test_dataset_overlays.py`.
+- **Transfer (d102):** `evaluate_model(..., design_data=)`, `run.load_transfer`,
+  `run_workbook(..., design_workbook=)`, `multifat-pipeline --design-material`. Tests:
+  `tests/test_transfer.py` (design rows and master curve identical to the design batch's own run).
+- **Standalone pipeline:** `examples/batch_comparison.py` (run / analyse / all / check), families in
+  `examples/data/material_families.json`, results in `examples/data/batch_comparison/42CrMo4/`,
+  figures `docs/images/batch_comparison_42CrMo4_{bias,transfer}.png`, guide
+  `docs/batch-comparison.md`. `tests/test_batch_comparison.py` checks the statistics on synthetic
+  data and fails when the committed results are stale (models, revision, dataset fingerprints).
+- **Regression snapshot** (`main` c09dc4c against the branch, calibration included): outside
+  42CrMo4_Reis no run output differs. On Reis 27 outputs are new (methods that needed the limits)
+  and 28 differ only in the `Dataset_fingerprint` column (the fingerprint hashes the Summary);
+  the aggregated Comparison files change accordingly.
+- **Homepage:** `load_error_ranking.csv` Reis rows rebuilt from the full own-batch run (QT and
+  FABEST rows reproduced exactly; 19 -> 43 Reis methods); `load_error_ranking.png` redrawn.
+
+Remaining: maintainer review of the branch and of the results posted on #71; open questions there
+(SSF constants in the transfer from Reis; adding the Ti6Al4V family after #24).
+
 ## PR #64 review response (9 November 2026)
 
 Maintainer review of #64 (six points), addressed on `feat/fe-and-time-history-inputs`:
