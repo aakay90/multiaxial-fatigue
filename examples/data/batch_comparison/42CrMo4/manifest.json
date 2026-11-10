@@ -5,9 +5,12 @@
   "42CrMo4_Reis",
   "42CrMo4_FABEST"
  ],
- "notes": "42CrMo4 +QT. 42CrMo4_QT: Santus 2018 and Benedetti 2022, one batch (maintainer decision d101); 42CrMo4_Reis: Anes/Reis 2014; 42CrMo4_FABEST: FABEST PBS series.",
- "created_utc": "2026-11-10T17:52:14+00:00",
- "git_commit": "c09dc4c4558b0f534f8d32252894e10faa349abf",
+ "notes": "42CrMo4 +QT. 42CrMo4_QT: Santus 2018 and Benedetti 2022, one batch (d101); 42CrMo4_Reis: Anes/Reis 2014; 42CrMo4_FABEST: FABEST PBS series. SSF runs only with the surface published for the Reis batch: in sample on Reis, out of sample when Reis is the design batch.",
+ "constants": {
+  "42CrMo4_Reis": "Calibrations/42CrMo4_Reis/SSF_published.json"
+ },
+ "created_utc": "2026-11-10T18:59:22+00:00",
+ "git_commit": "315753e48ee2bd65d311fa9c476c2b2f3d18396b",
  "registered_models": [
   "BP",
   "CAIM",
@@ -100,6 +103,7 @@
   "PI",
   "RFB",
   "SINES",
+  "SSF",
   "SWT",
   "SWTD",
   "VHN",

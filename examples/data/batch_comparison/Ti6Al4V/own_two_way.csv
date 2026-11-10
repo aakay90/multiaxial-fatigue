@@ -1,0 +1,2 @@
+Path,batches,n_methods,mu,interaction_rms,cell_se,method_sd,offset_Ti6Al4V,offset_Ti6Al4V_Berto
+T,Ti6Al4V+Ti6Al4V_Berto,31,0.14324,0.027987,0.037091,0.13224,0.18639,-0.18639

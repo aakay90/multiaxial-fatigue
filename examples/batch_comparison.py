@@ -132,21 +132,37 @@ def _pipeline(args: list[str]) -> int:
 
 
 def run(out: Path, family: str, jobs: int, models: str) -> None:
-    """Own-batch runs, then every ordered transfer, into out/<family>/{own,transfer}."""
-    batches = families()[family]["batches"]
+    """Own-batch runs, then every ordered transfer, into out/<family>/{own,transfer}.
+
+    A batch listed under the family's ``constants`` (a published-constants record, e.g. the SSF
+    surface of 42CrMo4_Reis) is run with ``--constants`` on its own and as a design batch; those
+    constants then reach the other batches only through the transfer.
+    """
+    spec = families()[family]
+    batches, constants = spec["batches"], spec.get("constants", {})
     base = out / family
-    codes = [
-        _pipeline(
-            [*sum((["--material", b] for b in batches), []), "--models", models,
-             "--jobs", str(jobs), "--results-dir", str(base / "own")]
+    common = ["--models", models, "--jobs", str(jobs)]
+
+    def materials(names):
+        return [arg for b in names for arg in ("--material", b)]
+
+    def supplied(batch):
+        return ["--constants", str(REPO_ROOT / constants[batch])] if batch in constants else []
+
+    plain = [b for b in batches if b not in constants]
+    codes = []
+    if plain:
+        codes.append(_pipeline([*materials(plain), *common, "--results-dir", str(base / "own")]))
+    for b in (b for b in batches if b in constants):
+        codes.append(
+            _pipeline([*materials([b]), *supplied(b), *common, "--results-dir", str(base / "own")])
         )
-    ]  # fmt: skip
     for design in batches:
         others = [b for b in batches if b != design]
         codes.append(
             _pipeline(
-                [*sum((["--material", b] for b in others), []), "--design-material", design,
-                 "--models", models, "--jobs", str(jobs), "--results-dir", str(base / "transfer")]
+                [*materials(others), "--design-material", design, *supplied(design), *common,
+                 "--results-dir", str(base / "transfer")]
             )
         )  # fmt: skip
     if any(codes):  # a failed model is reported in the run reports; the others are usable
@@ -381,6 +397,7 @@ def analyse(out: Path, family: str) -> Path:
         _figure_transfer(penalty, batches, family)
     manifest = dict(
         family=family, batches=batches, notes=spec.get("notes", ""),
+        constants=spec.get("constants", {}),
         created_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
         git_commit=_git("rev-parse", "HEAD"), registered_models=registered_models(),
         implementation_revision=_revision(), dataset_fingerprints=dataset_fingerprints(batches),
@@ -569,6 +586,8 @@ def check(family: str | None = None) -> list[str]:
         manifest = json.loads(path.read_text(encoding="utf-8"))
         if manifest["batches"] != spec["batches"]:
             problems.append(f"{name}: batches changed")
+        if manifest.get("constants", {}) != spec.get("constants", {}):
+            problems.append(f"{name}: supplied constants changed")
         added = sorted(set(registered_models()) - set(manifest["registered_models"]))
         removed = sorted(set(manifest["registered_models"]) - set(registered_models()))
         if added or removed:

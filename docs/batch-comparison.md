@@ -15,14 +15,29 @@ accuracy").
 
 ## Families
 
-A batch is one workbook (decision [d101](decision-log.md#d101)). Families are declared in
-[`examples/data/material_families.json`](../examples/data/material_families.json).
+Tests by different author groups are different batches. The only exception is Santus 2018 with
+Benedetti 2022, which are one batch (decision [d101](decision-log.md#d101)). The comparison
+compares workbooks, declared per family in
+[`examples/data/material_families.json`](../examples/data/material_families.json). A family may
+map a batch to a published-constants record (`constants`). That record is used on the batch's own
+run and when the batch is the design side of a transfer (decision
+[d103](decision-log.md#d103)): this is how SSF, published for the Reis batch, is tested on the
+other two.
 
 | Family | Batch | Source | Su / Sy (MPa) | Specimens | R = −1 failures (axial / torsion) | Multiaxial failures |
 | --- | --- | --- | --- | --- | --- | --- |
 | 42CrMo4 | `42CrMo4_QT` | Santus 2018 + Benedetti 2022 (one batch, d101) | 875 / 727 | solid, axial d = 5, torsion d = 14 mm | 27 / 9 (+ 9 torsion with mean shear) | none |
 | 42CrMo4 | `42CrMo4_Reis` | Anes/Reis 2014 | 1100 / 980 | solid, d = 6.3 / 7.5 mm | 6 / 5 | 8 in-phase, 6 at 90° |
 | 42CrMo4 | `42CrMo4_FABEST` | FABEST PBS series | 1111 / 1035 | thin-walled tube 8.1/7 mm | 20 / 20 | 18 in-phase, 21 at 90° |
+
+| Ti6Al4V | `Ti6Al4V` | Meneghetti 2018 (failures) + Delahay 2006 (4 run-outs) | Summary averages both: 1035 / 947.5 | — | 6 / 4 (lives over 0.39 / 0.79 decades) | none |
+| Ti6Al4V | `Ti6Al4V_Berto` | Berto 2015 | 978 / 894 | — | 9 / 8 (+ 31 torsion with mean shear) | none |
+
+By the author rule, `1_Ti6Al4V` mixes two batches. Its failures are all Meneghetti 2018, while
+its Summary averages the Meneghetti and Delahay properties: Su = (980 + 1090)/2 and
+Sigm1 = (500 + 652)/2 = 576 MPa. This is open in
+[#24](https://github.com/andreachiocca/multiaxial-fatigue/issues/24); the workbook is used as
+supplied.
 
 The fatigue limits of `42CrMo4_Reis` and `42CrMo4_FABEST` are the authors' strengths at
 $10^6$ cycles (decisions [d100](decision-log.md#d100) and the FABEST conversion).
@@ -108,8 +123,12 @@ imported with B's own E and ν: they describe the tests, not the material model.
 
 ## Results: 42CrMo4
 
-Run of 10 November 2026: 43 methods ran on every batch. TVEIT2025 and SSF were skipped because
-their constants are not in the workbooks, and GOLOS because the loading is out of its scope. The
+Run of 10 November 2026: 43 methods ran on every batch. The other three:
+
+- **TVEIT2025:** skipped, because its constants are not supplied.
+- **GOLOS:** skipped, because the loading is outside its scope.
+- **SSF:** runs only where its published surface applies: on Reis (in sample) and on FABEST
+  predicted from Reis (out of sample). The
 tables are in [`examples/data/batch_comparison/42CrMo4/`](../examples/data/batch_comparison/42CrMo4/).
 
 ![Own-batch bias per method, batch and loading path](images/batch_comparison_42CrMo4_bias.png)
@@ -178,5 +197,50 @@ batch.** These are medians over the 43 methods, on the tests each own-batch run 
     GAM, MMP and SWT/KUJAWSKI2021 (0.17).
   - LI (0.47) and MWCM (0.41) transfer worst.
 
+**4. SSF on a batch it was not fitted on.** The surface published for Reis (Anes et al. 2014) was
+applied to FABEST with Reis's torsion curve, out of sample (`transfer_cells.csv`):
+
+| Path ($n$) | SSF bias | SSF RMS | Median RMS, other 43 methods | SSF rank |
+| --- | --- | --- | --- | --- |
+| T (20) | −0.003 | 0.040 | 0.089 | 1 |
+| AT-IP (18) | +0.002 | 0.040 | 0.192 | 1 |
+| AT-NP (21) | −0.028 | 0.075 | 0.167 | 1 |
+| A (20) | +0.168 | 0.172 | 0.193 | 5 |
+
+On Reis itself, in sample, its RMS is 0.04 on every path. SSF is skipped on QT, whose torsion
+tests with a mean shear are outside the R = −1 scope of its surface.
+
+Part of this success comes from the data. The torsion curves of Reis and FABEST almost coincide
+(423 and 427 MPa at $10^5$ cycles), while their axial curves do not (532 and 643 MPa). A method
+whose design curve is the torsion curve therefore carries the multiaxial behaviour over almost
+unchanged; MWHS, also designed on torsion, behaves likewise. Between these two high-strength
+batches, the axial curve is the part that changes.
+
 These numbers are for one steel and three laboratories. They describe the batch-to-batch
 scatter that a design with handbook data has to cover; they do not rank the methods in general.
+
+## Results: Ti6Al4V
+
+![Own batch against cross-batch prediction, Ti6Al4V](images/batch_comparison_Ti6Al4V_transfer.png)
+
+All assessed failures are torsional. Only pure torsion is shared by both batches; Berto's 31
+torsion tests with a mean shear appear in `own_cells.csv` but have no counterpart.
+
+- **Decomposition.** There are 31 methods on both batches. The batch offsets are ±0.186, and the
+  interaction RMS is 0.028, below the cell SE of 0.037: the batch shifts every method equally.
+- **Transfer.** These are medians over the methods, on the same tests:
+
+  | Design → target | RMS own | RMS transfer | Median bias |
+  | --- | --- | --- | --- |
+  | Ti6Al4V → Ti6Al4V_Berto | 0.338 | 0.321 | +0.028 |
+  | Ti6Al4V_Berto → Ti6Al4V | 0.294 | 0.075 | +0.001 |
+
+- **The Meneghetti design set is barely identifiable.** Its 6 axial failures span 0.39 decades of
+  life, with a fitted slope b = −0.002. As a result:
+  - FS, FIN, MDC, MMCCM and LIUMAHADEVAN skip the transfer from it;
+  - predicting Ti6Al4V from Berto's curve and Summary is better than using its own.
+- **The Summary limits matter for the limit-based methods.** With the averaged
+  Meneghetti + Delahay limits of `1_Ti6Al4V` (576 MPa), their RMS is 0.29. With Berto's limits
+  (475.7 / 388.3 MPa) it is 0.04. This is evidence for #24: the averaged limits do not describe
+  the Meneghetti tests.
+

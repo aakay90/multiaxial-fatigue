@@ -24,8 +24,15 @@ whenever a method or the data change.
 - **Homepage:** `load_error_ranking.csv` Reis rows rebuilt from the full own-batch run (QT and
   FABEST rows reproduced exactly; 19 -> 43 Reis methods); `load_error_ranking.png` redrawn.
 
-Remaining: maintainer review of the branch and of the results posted on #71; open questions there
-(SSF constants in the transfer from Reis; adding the Ti6Al4V family after #24).
+Follow-up (maintainer answers on #71): PR opened; SSF published constants accepted in a transfer
+from 42CrMo4_Reis only (d103); batches are author groups, Santus + Benedetti one (d101 revised);
+Ti6Al4V family added. `eval/load_error.py` secant bounded (|ln s| <= 10, bisection fall-back):
+snapshot of the branch before and after, 0 of 2991 outputs differ. Results regenerated for both
+families.
+
+Remaining: maintainer review of the PR; #24 decision on the `1_Ti6Al4V` Summary, which averages
+Meneghetti and Delahay properties although every failure is Meneghetti's (limit-based methods: RMS
+0.29 with it, 0.04 with Berto's limits).
 
 ## PR #64 review response (9 November 2026)
 

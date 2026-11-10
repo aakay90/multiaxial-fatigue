@@ -154,6 +154,11 @@ Ti6Al4V and Ti6Al4V_Berto all assessed tests are torsional. Data in
 
 ![Method ranking by the load-equivalent error](docs/images/load_error_ranking.png)
 
+How the same methods carry over between batches of one material (42CrMo4: three laboratories;
+Ti6Al4V: two), each calibrated on its own batch and predicted from the others, is in the
+[cross-batch comparison](docs/batch-comparison.md)
+([issue #71](https://github.com/andreachiocca/multiaxial-fatigue/issues/71)).
+
 ## Method coverage
 
 <!-- METHOD_NAVIGATION_START -->

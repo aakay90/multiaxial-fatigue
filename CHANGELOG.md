@@ -26,6 +26,14 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
   `examples/data/batch_comparison/`, figures `docs/images/batch_comparison_*.png`, guide
   `docs/batch-comparison.md`. `tests/test_batch_comparison.py` fails when a method or a family
   workbook changes until the results are regenerated.
+- A transfer accepts `--constants` only for a published-constants record of the design batch
+  (decision d103): SSF is assessed on FABEST and QT with the surface published for Reis.
+- Second family Ti6Al4V (`Ti6Al4V`, `Ti6Al4V_Berto`). Batches are author groups, Santus 2018 and
+  Benedetti 2022 being one (decision d101); `1_Ti6Al4V` mixes the Meneghetti and Delahay
+  properties in its Summary (open, #24).
+- `eval/load_error.py`: the secant search in ln s stops beyond |ln s| = 10 and falls back to the
+  bisection, as documented, instead of overflowing (SSF extrapolated on FABEST). Regression
+  snapshot: no existing output changes.
 
 - New workbook `16_42CrMo4_FABEST.xlsx`, a third 42CrMo4 +QT batch, from the FABEST database
   (FAB_v20261014, doi:10.5281/zenodo.23359038, CC BY 4.0; #65). It holds the PBS series of plain hollow
