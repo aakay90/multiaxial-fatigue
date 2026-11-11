@@ -177,10 +177,9 @@ Departures from the source (shear-amplitude rule, elastic strains, repository ad
 listed per method in the [method audit](docs/method-audit.md) and the
 [complete catalogue](METHODS.md).
 
-The [method guides](docs/method-guides/README.md) explain the most widely used criteria (Findley,
-Fatemi–Socie, SWT, Matake, McDiarmid, MWCM, Crossland, Sines, Dang Van, Papadopoulos) one by one:
-the published equations, what the code computes and where it departs from the source, the
-calibration, and a worked example whose numbers are checked by the test suite.
+The [method guides](docs/method-guides/README.md) document all 46 currently registered criteria
+one by one: the published equations, what the code computes and where it departs from the source,
+the calibration, and a worked example whose numbers are checked by the test suite.
 
 <!-- METHOD_PROGRESS_START -->
 
