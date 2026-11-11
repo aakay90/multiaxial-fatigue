@@ -17,7 +17,14 @@ from multifat.imp.experimental_data import (
     import_experimental_data_grouped_by_material,
     load_material_workbook,
 )
-from multifat.imp.overlays import OverlayError, apply_overlay_to_workbook, overlay_path
+from multifat.imp import overlays as overlays_mod
+from multifat.imp.overlays import (
+    OverlayError,
+    _apply_one,
+    apply_overlay_to_workbook,
+    load_overlay,
+    overlay_path,
+)
 from multifat.imp.schema import ValidationReport, workbook_files
 from multifat.report.subsets import dataset_fingerprint
 
@@ -80,6 +87,78 @@ def test_tampered_from_value_aborts(tmp_path):
     wb["Summary"]["E2"].value = 1.0
     with pytest.raises(OverlayError, match="expected"):
         apply_overlay_to_workbook(wb, FOLDER / "8_AISI316L.xlsx")
+
+
+@pytest.mark.parametrize(
+    ("op", "match"),
+    [
+        (
+            {
+                "op": "set_case",
+                "authors": "Janssens",
+                "specimen": "Uniaxial_1",
+                "field": "Number of cycles to failure",
+                "from": -1,
+                "to": 100,
+            },
+            "expected",
+        ),
+        (
+            {
+                "op": "set_case",
+                "authors": "Janssens",
+                "specimen": "NoSuchSpecimen",
+                "field": "Number of cycles to failure",
+                "from": 1,
+                "to": 2,
+            },
+            "need 1",
+        ),
+        (
+            {
+                "op": "set_case",
+                "authors": "Janssens",
+                "specimen": "Uniaxial_1",
+                "field": "NoSuchColumn",
+                "from": 1,
+                "to": 2,
+            },
+            "no column headed",
+        ),
+        (
+            {"op": "add_case", "row": 2, "values": {"Specimen name": "Dup"}},
+            "is not empty",
+        ),
+        ({"op": "delete_case"}, "unknown overlay operation"),
+    ],
+)
+def test_apply_one_rejects_invalid_operations(op, match):
+    wb = load_workbook(FOLDER / "8_AISI316L.xlsx", data_only=True)
+    with pytest.raises(OverlayError, match=match):
+        _apply_one(wb, op)
+
+
+def test_load_overlay_rejects_unsupported_schema_version(tmp_path):
+    bad = tmp_path / "bad.overlay.json"
+    bad.write_text(json.dumps({"schema_version": 99, "operations": []}), encoding="utf-8")
+    with pytest.raises(OverlayError, match="unsupported schema_version"):
+        load_overlay(bad)
+
+
+def test_duplicate_base_hash_overlays_abort(tmp_path, monkeypatch):
+    same_hash = "0" * 64
+    for name in ("a.overlay.json", "b.overlay.json"):
+        (tmp_path / name).write_text(
+            json.dumps({"schema_version": 1, "base_sha256": same_hash, "operations": []}),
+            encoding="utf-8",
+        )
+    monkeypatch.setattr(overlays_mod, "OVERLAY_DIR", tmp_path)
+    overlays_mod._overlays_by_base_hash.cache_clear()
+    try:
+        with pytest.raises(OverlayError, match="name the same base file"):
+            overlays_mod._overlays_by_base_hash()
+    finally:
+        overlays_mod._overlays_by_base_hash.cache_clear()
 
 
 def test_renamed_copy_keeps_its_overlay(tmp_path):

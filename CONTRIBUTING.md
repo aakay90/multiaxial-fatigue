@@ -75,7 +75,7 @@ uv run python tools/regression_snapshot.py run /tmp/snap-new --jobs 4
 uv run python tools/regression_snapshot.py compare /tmp/snap-base /tmp/snap-new
 ```
 
-The snapshot runs every registered model and `_ext` variant on every workbook, the calibration and the comparison, and hashes every output (about 20 minutes on a laptop). A refactor must be output-identical. An intended numerical change goes in its own commit, with the changed outputs and the reason in the PR (which models, which materials, by how much). The end-to-end sweep `uv run python tests/run_material_validation.py /tmp/wg43-validation` checks finite outputs and row counts on all materials.
+The snapshot runs every registered model and `_ext` variant on every workbook, the calibration and the comparison, and hashes every output (about 20 minutes on a laptop). A refactor must be output-identical. An intended numerical change goes in its own commit, with the changed outputs and the reason in the PR (which models, which materials, by how much). Bump `IMPLEMENTATION_REVISION` in `src/multifat/models/references.py` (using a new dated string such as `"YYYY-MM-DD"`) whenever a change can alter numerical outputs (model equations, plane search, calibration, data import or overlays, master-curve fitting, or load-error/endurance evaluation); doing so stamps new result CSVs, flags older results as legacy in `multifat-compare`, rejects stale pipeline calibration sidecars, and triggers staleness checks in `examples/` manifests. The end-to-end sweep `uv run python tests/run_material_validation.py /tmp/wg43-validation` checks finite outputs and row counts on all materials.
 
 ### Workbook contributions
 

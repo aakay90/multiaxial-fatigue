@@ -92,5 +92,11 @@ def test_selection_by_id_reuses_constants(tmp_path):
 def test_incompatible_records_are_rejected(tmp_path):
     record = {"params": {"k_FI": 0.3}, "provenance": {"failure_fingerprint": "x"}}
     assert "insufficiently documented" in check_record_compatibility(record, {})[0]
-    record["provenance"]["implementation_revision"] = "1999-01-01-old"
-    assert "other formulations" in check_record_compatibility(record, {})[0]
+    for old_revision in ("1999-01-01-old", "2026-10-07-audit1"):
+        record["provenance"]["implementation_revision"] = old_revision
+        assert "other formulations" in check_record_compatibility(record, {})[0]
+    wb = _no_k_fi(tmp_path / "Old.xlsx")
+    stale = tmp_path / "stale.json"
+    stale.write_text(json.dumps(record), encoding="utf-8")
+    with pytest.raises(ValueError, match="other formulations"):
+        run_workbook(wb, models=["FIN"], results_dir=tmp_path / "res", constants=stale)

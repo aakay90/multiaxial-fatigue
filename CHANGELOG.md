@@ -8,6 +8,14 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ### Data
 
+- Homepage data provenance manifests (issue #80): `examples/homepage_data.py` writes paired
+  `.manifest.json` files alongside `examples/data/load_error_ranking.csv` and
+  `examples/data/42CrMo4_QT_predictions.csv` recording their canonical LF SHA-256,
+  `IMPLEMENTATION_REVISION`, registered models and post-overlay `dataset_fingerprint`s.
+  `examples/build_load_error_ranking.py --check`, `examples/build_predictions_csv.py --check` and
+  `tests/test_gallery_figures.py` fail when the committed CSVs go stale;
+  `tests/test_dataset_overlays.py` now also covers invalid overlay operations, unsupported overlay
+  schema versions and duplicate `base_sha256` aborts.
 - Workbook integrity checks (issue #75): `Experimental_Data/MANIFEST.json` records the SHA-256 and
   post-overlay `dataset_fingerprint` of every supplied workbook (`tests/test_dataset_overlays.py`
   enforces that supplied bytes do not drift without updating the manifest), and loading a file
@@ -32,6 +40,13 @@ checked against its original publication; changes to numerical outputs are liste
 
 ### Packaging and tooling
 
+- Implementation revision bump and policy (issue #76): `IMPLEMENTATION_REVISION` in
+  `src/multifat/models/references.py` bumped to `"2026-11-11"` after merging PR #70
+  (`origin/main` at `c09dc4c`); `CONTRIBUTING.md`, `docs/method-audit.md` and
+  `.github/pull_request_template.md` state the bump rule for PRs that can alter numerical outputs.
+  Pipeline sidecars calibrated under `"2026-10-07-audit1"` are rejected by
+  `multifat.cli.records.check_record_compatibility`, and `load_constants` flags upstream
+  `Calibrations/` records carrying an older `implementation_revision` with a provenance warning.
 - Documentation and tool CLI checking (issue #79): `tools/check_docs.py` now parses fenced
   `tools/*.py` shell invocations against each script's `build_parser()`; `AGENTS.md`,
   `CONTRIBUTING.md`, `docs/user-guide.md` and `docs/adding-methods.md` are aligned on overlays,
