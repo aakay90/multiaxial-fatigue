@@ -272,6 +272,53 @@ def fabest_benchmark() -> tuple[pd.DataFrame, pd.DataFrame]:
     return table, pd.DataFrame(summary)
 
 
+def _chi2_cdf(x: float, df: int) -> float:
+    """Chi-square distribution function: regularized lower incomplete gamma P(df/2, x/2)."""
+    from math import exp, lgamma, log
+
+    a, x = 0.5 * df, 0.5 * x
+    if x <= 0.0:
+        return 0.0
+    if x < a + 1.0:  # series
+        term = total = 1.0 / a
+        for n in range(1, 10_000):
+            term *= x / (a + n)
+            total += term
+            if term < total * 1e-16:
+                break
+        return total * exp(-x + a * log(x) - lgamma(a))
+    # continued fraction for the upper tail (Lentz)
+    tiny = 1e-300
+    b, c, d = x + 1.0 - a, 1.0 / tiny, 1.0 / (x + 1.0 - a)
+    h = d
+    for i in range(1, 10_000):
+        an = -i * (i - a)
+        b += 2.0
+        d = an * d + b
+        d = tiny if abs(d) < tiny else d
+        c = b + an / c
+        c = tiny if abs(c) < tiny else c
+        d = 1.0 / d
+        delta = d * c
+        h *= delta
+        if abs(delta - 1.0) < 1e-16:
+            break
+    return 1.0 - exp(-x + a * log(x) - lgamma(a)) * h
+
+
+def chi2_ppf(p: float, df: int) -> float:
+    """Quantile of the chi-square distribution, by bisection on ``_chi2_cdf`` (no scipy)."""
+    lo, hi = 0.0, max(1.0, float(df))
+    while _chi2_cdf(hi, df) < p:
+        hi *= 2.0
+    for _ in range(200):
+        mid = 0.5 * (lo + hi)
+        lo, hi = (mid, hi) if _chi2_cdf(mid, df) < p else (lo, mid)
+        if hi - lo < 1e-14 * max(1.0, hi):
+            break
+    return 0.5 * (lo + hi)
+
+
 def variance_components(series: pd.DataFrame, fabest_summary: pd.DataFrame) -> pd.DataFrame:
     """Split the spread of ln S(N_REF) between the datasets of a family into batch and series.
 
@@ -284,8 +331,6 @@ def variance_components(series: pd.DataFrame, fabest_summary: pd.DataFrame) -> p
     estimate has one or two degrees of freedom: ``datasets_sd_hi`` is the upper end of the 95 %
     chi-square interval of s_datasets, which bounds what the data can exclude.
     """
-    from scipy import stats
-
     if fabest_summary is None or fabest_summary.empty:
         return pd.DataFrame()
     pooled = series[series["Series"] == "all"]
@@ -305,7 +350,7 @@ def variance_components(series: pd.DataFrame, fabest_summary: pd.DataFrame) -> p
             ln = np.log(g[column].to_numpy(float))
             k = ln.size
             var = float(ln.var(ddof=1))
-            hi = np.sqrt(var * (k - 1) / stats.chi2.ppf(0.025, k - 1))
+            hi = np.sqrt(var * (k - 1) / chi2_ppf(0.025, k - 1))
             rows.append(
                 dict(Path=path, scale=scale, datasets=k, datasets_sd=np.sqrt(var),
                      datasets_sd_hi=float(hi), series_sd=s_series,
