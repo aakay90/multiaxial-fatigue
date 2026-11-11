@@ -77,6 +77,7 @@ ledgers.
 | [`d105`](#d105) | 2026-11-11 | **Active** | FABEST is one material batch; batch versus series | All FABEST series share one material batch; a dataset confounds material batch and test series; Santus and Benedetti are one batch, two series (decided on the data). |
 | [`d106`](#d106) | 2026-11-11 | **Active** | Master-curve identifiability and scatter | Skip a model whose master curve is not identifiable (< 5 tests, < 1 decade, slope not distinct from 0); scatter with n - 2 degrees of freedom. |
 | [`d107`](#d107) | 2026-11-11 | **Active** | Calibration outside R = -1 | The relaxed-tolerance and any-R fallbacks of the plane-constant calibration are accepted, recorded and flagged (`ok (R fallback)`). |
+| [`d108`](#d108) | 2026-11-11 | **Active** | Ti6Al4V Summary | `1_Ti6Al4V` keeps only the Meneghetti properties (overlay); the Delahay row no longer enters the material values. |
 
 ---
 
@@ -533,4 +534,11 @@ ledgers.
 * **Status:** Active
 * **Decision:** The selection of `cli/calibrate.py` may relax its tolerance on R = -1 (0.02, then 0.05 to 0.5) and finally accept any stress ratio. Maintainer: accepted, but flagged and documented. The record stores the tolerance used and whether any R was accepted for tension and torsion (`selection.*_rtol_R`, `*_any_R`) with a sentence (`selection.r_fallback`); every result that adopted such a constant has status `ok (R fallback)` and a note.
 * **Rationale:** The constants are defined on fully reversed tests; a constant fitted on other ratios mixes the mean-stress effect into the calibration. It is better than no constant for an exploratory comparison, but a reader must be able to see it.
+
+### d108
+* **Date:** 2026-11-11
+* **Topic:** Material values of `1_Ti6Al4V`
+* **Status:** Active
+* **Decision:** Maintainer: keep only the Meneghetti properties. An overlay sets the Delahay 2006 Summary row (Ti64Al4V, Su 1090 MPa) to `Null` and the Average and standard-deviation rows to the Meneghetti values (E 110000 MPa, nu 0.3, Su 980, Sy 915, Sigm1 500, Taum1 422.5 MPa at 2e6 cycles, R = -1), which is what the sheet's formulas give with Meneghetti alone. The Delahay row stays, as the source of the 4 Delahay run-outs; those run-outs are unchanged.
+* **Rationale:** Every failure of the workbook is Meneghetti's, and under d101 the Delahay tests are a different batch: averaging the two gave limits (576 / 416.75 MPa) that describe neither.
 

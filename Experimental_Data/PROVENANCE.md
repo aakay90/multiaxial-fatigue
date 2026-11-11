@@ -75,6 +75,10 @@ confirmed by T. Grossi on 2026-10-19 (decision d061).
   full recalculation gives `#REF!` (the importer does not read K; the cell was left as supplied).
 - 25CrMo4: E = 127000 MPa (Troost 1987 row) is low for a steel; FatLim lists no E.
 - Ti6Al4V: the Delahay row (Ti64Al4V, Su 1090, Sy 980) is averaged with Meneghetti (Su 980, Sy 915).
+  Resolved 2026-11-11 (decision d108): `src/multifat/imp/overlay_files/1_Ti6Al4V.overlay.json` sets the
+  Delahay row to `Null` (the row stays as the source of the 4 Delahay run-outs) and the Average and
+  standard-deviation rows to the Meneghetti values: E 110000, nu 0.3, Su 980, Sy 915, Sigm1 500,
+  Taum1 422.5 MPa (2e6 cycles, R = -1). `--no-overlay` returns the supplied averages.
 - Fatigue-limit datasets: are the `Run out = Yes` rows the fatigue-limit states at the stated cycle basis?
   They are assessed as such (fatigue index error).
 - Fatigue-limit datasets: the pure R = -1 rows do not match the Summary limits used as reference, so the

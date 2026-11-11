@@ -4,10 +4,10 @@
   "Ti6Al4V",
   "Ti6Al4V_Berto"
  ],
- "notes": "Ti6Al4V: Meneghetti 2018 failures (10) and Delahay 2006 run-outs (4), two author groups; the Summary averages the properties of both (Su 1035 = (980 + 1090)/2, Sigm1 576 = (500 + 652)/2; issue #24). Ti6Al4V_Berto: Berto 2015 (48 failures). All assessed tests are torsional.",
+ "notes": "Ti6Al4V: Meneghetti 2018 failures (10) and Delahay 2006 run-outs (4), two author groups; the Summary keeps the Meneghetti properties only (overlay, d108). Ti6Al4V_Berto: Berto 2015 (48 failures). All assessed tests are torsional.",
  "constants": {},
- "created_utc": "2026-11-11T12:09:57+00:00",
- "git_commit": "4b99af374a9d29d314b63d952f770f3f1e4a9dd2",
+ "created_utc": "2026-11-11T15:10:57+00:00",
+ "git_commit": "297068b96e619d7ffd67a5990f44d62a26158302",
  "registered_models": [
   "BP",
   "CAIM",
@@ -58,7 +58,7 @@
  ],
  "implementation_revision": "2026-11-11",
  "dataset_fingerprints": {
-  "Ti6Al4V": "40e7d508b9b363fc159b83d9c04c47513024900846945c46f2cb09145966e92a",
+  "Ti6Al4V": "c3b9a43f4f521b2f5d42196a14b61b824949dbed4b537e6b08d4fd247425871c",
   "Ti6Al4V_Berto": "75758708c36215a60aad7e144b9a18dc8ff4304726226aa3295e557026a38f02"
  },
  "methods_with_results": [

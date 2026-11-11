@@ -30,7 +30,15 @@ from multifat.report.subsets import dataset_fingerprint
 
 ROOT = Path(__file__).resolve().parents[1]
 FOLDER = ROOT / "Experimental_Data"
-OVERLAID = ["2_CX18", "3_25CrMo4", "4_30NCD16", "7_982FA", "8_AISI316L", "14_42CrMo4_Reis"]
+OVERLAID = [
+    "2_CX18",
+    "3_25CrMo4",
+    "4_30NCD16",
+    "7_982FA",
+    "8_AISI316L",
+    "14_42CrMo4_Reis",
+    "1_Ti6Al4V",
+]
 
 
 def _sha256(path: Path) -> str:
@@ -72,7 +80,7 @@ def test_overlay_off_gives_the_as_supplied_dataset():
 
 
 def test_no_overlay_for_workbooks_without_one():
-    block = load_material_workbook(FOLDER / "1_Ti6Al4V.xlsx")["Ti6Al4V"]
+    block = load_material_workbook(FOLDER / "15_Ti6Al4V_Berto.xlsx")["Ti6Al4V_Berto"]
     assert block["overlay"] is None
 
 
@@ -314,3 +322,16 @@ def test_reis_fatigue_limits_are_the_authors_trend_lines_at_1e6():
     assert abs(864.78 * 1e6**-0.061 - 372.0) < 1.0
     off = load_material_workbook(FOLDER / "14_42CrMo4_Reis.xlsx", overlay=False)["42CrMo4_Reis"]
     assert off["material"]["Tensile_fatigue_limit_MPa"] is None
+
+
+def test_ti6al4v_summary_keeps_only_the_meneghetti_batch():
+    """d108: every failure is Meneghetti's; the Delahay 2006 row no longer enters the values."""
+    block = load_material_workbook(FOLDER / "1_Ti6Al4V.xlsx")["Ti6Al4V"]
+    m = block["material"]
+    assert (m["Tensile_strength_MPa"], m["Yield_strength_MPa"]) == (980.0, 915.0)
+    assert (m["Tensile_fatigue_limit_MPa"], m["Torsional_fatigue_limit_MPa"]) == (500.0, 422.5)
+    for key in ("Sigm1", "Taum1"):
+        assert [s["authors"] for s in block["fatigue_limit_sources"][key]] == ["Meneghetti et al."]
+    assert (len(block["cases"]), len(block["runouts"])) == (10, 4)  # test data unchanged
+    off = load_material_workbook(FOLDER / "1_Ti6Al4V.xlsx", overlay=False)["Ti6Al4V"]
+    assert off["material"]["Tensile_strength_MPa"] == 1035.0  # supplied average of both rows

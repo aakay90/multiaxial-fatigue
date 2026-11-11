@@ -1,6 +1,8 @@
 """Ranking of every method by its load-equivalent error, across materials (issue #37).
 
-Rows: methods, ordered by their mean rank over the materials they ran on (best on top).
+Rows: methods, ordered by their mean rank over the materials they ran on (best on top). A material
+on which fewer than MIN_RANKED methods are scored (Ti6Al4V: only MOREL, issue #74) shows its cells
+but is left out of the ranks, since a rank among one method carries no information.
 Columns: materials. Cells: root mean square of Error_load = ln(1/s*) on the assessed failures,
 which combines bias and scatter; lower is better. A cell of 0.10 means a typical load
 misjudgement of about 10 %. The same scale holds for every
@@ -21,6 +23,8 @@ if str(REPO_ROOT) not in sys.path:
 
 from examples.style import DATA_DIR, DOCS_IMG_DIR, PALETTE, apply_academic_style
 
+MIN_RANKED = 2  # methods scored on a material for it to enter the ranks
+
 
 def plot_load_error_ranking(
     out_path: Path | None = None, data_path: Path = DATA_DIR / "load_error_ranking.csv"
@@ -30,6 +34,7 @@ def plot_load_error_ranking(
     table = pd.read_csv(data_path)
     sd = table.pivot(index="Method", columns="Material", values="Error_load_rms")
     ranks = sd.rank(axis=0, method="average")
+    ranks.loc[:, sd.notna().sum(axis=0) < MIN_RANKED] = np.nan  # no comparison on that material
     order = ranks.mean(axis=1).sort_values().index
     sd, ranks = sd.loc[order], ranks.loc[order]
     materials = list(sd.columns)
@@ -47,10 +52,9 @@ def plot_load_error_ranking(
             ax.text(j, i, text, ha="center", va="center", fontsize=7.5,
                     color="white" if dark else PALETTE["charcoal"])  # fmt: skip
     mean_rank = ranks.mean(axis=1)
-    covered = sd.notna().sum(axis=1)
-    labels = [
-        f"{name}  ({mean_rank[name]:.1f}, {covered[name]}/{len(materials)})" for name in sd.index
-    ]
+    covered = ranks.notna().sum(axis=1)
+    ranked = int(ranks.notna().any(axis=0).sum())
+    labels = [f"{name}  ({mean_rank[name]:.1f}, {covered[name]}/{ranked})" for name in sd.index]
     ax.set_yticks(range(len(sd)), labels, fontsize=8.5)
     ax.set_xticks(range(len(materials)), [m.replace("_", " ") for m in materials], fontsize=8.5)
     ax.xaxis.tick_top()
@@ -62,7 +66,7 @@ def plot_load_error_ranking(
     bar.set_label(r"RMS of $\ln(1/s^*)$ on assessed failures (lower is better)", fontsize=9)
     ax.set_title(
         "Methods ranked by their load-equivalent error (bias and scatter)\n"
-        r"row label: (mean rank, materials covered); $s^*$: load factor reproducing $N_{f,\exp}$",
+        r"row label: (mean rank, ranked materials covered); $s^*$: load factor reproducing $N_{f,\exp}$",
         fontsize=10.5, pad=46,
     )  # fmt: skip
     fig.tight_layout()

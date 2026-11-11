@@ -244,7 +244,10 @@ def test_batch_workbook_counts():
     assert (
         data["Ti6Al4V"]["material"]["Tensile_fatigue_limit_MPa"],
         data["Ti6Al4V"]["material"]["Torsional_fatigue_limit_MPa"],
-    ) == (576, 416.75)
+    ) == (
+        500.0,
+        422.5,
+    )  # Meneghetti only: the Delahay row is a different batch (d108)
     assert data["CX18"]["material"]["Tensile_fatigue_limit_MPa"] == 710
     assert data["CX18"]["material"]["Torsional_fatigue_limit_MPa"] == 450
     for m in ("CX18", "30NCD16", "25CrMo4", "982FA"):

@@ -6,6 +6,17 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### Ti6Al4V material values (decision d108, #24)
+
+- `1_Ti6Al4V.xlsx`: an overlay keeps only the Meneghetti 2018 properties (Su 980, Sy 915, Sigm1
+  500, Taum1 422.5 MPa) instead of the average with the Delahay 2006 row (1035, 947.5, 576,
+  416.75 MPa), a different batch. The workbook is unchanged; its 4 Delahay run-outs remain.
+- Only Ti6Al4V outputs change (regression snapshot against main). MOREL, the one method with its
+  own life law, now gives finite errors there (RMS of e_L 0.19 on 4 tests) and a Ti6Al4V cell in the
+  homepage ranking; the other methods stay skipped (master curve not identifiable, #74).
+- `plot_load_error_ranking`: a material on which fewer than 2 methods are scored is shown but left
+  out of the ranks, so MOREL does not gain a free rank 1 on Ti6Al4V (its mean rank stays 26.3).
+
 ### Material validity ranges skip, not fail
 
 - New typed skip error `MaterialScopeError` (`models/errors.py`): material constants outside a

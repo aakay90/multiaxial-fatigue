@@ -1,8 +1,8 @@
 {
  "csv": "load_error_ranking.csv",
- "csv_sha256": "ce40ba89485f5eeeb17b83e37bc0f38f55318757a70e8c4793803196ce8c8625",
- "created_utc": "2026-11-11T10:34:51+00:00",
- "git_commit": "fb6452b33be15c3ad04ae35b26c4a79dc2c24904",
+ "csv_sha256": "d2e820317b877561b35fd29827ee8e0726ee2cb5a6da7648298637f47c9b9d57",
+ "created_utc": "2026-11-11T15:10:59+00:00",
+ "git_commit": "297068b96e619d7ffd67a5990f44d62a26158302",
  "implementation_revision": "2026-11-11",
  "registered_models": [
   "BP",
@@ -67,7 +67,7 @@
   "42CrMo4_Reis": "45f0fd6adcb6f8c86a5cd51c45193ca7ae53eb68993ea7b60de7ebca877c4f7e",
   "AISI316L": "e245074653e53c978ee11a94812ba9d9fd6e48c0721b98a6f80c5f7a6ee2d9f5",
   "Al7075_T6": "2b6c64bcb9b92eec5faef76117a0973c63806eabc22d1ddf152461b7173fab25",
-  "Ti6Al4V": "40e7d508b9b363fc159b83d9c04c47513024900846945c46f2cb09145966e92a",
+  "Ti6Al4V": "c3b9a43f4f521b2f5d42196a14b61b824949dbed4b537e6b08d4fd247425871c",
   "Ti6Al4V_Berto": "75758708c36215a60aad7e144b9a18dc8ff4304726226aa3295e557026a38f02"
  },
  "methods_with_results": [

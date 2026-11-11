@@ -9,8 +9,8 @@
  "constants": {
   "42CrMo4_Reis": "Calibrations/42CrMo4_Reis/SSF_published.json"
  },
- "created_utc": "2026-11-11T12:09:53+00:00",
- "git_commit": "4b99af374a9d29d314b63d952f770f3f1e4a9dd2",
+ "created_utc": "2026-11-11T15:10:53+00:00",
+ "git_commit": "297068b96e619d7ffd67a5990f44d62a26158302",
  "registered_models": [
   "BP",
   "CAIM",
