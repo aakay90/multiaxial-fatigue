@@ -38,6 +38,17 @@ Branch `dev/tg-developments`, based on `main` at `e70a8af` (15 October 2026). Ev
 checked against its original publication; changes to numerical outputs are listed under
 **Changed numerically** and were checked with the regression snapshot before each commit.
 
+### Batched critical-plane evaluation (issue #69)
+
+- Replaced `np.frompyfunc(lambda x: x**2, 1, 1)` in `multifat.models.utils.batch.pypow2`
+  with an elementwise Python list comprehension over `np.asarray(x, dtype=float).ravel().tolist()`
+  followed by `.reshape(arr.shape)`. This preserves bit-for-bit parity with CPython's
+  `float ** 2` (avoiding the 1-ULP MSVC `pow(x, 2.0)` discrepancy) while eliminating NumPy
+  `object`-dtype ufunc state implicated in intermittent `python312.dll` crashes (`0xc0000409`)
+  during repeated pipeline runs on Windows Python 3.12 (`numpy==2.5.4`).
+- Added direct unit and edge-case tests (`test_pypow2_matches_cpython_float_pow`,
+  `test_pypow2_overflow_matches_cpython`) in `tests/test_batched_planes.py`.
+
 ### Packaging and tooling
 
 - Method documentation and docstrings (issue #32): added the remaining 16 method guides under
