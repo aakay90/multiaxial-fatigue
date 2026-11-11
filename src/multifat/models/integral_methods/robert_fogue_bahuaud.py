@@ -17,6 +17,8 @@ Repository choices:
 - Source Eq. (16) prints ``1 / pi`` instead of ``1 / (4 pi)`` required by Eqs. (8) and
   (18)-(24), and the Appendix omits ``1 / 2`` under the root of ``a`` required by Eqs. (20)
   and (24); the implementation restores both corrected factors (and reads Eq. 18 as ``E^2``).
+- Material constants outside 0.577 < t_-1 / s_-1 < 0.866 raise ``MaterialScopeError``: the
+  model is skipped on that material (eligibility ``out_of_scope``), not failed.
 - Spherical integration uses a 48 x 192 Gauss-Legendre grid (``GRID = (48, 192)``).
 - Endurance limits (``Sigm1``, ``Taum1``, and ``Sig0`` or the Boehme et al. 2026 Eq. 1
   estimate of ``s_0`` from ``Su``) replace fixed-life strengths ``N``, returning the scalar
@@ -30,6 +32,7 @@ from typing import Mapping
 import numpy as np
 
 from ..base import CaseResult
+from ..errors import MaterialScopeError
 from ..invariant_methods.stress_invariants import harmonic_parts
 from .bohme_papuga import _plane_amplitudes, _sphere_grid, _strengths
 
@@ -40,7 +43,7 @@ def rfb_parameters(f_m1: float, t_m1: float, f_0: float) -> tuple[float, float, 
     k = (f_m1 / t_m1) ** 2
     D = 225.0 * (1.0 - 8.0 * (k - 3.0) ** 2 / 25.0)
     if not (4.0 / 3.0 < k < 3.0) or D < 0.0:
-        raise ValueError(
+        raise MaterialScopeError(
             f"RFB requires 0.577 < t_-1/s_-1 < 0.866 (received {t_m1 / f_m1:.3f}); "
             "see the Appendix of Robert et al."
         )

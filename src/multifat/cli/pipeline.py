@@ -31,7 +31,12 @@ from multifat.cli import run as runmod
 import multifat.imp.experimental_data as exp
 from multifat.eval.fitting import stdnum_for_survival
 from multifat.imp.schema import WorkbookError, material_id, workbook_files
-from multifat.models.errors import DesignSetError, LoadingScopeError, MissingParamsError
+from multifat.models.errors import (
+    DesignSetError,
+    LoadingScopeError,
+    MaterialScopeError,
+    MissingParamsError,
+)
 
 DATA_FOLDER = "Experimental_Data"
 RESULTS_DIR = "Results/current"
@@ -226,7 +231,7 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
             Outcome(base_name + suffix, "skipped", str(exc), 0, time.perf_counter() - start)
             for suffix in suffixes
         ]
-    except LoadingScopeError as exc:
+    except (LoadingScopeError, MaterialScopeError) as exc:
         return [
             Outcome(
                 base_name + suffix,
@@ -285,7 +290,7 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
                     fit=curve,
                 )
             )
-        except LoadingScopeError as exc:  # e.g. a run-out outside the criterion's scope
+        except (LoadingScopeError, MaterialScopeError) as exc:  # e.g. a run-out out of scope
             results.append(
                 Outcome(label, "skipped", str(exc), calibrated=fitted_label, mode="out_of_scope")
             )
@@ -891,7 +896,7 @@ def _fatigue_limit_model(job: tuple) -> tuple[Outcome, dict]:
                 time.perf_counter() - start,
                 missing=tuple(exc.missing),
             )
-        except LoadingScopeError as exc:
+        except (LoadingScopeError, MaterialScopeError) as exc:
             outcome = Outcome(model_tag, "skipped", str(exc), 0, time.perf_counter() - start)
             outcome.mode = "out_of_scope"
         except Exception as exc:  # carry on with the remaining models

@@ -195,6 +195,7 @@ Native-life models (MOREL, MDC, MMCCM, TVEIT2025, LIUMAHADEVAN) declare `compari
 | `MissingParamsError` | constants are missing | skipped |
 | `LoadingScopeError` | the load is outside the criterion's declared scope | skipped, eligibility `out_of_scope` |
 | `DesignSetError` | the material has no design tests for the model | skipped |
+| `MaterialScopeError` | the material constants lie outside the criterion's validity range (e.g. RFB, 0.577 < t_-1/s_-1 < 0.866) | skipped, eligibility `out_of_scope` |
 
 In load-scaling searches (`endurance.scaled_damage`), a `LoadingScopeError` at a trial load
 counts as +inf damage, so the search backtracks.
