@@ -20,8 +20,8 @@
   (Sigm1 = plane bending 652, Taum1 = 411 MPa; tension 583 and rotating bending 602 as information).
   Full regression snapshot (merged #88 head vs branch): 0 of 2711 outputs differ; calibrate.log only
   adds the new dataset. 40 methods run, 6 skipped; Crossland 0 deg FI_load -0.065 checked by hand.
-- PR #89 (separate): `compare` no longer crashes on fatigue-limit-only runs.
-- Next action: CI on the Delahay PR and #89; maintainer merge decisions.
+- PR #89 merged: `compare` no longer crashes on fatigue-limit-only runs (checked on this dataset).
+- Next action: CI on the Delahay PR; maintainer merge decision.
 
 ## Issue #69 completion: Replace `np.frompyfunc` in `pypow2` (11 November 2026)
 

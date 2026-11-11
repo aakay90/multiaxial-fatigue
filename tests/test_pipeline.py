@@ -529,3 +529,26 @@ def test_missing_torsion_design_set_is_a_skip(tmp_path):
     wb = write_workbook(tmp_path / "Synth.xlsx", rows=no_torsion)
     (outcome,) = run_workbook(wb, models=["MWHS"], results_dir=tmp_path / "res")
     assert outcome.status == "skipped" and "torsion" in outcome.reason
+
+
+def test_fatigue_limit_only_run_finishes_with_the_comparison(tmp_path, capsys):
+    """A run on fatigue-limit datasets only has no lives to compare; it must not crash."""
+    from pathlib import Path
+
+    from multifat.cli.pipeline import main
+
+    data = Path(__file__).resolve().parents[1] / "Experimental_Data"
+    out = tmp_path / "r"
+    with pytest.raises(SystemExit) as e:
+        main([str(data / "2_CX18.xlsx"), "--models", "CROSSLAND", "--results-dir", str(out)])
+    assert e.value.code == 0
+    assert (out / "FatigueLimit" / "CROSSLAND_CX18_FI.csv").is_file()
+    assert "no life results to compare" in capsys.readouterr().out
+
+
+def test_compare_still_rejects_a_folder_without_results(tmp_path):
+    from multifat.cli import compare
+
+    (tmp_path / "r").mkdir()
+    with pytest.raises(FileNotFoundError, match="No CSV files"):
+        compare.main(["--results_dir", str(tmp_path / "r"), "--out_dir", str(tmp_path / "c")])
