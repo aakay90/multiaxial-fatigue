@@ -153,6 +153,43 @@ transverse hole) and fretting curves. Their axial R = -1 strengths at 1e6 cycles
 - Whether the shear stress of the hollow specimens refers to the outer surface or to the mean wall
   radius ("related to net section") is not stated. Values are used as given.
 
+## 17_Ti6Al4V_Delahay.xlsx (Delahay & Palin-Luc 2006, added 2026-11-11)
+
+**Source.** Delahay T, Palin-Luc T. Estimation of the fatigue strength distribution in high-cycle
+multiaxial fatigue taking into account the stress-strain gradient effect. Int J Fatigue 28 (2006)
+474-484, doi:10.1016/j.ijfatigue.2005.06.048. Table 1 (p. 478) and the Ti-6Al-4V rows of Table 2
+(p. 479) are transcribed in `sources/Delahay2006/ti6al4v_tables.csv`.
+
+**Conversion.** `tools/build_delahay_ti6al4v.py` builds the workbook from the transcription;
+`tests/test_delahay_dataset.py` checks that the committed workbook equals the build and that the
+transcription agrees with quantities the paper derives from it: sigma* = 563 MPa from Eq. (6), and
+tau*/tau_ref = 384/411 = 0.934 (Section 4.2).
+
+**Scope (maintainer decision d109).** Annealed Ti-6Al-4V (E 110 GPa, nu 0.3, Sy 980, Su 1090 MPa),
+smooth specimens, median staircase endurance limits (P_f = 0.5, at least 15 specimens, 1e6 or
+1e7 cycles; entered at N = 1e6), all R = -1:
+
+| Load | sigma_a (MPa) | tau_a (MPa) | s (MPa) | Phase | Role |
+|---|---|---|---|---|---|
+| tension | 583 | - | 17 | - | information (not in the workbook) |
+| rotating bending | 602 | - | 34 | - | information (not in the workbook) |
+| plane bending | 652 | - | 20 | - | Sigm1 (loading "plane bending") |
+| torsion | - | 411 | 27 | - | Taum1 |
+| plane bending + torsion | 442 | 255 | 47 | 0 deg | assessed |
+| plane bending + torsion | 567 | 328 | 17 | 90 deg | assessed |
+
+Sigm1 is the plane-bending limit, not the tension one: the assessed points are plane bending +
+torsion, so calibrating on the same load types lets the stress gradient largely cancel in a
+pointwise criterion. Every Dataset row is a limit state (`Run out = Yes`), as in the other
+fatigue-limit workbooks; the bending stress is the nominal surface amplitude.
+
+**Open points.**
+- The paper does not give the specimen diameter per test type (the size-effect figures name 7.98
+  mm for the reference specimens); the diameter is Null.
+- The cycle basis is "1e6 or 1e7 cycles" without saying which applies to each limit.
+- The authors note that the 90 deg limit was measured on specimens of a different roughness.
+- These limits were formerly in `1_Ti6Al4V.xlsx` as 4 run-outs, mislabelled (removed there, d109).
+
 ## 14_42CrMo4_Reis.xlsx: R = -1 fatigue limits (overlay, 2026-11-10)
 
 **Maintainer decision d100 (issue #71).** The Summary had no fatigue limits, so the 22 limit-based

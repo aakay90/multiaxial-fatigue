@@ -391,6 +391,8 @@ skipped on QT, whose torsion tests with a mean shear are outside its R = −1 sc
     failure is Meneghetti's. Since decision [d108](decision-log.md#d108) an overlay keeps the
     Meneghetti values only (Su 980, Sy 915, limits 500 / 422.5 MPa). The 4 Delahay rows, endurance
     limits of another batch entered as run-outs, are removed ([d109](decision-log.md#d109)).
+    They now form the fatigue-limit dataset `17_Ti6Al4V_Delahay`, which is not part of this
+    comparison: its errors are fatigue indices on limit states, not load errors on failures.
 
 ## Open questions
 
