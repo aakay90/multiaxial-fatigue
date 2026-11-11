@@ -19,6 +19,20 @@ from workbook_factory import revised_row, write_revised_workbook
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def _design_rows():
+    """Five axial tests over two decades: an identifiable master curve (issue #74)."""
+    return [
+        revised_row(
+            {
+                "Specimen name": f"T{i}",
+                "Number of cycles to failure": n,
+                "Amplitute AXIAL stress  (MPa)": s,
+            }
+        )
+        for i, (n, s) in enumerate([(1e4, 600), (3e4, 520), (1e5, 450), (3e5, 400), (1e6, 350)])
+    ]
+
+
 def _tension_rows():
     return [
         revised_row(
@@ -165,7 +179,7 @@ def test_missing_nu_blocks_strain_models_only(tmp_path):
     stress_only = stress_only_models()
     assert {"CROSSLAND", "FIN", "MATAKE", "MCD"} <= stress_only and "SWT" not in stress_only
     rows = [["r", "A", 2020, "Synthetic steel", 206000, "Null", 900, 750, 420, 300, 2e6, -1]]
-    path = write_revised_workbook(tmp_path / "N.xlsx", _tension_rows(), summary_rows=rows)
+    path = write_revised_workbook(tmp_path / "N.xlsx", _design_rows(), summary_rows=rows)
     block = _one(path)
     assert block["material"]["nu"] is None
     case = block["cases"][0]
@@ -198,7 +212,7 @@ def test_mixed_ratio_summary_uses_reversed_source_for_models(tmp_path):
         ["r2", "B", 2024, "Synthetic steel", 206000, 0.3, 900, 750, 600, 300, 1e6, 0],
     ]
     path = write_revised_workbook(
-        tmp_path / "Synthetic_steel.xlsx", _tension_rows(), summary_rows=rows
+        tmp_path / "Synthetic_steel.xlsx", _design_rows(), summary_rows=rows
     )
     out = {
         o.model: o

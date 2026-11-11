@@ -93,6 +93,10 @@ checked against its original publication; changes to numerical outputs are liste
   (P_s = 0.5) and the calibrated constants are unchanged; curves with P_s > 0.5 shift slightly.
 - New output `<material>_master_curves.csv` per pipeline run: n, decades, A, b with its standard
   error, R² in log space, scatter, identifiable and reason, for every fitted curve.
+- Consequences: the homepage load-error ranking loses its Ti6Al4V column (no method keeps three
+  assessed errors there); the cross-batch comparison of the Ti6Al4V family keeps only the
+  transfer from Ti6Al4V_Berto. Three synthetic test fixtures that had four or fewer design tests
+  were extended or their assertions updated.
 
 ### Survival probability (issue #16)
 

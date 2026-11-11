@@ -211,7 +211,9 @@ class DamageMetricTests(unittest.TestCase):
         fit = fit_power_law_with_survival_std(n, dp, stdnum=2)
         self.assertEqual(fit["b"], 0.0)
         self.assertTrue(np.isfinite(fit["A_surv"]))
-        self.assertAlmostEqual(fit["A_surv"], np.exp(-2 * np.std(np.log(dp), ddof=1)))
+        self.assertAlmostEqual(
+            fit["A_surv"], np.exp(-2 * np.std(np.log(dp), ddof=2))
+        )  # n - 2 dof (#74)
         self.assertTrue(np.isnan(fit["STD"]))
 
     def test_unidentifiable_calibration_is_not_reported_as_an_optimum(self):

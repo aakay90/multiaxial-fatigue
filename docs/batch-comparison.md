@@ -372,15 +372,15 @@ skipped on QT, whose torsion tests with a mean shear are outside its R = −1 sc
 
 ![Strength per path, Ti6Al4V](images/batch_comparison_Ti6Al4V_strength.png)
 
-Only pure torsion is assessed on both batches.
-
-- **Offsets.** ±0.186 [0.141, 0.232] on 31 methods, against a method-free prediction of ±0.158.
-  The interaction is 0.028, with 0.002 from sampling.
-- **Transfer.** The shift equals the prediction: +0.148 (A) and −0.134 (T) from `Ti6Al4V` to
-  Berto, −0.227 and +0.147 the other way.
-- **The `Ti6Al4V` design set is not identifiable.** Its 6 axial failures span 0.39 decades of
-  life, with a fitted slope $b = -0.002$; its 4 torsion failures give a strength interval of
-  512–4440 MPa. FS, FIN, MDC, MMCCM and LIUMAHADEVAN cannot be calibrated on it.
+- **No own-batch comparison is possible.** The `Ti6Al4V` design tests do not identify a master
+  curve: 6 axial failures over 0.39 decades of life with a slope indistinguishable from zero
+  ($b = -0.002 \pm 0.027$), and 4 torsion failures for MWHS. Since decision
+  [d106](decision-log.md#d106) the master-curve methods are skipped there, and only the native
+  MOREL runs. FS, FIN, MDC, MMCCM and LIUMAHADEVAN cannot be calibrated on it either.
+- **Transfer from Berto.** `Ti6Al4V` can still be predicted from `Ti6Al4V_Berto` (42 methods,
+  Berto's curves and Summary). The shift equals its method-free prediction: −0.227 on the axial
+  path and +0.147 in torsion (`transfer_prediction.csv`). The reverse transfer is skipped for the
+  same reason as the own batch.
 - **Two points look like data questions, not batch effects**
   ([#24](https://github.com/andreachiocca/multiaxial-fatigue/issues/24)):
   - The Meneghetti torsion amplitudes (474–550 MPa) equal the axial ones (523–550 MPa) at
@@ -388,8 +388,7 @@ Only pure torsion is assessed on both batches.
     is unusual for a wrought alloy and should be checked against the paper (for instance,
     whether the torsion values are equivalent stresses).
   - The Summary of `1_Ti6Al4V` averages the Meneghetti and Delahay properties, although every
-    failure is Meneghetti's. With it the limit-based methods have an RMS of 0.29 in torsion;
-    with Berto's limits, 0.04.
+    failure is Meneghetti's.
 
 ## Open questions
 
