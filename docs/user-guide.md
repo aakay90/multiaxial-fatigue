@@ -84,7 +84,7 @@ uv run multifat-pipeline --all --jobs 4
   └─────────────┬─────────────┘
                 ▼
   ┌───────────────────────────┐     Outputs: <METHOD>_<MATERIAL>.csv
-  │  3. Multi-Model Execution │ ──► (DP & Nf across all 34 registered criteria)
+  │  3. Multi-Model Execution │ ──► (DP & Nf across all 46 registered criteria)
   └─────────────┬─────────────┘
                 ▼
   ┌───────────────────────────┐     Outputs: Comparison/ & run_report.tsv
@@ -94,7 +94,7 @@ uv run multifat-pipeline --all --jobs 4
 
 1. **Validation**: the workbook is checked against the schema contract ([`docs/workbook-format.md`](workbook-format.md)). Execution stops at once when strict errors are found; warnings, by contrast, end up in `<MATERIAL>_validation.txt`.
 2. **Calibration**: which constants the models require but the workbook does not provide is identified first. Uniaxial Basquin curves are then fitted on $R=-1$ tests, the interaction coefficients that are needed get calculated, and all of this is stored in `<MATERIAL>_calibration.json`, together with a cryptographic fingerprint of the dataset. **No modification is ever applied to the original Excel file.**
-3. **Execution**: every one of the 34 registered criteria (along with their `_ext` variants) is evaluated over all failure and run-out observations. Should a model be missing required parameters, it is marked as skipped in `<MATERIAL>_run_report.tsv`, and the remaining models keep running.
+3. **Execution**: every one of the 46 registered criteria (along with their `_ext` variants) is evaluated over all failure and run-out observations. Should a model be missing required parameters, it is marked as skipped in `<MATERIAL>_run_report.tsv`, and the remaining models keep running.
 4. **Comparison**: experimental lives and predicted lives are set against each other, log-error statistics ($\mu_{\log_{10}}, \sigma_{\log_{10}}$) are computed, and comparison plots plus summary tables are written out. On `--all` runs, the global eligibility matrix `Comparison/eligibility_matrix.csv` is produced as well.
 
 Every output goes to `Results/current/`.
@@ -171,7 +171,7 @@ uv run multifat-compare --results_dir Results/current --out_dir Results/Comparis
 ```
 
 ### Direct Script Invocation
-Standalone execution shims also exist in `scripts/` matching upstream naming (`0_calibrate_material_params.py`, `1_run_material.py`, `2_compare_results.py`, and `3_pipeline.py`). See [`scripts/README.md`](../scripts/README.md).
+Standalone execution shims also exist in `scripts/` matching upstream naming (`0_calibrate_material_params.py`, `1_run_material.py`, `2_compare_results.py`, `3_pipeline.py`, and `3_review_subsets.py`). See [`scripts/README.md`](../scripts/README.md).
 
 ---
 
@@ -183,18 +183,18 @@ Before contributing code, running sweeps or committing changes, verify the imple
 # Run paper-reproduction unit tests only
 uv run pytest tests/methods -q
 
-# Run full test suite (about 1,700 tests)
+# Run full test suite
 uv run pytest -q
 
 # Code formatting & lint checks (Black owns layout, Ruff checks correctness)
 uv run black --check . && uv run ruff check .
 
-# Check local documentation links & scientific reviews (LaTeX/dossiers)
+# Check local documentation links & tool commands, and scientific reviews (LaTeX/dossiers)
 uv run python tools/check_docs.py
 uv run python tools/check_scientific_reviews.py
 
 # Numerical regression snapshot (gate before any commit that could touch numbers)
-uv run python tools/regression_snapshot.py
+uv run python tools/regression_snapshot.py run <dir>
 ```
 
 ---

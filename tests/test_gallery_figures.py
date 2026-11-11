@@ -11,6 +11,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from examples import homepage_data  # noqa: E402
 from examples.plot_damage_sphere import K_FI, SIGMA_A, TAU_A, findley_on_sphere  # noqa: E402
 from multifat.eval.evaluator import best_cp_for_case  # noqa: E402
 from multifat.models.cp_methods.fin import Findley  # noqa: E402
@@ -42,3 +43,46 @@ def test_ranking_data_is_consistent():
     var = table.Error_load_sd**2 * (table.n - 1) / table.n + table.Error_load_mean**2
     assert np.allclose(rms2, var, rtol=1e-4)  # RMS^2 = mean^2 + population variance
     assert not table.Method.str.endswith("_ext").any()
+
+
+def test_committed_homepage_data_is_current():
+    """A new method, changed revision or changed workbook needs homepage CSVs regenerated."""
+    problems = homepage_data.check()
+    assert not problems, (
+        "; ".join(problems)
+        + " -> regenerate examples/data/*.csv with build_load_error_ranking.py and build_predictions_csv.py"
+    )
+
+
+def test_homepage_manifest_detects_staleness(tmp_path, monkeypatch):
+    csv_path = tmp_path / "sample.csv"
+    csv_path.write_text("Material,Method\nM,FIN\n", encoding="utf-8")
+    monkeypatch.setattr(homepage_data, "registered_models", lambda: ["FIN", "SWT"])
+    monkeypatch.setattr(
+        homepage_data, "dataset_fingerprints", lambda mats: {m: f"fp-{m}" for m in mats}
+    )
+    monkeypatch.setattr(homepage_data, "_implementation_revision", lambda: "2026-11-11")
+    mpath = homepage_data.write_manifest(csv_path, ["M"], ["FIN"])
+
+    assert homepage_data.check_manifest(csv_path, ["M"]) == []
+    assert any(
+        "models added ['CROSSLAND']" in p
+        for p in homepage_data.check_manifest(
+            csv_path, ["M"], current_models=["CROSSLAND", "FIN", "SWT"]
+        )
+    )
+    assert any(
+        "implementation revision" in p
+        for p in homepage_data.check_manifest(csv_path, ["M"], current_revision="2026-12-01")
+    )
+    assert any(
+        "datasets changed ['M']" in p
+        for p in homepage_data.check_manifest(
+            csv_path, ["M"], current_fingerprints={"M": "fp-changed"}
+        )
+    )
+
+    csv_path.write_text("Material,Method\nM,SWT\n", encoding="utf-8")
+    assert any("sha256" in p for p in homepage_data.check_manifest(csv_path, ["M"]))
+    mpath.unlink()
+    assert any("missing manifest" in p for p in homepage_data.check_manifest(csv_path, ["M"]))

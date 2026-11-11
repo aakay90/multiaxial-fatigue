@@ -1,5 +1,90 @@
 # Development continuation checkpoint
 
+## Issue #32 completion: All method guides and module docstrings (11 November 2026)
+
+Completed all remaining deliverables for Issue #32 on branch `docs/issue-32-method-guides`
+(branched off `main` at `c016c77`):
+
+- **All 16 remaining registered method guides added under `docs/method-guides/`:**
+  - Batch 1 (`bff58ab`): `LI`, `LIU2021`, `MGSE_YU`, `MGSE_ZHU`, `MSWT`.
+  - Batch 2 (`9e53aff`): `MDC`, `MMCCM`, `SWTD`, `OTT`, `EK`.
+  - Batch 3 (`b33aa44`): `RFB`, `VHN`, `PBP`, `COIN`, `MMMH`, `TVEIT2025`.
+  - Every one of the 46 registered criteria in `src/multifat/models/registry.py` now has a
+    9-section guide matching `docs/method-guides/TEMPLATE.md`, indexed in
+    `docs/method-guides/README.md`, with runnable Python examples and CLI invocations.
+- **All 19 remaining method module docstrings completed:** Added line-1 module docstrings
+  containing literal equation blocks and `Repository choices:` sections across all remaining
+  pending files (`cp_methods/mgse_zhu`, `cp_methods/mswt`, `cp_methods/mdc`,
+  `cp_methods/mmccm`, `energy_based_methods/swtd`, `invariant_methods/ottosen`,
+  `energy_based_methods/ellyin_kujawski`, `integral_methods/robert_fogue_bahuaud`,
+  `invariant_methods/vu_halm_nadot`, `invariant_methods/pbp`, `invariant_methods/coin_liwi`,
+  `invariant_methods/mmmh`, `cp_methods/car_spa`,
+  `invariant_methods/papadopoulos_panoskaltsis`, `integral_methods/doudard`,
+  `integral_methods/flaceliere_morel`, `energy_based_methods/banvillet`,
+  `energy_based_methods/sed_berto_lazzarin`, `energy_based_methods/zhu_edp`), emptying
+  `PENDING_DOCSTRINGS` (`set()`) in `tests/test_method_guides.py`.
+- **Guide ratchet and documentation updates:** Tightened `test_guides_exist` in
+  `tests/test_method_guides.py` to assert `REGISTERED <= {p.stem for p in _guides()}`. Updated
+  `docs/method-guides/README.md`, `README.md`, `docs/user-guide.md`, `CHANGELOG.md`, and
+  `docs/audit-checkpoint.md`.
+- **Checks (`WorkstationUniTN` `DESKTOP-8EMS1B6`, `MPLBACKEND=Agg`, isolated bundle clone, `uv sync --offline` without optional `fe`/`ansys` extras):**
+  - `uv run pytest tests/methods -q`: `1454 passed, 2 skipped, 120 xfailed, 2 warnings in 65.47s`
+  - `uv run pytest --ignore=tests/methods -q`: `1583 passed, 65 skipped, 5 xfailed, 5 warnings, 61 subtests passed in 361.48s` (43 skips from omitted `h5py`, 2 from omitted/opt-in `ansys`, 20 helper modules without module docstrings in `tests/test_notation.py`)
+  - Local post-edit gates verified in final commit pass (`black`, `ruff`, generators, `check_docs.py`, `check_scientific_reviews.py`, `tests/test_method_guides.py`, `tests/test_notation.py`).
+- **Remaining / next action.** Push `docs/issue-32-method-guides` to `origin`, open a PR referencing `Closes #32`, and close Issue #32 upon authorization/merge.
+
+## PR #82 extension: Issues #76 and #80 (11 November 2026)
+
+Issues #76 and #80 added to branch `fix/docs-and-workbook-integrity` (PR #82, after merging
+`origin/main` at `c09dc4c` with PR #70):
+
+- **Issue #76 (`IMPLEMENTATION_REVISION` bump and archival policy).** Bumped
+  `IMPLEMENTATION_REVISION` in `src/multifat/models/references.py` from `"2026-10-07-audit1"` to
+  `"2026-11-11"`. Documented the bump rule in `CONTRIBUTING.md`, `docs/method-audit.md` and
+  `.github/pull_request_template.md`. Kept `check_record_compatibility` rejecting prior-revision
+  pipeline sidecars (`"params"` in record) and updated `load_constants` in
+  `src/multifat/cli/pipeline.py` to append a provenance warning when an upstream `Calibrations/`
+  record carries a mismatched `implementation_revision`. Verified rejection and flagging in
+  `tests/test_calibration_history.py`, `tests/test_pipeline.py` and
+  `tests/test_calibration_records.py`. Follow-up after PR #72 merges: `examples/batch_comparison.py`
+  exists on `origin/analysis/batch-comparison` (#72), not on this branch.
+- **Issue #80 (homepage data manifests, staleness checks and overlay error tests).** Added
+  `examples/homepage_data.py` to write and check `.manifest.json` provenance sidecars alongside
+  `examples/data/load_error_ranking.csv` and `examples/data/42CrMo4_QT_predictions.csv` (recording
+  canonical LF CSV SHA-256, `IMPLEMENTATION_REVISION`, enabled registered models and post-overlay
+  `dataset_fingerprint`s). Updated `examples/build_load_error_ranking.py` and
+  `examples/build_predictions_csv.py` with `--check` and `lineterminator="\n"`. Ran
+  `uv run multifat-pipeline` across all 7 ranking materials on `WorkstationUniTN` (`--models all
+  --no-compare --jobs 4`): `load_error_ranking.csv` reproduced all 263 rows with 0 numeric
+  differences and `42CrMo4_QT_predictions.csv` reproduced all 2,072 rows across 37 valid methods
+  within `5.7e-8` relative difference on `Nf_expected`, so both CSVs were kept unmodified in Git
+  and paired with new `.manifest.json` files. Added `test_committed_homepage_data_is_current` and
+  `test_homepage_manifest_detects_staleness` in `tests/test_gallery_figures.py`, plus invalid
+  operation, schema-version and duplicate `base_sha256` tests in `tests/test_dataset_overlays.py`.
+  Follow-up after PR #72 merges: `test_transfer_native_life_model` belongs in `tests/test_transfer.py`
+  on PR #72 (`load_transfer` does not exist on this branch).
+- **Modified / new files.** `.github/pull_request_template.md`, `CHANGELOG.md`, `CONTRIBUTING.md`,
+  `docs/audit-checkpoint.md`, `docs/method-audit.md`, `examples/build_load_error_ranking.py`,
+  `examples/build_predictions_csv.py`, `examples/homepage_data.py`,
+  `examples/data/42CrMo4_QT_predictions.manifest.json`,
+  `examples/data/load_error_ranking.manifest.json`, `src/multifat/cli/pipeline.py`,
+  `src/multifat/models/references.py`, `tests/test_calibration_history.py`,
+  `tests/test_calibration_records.py`, `tests/test_dataset_overlays.py`,
+  `tests/test_gallery_figures.py`, `tests/test_pipeline.py`.
+- **Checks (`WorkstationUniTN`, `MPLBACKEND=Agg`, private `--basetemp`).**
+  - `uv run ruff check .`: passed
+  - `uv run black --check .`: `266 files would be left unchanged.`
+  - `uv run python tools/generate_method_docs.py --check`: `162 records; 118 counted method/scoped candidates; 51/51 review entries; registry, paths, DOI evidence and generated files OK`
+  - `uv run python tools/generate_workbook_docs.py --check`: `docs/workbook-format.md OK`
+  - `uv run python tools/check_docs.py`: `1834 local documentation links and 23 tool commands OK (external links and frozen provenance excluded)`
+  - `uv run python tools/check_scientific_reviews.py`: `1 scientific review dossier(s); required files and benchmark JSON OK`
+  - `uv run python examples/build_load_error_ranking.py --check`: `load_error_ranking.csv is current`
+  - `uv run python examples/build_predictions_csv.py --check`: `42CrMo4_QT_predictions.csv is current`
+  - `uv run pytest tests/methods -q`: `1454 passed, 2 skipped, 120 xfailed, 2 warnings in 58.76s`
+  - `uv run pytest --ignore=tests/methods -q`: `1656 passed, 25 skipped, 5 xfailed, 5 warnings, 61 subtests passed in 339.62s` (single-process runs hit intermittent hardware access-violation/stack faults on the UniTN workstation around 50%; the overlapping transition run `tests/methods` through `tests/test_dataset_classification.py` passed on rerun with `1559 passed, 2 skipped, 120 xfailed, 6 warnings, 12 subtests passed in 162.36s`).
+- **Remaining / next action.** Commit verified changes on `fix/docs-and-workbook-integrity`, push to
+  `origin`, update PR #82 title/body and clean temporary remote directories.
+
 ## PR #64 review response (9 November 2026)
 
 Maintainer review of #64 (six points), addressed on `feat/fe-and-time-history-inputs`:

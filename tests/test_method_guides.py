@@ -55,7 +55,10 @@ def _model_names(text: str) -> set[str]:
 
 
 def test_guides_exist():
-    assert _guides(), "no method guide found"
+    guides = {p.stem for p in _guides()}
+    assert guides, "no method guide found"
+    missing = sorted(REGISTERED - guides)
+    assert not missing, f"registered models without a guide in docs/method-guides: {missing}"
 
 
 @pytest.mark.parametrize("guide", _guides(), ids=lambda p: p.stem)
@@ -89,29 +92,8 @@ HELPER_MODULES = {
     "invariant_methods/stress_invariants",  # invariant amplitudes shared by several criteria
 }
 # Method modules whose docstring still lacks the "Repository choices:" paragraph required by
-# docs/adding-methods.md (issue #32). Remove an entry when its docstring is completed; the test
-# fails if a listed module already complies, so this list can only shrink.
-PENDING_DOCSTRINGS = {
-    "cp_methods/car_spa",
-    "cp_methods/mdc",
-    "cp_methods/mgse_zhu",
-    "cp_methods/mmccm",
-    "cp_methods/mswt",
-    "invariant_methods/coin_liwi",
-    "invariant_methods/mmmh",
-    "invariant_methods/ottosen",
-    "invariant_methods/papadopoulos_panoskaltsis",
-    "invariant_methods/pbp",
-    "invariant_methods/vu_halm_nadot",
-    "integral_methods/doudard",
-    "integral_methods/flaceliere_morel",
-    "integral_methods/robert_fogue_bahuaud",
-    "energy_based_methods/banvillet",
-    "energy_based_methods/ellyin_kujawski",
-    "energy_based_methods/sed_berto_lazzarin",
-    "energy_based_methods/swtd",
-    "energy_based_methods/zhu_edp",
-}
+# docs/adding-methods.md (issue #32). All modules now comply; keep empty.
+PENDING_DOCSTRINGS: set[str] = set()
 
 
 def _method_modules() -> dict[str, Path]:

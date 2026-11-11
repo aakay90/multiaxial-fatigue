@@ -20,7 +20,7 @@ numbers are checked on every CI run.
 
 ## Available guides
 
-The most widely used criteria are documented first.
+All 46 registered criteria have a dedicated guide below, grouped by family.
 
 | Guide | Registry name | Family | Damage parameter (DP) | Material constants |
 | --- | --- | --- | --- | --- |
@@ -32,31 +32,46 @@ The most widely used criteria are documented first.
 | [Ince–Glinka GSE](GSE.md) | `GSE` | Critical plane, energy | $\tau_{\max}\gamma_{a} + \sigma_{n,\max}\varepsilon_{n,a}$ (+ plastic terms) (MPa) | `E`, `nu` |
 | [Ince–Glinka GSA](GSA.md) | `GSA` | Critical plane, strain | $\tau_{\max}\gamma_{a}/\tau_f' + \sigma_{n,\max}\varepsilon_{n,a}/\sigma_f'$ (+ plastic terms) (–) | `E`, `nu`; `sigma_f`, `tau_f` or `Su` |
 | [Liu virtual strain energy](VSE.md) | `VSE`, `VSE_ext` | Critical plane, energy | $\Delta\sigma_n\Delta\varepsilon_n + \Delta\tau\,\Delta(\gamma/2)$ (MPa) | `E`, `nu`; `vse_mode` |
+| [Yu MGSE](MGSE_YU.md) | `MGSE_YU`, `MGSE_YU_ext` | Critical plane, energy | $\tau_{\max}\gamma_a + \sigma_{n,\max}\varepsilon_{n,a}$ (MPa) | `E`, `nu` |
+| [Zhu MGSE](MGSE_ZHU.md) | `MGSE_ZHU`, `MGSE_ZHU_ext` | Critical plane, energy | $\tau_{\max}\gamma_a + k_\mathrm{MGSE}\sigma_{n,\max}\varepsilon_{n,a}$ (MPa) | `E`, `nu`; `k_MGSE` |
+| [Modified SWT](MSWT.md) | `MSWT`, `MSWT_ext` | Critical plane, energy | $4a\,\sigma_{n,\max}\varepsilon_{n,a} + 2(1-a)\tau_a\gamma_a$ (MPa) | `E`, `nu`; `a_MSWT` |
+| [Li et al. 2021](LI.md) | `LI`, `LI_ext` | Critical plane, energy | $(\tau_a + \lvert\tau_m\rvert)\gamma_a + L\,\sigma_{n,\max}\varepsilon_{n,a}$ (MPa) | `E`, `nu`; `L_LI` |
+| [Liu et al. 2021](LIU2021.md) | `LIU2021`, `LIU2021_ext` | Critical plane, strain | $\gamma_a + \sigma_{n,\max}\sqrt{\sigma_{n,\max}E\Delta\varepsilon_n}/(4G\tau_f')$ (–) | `E`, `nu`, `Su`; `tau_f` |
 | [Liu–Xie–Hao 2025](LIU2025.md) | `LIU2025`, `LIU2025_ext` | Critical plane, stress | $\sqrt{\sigma'^2_{n,a} + 3\tau'^2_a}$, Gerber/Serensen means (MPa) | `Su`; `Tu` |
 | [Kujawski mSWT](KUJAWSKI2021.md) | `KUJAWSKI2021`, `KUJAWSKI2021_ext` | Critical plane, energy-like | $(\sigma_{n,\max} + \lvert\sigma_{n,m}\rvert/3)\,\varepsilon_{n,a}$ for $\sigma_{n,m} < 0$, else SWT (MPa) | `E`, `nu` |
+| [Deviatoric SWT](SWTD.md) | `SWTD` | Energy-based, deviatoric | $\max_i \max(S_{\max,i}\lvert e_{a,i}\rvert,\, S_{\min,i}\lvert e_{a,i}\rvert)$ (MJ/m$^3$) | none |
+| [Ellyin–Kujawski](EK.md) | `EK` | Energy-based, distortional | $\Delta W_d\,(1 + \alpha\sigma_m/\bar{\sigma})/\bar{\rho}^{\,n}$ (MJ/m$^3$) | `E`, `nu`; `alpha_EK`, `n_EK`, `K_prime`, `n_prime` |
 | [Liu–Mahadevan](LIUMAHADEVAN.md) | `LIUMAHADEVAN` | Critical plane, stress (native life) | $\sqrt{[\sigma_{a,c}(1+\eta\sigma_{m,c}/f)/f]^2 + (\tau_{a,c}/t)^2 + k(\sigma^H_a/f)^2}/\beta$ (index) | `Sigm1`, `Taum1`, `sigma_f`, `b_fat`, `tau_f`, `b0` |
 | [Wang et al. 2022](WANG2022.md) | `WANG2022` | Critical plane, stress | $\sqrt{C_a^2 + k(1 - \sqrt{N_{\max}N_a}/2\sigma_y)^2N_a^2}$ (MPa) | `Sigm1`, `Taum1`, `Sy` |
 | [Zhang–Yao](ZHANGYAO.md) | `ZHANGYAO`, `ZHANGYAO_ext` | Critical plane, stress | $\sqrt{C_a^2 - C_aN^* + (t_{-1}^2/f_{-1}^2)(f_{-1}+2C_a)N^*}/t_{-1}$ (index) | `Sigm1`, `Taum1`; `Su` |
 | [Ninić Damage Function](NINIC.md) | `NINIC` | Critical plane, stress | $\sqrt{(\tau_a/t_{-1})^2 + k(\sigma_{n,\max}/f_{-1})^2}$ (index) | `Sigm1`, `Taum1`; `k_NIN` |
 | [Matake](MATAKE.md) | `MATAKE`, `MATAKE_ext` | Critical plane, stress | $\tau_a + (2t_{-1}/f_{-1} - 1)\,\sigma_{n,\max}$ (MPa) | `Sigm1`, `Taum1` |
 | [McDiarmid](MCD.md) | `MCD`, `MCD_ext` | Critical plane, stress | $\tau_a + t_{-1}\sigma_{n,\max}/(2S_u)$ (MPa) | `Taum1`, `Su` |
+| [Margetin–Ďurka–Chmelko](MDC.md) | `MDC`, `MDC_ext` | Critical plane, stress (native life) | $\sqrt{k\,\sigma_{a,\mathrm{cr}}^2 + \tau_{a,\mathrm{cr}}^2}$ (MPa) | `sigma_f`, `b_fat`, `tau_f`, `b0` |
 | [Modified Wöhler Curve Method](MWCM.md) | `MWCM` | Critical plane, stress | $\tau_a/\tau_{A,\mathrm{Ref}}(\rho)$ (index) | `Sigm1`, `Taum1` |
+| [Modified Manson–Coffin](MMCCM.md) | `MMCCM` | Critical plane, strain–stress (native life) | $1/N_f$ from $\gamma_a(\rho, N_f)$ (–) | `E`, `nu`, `sigma_f`, `epsilon_f`, `b_fat`, `c_fat`, `tau_f`, `gamma_f`, `b0`, `c0`; `nu_p` |
 | [Stress scale factor](SSF.md) | `SSF` | Equivalent shear stress | $\max_t[\lvert\tau\rvert + \mathrm{ssf}(\sigma,\lambda)\lvert\sigma\rvert]$ (MPa) | `a_SSF` … `i_SSF` (published for 42CrMo4_Reis) |
 | [Manson–McKnight–Papuga](MMP.md) | `MMP` | Equivalent stress | $\sigma_a^w(\sigma_a + \beta_P\sigma_m)^{1-w}/f_{-1}$ (index) | `Sigm1`, `Taum1`; `Sig0` or `Su`; `Tau0` |
 | [Crossland](CROSSLAND.md) | `CROSSLAND` | Stress invariants | $(\sqrt{J_{2,a}} + \kappa\,\sigma_{H,\max})/t_{-1}$ (index) | `Sigm1`, `Taum1` |
 | [Sines](SINES.md) | `SINES` | Stress invariants | $(\sqrt{J_{2,a}} + \kappa\,\sigma_{H,m})/t_{-1}$ (index) | `Sigm1`, `Taum1`, `Su` |
 | [Golos–Dębski–Dębski](GOLOS.md) | `GOLOS` | Limit curve (in-phase bending–torsion) | $A(\sigma/f_{-1})^2 + B\,\sigma/f_{-1} + (\tau/t_{-1})^2$ (index) | `Sigm1`, `Taum1` |
 | [Gonçalves–Araújo–Mamiya](GAM.md) | `GAM` | Stress invariants (prismatic hull) | $(\sqrt{\textstyle\sum a_i^2} + \kappa\,\sigma_{p\max})/\lambda$ (index) | `Sigm1`, `Taum1` |
+| [Reduced Ottosen](OTT.md) | `OTT` | Stress invariants (Hershey–Hosford) | $\sigma_{e,a} + A\,I_{1,m}$ (MPa) | `Sigm1`, `Taum1`; `m_OTT`, `A_OTT`, `Sig0` or `Su` |
+| [Vu–Halm–Nadot](VHN.md) | `VHN` | Stress invariants | $f_{\max}/t_{-1}$, Eq. (8) (index) | `Sigm1`, `Taum1`, `Su` |
+| [Projection-by-Projection](PBP.md) | `PBP` | Stress invariants (deviatoric covariance) | $\Gamma/\sqrt{J_{2A,\rho}}$ (index) | `Sigm1`, `Taum1` |
+| [COIN LiWI](COIN.md) | `COIN` | Stress invariants (complex phasors) | $\sqrt{k_\phi H + (1 - k_\phi)\lvert C\rvert}/s_{-1}$ (index) | `Sigm1`, `Taum1`; `k_phi` |
+| [Modified Mohr–Mises](MMMH.md) | `MMMH` | Stress invariants (signed Mohr–Mises) | $(\sigma_{\mathrm{eq},a} + M\,\sigma_{\mathrm{eq},m})/s_{-1}$ (index) | `Sigm1`, `Taum1`; `M_MMMH`, `Sig0` or `Su` |
+| [Tveit et al. 2025](TVEIT2025.md) | `TVEIT2025` | Incremental continuum damage (native life) | virgin $(\sigma_e + A\,I_1)/f_{-1}$ (index); life $N_f$ from $D = 1$ | `A_TVEIT`, `C_TVEIT`, `K_TVEIT`, `L_TVEIT` (`--constants`) |
 | [Dang Van](DANGVAN.md) | `DANGVAN` | Mesoscopic | $\sigma_{eq,DV}/f_{-1}$ (index) | `Sigm1`, `Taum1` |
 | [Papadopoulos](PAPADOPOULOS.md) | `PAPADOPOULOS` | Mesoscopic, integral | $\gamma_N/t_{-1}$, Eq. (41) (index) | `Sigm1`, `Taum1` |
+| [Robert–Fogue–Bahuaud](RFB.md) | `RFB` | Integral | $\frac{1}{s_{-1}}\sqrt{\langle(a\tau_a + b\sigma_{n,a} + d\sigma_{n,m})^2\rangle}$ (index) | `Sigm1`, `Taum1`; `Sig0` or `Su` |
 | [Böhme–Papuga](BP.md) | `BP` | Integral | $\sqrt{\langle a\tau_a^2 + b\sigma_{n,a}^2 + c\tau_a\tau_m + d\sigma_{n,a}\sigma_{n,m}\rangle}/s_{-1}$ (index) | `Sigm1`, `Taum1`, `Sig0`/`Tau0` or `Su` |
 | [CAIM](CAIM.md) | `CAIM` | Critical plane + integral | $\sqrt{\max(a\tau_a^2 + b\sigma_{n,a}^2) + \langle c\tau_a\tau_m + d\sigma_{n,a}\sigma_{n,m}\rangle}/s_{-1}$ (index) | as BP |
 | [Papuga–Růžička PCr](PCR.md) | `PCR` | Critical plane, stress | $\max\sqrt{a_c C_a^2 + b_c(N_a + t_{-1}N_m/f_0)}/f_{-1}$ (index) | `Sigm1`, `Taum1`, `Sig0` or `Su` |
 | [Papuga–Růžička PI](PI.md) | `PI` | Integral | $\sqrt{\langle a_I C_a^2 + b_I(N_a + \kappa N_m)\rangle}/f_{-1}$ (index) | `Sigm1`, `Taum1` |
 | [Morel](MOREL.md) | `MOREL` | Mesoscopic, native life | $T_S/T_{S,\lim}$ (index); life from Eq. (38) | `Sigm1`, `Taum1`; $p, q, r$ fitted |
 
-Guides still to be written follow the same [template](TEMPLATE.md). Until a guide exists, use the
-method's entry in the [catalogue](../../METHODS.md), its line in the
+New criteria added in future follow the same [template](TEMPLATE.md) alongside each method's entry in the [catalogue](../../METHODS.md), its line in the
 [method audit](../method-audit.md) and its module docstring under `src/multifat/models/`.
 
 ## What every method shares

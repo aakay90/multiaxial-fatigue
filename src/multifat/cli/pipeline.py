@@ -372,16 +372,27 @@ def load_constants(path: Path, material: str, n_failures: int | None = None) -> 
             kind="upstream calibration record",
             calibration_id=record.get("calibration_id"),
         )
+        from multifat.models.references import IMPLEMENTATION_REVISION
+
+        warnings_list: list[str] = []
         recorded_failures = (record.get("counts") or {}).get("failure")
         if (
             n_failures is not None
             and recorded_failures is not None
             and recorded_failures != n_failures
         ):
-            origin["warning"] = (
+            warnings_list.append(
                 f"record made on {recorded_failures} failures, the workbook has {n_failures}: "
                 "its constants were not calibrated on these data"
             )
+        recorded_revision = record.get("implementation_revision")
+        if recorded_revision is not None and recorded_revision != IMPLEMENTATION_REVISION:
+            warnings_list.append(
+                f"made with implementation revision {recorded_revision}, current is "
+                f"{IMPLEMENTATION_REVISION}: its constants belong to earlier formulations"
+            )
+        if warnings_list:
+            origin["warning"] = "; ".join(warnings_list)
         if "a_MSWT" in constants:
             weight = constants["a_MSWT"]
             constants["a_MSWT"] = weight / (2.0 - weight)
