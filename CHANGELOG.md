@@ -6,6 +6,14 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### Fatigue-limit-only runs no longer crash in the comparison
+
+- `multifat-pipeline` on fatigue-limit workbooks only (e.g. `2_CX18.xlsx`) ran every model and then
+  stopped with `FileNotFoundError: No CSV files` in `multifat-compare`, which reads life results
+  only. `compare` now reports that the folder holds only fatigue-limit results (their summary is
+  already in `FatigueLimit/`) and exits cleanly; a folder without any result is still an error.
+  Runs with life results are unaffected.
+
 ### Material validity ranges skip, not fail
 
 - New typed skip error `MaterialScopeError` (`models/errors.py`): material constants outside a
