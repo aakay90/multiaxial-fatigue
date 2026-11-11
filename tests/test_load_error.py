@@ -142,3 +142,13 @@ def test_native_load_error_below_the_limit():
     case = _case(axial=330.0, shear=150.0, mean=(0.0, 0.0, 0.0))
     e_L = native_life_load_error(model, params, case, None, fit, 1.0e6)
     assert np.isfinite(e_L) and e_L < 0.0  # the load must grow to fail: non-conservative
+
+
+def test_diverging_secant_falls_back_to_bisection():
+    """A secant step beyond |ln s| = LOG_S_MAX returns None instead of overflowing (#71)."""
+    from multifat.eval.load_error import LOG_S_MAX, _solve_in_log
+
+    # g is flat near 0 and steep far away: the first secant step jumps beyond the bound
+    assert _solve_in_log(lambda x: 1.0 + 1e-6 * x) is None
+    assert _solve_in_log(lambda x: x - 0.3) == pytest.approx(math.exp(0.3))
+    assert LOG_S_MAX == 10.0

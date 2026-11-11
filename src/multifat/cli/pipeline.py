@@ -54,6 +54,7 @@ class Outcome:
     missing: tuple = ()  # constants the skipped model was missing
     mode: str = "life"  # "fatigue_index" on a fatigue-limit dataset, "out_of_scope" for a skip
     # because the loading lies outside the criterion's scope
+    fit: dict | None = None  # master curve of the variant (issue #74); None for native life laws
 
 
 # Optional constants that a calibrated value may fill; required constants are always filled.
@@ -100,7 +101,23 @@ def _infeasible_pointer(calibration: dict) -> str:
 
 
 def _annotate_calibration(outcome: Outcome, model, calibration: dict) -> Outcome:
-    """Name the lost constants on the models that ran on their default or were skipped for them."""
+    """Name the lost constants on the models that ran on their default or were skipped for them.
+
+    A result that adopted a plane constant calibrated on tests outside R = -1 is marked
+    ``ok (R fallback)``, with the description of the tests in its notes (issue #77).
+    """
+    from multifat.cli.calibrate import CALIBRATED
+
+    adopted = set(filter(None, outcome.calibrated.split(",")))
+    if (
+        outcome.status == "ok"
+        and calibration.get("r_fallback")
+        and adopted & set(CALIBRATED.values())
+    ):
+        outcome.status = "ok (R fallback)"
+        names = ", ".join(sorted(adopted & set(CALIBRATED.values())))
+        flag = f"{names} {calibration['r_fallback']}, not on R = -1 tests only"
+        outcome.notes = " | ".join(text for text in (outcome.notes, flag) if text)
     lost = set(calibration.get("lost", ()))
     if not lost:
         return outcome
@@ -139,6 +156,7 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
         calibration,
         suffixes,
         survival_probability,
+        design_workbook,
     ) = job
     start = time.perf_counter()
     adopted: list[str] = []
@@ -148,7 +166,11 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
         flagged: dict = {}
         model = get_models([base_name])[0]
         suppliable = _constants_calibration_can_supply(model)
-        data, material = runmod.load_material(workbook)
+        design_data = None
+        if design_workbook is None:
+            data, material = runmod.load_material(workbook)
+        else:  # cross-batch transfer: constants and design set from design_workbook (#71)
+            data, material, design_data = runmod.load_transfer(workbook, design_workbook)
         params = runmod.build_params(runmod.exp.get_material_properties(data, material))
         # A Summary entry the importer flagged (e.g. Sigm1 averaged over stress ratios) is left
         # unused; models that need it are skipped with the importer's own explanation.
@@ -180,6 +202,7 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
             params,
             extra_design_ids=design_points,
             survival_probability=survival_probability,
+            design_data=design_data,
         )
     except MissingParamsError as exc:
         explanations = sorted({why[key] for key in exc.missing if key in why})
@@ -228,15 +251,19 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
         ]
     results = []
     fitted_label = ",".join(sorted(adopted))
+    from multifat.models.comparison import capabilities_for_model
+
+    native = capabilities_for_model(model).life_prediction == "native"
     for suffix in suffixes:
         label = base_name + suffix
         if suffix == "_ext" and not any("_ext" in v for v in evaluation.values):
             results.append(Outcome(label, "skipped", "model has no _ext variant"))
             continue
+        curve = None if native else evaluation.fit(suffix)
+        if curve is not None:
+            curve = {**curve, "design_loading": evaluation.design_loading}
         try:
-            from multifat.models.comparison import capabilities_for_model
-
-            if capabilities_for_model(model).life_prediction != "native":
+            if not native:
                 runmod.check_fit(base_name, suffix, evaluation.cal)
         except ValueError as exc:
             results.append(
@@ -245,6 +272,7 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
                     "skipped",
                     f"design-set fit unusable: {exc}",
                     calibrated=fitted_label,
+                    fit=curve,
                 )
             )
             continue
@@ -259,6 +287,7 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
                     time.perf_counter() - start,
                     fitted_label,
                     notes=_life_notes(model, evaluation, suffix, adopted, calibration),
+                    fit=curve,
                 )
             )
         except (LoadingScopeError, MaterialScopeError) as exc:  # e.g. a run-out out of scope
@@ -414,6 +443,20 @@ def load_constants(path: Path, material: str, n_failures: int | None = None) -> 
     return constants, origin
 
 
+def is_published_constants(path: Path, material: str) -> bool:
+    """True for a published-constants record (``published_constants``) of `material`.
+
+    The one kind of supplied record a cross-batch transfer accepts (issue #71): constants printed
+    in a paper for the design batch, such as the SSF surface of 42CrMo4_Reis. Calibration records
+    and sidecars are refused there, since the transfer calibrates the design batch itself.
+    """
+    try:
+        record = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    return "published_constants" in record and record.get("material_id") == material
+
+
 def supplied_design_ids(path: Path, data_block: dict, supplied: dict) -> tuple[dict, str]:
     """Design tests of supplied constants, from a sidecar made on the same failures.
 
@@ -476,9 +519,16 @@ def provenance(workbook: Path, data: dict | None = None, survival_probability: f
 
 
 def _calibration_state(sidecar: dict, needed: set[str]) -> dict:
-    """What an infeasible calibration lost, for the models that depended on the lost constants."""
+    """What an infeasible calibration lost, for the models that depended on the lost constants.
+
+    Also carries ``r_fallback``, the description of a calibration made on tests outside
+    R = -1 (issue #77), so that the models adopting those constants are flagged.
+    """
+    r_fallback = (sidecar.get("selection") or {}).get("r_fallback", "")
+    extra = {"r_fallback": r_fallback} if r_fallback else {}
     if sidecar.get("status") != "infeasible":
-        return {"at_bound": sidecar.get("at_bound", {})} if sidecar.get("at_bound") else {}
+        state = {"at_bound": sidecar.get("at_bound", {})} if sidecar.get("at_bound") else {}
+        return {**state, **extra}
     from multifat.cli.calibrate import CALIBRATED
 
     info = sidecar.get("infeasible") or {}
@@ -490,6 +540,7 @@ def _calibration_state(sidecar: dict, needed: set[str]) -> dict:
         "reason": sidecar.get("reason", ""),
         "lost": lost,
         "at_bound": sidecar.get("at_bound", {}),
+        **extra,
     }
 
 
@@ -505,10 +556,32 @@ def run_workbook(
     constants: Path | None = None,
     survival_probability: float = 0.5,
     calibration_archive: Path | None = None,
+    design_workbook: Path | None = None,
 ) -> list[Outcome]:
+    """Run the selected models on one workbook.
+
+    With `design_workbook` (cross-batch transfer, issue #71) the failures of `workbook` are
+    predicted from another batch: the Summary properties, the calibrated constants, the design
+    set and the master curves all come from `design_workbook`, and the outputs are written under
+    ``<material>_from_<design material>``. The design-side tests appear as design rows (Flag 0);
+    every failure of `workbook` is assessed (Flag 1).
+    """
     stdnum_for_survival(survival_probability)  # reject invalid values before any work
     results_dir.mkdir(parents=True, exist_ok=True)
     material = material_id(workbook.stem)
+    target_workbook = workbook
+    constants_material = material
+    if design_workbook is not None:
+        constants_material = material_id(design_workbook.stem)
+        if constants is not None and not is_published_constants(constants, constants_material):
+            raise ValueError(
+                "a transfer takes its constants from the design workbook; the only supplied "
+                "constants it accepts are a published-constants record of the design material "
+                f"'{constants_material}'"
+            )
+        material = runmod.transfer_material_id(material, constants_material)
+        # the design side must hold a valid design set; the target only needs to be readable
+        workbook = design_workbook
 
     report = runmod.validate_workbook(workbook)
     (results_dir / f"{material}_validation.txt").write_text(report.text(), encoding="utf-8")
@@ -519,7 +592,10 @@ def run_workbook(
 
     requested = select_method_variants(models, all_variants=all_variants)
     selected = list(dict.fromkeys(request.base_name for request in requested))
-    data, _ = runmod.load_material(workbook)
+    if design_workbook is None:
+        data, _ = runmod.load_material(workbook)
+    else:
+        data, _, _ = runmod.load_transfer(target_workbook, design_workbook)
     # Explicit workflow and observation roles from the shared importer (issue #18)
     from multifat.imp.classification import classify_dataset
 
@@ -529,6 +605,8 @@ def run_workbook(
     )
     if classification["workflow"] not in ("fatigue_life", "fatigue_limit"):
         raise WorkbookError(workbook.name, "", "", "; ".join(classification["reasons"]))
+    if classification["workflow"] == "fatigue_limit" and design_workbook is not None:
+        raise WorkbookError(workbook.name, "", "", "a transfer needs fatigue-life datasets")
     if classification["workflow"] == "fatigue_limit":
         results, sidecar = _evaluate_fatigue_limit(workbook, material, requested, results_dir, jobs)
         sidecar["provenance"] = provenance(workbook, data, survival_probability)
@@ -545,7 +623,9 @@ def run_workbook(
         _dump_run_report(results_dir, material, results)
         return results
     n_fail = len(data[material]["cases"])
-    supplied, source = load_constants(constants, material, n_fail) if constants else ({}, None)
+    supplied, source = (
+        load_constants(constants, constants_material, n_fail) if constants else ({}, None)
+    )
     if source is not None and source.get("kind") == "multifat calibration sidecar":
         from multifat.cli.records import check_record_compatibility, record_warnings
 
@@ -561,7 +641,12 @@ def run_workbook(
                 [source["warning"], *notes] if "warning" in source else notes
             )
     needed = (
-        (_absent_suppliable_constants(workbook, selected, data) - set(supplied))
+        (
+            _absent_suppliable_constants(
+                workbook, selected, data if design_workbook is None else None
+            )
+            - set(supplied)
+        )
         if calibrate
         else set()
     )
@@ -592,7 +677,15 @@ def run_workbook(
         if note:
             source = {**source, "design_rows": note}
         sidecar["constants_source"] = source
-    sidecar["provenance"] = provenance(workbook, data, survival_probability)
+    if design_workbook is None:
+        sidecar["provenance"] = provenance(workbook, data, survival_probability)
+    else:  # the constants describe the design batch; the assessed tests are the target's
+        sidecar["provenance"] = provenance(workbook, None, survival_probability)
+        sidecar["transfer"] = {
+            "design_material": material_id(design_workbook.stem),
+            "target_material": material_id(target_workbook.stem),
+            "target_provenance": provenance(target_workbook, None, survival_probability),
+        }
     from multifat.cli.records import CALIBRATION_PROCEDURE, archive_record
 
     sidecar["calibration_procedure"] = CALIBRATION_PROCEDURE
@@ -613,7 +706,7 @@ def run_workbook(
         suffixes_by_base.setdefault(request.base_name, []).append(request.suffix)
     queue = [
         (
-            str(workbook),
+            str(target_workbook),
             base_name,
             str(results_dir),
             overrides,
@@ -623,6 +716,7 @@ def run_workbook(
             calibration,
             tuple(suffixes),
             survival_probability,
+            None if design_workbook is None else str(design_workbook),
         )
         for base_name, suffixes in suffixes_by_base.items()
     ]
@@ -633,7 +727,37 @@ def run_workbook(
         results = [item for job in queue for item in _evaluate_base(job)]
 
     _dump_run_report(results_dir, material, results, sidecar.get("calibration_id", ""))
+    _dump_master_curves(results_dir, material, results)
     return results
+
+
+MASTER_CURVE_COLUMNS = [
+    "model", "status", "design_loading", "n", "decades", "A", "b", "b_se", "R2_log",
+    "STD_ln_DP", "STD", "identifiable", "reason",
+]  # fmt: skip
+
+
+def _dump_master_curves(dest: Path, material: str, results: list[Outcome]) -> None:
+    """Fit of the master curve behind every result: ``<material>_master_curves.csv`` (#74).
+
+    One row per model variant that fitted a master curve, also when it was skipped because the
+    curve is not identifiable, so that the reader can judge every curve the results rest on.
+    """
+    import csv
+
+    rows = [o for o in results if o.fit]
+    with (dest / f"{material}_master_curves.csv").open("w", newline="", encoding="utf-8") as fh:
+        writer = csv.writer(fh)
+        writer.writerow(MASTER_CURVE_COLUMNS)
+        for outcome in rows:
+            fit = outcome.fit
+            writer.writerow(
+                [outcome.model, outcome.status, fit.get("design_loading", "")]
+                + [
+                    f"{fit[k]:.6g}" if isinstance(fit.get(k), float) else fit.get(k, "")
+                    for k in MASTER_CURVE_COLUMNS[3:]
+                ]
+            )
 
 
 def _dump_run_report(
@@ -984,6 +1108,12 @@ def main(cli_args=None) -> None:
         help="constants from a Calibrations/ record or a calibration sidecar (one workbook)",
     )
     parser.add_argument(
+        "--design-material",
+        default=None,
+        help="cross-batch transfer (issue #71): predict every given workbook from this material, "
+        "whose Summary, calibration and design set are used; outputs <material>_from_<design>",
+    )
+    parser.add_argument(
         "--no-overlay",
         action="store_true",
         help="use the workbooks as supplied, without the overlays",
@@ -1000,7 +1130,7 @@ def main(cli_args=None) -> None:
         workbooks += workbook_files(DATA_FOLDER)
     if not workbooks:
         parser.error("supply a workbook path, --material NAME or --all")
-    if args.constants is not None and len(workbooks) != 1:
+    if args.constants is not None and len(workbooks) != 1 and args.design_material is None:
         parser.error("--constants accepts exactly one workbook (constants belong to one material)")
     if args.calibration_id is not None:
         if args.constants is not None or len(workbooks) != 1:
@@ -1014,6 +1144,24 @@ def main(cli_args=None) -> None:
             )
         except FileNotFoundError as exc:
             parser.error(str(exc))
+    design_workbook = None
+    if args.design_material is not None:
+        if args.calibration_id is not None:
+            parser.error("--design-material takes the constants from the design workbook only")
+        try:
+            design_workbook = runmod.resolve_workbook(args.design_material, DATA_FOLDER)
+        except WorkbookError as exc:
+            parser.error(str(exc))
+        if args.constants is not None and not is_published_constants(
+            args.constants, material_id(design_workbook.stem)
+        ):
+            parser.error(
+                "with --design-material, --constants must be a published-constants record of "
+                "the design material"
+            )
+        workbooks = [w for w in workbooks if Path(w).resolve() != design_workbook.resolve()]
+        if not workbooks:
+            parser.error("--design-material needs at least one other workbook to predict")
     if args.results_dir.resolve() == Path.cwd().resolve():
         parser.error("--results-dir must be a subdirectory, not the working directory")
     selected = None if args.models == "all" else [m.strip() for m in args.models.split(",")]
@@ -1032,7 +1180,10 @@ def main(cli_args=None) -> None:
     exit_code = 0
     run_map: dict = {}
     for workbook in workbooks:
-        print(f"== {workbook}")
+        print(f"== {workbook}" + (f" predicted from {design_workbook}" if design_workbook else ""))
+        run_id = material_id(workbook.stem)
+        if design_workbook is not None:
+            run_id = runmod.transfer_material_id(run_id, material_id(design_workbook.stem))
         try:
             outcomes = run_workbook(
                 workbook,
@@ -1045,15 +1196,16 @@ def main(cli_args=None) -> None:
                 constants=args.constants,
                 survival_probability=args.survival_probability,
                 calibration_archive=args.calibration_archive,
+                design_workbook=design_workbook,
             )
         except WorkbookError as exc:
             print(f"   workbook rejected: {exc}")
-            run_map[material_id(workbook.stem)] = _rejection_record(workbook, exc)
+            run_map[run_id] = _rejection_record(workbook, exc)
             exit_code = 1
             continue
-        run_map[material_id(workbook.stem)] = {
+        run_map[run_id] = {
             "outcomes": outcomes,
-            "calibration": _calibration_summary(args.results_dir, material_id(workbook.stem)),
+            "calibration": _calibration_summary(args.results_dir, run_id),
         }
         for state in ("ok", "skipped", "failed"):
             subset = [

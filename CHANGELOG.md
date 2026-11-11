@@ -14,7 +14,56 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
   failed (AISI316L, t_-1/s_-1 = 0.517). It is not a `LoadingScopeError`, so load-scaling searches
   do not mistake it for an out-of-scope trial load. No number changes.
 
+### Calibration outside R = −1 flagged (issue #77)
+
+- The plane-constant calibration may still relax its R = −1 tolerance or accept any stress ratio
+  when a material has no fully reversed tests (accepted by the maintainer, decision d107), but the
+  record now stores the tolerance used and whether any R was accepted (`selection.*_rtol_R`,
+  `*_any_R`, `r_fallback`), and every result that adopted such a constant is reported as
+  `ok (R fallback)` with a note. No current workbook needs the fallback: no output changes.
+
 ### Data
+
+- `14_42CrMo4_Reis.xlsx`: R = −1 fatigue limits Sigm1 = 452 MPa and Taum1 = 372 MPa, the authors'
+  trend-line values at 1e6 cycles (Anes et al., IJF 62 (2014), Table 5), added by an overlay
+  (decision d100, #71). The 22 limit-based methods and WANG2022 now run on this batch.
+- `42CrMo4_QT` (Santus 2018 + Benedetti 2022) is one batch (decision d101).
+
+### Cross-batch comparison (#71)
+
+- `multifat-pipeline --design-material A` predicts the failures of another batch from batch A: the
+  Summary properties, calibrated constants, design set and master curve all come from A; outputs
+  are `<material>_from_<A>` (decision d102). Extension point: `evaluate_model(..., design_data=...)`,
+  `run_workbook(..., design_workbook=...)`, `run.load_transfer`. Default runs are unchanged.
+- `examples/batch_comparison.py`: standalone pipeline of own-batch and cross-batch statistics for
+  the material families of `examples/data/material_families.json` (bias with bootstrap intervals,
+  Kruskal–Wallis with Benjamini–Hochberg, two-way decomposition into batch offsets and method ×
+  batch interaction, transfer penalty, method-free S-N reference). Results in
+  `examples/data/batch_comparison/`, figures `docs/images/batch_comparison_*.png`, guide
+  `docs/batch-comparison.md`. `tests/test_batch_comparison.py` fails when a method or a family
+  workbook changes until the results are regenerated.
+- Statistical design revised (decision d104). New method-free part (`examples/batch_reference.py`):
+  Basquin strength at 1e5 cycles per batch, path and series; the scatter between the same-steel
+  series of the FABEST database as the yardstick of a batch difference; the relative strengths
+  that predict the batch offsets and the transfer shifts without any method. The batch offsets
+  get joint-bootstrap intervals (same specimens for all methods); the Kruskal–Wallis and
+  Benjamini–Hochberg tests are removed in favour of effect sizes; run-outs enter a censored
+  sensitivity check; a load factor covering 95 % of the tests compares own batch and transfer.
+  Six new figures per family (`examples/batch_plots.py`).
+- Material batch, test series and dataset are kept apart (decision d105): the FABEST database is one
+  material batch (maintainer), so its between-series scatter is the test-series part, and
+  `variance_components` estimates the material-batch part of the spread between datasets
+  (`reference_components.csv`). Santus 2018 and Benedetti 2022 stay one batch with two series,
+  decided on the data. Decision d104 is active.
+- A transfer accepts `--constants` only for a published-constants record of the design batch
+  (decision d103): SSF is assessed on FABEST and QT with the surface published for Reis.
+- Second family Ti6Al4V (`Ti6Al4V`, `Ti6Al4V_Berto`). Batches are author groups, Santus 2018 and
+  Benedetti 2022 being one (decision d101); `1_Ti6Al4V` mixes the Meneghetti and Delahay
+  properties in its Summary (open, #24).
+- `eval/load_error.py`: the secant search in ln s stops beyond |ln s| = 10 and falls back to the
+  bisection, as documented, instead of overflowing (SSF extrapolated on FABEST). Regression
+  snapshot: no existing output changes.
+
 
 - Homepage data provenance manifests (issue #80): `examples/homepage_data.py` writes paired
   `.manifest.json` files alongside `examples/data/load_error_ranking.csv` and
@@ -80,6 +129,23 @@ checked against its original publication; changes to numerical outputs are liste
   and hashes all outputs, to prove a change output-identical.
 - Batched plane evaluation and a per-calibration plane cache (bit-identical outputs): a full
   snapshot dropped from about 21 to about 4 minutes before the calibration moved to all planes.
+
+### Master-curve identifiability and scatter (issue #74)
+
+- **Changed numerically.** A master curve is used only if it is identifiable: at least 5 design
+  tests, at least one decade of life, and a negative slope distinct from zero (|b| > 2 standard
+  errors), the thresholds of the Basquin fits. Otherwise the model is skipped on that dataset with
+  the reason (maintainer decision, d106). On the current data this skips the master-curve methods
+  on `Ti6Al4V` (6 axial design tests over 0.39 decades; MWHS: 4 torsion tests).
+- **Changed numerically.** The scatter of the master curve (`STD_ln_DP`, `STD`) is estimated with
+  n − 2 degrees of freedom (two fitted parameters), so its square is unbiased. Median results
+  (P_s = 0.5) and the calibrated constants are unchanged; curves with P_s > 0.5 shift slightly.
+- New output `<material>_master_curves.csv` per pipeline run: n, decades, A, b with its standard
+  error, R² in log space, scatter, identifiable and reason, for every fitted curve.
+- Consequences: the homepage load-error ranking loses its Ti6Al4V column (no method keeps three
+  assessed errors there); the cross-batch comparison of the Ti6Al4V family keeps only the
+  transfer from Ti6Al4V_Berto. Three synthetic test fixtures that had four or fewer design tests
+  were extended or their assertions updated.
 
 ### Survival probability (issue #16)
 

@@ -69,6 +69,14 @@ ledgers.
 | [`d097`](#d097) | 2026-11-06 | **Active** | Solver evidence and untrusted files | Document real versus hand-written coverage; no third-party code execution. |
 | [`d098`](#d098) | 2026-11-06 | **Active** | Whole-branch safeguards | Validate CSV row width before pandas projection; atomic output; require shared scalar load functions. |
 | [`d099`](#d099) | 2026-11-06 | **Active** | In-house Ansys fatigue benchmark | Repository purged of external repository fixtures; in-house PLANE183 2-step fatigue cycle generated on WorkstationUniTN. |
+| [`d100`](#d100) | 2026-11-10 | **Active** | 42CrMo4_Reis fatigue limits | Sigm1 = 452, Taum1 = 372 MPa: the authors' trend lines at 1e6 (Anes IJF 62 Table 5), by overlay, as for FABEST. |
+| [`d101`](#d101) | 2026-11-10 | **Active** | Batches | Tests by different author groups are different batches; Santus 2018 and Benedetti 2022 are one batch (`42CrMo4_QT`). Families (42CrMo4, Ti6Al4V) in `examples/data/material_families.json`. |
+| [`d102`](#d102) | 2026-11-10 | **Active** | Cross-batch transfer | `--design-material`: Summary, constants, design set and master curve from one batch, every failure of another assessed. |
+| [`d103`](#d103) | 2026-11-10 | **Active** | Published constants in a transfer | A published-constants record of the design batch (SSF of 42CrMo4_Reis) is accepted with `--design-material`; no other supplied constants. |
+| [`d104`](#d104) | 2026-11-10 | **Active** | Statistics of the batch comparison | Effect sizes with joint-bootstrap intervals, a method-free reference and the FABEST series as yardstick; no significance tests. |
+| [`d105`](#d105) | 2026-11-11 | **Active** | FABEST is one material batch; batch versus series | All FABEST series share one material batch; a dataset confounds material batch and test series; Santus and Benedetti are one batch, two series (decided on the data). |
+| [`d106`](#d106) | 2026-11-11 | **Active** | Master-curve identifiability and scatter | Skip a model whose master curve is not identifiable (< 5 tests, < 1 decade, slope not distinct from 0); scatter with n - 2 degrees of freedom. |
+| [`d107`](#d107) | 2026-11-11 | **Active** | Calibration outside R = -1 | The relaxed-tolerance and any-R fallbacks of the plane-constant calibration are accepted, recorded and flagged (`ok (R fallback)`). |
 
 ---
 
@@ -469,3 +477,60 @@ ledgers.
 * **Status:** Active
 * **Decision:** Purge repository of third-party repository fixtures (`axis-fem` removed). Generate an in-house 2D plane stress holed-plate benchmark using Ansys MAPDL 2026 R1 batch mode on WorkstationUniTN (`PLANE183`, `KEYOPT(3)=3`) under a 2-step alternating fatigue cycle ($Y$-tension 100 MPa then $X$-tension 100 MPa, rotating principal stress directions by $90^\circ$). Support PLANE182/183 elements in `rst.py`. Ingest both `.out` and `.rst` into exchange CSV and HDF5, verified against Howland's finite-width analytical solution ($K_{tg} \approx 3.032$). Mark real Abaqus output tests as xfail TODO pending Abaqus license/installation on workstation.
 * **Rationale:** Eliminates external repository dependencies, guarantees clean provenance, and directly exercises multi-step biaxial fatigue loading.
+
+### d100
+* **Date:** 2026-11-10
+* **Topic:** 42CrMo4_Reis fatigue limits
+* **Status:** Active
+* **Decision:** Sigm1 = 452 MPa and Taum1 = 372 MPa (R = -1, N = 1e6, push-pull): the values of Anes et al., IJF 62 (2014), Table 5 at 1e6, i.e. the authors' pure axial and pure shear trend lines of Table 4. Added as a Summary source row by an overlay; the supplied workbook is unchanged.
+* **Rationale:** Same rule as for FABEST (authors' strengths at 1e6), so that the limit-based methods run on all three 42CrMo4 batches. The values extrapolate the trend lines beyond the longest failures (about 3e5 cycles) and are recorded as finite-life strengths.
+
+### d101
+* **Date:** 2026-11-10
+* **Topic:** Definition of a batch
+* **Status:** Active
+* **Decision:** Tests by different author groups are different batches; the only exception is Santus 2018 and Benedetti 2022 (one batch, `42CrMo4_QT`; confirmed on the data, two test series, d105). The cross-batch comparison compares workbooks: 42CrMo4 (`42CrMo4_QT`, `42CrMo4_Reis`, `42CrMo4_FABEST`) and Ti6Al4V (`Ti6Al4V`, `Ti6Al4V_Berto`), declared in `examples/data/material_families.json`. Open (#24): by this rule `1_Ti6Al4V` mixes two batches, since its failures are Meneghetti 2018 while its Summary averages the Meneghetti and Delahay 2006 properties (Su 1035, Sigm1 576 MPa); `8_AISI316L` combines Janssens and Braun.
+* **Rationale:** The cross-batch statistics (issue #71) need a fixed unit. Benedetti 2022 states that its supplies differ from those of its ref. [17]; the maintainer confirmed the two Trento sources are the same batch.
+
+### d102
+* **Date:** 2026-11-10
+* **Topic:** Cross-batch transfer
+* **Status:** Active
+* **Decision:** `multifat-pipeline --material B --design-material A` (`run_workbook(..., design_workbook=A)`, `evaluate_model(..., design_data=...)`) predicts every failure of B with the Summary properties, calibrated constants, design set and master curve (or native life fit) of A. The load histories of B, strains included, are those imported with B's own E and nu. Outputs are `<B>_from_<A>`; the design rows (Flag 0) are A's, every failure of B is assessed (Flag 1). The default run is unchanged (regression snapshot).
+* **Rationale:** An error on the batch the method was calibrated on measures the fit; predicting another batch of the same material measures transfer, which is what a user relying on handbook data does.
+
+### d103
+* **Date:** 2026-11-10
+* **Topic:** Published constants in a cross-batch transfer
+* **Status:** Active
+* **Decision:** With `--design-material A`, `--constants` is accepted only for a published-constants record (`published_constants`) whose `material_id` is A; calibration records and sidecars stay refused. Used for SSF, whose surface is published for the Reis batch (`Calibrations/42CrMo4_Reis/SSF_published.json`): SSF results on 42CrMo4_Reis are in sample, those of the transfers from 42CrMo4_Reis out of sample. Maintainer: only in this context.
+* **Rationale:** A constant printed for the design batch is part of what is known about that batch; the transfer then tests it on another batch of the same steel.
+
+### d104
+* **Date:** 2026-11-10
+* **Topic:** Statistics of the cross-batch comparison
+* **Status:** Active (maintainer, 2026-11-11: the scientifically more correct and clearer option)
+* **Decision:** (1) Compare the batches first without any method: Basquin strength at 1e5 cycles per batch, path and series. (2) Use the unnotched R = -1 series of the FABEST source file (one steel, several laboratories and specimen types) as the yardstick for a difference between batches; they are read for this purpose only and are not imported as workbooks. (3) Report effect sizes with intervals: batch offsets from a joint bootstrap that resamples specimens within a batch and uses the same resample for every method. No Kruskal-Wallis or Benjamini-Hochberg tests. (4) Predict the batch offsets and the transfer shifts from the S-N data alone (relative strengths), and report the observed values against them. (5) Run-outs enter a censored-likelihood sensitivity check for the homogeneous damage parameters.
+* **Rationale:** The specimens of one S-N curve are not independent across series, and two or three batches allow no inference on a population of batches; a specimen-level test only says that two series differ. The method-free prediction shows that the transfer shift is the same for every method, so a transfer cannot rank methods.
+
+### d105
+* **Date:** 2026-11-11
+* **Topic:** Material batch, test series and dataset
+* **Status:** Active
+* **Decision:** (1) Maintainer: every series of the FABEST database comes from one material batch, ordered once and tested in several laboratories. (2) The comparison distinguishes the material batch (one lot), the test series (one S-N curve of one campaign: specimen, machining, laboratory, machine) and the dataset (one workbook, which confounds the two). The FABEST between-series scatter of ln S(1e5) is the test-series part; the material-batch part is estimated as max(s_datasets^2 - s_series^2, 0) (`examples/batch_reference.py::variance_components`). (3) Santus 2018 and Benedetti 2022 stay one batch with two series: maintainer's rule is to separate them only if the data indicate two batches, and their axial difference (0.096 in ln S) is below one standard deviation of the difference between two series of one batch (0.115). Checked 2026-11-11: Benedetti 2022's ref. [17], whose supply it calls distinct, is Benedetti et al. 2019 (IJF 126), not Santus 2018.
+* **Rationale:** A difference between two datasets cannot be assigned to the material from one comparison; a reference with one material and many series is the only way to separate the two parts with the available data.
+
+### d106
+* **Date:** 2026-11-11
+* **Topic:** Master-curve identifiability and scatter
+* **Status:** Active
+* **Decision:** (1) A master curve DP = A N^b is used only if its design set identifies it: at least 5 tests, at least one decade of life, and a negative slope with |b| > 2 standard errors (the thresholds of the Basquin fits in `material_fits`). Otherwise the model is skipped on that dataset, with the reason in the run report (maintainer: skip, not flag). (2) The residual standard deviation uses n - 2 degrees of freedom. (3) Every fitted curve is listed in `<material>_master_curves.csv`.
+* **Rationale:** A curve fitted on tests spanning 0.39 decades with a slope indistinguishable from zero (Ti6Al4V, R^2 = 0.001) gives predictions with no information, yet they entered the comparison and the homepage ranking. The n - 1 estimate underestimates the scatter of a two-parameter regression by 11 % at n = 6 and 18 % at n = 4.
+
+### d107
+* **Date:** 2026-11-11
+* **Topic:** Plane-constant calibration on tests outside R = -1
+* **Status:** Active
+* **Decision:** The selection of `cli/calibrate.py` may relax its tolerance on R = -1 (0.02, then 0.05 to 0.5) and finally accept any stress ratio. Maintainer: accepted, but flagged and documented. The record stores the tolerance used and whether any R was accepted for tension and torsion (`selection.*_rtol_R`, `*_any_R`) with a sentence (`selection.r_fallback`); every result that adopted such a constant has status `ok (R fallback)` and a note.
+* **Rationale:** The constants are defined on fully reversed tests; a constant fitted on other ratios mixes the mean-stress effect into the calibration. It is better than no constant for an exploratory comparison, but a reader must be able to see it.
+

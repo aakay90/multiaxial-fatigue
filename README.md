@@ -149,10 +149,17 @@ Cells give the RMS of $e_L$ on the assessed failures (bias and scatter; 0.10 is 
 misjudgement); rows are ordered by mean rank. Constants and master curves are calibrated on each
 dataset's uniaxial R = -1 tests (on its torsion tests for MWHS, as in its source), so this is a like-for-like comparison, not an independent
 validation ([issue #14](https://github.com/andreachiocca/multiaxial-fatigue/issues/14)); on
-Ti6Al4V and Ti6Al4V_Berto all assessed tests are torsional. Data in
+Ti6Al4V_Berto all assessed tests are torsional. Ti6Al4V is absent: its design tests (6 axial
+failures over 0.39 decades of life) do not identify a master curve, so the methods are skipped
+there ([issue #74](https://github.com/andreachiocca/multiaxial-fatigue/issues/74)). Data in
 `examples/data/load_error_ranking.csv`, rebuilt with `examples/build_load_error_ranking.py`:
 
 ![Method ranking by the load-equivalent error](docs/images/load_error_ranking.png)
+
+How the same methods carry over between batches of one material (42CrMo4: three laboratories;
+Ti6Al4V: two), each calibrated on its own batch and predicted from the others, is in the
+[cross-batch comparison](docs/batch-comparison.md)
+([issue #71](https://github.com/andreachiocca/multiaxial-fatigue/issues/71)).
 
 ## Method coverage
 

@@ -284,6 +284,9 @@ def _is_axial_torsion_case(
     return True, R
 
 
+INITIAL_RTOL_R = 0.02  # tolerance on R = -1 of the calibration tests before any relaxation
+
+
 def _pick_cases_with_relaxation(
     cases: Dict[int, Dict[str, Any]],
     selector: Callable[..., Tuple[bool, float]],
@@ -452,7 +455,7 @@ def calibrate_material_params(
     node: int = 1,
     # selection tolerances
     r_target: float = -1.0,
-    rtol_R_init: float = 0.02,
+    rtol_R_init: float = INITIAL_RTOL_R,
     rtol_uniax: float = 1e-3,
     # speed
     plane_stride: int = 1,
@@ -969,7 +972,15 @@ def calibrate_workbook(
             "fallback": bool(
                 sel["tension_info"]["fallback_used"] or sel["torsion_info"]["fallback_used"]
             ),
+            # issue #77: how far the selection departed from R = -1 (relaxed tolerance or any R)
+            "tension_rtol_R": sel["tension_info"]["rtol_R_used"],
+            "torsion_rtol_R": sel["torsion_info"]["rtol_R_used"],
+            "tension_any_R": bool(sel["tension_info"]["any_R_used"]),
+            "torsion_any_R": bool(sel["torsion_info"]["any_R_used"]),
         }
+        relaxed = r_fallback_text(out["selection"])
+        if relaxed:
+            out["selection"]["r_fallback"] = relaxed
         # Every test of the scatter objective fed the constant: a model that adopts it must report
         # these tests as design points (Flag = 0), not as independent assessments.
         objective_ids = sorted(
@@ -979,6 +990,27 @@ def calibrate_workbook(
             if out["source"].get(name, "").startswith("scatter minimisation"):
                 out["design_case_ids"][name] = objective_ids
     return out
+
+
+def r_fallback_text(selection: dict) -> str:
+    """Description of a calibration that left R = -1 (relaxed tolerance or any R), or "".
+
+    The plane constants are defined on fully reversed tension and torsion tests. When a material
+    has none within the initial tolerance, the selection relaxes it and, as a last resort, accepts
+    any stress ratio (``_pick_cases_with_relaxation``). The maintainer accepts that fallback, but
+    every constant calibrated that way, and every result that uses it, is flagged (issue #77).
+    """
+    if not selection.get("fallback"):
+        return ""
+    parts = []
+    for family in ("tension", "torsion"):
+        if selection.get(f"{family}_any_R"):
+            parts.append(f"{family} tests of any stress ratio")
+        else:
+            rtol = selection.get(f"{family}_rtol_R")
+            if rtol is not None and rtol > INITIAL_RTOL_R:
+                parts.append(f"{family} tests with |R + 1| up to {rtol:g}")
+    return "calibrated on " + " and ".join(parts) if parts else ""
 
 
 def calibrate_many(

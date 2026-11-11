@@ -139,7 +139,10 @@ uv run multifat-run --model SINES --material 42CrMo4_QT --survival-probability 0
 
 `--survival-probability` shifts the fitted master curve by $\Phi^{-1}(P_s)$ standard deviations of
 its residuals, assuming normal scatter; it is a survival probability, not a confidence level, and it
-does not apply to native life laws. See the [method audit](method-audit.md#damage-space-error-for-every-slope).
+does not apply to native life laws. The residual standard deviation uses n − 2 degrees of freedom
+(two fitted parameters). A master curve the design tests do not determine (fewer than 5 tests, less
+than one decade of life, or a slope not distinct from zero) skips the model; see
+`<material>_master_curves.csv`. See the [method audit](method-audit.md#damage-space-error-for-every-slope).
 
 ### 2. Parameter Calibrator (`multifat-calibrate`)
 To compute the material constants that the models need, without evaluating them:
