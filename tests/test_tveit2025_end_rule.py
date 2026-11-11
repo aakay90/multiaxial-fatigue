@@ -55,6 +55,32 @@ def test_long_history_is_reproduced(row):
         assert life.Nf == pytest.approx(expected, rel=0.02)
 
 
+def test_creeping_back_stress_is_not_taken_for_a_steady_state():
+    """Al7075_T6 stage-1 constants, torsion at its limit with a small constant out-of-plane shear.
+
+    The back-stress swings in every block (its net drift over 200 blocks is 0.9 % of its path
+    length) but creeps one way until the damage stops at block 2446. The steady-state test of #67
+    took block 400 for a steady state and extrapolated 4.6e9 cycles (found by an automated review).
+    """
+    S_mean, S_sin, S_cos = _cycle("torsion", -1.0, 99.996)
+    S_mean[1, 2] = S_mean[2, 1] = 0.895
+    life = tveit2025_life(S_mean, S_sin, S_cos, *_constants("Al7075_T6"))
+    assert life.termination == "shakedown" and math.isinf(life.Nf)
+    assert abs(life.blocks - 2446) <= 2
+
+
+def test_unresolved_decay_ends_at_the_block_limit_with_a_finite_life():
+    """A damage decay not resolved within max_blocks is extrapolated, conservatively, with a warning.
+
+    Ti6Al4V at 495 MPa shakes down at block 7219 (long history); stopped at 3000 blocks, it is still
+    decaying, and the life is extrapolated from the mean damage of the last 200 blocks.
+    """
+    cycle = _cycle("axial", -1.0, 495.0)
+    life = tveit2025_life(*cycle, *_constants("Ti6Al4V"), max_blocks=3000)
+    assert life.termination == "max_block_extrapolation" and life.blocks == 3000
+    assert 3000 < life.Nf < math.inf
+
+
 def test_failure_inside_the_first_increment_counts_less_than_one_increment():
     """The life ends inside the increment that crosses D = 1, not one increment later."""
     S_mean, S_sin, S_cos = _cycle("axial", -1.0, 1e5)  # damaging from the first increment on
