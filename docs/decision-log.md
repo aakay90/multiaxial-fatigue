@@ -76,6 +76,7 @@ ledgers.
 | [`d104`](#d104) | 2026-11-10 | **Active** | Statistics of the batch comparison | Effect sizes with joint-bootstrap intervals, a method-free reference and the FABEST series as yardstick; no significance tests. |
 | [`d105`](#d105) | 2026-11-11 | **Active** | FABEST is one material batch; batch versus series | All FABEST series share one material batch; a dataset confounds material batch and test series; Santus and Benedetti are one batch, two series (decided on the data). |
 | [`d106`](#d106) | 2026-11-11 | **Active** | Master-curve identifiability and scatter | Skip a model whose master curve is not identifiable (< 5 tests, < 1 decade, slope not distinct from 0); scatter with n - 2 degrees of freedom. |
+| [`d107`](#d107) | 2026-11-11 | **Active** | Calibration outside R = -1 | The relaxed-tolerance and any-R fallbacks of the plane-constant calibration are accepted, recorded and flagged (`ok (R fallback)`). |
 
 ---
 
@@ -525,4 +526,11 @@ ledgers.
 * **Status:** Active
 * **Decision:** (1) A master curve DP = A N^b is used only if its design set identifies it: at least 5 tests, at least one decade of life, and a negative slope with |b| > 2 standard errors (the thresholds of the Basquin fits in `material_fits`). Otherwise the model is skipped on that dataset, with the reason in the run report (maintainer: skip, not flag). (2) The residual standard deviation uses n - 2 degrees of freedom. (3) Every fitted curve is listed in `<material>_master_curves.csv`.
 * **Rationale:** A curve fitted on tests spanning 0.39 decades with a slope indistinguishable from zero (Ti6Al4V, R^2 = 0.001) gives predictions with no information, yet they entered the comparison and the homepage ranking. The n - 1 estimate underestimates the scatter of a two-parameter regression by 11 % at n = 6 and 18 % at n = 4.
+
+### d107
+* **Date:** 2026-11-11
+* **Topic:** Plane-constant calibration on tests outside R = -1
+* **Status:** Active
+* **Decision:** The selection of `cli/calibrate.py` may relax its tolerance on R = -1 (0.02, then 0.05 to 0.5) and finally accept any stress ratio. Maintainer: accepted, but flagged and documented. The record stores the tolerance used and whether any R was accepted for tension and torsion (`selection.*_rtol_R`, `*_any_R`) with a sentence (`selection.r_fallback`); every result that adopted such a constant has status `ok (R fallback)` and a note.
+* **Rationale:** The constants are defined on fully reversed tests; a constant fitted on other ratios mixes the mean-stress effect into the calibration. It is better than no constant for an exploratory comparison, but a reader must be able to see it.
 

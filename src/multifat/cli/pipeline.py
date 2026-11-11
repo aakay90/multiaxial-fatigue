@@ -96,7 +96,23 @@ def _infeasible_pointer(calibration: dict) -> str:
 
 
 def _annotate_calibration(outcome: Outcome, model, calibration: dict) -> Outcome:
-    """Name the lost constants on the models that ran on their default or were skipped for them."""
+    """Name the lost constants on the models that ran on their default or were skipped for them.
+
+    A result that adopted a plane constant calibrated on tests outside R = -1 is marked
+    ``ok (R fallback)``, with the description of the tests in its notes (issue #77).
+    """
+    from multifat.cli.calibrate import CALIBRATED
+
+    adopted = set(filter(None, outcome.calibrated.split(",")))
+    if (
+        outcome.status == "ok"
+        and calibration.get("r_fallback")
+        and adopted & set(CALIBRATED.values())
+    ):
+        outcome.status = "ok (R fallback)"
+        names = ", ".join(sorted(adopted & set(CALIBRATED.values())))
+        flag = f"{names} {calibration['r_fallback']}, not on R = -1 tests only"
+        outcome.notes = " | ".join(text for text in (outcome.notes, flag) if text)
     lost = set(calibration.get("lost", ()))
     if not lost:
         return outcome
@@ -498,9 +514,16 @@ def provenance(workbook: Path, data: dict | None = None, survival_probability: f
 
 
 def _calibration_state(sidecar: dict, needed: set[str]) -> dict:
-    """What an infeasible calibration lost, for the models that depended on the lost constants."""
+    """What an infeasible calibration lost, for the models that depended on the lost constants.
+
+    Also carries ``r_fallback``, the description of a calibration made on tests outside
+    R = -1 (issue #77), so that the models adopting those constants are flagged.
+    """
+    r_fallback = (sidecar.get("selection") or {}).get("r_fallback", "")
+    extra = {"r_fallback": r_fallback} if r_fallback else {}
     if sidecar.get("status") != "infeasible":
-        return {"at_bound": sidecar.get("at_bound", {})} if sidecar.get("at_bound") else {}
+        state = {"at_bound": sidecar.get("at_bound", {})} if sidecar.get("at_bound") else {}
+        return {**state, **extra}
     from multifat.cli.calibrate import CALIBRATED
 
     info = sidecar.get("infeasible") or {}
@@ -512,6 +535,7 @@ def _calibration_state(sidecar: dict, needed: set[str]) -> dict:
         "reason": sidecar.get("reason", ""),
         "lost": lost,
         "at_bound": sidecar.get("at_bound", {}),
+        **extra,
     }
 
 
