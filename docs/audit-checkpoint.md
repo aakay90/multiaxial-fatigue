@@ -23,7 +23,11 @@
   - `tools/regression_snapshot.py` (`--jobs 12`) comparing `main` (`330782e`) vs
     `fix/issue-69-pypow2` on `WorkstationUniPi`: `outputs: 2760 files, 0 differ`;
     `logs: 646 files, 0 differ`.
-- Remaining / next action: push `fix/issue-69-pypow2` and open PR closing `#69`.
+  - After merging `origin/main` (`3162fd9`, adding PRs `#72`, `#83`, `#84`): `black --check .`
+    (`273` files unchanged), `ruff check .`, `tools/check_docs.py` (`1955` local links OK),
+    docs/review generators, and full `pytest` (`--extra fe`, `WorkstationUniPi`) passed:
+    `3220 passed, 25 skipped, 125 xfailed, 61 subtests passed` in `378.04s`.
+- Remaining / next action: wait for GitHub CI on PR `#87` and merge `fix/issue-69-pypow2` to `main`.
 
 ## Cross-batch comparison, issue #71 (10 November 2026)
 
