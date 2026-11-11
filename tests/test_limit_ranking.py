@@ -75,3 +75,19 @@ def test_committed_ranking_keeps_the_life_rows_and_leaves_out_data_under_review(
     assert set(table["Assessment"]) == {"fatigue_life", "fatigue_limit"}
     assert not set(br.UNDER_REVIEW) & set(table["Material"])
     assert (table["n"] >= 3).all()
+
+
+def test_runout_fingerprint_ignores_last_bit_differences():
+    """Windows and Linux libm differ in the last bits of cos/sin (cos 90 deg ~ 6e-17)."""
+    import copy
+
+    data, mat = runmod.load_material("30NCD16")
+    block = data[mat]
+    other = copy.deepcopy(block)
+    for case in other["runouts"].values():
+        for key in ("S_sin", "S_cos"):
+            case["harmonics"][key] = np.asarray(case["harmonics"][key]) * (1 + 1e-12) + 1e-15
+    assert dataset_fingerprint(other, runouts=True) == dataset_fingerprint(block, runouts=True)
+    case = next(iter(other["runouts"].values()))
+    case["harmonics"]["S_sin"] = np.asarray(case["harmonics"]["S_sin"]) + 0.01  # a real change
+    assert dataset_fingerprint(other, runouts=True) != dataset_fingerprint(block, runouts=True)

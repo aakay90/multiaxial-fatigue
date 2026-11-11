@@ -15,7 +15,8 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
   data errors are resolved (#24).
 - `load_error_ranking.csv` appends the column `Assessment` (fatigue_life / fatigue_limit); its
   life rows are unchanged. `dataset_fingerprint(block, runouts=True)` (opt-in) also hashes the
-  run-outs, so the manifest tracks the limit states of a limit dataset; the default is unchanged.
+  run-outs (rounded to 1e-6 MPa, so that the last bits of cos/sin on Windows and Linux agree), so
+  the manifest tracks the limit states of a limit dataset; the default is unchanged.
 
 ### Ti6Al4V_Delahay fatigue-limit dataset (decision d109)
 
