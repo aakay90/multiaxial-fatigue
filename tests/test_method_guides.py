@@ -94,9 +94,7 @@ HELPER_MODULES = {
 PENDING_DOCSTRINGS = {
     "cp_methods/car_spa",
     "cp_methods/mdc",
-    "cp_methods/mgse_zhu",
     "cp_methods/mmccm",
-    "cp_methods/mswt",
     "invariant_methods/coin_liwi",
     "invariant_methods/mmmh",
     "invariant_methods/ottosen",

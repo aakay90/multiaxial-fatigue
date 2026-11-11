@@ -32,6 +32,11 @@ The most widely used criteria are documented first.
 | [Ince–Glinka GSE](GSE.md) | `GSE` | Critical plane, energy | $\tau_{\max}\gamma_{a} + \sigma_{n,\max}\varepsilon_{n,a}$ (+ plastic terms) (MPa) | `E`, `nu` |
 | [Ince–Glinka GSA](GSA.md) | `GSA` | Critical plane, strain | $\tau_{\max}\gamma_{a}/\tau_f' + \sigma_{n,\max}\varepsilon_{n,a}/\sigma_f'$ (+ plastic terms) (–) | `E`, `nu`; `sigma_f`, `tau_f` or `Su` |
 | [Liu virtual strain energy](VSE.md) | `VSE`, `VSE_ext` | Critical plane, energy | $\Delta\sigma_n\Delta\varepsilon_n + \Delta\tau\,\Delta(\gamma/2)$ (MPa) | `E`, `nu`; `vse_mode` |
+| [Yu MGSE](MGSE_YU.md) | `MGSE_YU`, `MGSE_YU_ext` | Critical plane, energy | $\tau_{\max}\gamma_a + \sigma_{n,\max}\varepsilon_{n,a}$ (MPa) | `E`, `nu` |
+| [Zhu MGSE](MGSE_ZHU.md) | `MGSE_ZHU`, `MGSE_ZHU_ext` | Critical plane, energy | $\tau_{\max}\gamma_a + k_\mathrm{MGSE}\sigma_{n,\max}\varepsilon_{n,a}$ (MPa) | `E`, `nu`; `k_MGSE` |
+| [Modified SWT](MSWT.md) | `MSWT`, `MSWT_ext` | Critical plane, energy | $4a\,\sigma_{n,\max}\varepsilon_{n,a} + 2(1-a)\tau_a\gamma_a$ (MPa) | `E`, `nu`; `a_MSWT` |
+| [Li et al. 2021](LI.md) | `LI`, `LI_ext` | Critical plane, energy | $(\tau_a + \lvert\tau_m\rvert)\gamma_a + L\,\sigma_{n,\max}\varepsilon_{n,a}$ (MPa) | `E`, `nu`; `L_LI` |
+| [Liu et al. 2021](LIU2021.md) | `LIU2021`, `LIU2021_ext` | Critical plane, strain | $\gamma_a + \sigma_{n,\max}\sqrt{\sigma_{n,\max}E\Delta\varepsilon_n}/(4G\tau_f')$ (–) | `E`, `nu`, `Su`; `tau_f` |
 | [Liu–Xie–Hao 2025](LIU2025.md) | `LIU2025`, `LIU2025_ext` | Critical plane, stress | $\sqrt{\sigma'^2_{n,a} + 3\tau'^2_a}$, Gerber/Serensen means (MPa) | `Su`; `Tu` |
 | [Kujawski mSWT](KUJAWSKI2021.md) | `KUJAWSKI2021`, `KUJAWSKI2021_ext` | Critical plane, energy-like | $(\sigma_{n,\max} + \lvert\sigma_{n,m}\rvert/3)\,\varepsilon_{n,a}$ for $\sigma_{n,m} < 0$, else SWT (MPa) | `E`, `nu` |
 | [Liu–Mahadevan](LIUMAHADEVAN.md) | `LIUMAHADEVAN` | Critical plane, stress (native life) | $\sqrt{[\sigma_{a,c}(1+\eta\sigma_{m,c}/f)/f]^2 + (\tau_{a,c}/t)^2 + k(\sigma^H_a/f)^2}/\beta$ (index) | `Sigm1`, `Taum1`, `sigma_f`, `b_fat`, `tau_f`, `b0` |
