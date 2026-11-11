@@ -17,6 +17,6 @@
    "Ti6Al4V",
    "Ti6Al4V_Berto"
   ],
-  "notes": "Ti6Al4V: Meneghetti 2018 failures (10) and Delahay 2006 run-outs (4), two author groups; the Summary keeps the Meneghetti properties only (overlay, d108). Ti6Al4V_Berto: Berto 2015 (48 failures). All assessed tests are torsional."
+  "notes": "Ti6Al4V: Meneghetti 2018 failures (10); the Summary keeps the Meneghetti properties only (overlay, d108) and the 4 Delahay 2006 rows are removed (d109). Ti6Al4V_Berto: Berto 2015 (48 failures). All assessed tests are torsional."
  }
 }

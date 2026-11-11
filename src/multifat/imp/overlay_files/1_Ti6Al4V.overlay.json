@@ -173,6 +173,57 @@
    "to": 0,
    "decision": "d108",
    "source": "Meneghetti et al. 2018, TAFM 96, doi:10.1016/j.tafmec.2018.06.010, Table 1 p. 6 and Summary row 2: every failure of this workbook is Meneghetti's; the Delahay 2006 row (Ti64Al4V, Su 1090 MPa) is a different batch (d101) and no longer enters the material values (d108)"
+  },
+  {
+   "op": "drop_case",
+   "row": 58,
+   "authors": "Delahay T",
+   "specimen": "SPECIMEN_5",
+   "check": {
+    "Run out (Yes/No)": "Yes",
+    "Amplitute AXIAL stress  (MPa)": 652
+   },
+   "decision": "d109",
+   "source": "Delahay & Palin-Luc 2006, IJF 28:474, doi:10.1016/j.ijfatigue.2005.06.048, Table 2 p. 479: these rows are median staircase endurance limits of annealed Ti-6Al-4V (another batch, d101), not run-outs; the workbook labels plane bending as axial and gives 441 for the torsion limit 411. Removed from this dataset (d109); the limits are to form a separate dataset from Table 2."
+  },
+  {
+   "op": "drop_case",
+   "row": 59,
+   "authors": "Delahay T",
+   "specimen": "SPECIMEN_5",
+   "check": {
+    "Run out (Yes/No)": "Yes",
+    "Amplitute SHEAR stress  (MPa)": 441
+   },
+   "decision": "d109",
+   "source": "Delahay & Palin-Luc 2006, IJF 28:474, doi:10.1016/j.ijfatigue.2005.06.048, Table 2 p. 479: these rows are median staircase endurance limits of annealed Ti-6Al-4V (another batch, d101), not run-outs; the workbook labels plane bending as axial and gives 441 for the torsion limit 411. Removed from this dataset (d109); the limits are to form a separate dataset from Table 2."
+  },
+  {
+   "op": "drop_case",
+   "row": 60,
+   "authors": "Delahay T",
+   "specimen": "SPECIMEN_5",
+   "check": {
+    "Run out (Yes/No)": "Yes",
+    "Amplitute AXIAL stress  (MPa)": 442,
+    "Amplitute SHEAR stress  (MPa)": 255
+   },
+   "decision": "d109",
+   "source": "Delahay & Palin-Luc 2006, IJF 28:474, doi:10.1016/j.ijfatigue.2005.06.048, Table 2 p. 479: these rows are median staircase endurance limits of annealed Ti-6Al-4V (another batch, d101), not run-outs; the workbook labels plane bending as axial and gives 441 for the torsion limit 411. Removed from this dataset (d109); the limits are to form a separate dataset from Table 2."
+  },
+  {
+   "op": "drop_case",
+   "row": 61,
+   "authors": "Delahay T",
+   "specimen": "SPECIMEN_5",
+   "check": {
+    "Run out (Yes/No)": "Yes",
+    "Amplitute AXIAL stress  (MPa)": 567,
+    "Amplitute SHEAR stress  (MPa)": 328,
+    "Phase TORSIONAL load (°)": 90
+   },
+   "decision": "d109",
+   "source": "Delahay & Palin-Luc 2006, IJF 28:474, doi:10.1016/j.ijfatigue.2005.06.048, Table 2 p. 479: these rows are median staircase endurance limits of annealed Ti-6Al-4V (another batch, d101), not run-outs; the workbook labels plane bending as axial and gives 441 for the torsion limit 411. Removed from this dataset (d109); the limits are to form a separate dataset from Table 2."
   }
  ]
 }

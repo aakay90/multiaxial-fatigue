@@ -10,7 +10,12 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 - `1_Ti6Al4V.xlsx`: an overlay keeps only the Meneghetti 2018 properties (Su 980, Sy 915, Sigm1
   500, Taum1 422.5 MPa) instead of the average with the Delahay 2006 row (1035, 947.5, 576,
-  416.75 MPa), a different batch. The workbook is unchanged; its 4 Delahay run-outs remain.
+  416.75 MPa), a different batch. The workbook is unchanged.
+- The same overlay removes the 4 Delahay rows (decision d109): Table 2 of Delahay & Palin-Luc 2006
+  shows they are endurance limits of another batch, not run-outs, with plane bending entered as
+  axial and the torsion limit as 441 instead of 411 MPa. New overlay operation `drop_case` clears
+  a Dataset row after checking its authors, specimen and values. Failures and their errors are
+  unchanged; GOLOS, no longer stopped by the 90° row, runs in the Berto -> Ti6Al4V transfer.
 - Only Ti6Al4V outputs change (regression snapshot against main). MOREL, the one method with its
   own life law, now gives finite errors there (RMS of e_L 0.19 on 4 tests) and a Ti6Al4V cell in the
   homepage ranking; the other methods stay skipped (master curve not identifiable, #74).

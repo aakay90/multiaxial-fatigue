@@ -6,8 +6,8 @@
  ],
  "notes": "Ti6Al4V: Meneghetti 2018 failures (10) and Delahay 2006 run-outs (4), two author groups; the Summary keeps the Meneghetti properties only (overlay, d108). Ti6Al4V_Berto: Berto 2015 (48 failures). All assessed tests are torsional.",
  "constants": {},
- "created_utc": "2026-11-11T15:10:57+00:00",
- "git_commit": "297068b96e619d7ffd67a5990f44d62a26158302",
+ "created_utc": "2026-11-11T17:30:39+00:00",
+ "git_commit": "d233845ef084c599b8360fc4c61406d75f0a47cc",
  "registered_models": [
   "BP",
   "CAIM",

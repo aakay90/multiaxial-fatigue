@@ -11,8 +11,12 @@
 - Regenerated: batch comparison (Ti6Al4V family, `check` current), load-error ranking CSV, manifest
   and figure. `plot_load_error_ranking` leaves out of the ranks a material with < 2 scored methods.
 - Checks: black, ruff, doc generators, check_docs, scientific reviews; full pytest 3091 passed.
-- Open: the 4 Delahay run-outs remain in `1_Ti6Al4V` (another batch); maintainer to decide.
-- Next action: CI on the PR, then the maintainer's merge decision.
+- d109 (same PR): `drop_case` overlay operation; the 4 Delahay rows leave `1_Ti6Al4V` (Table 2 of
+  Delahay & Palin-Luc 2006: mislabelled endurance limits of another batch). Snapshot on 1_Ti6Al4V:
+  failures and calibration unchanged; only MOREL run-out rows and their plots differ. Batch
+  comparison regenerated (GOLOS now in the Berto -> Ti6Al4V transfer).
+- Next action: CI on PR #88; then a new PR building `17_Ti6Al4V_Delahay` from Table 2 (calibration
+  on plane bending 652 and torsion 411 MPa; tension 583 and rotating bending 602 as information).
 
 ## Issue #69 completion: Replace `np.frompyfunc` in `pypow2` (11 November 2026)
 

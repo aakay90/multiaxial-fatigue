@@ -78,6 +78,7 @@ ledgers.
 | [`d106`](#d106) | 2026-11-11 | **Active** | Master-curve identifiability and scatter | Skip a model whose master curve is not identifiable (< 5 tests, < 1 decade, slope not distinct from 0); scatter with n - 2 degrees of freedom. |
 | [`d107`](#d107) | 2026-11-11 | **Active** | Calibration outside R = -1 | The relaxed-tolerance and any-R fallbacks of the plane-constant calibration are accepted, recorded and flagged (`ok (R fallback)`). |
 | [`d108`](#d108) | 2026-11-11 | **Active** | Ti6Al4V Summary | `1_Ti6Al4V` keeps only the Meneghetti properties (overlay); the Delahay row no longer enters the material values. |
+| [`d109`](#d109) | 2026-11-11 | **Active** | Delahay rows of `1_Ti6Al4V` | The 4 Delahay 2006 rows leave `1_Ti6Al4V` (overlay `drop_case`); they are endurance limits of another batch, mislabelled. Table 2 of the paper is to form a separate fatigue-limit dataset calibrated on plane bending and torsion. |
 
 ---
 
@@ -541,4 +542,12 @@ ledgers.
 * **Status:** Active
 * **Decision:** Maintainer: keep only the Meneghetti properties. An overlay sets the Delahay 2006 Summary row (Ti64Al4V, Su 1090 MPa) to `Null` and the Average and standard-deviation rows to the Meneghetti values (E 110000 MPa, nu 0.3, Su 980, Sy 915, Sigm1 500, Taum1 422.5 MPa at 2e6 cycles, R = -1), which is what the sheet's formulas give with Meneghetti alone. The Delahay row stays, as the source of the 4 Delahay run-outs; those run-outs are unchanged.
 * **Rationale:** Every failure of the workbook is Meneghetti's, and under d101 the Delahay tests are a different batch: averaging the two gave limits (576 / 416.75 MPa) that describe neither.
+
+### d109
+* **Date:** 2026-11-11
+* **Topic:** Delahay 2006 rows of `1_Ti6Al4V`
+* **Status:** Active
+* **Decision:** Maintainer: remove the 4 Delahay rows from `1_Ti6Al4V` and build a separate fatigue-limit dataset from Table 2 of Delahay & Palin-Luc 2006 (doi:10.1016/j.ijfatigue.2005.06.048), calibrated on the plane-bending (652 MPa) and torsion (411 MPa) limits, with tension (583) and rotating bending (602) recorded as information. A new overlay operation `drop_case` clears the 4 Dataset rows (58-61), each checked against its authors, specimen name, run-out flag and stresses.
+* **Rationale:** Table 2 (p. 479) shows that the rows are median staircase endurance limits of annealed Ti-6Al-4V (Su 1090 MPa), another batch (d101), not run-outs of the Meneghetti tests. Three of them are mislabelled: the 652 MPa "axial" limit and the two "axial + torsion" limits are plane bending, and the torsion limit is 411 MPa, not 441. Bending and torsion limits carry a stress gradient; calibrating on the same load types as the assessed bending + torsion points lets it largely cancel in a pointwise criterion.
+* **Effect:** Failures, calibration and every error on the failures are unchanged (regression snapshot); the 4 run-out rows leave the MOREL output, and GOLOS, previously skipped because the 90° row is outside the in-phase scope of its Eq. (32), now runs in the Ti6Al4V_Berto -> Ti6Al4V transfer. `dataset_fingerprint` hashes properties and failures only, so it does not change.
 
