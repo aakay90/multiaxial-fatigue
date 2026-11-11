@@ -8,6 +8,47 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ### Data
 
+- `14_42CrMo4_Reis.xlsx`: R = −1 fatigue limits Sigm1 = 452 MPa and Taum1 = 372 MPa, the authors'
+  trend-line values at 1e6 cycles (Anes et al., IJF 62 (2014), Table 5), added by an overlay
+  (decision d100, #71). The 22 limit-based methods and WANG2022 now run on this batch.
+- `42CrMo4_QT` (Santus 2018 + Benedetti 2022) is one batch (decision d101).
+
+### Cross-batch comparison (#71)
+
+- `multifat-pipeline --design-material A` predicts the failures of another batch from batch A: the
+  Summary properties, calibrated constants, design set and master curve all come from A; outputs
+  are `<material>_from_<A>` (decision d102). Extension point: `evaluate_model(..., design_data=...)`,
+  `run_workbook(..., design_workbook=...)`, `run.load_transfer`. Default runs are unchanged.
+- `examples/batch_comparison.py`: standalone pipeline of own-batch and cross-batch statistics for
+  the material families of `examples/data/material_families.json` (bias with bootstrap intervals,
+  Kruskal–Wallis with Benjamini–Hochberg, two-way decomposition into batch offsets and method ×
+  batch interaction, transfer penalty, method-free S-N reference). Results in
+  `examples/data/batch_comparison/`, figures `docs/images/batch_comparison_*.png`, guide
+  `docs/batch-comparison.md`. `tests/test_batch_comparison.py` fails when a method or a family
+  workbook changes until the results are regenerated.
+- Statistical design revised (decision d104). New method-free part (`examples/batch_reference.py`):
+  Basquin strength at 1e5 cycles per batch, path and series; the scatter between the same-steel
+  series of the FABEST database as the yardstick of a batch difference; the relative strengths
+  that predict the batch offsets and the transfer shifts without any method. The batch offsets
+  get joint-bootstrap intervals (same specimens for all methods); the Kruskal–Wallis and
+  Benjamini–Hochberg tests are removed in favour of effect sizes; run-outs enter a censored
+  sensitivity check; a load factor covering 95 % of the tests compares own batch and transfer.
+  Six new figures per family (`examples/batch_plots.py`).
+- Material batch, test series and dataset are kept apart (decision d105): the FABEST database is one
+  material batch (maintainer), so its between-series scatter is the test-series part, and
+  `variance_components` estimates the material-batch part of the spread between datasets
+  (`reference_components.csv`). Santus 2018 and Benedetti 2022 stay one batch with two series,
+  decided on the data. Decision d104 is active.
+- A transfer accepts `--constants` only for a published-constants record of the design batch
+  (decision d103): SSF is assessed on FABEST and QT with the surface published for Reis.
+- Second family Ti6Al4V (`Ti6Al4V`, `Ti6Al4V_Berto`). Batches are author groups, Santus 2018 and
+  Benedetti 2022 being one (decision d101); `1_Ti6Al4V` mixes the Meneghetti and Delahay
+  properties in its Summary (open, #24).
+- `eval/load_error.py`: the secant search in ln s stops beyond |ln s| = 10 and falls back to the
+  bisection, as documented, instead of overflowing (SSF extrapolated on FABEST). Regression
+  snapshot: no existing output changes.
+
+
 - Homepage data provenance manifests (issue #80): `examples/homepage_data.py` writes paired
   `.manifest.json` files alongside `examples/data/load_error_ranking.csv` and
   `examples/data/42CrMo4_QT_predictions.csv` recording their canonical LF SHA-256,

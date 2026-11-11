@@ -192,6 +192,45 @@ def load_material(
     return exp.load_material_workbook(wb_path, verbose=verbose), material_id(wb_path.stem)
 
 
+TRANSFER_ID_OFFSET = 1_000_000  # case ids of the predicted batch in a transfer dataset
+
+
+def transfer_material_id(target: str, design: str) -> str:
+    """Name of the transfer dataset: the tests of `target` predicted from `design`."""
+    return f"{target}_from_{design}"
+
+
+def load_transfer(
+    target: str | Path, design: str | Path, *, data_folder: str | Path = DATA_FOLDER
+) -> tuple[dict, str, dict]:
+    """Cross-batch transfer dataset (issue #71): predict the tests of `target` from `design`.
+
+    Returns ``(data, material, design_data)`` for ``evaluate_model(..., design_data=...)``:
+
+    - the material properties (Summary) and the failures that can enter a design set or a
+      constant fit come from `design`; `design_data` holds those failures only;
+    - `data` adds every failure of `target` (ids shifted by ``TRANSFER_ID_OFFSET``), which are
+      the only cases scored; the run-outs are those of `target`;
+    - the load histories of `target`, strains included, are kept as imported (they describe
+      the tests, computed from that batch's own E and nu).
+    """
+    d_data, d_mat = load_material(design, data_folder=data_folder)
+    t_data, t_mat = load_material(target, data_folder=data_folder)
+    d_block, t_block = d_data[d_mat], t_data[t_mat]
+    if d_block["cases"] and max(int(i) for i in d_block["cases"]) >= TRANSFER_ID_OFFSET:
+        raise ValueError(f"{d_mat}: case ids reach the transfer offset {TRANSFER_ID_OFFSET}")
+    material = transfer_material_id(t_mat, d_mat)
+    shift = {int(i) + TRANSFER_ID_OFFSET: c for i, c in t_block["cases"].items()}
+    merged = {
+        **d_block,
+        "cases": {**{int(i): c for i, c in d_block["cases"].items()}, **shift},
+        "runouts": {int(i) + TRANSFER_ID_OFFSET: c for i, c in t_block.get("runouts", {}).items()},
+        "transfer": {"target": t_mat, "design": d_mat},
+    }
+    design_data = {material: {**d_block, "runouts": {}}}
+    return {material: merged}, material, design_data
+
+
 def build_params(mat_prop: dict) -> dict:
     """Model parameters taken from the workbook material block (absent entries remain None)."""
     collected = {}
@@ -388,11 +427,18 @@ def evaluate_model(
     survival_probability: float | None = None,
     extra_design_ids=(),
     shear_amplitude_algorithm: str = "method_default",
+    design_data: dict | None = None,
 ) -> Evaluation:
     """Calibrate on the uniaxial R = -1 design points, then score every remaining case once.
 
     `extra_design_ids` lists cases that fed the material constants (e.g. the torsion tests
     behind a fitted tau_f, b0): they are reported as design points rather than predictions.
+
+    `design_data` (cross-batch transfer, issue #71) holds the tests the design set comes from,
+    under the same material key as `data`, whose cases it must be a subset of. The design set,
+    the master curve and the native life fit are then taken from `design_data` only, and only the
+    cases of `data` absent from `design_data` are scored: the other design-side tests are known
+    information, not predictions. Default None: `data` is both, as before.
     """
     if stdnum is None:
         if survival_probability is None:
@@ -412,11 +458,16 @@ def evaluate_model(
 
     native_prediction = capabilities_for_model(mdl).life_prediction == "native"
     design_loading = design_loading_of(mdl)
+    source = data if design_data is None else design_data
+    if design_data is not None and not set(design_data[material]["cases"]) <= set(
+        data[material]["cases"]
+    ):
+        raise ValueError("design_data must hold a subset of the cases of data")
     if design_loading == "torsion":
         # The source fits the life curve on torsion tests (e.g. MWHS, Wu et al. 2017 Eq. 19).
-        uniax_rminus1 = exp.extract_pure_torsion(data)
+        uniax_rminus1 = exp.extract_pure_torsion(source)
     else:
-        uniax_rminus1 = exp.extract_uniaxial_tension(data)
+        uniax_rminus1 = exp.extract_uniaxial_tension(source)
     if material not in uniax_rminus1 and native_prediction:
         # A native-life model needs no axial R=-1 subset or DP master curve.
         uniax_rminus1 = {material: {"points": []}}
@@ -430,7 +481,7 @@ def evaluate_model(
             f"No design points for '{material}': the calibration needs uniaxial tension R = -1 tests"
         )
     calibrations = collect_uniaxial_series_and_fit(
-        data=data,
+        data=source,
         exp=exp,
         material_name=material,
         uniax_cases=uniax_rminus1,
@@ -482,8 +533,15 @@ def evaluate_model(
                 result.design_aux.append(dict(case_res.aux))
     extra_set = {int(i) for i in extra_design_ids}
 
-    # Skip the design subset and score what is left
-    data_without_uniax = exp.exclude_subdataset(data, uniax_rminus1)
+    # Skip the design subset and score what is left (in a transfer: the tests absent from the
+    # design side only, plus those behind its constants, which are reported as design rows below)
+    if design_data is None:
+        excluded = uniax_rminus1
+    else:
+        series = {int(p["case_id"]) for p in uniax_rminus1.get(material, {}).get("points", [])}
+        known = set(map(int, design_data[material]["cases"])) - (extra_set - series)
+        excluded = {material: {"points": [{"case_id": i} for i in sorted(known)]}}
+    data_without_uniax = exp.exclude_subdataset(data, excluded)
     for case_id in data_without_uniax[material]["cases"].keys():
         if amplitude and not harmonic_case_or_skip(
             data_without_uniax[material]["cases"][int(case_id)],

@@ -24,6 +24,14 @@ PALETTE = {
 }
 
 
+# Categorical palette of the batch figures (issue #71): blue, orange, aqua, violet, validated for
+# colour-vision deficiencies on a light surface; the markers carry the identity without colour.
+BATCH_COLOURS = ["#2a78d6", "#eb6834", "#1baf7a", "#6250d6"]
+BATCH_MARKERS = ["o", "s", "^", "D"]
+# Diverging pair with a neutral midpoint: red = non-conservative, blue = conservative.
+DIVERGING = ["#c8343b", "#f0efec", "#2a6fc4"]
+
+
 def apply_academic_style() -> None:
     """Configure matplotlib with Times New Roman and Computer Modern math."""
     plt.rcParams.update(

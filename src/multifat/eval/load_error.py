@@ -19,6 +19,8 @@ Repository choices:
   - homogeneous DPs (DP(2 x) = 2^d DP(x) and DP(x/2) = 2^-d DP(x) to 1e-9) use the closed form
     e_L = ln(DP / DP_fit) / d; other DPs and native life laws are solved by a secant iteration in
     ln s, with the bisection of ``endurance.load_factor`` as fall-back;
+  - the secant steps are confined to |ln s| <= LOG_S_MAX = 10; a diverging iteration falls back
+    to the bisection (issue #71: SSF extrapolated beyond its fit range on FABEST);
   - run-outs give bounds only and are not evaluated.
 """
 
@@ -49,6 +51,12 @@ def homogeneity_degree(model, params: dict, case: dict, R_list, DP: float, *, va
     return d_up
 
 
+# Secant steps stay within |ln s| <= LOG_S_MAX (load factors 4.5e-5 to 2.2e4); a step beyond it
+# means the iteration diverges (e.g. a DP that is not monotonic in the load, such as an
+# extrapolated SSF surface), and the bisection of endurance.load_factor takes over.
+LOG_S_MAX = 10.0
+
+
 def _solve_in_log(g, s0: float = 1.0, tol: float = 1e-12, max_iter: int = 60):
     """Root of the increasing function g(ln s) by secant steps from ln s0; None if it fails."""
     x0, x1 = math.log(s0), math.log(s0) + 0.05
@@ -57,6 +65,8 @@ def _solve_in_log(g, s0: float = 1.0, tol: float = 1e-12, max_iter: int = 60):
         if not (np.isfinite(g0) and np.isfinite(g1)) or g1 == g0:
             return None
         x2 = x1 - g1 * (x1 - x0) / (g1 - g0)
+        if not abs(x2) <= LOG_S_MAX:
+            return None
         if abs(x2 - x1) < tol:
             return math.exp(x2)
         x0, g0, x1, g1 = x1, g1, x2, g(x2)
