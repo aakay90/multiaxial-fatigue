@@ -48,8 +48,8 @@ The maintainer's rules:
   is decided on the data (d101, revised): their axial strengths differ by 0.096 in ln S, less
   than one standard deviation of the difference between two series of one batch
   ($0.081\sqrt2 = 0.115$, from FABEST). Nothing in the data indicates two batches. Benedetti
-  2022 states that its material supply differs from that of its ref. [17]; if [17] is Santus
-  2018, the source says otherwise and the two series become two batches.
+  2022 states that its material supply differs from that of its ref. [17], which is Benedetti,
+  Santus and Berto 2019 (IJF 126), not Santus 2018; so the source does not separate them either.
 - **FABEST (d105)**: every series of the database comes from one material batch, ordered once
   and tested in several laboratories. Its scatter between series is therefore the pure
   test-series scatter, the yardstick used below.
@@ -384,21 +384,19 @@ Only pure torsion is assessed on both batches.
 - **Two points look like data questions, not batch effects**
   ([#24](https://github.com/andreachiocca/multiaxial-fatigue/issues/24)):
   - The Meneghetti torsion amplitudes (474–550 MPa) equal the axial ones (523–550 MPa) at
-    similar lives, a ratio $\tau_a/\sigma_a \approx 1$. Berto's ratio is 0.70. A ratio near 1
-    is unusual for a wrought alloy and should be checked against the paper (for instance,
-    whether the torsion values are equivalent stresses).
+    similar lives, a ratio $\tau_a/\sigma_a \approx 1$ (Berto: 0.70). Checked against the
+    paper: the values are nominal shear amplitudes, and the ratio comes from an almost flat
+    axial curve (inverse slope 50, against 22 in torsion); at $2\times10^6$ cycles the paper
+    gives 0.88. Not a data error.
   - The Summary of `1_Ti6Al4V` averages the Meneghetti and Delahay properties, although every
     failure is Meneghetti's. With it the limit-based methods have an RMS of 0.29 in torsion;
     with Berto's limits, 0.04.
 
 ## Open questions
 
-1. **Benedetti 2022, ref. [17].** If it is Santus 2018, the paper states that the two QT series
-   come from different material supplies, and they become two batches (the data do not decide
-   this).
-2. **Ti6Al4V.** The two data questions above need Meneghetti 2018
-   ([#24](https://github.com/andreachiocca/multiaxial-fatigue/issues/24)).
-3. **More FABEST series.** Importing the other unnotched FABEST series
+1. **Ti6Al4V Summary.** `1_Ti6Al4V` averages the Meneghetti and Delahay properties
+   ([#24](https://github.com/andreachiocca/multiaxial-fatigue/issues/24)); a maintainer decision.
+2. **More FABEST series.** Importing the other unnotched FABEST series
    ([#65](https://github.com/andreachiocca/multiaxial-fatigue/issues/65)) would let the
    series scatter be estimated per laboratory and specimen type, and would firm up the torsion
    yardstick, which rests on three series.

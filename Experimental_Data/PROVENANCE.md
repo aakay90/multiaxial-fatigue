@@ -190,7 +190,8 @@ Material constants printed in the sources:
 - Benedetti 2022 Table 12 (p. 12), plain R = -1: torsion τa = 681.6·N_f^-0.048 MPa; axial
   σa = 103 + 859.9·N_f^-0.066 MPa; strengths at 5×10^6 cycles: 412 MPa (axial), 328 MPa (torsion).
   The paper says its supplies are distinct from those of its ref. [17]; it does not say they are the Santus
-  2018 bars.
+  2018 bars. Checked 2026-11-11: ref. [17] is Benedetti, Santus, Berto, IJF 126 (2019) 306-318, not
+  Santus 2018 (which is its ref. [15]); the statement concerns the 2019 material only.
 - **Maintainer decision d101 (2026-11-10, issue #71):** the Santus 2018 and Benedetti 2022 tests of this
   workbook are one batch, and `42CrMo4_QT` is treated as one batch in the cross-batch comparison
   (`examples/data/material_families.json`).
@@ -374,6 +375,11 @@ Known issues:
    implies 5. The 3 plain run-outs (2 axial, 1 torsion) are not in the workbook.
 4. k_FS, k_FI, L_LI, k_MGSE, a_MSWT and xi_ZHU are not in either paper.
 5. The Berto Summary row leaves E and ν empty, although the paper prints them.
+6. τa/σa ≈ 1 at 10^5 cycles in the Meneghetti plain data (checked 2026-11-11, issue #24) is a property
+   of the data, not an error. The torsion values are nominal net-section shear amplitudes (Eq. 12b,
+   p. 11). The axial curve is almost flat (k = 50) and the torsion curve steeper (k = 22), so the two
+   curves converge at short lives; at 2×10^6 cycles Table 3 gives τA/σA = 894/1014 = 0.88 (0.83 with
+   the text's values).
 
 ## Further edits applied on 2026-10-18 (approved by T. Grossi; Excel comment on each cell)
 
