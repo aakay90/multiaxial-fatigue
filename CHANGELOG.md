@@ -14,6 +14,17 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
   failed (AISI316L, t_-1/s_-1 = 0.517). It is not a `LoadingScopeError`, so load-scaling searches
   do not mistake it for an out-of-scope trial load. No number changes.
 
+### Batched critical-plane evaluation (issue #69)
+
+- Replaced `np.frompyfunc(lambda x: x**2, 1, 1)` in `multifat.models.utils.batch.pypow2`
+  with an elementwise Python list comprehension over `np.asarray(x, dtype=float).ravel().tolist()`
+  followed by `.reshape(arr.shape)`. This preserves bit-for-bit parity with CPython's
+  `float ** 2` (avoiding the 1-ULP MSVC `pow(x, 2.0)` discrepancy) while eliminating NumPy
+  `object`-dtype ufunc state implicated in intermittent `python312.dll` crashes (`0xc0000409`)
+  during repeated pipeline runs on Windows Python 3.12 (`numpy==2.5.4`).
+- Added direct unit and edge-case tests (`test_pypow2_matches_cpython_float_pow`,
+  `test_pypow2_overflow_matches_cpython`) in `tests/test_batched_planes.py`.
+
 ### Calibration outside R = −1 flagged (issue #77)
 
 - The plane-constant calibration may still relax its R = −1 tolerance or accept any stress ratio
