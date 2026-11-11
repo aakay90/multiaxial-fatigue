@@ -136,10 +136,14 @@ def render() -> str:
     return "\n".join(out) + "\n"
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser()
+def build_parser() -> argparse.ArgumentParser:
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--check", action="store_true")
-    args = ap.parse_args()
+    return ap
+
+
+def main() -> None:
+    args = build_parser().parse_args()
     text = render()
     if args.check:
         if not OUT.exists() or OUT.read_text(encoding="utf-8") != text:

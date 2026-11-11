@@ -329,7 +329,7 @@ def load_material_workbook(
             raise WorkbookError(fp.name, sheet, "", f"missing sheet '{sheet}'")
     if overlay is None:
         overlay = OVERLAYS_ENABLED
-    overlay_id = apply_overlay_to_workbook(wb, fp) if overlay else None
+    overlay_id = apply_overlay_to_workbook(wb, fp, report=rep) if overlay else None
     dataset_source: Any = fp
     if overlay_id is not None:
         rep.info.append(

@@ -393,6 +393,28 @@ def test_record_for_other_dataset_is_flagged(tmp_path):
     assert "input_fingerprint" not in side["provenance"]
 
 
+def test_upstream_record_with_old_revision_is_flagged(tmp_path):
+    """An upstream Calibrations/ record from an earlier revision is flagged in constants_source."""
+    wb = _no_plane_constants(tmp_path / "Rev.xlsx")
+    rec = tmp_path / "old_upstream.json"
+    rec.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "status": "success",
+                "calibration_id": "c_old",
+                "material_id": "Rev",
+                "implementation_revision": "2026-10-07-audit1",
+                "parameters": {"k_FI": 0.4},
+            }
+        ),
+        encoding="utf-8",
+    )
+    run_workbook(wb, models=["FIN"], results_dir=tmp_path / "res", constants=rec)
+    side = json.loads((tmp_path / "res" / "Rev_calibration.json").read_text(encoding="utf-8"))
+    assert "2026-10-07-audit1" in side["constants_source"]["warning"]
+
+
 def test_constants_needs_exactly_one_workbook(tmp_path):
     """Minor: --constants with several workbooks is a usage error, not a traceback."""
     from multifat.cli.pipeline import main
