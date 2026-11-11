@@ -84,7 +84,7 @@ uv run multifat-pipeline --all --jobs 4
   └─────────────┬─────────────┘
                 ▼
   ┌───────────────────────────┐     Outputs: <METHOD>_<MATERIAL>.csv
-  │  3. Multi-Model Execution │ ──► (DP & Nf across all 34 registered criteria)
+  │  3. Multi-Model Execution │ ──► (DP & Nf across all 46 registered criteria)
   └─────────────┬─────────────┘
                 ▼
   ┌───────────────────────────┐     Outputs: Comparison/ & run_report.tsv
@@ -94,7 +94,7 @@ uv run multifat-pipeline --all --jobs 4
 
 1. **Validation**: the workbook is checked against the schema contract ([`docs/workbook-format.md`](workbook-format.md)). Execution stops at once when strict errors are found; warnings, by contrast, end up in `<MATERIAL>_validation.txt`.
 2. **Calibration**: which constants the models require but the workbook does not provide is identified first. Uniaxial Basquin curves are then fitted on $R=-1$ tests, the interaction coefficients that are needed get calculated, and all of this is stored in `<MATERIAL>_calibration.json`, together with a cryptographic fingerprint of the dataset. **No modification is ever applied to the original Excel file.**
-3. **Execution**: every one of the 34 registered criteria (along with their `_ext` variants) is evaluated over all failure and run-out observations. Should a model be missing required parameters, it is marked as skipped in `<MATERIAL>_run_report.tsv`, and the remaining models keep running.
+3. **Execution**: every one of the 46 registered criteria (along with their `_ext` variants) is evaluated over all failure and run-out observations. Should a model be missing required parameters, it is marked as skipped in `<MATERIAL>_run_report.tsv`, and the remaining models keep running.
 4. **Comparison**: experimental lives and predicted lives are set against each other, log-error statistics ($\mu_{\log_{10}}, \sigma_{\log_{10}}$) are computed, and comparison plots plus summary tables are written out. On `--all` runs, the global eligibility matrix `Comparison/eligibility_matrix.csv` is produced as well.
 
 Every output goes to `Results/current/`.

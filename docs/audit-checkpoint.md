@@ -49,6 +49,39 @@ Remaining: maintainer review of the PR; #24 decision on the `1_Ti6Al4V` Summary,
 Meneghetti and Delahay properties although every failure is Meneghetti's (limit-based methods: RMS
 0.29 with it, 0.04 with Berto's limits).
 
+## Issue #32 completion: All method guides and module docstrings (11 November 2026)
+
+Completed all remaining deliverables for Issue #32 on branch `docs/issue-32-method-guides`
+(branched off `main` at `c016c77`):
+
+- **All 16 remaining registered method guides added under `docs/method-guides/`:**
+  - Batch 1 (`bff58ab`): `LI`, `LIU2021`, `MGSE_YU`, `MGSE_ZHU`, `MSWT`.
+  - Batch 2 (`9e53aff`): `MDC`, `MMCCM`, `SWTD`, `OTT`, `EK`.
+  - Batch 3 (`b33aa44`): `RFB`, `VHN`, `PBP`, `COIN`, `MMMH`, `TVEIT2025`.
+  - Every one of the 46 registered criteria in `src/multifat/models/registry.py` now has a
+    9-section guide matching `docs/method-guides/TEMPLATE.md`, indexed in
+    `docs/method-guides/README.md`, with runnable Python examples and CLI invocations.
+- **All 19 remaining method module docstrings completed:** Added line-1 module docstrings
+  containing literal equation blocks and `Repository choices:` sections across all remaining
+  pending files (`cp_methods/mgse_zhu`, `cp_methods/mswt`, `cp_methods/mdc`,
+  `cp_methods/mmccm`, `energy_based_methods/swtd`, `invariant_methods/ottosen`,
+  `energy_based_methods/ellyin_kujawski`, `integral_methods/robert_fogue_bahuaud`,
+  `invariant_methods/vu_halm_nadot`, `invariant_methods/pbp`, `invariant_methods/coin_liwi`,
+  `invariant_methods/mmmh`, `cp_methods/car_spa`,
+  `invariant_methods/papadopoulos_panoskaltsis`, `integral_methods/doudard`,
+  `integral_methods/flaceliere_morel`, `energy_based_methods/banvillet`,
+  `energy_based_methods/sed_berto_lazzarin`, `energy_based_methods/zhu_edp`), emptying
+  `PENDING_DOCSTRINGS` (`set()`) in `tests/test_method_guides.py`.
+- **Guide ratchet and documentation updates:** Tightened `test_guides_exist` in
+  `tests/test_method_guides.py` to assert `REGISTERED <= {p.stem for p in _guides()}`. Updated
+  `docs/method-guides/README.md`, `README.md`, `docs/user-guide.md`, `CHANGELOG.md`, and
+  `docs/audit-checkpoint.md`.
+- **Checks (`WorkstationUniTN` `DESKTOP-8EMS1B6`, `MPLBACKEND=Agg`, isolated bundle clone, `uv sync --offline` without optional `fe`/`ansys` extras):**
+  - `uv run pytest tests/methods -q`: `1454 passed, 2 skipped, 120 xfailed, 2 warnings in 65.47s`
+  - `uv run pytest --ignore=tests/methods -q`: `1583 passed, 65 skipped, 5 xfailed, 5 warnings, 61 subtests passed in 361.48s` (43 skips from omitted `h5py`, 2 from omitted/opt-in `ansys`, 20 helper modules without module docstrings in `tests/test_notation.py`)
+  - Local post-edit gates verified in final commit pass (`black`, `ruff`, generators, `check_docs.py`, `check_scientific_reviews.py`, `tests/test_method_guides.py`, `tests/test_notation.py`).
+- **Remaining / next action.** Push `docs/issue-32-method-guides` to `origin`, open a PR referencing `Closes #32`, and close Issue #32 upon authorization/merge.
+
 ## PR #82 extension: Issues #76 and #80 (11 November 2026)
 
 Issues #76 and #80 added to branch `fix/docs-and-workbook-integrity` (PR #82, after merging

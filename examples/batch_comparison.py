@@ -334,21 +334,46 @@ def predicted_offsets(offsets: pd.DataFrame, relative: pd.DataFrame) -> pd.DataF
     return out
 
 
-def censored_mean(failures: np.ndarray, bounds: np.ndarray) -> float:
-    """Mean of a normal sample with right-censored observations (true value > bound), by MLE."""
-    from scipy import optimize, stats
+def censored_mean(
+    failures: np.ndarray, bounds: np.ndarray, *, tol: float = 1e-10, max_iter: int = 10_000
+) -> float:
+    """Mean of a normal sample with right-censored observations (true value > bound), by MLE.
 
+    Expectation-maximisation for the normal distribution with right censoring: each censored
+    value is replaced by its conditional moments given that it exceeds its bound,
+    E[X | X > c] = mu + sd * lambda(z) and E[X^2 | X > c] = mu^2 + sd^2 + sd (mu + c) lambda(z),
+    with z = (c - mu) / sd and lambda the inverse Mills ratio phi(z) / (1 - Phi(z)); the mean and
+    variance are then re-estimated. The iteration converges to the maximum-likelihood estimate.
+    Standard library and numpy only (scipy is not a project dependency).
+    """
+    from math import erfc, exp, pi, sqrt
+
+    failures = np.asarray(failures, float)
+    bounds = np.asarray(bounds, float)
     if bounds.size == 0 or failures.size < MIN_N:
         return float(failures.mean()) if failures.size else float("nan")
 
-    def negative_log_likelihood(theta):
-        mu, log_sd = theta
-        sd = np.exp(log_sd)
-        return -(stats.norm.logpdf(failures, mu, sd).sum() + stats.norm.logsf(bounds, mu, sd).sum())
+    def mills(z: float) -> float:
+        tail = 0.5 * erfc(z / sqrt(2.0))
+        if tail < 1e-300:  # far tail: lambda(z) -> z
+            return z
+        return exp(-0.5 * z * z) / sqrt(2.0 * pi) / tail
 
-    start = [failures.mean(), np.log(max(failures.std(ddof=1), 1e-3))]
-    fit = optimize.minimize(negative_log_likelihood, start, method="Nelder-Mead")
-    return float(fit.x[0])
+    n = failures.size + bounds.size
+    mu = float(np.concatenate([failures, bounds]).mean())
+    sd = max(float(failures.std(ddof=1)), 1e-6)
+    for _ in range(max_iter):
+        lam = np.array([mills((c - mu) / sd) for c in bounds])
+        first = mu + sd * lam
+        second = mu**2 + sd**2 + sd * (mu + bounds) * lam
+        mu_new = (failures.sum() + first.sum()) / n
+        var = ((failures**2).sum() + second.sum()) / n - mu_new**2
+        sd_new = sqrt(max(var, 1e-24))
+        converged = abs(mu_new - mu) < tol and abs(sd_new - sd) < tol
+        mu, sd = mu_new, sd_new
+        if converged:
+            break
+    return float(mu)
 
 
 def runout_sensitivity(own: pd.DataFrame, batches: list[str]) -> pd.DataFrame:

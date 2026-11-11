@@ -186,3 +186,17 @@ def test_variance_components_subtract_the_series_scatter():
     assert out.loc["raw", "batch_sd"] == pytest.approx(np.sqrt(0.09 - 0.01))
     assert out.loc["over_Su", "batch_sd"] == 0.0  # spread below the series scatter
     assert out.loc["raw", "datasets_sd_hi"] > 3 * out.loc["raw", "datasets_sd"]  # 2 dof
+
+
+@pytest.mark.parametrize(
+    "p, df, expected",
+    [  # reference quantiles (standard tables)
+        (0.025, 1, 0.000982069),
+        (0.025, 2, 0.0506356),
+        (0.975, 2, 7.37776),
+        (0.5, 10, 9.34182),
+        (0.95, 30, 43.7730),
+    ],
+)
+def test_chi2_quantile_without_scipy(p, df, expected):
+    assert br.chi2_ppf(p, df) == pytest.approx(expected, rel=1e-5)
