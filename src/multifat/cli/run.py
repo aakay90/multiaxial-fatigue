@@ -367,6 +367,9 @@ def check_fit(base_name: str, variant_key: str, cal: dict) -> None:
         raise ValueError(
             "Invalid master-curve fit: at least two distinct positive experimental lives are required"
         )
+    if not curve.get("identifiable", True):
+        # issue #74: an S-N curve the design tests do not determine gives no usable prediction
+        raise ValueError(f"master curve not identifiable: {curve.get('reason', '')}")
 
 
 def shear_amplitude_for(base_name: str, selection: str) -> dict | None:

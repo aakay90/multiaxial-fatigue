@@ -29,6 +29,13 @@ print(method.comparison_capabilities.dp_reference)     # master_curve
   data-dependent curve `DP = A N_f^b` is fitted, and the resulting
   `Nf_expected` is compared with the observed failure life. This is an
   *assessment-layer* life prediction, not necessarily an original-author life law.
+- **Identifiable master curve (issue #74).** A fitted master curve is used only if its design
+  set determines it: at least 5 tests, over at least one decade of life, with a negative slope
+  distinct from zero ($|b| > 2$ standard errors), the thresholds of the Basquin fits. Otherwise
+  the model is skipped on that dataset with the reason. Every fitted curve, used or not, is
+  listed in `<material>_master_curves.csv` (n, decades, A, b and its standard error, R² in
+  log space, scatter, identifiable, reason). The scatter is estimated with n − 2 degrees of
+  freedom.
 - **Life, native**: `Nf_native` is computed from the method's own fatigue-life law.
   The `Nf_expected` CSV column contains exactly the same native prediction for
   plot compatibility, with `Metric_mode=Nf_direct`. No supplementary generic

@@ -49,6 +49,7 @@ class Outcome:
     missing: tuple = ()  # constants the skipped model was missing
     mode: str = "life"  # "fatigue_index" on a fatigue-limit dataset, "out_of_scope" for a skip
     # because the loading lies outside the criterion's scope
+    fit: dict | None = None  # master curve of the variant (issue #74); None for native life laws
 
 
 # Optional constants that a calibrated value may fill; required constants are always filled.
@@ -245,15 +246,19 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
         ]
     results = []
     fitted_label = ",".join(sorted(adopted))
+    from multifat.models.comparison import capabilities_for_model
+
+    native = capabilities_for_model(model).life_prediction == "native"
     for suffix in suffixes:
         label = base_name + suffix
         if suffix == "_ext" and not any("_ext" in v for v in evaluation.values):
             results.append(Outcome(label, "skipped", "model has no _ext variant"))
             continue
+        curve = None if native else evaluation.fit(suffix)
+        if curve is not None:
+            curve = {**curve, "design_loading": evaluation.design_loading}
         try:
-            from multifat.models.comparison import capabilities_for_model
-
-            if capabilities_for_model(model).life_prediction != "native":
+            if not native:
                 runmod.check_fit(base_name, suffix, evaluation.cal)
         except ValueError as exc:
             results.append(
@@ -262,6 +267,7 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
                     "skipped",
                     f"design-set fit unusable: {exc}",
                     calibrated=fitted_label,
+                    fit=curve,
                 )
             )
             continue
@@ -276,6 +282,7 @@ def _evaluate_base_core(job: tuple) -> list[Outcome]:
                     time.perf_counter() - start,
                     fitted_label,
                     notes=_life_notes(model, evaluation, suffix, adopted, calibration),
+                    fit=curve,
                 )
             )
         except LoadingScopeError as exc:  # e.g. a run-out outside the criterion's scope
@@ -715,7 +722,37 @@ def run_workbook(
         results = [item for job in queue for item in _evaluate_base(job)]
 
     _dump_run_report(results_dir, material, results, sidecar.get("calibration_id", ""))
+    _dump_master_curves(results_dir, material, results)
     return results
+
+
+MASTER_CURVE_COLUMNS = [
+    "model", "status", "design_loading", "n", "decades", "A", "b", "b_se", "R2_log",
+    "STD_ln_DP", "STD", "identifiable", "reason",
+]  # fmt: skip
+
+
+def _dump_master_curves(dest: Path, material: str, results: list[Outcome]) -> None:
+    """Fit of the master curve behind every result: ``<material>_master_curves.csv`` (#74).
+
+    One row per model variant that fitted a master curve, also when it was skipped because the
+    curve is not identifiable, so that the reader can judge every curve the results rest on.
+    """
+    import csv
+
+    rows = [o for o in results if o.fit]
+    with (dest / f"{material}_master_curves.csv").open("w", newline="", encoding="utf-8") as fh:
+        writer = csv.writer(fh)
+        writer.writerow(MASTER_CURVE_COLUMNS)
+        for outcome in rows:
+            fit = outcome.fit
+            writer.writerow(
+                [outcome.model, outcome.status, fit.get("design_loading", "")]
+                + [
+                    f"{fit[k]:.6g}" if isinstance(fit.get(k), float) else fit.get(k, "")
+                    for k in MASTER_CURVE_COLUMNS[3:]
+                ]
+            )
 
 
 def _dump_run_report(

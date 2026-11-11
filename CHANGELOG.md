@@ -122,6 +122,23 @@ checked against its original publication; changes to numerical outputs are liste
 - Batched plane evaluation and a per-calibration plane cache (bit-identical outputs): a full
   snapshot dropped from about 21 to about 4 minutes before the calibration moved to all planes.
 
+### Master-curve identifiability and scatter (issue #74)
+
+- **Changed numerically.** A master curve is used only if it is identifiable: at least 5 design
+  tests, at least one decade of life, and a negative slope distinct from zero (|b| > 2 standard
+  errors), the thresholds of the Basquin fits. Otherwise the model is skipped on that dataset with
+  the reason (maintainer decision, d106). On the current data this skips the master-curve methods
+  on `Ti6Al4V` (6 axial design tests over 0.39 decades; MWHS: 4 torsion tests).
+- **Changed numerically.** The scatter of the master curve (`STD_ln_DP`, `STD`) is estimated with
+  n − 2 degrees of freedom (two fitted parameters), so its square is unbiased. Median results
+  (P_s = 0.5) and the calibrated constants are unchanged; curves with P_s > 0.5 shift slightly.
+- New output `<material>_master_curves.csv` per pipeline run: n, decades, A, b with its standard
+  error, R² in log space, scatter, identifiable and reason, for every fitted curve.
+- Consequences: the homepage load-error ranking loses its Ti6Al4V column (no method keeps three
+  assessed errors there); the cross-batch comparison of the Ti6Al4V family keeps only the
+  transfer from Ti6Al4V_Berto. Three synthetic test fixtures that had four or fewer design tests
+  were extended or their assertions updated.
+
 ### Survival probability (issue #16)
 
 - `--survival-probability P_s` on `multifat-run` and `multifat-pipeline` (0.5 <= P_s < 1, default 0.5
