@@ -73,7 +73,8 @@ ledgers.
 | [`d101`](#d101) | 2026-11-10 | **Active** | Batches | Tests by different author groups are different batches; Santus 2018 and Benedetti 2022 are one batch (`42CrMo4_QT`). Families (42CrMo4, Ti6Al4V) in `examples/data/material_families.json`. |
 | [`d102`](#d102) | 2026-11-10 | **Active** | Cross-batch transfer | `--design-material`: Summary, constants, design set and master curve from one batch, every failure of another assessed. |
 | [`d103`](#d103) | 2026-11-10 | **Active** | Published constants in a transfer | A published-constants record of the design batch (SSF of 42CrMo4_Reis) is accepted with `--design-material`; no other supplied constants. |
-| [`d104`](#d104) | 2026-11-10 | **Proposed** | Statistics of the batch comparison | Effect sizes with joint-bootstrap intervals, a method-free reference and the FABEST series as yardstick; no significance tests. |
+| [`d104`](#d104) | 2026-11-10 | **Active** | Statistics of the batch comparison | Effect sizes with joint-bootstrap intervals, a method-free reference and the FABEST series as yardstick; no significance tests. |
+| [`d105`](#d105) | 2026-11-11 | **Active** | FABEST is one material batch; batch versus series | All FABEST series share one material batch; a dataset confounds material batch and test series; Santus and Benedetti are one batch, two series (decided on the data). |
 
 ---
 
@@ -486,7 +487,7 @@ ledgers.
 * **Date:** 2026-11-10
 * **Topic:** Definition of a batch
 * **Status:** Active
-* **Decision:** Tests by different author groups are different batches; the only exception is Santus 2018 and Benedetti 2022 (one batch, `42CrMo4_QT`). The cross-batch comparison compares workbooks: 42CrMo4 (`42CrMo4_QT`, `42CrMo4_Reis`, `42CrMo4_FABEST`) and Ti6Al4V (`Ti6Al4V`, `Ti6Al4V_Berto`), declared in `examples/data/material_families.json`. Open (#24): by this rule `1_Ti6Al4V` mixes two batches, since its failures are Meneghetti 2018 while its Summary averages the Meneghetti and Delahay 2006 properties (Su 1035, Sigm1 576 MPa); `8_AISI316L` combines Janssens and Braun.
+* **Decision:** Tests by different author groups are different batches; the only exception is Santus 2018 and Benedetti 2022 (one batch, `42CrMo4_QT`; confirmed on the data, two test series, d105). The cross-batch comparison compares workbooks: 42CrMo4 (`42CrMo4_QT`, `42CrMo4_Reis`, `42CrMo4_FABEST`) and Ti6Al4V (`Ti6Al4V`, `Ti6Al4V_Berto`), declared in `examples/data/material_families.json`. Open (#24): by this rule `1_Ti6Al4V` mixes two batches, since its failures are Meneghetti 2018 while its Summary averages the Meneghetti and Delahay 2006 properties (Su 1035, Sigm1 576 MPa); `8_AISI316L` combines Janssens and Braun.
 * **Rationale:** The cross-batch statistics (issue #71) need a fixed unit. Benedetti 2022 states that its supplies differ from those of its ref. [17]; the maintainer confirmed the two Trento sources are the same batch.
 
 ### d102
@@ -506,7 +507,14 @@ ledgers.
 ### d104
 * **Date:** 2026-11-10
 * **Topic:** Statistics of the cross-batch comparison
-* **Status:** Proposed (awaiting maintainer review on PR #72)
+* **Status:** Active (maintainer, 2026-11-11: the scientifically more correct and clearer option)
 * **Decision:** (1) Compare the batches first without any method: Basquin strength at 1e5 cycles per batch, path and series. (2) Use the unnotched R = -1 series of the FABEST source file (one steel, several laboratories and specimen types) as the yardstick for a difference between batches; they are read for this purpose only and are not imported as workbooks. (3) Report effect sizes with intervals: batch offsets from a joint bootstrap that resamples specimens within a batch and uses the same resample for every method. No Kruskal-Wallis or Benjamini-Hochberg tests. (4) Predict the batch offsets and the transfer shifts from the S-N data alone (relative strengths), and report the observed values against them. (5) Run-outs enter a censored-likelihood sensitivity check for the homogeneous damage parameters.
 * **Rationale:** The specimens of one S-N curve are not independent across series, and two or three batches allow no inference on a population of batches; a specimen-level test only says that two series differ. The method-free prediction shows that the transfer shift is the same for every method, so a transfer cannot rank methods.
+
+### d105
+* **Date:** 2026-11-11
+* **Topic:** Material batch, test series and dataset
+* **Status:** Active
+* **Decision:** (1) Maintainer: every series of the FABEST database comes from one material batch, ordered once and tested in several laboratories. (2) The comparison distinguishes the material batch (one lot), the test series (one S-N curve of one campaign: specimen, machining, laboratory, machine) and the dataset (one workbook, which confounds the two). The FABEST between-series scatter of ln S(1e5) is the test-series part; the material-batch part is estimated as max(s_datasets^2 - s_series^2, 0) (`examples/batch_reference.py::variance_components`). (3) Santus 2018 and Benedetti 2022 stay one batch with two series: maintainer's rule is to separate them only if the data indicate two batches, and their axial difference (0.096 in ln S) is below one standard deviation of the difference between two series of one batch (0.115). To be revisited if Benedetti 2022's ref. [17] is Santus 2018.
+* **Rationale:** A difference between two datasets cannot be assigned to the material from one comparison; a reference with one material and many series is the only way to separate the two parts with the available data.
 

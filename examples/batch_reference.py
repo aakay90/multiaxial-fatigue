@@ -13,6 +13,9 @@ S-N data, per loading path and per test series:
 - ``relative_strengths``: the tests of each batch and path measured against the axial Basquin
   curve of a design batch, at their own lives: the method-free prediction of the batch offsets
   and of the transfer shifts.
+- ``variance_components``: the spread between the datasets of a family split into a material
+  batch part and a test-series part, the latter from the FABEST series (one material batch,
+  maintainer, d105).
 - ``fabest_benchmark``: every unnotched, R = -1 axial and torsion series of the FABEST database
   (one steel, five laboratories), read from the committed source file. The scatter of S(N_REF)
   between these series is the yardstick for a difference between two batches: a difference that
@@ -269,6 +272,49 @@ def fabest_benchmark() -> tuple[pd.DataFrame, pd.DataFrame]:
     return table, pd.DataFrame(summary)
 
 
+def variance_components(series: pd.DataFrame, fabest_summary: pd.DataFrame) -> pd.DataFrame:
+    """Split the spread of ln S(N_REF) between the datasets of a family into batch and series.
+
+    A dataset (workbook) confounds the material batch with the test series (specimen,
+    machining, laboratory, machine). The FABEST database is one material batch tested in
+    several series and laboratories, so the variance of ln S between its unnotched series is the
+    series component alone, s_series^2. The batch component is then estimated as
+    s_batch^2 = max(s_datasets^2 - s_series^2, 0), with s_datasets^2 the variance of ln S between
+    the pooled datasets of the family (raw, and divided by Su). With two or three datasets the
+    estimate has one or two degrees of freedom: ``datasets_sd_hi`` is the upper end of the 95 %
+    chi-square interval of s_datasets, which bounds what the data can exclude.
+    """
+    from scipy import stats
+
+    if fabest_summary is None or fabest_summary.empty:
+        return pd.DataFrame()
+    pooled = series[series["Series"] == "all"]
+    rows = []
+    for path, load in (("A", "Axial"), ("T", "Torsion")):
+        ref = fabest_summary[
+            (fabest_summary["Load"] == load) & (fabest_summary["group"] == "all unnotched series")
+        ]
+        g = pooled[pooled["Path"] == path]
+        if ref.empty or len(g) < 2:
+            continue
+        s_series = float(ref["sd_ln"].iloc[0])
+        for scale in ("raw", "over_Su"):
+            column = "S_ref" if scale == "raw" else "S_ref_over_Su"
+            if column not in g or g[column].isna().any():
+                continue
+            ln = np.log(g[column].to_numpy(float))
+            k = ln.size
+            var = float(ln.var(ddof=1))
+            hi = np.sqrt(var * (k - 1) / stats.chi2.ppf(0.025, k - 1))
+            rows.append(
+                dict(Path=path, scale=scale, datasets=k, datasets_sd=np.sqrt(var),
+                     datasets_sd_hi=float(hi), series_sd=s_series,
+                     series_count=int(ref["series"].iloc[0]),
+                     batch_sd=float(np.sqrt(max(var - s_series**2, 0.0))))
+            )  # fmt: skip
+    return pd.DataFrame(rows)
+
+
 def write_reference(dest: Path, batches, *, fabest: bool = False) -> dict:
     """Write the method-free tables of a family into `dest`; returns them."""
     write = dict(index=False, float_format="%.5g")
@@ -284,4 +330,6 @@ def write_reference(dest: Path, batches, *, fabest: bool = False) -> dict:
         out["fabest"], out["fabest_summary"] = fabest_benchmark()
         out["fabest"].to_csv(dest / "fabest_series.csv", **write)
         out["fabest_summary"].to_csv(dest / "fabest_summary.csv", **write)
+        out["components"] = variance_components(out["series"], out["fabest_summary"])
+        out["components"].to_csv(dest / "reference_components.csv", **write)
     return out

@@ -39,6 +39,12 @@ commit of `src/`). Tests: `tests/test_batch_comparison.py` (11). Findings: batch
 in axial strength; the transfer shift is method-free (observed = predicted to 0.001); Santus and
 Benedetti axial series differ by 10 %; Meneghetti tau/sigma is about 1 (data question, #24).
 
+Maintainer answers (11 November): FABEST is one material batch (d105); d104 active; Santus and
+Benedetti decided on the data (one batch, two series); master curves that cannot be identified
+are skipped and the scatter uses n - 2 (#74, branch `fix/master-curve-identifiability`, stacked on
+this one); the any-R calibration fallback is accepted but flagged and documented (#77, branch
+`fix/calibration-r-fallback-flag`). Papers requested: Meneghetti 2018, Benedetti 2022 (ref. [17]).
+
 Remaining: maintainer review of the PR; #24 decision on the `1_Ti6Al4V` Summary, which averages
 Meneghetti and Delahay properties although every failure is Meneghetti's (limit-based methods: RMS
 0.29 with it, 0.04 with Berto's limits).

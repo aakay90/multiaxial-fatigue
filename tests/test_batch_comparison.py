@@ -170,3 +170,19 @@ def test_committed_batch_comparison_is_current():
         "; ".join(problems)
         + " -> uv run python examples/batch_comparison.py all <tmp_dir> --jobs 4"
     )
+
+
+def test_variance_components_subtract_the_series_scatter():
+    """s_batch^2 = s_datasets^2 - s_series^2, floored at zero (d105)."""
+    series = pd.DataFrame(
+        dict(Batch=["X", "Y", "Z"], Path="A", Series="all", S_ref=np.exp([0.0, 0.3, 0.6]),
+             S_ref_over_Su=np.exp([0.0, 0.01, 0.02]))
+    )  # fmt: skip
+    yardstick = pd.DataFrame(
+        dict(Load="Axial", group="all unnotched series", series=[20], sd_ln=[0.1])
+    )
+    out = br.variance_components(series, yardstick).set_index("scale")
+    assert out.loc["raw", "datasets_sd"] == pytest.approx(0.3)
+    assert out.loc["raw", "batch_sd"] == pytest.approx(np.sqrt(0.09 - 0.01))
+    assert out.loc["over_Su", "batch_sd"] == 0.0  # spread below the series scatter
+    assert out.loc["raw", "datasets_sd_hi"] > 3 * out.loc["raw", "datasets_sd"]  # 2 dof

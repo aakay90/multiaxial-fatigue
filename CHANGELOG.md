@@ -34,6 +34,11 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
   Benjamini–Hochberg tests are removed in favour of effect sizes; run-outs enter a censored
   sensitivity check; a load factor covering 95 % of the tests compares own batch and transfer.
   Six new figures per family (`examples/batch_plots.py`).
+- Material batch, test series and dataset are kept apart (decision d105): the FABEST database is one
+  material batch (maintainer), so its between-series scatter is the test-series part, and
+  `variance_components` estimates the material-batch part of the spread between datasets
+  (`reference_components.csv`). Santus 2018 and Benedetti 2022 stay one batch with two series,
+  decided on the data. Decision d104 is active.
 - A transfer accepts `--constants` only for a published-constants record of the design batch
   (decision d103): SSF is assessed on FABEST and QT with the surface published for Reis.
 - Second family Ti6Al4V (`Ti6Al4V`, `Ti6Al4V_Berto`). Batches are author groups, Santus 2018 and

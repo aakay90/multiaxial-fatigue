@@ -13,10 +13,12 @@ tests on the same material from different sources. This page asks:
 - **The batches differ mainly in their axial strength.** At $10^5$ cycles the axial strengths
   are 478, 530 and 642 MPa (QT, Reis, FABEST). The torsion strengths are 393, 423 and 427 MPa,
   and the two batches with multiaxial tests agree within 3 % on both multiaxial paths.
-- **Much of that difference is no larger than the scatter inside one steel.** In the FABEST
-  database, 27 axial series of a single steel, from four laboratories, span 484–658 MPa at
-  $10^5$ cycles. After dividing by the tensile strength, the three batches lie within that
-  range.
+- **Part of it is test series, part is material batch, and the batch part is mostly the
+  strength level.** The FABEST database is one material batch tested in 27 axial series in
+  four laboratories; between its series the axial strength scatters with SD 0.081 in ln S. The
+  three 42CrMo4 datasets scatter with SD 0.150. The batch part, about 0.13, falls to about 0.05
+  once the strengths are divided by the tensile strength Su. In torsion the datasets scatter no
+  more than the FABEST series do.
 - **Each batch shifts all methods together.** Calibrated on its own batch, every method moves
   by nearly the same amount from one batch to the next. The shift can be computed from the S-N
   data alone.
@@ -32,13 +34,32 @@ general.
 
 ## What is a batch?
 
-Maintainer decision [d101](decision-log.md#d101): tests by different author groups are different
-batches, except Santus 2018 and Benedetti 2022, which are one batch. Families are declared in
+Three terms are kept apart on this page:
+
+- **Material batch**: one lot of material (one heat and heat treatment).
+- **Test series**: one S-N curve of one campaign: specimen type, machining, laboratory, machine.
+- **Dataset**: one workbook. It is what the comparison can compare, and it confounds the
+  material batch with its test series.
+
+The maintainer's rules:
+
+- **d101**: tests by different author groups are different material batches.
+- **Santus 2018 and Benedetti 2022 (`42CrMo4_QT`)**: one material batch, two test series. This
+  is decided on the data (d101, revised): their axial strengths differ by 0.096 in ln S, less
+  than one standard deviation of the difference between two series of one batch
+  ($0.081\sqrt2 = 0.115$, from FABEST). Nothing in the data indicates two batches. Benedetti
+  2022 states that its material supply differs from that of its ref. [17]; if [17] is Santus
+  2018, the source says otherwise and the two series become two batches.
+- **FABEST (d105)**: every series of the database comes from one material batch, ordered once
+  and tested in several laboratories. Its scatter between series is therefore the pure
+  test-series scatter, the yardstick used below.
+
+Families are declared in
 [`examples/data/material_families.json`](../examples/data/material_families.json).
 
 | Family | Batch | Source | Su / Sy (MPa) | Specimens | R = −1 failures (A / T) | Multiaxial failures |
 | --- | --- | --- | --- | --- | --- | --- |
-| 42CrMo4 | `42CrMo4_QT` | Santus 2018 + Benedetti 2022 | 875 / 727 | solid, axial d = 5, torsion d = 14 mm | 27 / 9 (+ 9 torsion with mean shear) | none |
+| 42CrMo4 | `42CrMo4_QT` | Santus 2018 + Benedetti 2022 (one batch, two series) | 875 / 727 | solid, axial d = 5, torsion d = 14 mm | 27 / 9 (+ 9 torsion with mean shear) | none |
 | 42CrMo4 | `42CrMo4_Reis` | Anes/Reis 2014 | 1100 / 980 | solid, d = 6.3 / 7.5 mm | 6 / 5 | 8 in-phase, 6 at 90° |
 | 42CrMo4 | `42CrMo4_FABEST` | FABEST, PBS series | 1111 / 1035 | thin-walled tube 8.1/7 mm | 20 / 20 | 18 in-phase, 21 at 90° |
 | Ti6Al4V | `Ti6Al4V` | Meneghetti 2018 (failures) + Delahay 2006 (4 run-outs) | Summary averages both: 1035 / 947.5 | — | 6 / 4 | none |
@@ -61,20 +82,19 @@ A batch defined by its authors differs from the next one in several ways at once
 | Frequency (Hz) | 15–20 and 150 | not recorded | 5–39 | No |
 | Fatigue limits in the Summary | 433 / 344 at $2\times10^6$ (paper Table 12: 412 / 328 at $5\times10^6$) | 452 / 372: trend lines at $10^6$, extrapolated | 517 / 367: Basquin at $10^6$, below the run-outs | No: three definitions |
 
-So a difference between two of these batches cannot be assigned to the material. The FABEST
-database is the exception: it holds one steel tested in several laboratories, on several
-specimen types and finishes. It is used below as the yardstick.
+So a difference between two datasets cannot be assigned to the material from one comparison.
+The FABEST database separates the two parts: one material batch tested in several laboratories,
+on several specimen types and finishes. Its scatter between series is subtracted from the
+scatter between datasets to estimate the material-batch part
+([variance split](#the-batches-without-any-method)).
 
-Two sub-series show the same thing inside a batch (`reference_series.csv`):
+Series inside a dataset (`reference_series.csv`):
 
-- **QT.** The Santus axial series gives 457 MPa at $10^5$ cycles (95 % interval 437–471). The
-  Benedetti series gives 503 MPa (485–525). The two series of this "one batch" differ by 10 %,
-  more than the two machining variants of FABEST do (2 % axial, 1.5 % torsion, 3.5 % in-phase,
-  6 % out-of-phase).
+- **QT.** The Santus axial series gives 457 MPa at $10^5$ cycles (95 % interval 437–471), the
+  Benedetti series 503 MPa (485–525). The difference (10 %) is inside the scatter between
+  FABEST series of one batch.
 - **FABEST.** FAB06x and FAB07x differ in the turning parameters (cutter nose radius 0.4 and
-  0.8 mm, `Production` sheet).
-
-Options for the maintainer are listed under [Open questions](#open-questions).
+  0.8 mm, `Production` sheet) and in strength by 1.5–6 % depending on the path.
 
 ## How to run
 
@@ -223,20 +243,39 @@ Strength at $10^5$ cycles (`reference_series.csv`, pooled series):
 | AT-NP ($\sigma_a$), MPa | — | 496 | 502 | 0.01 |
 | T / A | 0.82 | 0.80 | 0.66 | — |
 
-The yardstick, from the FABEST database (`fabest_summary.csv`):
+The yardstick, from the FABEST database (`fabest_summary.csv`; one material batch, d105):
 
-| Series of one steel | Series | Laboratories | $S(10^5)$, MPa | SD of ln S | Range (ln) |
+| Series of one batch | Series | Laboratories | $S(10^5)$, MPa | SD of ln S | Range (ln) |
 | --- | --- | --- | --- | --- | --- |
 | Axial, all unnotched | 27 | 4 | 484–658 | 0.081 | 0.31 |
 | Axial, one drawing (tube 8.1/7 mm) | 7 | 3 | 561–655 | 0.063 | 0.15 |
 | Torsion, all unnotched | 3 | 2 | 397–432 | 0.046 | 0.09 |
 
+Variance split (`reference_components.csv`). The variance of ln S between the datasets is the
+sum of a material-batch part and a test-series part; the latter is taken from FABEST:
+
+$$s_\mathrm{batch}^2 = \max\left(s_\mathrm{datasets}^2 - s_\mathrm{series}^2,\ 0\right)$$
+
+| Path | Strength | $s_\mathrm{datasets}$ (3 datasets) | upper 95 % | $s_\mathrm{series}$ (FABEST) | $s_\mathrm{batch}$ |
+| --- | --- | --- | --- | --- | --- |
+| A | $S$ | 0.150 | 0.94 | 0.081 (27 series) | 0.126 |
+| A | $S/S_u$ | 0.093 | 0.59 | 0.081 | 0.047 |
+| T | $S$ | 0.046 | 0.29 | 0.046 (3 series) | 0.000 |
+| T | $S/S_u$ | 0.090 | 0.56 | 0.046 | 0.077 |
+
 Reading:
 
-- **Torsion and multiaxial strengths agree between the batches**, within the scatter between
-  series of one steel.
-- **The axial strength differs by 30 %.** Dividing by Su removes about half of it. What remains
-  (range 0.18) is inside the range of the FABEST series (0.31).
+- **Axial: the material batch matters, and mostly through its strength level.** The datasets
+  spread almost twice as much as the series of one batch. Dividing by Su leaves a batch part of
+  about 0.05, below the series scatter.
+- **Torsion: no batch part is visible.** The datasets spread exactly as much as the FABEST
+  series, and dividing by Su makes the spread larger: the torsion strength of these three
+  datasets does not follow Su. The FABEST torsion yardstick rests on three series only.
+- **The uncertainty is large.** Three datasets give two degrees of freedom; the upper end of
+  the 95 % interval of $s_\mathrm{datasets}$ is six times the estimate. The split is a point
+  estimate, not a test.
+- **Multiaxial strengths agree** between the two datasets that have them (3 % in-phase, 1 % out
+  of phase).
 - **The torsion-to-axial ratio separates the tubes (0.66) from the solid bars (0.80–0.82).** All
   three are above the von Mises value 0.577. A stress gradient in solid torsion bars raises the
   nominal torsion strength, which fits the direction of the difference. The ratio is confounded
@@ -354,21 +393,12 @@ Only pure torsion is assessed on both batches.
 
 ## Open questions
 
-For the maintainer:
-
-1. **Vocabulary.** "Batch" as used here is a source: a material lot and a test series
-   (specimen, machining, laboratory) together. Options:
-   - keep the definition, and state on every result that a batch difference includes the
-     specimen and the laboratory (done on this page);
-   - add a *series* level to the workbooks (FABEST already has `Curve ID`), so that every
-     comparison can report the scatter inside a source.
-2. **Santus and Benedetti.** Their axial series differ by 10 % at $10^5$ cycles, with
-   non-overlapping intervals. Keep them as one batch (d101), or report them as two series of
-   one batch?
-3. **FABEST as a designed comparison.** The database holds the same steel in five laboratories.
-   Importing its other unnotched series
-   ([#65](https://github.com/andreachiocca/multiaxial-fatigue/issues/65)) would be the only way,
-   with the available data, to separate the laboratory and the specimen from the material. The
-   yardstick above reads those series from the source file without importing them. Whether all
-   FABEST series come from one heat should be confirmed with the database authors.
-4. **Ti6Al4V.** The two data questions above.
+1. **Benedetti 2022, ref. [17].** If it is Santus 2018, the paper states that the two QT series
+   come from different material supplies, and they become two batches (the data do not decide
+   this).
+2. **Ti6Al4V.** The two data questions above need Meneghetti 2018
+   ([#24](https://github.com/andreachiocca/multiaxial-fatigue/issues/24)).
+3. **More FABEST series.** Importing the other unnotched FABEST series
+   ([#65](https://github.com/andreachiocca/multiaxial-fatigue/issues/65)) would let the
+   series scatter be estimated per laboratory and specimen type, and would firm up the torsion
+   yardstick, which rests on three series.
