@@ -26,18 +26,38 @@ from examples.style import DATA_DIR, DOCS_IMG_DIR, PALETTE, apply_academic_style
 MIN_RANKED = 2  # methods scored on a material for it to enter the ranks
 
 
+GROUPS = (("fatigue_life", "failures (life datasets)"), ("fatigue_limit", "limit states (d110)"))
+
+
+def _ranks(sd: pd.DataFrame) -> pd.DataFrame:
+    ranks = sd.rank(axis=0, method="average")
+    ranks.loc[:, sd.notna().sum(axis=0) < MIN_RANKED] = np.nan  # no comparison on that material
+    return ranks
+
+
 def plot_load_error_ranking(
     out_path: Path | None = None, data_path: Path = DATA_DIR / "load_error_ranking.csv"
 ) -> Path:
     apply_academic_style()
     out_path = out_path or DOCS_IMG_DIR / "load_error_ranking.png"
     table = pd.read_csv(data_path)
+    if "Assessment" not in table:
+        table["Assessment"] = "fatigue_life"
+    # one block of columns per kind of observation, each with its own mean rank: a limit dataset
+    # rests on 3-40 limit states, so its columns are not pooled with the life datasets
+    blocks, block_ranks = [], {}
+    for kind, _ in GROUPS:
+        part = table[table["Assessment"] == kind]
+        if part.empty:
+            continue
+        sd_k = part.pivot(index="Method", columns="Material", values="Error_load_rms")
+        blocks.append((kind, list(sd_k.columns)))
+        block_ranks[kind] = _ranks(sd_k)
     sd = table.pivot(index="Method", columns="Material", values="Error_load_rms")
-    ranks = sd.rank(axis=0, method="average")
-    ranks.loc[:, sd.notna().sum(axis=0) < MIN_RANKED] = np.nan  # no comparison on that material
-    order = ranks.mean(axis=1).sort_values().index
-    sd, ranks = sd.loc[order], ranks.loc[order]
-    materials = list(sd.columns)
+    materials = [m for _, cols in blocks for m in cols]
+    first = blocks[0][0]
+    order = block_ranks[first].mean(axis=1).reindex(sd.index).sort_values(na_position="last").index
+    sd = sd.loc[order, materials]
 
     fig, ax = plt.subplots(figsize=(1.35 * len(materials) + 3.4, 0.30 * len(sd) + 1.9), dpi=300)
     values = sd.to_numpy(dtype=float)
@@ -51,10 +71,18 @@ def plot_load_error_ranking(
             dark = not np.isnan(values[i, j]) and values[i, j] > 0.6 * image.norm.vmax
             ax.text(j, i, text, ha="center", va="center", fontsize=7.5,
                     color="white" if dark else PALETTE["charcoal"])  # fmt: skip
-    mean_rank = ranks.mean(axis=1)
-    covered = ranks.notna().sum(axis=1)
-    ranked = int(ranks.notna().any(axis=0).sum())
-    labels = [f"{name}  ({mean_rank[name]:.1f}, {covered[name]}/{ranked})" for name in sd.index]
+
+    def rank_text(name: str, kind: str) -> str:
+        r = block_ranks[kind].reindex(sd.index)
+        n_ranked = int(r.notna().any(axis=0).sum())
+        covered = int(r.loc[name].notna().sum())
+        mean = r.loc[name].mean()
+        return "–" if covered == 0 else f"{mean:.1f}, {covered}/{n_ranked}"
+
+    labels = [
+        f"{name}  (" + " | ".join(rank_text(name, kind) for kind, _ in blocks) + ")"
+        for name in sd.index
+    ]
     ax.set_yticks(range(len(sd)), labels, fontsize=8.5)
     ax.set_xticks(range(len(materials)), [m.replace("_", " ") for m in materials], fontsize=8.5)
     ax.xaxis.tick_top()
@@ -62,11 +90,20 @@ def plot_load_error_ranking(
     ax.tick_params(length=0)
     for spine in ax.spines.values():
         spine.set_visible(False)
+    start = 0
+    for k, (kind, cols) in enumerate(blocks):
+        if k:
+            ax.axvline(start - 0.5, color=PALETTE["charcoal"], lw=1.6)
+        title = dict(GROUPS)[kind]
+        ax.text(start + (len(cols) - 1) / 2, len(sd) - 0.2, title, ha="center", va="top",
+                fontsize=9.5, color=PALETTE["charcoal"], clip_on=False)  # fmt: skip
+        start += len(cols)
     bar = fig.colorbar(image, ax=ax, fraction=0.04, pad=0.02)
-    bar.set_label(r"RMS of $\ln(1/s^*)$ on assessed failures (lower is better)", fontsize=9)
+    bar.set_label(r"RMS of $\ln(1/s^*)$ on assessed tests (lower is better)", fontsize=9)
     ax.set_title(
         "Methods ranked by their load-equivalent error (bias and scatter)\n"
-        r"row label: (mean rank, ranked materials covered); $s^*$: load factor reproducing $N_{f,\exp}$",
+        r"row label: (mean rank, materials ranked) for life | limit datasets; $s^*$: load factor"
+        r" reproducing $N_{f,\exp}$ or reaching the limit, $\ln(1/s^*) = \ln(1 + FI_{load})$",
         fontsize=10.5, pad=46,
     )  # fmt: skip
     fig.tight_layout()

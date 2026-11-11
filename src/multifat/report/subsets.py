@@ -56,15 +56,26 @@ def _history(case) -> dict:
     }
 
 
-def dataset_fingerprint(block: dict) -> str:
-    """Hash of the material properties and the failure histories (lives and stress histories)."""
+def dataset_fingerprint(block: dict, runouts: bool = False) -> str:
+    """Hash of the material properties and the failure histories (lives and stress histories).
+
+    With ``runouts`` the run-out histories are hashed too: a fatigue-limit dataset holds only
+    run-outs (its limit states), so without them its fingerprint would track the properties only.
+    The default keeps every recorded fingerprint unchanged.
+    """
     props = {k: v for k, v in block["material"].items() if k != "extra"}
     props.update(block["material"].get("extra") or {})
-    failures = sorted(
-        json.dumps(json_value({"N": c["meta"]["Nf_cycles"], **_history(c)}), sort_keys=True)
-        for c in block["cases"].values()
-    )
-    return _sha({"properties": props, "failures": failures})
+
+    def histories(cases) -> list[str]:
+        return sorted(
+            json.dumps(json_value({"N": c["meta"]["Nf_cycles"], **_history(c)}), sort_keys=True)
+            for c in cases.values()
+        )
+
+    content = {"properties": props, "failures": histories(block["cases"])}
+    if runouts:
+        content["runouts"] = histories(block.get("runouts") or {})
+    return _sha(content)
 
 
 def observation_index(block: dict) -> dict[tuple[str, int], dict]:

@@ -79,6 +79,7 @@ ledgers.
 | [`d107`](#d107) | 2026-11-11 | **Active** | Calibration outside R = -1 | The relaxed-tolerance and any-R fallbacks of the plane-constant calibration are accepted, recorded and flagged (`ok (R fallback)`). |
 | [`d108`](#d108) | 2026-11-11 | **Active** | Ti6Al4V Summary | `1_Ti6Al4V` keeps only the Meneghetti properties (overlay); the Delahay row no longer enters the material values. |
 | [`d109`](#d109) | 2026-11-11 | **Active** | Delahay rows of `1_Ti6Al4V` | The 4 Delahay 2006 rows leave `1_Ti6Al4V` (overlay `drop_case`); they are endurance limits of another batch, mislabelled. Table 2 of the paper is to form a separate fatigue-limit dataset calibrated on plane bending and torsion. |
+| [`d110`](#d110) | 2026-11-11 | **Active** | Fatigue-limit datasets in the load-error ranking | Limit states enter the ranking with $e_L=\ln(1+FI_{load})$, in a separate column block with its own mean rank; R = -1 axial references left out; CX18 and GGG60 left out until #24. |
 
 ---
 
@@ -552,3 +553,10 @@ ledgers.
 * **Implementation:** `17_Ti6Al4V_Delahay.xlsx`, built by `tools/build_delahay_ti6al4v.py` from the transcription `Experimental_Data/sources/Delahay2006/ti6al4v_tables.csv`; classified `fatigue_limit` (4 limit states: plane bending, torsion, plane bending + torsion at 0 and 90 deg).
 * **Effect:** Failures, calibration and every error on the failures are unchanged (regression snapshot); the 4 run-out rows leave the MOREL output, and GOLOS, previously skipped because the 90° row is outside the in-phase scope of its Eq. (32), now runs in the Ti6Al4V_Berto -> Ti6Al4V transfer. `dataset_fingerprint` hashes properties and failures only, so it does not change.
 
+### d110
+* **Date:** 2026-11-11
+* **Topic:** Fatigue-limit datasets in the load-error ranking (#37)
+* **Status:** Active
+* **Decision:** Maintainer: add the fatigue-limit datasets to the homepage ranking as a separate block of columns with its own mean rank; leave the cross-batch comparison (#71) unchanged; leave out CX18 and GGG60 until #24 resolves their data. A limit state enters with $e_L = \ln(1/s) = \ln(1 + FI_{load})$. The pure R = -1 axial limit states are the reference of the fatigue index and are left out, as the design failures of a life dataset; torsion and multiaxial limits are assessed. Methods need at least 3 assessed limit states on a material.
+* **Rationale:** $FI_{load} = 1/s - 1$ (`eval/endurance.py`, d063) and $e_L = \ln(1/s^*)$ (`eval/load_error.py`) are the same load factor, so the conversion is exact for any damage parameter and needs no new method. The cross-batch comparison cannot use the limit datasets: no material has two limit batches, and Ti6Al4V_Delahay shares no load path with the Ti6Al4V life batches. A limit dataset has 3 to 40 assessed states against 4 to 76 failures, so its columns are not pooled into the life mean rank. CX18 (Summary limits of 30NCD16) and GGG60 (axial amplitudes about twice the Summary limit) give RMS errors of 0.78-0.85 for every method alike, which would measure the data error, not the criteria.
+* **Implementation:** `examples/build_load_error_ranking.py` (reads `FatigueLimit/*_FI.csv`, column `Assessment` appended), `examples/plot_load_error_ranking.py` (two blocks), `examples/homepage_data.py` (limit materials; their fingerprint includes the run-outs through the new opt-in `dataset_fingerprint(block, runouts=True)`, since a limit dataset has no failures). The life rows of the CSV are unchanged.

@@ -1,8 +1,8 @@
 {
  "csv": "load_error_ranking.csv",
- "csv_sha256": "d2e820317b877561b35fd29827ee8e0726ee2cb5a6da7648298637f47c9b9d57",
- "created_utc": "2026-11-11T17:30:56+00:00",
- "git_commit": "d233845ef084c599b8360fc4c61406d75f0a47cc",
+ "csv_sha256": "0a01ac91a4f04545b17970846bf95ecda1e4e0981aef5182d83188eaf0fb4e4d",
+ "created_utc": "2026-11-11T21:27:53+00:00",
+ "git_commit": "7c389b53c7d1504a7d71b354027a15c14609ec6e",
  "implementation_revision": "2026-11-11",
  "registered_models": [
   "BP",
@@ -53,22 +53,34 @@
   "ZHANGYAO"
  ],
  "materials": [
+  "25CrMo4",
+  "30NCD16",
+  "34Cr4",
   "42CrMo4_FABEST",
   "42CrMo4_QT",
   "42CrMo4_Reis",
+  "982FA",
   "AISI316L",
   "Al7075_T6",
+  "S65A",
   "Ti6Al4V",
-  "Ti6Al4V_Berto"
+  "Ti6Al4V_Berto",
+  "Ti6Al4V_Delahay"
  ],
  "dataset_fingerprints": {
+  "25CrMo4": "01bed796e14545184670182de74ab398ab9b751854b4dd7c871dd649843b089f",
+  "30NCD16": "2ddb3ee94b72c65a498ca569b538084c59dae5e2881d2b3f0d6fb618762557be",
+  "34Cr4": "fac507ce3a06f11f31d774216552c36d4bfb810efe128678ba705ca5c362457f",
   "42CrMo4_FABEST": "7f9f7d14d4460376ce190ad7de2ce21528450df1fe0b6172129f6a7039c234b8",
   "42CrMo4_QT": "50fcebd49c4006212a50d303f4549cf0351c59047b2f0e9bcdebf3323aec15a3",
   "42CrMo4_Reis": "45f0fd6adcb6f8c86a5cd51c45193ca7ae53eb68993ea7b60de7ebca877c4f7e",
+  "982FA": "f8def84472df0d3ff33ac2175f91c27386f9d54e88fd81afae21ff5ce67a1f2f",
   "AISI316L": "e245074653e53c978ee11a94812ba9d9fd6e48c0721b98a6f80c5f7a6ee2d9f5",
   "Al7075_T6": "2b6c64bcb9b92eec5faef76117a0973c63806eabc22d1ddf152461b7173fab25",
+  "S65A": "267a7366ca47548dbbdee1c5f9c0bde016da8a4c5d7606d50709e6aab0729c3c",
   "Ti6Al4V": "c3b9a43f4f521b2f5d42196a14b61b824949dbed4b537e6b08d4fd247425871c",
-  "Ti6Al4V_Berto": "75758708c36215a60aad7e144b9a18dc8ff4304726226aa3295e557026a38f02"
+  "Ti6Al4V_Berto": "75758708c36215a60aad7e144b9a18dc8ff4304726226aa3295e557026a38f02",
+  "Ti6Al4V_Delahay": "5f52e3914cbea2f2265209fc0a9fadf301ab3d59b77959ef0e1822e613431828"
  },
  "methods_with_results": [
   "BP",

@@ -141,20 +141,29 @@ combined-loading fatigue-limit tests.
 ![Multiaxial Fatigue Limit Envelopes](docs/images/fatigue_limit_envelopes.png)
 
 ### 5. Method ranking by the load-equivalent error
-Every method on every life dataset, on one scale: the load-equivalent error $e_L = \ln(1/s^*)$,
+Every method on every dataset, on one scale: the load-equivalent error $e_L = \ln(1/s^*)$,
 where $s^*$ is the factor on the whole load at which the method predicts the observed life. Unlike
 the life error, it does not grow with the flatness of the S-N curve nor with the degree of the damage
 parameter, and it also covers native-life methods ([comparison capabilities](docs/comparison-capabilities.md#load-equivalent-error-the-cross-method-ranking-metric)).
-Cells give the RMS of $e_L$ on the assessed failures (bias and scatter; 0.10 is a typical 10 % load
-misjudgement); rows are ordered by mean rank. Constants and master curves are calibrated on each
-dataset's uniaxial R = -1 tests (on its torsion tests for MWHS, as in its source), so this is a like-for-like comparison, not an independent
-validation ([issue #14](https://github.com/andreachiocca/multiaxial-fatigue/issues/14)); on
-Ti6Al4V_Berto all assessed tests are torsional. on Ti6Al4V only MOREL, which has its own
-life law, is scored: the design tests (6 axial failures over 0.39 decades of life) do not identify
-a master curve, so the other methods are skipped there
-([issue #74](https://github.com/andreachiocca/multiaxial-fatigue/issues/74)), and the column is
-left out of the ranks. Data in
-`examples/data/load_error_ranking.csv`, rebuilt with `examples/build_load_error_ranking.py`:
+Cells give the RMS of $e_L$ on the assessed tests (bias and scatter; 0.10 is a typical 10 % load
+misjudgement); rows are ordered by mean rank on the life datasets. Constants and master curves are
+calibrated on each dataset's uniaxial R = -1 tests (on its torsion tests for MWHS, as in its source),
+so this is a like-for-like comparison, not an independent validation
+([issue #14](https://github.com/andreachiocca/multiaxial-fatigue/issues/14)).
+
+- **Life datasets** (left block): $e_L$ on the assessed failures. On Ti6Al4V_Berto all assessed
+  tests are torsional. On Ti6Al4V only MOREL, which has its own life law, is scored: the design
+  tests (6 axial failures over 0.39 decades of life) do not identify a master curve, so the other
+  methods are skipped there ([issue #74](https://github.com/andreachiocca/multiaxial-fatigue/issues/74)),
+  and the column is left out of the ranks.
+- **Fatigue-limit datasets** (right block, decision d110): a limit state has the same error,
+  $e_L = \ln(1 + FI_{load})$, where $FI_{load} = 1/s - 1$ is the stress-scaled fatigue index. The
+  pure R = -1 axial limits are the reference and are left out; torsion and multiaxial limits are
+  assessed. These datasets rest on 3 to 40 limit states, so the block has its own mean rank.
+  CX18 and GGG60 are left out until their data errors are resolved
+  ([issue #24](https://github.com/andreachiocca/multiaxial-fatigue/issues/24)).
+
+Data in `examples/data/load_error_ranking.csv`, rebuilt with `examples/build_load_error_ranking.py`:
 
 ![Method ranking by the load-equivalent error](docs/images/load_error_ranking.png)
 
