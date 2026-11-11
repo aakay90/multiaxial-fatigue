@@ -6,6 +6,14 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### Ti6Al4V_Delahay fatigue-limit dataset (decision d109)
+
+- New workbook `17_Ti6Al4V_Delahay.xlsx`: the Ti-6Al-4V endurance limits of Delahay & Palin-Luc
+  2006 (Tables 1-2), built by `tools/build_delahay_ti6al4v.py` from a transcription kept in
+  `Experimental_Data/sources/Delahay2006/`. Sigm1 = 652 MPa (plane bending), Taum1 = 411 MPa;
+  assessed points: plane bending + torsion at 0 and 90 deg. Tension (583) and rotating bending
+  (602 MPa) are recorded as information. Existing outputs unchanged (regression snapshot).
+
 ### Ti6Al4V material values (decision d108, #24)
 
 - `1_Ti6Al4V.xlsx`: an overlay keeps only the Meneghetti 2018 properties (Su 980, Sy 915, Sigm1

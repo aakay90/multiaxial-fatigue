@@ -27,6 +27,10 @@
     "sha256": "04afa35fc8b3c953c0319a8389f78d9e502ae19104d126ab26ec2cc86f963e69",
     "dataset_fingerprint": "7f9f7d14d4460376ce190ad7de2ce21528450df1fe0b6172129f6a7039c234b8"
   },
+  "17_Ti6Al4V_Delahay.xlsx": {
+    "sha256": "a67fbf23ff5ecd1ed125695f648433c69497c4ce02679e1bbb63075144580dd6",
+    "dataset_fingerprint": "0327f6fdc6f90e7c0c62378108bdf606c27fd8d56a2cda2357f2059496e71008"
+  },
   "1_Ti6Al4V.xlsx": {
     "sha256": "86f0f71c50dffa3be188a0620d91f8c664197eedeef6d6a30c01f58ae884bd8b",
     "dataset_fingerprint": "c3b9a43f4f521b2f5d42196a14b61b824949dbed4b537e6b08d4fd247425871c"
