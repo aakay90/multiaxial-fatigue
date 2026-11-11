@@ -40,6 +40,14 @@ checked against its original publication; changes to numerical outputs are liste
 
 ### Packaging and tooling
 
+- Method documentation and docstrings (issue #32): added the remaining 16 method guides under
+  `docs/method-guides/` (`LI`, `LIU2021`, `MGSE_YU`, `MGSE_ZHU`, `MSWT`, `MDC`, `MMCCM`,
+  `SWTD`, `OTT`, `EK`, `RFB`, `VHN`, `PBP`, `COIN`, `MMMH`, `TVEIT2025`), bringing guide
+  coverage to all 46 registered criteria; completed module docstrings (opening on line 1 with
+  governing equations and `Repository choices:`) across all 19 remaining method modules and
+  emptied `PENDING_DOCSTRINGS`; tightened `tests/test_method_guides.py::test_guides_exist` to
+  require a guide for every registered criterion; updated `docs/method-guides/README.md`,
+  `README.md`, and `docs/user-guide.md`.
 - Implementation revision bump and policy (issue #76): `IMPLEMENTATION_REVISION` in
   `src/multifat/models/references.py` bumped to `"2026-11-11"` after merging PR #70
   (`origin/main` at `c09dc4c`); `CONTRIBUTING.md`, `docs/method-audit.md` and
