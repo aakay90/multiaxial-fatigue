@@ -153,6 +153,19 @@ naming the block and the default value; models that require it stay `skipped` wi
 appended to their reason. Block isolation (`partial`) is reserved for a later change and is not
 produced.
 
+**Tests outside R = −1 (issue #77, decision d107).** The plane constants (`k_FS`, `k_FI`, `L_LI`,
+`k_MGSE`, `a_MSWT`) are defined on fully reversed tension and torsion tests, selected with
+|R + 1| ≤ 0.02. When a material has none, the selection relaxes the tolerance (0.05, 0.1, 0.2, 0.5)
+and, as a last resort, accepts any stress ratio. The maintainer accepts this fallback, with two
+conditions:
+
+- the record says how far it went: `selection.tension_rtol_R`, `torsion_rtol_R`, `tension_any_R`,
+  `torsion_any_R`, and the sentence `selection.r_fallback`;
+- every result that adopted such a constant is marked `ok (R fallback)` in the run report, with
+  the constant and the tests in its notes.
+
+None of the current workbooks needs the fallback.
+
 Each material is independent: one `infeasible` or `error` material does not stop the batch, the
 materials after it are calibrated as usual, and the process exits 1 so a script can detect the
 failure. Per material, `multifat-pipeline --material NAME` still completes and records the outcome.

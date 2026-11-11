@@ -69,6 +69,7 @@ ledgers.
 | [`d097`](#d097) | 2026-11-06 | **Active** | Solver evidence and untrusted files | Document real versus hand-written coverage; no third-party code execution. |
 | [`d098`](#d098) | 2026-11-06 | **Active** | Whole-branch safeguards | Validate CSV row width before pandas projection; atomic output; require shared scalar load functions. |
 | [`d099`](#d099) | 2026-11-06 | **Active** | In-house Ansys fatigue benchmark | Repository purged of external repository fixtures; in-house PLANE183 2-step fatigue cycle generated on WorkstationUniTN. |
+| [`d107`](#d107) | 2026-11-11 | **Active** | Calibration outside R = -1 | The relaxed-tolerance and any-R fallbacks of the plane-constant calibration are accepted, recorded and flagged (`ok (R fallback)`). |
 
 ---
 
@@ -469,3 +470,11 @@ ledgers.
 * **Status:** Active
 * **Decision:** Purge repository of third-party repository fixtures (`axis-fem` removed). Generate an in-house 2D plane stress holed-plate benchmark using Ansys MAPDL 2026 R1 batch mode on WorkstationUniTN (`PLANE183`, `KEYOPT(3)=3`) under a 2-step alternating fatigue cycle ($Y$-tension 100 MPa then $X$-tension 100 MPa, rotating principal stress directions by $90^\circ$). Support PLANE182/183 elements in `rst.py`. Ingest both `.out` and `.rst` into exchange CSV and HDF5, verified against Howland's finite-width analytical solution ($K_{tg} \approx 3.032$). Mark real Abaqus output tests as xfail TODO pending Abaqus license/installation on workstation.
 * **Rationale:** Eliminates external repository dependencies, guarantees clean provenance, and directly exercises multi-step biaxial fatigue loading.
+
+### d107
+* **Date:** 2026-11-11
+* **Topic:** Plane-constant calibration on tests outside R = -1
+* **Status:** Active
+* **Decision:** The selection of `cli/calibrate.py` may relax its tolerance on R = -1 (0.02, then 0.05 to 0.5) and finally accept any stress ratio. Maintainer: accepted, but flagged and documented. The record stores the tolerance used and whether any R was accepted for tension and torsion (`selection.*_rtol_R`, `*_any_R`) with a sentence (`selection.r_fallback`); every result that adopted such a constant has status `ok (R fallback)` and a note.
+* **Rationale:** The constants are defined on fully reversed tests; a constant fitted on other ratios mixes the mean-stress effect into the calibration. It is better than no constant for an exploratory comparison, but a reader must be able to see it.
+

@@ -6,6 +6,14 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### Calibration outside R = −1 flagged (issue #77)
+
+- The plane-constant calibration may still relax its R = −1 tolerance or accept any stress ratio
+  when a material has no fully reversed tests (accepted by the maintainer, decision d107), but the
+  record now stores the tolerance used and whether any R was accepted (`selection.*_rtol_R`,
+  `*_any_R`, `r_fallback`), and every result that adopted such a constant is reported as
+  `ok (R fallback)` with a note. No current workbook needs the fallback: no output changes.
+
 ### Data
 
 - New workbook `16_42CrMo4_FABEST.xlsx`, a third 42CrMo4 +QT batch, from the FABEST database
