@@ -32,7 +32,7 @@ What the revised files contain compared with the previous workbooks (`tools/audi
 | Material | Revised file | Change from the previous workbook |
 |---|---|---|
 | 42CrMo4_QT | `6_42CrMo4_QT.xlsx` | Santus and Benedetti rows only (45 plain failures, 11 run-outs); the Anes/Reis rows (Su 1100 batch) are not in it |
-| Ti6Al4V | `1_Ti6Al4V.xlsx` | Meneghetti 10 failures and 4 Delahay run-outs; the 48 Berto failures are not in it |
+| Ti6Al4V | `1_Ti6Al4V.xlsx` | Meneghetti 10 failures and 4 Delahay run-outs (removed by overlay, d109); the 48 Berto failures are not in it |
 | AISI316L | `8_AISI316L.xlsx` | Janssens and Braun rows as originally supplied (without N6, N8 and our E, nu) |
 | Al7075_T6 | `Al7075_T6.xlsx` | measured data unchanged; Summary coefficient cells removed |
 | eight new materials | `2_`-`5_`, `7_`, `10_`-`13_` | En3B and GJS600 notched only; CX18, 30NCD16, 25CrMo4, 982FA, 34Cr4, GGG60 and S65A have only fatigue-limit rows (`Run out = Yes` at the endurance basis) |
@@ -75,6 +75,14 @@ confirmed by T. Grossi on 2026-10-19 (decision d061).
   full recalculation gives `#REF!` (the importer does not read K; the cell was left as supplied).
 - 25CrMo4: E = 127000 MPa (Troost 1987 row) is low for a steel; FatLim lists no E.
 - Ti6Al4V: the Delahay row (Ti64Al4V, Su 1090, Sy 980) is averaged with Meneghetti (Su 980, Sy 915).
+  Resolved 2026-11-11 (decision d108): `src/multifat/imp/overlay_files/1_Ti6Al4V.overlay.json` sets the
+  Delahay row to `Null` and the Average and
+  standard-deviation rows to the Meneghetti values: E 110000, nu 0.3, Su 980, Sy 915, Sigm1 500,
+  Taum1 422.5 MPa (2e6 cycles, R = -1). `--no-overlay` returns the supplied averages.
+- Ti6Al4V: the 4 Delahay rows (Dataset rows 58-61, `Run out = Yes`) are median staircase endurance
+  limits of annealed Ti-6Al-4V (Delahay & Palin-Luc 2006, Table 2), not run-outs; 652 and the two
+  combined rows are plane bending, not axial, and the torsion limit is 411, not 441 MPa. Resolved
+  2026-11-11 (decision d109): the overlay clears the 4 rows (`drop_case`).
 - Fatigue-limit datasets: are the `Run out = Yes` rows the fatigue-limit states at the stated cycle basis?
   They are assessed as such (fatigue index error).
 - Fatigue-limit datasets: the pure R = -1 rows do not match the Summary limits used as reference, so the

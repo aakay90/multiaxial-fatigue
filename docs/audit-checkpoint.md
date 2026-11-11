@@ -1,5 +1,23 @@
 # Development continuation checkpoint
 
+## Ti6Al4V Meneghetti-only Summary, decision d108 (11 November 2026)
+
+- Branch `data/ti6al4v-meneghetti-summary` (from main `297068b`). Overlay
+  `src/multifat/imp/overlay_files/1_Ti6Al4V.overlay.json` drops the Delahay 2006 Summary row and sets
+  Average to the Meneghetti 2018 values (Su 980, Sy 915, Sigm1 500, Taum1 422.5 MPa), SD to 0.
+  `Experimental_Data/MANIFEST.json` fingerprint updated.
+- Regression snapshot main vs branch: only Ti6Al4V outputs differ. MOREL_Ti6Al4V finite (RMS e_L
+  0.186, 4 tests); FS calibration STD 1.759 -> 1.259; other methods still skipped (#74).
+- Regenerated: batch comparison (Ti6Al4V family, `check` current), load-error ranking CSV, manifest
+  and figure. `plot_load_error_ranking` leaves out of the ranks a material with < 2 scored methods.
+- Checks: black, ruff, doc generators, check_docs, scientific reviews; full pytest 3091 passed.
+- d109 (same PR): `drop_case` overlay operation; the 4 Delahay rows leave `1_Ti6Al4V` (Table 2 of
+  Delahay & Palin-Luc 2006: mislabelled endurance limits of another batch). Snapshot on 1_Ti6Al4V:
+  failures and calibration unchanged; only MOREL run-out rows and their plots differ. Batch
+  comparison regenerated (GOLOS now in the Berto -> Ti6Al4V transfer).
+- Next action: CI on PR #88; then a new PR building `17_Ti6Al4V_Delahay` from Table 2 (calibration
+  on plane bending 652 and torsion 411 MPa; tension 583 and rotating bending 602 as information).
+
 ## Issue #69 completion: Replace `np.frompyfunc` in `pypow2` (11 November 2026)
 
 - Root cause / scope: replaced `np.frompyfunc(lambda x: x**2, 1, 1)` in
