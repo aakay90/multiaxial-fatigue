@@ -9,8 +9,8 @@
  "constants": {
   "42CrMo4_Reis": "Calibrations/42CrMo4_Reis/SSF_published.json"
  },
- "created_utc": "2026-11-11T07:11:53+00:00",
- "git_commit": "8ef29cce3bd9145b51191ec82c9f9d60c9f77cc0",
+ "created_utc": "2026-11-11T10:34:00+00:00",
+ "git_commit": "fb6452b33be15c3ad04ae35b26c4a79dc2c24904",
  "registered_models": [
   "BP",
   "CAIM",
@@ -59,7 +59,7 @@
   "WANG2022",
   "ZHANGYAO"
  ],
- "implementation_revision": "2026-10-07-audit1",
+ "implementation_revision": "2026-11-11",
  "dataset_fingerprints": {
   "42CrMo4_QT": "50fcebd49c4006212a50d303f4549cf0351c59047b2f0e9bcdebf3323aec15a3",
   "42CrMo4_Reis": "45f0fd6adcb6f8c86a5cd51c45193ca7ae53eb68993ea7b60de7ebca877c4f7e",

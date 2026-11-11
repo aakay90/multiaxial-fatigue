@@ -155,7 +155,7 @@ def test_identity_conflict_warns_but_uses_summary_fatigue_limits(tmp_path):
         ["r2", "B", 2024, "30NCD16", 195000, 0.3, 1160, 1020, 388, 450, 1e6, 0],
     ]
     path = write_revised_workbook(tmp_path / "2_CX18.xlsx", _tension_rows(), summary_rows=rows)
-    block = _one(path)
+    (block,) = load_material_workbook(path, overlay=False).values()
     assert block["identity_issues"] and "30NCD16" in block["identity_issues"][0]
     assert not block["property_issues"]
     assert block["material"]["Tensile_fatigue_limit_MPa"] == 710

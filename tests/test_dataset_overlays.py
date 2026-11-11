@@ -8,6 +8,7 @@ so it follows a copy of that file and never applies to an edited one.
 import hashlib
 import json
 from pathlib import Path
+import warnings
 
 import pytest
 from openpyxl import load_workbook
@@ -16,7 +17,15 @@ from multifat.imp.experimental_data import (
     import_experimental_data_grouped_by_material,
     load_material_workbook,
 )
-from multifat.imp.overlays import OverlayError, apply_overlay_to_workbook, overlay_path
+from multifat.imp import overlays as overlays_mod
+from multifat.imp.overlays import (
+    OverlayError,
+    _apply_one,
+    apply_overlay_to_workbook,
+    load_overlay,
+    overlay_path,
+)
+from multifat.imp.schema import ValidationReport, workbook_files
 from multifat.report.subsets import dataset_fingerprint
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -80,6 +89,78 @@ def test_tampered_from_value_aborts(tmp_path):
         apply_overlay_to_workbook(wb, FOLDER / "8_AISI316L.xlsx")
 
 
+@pytest.mark.parametrize(
+    ("op", "match"),
+    [
+        (
+            {
+                "op": "set_case",
+                "authors": "Janssens",
+                "specimen": "Uniaxial_1",
+                "field": "Number of cycles to failure",
+                "from": -1,
+                "to": 100,
+            },
+            "expected",
+        ),
+        (
+            {
+                "op": "set_case",
+                "authors": "Janssens",
+                "specimen": "NoSuchSpecimen",
+                "field": "Number of cycles to failure",
+                "from": 1,
+                "to": 2,
+            },
+            "need 1",
+        ),
+        (
+            {
+                "op": "set_case",
+                "authors": "Janssens",
+                "specimen": "Uniaxial_1",
+                "field": "NoSuchColumn",
+                "from": 1,
+                "to": 2,
+            },
+            "no column headed",
+        ),
+        (
+            {"op": "add_case", "row": 2, "values": {"Specimen name": "Dup"}},
+            "is not empty",
+        ),
+        ({"op": "delete_case"}, "unknown overlay operation"),
+    ],
+)
+def test_apply_one_rejects_invalid_operations(op, match):
+    wb = load_workbook(FOLDER / "8_AISI316L.xlsx", data_only=True)
+    with pytest.raises(OverlayError, match=match):
+        _apply_one(wb, op)
+
+
+def test_load_overlay_rejects_unsupported_schema_version(tmp_path):
+    bad = tmp_path / "bad.overlay.json"
+    bad.write_text(json.dumps({"schema_version": 99, "operations": []}), encoding="utf-8")
+    with pytest.raises(OverlayError, match="unsupported schema_version"):
+        load_overlay(bad)
+
+
+def test_duplicate_base_hash_overlays_abort(tmp_path, monkeypatch):
+    same_hash = "0" * 64
+    for name in ("a.overlay.json", "b.overlay.json"):
+        (tmp_path / name).write_text(
+            json.dumps({"schema_version": 1, "base_sha256": same_hash, "operations": []}),
+            encoding="utf-8",
+        )
+    monkeypatch.setattr(overlays_mod, "OVERLAY_DIR", tmp_path)
+    overlays_mod._overlays_by_base_hash.cache_clear()
+    try:
+        with pytest.raises(OverlayError, match="name the same base file"):
+            overlays_mod._overlays_by_base_hash()
+    finally:
+        overlays_mod._overlays_by_base_hash.cache_clear()
+
+
 def test_renamed_copy_keeps_its_overlay(tmp_path):
     copy = tmp_path / "some_other_name.xlsx"
     copy.write_bytes((FOLDER / "8_AISI316L.xlsx").read_bytes())
@@ -93,7 +174,43 @@ def test_modified_workbook_is_not_overlaid(tmp_path):
     copy = tmp_path / "8_AISI316L.xlsx"
     wb.save(copy)  # same content, different bytes: no overlay is written against it
     assert overlay_path(copy) is None
-    assert apply_overlay_to_workbook(wb, copy) is None
+    with pytest.warns(RuntimeWarning, match="overlay was not applied"):
+        assert apply_overlay_to_workbook(wb, copy) is None
+
+    report = ValidationReport(file=copy.name)
+    with pytest.warns(RuntimeWarning, match="overlay was not applied"):
+        load_material_workbook(copy, report=report)
+    assert any("overlay was not applied" in warning for warning in report.warnings)
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        load_material_workbook(copy, overlay=False)
+    assert not [w for w in caught if issubclass(w.category, RuntimeWarning)]
+
+    renamed = tmp_path / "other_name.xlsx"
+    wb.save(renamed)
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        assert apply_overlay_to_workbook(wb, renamed) is None
+    assert not [w for w in caught if issubclass(w.category, RuntimeWarning)]
+
+
+def test_experimental_data_manifest_is_current():
+    manifest_path = FOLDER / "MANIFEST.json"
+    assert manifest_path.is_file(), "Experimental_Data/MANIFEST.json is missing"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    files = workbook_files(FOLDER)
+    assert set(manifest) == {p.name for p in files}
+    for path in files:
+        entry = manifest[path.name]
+        assert entry["sha256"] == _sha256(path), (
+            f"{path.name}: SHA-256 differs from MANIFEST.json; "
+            "supplied workbooks must not be edited in place"
+        )
+        (block,) = load_material_workbook(path).values()
+        assert entry["dataset_fingerprint"] == dataset_fingerprint(
+            block
+        ), f"{path.name}: dataset_fingerprint differs from MANIFEST.json"
 
 
 # The five uniaxial and one non-proportional PSI rows were added from the

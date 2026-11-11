@@ -181,7 +181,7 @@ def compare(base: Path, new: Path) -> int:
     return 1 if (changed or log_changed or status) else 0
 
 
-def main() -> None:
+def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("run")
@@ -192,7 +192,11 @@ def main() -> None:
     c = sub.add_parser("compare")
     c.add_argument("base", type=Path)
     c.add_argument("new", type=Path)
-    args = ap.parse_args()
+    return ap
+
+
+def main() -> None:
+    args = build_parser().parse_args()
     if args.cmd == "run":
         folder = args.data_folder.resolve() if args.data_folder else None
         run(args.out.resolve(), args.jobs, args.skip_calibrate, folder)

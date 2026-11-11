@@ -22,9 +22,10 @@ environment. MIT licence (see `LICENSE`).
 
 `fatigue/` is now `src/multifat/`: `fatigue/models` -> `src/multifat/models`, `fatigue/eval` ->
 `src/multifat/eval`, `fatigue/imp` -> `src/multifat/imp`, `fatigue/report` -> `src/multifat/report`,
-`fatigue/planes` -> `src/multifat/planes`. The three numbered scripts (`0_calibrate...`,
-`1_run_material.py`, `2_compare_results.py`) are console scripts (`multifat-calibrate`, `-run`,
-`-compare`, `-pipeline`); `scripts/` keeps thin shims.
+`fatigue/planes` -> `src/multifat/planes`. The numbered scripts (`0_calibrate_material_params.py`,
+`1_run_material.py`, `2_compare_results.py`, `3_pipeline.py`, `3_review_subsets.py`) back the
+console scripts (`multifat-calibrate`, `-run`, `-compare`, `-pipeline`); `scripts/` keeps thin
+shims.
 
 ## Layout
 
@@ -87,9 +88,9 @@ uv run pytest tests/methods -q                     # paper reproductions only
 uv run black --check . && uv run ruff check .
 uv run python tools/generate_workbook_docs.py      # after optional_params changes
 uv run python tools/generate_method_docs.py        # after catalogue changes
-uv run python tools/check_docs.py                  # local documentation links
+uv run python tools/check_docs.py                  # local links and fenced tool commands
 uv run python tools/check_scientific_reviews.py    # scientific dossiers
-uv run python tools/regression_snapshot.py         # numerical gate before a commit
+uv run python tools/regression_snapshot.py run <dir>     # numerical gate (then compare BASE NEW)
 ```
 
 `regression_snapshot.py` runs every model on every workbook plus the calibration and the
