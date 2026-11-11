@@ -15,8 +15,13 @@
   Delahay & Palin-Luc 2006: mislabelled endurance limits of another batch). Snapshot on 1_Ti6Al4V:
   failures and calibration unchanged; only MOREL run-out rows and their plots differ. Batch
   comparison regenerated (GOLOS now in the Berto -> Ti6Al4V transfer).
-- Next action: CI on PR #88; then a new PR building `17_Ti6Al4V_Delahay` from Table 2 (calibration
-  on plane bending 652 and torsion 411 MPa; tension 583 and rotating bending 602 as information).
+- PR #88 merged. Branch `data/ti6al4v-delahay`: `17_Ti6Al4V_Delahay.xlsx` built by
+  `tools/build_delahay_ti6al4v.py` from `Experimental_Data/sources/Delahay2006/ti6al4v_tables.csv`
+  (Sigm1 = plane bending 652, Taum1 = 411 MPa; tension 583 and rotating bending 602 as information).
+  Full regression snapshot (merged #88 head vs branch): 0 of 2711 outputs differ; calibrate.log only
+  adds the new dataset. 40 methods run, 6 skipped; Crossland 0 deg FI_load -0.065 checked by hand.
+- PR #89 (separate): `compare` no longer crashes on fatigue-limit-only runs.
+- Next action: CI on the Delahay PR and #89; maintainer merge decisions.
 
 ## Issue #69 completion: Replace `np.frompyfunc` in `pypow2` (11 November 2026)
 
