@@ -760,10 +760,14 @@ def browse(entries):
     return txt
 
 
-def main():
-    args = argparse.ArgumentParser()
+def build_parser() -> argparse.ArgumentParser:
+    args = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     args.add_argument("--check", action="store_true")
-    opt = args.parse_args()
+    return args
+
+
+def main():
+    opt = build_parser().parse_args()
     data = json.loads(DATA.read_text(encoding="utf-8"))
     entries = validate(data)
     global EXTERNAL_SOURCES

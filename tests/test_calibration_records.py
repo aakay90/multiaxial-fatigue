@@ -25,6 +25,8 @@ def test_record_loads_through_the_pipeline_loader(record):
     assert constants, f"{record.name}: no constants"
     assert all(isinstance(v, float) for v in constants.values())
     assert origin["kind"]
+    if origin["kind"] == "upstream calibration record":
+        assert "implementation revision" in origin.get("warning", "")
 
 
 @pytest.mark.parametrize("record", RECORDS, ids=lambda p: f"{p.parent.name}/{p.name}")

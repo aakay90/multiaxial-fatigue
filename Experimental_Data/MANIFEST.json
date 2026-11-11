@@ -1,0 +1,66 @@
+{
+  "10_En3B.xlsx": {
+    "sha256": "16a56e868fec91f57c57692c6d9f86bec6444ccce5abdf6c1525ff3f4481f322",
+    "dataset_fingerprint": "e38744e48bfde9e8dfeb978ef2473a3c5c8410ff9b8958931ae7110849ac2f43"
+  },
+  "11_GJS600.xlsx": {
+    "sha256": "d4c82e5c80ca604f874dd5f821b24dcc8bba0153bd394842c442db181bc594cf",
+    "dataset_fingerprint": "38bba4d81b6b31708d126012f5d9025868d3186b373ee0605a007afd0757ef13"
+  },
+  "12_GGG60.xlsx": {
+    "sha256": "e53345f03ea4dffacd568b349cc789d02f9597bf0ceb2ce443d0a905a0859f65",
+    "dataset_fingerprint": "b4c039dc6c7448a38aa42244aaa96c28d2759f2ef864901d433a638823e9b1aa"
+  },
+  "13_S65A.xlsx": {
+    "sha256": "dd03c3b0a89906fa3d55281c70a592541d864bcc96fce139e96fd5e7a3f9c218",
+    "dataset_fingerprint": "6b4ff5c4296f33851f3edf821b5f0c251c025f6bdb4db6a04b5471fadd131144"
+  },
+  "14_42CrMo4_Reis.xlsx": {
+    "sha256": "8a2f87a325e2925e422696602ad6b58ee74c167c3af822be9e6f9453c65bd412",
+    "dataset_fingerprint": "636b47005ba257f00f4ac224d0c278f91a01f54544cd6f0f169a928da32b46c8"
+  },
+  "15_Ti6Al4V_Berto.xlsx": {
+    "sha256": "4cb8262d51574e383db43e6fa7fe51b760850d6f41706da43dd8db0a9168bd57",
+    "dataset_fingerprint": "75758708c36215a60aad7e144b9a18dc8ff4304726226aa3295e557026a38f02"
+  },
+  "16_42CrMo4_FABEST.xlsx": {
+    "sha256": "04afa35fc8b3c953c0319a8389f78d9e502ae19104d126ab26ec2cc86f963e69",
+    "dataset_fingerprint": "7f9f7d14d4460376ce190ad7de2ce21528450df1fe0b6172129f6a7039c234b8"
+  },
+  "1_Ti6Al4V.xlsx": {
+    "sha256": "86f0f71c50dffa3be188a0620d91f8c664197eedeef6d6a30c01f58ae884bd8b",
+    "dataset_fingerprint": "40e7d508b9b363fc159b83d9c04c47513024900846945c46f2cb09145966e92a"
+  },
+  "2_CX18.xlsx": {
+    "sha256": "0f8040cc6c00c36391baa01bb6d97696aa29944ea4eda297e2dede49ff3645e6",
+    "dataset_fingerprint": "ed52773be6d62432542e4b9b611769de2990a9933536a1f7d38b2d8e2a06c5ec"
+  },
+  "3_25CrMo4.xlsx": {
+    "sha256": "ba08322b49592323d847481d8c8b779ac64324a9f332b93cb6048ac5e0eb44cf",
+    "dataset_fingerprint": "75af4a6143a08a9000ba6df062b33141eb0625daf0523f6037193bcdf088d69c"
+  },
+  "4_30NCD16.xlsx": {
+    "sha256": "debf822173d4914ab6f91ad4b6f4c762c66999bf917cdbc8d18243cec211145f",
+    "dataset_fingerprint": "6bfc38eb684ddc100dd9da3f8e16f45837732ff4e81a5ea756cfda0132f850aa"
+  },
+  "5_34Cr4.xlsx": {
+    "sha256": "9352b72a54ddb872f1278820c5201b34f63de379b092f404a3dbbacb51a5f332",
+    "dataset_fingerprint": "3f5853afa48f1b4c7117d7c1e9fd90036f5727eb243fea5076286e9b353c9e34"
+  },
+  "6_42CrMo4_QT.xlsx": {
+    "sha256": "87f40c72a2e4d766a93bb93ec001777a55ca84e7535e0ce339d2ba3f60de0c63",
+    "dataset_fingerprint": "50fcebd49c4006212a50d303f4549cf0351c59047b2f0e9bcdebf3323aec15a3"
+  },
+  "7_982FA.xlsx": {
+    "sha256": "f786dc8e99f598dd860489031456360e78753e674c95c41536b60ac983ecb620",
+    "dataset_fingerprint": "9abfb930bb0a584cd71aa8a11ce9165df5b7fd7446c24688b045e34504b22059"
+  },
+  "8_AISI316L.xlsx": {
+    "sha256": "26a97aec4603aa19df29bbd6576c3b72259cc3792eaa6e60df1d5e977f52017c",
+    "dataset_fingerprint": "e245074653e53c978ee11a94812ba9d9fd6e48c0721b98a6f80c5f7a6ee2d9f5"
+  },
+  "Al7075_T6.xlsx": {
+    "sha256": "2c250c383cfe6476ac207baf6da8735c6ee0aa38f3c3f336a245a64993991269",
+    "dataset_fingerprint": "2b6c64bcb9b92eec5faef76117a0973c63806eabc22d1ddf152461b7173fab25"
+  }
+}
