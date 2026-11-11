@@ -29,7 +29,7 @@ import numpy as np
 
 from multifat.fe.bridge import to_case_inputs
 from multifat.fe.ranges import ExplicitPair
-from multifat.models.errors import LoadingScopeError
+from multifat.models.errors import LoadingScopeError, MaterialScopeError
 from multifat.models.registry import stress_only_models
 
 from .accumulate import Endurance, SNCurve, miner
@@ -157,6 +157,10 @@ def _evaluate(model, params, R_list, block, meta, pair, variant: str, name: str)
         raise IneligibleHistoryError(
             f"{name}: the event between samples {tuple(pair)} lies outside the loading scope of the "
             f"criterion: {exc}"
+        ) from exc
+    except MaterialScopeError as exc:
+        raise IneligibleHistoryError(
+            f"{name}: the material lies outside the validity range of the criterion: {exc}"
         ) from exc
     if variant not in result.values:
         raise IneligibleHistoryError(

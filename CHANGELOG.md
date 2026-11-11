@@ -6,6 +6,14 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### Material validity ranges skip, not fail
+
+- New typed skip error `MaterialScopeError` (`models/errors.py`): material constants outside a
+  criterion's validity range. RFB raises it outside 0.577 < t_-1/s_-1 < 0.866 (Robert et al.,
+  Appendix); the pipeline reports the model as skipped with eligibility `out_of_scope` instead of
+  failed (AISI316L, t_-1/s_-1 = 0.517). It is not a `LoadingScopeError`, so load-scaling searches
+  do not mistake it for an out-of-scope trial load. No number changes.
+
 ### Data
 
 - Homepage data provenance manifests (issue #80): `examples/homepage_data.py` writes paired

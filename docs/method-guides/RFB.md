@@ -41,7 +41,7 @@ d = \frac{-(3b + 2a) + \sqrt{(3b + 2a)^2 + 3\,(60 s_{-1}^2 / s_0^2 - 15)}}{3}.
 **Repository choices and departures.**
 - *Published misprint corrections:* Source Eq. (16) prints $1/\pi$ instead of $1/(4\pi)$ (violating Eqs. 8 and 18–24), the Appendix omits the factor $1/2$ under the square root for $a$ (violating Eqs. 20 and 24), and Eq. (18) prints $E$ where $E^2$ is intended. The repository enforces the mathematically consistent $1/(4\pi)$ normalization and the $1/2$ factor in $a$.
 - *Strength inputs:* Fixed-life strengths at target $N$ in the paper are mapped to workbook endurance limits (`Sigm1`, `Taum1`, and `Sig0` or the Böhme et al. 2026 Eq. 1 estimate of $s_0$ from `Su`), returning the scalar validity index $E$ (`I` in Eq. 27).
-- *Ratio domain:* Ratios outside $0.577 < t_{-1}/s_{-1} < 0.866$ raise `ValueError`.
+- *Ratio domain:* Ratios outside $0.577 < t_{-1}/s_{-1} < 0.866$ raise `MaterialScopeError`: the model is skipped on that material (eligibility `out_of_scope`), not reported as failed (e.g. AISI316L, $t_{-1}/s_{-1} = 0.517$).
 
 ## Material constants and inputs
 
