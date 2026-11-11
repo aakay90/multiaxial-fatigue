@@ -76,7 +76,17 @@ def write_ranking(results_dir: Path, out_path: Path | None = None) -> tuple[Path
     table = build(results_dir)
     target.parent.mkdir(parents=True, exist_ok=True)
     table.to_csv(target, index=False, float_format="%.6g", lineterminator="\n")
-    materials = sorted(table["Material"].astype(str).unique())
+    # every material that was run, also one whose methods were all skipped or left fewer than 3
+    # errors (e.g. Ti6Al4V, whose master curves are not identifiable, #74): its fingerprint must
+    # still be tracked
+    materials = sorted(
+        {str(m) for m in table["Material"].astype(str)}
+        | {
+            str(pd.read_csv(path, nrows=1, usecols=["Material"])["Material"].iloc[0])
+            for path in results_dir.glob("*.csv")
+            if "Material" in pd.read_csv(path, nrows=0).columns
+        }
+    )
     methods = sorted(table["Method"].astype(str).unique())
     manifest = write_manifest(target, materials, methods)
     return target, manifest

@@ -565,6 +565,9 @@ def analyse(out: Path, family: str) -> Path:
         designer.to_csv(dest / "transfer_designer.csv", **write)
     for stale in ("own_batch_effect.csv", "batch_reference.csv"):  # replaced outputs
         (dest / stale).unlink(missing_ok=True)
+    # a figure that cannot be drawn any more (e.g. no own-batch result) must not survive
+    for old in DOCS_IMG_DIR.glob(f"batch_comparison_{family}_*.png"):
+        old.unlink()
     _latex_tables(dest, decomposition, penalty, batches)
     _figure_bias(cells, batches, family)
     if len(penalty):

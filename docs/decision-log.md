@@ -75,6 +75,7 @@ ledgers.
 | [`d103`](#d103) | 2026-11-10 | **Active** | Published constants in a transfer | A published-constants record of the design batch (SSF of 42CrMo4_Reis) is accepted with `--design-material`; no other supplied constants. |
 | [`d104`](#d104) | 2026-11-10 | **Active** | Statistics of the batch comparison | Effect sizes with joint-bootstrap intervals, a method-free reference and the FABEST series as yardstick; no significance tests. |
 | [`d105`](#d105) | 2026-11-11 | **Active** | FABEST is one material batch; batch versus series | All FABEST series share one material batch; a dataset confounds material batch and test series; Santus and Benedetti are one batch, two series (decided on the data). |
+| [`d106`](#d106) | 2026-11-11 | **Active** | Master-curve identifiability and scatter | Skip a model whose master curve is not identifiable (< 5 tests, < 1 decade, slope not distinct from 0); scatter with n - 2 degrees of freedom. |
 
 ---
 
@@ -517,4 +518,11 @@ ledgers.
 * **Status:** Active
 * **Decision:** (1) Maintainer: every series of the FABEST database comes from one material batch, ordered once and tested in several laboratories. (2) The comparison distinguishes the material batch (one lot), the test series (one S-N curve of one campaign: specimen, machining, laboratory, machine) and the dataset (one workbook, which confounds the two). The FABEST between-series scatter of ln S(1e5) is the test-series part; the material-batch part is estimated as max(s_datasets^2 - s_series^2, 0) (`examples/batch_reference.py::variance_components`). (3) Santus 2018 and Benedetti 2022 stay one batch with two series: maintainer's rule is to separate them only if the data indicate two batches, and their axial difference (0.096 in ln S) is below one standard deviation of the difference between two series of one batch (0.115). Checked 2026-11-11: Benedetti 2022's ref. [17], whose supply it calls distinct, is Benedetti et al. 2019 (IJF 126), not Santus 2018.
 * **Rationale:** A difference between two datasets cannot be assigned to the material from one comparison; a reference with one material and many series is the only way to separate the two parts with the available data.
+
+### d106
+* **Date:** 2026-11-11
+* **Topic:** Master-curve identifiability and scatter
+* **Status:** Active
+* **Decision:** (1) A master curve DP = A N^b is used only if its design set identifies it: at least 5 tests, at least one decade of life, and a negative slope with |b| > 2 standard errors (the thresholds of the Basquin fits in `material_fits`). Otherwise the model is skipped on that dataset, with the reason in the run report (maintainer: skip, not flag). (2) The residual standard deviation uses n - 2 degrees of freedom. (3) Every fitted curve is listed in `<material>_master_curves.csv`.
+* **Rationale:** A curve fitted on tests spanning 0.39 decades with a slope indistinguishable from zero (Ti6Al4V, R^2 = 0.001) gives predictions with no information, yet they entered the comparison and the homepage ranking. The n - 1 estimate underestimates the scatter of a two-parameter regression by 11 % at n = 6 and 18 % at n = 4.
 

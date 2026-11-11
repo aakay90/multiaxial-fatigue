@@ -15,13 +15,11 @@ import math
 
 import numpy as np
 
+from multifat.eval.fitting import MIN_DECADES, MIN_POINTS, MIN_T
 from multifat.models.utils.fatigue_estimation import (
     estimate_axial_fatigue_props_uniform_material_law,
 )
 
-MIN_POINTS = 5
-MIN_DECADES = 1.0
-MIN_T = 2.0
 BASQUIN_KEYS = ("sigma_f", "b_fat", "tau_f", "b0")
 PLASTIC_KEYS = ("epsilon_f", "c_fat", "gamma_f", "c0")
 
