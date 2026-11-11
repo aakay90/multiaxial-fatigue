@@ -62,7 +62,7 @@ Families are declared in
 | 42CrMo4 | `42CrMo4_QT` | Santus 2018 + Benedetti 2022 (one batch, two series) | 875 / 727 | solid, axial d = 5, torsion d = 14 mm | 27 / 9 (+ 9 torsion with mean shear) | none |
 | 42CrMo4 | `42CrMo4_Reis` | Anes/Reis 2014 | 1100 / 980 | solid, d = 6.3 / 7.5 mm | 6 / 5 | 8 in-phase, 6 at 90° |
 | 42CrMo4 | `42CrMo4_FABEST` | FABEST, PBS series | 1111 / 1035 | thin-walled tube 8.1/7 mm | 20 / 20 | 18 in-phase, 21 at 90° |
-| Ti6Al4V | `Ti6Al4V` | Meneghetti 2018 (failures) + Delahay 2006 (4 run-outs) | Summary averages both: 1035 / 947.5 | — | 6 / 4 | none |
+| Ti6Al4V | `Ti6Al4V` | Meneghetti 2018 (Delahay 2006 rows removed, d109) | 980 / 915 (Meneghetti only, d108) | — | 6 / 4 | none |
 | Ti6Al4V | `Ti6Al4V_Berto` | Berto 2015 | 978 / 894 | — | 9 / 8 (+ 31 torsion with mean shear) | none |
 
 ### What "batch" confounds
@@ -387,14 +387,14 @@ skipped on QT, whose torsion tests with a mean shear are outside its R = −1 sc
     paper: the values are nominal shear amplitudes, and the ratio comes from an almost flat
     axial curve (inverse slope 50, against 22 in torsion); at $2\times10^6$ cycles the paper
     gives 0.88. Not a data error.
-  - Open: the Summary of `1_Ti6Al4V` averages the Meneghetti and Delahay properties, although
-    every failure is Meneghetti's.
+  - The Summary of `1_Ti6Al4V` averaged the Meneghetti and Delahay properties, although every
+    failure is Meneghetti's. Since decision [d108](decision-log.md#d108) an overlay keeps the
+    Meneghetti values only (Su 980, Sy 915, limits 500 / 422.5 MPa). The 4 Delahay rows, endurance
+    limits of another batch entered as run-outs, are removed ([d109](decision-log.md#d109)).
 
 ## Open questions
 
-1. **Ti6Al4V Summary.** `1_Ti6Al4V` averages the Meneghetti and Delahay properties
-   ([#24](https://github.com/andreachiocca/multiaxial-fatigue/issues/24)); a maintainer decision.
-2. **More FABEST series.** Importing the other unnotched FABEST series
+1. **More FABEST series.** Importing the other unnotched FABEST series
    ([#65](https://github.com/andreachiocca/multiaxial-fatigue/issues/65)) would let the
    series scatter be estimated per laboratory and specimen type, and would firm up the torsion
    yardstick, which rests on three series.

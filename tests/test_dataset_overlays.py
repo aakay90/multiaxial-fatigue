@@ -30,7 +30,15 @@ from multifat.report.subsets import dataset_fingerprint
 
 ROOT = Path(__file__).resolve().parents[1]
 FOLDER = ROOT / "Experimental_Data"
-OVERLAID = ["2_CX18", "3_25CrMo4", "4_30NCD16", "7_982FA", "8_AISI316L", "14_42CrMo4_Reis"]
+OVERLAID = [
+    "2_CX18",
+    "3_25CrMo4",
+    "4_30NCD16",
+    "7_982FA",
+    "8_AISI316L",
+    "14_42CrMo4_Reis",
+    "1_Ti6Al4V",
+]
 
 
 def _sha256(path: Path) -> str:
@@ -72,7 +80,7 @@ def test_overlay_off_gives_the_as_supplied_dataset():
 
 
 def test_no_overlay_for_workbooks_without_one():
-    block = load_material_workbook(FOLDER / "1_Ti6Al4V.xlsx")["Ti6Al4V"]
+    block = load_material_workbook(FOLDER / "15_Ti6Al4V_Berto.xlsx")["Ti6Al4V_Berto"]
     assert block["overlay"] is None
 
 
@@ -314,3 +322,46 @@ def test_reis_fatigue_limits_are_the_authors_trend_lines_at_1e6():
     assert abs(864.78 * 1e6**-0.061 - 372.0) < 1.0
     off = load_material_workbook(FOLDER / "14_42CrMo4_Reis.xlsx", overlay=False)["42CrMo4_Reis"]
     assert off["material"]["Tensile_fatigue_limit_MPa"] is None
+
+
+def test_ti6al4v_summary_keeps_only_the_meneghetti_batch():
+    """d108: every failure is Meneghetti's; the Delahay 2006 row no longer enters the values."""
+    block = load_material_workbook(FOLDER / "1_Ti6Al4V.xlsx")["Ti6Al4V"]
+    m = block["material"]
+    assert (m["Tensile_strength_MPa"], m["Yield_strength_MPa"]) == (980.0, 915.0)
+    assert (m["Tensile_fatigue_limit_MPa"], m["Torsional_fatigue_limit_MPa"]) == (500.0, 422.5)
+    for key in ("Sigm1", "Taum1"):
+        assert [s["authors"] for s in block["fatigue_limit_sources"][key]] == ["Meneghetti et al."]
+    # d109: the 4 Delahay rows (endurance limits entered as run-outs) leave the dataset
+    assert (len(block["cases"]), len(block["runouts"])) == (10, 0)
+    off = load_material_workbook(FOLDER / "1_Ti6Al4V.xlsx", overlay=False)["Ti6Al4V"]
+    assert off["material"]["Tensile_strength_MPa"] == 1035.0  # supplied average of both rows
+    assert (len(off["cases"]), len(off["runouts"])) == (10, 4)
+
+
+def _drop(row=58, **check):
+    return {"op": "drop_case", "row": row, "authors": "Delahay T", "specimen": "SPECIMEN_5",
+            "check": check}  # fmt: skip
+
+
+def test_drop_case_clears_the_checked_row_only():
+    wb = load_workbook(FOLDER / "1_Ti6Al4V.xlsx", data_only=True)
+    ws = wb["Dataset"]
+    before = [[c.value for c in r] for r in ws.iter_rows(min_row=57, max_row=59)]
+    _apply_one(wb, _drop(**{"Amplitute AXIAL stress  (MPa)": 652}))
+    assert all(c.value is None for c in ws[58])
+    assert [c.value for c in ws[57]] == before[0] and [c.value for c in ws[59]] == before[2]
+
+
+@pytest.mark.parametrize(
+    ("op", "match"),
+    [
+        (_drop(row=57), "expected 'Delahay T'"),
+        (_drop(**{"Amplitute AXIAL stress  (MPa)": 583}), "expected 583"),
+        (_drop(**{"No such column": 1}), "no column headed"),
+    ],
+)
+def test_drop_case_rejects_a_row_that_does_not_match(op, match):
+    wb = load_workbook(FOLDER / "1_Ti6Al4V.xlsx", data_only=True)
+    with pytest.raises(OverlayError, match=match):
+        _apply_one(wb, op)

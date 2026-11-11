@@ -119,6 +119,25 @@ def _apply_one(wb, op: dict[str, Any]) -> None:
             raise OverlayError(f"Dataset row {row} is not empty; add_case needs a free row")
         for header, value in op["values"].items():
             ws.cell(row, _column_index(ws, header)).value = value
+    elif kind == "drop_case":
+        # Clear one test row; row numbers of the other rows are kept, and the importer reads an
+        # empty row as no test. The row is identified by number (specimen names need not be
+        # unique) and checked against its authors, specimen name and the 'check' values.
+        ws = wb["Dataset"]
+        row = op["row"]
+        expected = {
+            "Authors": op["authors"],
+            "Specimen name": op["specimen"],
+            **op.get("check", {}),
+        }
+        for header, value in expected.items():
+            current = ws.cell(row, _column_index(ws, header)).value
+            if not _same(current, value):
+                raise OverlayError(
+                    f"Dataset row {row} {header!r} is {current!r}, expected {value!r}"
+                )
+        for c in range(1, ws.max_column + 1):
+            ws.cell(row, c).value = None
     else:
         raise OverlayError(f"unknown overlay operation {kind!r}")
 
