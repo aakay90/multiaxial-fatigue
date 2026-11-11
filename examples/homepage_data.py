@@ -27,6 +27,13 @@ RANKING_MATERIALS: tuple[str, ...] = (
     "Al7075_T6",
     "Ti6Al4V",
     "Ti6Al4V_Berto",
+    # fatigue-limit datasets (d110; CX18 and GGG60 left out until #24 resolves their data)
+    "25CrMo4",
+    "30NCD16",
+    "34Cr4",
+    "982FA",
+    "S65A",
+    "Ti6Al4V_Delahay",
 )
 PREDICTIONS_MATERIAL = "42CrMo4_QT"
 
@@ -63,14 +70,19 @@ def registered_models() -> list[str]:
 
 
 def dataset_fingerprints(materials: Sequence[str]) -> dict[str, str]:
-    """Post-overlay failure-dataset fingerprints keyed by material name."""
+    """Post-overlay dataset fingerprints keyed by material name.
+
+    A dataset without failures (fatigue-limit states only) is hashed with its run-outs, which are
+    its assessed observations; the fingerprint of a life dataset is the failure fingerprint.
+    """
     from multifat.cli import run as runmod
     from multifat.report.subsets import dataset_fingerprint
 
     out: dict[str, str] = {}
     for mat in materials:
         data, resolved = runmod.load_material(mat)
-        out[mat] = dataset_fingerprint(data[resolved])
+        block = data[resolved]
+        out[mat] = dataset_fingerprint(block, runouts=not block["cases"])
     return out
 
 

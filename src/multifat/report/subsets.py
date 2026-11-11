@@ -56,15 +56,46 @@ def _history(case) -> dict:
     }
 
 
-def dataset_fingerprint(block: dict) -> str:
-    """Hash of the material properties and the failure histories (lives and stress histories)."""
+def dataset_fingerprint(block: dict, runouts: bool = False) -> str:
+    """Hash of the material properties and the failure histories (lives and stress histories).
+
+    With ``runouts`` the run-out histories are hashed too: a fatigue-limit dataset holds only
+    run-outs (its limit states), so without them its fingerprint would track the properties only.
+    The default keeps every recorded fingerprint unchanged.
+    """
     props = {k: v for k, v in block["material"].items() if k != "extra"}
     props.update(block["material"].get("extra") or {})
-    failures = sorted(
-        json.dumps(json_value({"N": c["meta"]["Nf_cycles"], **_history(c)}), sort_keys=True)
-        for c in block["cases"].values()
-    )
-    return _sha({"properties": props, "failures": failures})
+
+    def histories(cases) -> list[str]:
+        return sorted(
+            json.dumps(json_value({"N": c["meta"]["Nf_cycles"], **_history(c)}), sort_keys=True)
+            for c in cases.values()
+        )
+
+    content = {"properties": props, "failures": histories(block["cases"])}
+    if runouts:
+        # rounded to 1e-6 MPa: out-of-phase harmonics hold trigonometric values (cos 90 deg =
+        # 6e-17) whose last bits differ between platforms' math libraries
+        content["runouts"] = sorted(
+            json.dumps(
+                json_value({"N": c["meta"]["Nf_cycles"], **_rounded(_history(c), RUNOUT_DECIMALS)}),
+                sort_keys=True,
+            )
+            for c in (block.get("runouts") or {}).values()
+        )
+    return _sha(content)
+
+
+RUNOUT_DECIMALS = 6
+
+
+def _rounded(value, decimals: int):
+    """Copy with every array rounded (and -0.0 turned into 0.0)."""
+    if isinstance(value, dict):
+        return {k: _rounded(v, decimals) for k, v in value.items()}
+    if isinstance(value, (np.ndarray, list, tuple)):
+        return np.round(np.asarray(value, dtype=float), decimals) + 0.0
+    return value
 
 
 def observation_index(block: dict) -> dict[tuple[str, int], dict]:

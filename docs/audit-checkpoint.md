@@ -1,5 +1,15 @@
 # Development continuation checkpoint
 
+## Fatigue-limit datasets in the load-error ranking, decision d110 (11 November 2026)
+
+- Branch `analysis/limit-ranking` from main `07bd8b1` + #90. `build_load_error_ranking.py` reads
+  `FatigueLimit/*_FI.csv` (Error_load = ln(1 + FI_load); pure R = -1 axial references left out;
+  CX18 and GGG60 left out until #24); figure in two column blocks with separate mean ranks;
+  `dataset_fingerprint(block, runouts=True)` opt-in for the limit datasets of the manifest.
+- Life rows of `load_error_ranking.csv` identical to main (254 rows, checked frame-equal); batch
+  comparison (#71) unchanged by decision.
+- Next action: CI on the PR; maintainer merge decision.
+
 ## Ti6Al4V Meneghetti-only Summary, decision d108 (11 November 2026)
 
 - Branch `data/ti6al4v-meneghetti-summary` (from main `297068b`). Overlay

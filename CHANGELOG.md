@@ -6,6 +6,18 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### Fatigue-limit datasets in the method ranking (decision d110, #37)
+
+- The homepage ranking adds the fatigue-limit datasets (25CrMo4, 30NCD16, 34Cr4, 982FA, S65A,
+  Ti6Al4V_Delahay) as a separate block of columns with its own mean rank. A limit state has the
+  load-equivalent error $e_L = \ln(1 + FI_{load})$, exact for any damage parameter; the pure
+  R = -1 axial limits are the reference and are left out. CX18 and GGG60 are left out until their
+  data errors are resolved (#24).
+- `load_error_ranking.csv` appends the column `Assessment` (fatigue_life / fatigue_limit); its
+  life rows are unchanged. `dataset_fingerprint(block, runouts=True)` (opt-in) also hashes the
+  run-outs (rounded to 1e-6 MPa, so that the last bits of cos/sin on Windows and Linux agree), so
+  the manifest tracks the limit states of a limit dataset; the default is unchanged.
+
 ### Ti6Al4V_Delahay fatigue-limit dataset (decision d109)
 
 - New workbook `17_Ti6Al4V_Delahay.xlsx`: the Ti-6Al-4V endurance limits of Delahay & Palin-Luc
