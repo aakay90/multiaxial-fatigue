@@ -93,11 +93,8 @@ HELPER_MODULES = {
 # fails if a listed module already complies, so this list can only shrink.
 PENDING_DOCSTRINGS = {
     "cp_methods/car_spa",
-    "cp_methods/mdc",
-    "cp_methods/mmccm",
     "invariant_methods/coin_liwi",
     "invariant_methods/mmmh",
-    "invariant_methods/ottosen",
     "invariant_methods/papadopoulos_panoskaltsis",
     "invariant_methods/pbp",
     "invariant_methods/vu_halm_nadot",
@@ -105,9 +102,7 @@ PENDING_DOCSTRINGS = {
     "integral_methods/flaceliere_morel",
     "integral_methods/robert_fogue_bahuaud",
     "energy_based_methods/banvillet",
-    "energy_based_methods/ellyin_kujawski",
     "energy_based_methods/sed_berto_lazzarin",
-    "energy_based_methods/swtd",
     "energy_based_methods/zhu_edp",
 }
 
