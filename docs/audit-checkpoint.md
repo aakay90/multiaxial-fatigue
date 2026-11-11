@@ -25,6 +25,55 @@
     `logs: 646 files, 0 differ`.
 - Remaining / next action: push `fix/issue-69-pypow2` and open PR closing `#69`.
 
+## Cross-batch comparison, issue #71 (10 November 2026)
+
+Branch `analysis/batch-comparison` from `main` at `c09dc4c`. Maintainer decisions on #71:
+Santus 2018 and Benedetti 2022 are one batch (d101); cross-batch transfer wanted (d102); Reis
+fatigue limits as for FABEST (d100); a standalone example pipeline for the article, regenerated
+whenever a method or the data change.
+
+- **Reis limits (d100):** overlay `14_42CrMo4_Reis.overlay.json` adds a Summary source row with
+  Sigm1 = 452, Taum1 = 372 MPa (Anes IJF 62 Table 5 at 1e6). Test in `tests/test_dataset_overlays.py`.
+- **Transfer (d102):** `evaluate_model(..., design_data=)`, `run.load_transfer`,
+  `run_workbook(..., design_workbook=)`, `multifat-pipeline --design-material`. Tests:
+  `tests/test_transfer.py` (design rows and master curve identical to the design batch's own run).
+- **Standalone pipeline:** `examples/batch_comparison.py` (run / analyse / all / check), families in
+  `examples/data/material_families.json`, results in `examples/data/batch_comparison/42CrMo4/`,
+  figures `docs/images/batch_comparison_42CrMo4_{bias,transfer}.png`, guide
+  `docs/batch-comparison.md`. `tests/test_batch_comparison.py` checks the statistics on synthetic
+  data and fails when the committed results are stale (models, revision, dataset fingerprints).
+- **Regression snapshot** (`main` c09dc4c against the branch, calibration included): outside
+  42CrMo4_Reis no run output differs. On Reis 27 outputs are new (methods that needed the limits)
+  and 28 differ only in the `Dataset_fingerprint` column (the fingerprint hashes the Summary);
+  the aggregated Comparison files change accordingly.
+- **Homepage:** `load_error_ranking.csv` Reis rows rebuilt from the full own-batch run (QT and
+  FABEST rows reproduced exactly; 19 -> 43 Reis methods); `load_error_ranking.png` redrawn.
+
+Follow-up (maintainer answers on #71): PR opened; SSF published constants accepted in a transfer
+from 42CrMo4_Reis only (d103); batches are author groups, Santus + Benedetti one (d101 revised);
+Ti6Al4V family added. `eval/load_error.py` secant bounded (|ln s| <= 10, bisection fall-back):
+snapshot of the branch before and after, 0 of 2991 outputs differ. Results regenerated for both
+families.
+
+Statistical redesign (same day, decision d104 proposed): `examples/batch_reference.py` (method-free
+strengths, relative strengths, FABEST yardstick), joint-bootstrap offsets, censored run-out check,
+transfer prediction and load factor in `examples/batch_comparison.py`, figures in
+`examples/batch_plots.py`; Kruskal-Wallis/BH removed. No pipeline or model code changed, so no
+regression snapshot was needed; results regenerated from the runs of the previous step (same
+commit of `src/`). Tests: `tests/test_batch_comparison.py` (11). Findings: batches differ mainly
+in axial strength; the transfer shift is method-free (observed = predicted to 0.001); Santus and
+Benedetti axial series differ by 10 %; Meneghetti tau/sigma is about 1 (data question, #24).
+
+Maintainer answers (11 November): FABEST is one material batch (d105); d104 active; Santus and
+Benedetti decided on the data (one batch, two series); master curves that cannot be identified
+are skipped and the scatter uses n - 2 (#74, branch `fix/master-curve-identifiability`, stacked on
+this one); the any-R calibration fallback is accepted but flagged and documented (#77, branch
+`fix/calibration-r-fallback-flag`). Papers requested: Meneghetti 2018, Benedetti 2022 (ref. [17]).
+
+Remaining: maintainer review of the PR; #24 decision on the `1_Ti6Al4V` Summary, which averages
+Meneghetti and Delahay properties although every failure is Meneghetti's (limit-based methods: RMS
+0.29 with it, 0.04 with Berto's limits).
+
 ## Issue #32 completion: All method guides and module docstrings (11 November 2026)
 
 Completed all remaining deliverables for Issue #32 on branch `docs/issue-32-method-guides`

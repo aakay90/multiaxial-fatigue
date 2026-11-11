@@ -1,6 +1,6 @@
 """Overlay layer: as-supplied workbooks plus declared corrections reproduce the revised dataset.
 
-The five workbooks edited after supply are kept byte-identical to their source; their corrections
+The workbooks edited after supply are kept byte-identical to their source; their corrections
 are shipped with the package. Each overlay is found by the SHA-256 of the file it was written against,
 so it follows a copy of that file and never applies to an edited one.
 """
@@ -30,7 +30,7 @@ from multifat.report.subsets import dataset_fingerprint
 
 ROOT = Path(__file__).resolve().parents[1]
 FOLDER = ROOT / "Experimental_Data"
-OVERLAID = ["2_CX18", "3_25CrMo4", "4_30NCD16", "7_982FA", "8_AISI316L"]
+OVERLAID = ["2_CX18", "3_25CrMo4", "4_30NCD16", "7_982FA", "8_AISI316L", "14_42CrMo4_Reis"]
 
 
 def _sha256(path: Path) -> str:
@@ -299,3 +299,18 @@ def test_aisi316l_psi_correction_scope_is_six_of_eight_added_cases():
         assert op["psi_shear_source_precision"]["correction_type"].startswith(
             "published figure rounding"
         )
+
+
+def test_reis_fatigue_limits_are_the_authors_trend_lines_at_1e6():
+    """d100: Sigm1, Taum1 of 42CrMo4_Reis = Anes et al. IJF 62 (2014) Table 5 at N = 1e6."""
+    block = load_material_workbook(FOLDER / "14_42CrMo4_Reis.xlsx")["42CrMo4_Reis"]
+    assert block["material"]["Tensile_fatigue_limit_MPa"] == 452.0
+    assert block["material"]["Torsional_fatigue_limit_MPa"] == 372.0
+    (src,) = block["fatigue_limit_sources"]["Sigm1"]
+    assert src["reference"] == "10.1016/j.ijfatigue.2013.05.004"
+    assert src["reference_cycles"] == 1e6 and src["loading"] == "push-pull"
+    # the Table 4 trend lines behind Table 5 (sigma_a = 1204.3 N^-0.071, tau_a = 864.78 N^-0.061)
+    assert abs(1204.3 * 1e6**-0.071 - 452.0) < 1.0
+    assert abs(864.78 * 1e6**-0.061 - 372.0) < 1.0
+    off = load_material_workbook(FOLDER / "14_42CrMo4_Reis.xlsx", overlay=False)["42CrMo4_Reis"]
+    assert off["material"]["Tensile_fatigue_limit_MPa"] is None

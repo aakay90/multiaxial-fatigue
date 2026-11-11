@@ -143,8 +143,13 @@ the generators after touching the catalogue or a model's declared parameters.
    - The design set is the R = -1 uniaxial tension failures (`extract_uniaxial_tension`).
      A model that declares `design_loading = "torsion"` uses `extract_pure_torsion` instead
      (MWHS).
-   - The master curve `DP = A N^b` is fitted on that set (`eval/fitting.py`).
+   - The master curve `DP = A N^b` is fitted on that set (`eval/fitting.py`). A curve that is not
+     identifiable (< 5 tests, < 1 decade, slope not distinct from 0) skips the model (#74); every
+     fit is listed in `<MAT>_master_curves.csv`.
    - Every other case is then evaluated.
+   - Cross-batch transfer (`--design-material A`, `evaluate_model(design_data=...)`, issue #71):
+     the Summary, constants, design set and master curve come from batch A, and only the tests
+     of the other batch are scored; outputs are `<material>_from_<A>`.
 5. **Write** (`run.write_variant`). One CSV per model and variant.
    - `Flag`: 0 = design, 1 = assessed, 2 = run-out.
    - Error columns: `Error_ln`, `Error_log10_dp` and `Error_load`, the load-equivalent error
