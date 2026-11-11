@@ -20,7 +20,7 @@ numbers are checked on every CI run.
 
 ## Available guides
 
-The most widely used criteria are documented first.
+All 46 registered criteria have a dedicated guide below, grouped by family.
 
 | Guide | Registry name | Family | Damage parameter (DP) | Material constants |
 | --- | --- | --- | --- | --- |
@@ -71,8 +71,7 @@ The most widely used criteria are documented first.
 | [Papuga–Růžička PI](PI.md) | `PI` | Integral | $\sqrt{\langle a_I C_a^2 + b_I(N_a + \kappa N_m)\rangle}/f_{-1}$ (index) | `Sigm1`, `Taum1` |
 | [Morel](MOREL.md) | `MOREL` | Mesoscopic, native life | $T_S/T_{S,\lim}$ (index); life from Eq. (38) | `Sigm1`, `Taum1`; $p, q, r$ fitted |
 
-Guides still to be written follow the same [template](TEMPLATE.md). Until a guide exists, use the
-method's entry in the [catalogue](../../METHODS.md), its line in the
+New criteria added in future follow the same [template](TEMPLATE.md) alongside each method's entry in the [catalogue](../../METHODS.md), its line in the
 [method audit](../method-audit.md) and its module docstring under `src/multifat/models/`.
 
 ## What every method shares
