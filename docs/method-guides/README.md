@@ -57,8 +57,14 @@ The most widely used criteria are documented first.
 | [Golos–Dębski–Dębski](GOLOS.md) | `GOLOS` | Limit curve (in-phase bending–torsion) | $A(\sigma/f_{-1})^2 + B\,\sigma/f_{-1} + (\tau/t_{-1})^2$ (index) | `Sigm1`, `Taum1` |
 | [Gonçalves–Araújo–Mamiya](GAM.md) | `GAM` | Stress invariants (prismatic hull) | $(\sqrt{\textstyle\sum a_i^2} + \kappa\,\sigma_{p\max})/\lambda$ (index) | `Sigm1`, `Taum1` |
 | [Reduced Ottosen](OTT.md) | `OTT` | Stress invariants (Hershey–Hosford) | $\sigma_{e,a} + A\,I_{1,m}$ (MPa) | `Sigm1`, `Taum1`; `m_OTT`, `A_OTT`, `Sig0` or `Su` |
+| [Vu–Halm–Nadot](VHN.md) | `VHN` | Stress invariants | $f_{\max}/t_{-1}$, Eq. (8) (index) | `Sigm1`, `Taum1`, `Su` |
+| [Projection-by-Projection](PBP.md) | `PBP` | Stress invariants (deviatoric covariance) | $\Gamma/\sqrt{J_{2A,\rho}}$ (index) | `Sigm1`, `Taum1` |
+| [COIN LiWI](COIN.md) | `COIN` | Stress invariants (complex phasors) | $\sqrt{k_\phi H + (1 - k_\phi)\lvert C\rvert}/s_{-1}$ (index) | `Sigm1`, `Taum1`; `k_phi` |
+| [Modified Mohr–Mises](MMMH.md) | `MMMH` | Stress invariants (signed Mohr–Mises) | $(\sigma_{\mathrm{eq},a} + M\,\sigma_{\mathrm{eq},m})/s_{-1}$ (index) | `Sigm1`, `Taum1`; `M_MMMH`, `Sig0` or `Su` |
+| [Tveit et al. 2025](TVEIT2025.md) | `TVEIT2025` | Incremental continuum damage (native life) | virgin $(\sigma_e + A\,I_1)/f_{-1}$ (index); life $N_f$ from $D = 1$ | `A_TVEIT`, `C_TVEIT`, `K_TVEIT`, `L_TVEIT` (`--constants`) |
 | [Dang Van](DANGVAN.md) | `DANGVAN` | Mesoscopic | $\sigma_{eq,DV}/f_{-1}$ (index) | `Sigm1`, `Taum1` |
 | [Papadopoulos](PAPADOPOULOS.md) | `PAPADOPOULOS` | Mesoscopic, integral | $\gamma_N/t_{-1}$, Eq. (41) (index) | `Sigm1`, `Taum1` |
+| [Robert–Fogue–Bahuaud](RFB.md) | `RFB` | Integral | $\frac{1}{s_{-1}}\sqrt{\langle(a\tau_a + b\sigma_{n,a} + d\sigma_{n,m})^2\rangle}$ (index) | `Sigm1`, `Taum1`; `Sig0` or `Su` |
 | [Böhme–Papuga](BP.md) | `BP` | Integral | $\sqrt{\langle a\tau_a^2 + b\sigma_{n,a}^2 + c\tau_a\tau_m + d\sigma_{n,a}\sigma_{n,m}\rangle}/s_{-1}$ (index) | `Sigm1`, `Taum1`, `Sig0`/`Tau0` or `Su` |
 | [CAIM](CAIM.md) | `CAIM` | Critical plane + integral | $\sqrt{\max(a\tau_a^2 + b\sigma_{n,a}^2) + \langle c\tau_a\tau_m + d\sigma_{n,a}\sigma_{n,m}\rangle}/s_{-1}$ (index) | as BP |
 | [Papuga–Růžička PCr](PCR.md) | `PCR` | Critical plane, stress | $\max\sqrt{a_c C_a^2 + b_c(N_a + t_{-1}N_m/f_0)}/f_{-1}$ (index) | `Sigm1`, `Taum1`, `Sig0` or `Su` |
