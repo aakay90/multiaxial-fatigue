@@ -1,5 +1,34 @@
 # Development continuation checkpoint
 
+## Issue #69 completion: Replace `np.frompyfunc` in `pypow2` (11 November 2026)
+
+- Root cause / scope: replaced `np.frompyfunc(lambda x: x**2, 1, 1)` in
+  `src/multifat/models/utils/batch.py` (`pypow2`) with a comprehension over
+  `np.asarray(x, dtype=float).ravel().tolist()` reshaped to `arr.shape`. Preserves bitwise
+  parity with CPython `float ** 2` (including `OverflowError` on overflow and `(-0.0) ** 2` sign)
+  while avoiding `np.frompyfunc` object-dtype ufunc state linked to intermittent
+  `python312.dll` (`0xc0000409`) crashes on Windows Python 3.12 + `numpy==2.5.4`
+  (30/30 pipeline stress runs passed after patching vs. 1/12 and 1/24 failures on `main`).
+- Modified files: `src/multifat/models/utils/batch.py`, `tests/test_batched_planes.py`,
+  `CHANGELOG.md`, `docs/audit-checkpoint.md`.
+- Verification (`fix/issue-69-pypow2` off `main` `330782e`):
+  - `black --check .` (`266` files unchanged), `ruff check .`,
+    `tools/generate_workbook_docs.py --check`, `tools/generate_method_docs.py --check`,
+    `tools/check_docs.py` (`1932` local links, `23` tool commands OK), and
+    `tools/check_scientific_reviews.py` passed.
+  - Full `pytest` on `WorkstationUniPi` (`Python 3.11.15`, `numpy==2.4.6`, `--extra fe` with
+    `h5py==3.16.0`): `3178 passed, 25 skipped, 125 xfailed, 61 subtests passed` in `373.98s`.
+  - Full `pytest` on `WorkstationUniTN` (`Python 3.12.12`, `numpy==2.5.4`, without `h5py`):
+    `3039 passed, 67 skipped, 125 xfailed, 61 subtests passed` in `406.44s`.
+  - `tools/regression_snapshot.py` (`--jobs 12`) comparing `main` (`330782e`) vs
+    `fix/issue-69-pypow2` on `WorkstationUniPi`: `outputs: 2760 files, 0 differ`;
+    `logs: 646 files, 0 differ`.
+  - After merging `origin/main` (`3162fd9`, adding PRs `#72`, `#83`, `#84`): `black --check .`
+    (`273` files unchanged), `ruff check .`, `tools/check_docs.py` (`1955` local links OK),
+    docs/review generators, and full `pytest` (`--extra fe`, `WorkstationUniPi`) passed:
+    `3220 passed, 25 skipped, 125 xfailed, 61 subtests passed` in `378.04s`.
+- Remaining / next action: wait for GitHub CI on PR `#87` and merge `fix/issue-69-pypow2` to `main`.
+
 ## Cross-batch comparison, issue #71 (10 November 2026)
 
 Branch `analysis/batch-comparison` from `main` at `c09dc4c`. Maintainer decisions on #71:
