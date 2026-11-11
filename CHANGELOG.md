@@ -6,6 +6,14 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### Al7075_T6 material values (decision d111)
+
+- An overlay sets the Pedranz 2025 fatigue limits at their own basis, 143.8 / 100.9 MPa at N = 5e6,
+  R = -1 (Appendix B Table 5), instead of the unsourced 150 / 100 MPa, and adds the measured plastic
+  strain-life terms of Benedetti 2021 Table 4 (eps'_f = 0.131, c = -0.674) in place of the steel
+  uniform-material-law estimates. sigma'_f and b stay the Basquin fit of the HCF tests. Only
+  Al7075_T6 outputs change; the homepage ranking is regenerated for it.
+
 ### Fatigue-limit datasets in the method ranking (decision d110, #37)
 
 - The homepage ranking adds the fatigue-limit datasets (25CrMo4, 30NCD16, 34Cr4, 982FA, S65A,
