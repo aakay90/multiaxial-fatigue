@@ -24,7 +24,7 @@ HISTORIES = pd.read_csv(ROOT / "tests" / "data" / "tveit2025_long_histories.csv"
 def _constants(material):
     params = json.loads(
         (ROOT / "Calibrations" / material / "TVEIT2025_stage1.json").read_text(encoding="utf-8")
-    )["params"]
+    )["hand_entered_constants"]
     keys = ("Sigm1_TVEIT", "Taum1_TVEIT", "A_TVEIT", "C_TVEIT", "K_TVEIT", "L_TVEIT")
     return [params[k] for k in keys]
 

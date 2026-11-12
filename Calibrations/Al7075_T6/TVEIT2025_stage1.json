@@ -1,5 +1,5 @@
 {
-    "params": {
+    "hand_entered_constants": {
         "Sigm1_TVEIT": 150.0,
         "Taum1_TVEIT": 100.0,
         "A_TVEIT": 0.409090909090983,
@@ -12,6 +12,7 @@
         "tol_alpha_TVEIT": 0.01,
         "tol_damage_TVEIT": 0.001
     },
+    "material_id": "Al7075_T6",
     "provenance": {
         "workbook": "Experimental_Data/Al7075_T6.xlsx",
         "model": "TVEIT2025",
