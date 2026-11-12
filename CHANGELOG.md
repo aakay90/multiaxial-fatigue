@@ -12,6 +12,16 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
   the design batch's own native lives on its design rows, and its 25 assessed rows have finite
   `Error_load`.
 
+### Hand-entered constants accepted by `--constants` (#60)
+
+- New constants kind `hand_entered_constants` (`cli/pipeline.py::load_constants`), as chosen by
+  the TVEIT2025 owner: constants calibrated outside the pipeline, with `material_id` and the
+  `provenance` of the entry, without the revision and fingerprint check of pipeline sidecars.
+  The run sidecar labels them "hand-entered constants" and copies the provenance.
+- The four `Calibrations/*/TVEIT2025_stage1.json` files use it; their constants, including
+  `Sigm1_TVEIT`, `Taum1_TVEIT` and the numerical settings, and their provenance text are unchanged.
+  The documented `multifat-pipeline ... --constants` command works again (it failed since #15).
+
 ### One visual system for the homepage
 
 - Every README figure uses `examples/style.py`: `apply_homepage_style` (Inter, recessive axes),

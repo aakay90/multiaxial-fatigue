@@ -31,8 +31,11 @@ inputs, so a record reproduces former constants, not a calibration of the new da
 
 `<material>/TVEIT2025_stage1.json` holds the constants of the Tveit et al. (2025) model, entered by
 hand (stage 1: the model runs with supplied constants; their calibration is not implemented yet).
-These files use the sidecar layout (`params` and `provenance.workbook`), not the record schema.
-`provenance` states how the constants were obtained. Each file sets:
+These files use the `hand_entered_constants` kind (#60): the constants under
+`hand_entered_constants`, the batch under `material_id`, and in `provenance` how the constants were
+obtained. They are not pipeline calibrations, so they carry no implementation revision or dataset
+fingerprint and skip that check; the run sidecar labels their source "hand-entered constants" and
+copies the provenance. Each file sets:
 
 - `A_TVEIT`, `C_TVEIT`, `K_TVEIT` and `L_TVEIT`;
 - `Sigm1_TVEIT` and `Taum1_TVEIT`, the fatigue limits these constants were calibrated with. They
