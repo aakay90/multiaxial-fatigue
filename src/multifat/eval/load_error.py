@@ -121,26 +121,35 @@ def _native_life_load_error(model, params, case, R_list, fit, Nf, variant):
         )  # fmt: skip
         aux = {"dp": float(result.values.get(variant, np.nan)), **result.aux}
         Nf_scaled = float(np.asarray(model.native_life(aux, params, fit), dtype=float))
+        if math.isnan(Nf_scaled):
+            raise _UndefinedLife  # no life at this load: the search fails (#78)
         return math.log(Nf_scaled) if Nf_scaled > 0 else -np.inf
 
     target = math.log(Nf)
-    # The life decreases with the load: find lo (life >= N_exp) and hi (life < N_exp).
-    lo, hi = -0.1, 0.1
-    for _ in range(40):
-        if log_life(lo) >= target:
-            break
-        lo -= 0.5
-    else:
+    try:
+        # The life decreases with the load: find lo (life >= N_exp) and hi (life < N_exp).
+        lo, hi = -0.1, 0.1
+        for _ in range(40):
+            if log_life(lo) >= target:
+                break
+            lo -= 0.5
+        else:
+            return float("nan")
+        for _ in range(40):
+            if log_life(hi) < target:
+                break
+            hi += 0.5
+        else:
+            return float("nan")
+        for _ in range(100):
+            mid = 0.5 * (lo + hi)
+            if hi - lo < 1e-12:
+                break
+            lo, hi = (mid, hi) if log_life(mid) >= target else (lo, mid)
+    except _UndefinedLife:
         return float("nan")
-    for _ in range(40):
-        if log_life(hi) < target:
-            break
-        hi += 0.5
-    else:
-        return float("nan")
-    for _ in range(100):
-        mid = 0.5 * (lo + hi)
-        if hi - lo < 1e-12:
-            break
-        lo, hi = (mid, hi) if log_life(mid) >= target else (lo, mid)
     return -0.5 * (lo + hi)
+
+
+class _UndefinedLife(Exception):
+    """A NaN native life inside the load search: no defined life at that trial load."""

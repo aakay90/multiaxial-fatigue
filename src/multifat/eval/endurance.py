@@ -190,9 +190,27 @@ def load_factor(
         mid = float(np.sqrt(lo * hi))
         r_mid = residual(mid)
         if r_mid == 0.0 or hi / lo - 1.0 < 1e-13:
-            return mid
-        lo, hi = (mid, hi) if r_mid < 0.0 else (lo, mid)
-    return float(np.sqrt(lo * hi))
+            if r_mid == 0.0:
+                return mid
+            # residual on the upper side of the converged crossing
+            return _sign_change(mid, r_hi if r_mid < 0.0 else r_mid)
+        if r_mid < 0.0:
+            lo = mid
+        else:  # r_mid >= 0, or NaN: then the bracket closes on a non-finite end and is rejected
+            hi, r_hi = mid, r_mid
+    return _sign_change(float(np.sqrt(lo * hi)), r_hi)
+
+
+def _sign_change(s: float, r_hi: float) -> float:
+    """`s`, the point where the residual changes sign, or NaN if it changes sign against +inf.
+
+    The residual DP(s) - target may jump: a critical-plane criterion switches plane as the load
+    grows. A finite jump across the target is still a crossing: DP < target just below `s` and
+    DP >= target just above, to the bisection tolerance (1e-13 in s). A jump to +inf is the edge of the criterion's domain
+    (`scaled_damage` maps a LoadingScopeError to +inf): DP never reaches the target inside the
+    domain, so the edge is not a root (#78).
+    """
+    return s if np.isfinite(r_hi) else float("nan")
 
 
 def fatigue_index(

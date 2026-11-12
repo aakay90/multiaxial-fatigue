@@ -751,6 +751,52 @@ def _case_tensors(ev: Evaluation, case_id: int) -> dict:
 LOAD_ERROR_SKIP = {"TVEIT2025"}
 
 
+class _CachedModel:
+    """The model of an Evaluation, with ``evaluate_case`` memoised on the input tensors (#78).
+
+    A scaled evaluation returns every variant at once, so the load errors of the std and `_ext`
+    variants, and the homogeneity checks of both, share one call per case and load factor. A
+    LoadingScopeError is memoised too and raised again. Other attributes are the model's.
+    """
+
+    def __init__(self, model):
+        self._model = model
+        self._cache: dict = {}
+
+    def __getattr__(self, name):
+        return getattr(self._model, name)
+
+    def evaluate_case(self, *, S0, E0, S1, E1, params, R_list, harmonics=None):
+        key = (
+            tuple(np.ascontiguousarray(a, dtype=float).tobytes() for a in (S0, E0, S1, E1)),
+            tuple(
+                (k, np.ascontiguousarray(v, dtype=float).tobytes())
+                for k, v in sorted((harmonics or {}).items())
+            ),
+        )
+        if key not in self._cache:
+            try:
+                self._cache[key] = self._model.evaluate_case(
+                    S0=S0, E0=E0, S1=S1, E1=E1, params=params, R_list=R_list,
+                    harmonics=harmonics,
+                )  # fmt: skip
+            except Exception as exc:  # noqa: BLE001 - memoised and raised again below
+                self._cache[key] = exc
+        value = self._cache[key]
+        if isinstance(value, Exception):
+            raise value
+        return value
+
+
+def _load_error_model(ev: Evaluation):
+    """The memoised model shared by every variant of `ev` (one cache per Evaluation)."""
+    cached = ev.__dict__.get("_load_error_model")
+    if cached is None or cached._model is not ev.model:
+        cached = _CachedModel(ev.model)
+        ev.__dict__["_load_error_model"] = cached
+    return cached
+
+
 def load_errors(ev: Evaluation, variant_key: str, case_ids, lives, *, native: bool) -> list[float]:
     """Load-equivalent error e_L = ln(1/s*) of each failed case (issue #37); NaN when undefined."""
     from multifat.eval.endurance import damage
@@ -758,6 +804,7 @@ def load_errors(ev: Evaluation, variant_key: str, case_ids, lives, *, native: bo
 
     if ev.data is None or case_ids is None or ev.base_name in LOAD_ERROR_SKIP:
         return [float("nan")] * len(lives)
+    model = _load_error_model(ev)
     errors = []
     curve = None if native else ev.fit(variant_key)
     for case_id, Nf in zip(case_ids, lives):
@@ -768,16 +815,16 @@ def load_errors(ev: Evaluation, variant_key: str, case_ids, lives, *, native: bo
                 continue
             errors.append(
                 native_life_load_error(
-                    ev.model, ev.params, case, ev.R_list, ev.life_curve, float(Nf),
+                    model, ev.params, case, ev.R_list, ev.life_curve, float(Nf),
                     variant=variant_key,
                 )
             )  # fmt: skip
             continue
         DP_fit = float(curve["A_surv"]) * float(Nf) ** float(curve["b"])
-        DP = damage(ev.model, ev.params, case, ev.R_list, variant=variant_key)
+        DP = damage(model, ev.params, case, ev.R_list, variant=variant_key)
         errors.append(
             master_curve_load_error(
-                ev.model, ev.params, case, ev.R_list, DP, DP_fit, variant=variant_key
+                model, ev.params, case, ev.R_list, DP, DP_fit, variant=variant_key
             )
         )
     return errors
