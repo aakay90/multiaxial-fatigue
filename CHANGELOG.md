@@ -6,6 +6,20 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### Load error: shared scaled evaluations, no domain edge taken as a root (#78)
+
+- `cli/run.py::load_errors` evaluates each scaled load once per case and reuses it across the
+  variants and the master-curve and native-life searches (`_CachedModel`, keyed on the input
+  tensors; skip errors are cached too). On 42CrMo4_Reis: SWT 4.2 s -> 1.1 s, FS 11.0 s -> 6.5 s.
+- `eval/endurance.py::load_factor` returns NaN when the bisection closes on a sign change against
+  +inf, i.e. on the edge of the criterion's domain (`scaled_damage` maps a LoadingScopeError to
+  +inf): DP never reaches the target there. A finite jump across the target (a plane switch) is
+  still a crossing and is kept. The native-life search treats a NaN life as a failed search.
+- Numbers: `IMPLEMENTATION_REVISION` 2026-11-12. Only ZHANGYAO on Ti6Al4V_Berto changes: 9
+  torsion tests (Torsion_Plain_12, 18-25) had a finite `Error_load` at the scope edge of the
+  model (DP(s*) = 0.839 against the target 1.527 for Plain_18) and are now NaN. All other run and
+  fatigue-index outputs are unchanged; ranking and batch comparison regenerated.
+
 ### Test: cross-batch transfer with a native-life model (#80)
 
 - `test_transfer_native_life_model`: MOREL in the 42CrMo4_Santus -> 42CrMo4_Reis transfer keeps

@@ -1,5 +1,17 @@
 # Development continuation checkpoint
 
+## Issue #78, load-error evaluations (12 November 2026)
+
+- Branch `fix/load-error-evaluations`: cached scaled evaluations in `run.load_errors`; the load
+  factor rejects only a sign change against +inf (scope edge), keeps finite jumps; NaN native life
+  fails the search. `IMPLEMENTATION_REVISION` 2026-11-12.
+- Evidence: run CSVs of every model and life workbook against main differ only in
+  ZHANGYAO_Ti6Al4V_Berto (9 scope-edge values -> NaN); fatigue-index CSVs 0 of 311 differ.
+  A first, stricter check (|DP(s*) - target| <= 1e-6 target) also dropped 3 finite plane-switch
+  crossings (NINIC 25CrMo4, MMP 34Cr4) and was replaced.
+- Open PRs: #97 (#73 snapshot pipeline stage), #98 (#77 design-test selector), this one.
+- Next action: CI and maintainer merge decisions.
+
 ## Batch names, decision d112 (12 November 2026)
 
 - Branch `data/batch-names`: `42CrMo4_QT` -> `42CrMo4_Santus` (file, `Calibrations/42CrMo4_Santus/`,
