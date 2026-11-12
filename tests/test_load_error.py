@@ -200,3 +200,18 @@ def test_native_search_treats_an_undefined_life_as_a_failed_search():
         -math.log(0.1), abs=1e-9
     )
     assert math.isnan(native_life_load_error(_NaNLifeStub(), {}, case, R_LIST, None, 1e3))
+
+
+class _JumpStub:
+    """DP = axial amplitude + 5 below 120 MPa, + 50 above: a finite jump, as a plane switch (#78)."""
+
+    def evaluate_case(self, *, S0, E0, S1, E1, params, R_list, harmonics=None):
+        amplitude = float(np.asarray(harmonics["S_sin"])[1, 1])
+        dp = amplitude + (5.0 if amplitude < 120.0 else 50.0)
+        return _StubResult({"": dp, "_ext": dp})
+
+
+def test_load_factor_keeps_a_finite_jump_across_the_target():
+    """A finite jump across the target is a crossing (s = 1.2), unlike a jump to +inf."""
+    case = case_from_amplitudes(axial=100.0, shear=0.0, mean=(0.0, 0.0, 0.0), E=E, nu=NU)
+    assert load_factor(_JumpStub(), {}, case, 150.0, R_LIST) == pytest.approx(1.2, rel=1e-9)
