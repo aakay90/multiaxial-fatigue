@@ -1,5 +1,5 @@
 {
-    "params": {
+    "hand_entered_constants": {
         "Sigm1_TVEIT": 433.0,
         "Taum1_TVEIT": 344.0,
         "A_TVEIT": 0.245625,
@@ -12,6 +12,7 @@
         "tol_alpha_TVEIT": 0.01,
         "tol_damage_TVEIT": 0.001
     },
+    "material_id": "42CrMo4_Santus",
     "provenance": {
         "workbook": "Experimental_Data/6_42CrMo4_Santus.xlsx",
         "model": "TVEIT2025",

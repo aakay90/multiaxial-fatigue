@@ -1,5 +1,5 @@
 {
-    "params": {
+    "hand_entered_constants": {
         "Sigm1_TVEIT": 500.0,
         "Taum1_TVEIT": 422.0,
         "A_TVEIT": 0.510725229826353,
@@ -12,6 +12,7 @@
         "tol_alpha_TVEIT": 0.01,
         "tol_damage_TVEIT": 0.001
     },
+    "material_id": "Ti6Al4V_Berto",
     "provenance": {
         "workbook": "Experimental_Data/15_Ti6Al4V_Berto.xlsx",
         "model": "TVEIT2025",
