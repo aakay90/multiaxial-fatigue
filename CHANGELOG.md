@@ -6,6 +6,16 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### One visual system for the homepage
+
+- Every README figure uses `examples/style.py`: `apply_homepage_style` (Inter, recessive axes),
+  the validated colour-blind safe palette `SERIES`, one blue ramp for magnitudes (`blue_cmap`) and
+  one title layout (`homepage_title`). Redrawn: the critical-plane sphere, the fatigue-limit
+  envelopes (direct labels) and the load-error ranking.
+- Removed: the polar damage landscape (repeated the sphere), the life-prediction correlation and
+  the life-error benchmark (superseded by the load-equivalent ranking, #37), with
+  `build_predictions_csv.py` and its CSV. Adding a method now refreshes the ranking only.
+
 ### Batch names after their author or project (decision d112)
 
 - `42CrMo4_QT` is now `42CrMo4_Santus` (file `6_42CrMo4_Santus.xlsx`, `Calibrations/42CrMo4_Santus/`)

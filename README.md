@@ -21,7 +21,7 @@ non-proportional loading, without notches, cracks or significant stress gradient
 
 *A critical-plane criterion evaluates the damage on every material plane and selects the most
 damaged one ($\mathbf{n}^*$); here Findley under in-phase and 90° out-of-phase tension-torsion. All
-methods are then compared on one scale: see the [method ranking](#5-method-ranking-by-the-load-equivalent-error).*
+methods are then compared on one scale: see the [method ranking](#which-criterion-misjudges-the-load-least).*
 
 ## Quick start
 
@@ -92,55 +92,25 @@ life $N_f$ comes from mapping $DP$ through the material's calibrated uniaxial Ba
 MMCCM, MOREL). See [BP/CAIM usage](docs/bp-caim-usage.md) and
 [architecture](docs/architecture.md).
 
-## Visual results gallery
+## Results at a glance
 
-`examples/` holds a self-contained visualization suite. Every figure uses publication formatting
-(Times New Roman, Computer Modern math, factor-of-2 scatter bounds) and is reproduced with one
-command:
+The homepage figures share one visual system (`examples/style.py`): one validated, colour-blind
+safe palette, one type family, one title layout. They are redrawn with one command:
 
 ```bash
 uv run python examples/generate_gallery.py
 ```
 
-### 1. Critical-plane damage landscapes
-Orientation-dependent damage distributions $\mathrm{DP}(\theta)$ under in-phase ($\delta = 0^\circ$)
-versus non-proportional $90^\circ$ out-of-phase biaxial loading ($\sigma_a = 240\,\mathrm{MPa},
-\tau_a = 150\,\mathrm{MPa}$; illustrative loading, not a material benchmark; $k_{FI} = 0.28$, $k_{FS} = 0.50$,
-$S_y = 750\,\mathrm{MPa}$, $E = 206\,\mathrm{GPa}$, $\nu = 0.30$), showing how the phase shift moves
-the critical plane and changes each criterion's damage peaks:
+### Where the criteria disagree
+Fatigue limit envelopes ($\sigma_a / \sigma_{-1}$ vs $\tau_a / \tau_{-1}$) for fully reversed,
+in-phase tension-torsion, calibrated on the 42CrMo4_Santus fatigue limits ($\sigma_{-1} = 433$ MPa,
+$\tau_{-1} = 344$ MPa). The criteria agree at the two calibration points and part company in
+between: the maximum shear stress criterion, calibrated on $\sigma_{-1}$ alone, misses $\tau_{-1}$
+by 37 %.
 
-![Critical Plane Damage Landscapes](docs/images/critical_plane_polar.png)
+![Fatigue limit envelopes](docs/images/fatigue_limit_envelopes.png)
 
-### 2. Multiaxial fatigue life prediction correlation
-Experimental versus predicted fatigue life ($N_{f,\mathrm{exp}}$ vs $N_{f,\mathrm{pred}}$) for the
-plain axial and torsion tests of 42CrMo4_Santus (`Experimental_Data/6_42CrMo4_Santus.xlsx`; run-outs
-excluded; no combined-loading tests in the workbook), against the Factor-of-2 ($F2$) and Factor-of-3
-($F3$) scatter bands. Predictions come from the current pipeline
-(`examples/build_predictions_csv.py`):
-
-![Fatigue Life Prediction Correlation](docs/images/life_prediction_correlation.png)
-
-### 3. Model benchmark & error dispersion
-Cross-criterion comparison ranking models by log-error standard deviation
-$s_{\ln} = \mathrm{std}(\ln(N_{f,\mathrm{exp}} / N_{f,\mathrm{pred}}))$ alongside systematic bias
-$\mu_{\ln}$ (positive = conservative). Every test here is axial or torsional and all criteria are
-calibrated on the same limits, so the ranking says nothing about multiaxial or non-proportional
-performance. Methods without finite life predictions on this dataset are not shown: MOREL (its
-native life law predicts an infinite life below its limit for some failed tests) and MWHS (its
-torsion-calibrated master curve is too flat, so only damage errors are reported):
-
-![Comparative Benchmark of Multiaxial Fatigue Criteria](docs/images/model_benchmark_error.png)
-
-### 4. Biaxial fatigue limit failure envelopes
-Normalized failure boundaries ($\sigma_a / \sigma_{-1}$ vs $\tau_a / \tau_{-1}$) for fully reversed
-proportional loading, calibrated on the 42CrMo4_Santus fatigue limits ($\sigma_{-1} = 433$ MPa,
-$\tau_{-1} = 344$ MPa): Gough-Pollard ellipse, maximum shear stress (Tresca, calibrated on
-$\sigma_{-1}$), Crossland and Findley. Only the two calibration points are shown: the dataset has no
-combined-loading fatigue-limit tests.
-
-![Multiaxial Fatigue Limit Envelopes](docs/images/fatigue_limit_envelopes.png)
-
-### 5. Method ranking by the load-equivalent error
+### Which criterion misjudges the load least?
 Every method on every dataset, on one scale: the load-equivalent error $e_L = \ln(1/s^*)$,
 where $s^*$ is the factor on the whole load at which the method predicts the observed life. Unlike
 the life error, it does not grow with the flatness of the S-N curve nor with the degree of the damage
