@@ -1,7 +1,7 @@
 """Ranking of every method by its load-equivalent error, across materials (issue #37).
 
 Rows: methods, ordered by their mean rank over the materials they ran on (best on top). A material
-on which fewer than MIN_RANKED methods are scored (Ti6Al4V: only MOREL, issue #74) shows its cells
+on which fewer than MIN_RANKED methods are scored (Ti6Al4V_Meneghetti: only MOREL, issue #74) shows its cells
 but is left out of the ranks, since a rank among one method carries no information.
 Columns: materials. Cells: root mean square of Error_load = ln(1/s*) on the assessed failures,
 which combines bias and scatter; lower is better. A cell of 0.10 means a typical load
@@ -45,6 +45,11 @@ def plot_load_error_ranking(
         table["Assessment"] = "fatigue_life"
     # one block of columns per kind of observation, each with its own mean rank: a limit dataset
     # rests on 3-40 limit states, so its columns are not pooled with the life datasets
+    # a material on which fewer than MIN_RANKED methods are scored compares nothing: left out of
+    # the figure and named in a note (Ti6Al4V_Meneghetti: only MOREL, #74)
+    counts = table.groupby("Material")["Method"].nunique()
+    hidden = sorted(counts[counts < MIN_RANKED].index)
+    table = table[~table["Material"].isin(hidden)]
     blocks, block_ranks = [], {}
     for kind, _ in GROUPS:
         part = table[table["Assessment"] == kind]
@@ -106,6 +111,9 @@ def plot_load_error_ranking(
         r" reproducing $N_{f,\exp}$ or reaching the limit, $\ln(1/s^*) = \ln(1 + FI_{load})$",
         fontsize=10.5, pad=46,
     )  # fmt: skip
+    if hidden:
+        fig.text(0.01, 0.005, "Not shown (fewer than %d methods scored): %s" % (MIN_RANKED, ", ".join(
+            m.replace("_", " ") for m in hidden)), fontsize=8, color=PALETTE["charcoal"])  # fmt: skip
     fig.tight_layout()
     fig.savefig(out_path, facecolor="#FFFFFF", bbox_inches="tight")
     plt.close(fig)

@@ -1,5 +1,16 @@
 # Development continuation checkpoint
 
+## Batch names, decision d112 (12 November 2026)
+
+- Branch `data/batch-names`: `42CrMo4_QT` -> `42CrMo4_Santus` (file, `Calibrations/42CrMo4_Santus/`,
+  upstream record material_id), `Ti6Al4V` -> `Ti6Al4V_Meneghetti` (TVEIT constants moved to
+  `Calibrations/Ti6Al4V_Meneghetti/`, workbook path only). Historical records keep the old names.
+- Evidence: homepage ranking identical to main after name substitution (488 rows, all statistics
+  equal); batch comparison point statistics identical, bootstrap bounds move <= 0.05 (seed drawn in
+  name order). Ranking figure drops materials with < 2 scored methods.
+- Stacked: `docs/readme-visual-system` (README visual system) on top of this branch.
+- Next action: CI on both PRs; maintainer merge decisions (this one first).
+
 ## Al7075_T6 Summary review, decision d111 (11 November 2026)
 
 - Branch `data/al7075-summary`. The curator's archive held no Al7075 tests: its "original" workbook

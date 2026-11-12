@@ -31,8 +31,8 @@ What the revised files contain compared with the previous workbooks (`tools/audi
 
 | Material | Revised file | Change from the previous workbook |
 |---|---|---|
-| 42CrMo4_QT | `6_42CrMo4_QT.xlsx` | Santus and Benedetti rows only (45 plain failures, 11 run-outs); the Anes/Reis rows (Su 1100 batch) are not in it |
-| Ti6Al4V | `1_Ti6Al4V.xlsx` | Meneghetti 10 failures and 4 Delahay run-outs (removed by overlay, d109); the 48 Berto failures are not in it |
+| 42CrMo4_Santus | `6_42CrMo4_Santus.xlsx` | Santus and Benedetti rows only (45 plain failures, 11 run-outs); the Anes/Reis rows (Su 1100 batch) are not in it |
+| Ti6Al4V | `1_Ti6Al4V_Meneghetti.xlsx` | Meneghetti 10 failures and 4 Delahay run-outs (removed by overlay, d109); the 48 Berto failures are not in it |
 | AISI316L | `8_AISI316L.xlsx` | Janssens and Braun rows as originally supplied (without N6, N8 and our E, nu) |
 | Al7075_T6 | `Al7075_T6.xlsx` | measured data unchanged; Summary coefficient cells removed |
 | eight new materials | `2_`-`5_`, `7_`, `10_`-`13_` | En3B and GJS600 notched only; CX18, 30NCD16, 25CrMo4, 982FA, 34Cr4, GGG60 and S65A have only fatigue-limit rows (`Run out = Yes` at the endurance basis) |
@@ -41,7 +41,7 @@ What the revised files contain compared with the previous workbooks (`tools/audi
 
 | Workbook | Change | Source | Decision |
 |---|---|---|---|
-| `14_42CrMo4_Reis.xlsx` (new) | the 29 Anes/Reis rows of the previous 42CrMo4_QT.xlsx (25 failures, 4 run-outs, including N1), in the revised layout; Summary rows Anes IJF 58 and FFEMS 37 with E 206000, nu 0.3, Su 1100, Sy 980 and the strain-life constants sigma_f 1154 MPa, b -0.061, epsilon_f 0.180, c -0.53 (new Summary columns) | Anes et al., IJF 58 (2014) Table 1 p. 2 | d055 |
+| `14_42CrMo4_Reis.xlsx` (new) | the 29 Anes/Reis rows of the previous 42CrMo4_Santus.xlsx (25 failures, 4 run-outs, including N1), in the revised layout; Summary rows Anes IJF 58 and FFEMS 37 with E 206000, nu 0.3, Su 1100, Sy 980 and the strain-life constants sigma_f 1154 MPa, b -0.061, epsilon_f 0.180, c -0.53 (new Summary columns) | Anes et al., IJF 58 (2014) Table 1 p. 2 | d055 |
 | `15_Ti6Al4V_Berto.xlsx` (new) | the 48 Berto rows of the previous Ti6Al4V_andrea_(AXIAL).xlsx; Summary E 110000, nu 0.3, Su 978, Sy 894, fatigue limits 475.74 / 388.25 MPa at 2e6 cycles, R = -1 | Berto et al., FFEMS 38 (2015): Table 1 p. 3, text p. 9, Table 3 p. 5 | d055 |
 | `8_AISI316L.xlsx` | N6: torsional phase 90 on Non_prop_1-11; N8: the 8 Janssens Table 4 rows (Uniaxial_10-14, Torsional_8-9, Non_prop_12) | Janssens 2018 Table 4 p. 4 | d056 |
 | `8_AISI316L.xlsx` | Summary: Janssens E 193000, nu 0.3; Braun E, nu set to Null (were 219000 / 0.29) | Zhu et al. 2019 p. 8; Braun 2024 p. 8 gives 219 GPa / 0.29 as the X-ray elastic constants of the (220) planes for residual stresses, not bulk values | d056 |
@@ -75,7 +75,7 @@ confirmed by T. Grossi on 2026-10-19 (decision d061).
   full recalculation gives `#REF!` (the importer does not read K; the cell was left as supplied).
 - 25CrMo4: E = 127000 MPa (Troost 1987 row) is low for a steel; FatLim lists no E.
 - Ti6Al4V: the Delahay row (Ti64Al4V, Su 1090, Sy 980) is averaged with Meneghetti (Su 980, Sy 915).
-  Resolved 2026-11-11 (decision d108): `src/multifat/imp/overlay_files/1_Ti6Al4V.overlay.json` sets the
+  Resolved 2026-11-11 (decision d108): `src/multifat/imp/overlay_files/1_Ti6Al4V_Meneghetti.overlay.json` sets the
   Delahay row to `Null` and the Average and
   standard-deviation rows to the Meneghetti values: E 110000, nu 0.3, Su 980, Sy 915, Sigm1 500,
   Taum1 422.5 MPa (2e6 cycles, R = -1). `--no-overlay` returns the supplied averages.
@@ -188,7 +188,7 @@ fatigue-limit workbooks; the bending stress is the nominal surface amplitude.
   mm for the reference specimens); the diameter is Null.
 - The cycle basis is "1e6 or 1e7 cycles" without saying which applies to each limit.
 - The authors note that the 90 deg limit was measured on specimens of a different roughness.
-- These limits were formerly in `1_Ti6Al4V.xlsx` as 4 run-outs, mislabelled (removed there, d109).
+- These limits were formerly in `1_Ti6Al4V_Meneghetti.xlsx` as 4 run-outs, mislabelled (removed there, d109).
 
 ## 14_42CrMo4_Reis.xlsx: R = -1 fatigue limits (overlay, 2026-11-10)
 
@@ -213,7 +213,7 @@ on them, `Calibrations/42CrMo4_Reis/SSF_published.json`).
   1e6 extrapolate the authors' trend lines; they are finite-life strengths, not staircase limits.
 - Ratio Taum1/Sigm1 = 0.823, against 0.794 (QT) and 0.709 (FABEST) (issue #71).
 
-## 42CrMo4_QT.xlsx
+## 42CrMo4_Santus.xlsx
 
 | Source (as cited in workbook) | Plain failures | Plain run-outs | Notched | Where the data are printed | How read |
 |---|---|---|---|---|---|
@@ -238,7 +238,7 @@ Material constants printed in the sources:
   2018 bars. Checked 2026-11-11: ref. [17] is Benedetti, Santus, Berto, IJF 126 (2019) 306-318, not
   Santus 2018 (which is its ref. [15]); the statement concerns the 2019 material only.
 - **Maintainer decision d101 (2026-11-10, issue #71):** the Santus 2018 and Benedetti 2022 tests of this
-  workbook are one batch, and `42CrMo4_QT` is treated as one batch in the cross-batch comparison
+  workbook are one batch, and `42CrMo4_Santus` is treated as one batch in the cross-batch comparison
   (`examples/data/material_families.json`).
 
 Known issues:
@@ -437,9 +437,9 @@ Known issues:
 
 | Workbook | Cell | Old | New | Reason |
 |---|---|---|---|---|
-| 42CrMo4_QT | Dataset O103 (`Plain_multiaxial_9`, phase torsional) | 90 | 0 | Proportional test: PP row of Anes IJF 58 Table 3 = case 1 of Anes FFEMS 37 Table 2 |
+| 42CrMo4_Santus | Dataset O103 (`Plain_multiaxial_9`, phase torsional) | 90 | 0 | Proportional test: PP row of Anes IJF 58 Table 3 = case 1 of Anes FFEMS 37 Table 2 |
 | AISI316L | Dataset O25-O36 (`Non_prop_1`-`12`, phase torsional) | Null | 90 | Janssens Table 4, "Non-Prop 90° Phase Shift" |
-| 42CrMo4_QT | Summary P2 (a_MSWT, Santus row) | 0.53 | 0.3605 | a' = a/(2 - a): printed MSWT weighting (Jiang 2000 Eq. 6 / Zhu 2018 Eq. 13); lives unchanged |
+| 42CrMo4_Santus | Summary P2 (a_MSWT, Santus row) | 0.53 | 0.3605 | a' = a/(2 - a): printed MSWT weighting (Jiang 2000 Eq. 6 / Zhu 2018 Eq. 13); lives unchanged |
 | AISI316L | Summary P2 (a_MSWT, Janssens row) | 0.36 | 0.2195 | same |
 | Al7075_T6 | Summary P2 (a_MSWT, Benedetti 2021 row) | 0.39 | 0.2422 | same |
 | Ti6Al4V_andrea_(AXIAL) | Summary P2 (a_MSWT, Meneghetti row) | 0.63 | 0.4599 | same |
@@ -448,7 +448,7 @@ The Average rows are formulas and now read the converted a_MSWT values.
 
 ## TODO
 
-- [ ] **Benedetti 2022 data in `42CrMo4_QT.xlsx` (source verification needed):** The paper and its
+- [ ] **Benedetti 2022 data in `42CrMo4_Santus.xlsx` (source verification needed):** The paper and its
   supplementary files (two MATLAB scripts, no test data) do not contain: the 9 plain torsion R = 0.1
   failures and 2 run-outs; the points at 600 MPa / 3620 cycles (axial) and 480 MPa / 2113 cycles (torsion);
   the Summary fatigue limits 433 / 344 MPa (Table 12 prints 412 / 328 MPa). All are kept unchanged until the

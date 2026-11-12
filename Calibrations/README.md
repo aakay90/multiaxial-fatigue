@@ -23,7 +23,7 @@ used but flagged in the sidecar (`constants_source.warning`). Its a_MSWT is in t
 workbooks and is converted to the printed one, a' = a/(2 - a). The calibration sidecar records
 the file, its SHA-256 and the calibration ID. The pipeline does not write new records here; its
 own results go to `<MATERIAL>_calibration.json` in the results folder, which `--constants` also
-accepts. The four records belong to the previous collection (material IDs `42CrMo4_QT`,
+accepts. The four records belong to the previous collection (material IDs `42CrMo4_Santus`,
 `AISI316L`, `Al7075_T6`, `Ti6Al4V_andrea_(AXIAL)`); the revised workbooks change the material
 inputs, so a record reproduces former constants, not a calibration of the new data.
 
@@ -43,7 +43,7 @@ These files use the sidecar layout (`params` and `provenance.workbook`), not the
 
 `notes` explains each entry. Edit a copy to change a run:
 
-    multifat-pipeline Experimental_Data/6_42CrMo4_QT.xlsx --models TVEIT2025 --no-calibrate --constants Calibrations/42CrMo4_QT/TVEIT2025_stage1.json
+    multifat-pipeline Experimental_Data/6_42CrMo4_Santus.xlsx --models TVEIT2025 --no-calibrate --constants Calibrations/42CrMo4_Santus/TVEIT2025_stage1.json
 
 ## Provisional TVEIT2025 records
 

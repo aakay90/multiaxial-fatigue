@@ -44,7 +44,9 @@ from multifat.models.comparison import capabilities_for_model
 DATA_FOLDER = "Experimental_Data"
 RESULTS_DIR = "Results/current"
 
-MATERIAL_NAME = "AISI316L"  # e.g. "42CrMo4_QT", "AISI316L", "Al7075_T6", "Ti6Al4V_andrea_(AXIAL)"
+MATERIAL_NAME = (
+    "AISI316L"  # e.g. "42CrMo4_Santus", "AISI316L", "Al7075_T6", "Ti6Al4V_andrea_(AXIAL)"
+)
 MODEL_NAME = "FS"  # defaults to the author/maintainer plane-selection rule
 # Findley only (FIN, FIN_ext): method_default is the production MCE path; mcc_harmonic,
 # mce_harmonic and rss run the explicit harmonic assessment, calibrated with the same option.

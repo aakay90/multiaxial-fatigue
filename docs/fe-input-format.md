@@ -114,7 +114,7 @@ meta = import_pvd(
     "vtk/tube.pvd", "from_vtk.h5",
     stress=TensorSpec("Stress", CANONICAL, unit="MPa"),
     strain=TensorSpec("Strain", CANONICAL, shear="tensor"),
-    id_array="NodeID", material_id="42CrMo4_QT", length_unit="mm",
+    id_array="NodeID", material_id="42CrMo4_Santus", length_unit="mm",
     solver="my-solver", solver_version="1.0", analysis_step="step 1",
 )
 ```

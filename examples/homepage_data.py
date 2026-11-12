@@ -17,15 +17,15 @@ if str(REPO_ROOT) not in sys.path:
 from examples.style import DATA_DIR  # noqa: E402
 
 RANKING_CSV = DATA_DIR / "load_error_ranking.csv"
-PREDICTIONS_CSV = DATA_DIR / "42CrMo4_QT_predictions.csv"
+PREDICTIONS_CSV = DATA_DIR / "42CrMo4_Santus_predictions.csv"
 
 RANKING_MATERIALS: tuple[str, ...] = (
     "42CrMo4_FABEST",
-    "42CrMo4_QT",
+    "42CrMo4_Santus",
     "42CrMo4_Reis",
     "AISI316L",
     "Al7075_T6",
-    "Ti6Al4V",
+    "Ti6Al4V_Meneghetti",
     "Ti6Al4V_Berto",
     # fatigue-limit datasets (d110; CX18 and GGG60 left out until #24 resolves their data)
     "25CrMo4",
@@ -35,7 +35,7 @@ RANKING_MATERIALS: tuple[str, ...] = (
     "S65A",
     "Ti6Al4V_Delahay",
 )
-PREDICTIONS_MATERIAL = "42CrMo4_QT"
+PREDICTIONS_MATERIAL = "42CrMo4_Santus"
 
 
 def manifest_path_for(csv_path: Path) -> Path:

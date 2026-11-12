@@ -54,7 +54,7 @@ def _one(path):
 def test_prefix_is_not_identity(tmp_path):
     from multifat.cli.run import resolve_workbook
 
-    assert material_id("6_42CrMo4_QT") == "42CrMo4_QT"
+    assert material_id("6_42CrMo4_Santus") == "42CrMo4_Santus"
     assert material_id("Ti6Al4V_andrea_(AXIAL)") == "Ti6Al4V_andrea_(AXIAL)"
     write_revised_workbook(tmp_path / "6_Synth.xlsx", _tension_rows())
     assert list(import_experimental_data_grouped_by_material(tmp_path)) == ["Synth"]
@@ -194,7 +194,7 @@ def test_missing_nu_blocks_strain_models_only(tmp_path):
     assert out["SWT"].status == "skipped" and "needs E and nu" in out["SWT"].reason
 
 
-@pytest.mark.skipif(not (ROOT / "Experimental_Data/6_42CrMo4_QT.xlsx").exists(), reason="data")
+@pytest.mark.skipif(not (ROOT / "Experimental_Data/6_42CrMo4_Santus.xlsx").exists(), reason="data")
 def test_all_active_workbooks_import():
     from multifat.cli.run import validate_workbook
 
@@ -242,8 +242,8 @@ def test_batch_workbook_counts():
         ss["material"]["Torsional_fatigue_limit_MPa"],
     ) == (278.5, 144)
     assert (
-        data["Ti6Al4V"]["material"]["Tensile_fatigue_limit_MPa"],
-        data["Ti6Al4V"]["material"]["Torsional_fatigue_limit_MPa"],
+        data["Ti6Al4V_Meneghetti"]["material"]["Tensile_fatigue_limit_MPa"],
+        data["Ti6Al4V_Meneghetti"]["material"]["Torsional_fatigue_limit_MPa"],
     ) == (
         500.0,
         422.5,

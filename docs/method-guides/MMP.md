@@ -150,7 +150,7 @@ $t_{-1}$ and $t_0$.
 **On a supplied workbook:**
 
 ```bash
-uv run multifat-pipeline --material 42CrMo4_QT --models MMP --results-dir Results/current/guides
+uv run multifat-pipeline --material 42CrMo4_Santus --models MMP --results-dir Results/current/guides
 ```
 
 ## Comparison capabilities and outputs

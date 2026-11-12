@@ -43,7 +43,7 @@ Starting from $\boldsymbol{\alpha} = \mathbf{0}$ and $D = 0$, failure occurs at 
 4. *Block cap:* after `max_blocks_TVEIT = 60000` cycles, life is extrapolated similarly and a warning is emitted.
 
 **Repository choices and departures.**
-- *No internal `C, K, L` optimizer:* Calibration of $(C, K, L)$ (Eq. 25, after Ottosen et al. 2008) is not implemented inside `multifat-calibrate`; constants must be supplied in a JSON `--constants` file (e.g., [`Calibrations/42CrMo4_QT/TVEIT2025_stage1.json`](../../Calibrations/42CrMo4_QT/TVEIT2025_stage1.json)).
+- *No internal `C, K, L` optimizer:* Calibration of $(C, K, L)$ (Eq. 25, after Ottosen et al. 2008) is not implemented inside `multifat-calibrate`; constants must be supplied in a JSON `--constants` file (e.g., [`Calibrations/42CrMo4_Santus/TVEIT2025_stage1.json`](../../Calibrations/42CrMo4_Santus/TVEIT2025_stage1.json)).
 - *Constants-file limits and settings:* `Sigm1_TVEIT` and `Taum1_TVEIT` override workbook `Sigm1`/`Taum1` for `TVEIT2025` only so calibrated constants always match their reference limits. Optional `npts_TVEIT`, `min_blocks_TVEIT`, `max_blocks_TVEIT`, `tol_alpha_TVEIT`, and `tol_damage_TVEIT` may also be overridden in the file. With `1001` points per cycle, finite lives sit roughly $0.02$ decade shorter than converged high-resolution integration (Table 1 NiCrMo steel).
 - *Symmetric `G` projection and DP:* `G` uses the deviatoric projection $\mathbf{s}\mathbf{s} - \frac{2}{3} J_2 \mathbf{I}$ of $\partial J_3 / \partial \mathbf{s}$ (Eq. 10 prints a different isotropic piece that cancels upon deviatoric contraction). `values[""]` holds the virgin-state maximum of $(\sigma_e + A I_1)/f_{-1}$ ($\beta + 1$ at $\boldsymbol{\alpha} = 0$), while `aux["Nf"]` returns native life.
 
@@ -91,7 +91,7 @@ index = 1.8986, Nf = 263
 Batch CLI evaluation on 42CrMo4 Q&T with Stage 1 constants:
 
 ```bash
-multifat-run --model TVEIT2025 --material 42CrMo4_QT --constants Calibrations/42CrMo4_QT/TVEIT2025_stage1.json
+multifat-run --model TVEIT2025 --material 42CrMo4_Santus --constants Calibrations/42CrMo4_Santus/TVEIT2025_stage1.json
 ```
 
 ## Comparison capabilities and outputs

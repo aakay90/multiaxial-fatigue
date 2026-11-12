@@ -1,5 +1,5 @@
 Batch,Path,n,n_axial,ratio,ratio_lo,ratio_hi,ln_ratio,ln_ratio_se,extrapolated
-42CrMo4_QT,T,9,27,0.82154,0.79066,0.84806,-0.19657,0.017813,False
+42CrMo4_Santus,T,9,27,0.82154,0.79066,0.84806,-0.19657,0.017813,False
 42CrMo4_Reis,AT-IP,8,6,0.89865,0.88026,0.92005,-0.10686,0.014968,False
 42CrMo4_Reis,AT-NP,6,6,0.93561,0.92343,0.95905,-0.06656,0.013712,False
 42CrMo4_Reis,T,5,6,0.7978,0.77966,0.82027,-0.2259,0.017132,False

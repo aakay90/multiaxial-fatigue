@@ -29,7 +29,7 @@ def _block(m=4, n=3, strain=True, **override):
 
 def _meta(**override):
     kw = dict(
-        material_id="42CrMo4_QT",
+        material_id="42CrMo4_Santus",
         solver="synthetic",
         solver_version="1",
         analysis_step="step-1",

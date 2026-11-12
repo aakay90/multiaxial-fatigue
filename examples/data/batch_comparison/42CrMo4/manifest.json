@@ -1,16 +1,16 @@
 {
  "family": "42CrMo4",
  "batches": [
-  "42CrMo4_QT",
+  "42CrMo4_Santus",
   "42CrMo4_Reis",
   "42CrMo4_FABEST"
  ],
- "notes": "42CrMo4 +QT. 42CrMo4_QT: Santus 2018 and Benedetti 2022, one material batch, two test series (d101, d105); 42CrMo4_Reis: Anes/Reis 2014; 42CrMo4_FABEST: FABEST PBS series. SSF runs only with the surface published for the Reis batch: in sample on Reis, out of sample when Reis is the design batch.",
+ "notes": "42CrMo4 +QT. 42CrMo4_Santus: Santus 2018 and Benedetti 2022 (Trento bars), one material batch, two test series (d101, d105); 42CrMo4_Reis: Anes/Reis 2014; 42CrMo4_FABEST: FABEST PBS series. SSF runs only with the surface published for the Reis batch: in sample on Reis, out of sample when Reis is the design batch.",
  "constants": {
   "42CrMo4_Reis": "Calibrations/42CrMo4_Reis/SSF_published.json"
  },
- "created_utc": "2026-11-11T17:30:36+00:00",
- "git_commit": "d233845ef084c599b8360fc4c61406d75f0a47cc",
+ "created_utc": "2026-11-12T08:23:53+00:00",
+ "git_commit": "a27ce0ab9de160f44a2ff8cbde9eb6f7aea8971b",
  "registered_models": [
   "BP",
   "CAIM",
@@ -61,7 +61,7 @@
  ],
  "implementation_revision": "2026-11-11",
  "dataset_fingerprints": {
-  "42CrMo4_QT": "50fcebd49c4006212a50d303f4549cf0351c59047b2f0e9bcdebf3323aec15a3",
+  "42CrMo4_Santus": "50fcebd49c4006212a50d303f4549cf0351c59047b2f0e9bcdebf3323aec15a3",
   "42CrMo4_Reis": "45f0fd6adcb6f8c86a5cd51c45193ca7ae53eb68993ea7b60de7ebca877c4f7e",
   "42CrMo4_FABEST": "7f9f7d14d4460376ce190ad7de2ce21528450df1fe0b6172129f6a7039c234b8"
  },

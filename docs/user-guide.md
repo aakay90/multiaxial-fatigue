@@ -59,7 +59,7 @@ pytest
 Every registered model on one material workbook:
 
 ```bash
-uv run multifat-pipeline --material 42CrMo4_QT --jobs 4
+uv run multifat-pipeline --material 42CrMo4_Santus --jobs 4
 ```
 
 ### Running All Materials in Batch
@@ -124,17 +124,17 @@ Each pipeline stage is also a console command, for targeted experiments and deve
 To run one chosen criterion on a single material, without invoking the full pipeline:
 
 ```bash
-# Run the Böhme-Papuga criterion on 42CrMo4_QT
-uv run multifat-run --model BP --material 42CrMo4_QT
+# Run the Böhme-Papuga criterion on 42CrMo4_Santus
+uv run multifat-run --model BP --material 42CrMo4_Santus
 
 # Run a stress-invariant criterion without generating individual plots
-uv run multifat-run --model SINES --material 42CrMo4_QT --no-plots
+uv run multifat-run --model SINES --material 42CrMo4_Santus --no-plots
 
 # Run Findley with explicit shear amplitude algorithm
-uv run multifat-run --model FIN --material 42CrMo4_QT --shear-amplitude-algorithm mce_harmonic
+uv run multifat-run --model FIN --material 42CrMo4_Santus --shear-amplitude-algorithm mce_harmonic
 
 # Design curve with a 90 % survival probability instead of the median (also on multifat-pipeline)
-uv run multifat-run --model SINES --material 42CrMo4_QT --survival-probability 0.9
+uv run multifat-run --model SINES --material 42CrMo4_Santus --survival-probability 0.9
 ```
 
 `--survival-probability` shifts the fitted master curve by $\Phi^{-1}(P_s)$ standard deviations of
@@ -156,7 +156,7 @@ uv run multifat-calibrate --data-folder Experimental_Data --shear-amplitude-algo
 ```
 
 The batch calibrates every material independently: a material whose plane-constant calibration has no
-finite objective (`1_Ti6Al4V` in this collection: its torsion/tension mix orders the Li damage
+finite objective (`1_Ti6Al4V_Meneghetti` in this collection: its torsion/tension mix orders the Li damage
 parameter against life) is reported as `infeasible` with the block and a measured diagnostic, the
 materials after it are still calibrated, and the command exits with status 1. A summary table at the
 end lists the status of every material.
@@ -206,7 +206,7 @@ uv run python tools/regression_snapshot.py run <dir>
 
 Testing your own fatigue data with `multifat` requires the following steps:
 
-1. **Place the workbook** in `Experimental_Data/` as `<MATERIAL_NAME>.xlsx` (e.g. `Experimental_Data/Inconel718.xlsx`); the material name is the file stem without its ordering prefix (`6_42CrMo4_QT.xlsx` is `42CrMo4_QT`).
+1. **Place the workbook** in `Experimental_Data/` as `<MATERIAL_NAME>.xlsx` (e.g. `Experimental_Data/Inconel718.xlsx`); the material name is the file stem without its ordering prefix (`6_42CrMo4_Santus.xlsx` is `42CrMo4_Santus`).
 2. **Fill the two sheets the importer reads**:
    - `Summary`: one header row; the material values are read from the row labelled `Average`. Young's modulus and Poisson's ratio are required; the fatigue limits, the two $R = 0$ strengths, the yield and ultimate strengths and the method constants (`k FS`, `k FI`, `k MGSE`, `a MSWT`, `L LI`, ...) are optional, and a model whose constant is missing is skipped.
    - `Dataset`: one row per test, with columns found by header tokens: the radial, axial and shear mean and amplitude stresses, the `Phase AXIAL load` column of the revised format, the cycles to failure, `Notched` and `Run out (Yes/No)`.

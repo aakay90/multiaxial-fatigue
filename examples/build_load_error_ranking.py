@@ -4,8 +4,8 @@ Per method and material: number, mean, standard deviation and root mean square o
 Error_load = ln(1/s*) on the assessed failures (Flag = 1), and the fraction within +-20 % of
 the load. Regenerate after any model or dataset change:
 
-    uv run multifat-pipeline --material 42CrMo4_QT --material 42CrMo4_Reis --material AISI316L \
-        --material Al7075_T6 --material Ti6Al4V --material Ti6Al4V_Berto --material 42CrMo4_FABEST \
+    uv run multifat-pipeline --material 42CrMo4_Santus --material 42CrMo4_Reis --material AISI316L \
+        --material Al7075_T6 --material Ti6Al4V_Meneghetti --material Ti6Al4V_Berto --material 42CrMo4_FABEST \
         --models all \
         --jobs 4 --results-dir <tmp_dir>
     uv run python examples/build_load_error_ranking.py <tmp_dir>
@@ -150,7 +150,7 @@ def write_ranking(results_dir: Path, out_path: Path | None = None) -> tuple[Path
     target.parent.mkdir(parents=True, exist_ok=True)
     table.to_csv(target, index=False, float_format="%.6g", lineterminator="\n")
     # every material that was run, also one whose methods were all skipped or left fewer than 3
-    # errors (e.g. Ti6Al4V, whose master curves are not identifiable, #74): its fingerprint must
+    # errors (e.g. Ti6Al4V_Meneghetti, whose master curves are not identifiable, #74): its fingerprint must
     # still be tracked
     materials = sorted(
         {str(m) for m in table["Material"].astype(str)}

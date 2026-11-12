@@ -11,7 +11,7 @@ tests on the same material from different sources. This page asks:
 ## Short answer (42CrMo4, three batches)
 
 - **The batches differ mainly in their axial strength.** At $10^5$ cycles the axial strengths
-  are 478, 530 and 642 MPa (QT, Reis, FABEST). The torsion strengths are 393, 423 and 427 MPa,
+  are 478, 530 and 642 MPa (Santus, Reis, FABEST). The torsion strengths are 393, 423 and 427 MPa,
   and the two batches with multiaxial tests agree within 3 % on both multiaxial paths.
 - **Part of it is test series, part is material batch, and the batch part is mostly the
   strength level.** The FABEST database is one material batch tested in 27 axial series in
@@ -25,9 +25,9 @@ tests on the same material from different sources. This page asks:
 - **The transfer shift does not depend on the method.** Predicting batch B from batch A changes
   every method's bias by the same amount, equal to three decimals to a quantity computed from
   the S-N curves. A transfer therefore tests the data of the two batches, not the methods.
-- **Direction matters for safety.** Calibrating on the softer QT batch is conservative for the
-  other two. Calibrating on Reis or FABEST is non-conservative for QT: the load must be reduced
-  by a further 15–25 % to cover 95 % of the QT tests.
+- **Direction matters for safety.** Calibrating on the softer Santus batch is conservative for the
+  other two. Calibrating on Reis or FABEST is non-conservative for Santus: the load must be reduced
+  by a further 15–25 % to cover 95 % of the Santus tests.
 
 These are descriptive results for one steel and three sources. They do not rank the methods in
 general.
@@ -44,7 +44,7 @@ Three terms are kept apart on this page:
 The maintainer's rules:
 
 - **d101**: tests by different author groups are different material batches.
-- **Santus 2018 and Benedetti 2022 (`42CrMo4_QT`)**: one material batch, two test series. This
+- **Santus 2018 and Benedetti 2022 (`42CrMo4_Santus`)**: one material batch, two test series. This
   is decided on the data (d101, revised): their axial strengths differ by 0.096 in ln S, less
   than one standard deviation of the difference between two series of one batch
   ($0.081\sqrt2 = 0.115$, from FABEST). Nothing in the data indicates two batches. Benedetti
@@ -55,14 +55,16 @@ The maintainer's rules:
   test-series scatter, the yardstick used below.
 
 Families are declared in
-[`examples/data/material_families.json`](../examples/data/material_families.json).
+[`examples/data/material_families.json`](../examples/data/material_families.json). A batch is named
+after its first author or its project (decision [d112](decision-log.md#d112)): every 42CrMo4 batch
+is quenched and tempered (+QT), so the condition does not tell them apart.
 
 | Family | Batch | Source | Su / Sy (MPa) | Specimens | R = −1 failures (A / T) | Multiaxial failures |
 | --- | --- | --- | --- | --- | --- | --- |
-| 42CrMo4 | `42CrMo4_QT` | Santus 2018 + Benedetti 2022 (one batch, two series) | 875 / 727 | solid, axial d = 5, torsion d = 14 mm | 27 / 9 (+ 9 torsion with mean shear) | none |
+| 42CrMo4 | `42CrMo4_Santus` | Santus 2018 + Benedetti 2022 (one batch, two series) | 875 / 727 | solid, axial d = 5, torsion d = 14 mm | 27 / 9 (+ 9 torsion with mean shear) | none |
 | 42CrMo4 | `42CrMo4_Reis` | Anes/Reis 2014 | 1100 / 980 | solid, d = 6.3 / 7.5 mm | 6 / 5 | 8 in-phase, 6 at 90° |
 | 42CrMo4 | `42CrMo4_FABEST` | FABEST, PBS series | 1111 / 1035 | thin-walled tube 8.1/7 mm | 20 / 20 | 18 in-phase, 21 at 90° |
-| Ti6Al4V | `Ti6Al4V` | Meneghetti 2018 (Delahay 2006 rows removed, d109) | 980 / 915 (Meneghetti only, d108) | — | 6 / 4 | none |
+| Ti6Al4V | `Ti6Al4V_Meneghetti` | Meneghetti 2018 (Delahay 2006 rows removed, d109) | 980 / 915 (Meneghetti only, d108) | — | 6 / 4 | none |
 | Ti6Al4V | `Ti6Al4V_Berto` | Berto 2015 | 978 / 894 | — | 9 / 8 (+ 31 torsion with mean shear) | none |
 
 ### What "batch" confounds
@@ -70,7 +72,7 @@ Families are declared in
 A batch defined by its authors differs from the next one in several ways at once. For the three
 42CrMo4 batches (workbooks, `Experimental_Data/PROVENANCE.md` and the FABEST source file):
 
-| Factor | QT | Reis | FABEST | Separable with these data? |
+| Factor | Santus | Reis | FABEST | Separable with these data? |
 | --- | --- | --- | --- | --- |
 | Heat treatment (Su, MPa) | 875 | 1100 | 1111 | Partly: strengths can be divided by Su |
 | Specimen | solid; axial d = 5, torsion d = 14 mm | solid; d = 6.3 and 7.5 mm | tube 8.1/7 mm | No: one geometry per batch |
@@ -90,7 +92,7 @@ scatter between datasets to estimate the material-batch part
 
 Series inside a dataset (`reference_series.csv`):
 
-- **QT.** The Santus axial series gives 457 MPa at $10^5$ cycles (95 % interval 437–471), the
+- **Santus.** The Santus axial series gives 457 MPa at $10^5$ cycles (95 % interval 437–471), the
   Benedetti series 503 MPa (485–525). The difference (10 %) is inside the scatter between
   FABEST series of one batch.
 - **FABEST.** FAB06x and FAB07x differ in the turning parameters (cutter nose radius 0.4 and
@@ -234,7 +236,7 @@ supplied), GOLOS is out of scope, and SSF runs only where its published surface 
 
 Strength at $10^5$ cycles (`reference_series.csv`, pooled series):
 
-| Path | QT | Reis | FABEST | Range (ln) |
+| Path | Santus | Reis | FABEST | Range (ln) |
 | --- | --- | --- | --- | --- |
 | A, MPa | 478 | 530 | 642 | 0.30 |
 | A / Su | 0.546 | 0.482 | 0.578 | 0.18 |
@@ -286,7 +288,7 @@ Reading:
 
 ![Batch offsets](images/batch_comparison_42CrMo4_offsets.png)
 
-| Path | Methods | $\beta_\mathrm{QT}$ | $\beta_\mathrm{Reis}$ | $\beta_\mathrm{FABEST}$ | Interaction RMS | From sampling | Method SD |
+| Path | Methods | $\beta_\mathrm{Santus}$ | $\beta_\mathrm{Reis}$ | $\beta_\mathrm{FABEST}$ | Interaction RMS | From sampling | Method SD |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | T | 33 | +0.097 [0.067, 0.126] | +0.015 [−0.016, 0.044] | −0.112 [−0.137, −0.087] | 0.043 | 0.008 | 0.141 |
 | AT-IP | 43 | — | +0.061 [0.045, 0.077] | −0.061 | 0.023 | 0.004 | 0.047 |
@@ -318,11 +320,11 @@ method-free prediction $q(B|A) - q(A|A)$ (`transfer_prediction.csv`):
 
 | Design → target | Path A | Path T | Path AT-IP | Path AT-NP |
 | --- | --- | --- | --- | --- |
-| QT → Reis | +0.112 / +0.112 | +0.044 / +0.044 | — | — |
-| QT → FABEST | +0.298 / +0.298 | +0.039 / +0.039 | — | — |
-| Reis → QT | −0.088 / −0.088 | −0.020 / −0.020 | — | — |
+| Santus → Reis | +0.112 / +0.112 | +0.044 / +0.044 | — | — |
+| Santus → FABEST | +0.298 / +0.298 | +0.039 / +0.039 | — | — |
+| Reis → Santus | −0.088 / −0.088 | −0.020 / −0.020 | — | — |
 | Reis → FABEST | +0.191 / +0.191 | −0.007 / −0.007 | +0.029 / +0.030 | −0.015 / −0.015 |
-| FABEST → QT | −0.286 / −0.286 | −0.023 / −0.023 | — | — |
+| FABEST → Santus | −0.286 / −0.286 | −0.023 / −0.023 | — | — |
 | FABEST → Reis | −0.189 / −0.189 | +0.006 / +0.006 | −0.030 / −0.030 | +0.012 / +0.012 |
 
 (observed / predicted)
@@ -332,8 +334,8 @@ method-free prediction $q(B|A) - q(A|A)$ (`transfer_prediction.csv`):
   other. It does not discriminate between methods; their ranking in a transfer is inherited
   from their own-batch bias.
 - **Nearly all of the shift is on the axial path**, in line with the method-free comparison.
-- **Direction.** From QT to the stronger batches the median bias is +0.24 to +0.25
-  (conservative). From Reis or FABEST to QT it is −0.09 and −0.17 (non-conservative). Between
+- **Direction.** From Santus to the stronger batches the median bias is +0.24 to +0.25
+  (conservative). From Reis or FABEST to Santus it is −0.09 and −0.17 (non-conservative). Between
   Reis and FABEST it is +0.13 and −0.01.
 
 ![Load factor covering 95 % of the tests](images/batch_comparison_42CrMo4_designer.png)
@@ -342,9 +344,9 @@ The load factor $\gamma_{95} = \exp[-(\bar e_L - 1.645\,s)]$ is the factor by wh
 allowed by a method must be divided so that 95 % of the tests are on the safe side, under a
 normal model of $e_L$ (`transfer_designer.csv`, median over the methods, same tests):
 
-| Target | Own batch | From QT | From Reis | From FABEST |
+| Target | Own batch | From Santus | From Reis | From FABEST |
 | --- | --- | --- | --- | --- |
-| QT | 1.10 | — | 1.26 | 1.35 |
+| Santus | 1.10 | — | 1.26 | 1.35 |
 | Reis | 1.08 | 0.92 | — | 1.14 |
 | FABEST | 1.17 | 0.96 | 1.09 | — |
 
@@ -366,18 +368,18 @@ to FABEST with Reis's torsion curve (`transfer_cells.csv`):
 The explanation is in the method-free comparison: the torsion and multiaxial curves of Reis and
 FABEST coincide, and SSF is designed on the torsion curve. Its error appears on the axial path,
 where the two batches differ. On Reis itself (in sample) its RMS is 0.04 on every path. SSF is
-skipped on QT, whose torsion tests with a mean shear are outside its R = −1 scope.
+skipped on Santus, whose torsion tests with a mean shear are outside its R = −1 scope.
 
 ## Results: Ti6Al4V
 
 ![Strength per path, Ti6Al4V](images/batch_comparison_Ti6Al4V_strength.png)
 
-- **No own-batch comparison is possible.** The `Ti6Al4V` design tests do not identify a master
+- **No own-batch comparison is possible.** The `Ti6Al4V_Meneghetti` design tests do not identify a master
   curve: 6 axial failures over 0.39 decades of life with a slope indistinguishable from zero
   ($b = -0.002 \pm 0.027$), and 4 torsion failures for MWHS. Since decision
   [d106](decision-log.md#d106) the master-curve methods are skipped there, and only the native
   MOREL runs. FS, FIN, MDC, MMCCM and LIUMAHADEVAN cannot be calibrated on it either.
-- **Transfer from Berto.** `Ti6Al4V` can still be predicted from `Ti6Al4V_Berto` (42 methods,
+- **Transfer from Berto.** `Ti6Al4V_Meneghetti` can still be predicted from `Ti6Al4V_Berto` (42 methods,
   Berto's curves and Summary). The shift equals its method-free prediction: −0.227 on the axial
   path and +0.147 in torsion (`transfer_prediction.csv`). The reverse transfer is skipped for the
   same reason as the own batch.
@@ -387,7 +389,7 @@ skipped on QT, whose torsion tests with a mean shear are outside its R = −1 sc
     paper: the values are nominal shear amplitudes, and the ratio comes from an almost flat
     axial curve (inverse slope 50, against 22 in torsion); at $2\times10^6$ cycles the paper
     gives 0.88. Not a data error.
-  - The Summary of `1_Ti6Al4V` averaged the Meneghetti and Delahay properties, although every
+  - The Summary of `1_Ti6Al4V_Meneghetti` averaged the Meneghetti and Delahay properties, although every
     failure is Meneghetti's. Since decision [d108](decision-log.md#d108) an overlay keeps the
     Meneghetti values only (Su 980, Sy 915, limits 500 / 422.5 MPa). The 4 Delahay rows, endurance
     limits of another batch entered as run-outs, are removed ([d109](decision-log.md#d109)).

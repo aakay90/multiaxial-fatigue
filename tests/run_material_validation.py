@@ -31,10 +31,10 @@ def main():
     # Plain failures of the materials with life data (the fatigue-limit sets need the pipeline)
     counts = {
         "AISI316L": 39,
-        "42CrMo4_QT": 45,
+        "42CrMo4_Santus": 45,
         "42CrMo4_Reis": 25,
         "Al7075_T6": 87,
-        "Ti6Al4V": 10,
+        "Ti6Al4V_Meneghetti": 10,
         "Ti6Al4V_Berto": 48,
     }
     runout_counts = {
