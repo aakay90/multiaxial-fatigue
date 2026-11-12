@@ -16,7 +16,7 @@ from multifat.cli import run as runmod
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "Experimental_Data"
-DESIGN, TARGET = "42CrMo4_QT", "42CrMo4_Reis"
+DESIGN, TARGET = "42CrMo4_Santus", "42CrMo4_Reis"
 SSF_REIS = ROOT / "Calibrations" / "42CrMo4_Reis" / "SSF_published.json"
 
 
@@ -27,7 +27,7 @@ def transfer():
 
 def test_transfer_dataset_layout(transfer):
     data, material, design_data = transfer
-    assert material == "42CrMo4_Reis_from_42CrMo4_QT"
+    assert material == "42CrMo4_Reis_from_42CrMo4_Santus"
     d_data, d_mat = runmod.load_material(DESIGN)
     t_data, t_mat = runmod.load_material(TARGET)
     block = data[material]
@@ -87,11 +87,11 @@ def test_transfer_run_writes_design_rows_of_the_design_batch(tmp_path):
         DATA / "14_42CrMo4_Reis.xlsx",
         models=["CROSSLAND"],
         results_dir=tmp_path,
-        design_workbook=DATA / "6_42CrMo4_QT.xlsx",
+        design_workbook=DATA / "6_42CrMo4_Santus.xlsx",
     )
     assert [o.status for o in outcomes] == ["ok"]
-    frame = pd.read_csv(tmp_path / "CROSSLAND_42CrMo4_Reis_from_42CrMo4_QT.csv")
-    own = pd.read_csv(_own_run(tmp_path / "own", "6_42CrMo4_QT.xlsx"))
+    frame = pd.read_csv(tmp_path / "CROSSLAND_42CrMo4_Reis_from_42CrMo4_Santus.csv")
+    own = pd.read_csv(_own_run(tmp_path / "own", "6_42CrMo4_Santus.xlsx"))
     design, own_design = frame[frame["Flag"] == 0], own[own["Flag"] == 0]
     assert sorted(design["Observation_id"]) == sorted(own_design["Observation_id"])
     assert np.array_equal(
@@ -105,7 +105,7 @@ def test_transfer_run_writes_design_rows_of_the_design_batch(tmp_path):
 
 def _own_run(dest: Path, workbook: str) -> Path:
     pipeline.run_workbook(DATA / workbook, models=["CROSSLAND"], results_dir=dest)
-    return dest / "CROSSLAND_42CrMo4_QT.csv"
+    return dest / "CROSSLAND_42CrMo4_Santus.csv"
 
 
 def test_transfer_refuses_constants_of_another_material(tmp_path):
@@ -116,7 +116,7 @@ def test_transfer_refuses_constants_of_another_material(tmp_path):
             models=["CROSSLAND"],
             results_dir=tmp_path,
             constants=SSF_REIS,
-            design_workbook=DATA / "6_42CrMo4_QT.xlsx",
+            design_workbook=DATA / "6_42CrMo4_Santus.xlsx",
         )
 
 
@@ -130,7 +130,7 @@ def test_transfer_refuses_calibration_records(tmp_path):
             models=["CROSSLAND"],
             results_dir=tmp_path,
             constants=sidecar,
-            design_workbook=DATA / "6_42CrMo4_QT.xlsx",
+            design_workbook=DATA / "6_42CrMo4_Santus.xlsx",
         )
 
 

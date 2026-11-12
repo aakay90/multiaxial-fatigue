@@ -59,14 +59,14 @@ def test_curves_that_are_not_identifiable(N, DP, expected):
 
 
 def test_pipeline_skips_and_reports_a_curve_that_is_not_identifiable(tmp_path):
-    """Ti6Al4V: 6 axial design tests over 0.39 decades of life."""
+    """Ti6Al4V_Meneghetti: 6 axial design tests over 0.39 decades of life."""
     outcomes = pipeline.run_workbook(
-        DATA / "1_Ti6Al4V.xlsx", models=["CROSSLAND"], results_dir=tmp_path
+        DATA / "1_Ti6Al4V_Meneghetti.xlsx", models=["CROSSLAND"], results_dir=tmp_path
     )
     assert [o.status for o in outcomes] == ["skipped"]
     assert "master curve not identifiable" in outcomes[0].reason
-    table = pd.read_csv(tmp_path / "Ti6Al4V_master_curves.csv")
+    table = pd.read_csv(tmp_path / "Ti6Al4V_Meneghetti_master_curves.csv")
     row = table.set_index("model").loc["CROSSLAND"]
     assert row["status"] == "skipped" and not row["identifiable"]
     assert row["n"] == 6 and row["decades"] == pytest.approx(0.389, abs=1e-3)
-    assert not (tmp_path / "CROSSLAND_Ti6Al4V.csv").exists()
+    assert not (tmp_path / "CROSSLAND_Ti6Al4V_Meneghetti.csv").exists()

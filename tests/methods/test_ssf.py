@@ -135,5 +135,5 @@ def test_published_constants_record():
     constants, origin = load_constants(path, "42CrMo4_Reis")
     assert constants == PUBLISHED
     assert origin["kind"] == "published constants"
-    with pytest.raises(ValueError, match="not '42CrMo4_QT'"):
-        load_constants(path, "42CrMo4_QT")
+    with pytest.raises(ValueError, match="not '42CrMo4_Santus'"):
+        load_constants(path, "42CrMo4_Santus")

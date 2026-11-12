@@ -4,7 +4,7 @@
 
 One `.xlsx` file per material in `Experimental_Data/` (subfolders such as `archive/` are not
 read). The material ID is the file name without extension and without an ordering prefix
-such as `6_` (`6_42CrMo4_QT.xlsx` is `42CrMo4_QT`); two files with the same ID are rejected.
+such as `6_` (`6_42CrMo4_Santus.xlsx` is `42CrMo4_Santus`); two files with the same ID are rejected.
 `multifat-pipeline <workbook>` validates it, calibrates missing constants, runs every
 registered model and compares the results. Workbooks are never modified.
 

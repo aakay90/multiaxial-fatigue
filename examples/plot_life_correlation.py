@@ -20,7 +20,7 @@ def plot_life_correlation(out_path: Path | None = None) -> Path:
     if out_path is None:
         out_path = DOCS_IMG_DIR / "life_prediction_correlation.png"
 
-    csv_path = DATA_DIR / "42CrMo4_QT_predictions.csv"
+    csv_path = DATA_DIR / "42CrMo4_Santus_predictions.csv"
     df = pd.read_csv(csv_path)
 
     target_models: List[Tuple[str, str, str, str]] = [
@@ -85,7 +85,7 @@ def plot_life_correlation(out_path: Path | None = None) -> Path:
     )
     ax.set_title(
         r"$\mathbf{Multiaxial\ Fatigue\ Life\ Prediction\ Correlation}$"
-        + "\n42CrMo4-QT, plain axial and torsion tests (run-outs excluded)",
+        + "\n42CrMo4_Santus, plain axial and torsion tests (run-outs excluded)",
         fontsize=12,
         pad=12,
     )

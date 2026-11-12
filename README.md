@@ -113,7 +113,7 @@ the critical plane and changes each criterion's damage peaks:
 
 ### 2. Multiaxial fatigue life prediction correlation
 Experimental versus predicted fatigue life ($N_{f,\mathrm{exp}}$ vs $N_{f,\mathrm{pred}}$) for the
-plain axial and torsion tests of 42CrMo4-QT (`Experimental_Data/6_42CrMo4_QT.xlsx`; run-outs
+plain axial and torsion tests of 42CrMo4_Santus (`Experimental_Data/6_42CrMo4_Santus.xlsx`; run-outs
 excluded; no combined-loading tests in the workbook), against the Factor-of-2 ($F2$) and Factor-of-3
 ($F3$) scatter bands. Predictions come from the current pipeline
 (`examples/build_predictions_csv.py`):
@@ -133,7 +133,7 @@ torsion-calibrated master curve is too flat, so only damage errors are reported)
 
 ### 4. Biaxial fatigue limit failure envelopes
 Normalized failure boundaries ($\sigma_a / \sigma_{-1}$ vs $\tau_a / \tau_{-1}$) for fully reversed
-proportional loading, calibrated on the 42CrMo4-QT fatigue limits ($\sigma_{-1} = 433$ MPa,
+proportional loading, calibrated on the 42CrMo4_Santus fatigue limits ($\sigma_{-1} = 433$ MPa,
 $\tau_{-1} = 344$ MPa): Gough-Pollard ellipse, maximum shear stress (Tresca, calibrated on
 $\sigma_{-1}$), Crossland and Findley. Only the two calibration points are shown: the dataset has no
 combined-loading fatigue-limit tests.
@@ -152,10 +152,9 @@ so this is a like-for-like comparison, not an independent validation
 ([issue #14](https://github.com/andreachiocca/multiaxial-fatigue/issues/14)).
 
 - **Life datasets** (left block): $e_L$ on the assessed failures. On Ti6Al4V_Berto all assessed
-  tests are torsional. On Ti6Al4V only MOREL, which has its own life law, is scored: the design
-  tests (6 axial failures over 0.39 decades of life) do not identify a master curve, so the other
-  methods are skipped there ([issue #74](https://github.com/andreachiocca/multiaxial-fatigue/issues/74)),
-  and the column is left out of the ranks.
+  tests are torsional. Ti6Al4V_Meneghetti is not shown: only MOREL, which has its own life law, is
+  scored there, because its design tests (6 axial failures over 0.39 decades of life) do not
+  identify a master curve ([issue #74](https://github.com/andreachiocca/multiaxial-fatigue/issues/74)).
 - **Fatigue-limit datasets** (right block, decision d110): a limit state has the same error,
   $e_L = \ln(1 + FI_{load})$, where $FI_{load} = 1/s - 1$ is the stress-scaled fatigue index. The
   pure R = -1 axial limits are the reference and are left out; torsion and multiaxial limits are

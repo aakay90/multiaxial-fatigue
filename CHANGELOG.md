@@ -6,6 +6,14 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### Batch names after their author or project (decision d112)
+
+- `42CrMo4_QT` is now `42CrMo4_Santus` (file `6_42CrMo4_Santus.xlsx`, `Calibrations/42CrMo4_Santus/`)
+  and `Ti6Al4V` is now `Ti6Al4V_Meneghetti` (`1_Ti6Al4V_Meneghetti.xlsx`): every 42CrMo4 batch is
+  +QT, so the heat treatment did not distinguish them. Workbook bytes and numbers are unchanged.
+- The homepage ranking figure leaves out a material with fewer than 2 scored methods
+  (Ti6Al4V_Meneghetti, only MOREL, #74) and names it in a note.
+
 ### Fatigue-limit datasets in the method ranking (decision d110, #37)
 
 - The homepage ranking adds the fatigue-limit datasets (25CrMo4, 30NCD16, 34Cr4, 982FA, S65A,

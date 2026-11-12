@@ -99,12 +99,12 @@ and master curves use `FIN`. `_ext` is a separate stored curve, not a new materi
 
 ```bash
 # Fit the requested coefficient and both FS curve variants.
-python scripts/0_calibrate_material_params.py --material 42CrMo4_QT --models FS
-python scripts/1_run_material.py --material 42CrMo4_QT --model FS_ext --results-dir Results/current --plot-dir Results/current/plots
+python scripts/0_calibrate_material_params.py --material 42CrMo4_Santus --models FS
+python scripts/1_run_material.py --material 42CrMo4_Santus --model FS_ext --results-dir Results/current --plot-dir Results/current/plots
 
 # BP/CAIM require no fitted method coefficients, but still need master curves.
-python scripts/0_calibrate_material_params.py --material 42CrMo4_QT --models BP CAIM
-python scripts/1_run_material.py --material 42CrMo4_QT --model BP --results-dir Results/current --no-plots
+python scripts/0_calibrate_material_params.py --material 42CrMo4_Santus --models BP CAIM
+python scripts/1_run_material.py --material 42CrMo4_Santus --model BP --results-dir Results/current --no-plots
 python scripts/2_compare_results.py --results_dir Results/current --out_dir Results/Comparison
 ```
 
@@ -146,7 +146,7 @@ noted in the run report. A model whose master curve cannot be inverted for life 
 `k = -1/b > 15`) still runs, with DP errors only; the run report says so.
 
 Calibration stays all-or-nothing per material: an `infeasible` material yields exactly the constants
-it yielded before the status existed, so `1_Ti6Al4V` keeps its Basquin and strain-life estimates and
+it yielded before the status existed, so `1_Ti6Al4V_Meneghetti` keeps its Basquin and strain-life estimates and
 loses the plane constants of every block, not only the one that failed. Models that read a lost
 constant with a fallback still run, and the run report marks them `ok (default constant)` with a note
 naming the block and the default value; models that require it stay `skipped` with the same pointer

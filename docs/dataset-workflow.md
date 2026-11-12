@@ -12,7 +12,7 @@ uv run python tools/audit_dataset_migration.py --old-dir Experimental_Data/archi
 
 ## Provenance and import
 
-Header rules live in `multifat.imp.schema` (see [workbook format](workbook-format.md)). An ordering prefix such as `6_` is stripped from the file name, which yields the material ID `42CrMo4_QT`; two files carrying the same ID are rejected, and `--material 42CrMo4_QT` locates `6_42CrMo4_QT.xlsx`. Alloy, treatment and legacy axial/bending suffixes are left unmerged. Workbooks are user inputs. Their Summary sheet stores the material properties, while the Dataset sheet stores the observations. A source-row material name different from the file ID is reported as an identity issue, but does not change the Summary values or rewrite the workbook.
+Header rules live in `multifat.imp.schema` (see [workbook format](workbook-format.md)). An ordering prefix such as `6_` is stripped from the file name, which yields the material ID `42CrMo4_Santus`; two files carrying the same ID are rejected, and `--material 42CrMo4_Santus` locates `6_42CrMo4_Santus.xlsx`. Alloy, treatment and legacy axial/bending suffixes are left unmerged. Workbooks are user inputs. Their Summary sheet stores the material properties, while the Dataset sheet stores the observations. A source-row material name different from the file ID is reported as an identity issue, but does not change the Summary values or rewrite the workbook.
 
 Summary properties other than the R = -1 fatigue limits are taken from the named Average cell when that cell exists; otherwise they come from the row labelled Average. In a revised Summary with a `Stress ratio R` column, the maintainer-approved policy (28 October 2026, Issue #22) uses an equal-weight arithmetic mean of the eligible positive, finite R = -1 source values for each parameter, `Sigm1` and `Taum1`. Values at other stress ratios are never included in those means. Tensile and torsional values are selected separately; source-row names are retained for review, not used to discard values from the supplied workbook. Each selected value retains the contributing Excel rows, references, authors, stress ratios and reference cycle counts in `fatigue_limit_sources`. A property with source values but no usable R = -1 value is unavailable and reported. Legacy workbooks retain the Average-row rule. Properties that are absent remain absent. Strains are undefined without E or nu; stress observations are imported regardless, and only the models that require strains get skipped (`multifat.models.registry.stress_only_models()` finds the others by evaluation).
 
@@ -58,7 +58,7 @@ Availability is not an accuracy ranking. If two selected workbooks share a mater
 
 ```bash
 uv run multifat-pipeline --all --jobs 8 --results-dir Results/current
-uv run multifat-pipeline --material 42CrMo4_QT --models BP,SWT --no-calibrate
+uv run multifat-pipeline --material 42CrMo4_Santus --models BP,SWT --no-calibrate
 ```
 
 ## Workflow classification (issue #18)

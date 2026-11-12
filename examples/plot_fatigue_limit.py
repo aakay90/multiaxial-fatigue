@@ -1,8 +1,8 @@
 """Biaxial Fatigue Limit Envelopes Plot.
 
 Failure boundaries for fully reversed, proportional (in-phase) axial + torsional loading in
-normalized stress space (sigma_a / sigma_{-1} vs tau_a / tau_{-1}), calibrated on the 42CrMo4-QT
-fatigue limits of ``Experimental_Data/6_42CrMo4_QT.xlsx`` (Benedetti et al. 2022):
+normalized stress space (sigma_a / sigma_{-1} vs tau_a / tau_{-1}), calibrated on the 42CrMo4_Santus
+fatigue limits of ``Experimental_Data/6_42CrMo4_Santus.xlsx`` (Benedetti et al. 2022):
 
 - Gough-Pollard ellipse
 - Maximum shear stress (Tresca), calibrated on sigma_{-1}
@@ -143,7 +143,7 @@ def plot_fatigue_limit_envelopes(
     )
     ax.set_title(
         r"$\mathbf{Multiaxial\ Fatigue\ Limit\ Envelopes}$"
-        + "\n42CrMo4-QT, fully reversed proportional loading "
+        + "\n42CrMo4_Santus, fully reversed proportional loading "
         + rf"($\tau_{{-1}}/\sigma_{{-1}} = {r:.2f}$)",
         fontsize=12,
         pad=12,

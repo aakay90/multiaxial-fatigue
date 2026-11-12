@@ -106,7 +106,7 @@ DP $= \tau_{eqv}$ (MPa), with the cycle sampled at 4096 points:
      extrapolated there; the method warns.
    - The extrapolated cubic is not monotonic in the load, so the load-error search falls back to
      bisection (`eval/load_error.py`).
-   - On 42CrMo4_QT, SSF is skipped: its torsion tests with a mean shear are outside the R = −1
+   - On 42CrMo4_Santus, SSF is skipped: its torsion tests with a mean shear are outside the R = −1
      scope.
    - Results: [cross-batch comparison](../batch-comparison.md).
 

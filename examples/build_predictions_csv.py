@@ -1,8 +1,8 @@
-"""Build examples/data/42CrMo4_QT_predictions.csv from pipeline output.
+"""Build examples/data/42CrMo4_Santus_predictions.csv from pipeline output.
 
 Regenerate after any model or dataset change:
 
-    uv run multifat-pipeline --material 42CrMo4_QT --models all --no-compare \
+    uv run multifat-pipeline --material 42CrMo4_Santus --models all --no-compare \
         --results-dir <tmp_dir>
     uv run python examples/build_predictions_csv.py <tmp_dir>
 
@@ -46,9 +46,9 @@ COLUMNS = [
 
 
 def build(results_dir: Path, out_path: Path | None = None) -> Path:
-    files = sorted(results_dir.glob("*_42CrMo4_QT.csv"))
+    files = sorted(results_dir.glob("*_42CrMo4_Santus.csv"))
     if not files:
-        raise FileNotFoundError(f"no *_42CrMo4_QT.csv in {results_dir}")
+        raise FileNotFoundError(f"no *_42CrMo4_Santus.csv in {results_dir}")
     df = pd.concat(pd.read_csv(f) for f in files)[COLUMNS]
     valid = df.groupby("Method")["Nf_expected"].transform(lambda s: s.notna().any())
     df = df[valid].sort_values(["Method", "Specimen_id"]).reset_index(drop=True)

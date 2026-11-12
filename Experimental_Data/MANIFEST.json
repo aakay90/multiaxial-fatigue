@@ -31,7 +31,7 @@
     "sha256": "a67fbf23ff5ecd1ed125695f648433c69497c4ce02679e1bbb63075144580dd6",
     "dataset_fingerprint": "0327f6fdc6f90e7c0c62378108bdf606c27fd8d56a2cda2357f2059496e71008"
   },
-  "1_Ti6Al4V.xlsx": {
+  "1_Ti6Al4V_Meneghetti.xlsx": {
     "sha256": "86f0f71c50dffa3be188a0620d91f8c664197eedeef6d6a30c01f58ae884bd8b",
     "dataset_fingerprint": "c3b9a43f4f521b2f5d42196a14b61b824949dbed4b537e6b08d4fd247425871c"
   },
@@ -51,7 +51,7 @@
     "sha256": "9352b72a54ddb872f1278820c5201b34f63de379b092f404a3dbbacb51a5f332",
     "dataset_fingerprint": "3f5853afa48f1b4c7117d7c1e9fd90036f5727eb243fea5076286e9b353c9e34"
   },
-  "6_42CrMo4_QT.xlsx": {
+  "6_42CrMo4_Santus.xlsx": {
     "sha256": "87f40c72a2e4d766a93bb93ec001777a55ca84e7535e0ce339d2ba3f60de0c63",
     "dataset_fingerprint": "50fcebd49c4006212a50d303f4549cf0351c59047b2f0e9bcdebf3323aec15a3"
   },

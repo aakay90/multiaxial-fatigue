@@ -159,7 +159,7 @@ sigma_a = 400, tau_a = 230 MPa, delta = 90 deg: N_f = 3.63e+04
 **On a supplied workbook:**
 
 ```bash
-uv run multifat-pipeline --material 42CrMo4_QT --models LIUMAHADEVAN --results-dir Results/current/guides
+uv run multifat-pipeline --material 42CrMo4_Santus --models LIUMAHADEVAN --results-dir Results/current/guides
 ```
 
 ## Comparison capabilities and outputs

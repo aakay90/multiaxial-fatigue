@@ -1,7 +1,7 @@
 """Model Benchmark Error Distribution Plot.
 
 Generates a two-panel publication-grade horizontal bar chart comparing multiaxial
-fatigue criteria on 42CrMo4-QT:
+fatigue criteria on 42CrMo4_Santus:
 - Left panel: Log-error standard deviation s_ln (lower dispersion is better).
 - Right panel: Mean log-error mu_ln (systematic bias, conservative vs unconservative).
 """
@@ -30,7 +30,7 @@ def plot_benchmark_error(
     """Generate two-panel horizontal benchmark ranking models by scatter and bias."""
     apply_academic_style()
     if csv_path is None:
-        csv_path = DATA_DIR / "42CrMo4_QT_predictions.csv"
+        csv_path = DATA_DIR / "42CrMo4_Santus_predictions.csv"
     if out_path is None:
         out_path = DOCS_IMG_DIR / "model_benchmark_error.png"
 
@@ -184,7 +184,7 @@ def plot_benchmark_error(
 
     fig.suptitle(
         r"$\mathbf{Comparative\ Benchmark\ of\ Multiaxial\ Fatigue\ Criteria}$"
-        + f"\n42CrMo4-QT, plain axial and torsion tests ({n_tests} failures, run-outs excluded)",
+        + f"\n42CrMo4_Santus, plain axial and torsion tests ({n_tests} failures, run-outs excluded)",
         fontsize=13.0,
         y=0.995,
     )
