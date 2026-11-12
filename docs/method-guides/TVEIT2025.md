@@ -91,7 +91,7 @@ index = 1.8986, Nf = 263
 Batch CLI evaluation on 42CrMo4 Q&T with Stage 1 constants:
 
 ```bash
-multifat-run --model TVEIT2025 --material 42CrMo4_Santus --constants Calibrations/42CrMo4_Santus/TVEIT2025_stage1.json
+multifat-pipeline Experimental_Data/6_42CrMo4_Santus.xlsx --models TVEIT2025 --no-calibrate --constants Calibrations/42CrMo4_Santus/TVEIT2025_stage1.json
 ```
 
 ## Comparison capabilities and outputs

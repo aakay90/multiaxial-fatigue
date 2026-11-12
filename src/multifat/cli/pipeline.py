@@ -376,7 +376,9 @@ def load_constants(path: Path, material: str, n_failures: int | None = None) -> 
     constants under ``parameters``; its a_MSWT uses the weighting of the former workbooks and is
     converted with a' = a/(2 - a) (Jiang 2000 Eq. 6, as in 23e1dfe). The sidecar written here keeps
     them in ``params``. A published-constants file keeps constants printed in a paper under
-    ``published_constants``, with ``material_id`` and ``reference``. Returns (constants,
+    ``published_constants``, with ``material_id`` and ``reference``; a hand-entered file keeps
+    constants calibrated outside the pipeline under ``hand_entered_constants``, with
+    ``material_id`` and the ``provenance`` of the entry (#60). Returns (constants,
     description of the source for the new sidecar).
     """
     path = Path(path)
@@ -415,6 +417,13 @@ def load_constants(path: Path, material: str, n_failures: int | None = None) -> 
             weight = constants["a_MSWT"]
             constants["a_MSWT"] = weight / (2.0 - weight)
             origin["note"] = f"a_MSWT {weight} converted to the printed weighting a/(2 - a)"
+    elif "hand_entered_constants" in record:
+        # Constants entered by hand from an external or article-style calibration (TVEIT2025
+        # stage 1, #60): not a pipeline calibration, so no fingerprint or revision check; the
+        # record names its material, and its provenance text travels into the run sidecar.
+        declared_material = record.get("material_id")
+        constants = {k: float(v) for k, v in record["hand_entered_constants"].items()}
+        origin.update(kind="hand-entered constants", provenance=record.get("provenance"))
     elif "published_constants" in record:
         # Constants printed in a publication (e.g. the SSF surface of Anes et al. 2014): not a
         # calibration of these data, so no fingerprint; the record names its source and material.
