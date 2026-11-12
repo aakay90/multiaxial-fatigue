@@ -7,7 +7,8 @@ from multifat.cli import calibrate
 from multifat.cli.pipeline import Outcome, _annotate_calibration, _calibration_state
 from multifat.models.registry import get_models
 
-R_MINUS_1 = dict(fallback=False, tension_rtol_R=0.02, torsion_rtol_R=0.02,
+R_MINUS_1 = dict(fallback=False, tension_rtol_R=calibrate.INITIAL_RTOL_R,
+                 torsion_rtol_R=calibrate.INITIAL_RTOL_R,
                  tension_any_R=False, torsion_any_R=False)  # fmt: skip
 
 

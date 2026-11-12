@@ -51,6 +51,7 @@ from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence, Tupl
 import numpy as np
 
 from multifat.imp import experimental_data as exp
+from multifat.imp.experimental_data import DESIGN_RTOL_R, design_test_ratio, is_design_test
 from multifat.planes.sampling import dcmesh_xyz, gentang
 from multifat.eval.evaluator import (
     NEEDS_TAU_MAX,
@@ -197,52 +198,18 @@ def minimize_1d_smallest(
     return lo_edge, float(objective(lo_edge)), (lo_edge, float(xs[int(flat[-1])]))
 
 
-def _is_negligible(side_max: float, main_max: float, *, atol: float, rtol: float) -> bool:
-    return side_max <= (rtol * abs(main_max) + atol)
-
-
-def _case_extrema_tensors(case: Dict[str, Any], node: int = 1) -> Tuple[np.ndarray, np.ndarray]:
-    S0 = np.asarray(case[node][1]["stress"], dtype=float)
-    S1 = np.asarray(case[node][2]["stress"], dtype=float)
-    return S0, S1
-
-
 def _is_axial_tension_case(
     case: Dict[str, Any],
     *,
     node: int = 1,
     r_target: Optional[float] = -1.0,
-    rtol_R: float = 0.02,
+    rtol_R: float = DESIGN_RTOL_R,
     atol_R: float = 1e-6,
     rtol_uniax: float = 1e-3,
     atol_uniax: float = 1e-6,
 ) -> Tuple[bool, float]:
-    S0, S1 = _case_extrema_tensors(case, node=node)
-
-    s0 = float(S0[1, 1])
-    s1 = float(S1[1, 1])
-    smax = max(s0, s1)
-    smin = min(s0, s1)
-
-    if abs(smax) < atol_R:
-        return False, np.nan
-
-    R = smin / smax
-
-    if smax <= 0.0:
-        return False, R
-
-    S_rest = S0.copy()
-    S_rest[1, 1] = 0.0
-    rest_max = float(np.max(np.abs(S_rest)))
-    if not _is_negligible(rest_max, smax, atol=atol_uniax, rtol=rtol_uniax):
-        return False, R
-
-    if r_target is not None:
-        if not np.isclose(R, r_target, rtol=rtol_R, atol=atol_R):
-            return False, R
-
-    return True, R
+    """(selected, R) of a uniaxial tension case: ``imp.experimental_data.is_design_test`` (#77)."""
+    return _design_test(case, "tension", node, r_target, rtol_R, atol_R, rtol_uniax, atol_uniax)
 
 
 def _is_axial_torsion_case(
@@ -250,41 +217,26 @@ def _is_axial_torsion_case(
     *,
     node: int = 1,
     r_target: Optional[float] = -1.0,
-    rtol_R: float = 0.02,
+    rtol_R: float = DESIGN_RTOL_R,
     atol_R: float = 1e-6,
     rtol_uniax: float = 1e-3,
     atol_uniax: float = 1e-6,
 ) -> Tuple[bool, float]:
-    S0, S1 = _case_extrema_tensors(case, node=node)
-
-    t0 = float(S0[0, 1])
-    t1 = float(S1[0, 1])
-    tmax = max(t0, t1)
-    tmin = min(t0, t1)
-
-    if abs(tmax) < atol_R:
-        return False, np.nan
-
-    R = tmin / tmax
-
-    if tmax <= 0.0:
-        return False, R
-
-    S_rest = S0.copy()
-    S_rest[0, 1] = 0.0
-    S_rest[1, 0] = 0.0
-    rest_max = float(np.max(np.abs(S_rest)))
-    if not _is_negligible(rest_max, tmax, atol=atol_uniax, rtol=rtol_uniax):
-        return False, R
-
-    if r_target is not None:
-        if not np.isclose(R, r_target, rtol=rtol_R, atol=atol_R):
-            return False, R
-
-    return True, R
+    """(selected, R) of a pure torsion case: ``imp.experimental_data.is_design_test`` (#77)."""
+    return _design_test(case, "torsion", node, r_target, rtol_R, atol_R, rtol_uniax, atol_uniax)
 
 
-INITIAL_RTOL_R = 0.02  # tolerance on R = -1 of the calibration tests before any relaxation
+def _design_test(case, loading, node, r_target, rtol_R, atol_R, rtol_other, atol):
+    R = design_test_ratio(case, loading, node=node, rtol_other=rtol_other, atol=atol)
+    ok = is_design_test(
+        case, loading, r_target=r_target, rtol_R=rtol_R, atol_R=atol_R, node=node,
+        rtol_other=rtol_other, atol=atol,
+    )  # fmt: skip
+    return ok, R
+
+
+# The calibration starts from the design-set tolerance, then relaxes (recorded, d107; #77)
+INITIAL_RTOL_R = DESIGN_RTOL_R
 
 
 def _pick_cases_with_relaxation(

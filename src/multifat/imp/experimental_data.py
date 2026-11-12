@@ -746,11 +746,63 @@ def get_material_properties(data: Dict[str, Any], material: str) -> Dict[str, An
 
 
 #### Extract sub-dataset for uniaxial tension with R=-1
+DESIGN_RTOL_R = 1e-3  # tolerance on R = -1 of a design test, shared by every selector (#77)
+_COMPONENT = {"tension": (1, 1), "torsion": (0, 1)}  # axial sigma_yy, torsion tau_xy
+
+
+def design_test_ratio(
+    case: Dict[str, Any],
+    loading: str,
+    *,
+    node: int = 1,
+    rtol_other: float = 1e-3,
+    atol: float = 1e-6,
+) -> float:
+    """Stress ratio R of a uniaxial tension or pure torsion case; NaN for any other case.
+
+    The only stress is sigma_yy (``loading="tension"``) or tau_xy (``"torsion"``): every other
+    component of both load steps stays below ``rtol_other`` times the peak value plus ``atol``.
+    R = min / max of that component over the two load steps, whatever their order, and the peak
+    must be positive. The one definition of the "fully reversed uniaxial tests" (#77): the master
+    curve, the Basquin constants and the calibration of the plane constants all select with it.
+    """
+    i, j = _COMPONENT[loading]
+    steps = [np.asarray(case[node][k]["stress"], dtype=float) for k in (1, 2)]
+    v_max = max(float(S[i, j]) for S in steps)
+    v_min = min(float(S[i, j]) for S in steps)
+    if abs(v_max) < atol or v_max <= 0.0:
+        return float("nan")
+    for S in steps:
+        rest = S.copy()
+        rest[i, j] = rest[j, i] = 0.0
+        if float(np.max(np.abs(rest))) > rtol_other * v_max + atol:
+            return float("nan")
+    return v_min / v_max
+
+
+def is_design_test(
+    case: Dict[str, Any],
+    loading: str,
+    *,
+    r_target: Optional[float] = -1.0,
+    rtol_R: float = DESIGN_RTOL_R,
+    atol_R: float = 1e-6,
+    node: int = 1,
+    rtol_other: float = 1e-3,
+    atol: float = 1e-6,
+) -> bool:
+    """True for a uniaxial tension or pure torsion case at R = r_target (any R when None)."""
+    R = design_test_ratio(case, loading, node=node, rtol_other=rtol_other, atol=atol)
+    if not np.isfinite(R):
+        return False
+    return r_target is None or bool(np.isclose(R, r_target, rtol=rtol_R, atol=atol_R))
+
+
 def extract_uniaxial_tension(
     data: Dict[str, Any],
     *,
     node: int = 1,
-    rtol_R: float = 1e-3,
+    rtol_R: float = DESIGN_RTOL_R,
     atol_R: float = 1e-6,
     rtol_uniax: float = 1e-3,
     atol_uniax: float = 1e-6,
@@ -819,37 +871,16 @@ def extract_uniaxial_tension(
             Smin = np.asarray(case[node][2]["stress"], dtype=float)  # loadstep 2: min
             Emax = np.asarray(case[node][1]["strain"], dtype=float)
 
-            # Axial component (AXIAL -> sigma_yy)
-            smax = float(Smax[1, 1])
-            smin = float(Smin[1, 1])
-
-            # Need a nonzero max to define R robustly
-            if abs(smax) < atol_R:
+            if not is_design_test(
+                case, "tension", node=node, rtol_R=rtol_R, atol_R=atol_R,
+                rtol_other=rtol_uniax, atol=atol_uniax,
+            ):  # fmt: skip
                 continue
-
-            # Must be tensile in maximum state
-            if smax <= 0.0:
-                continue
-
-            # Check R ≈ -1
-            R_ax = smin / smax
-            if not np.isclose(R_ax, -1.0, rtol=rtol_R, atol=atol_R):
-                continue
-
-            # Uniaxial check: all other stress components near zero relative to |smax|
-            S_other = Smax.copy()
-            S_other[1, 1] = 0.0  # remove axial component
-            max_other = float(np.max(np.abs(S_other)))
-            if max_other > (rtol_uniax * abs(smax) + atol_uniax):
-                continue
-
-            # Build amplitudes (general definition; for R=-1 this will be ~smax)
+            # Axial component (AXIAL -> sigma_yy), whatever the order of the load steps
+            smax = max(float(Smax[1, 1]), float(Smin[1, 1]))
+            smin = min(float(Smax[1, 1]), float(Smin[1, 1]))
             sigma_a = 0.5 * (smax - smin)
-
-            # Axial strain amplitude from the already computed strain tensors
-            emax = float(Emax[1, 1])
-            emin = float(Emin[1, 1])
-            eps_a = 0.5 * (emax - emin)
+            eps_a = 0.5 * abs(float(Emax[1, 1]) - float(Emin[1, 1]))
 
             Nf = float(case["meta"]["Nf_cycles"])
 
@@ -877,7 +908,7 @@ def extract_pure_torsion(
     data: Dict[str, Any],
     *,
     node: int = 1,
-    rtol_R: float = 1e-3,
+    rtol_R: float = DESIGN_RTOL_R,
     atol_R: float = 1e-6,
     rtol_pure: float = 1e-3,
     atol_pure: float = 1e-6,
@@ -892,15 +923,14 @@ def extract_pure_torsion(
     for material_name, mat_block in data.items():
         points: List[Dict[str, float]] = []
         for case_id, case in mat_block.get("cases", {}).items():
+            if not is_design_test(
+                case, "torsion", node=node, rtol_R=rtol_R, atol_R=atol_R,
+                rtol_other=rtol_pure, atol=atol_pure,
+            ):  # fmt: skip
+                continue
             Smax = np.asarray(case[node][1]["stress"], dtype=float)
             Smin = np.asarray(case[node][2]["stress"], dtype=float)
             tmax, tmin = float(Smax[0, 1]), float(Smin[0, 1])
-            if abs(tmax) < atol_R or not np.isclose(tmin / tmax, -1.0, rtol=rtol_R, atol=atol_R):
-                continue
-            other = Smax.copy()
-            other[0, 1] = other[1, 0] = 0.0
-            if float(np.max(np.abs(other))) > rtol_pure * abs(tmax) + atol_pure:
-                continue
             points.append(
                 {
                     "case_id": int(case_id),
