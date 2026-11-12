@@ -152,3 +152,51 @@ def test_diverging_secant_falls_back_to_bisection():
     assert _solve_in_log(lambda x: 1.0 + 1e-6 * x) is None
     assert _solve_in_log(lambda x: x - 0.3) == pytest.approx(math.exp(0.3))
     assert LOG_S_MAX == 10.0
+
+
+class _StubResult:
+    def __init__(self, values, aux=None):
+        self.values, self.aux = values, aux or {}
+
+
+class _ScopedStub:
+    """DP = axial amplitude + 5, outside the scope (LoadingScopeError) above 150 MPa (#78)."""
+
+    def evaluate_case(self, *, S0, E0, S1, E1, params, R_list, harmonics=None):
+        from multifat.models.errors import LoadingScopeError
+
+        amplitude = float(np.asarray(harmonics["S_sin"])[1, 1])
+        if amplitude > 150.0:
+            raise LoadingScopeError("stub: above 150 MPa")
+        return _StubResult({"": amplitude + 5.0, "_ext": amplitude + 5.0})
+
+
+def test_load_factor_does_not_return_a_scope_edge_as_a_root():
+    """An unreachable target behind a scope edge is NaN, not the edge (s = 1.5 before #78)."""
+    case = case_from_amplitudes(axial=100.0, shear=0.0, mean=(0.0, 0.0, 0.0), E=E, nu=NU)
+    assert math.isnan(load_factor(_ScopedStub(), {}, case, 200.0, R_LIST))
+    assert math.isnan(master_curve_load_error(_ScopedStub(), {}, case, R_LIST, 105.0, 200.0))
+    # a reachable target is still found
+    assert load_factor(_ScopedStub(), {}, case, 125.0, R_LIST) == pytest.approx(1.2, rel=1e-9)
+
+
+class _NaNLifeStub:
+    """Native life N = 1e6 s^-10, undefined (NaN) above s = 1.3 (#78)."""
+
+    def evaluate_case(self, *, S0, E0, S1, E1, params, R_list, harmonics=None):
+        s = float(np.asarray(harmonics["S_sin"])[1, 1]) / 100.0
+        return _StubResult({"": s}, {"s": s})
+
+    def native_life(self, aux, params, fit):
+        s = aux["s"]
+        return float("nan") if s > 1.3 else 1e6 * s**-10
+
+
+def test_native_search_treats_an_undefined_life_as_a_failed_search():
+    """The true root (N = 1e16 at s = 0.1) lies on the defined side: still found; a target past
+    the NaN region is NaN, not the edge of the region (-ln 1.3 before #78)."""
+    case = case_from_amplitudes(axial=100.0, shear=0.0, mean=(0.0, 0.0, 0.0), E=E, nu=NU)
+    assert native_life_load_error(_NaNLifeStub(), {}, case, R_LIST, None, 1e16) == pytest.approx(
+        -math.log(0.1), abs=1e-9
+    )
+    assert math.isnan(native_life_load_error(_NaNLifeStub(), {}, case, R_LIST, None, 1e3))

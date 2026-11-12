@@ -190,9 +190,23 @@ def load_factor(
         mid = float(np.sqrt(lo * hi))
         r_mid = residual(mid)
         if r_mid == 0.0 or hi / lo - 1.0 < 1e-13:
-            return mid
+            return _checked_root(residual, mid, target)
         lo, hi = (mid, hi) if r_mid < 0.0 else (lo, mid)
-    return float(np.sqrt(lo * hi))
+    return _checked_root(residual, float(np.sqrt(lo * hi)), target)
+
+
+ROOT_RTOL = 1e-6  # largest |DP(s*) - target| / target accepted as a root (#78)
+
+
+def _checked_root(residual, s: float, target: float) -> float:
+    """`s` if DP(s) meets the target, NaN otherwise.
+
+    A bracket whose upper end lies outside the criterion's domain (residual +inf) can make the
+    bisection close on the edge of that domain, where DP jumps instead of crossing the target;
+    the converged point is then not a root and must not give a finite, plausible result.
+    """
+    r = residual(s)
+    return s if np.isfinite(r) and abs(r) <= ROOT_RTOL * abs(target) else float("nan")
 
 
 def fatigue_index(
