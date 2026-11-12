@@ -364,7 +364,7 @@ Known issues:
 | Source | Plain failures | Plain run-outs | Notched | Where printed | How read |
 |---|---|---|---|---|---|
 | Pedranz et al. 2025, Int. J. Mech. Sci. 288, 109961, [10.1016/j.ijmecsci.2025.109961](https://doi.org/10.1016/j.ijmecsci.2025.109961) | 87 (axial R = -1/0.1: 11/11; torsion R = -1/0.1: 12/11; multiaxial 42) | 14 | 88 | supplementary Appendix B, Tables 6-22 | tabulated |
-| Benedetti et al. 2021, FFEMS 44, 2975-2989, [10.1111/ffe.13530](https://doi.org/10.1111/ffe.13530) | 0 | 0 | 0 | Summary sheet only | - |
+| Benedetti et al. 2021, FFEMS 44, 2975-2989, [10.1111/ffe.13530](https://doi.org/10.1111/ffe.13530) | 0 (15 axial R = 0.1 tests on the phi60 bar, plotted only in Fig. 9B; not imported, d111) | 0 | 0 | Summary sheet only | - |
 
 All 189 rows match Appendix B point by point (cycles and amplitude, in the right series), except one notched
 blunt-torsion run-out stored as 5,000,000 cycles where Table 13 prints 4,800,000.
@@ -389,7 +389,14 @@ Known issues:
 1. The Benedetti 2021 Summary row carries k_FS = 2.09, k_FI = 0.39, L_LI = 3.42, k_MGSE = 0.64 and
    a_MSWT = 0.39. That paper reports axial tests only, and none of these values appears in it.
 2. The Pedranz fatigue limits in the Summary (150 / 100 MPa) differ from Appendix B Table 5 (143.8 /
-   100.9 MPa).
+   100.9 MPa). Resolved 2026-11-11 (decision d111): `src/multifat/imp/overlay_files/Al7075_T6.overlay.json`
+   sets the Table 5 strengths at N = 5e6, R = -1, push-pull (the paper's basis, Tables 3-4); 150 / 100
+   is printed in neither source and fits neither 5e6 nor 2e6 (155.9 / 108.8 MPa from the same fits).
+   The same overlay adds the measured plastic strain-life terms of Benedetti 2021 Table 4 (eps'_f =
+   0.131, c = -0.674; gamma'_f = sqrt(3) eps'_f, c0 = c by the rule of `strain_life_fill`), which
+   replace the steel uniform-material-law estimates. sigma'_f and b stay the Basquin fit of the HCF
+   tests: the LCF values (1067 MPa, -0.0893) give 311 MPa at 2N = 1e6, against about 145 MPa
+   measured. The Summary name becomes Al 7075-T6, as both papers write it (T6511 once in Pedranz).
 3. Workbook group R = -1, φ = 0° (19 rows) merges two biaxiality ratios (λ = 1/√3 and λ = 1).
 
 ## Ti6Al4V_andrea_(AXIAL).xlsx
