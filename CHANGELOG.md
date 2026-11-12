@@ -6,6 +6,22 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### Observation type of each Dataset row (decision d113, #18)
+
+- New Dataset column `Observation type (failure/run-out/fatigue limit)`, read by the importer
+  (`imp.schema.parse_observation_type`, stored as `meta["observation_type"]`); a type that
+  contradicts Run out, or unknown text, stops the import.
+- All 17 supplied workbooks carry it: run-outs of the S-N workbooks are `run-out` (126 rows), the
+  rows of the 8 limit-only workbooks `fatigue limit` (147). `tools/add_observation_type.py` edits
+  only the sheet and table XML; FABEST and Delahay are rebuilt by their scripts. Overlays are
+  re-pinned to the new SHA-256 (`MANIFEST.json`, `PROVENANCE.md`).
+- `imp.classification` takes declared types as given (blank: the rule before d113). A life
+  workbook with declared fatigue limits is mixed: its limit states are also judged by the fatigue
+  index (`FatigueLimit/`, own run report); `limit_state_runouts` selects them for the fatigue
+  index path, so declared interrupted tests of a limit workbook are no longer taken as limits.
+- No number changes: fingerprints, classification and fatigue-index outputs identical on all 17
+  workbooks.
+
 ### Load error: shared scaled evaluations, no domain edge taken as a root (#78)
 
 - `cli/run.py::load_errors` evaluates each scaled load once per case and reuses it across the

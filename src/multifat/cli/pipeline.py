@@ -737,6 +737,22 @@ def run_workbook(
 
     _dump_run_report(results_dir, material, results, sidecar.get("calibration_id", ""))
     _dump_master_curves(results_dir, material, results)
+    if classification["roles"]["limit_state"] and design_workbook is None:
+        _evaluate_declared_limits(workbook, material, requested, results_dir, jobs)
+    return results
+
+
+def _evaluate_declared_limits(workbook: Path, material: str, requests, dest: Path, jobs: int):
+    """Fatigue index of the declared fatigue limits of a mixed life workbook (d113, issue #18).
+
+    The life outcomes stay the workbook's result (run report, eligibility); the limit states are
+    reported apart, in ``FatigueLimit/`` with their own run report and endurance constants.
+    """
+    results, sidecar = _evaluate_fatigue_limit(workbook, material, requests, dest, jobs)
+    _dump_run_report(dest / "FatigueLimit", material, results)
+    (dest / "FatigueLimit" / f"{material}_fatigue_limit.json").write_text(
+        json.dumps(sidecar, indent=1, default=float), encoding="utf-8"
+    )
     return results
 
 
@@ -864,7 +880,10 @@ def _fatigue_limit_model(job: tuple) -> tuple[Outcome, dict]:
             absent = [name for name in model.required_params() if params.get(name) is None]
             if absent:
                 raise MissingParamsError(model.name, absent)
-            limits = list(block["runouts"].values())
+            from multifat.imp.classification import limit_state_runouts
+
+            # the limit states only: declared interrupted tests are not limits (d113, #18)
+            limits = list(limit_state_runouts(block, material).values())
             rows = fatigue_index(
                 model,
                 params,

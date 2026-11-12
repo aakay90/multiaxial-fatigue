@@ -14,15 +14,21 @@ support and gives every plain observation an explicit role::
 Rules that keep the scientific distinction explicit:
 
 - a run-out is a censored life observation (a lower bound on life), never a failure;
-- in a ``fatigue_life`` workbook a run-out is not an established fatigue limit: finite-cycle
-  survival and an experimentally established limit need different evidence, so a mixed
-  workbook is assessed through its failures, with its run-outs kept as censored rows;
-- in a ``fatigue_limit`` workbook every plain run-out is treated as a limit state; a run-out
-  stopped below the reference life of the Summary limits is reported in ``diagnostics``.
+- the Dataset column ``Observation type`` (decision d113) declares each run-out row either an
+  interrupted test (``run-out``, censored) or an established limit state (``fatigue limit``,
+  from a staircase or derived from an S-N curve); a declared type is never overridden;
+- an undeclared run-out (blank cell, or a workbook without the column) follows the rule before
+  d113: a limit state in a workbook without failures, a censored row otherwise, because
+  finite-cycle survival and an established limit need different evidence;
+- a ``fatigue_life`` workbook with declared fatigue limits is mixed: its failures go through the
+  life assessment and its limit states through the fatigue index (``roles["limit_state"]``);
+- a limit state stopped below the reference life of the Summary limits is reported in
+  ``diagnostics``.
 
 Repository choices:
   - the classification reproduces the routing of the pipeline before issue #18 for every
-    unambiguous workbook (failures -> life path, run-outs only with limits -> limit path);
+    unambiguous workbook (failures -> life path, run-outs only with limits -> limit path), and
+    the d113 types of the supplied workbooks reproduce it too;
   - the reference life of a limit is the smallest ``reference_cycles`` among its R = -1 sources.
 """
 
@@ -58,6 +64,12 @@ def classify_dataset(block: dict, material: str) -> dict[str, Any]:
     reasons: list[str] = []
     diagnostics: list[str] = []
 
+    declared = {int(k): (r.get("meta") or {}).get("observation_type") for k, r in runouts.items()}
+    limit_ids = sorted(
+        k for k, kind in declared.items() if kind == "fatigue limit" or (kind is None and not cases)
+    )
+    censored_ids = sorted(set(declared) - set(limit_ids))
+
     if not cases and not runouts:
         workflow = "out_of_scope"
         reasons.append("no plain (unnotched) observation")
@@ -67,34 +79,44 @@ def classify_dataset(block: dict, material: str) -> dict[str, Any]:
             f"{len(design_ids)} uniaxial tension R = -1 failures with {len(design_lives)} "
             "distinct lives form the design set"
         )
-        if runouts:
+        if censored_ids:
             diagnostics.append(
-                f"{len(runouts)} run-outs are censored life observations, not fatigue limits"
+                f"{len(censored_ids)} run-outs are censored life observations, not fatigue limits"
             )
+        if limit_ids and usable_limits:
+            reasons.append(
+                f"mixed: {len(limit_ids)} declared fatigue limits are also judged by the fatigue "
+                f"index at Sigm1 = {limits['Sigm1']:g} and Taum1 = {limits['Taum1']:g} MPa"
+            )
+        elif limit_ids:
+            diagnostics.append(
+                f"{len(limit_ids)} declared fatigue limits are not assessed: the Summary lacks "
+                "usable R = -1 fatigue limits"
+            )
+            limit_ids = []
     elif cases:
         workflow = "ambiguous"
         reasons.append(
             "failures present, but fewer than 2 uniaxial tension R = -1 failures with distinct "
             f"lives (found {len(design_ids)}): no master curve can be fitted"
         )
+    elif not limit_ids:
+        workflow = "ambiguous"
+        reasons.append(
+            f"{len(runouts)} run-outs declared as interrupted tests and no failure: neither a "
+            "master curve nor a limit state"
+        )
     elif usable_limits:
         workflow = "fatigue_limit"
         reasons.append(
-            f"{len(runouts)} run-outs and no failure: limit states judged at the R = -1 limits "
+            f"{len(limit_ids)} run-outs and no failure: limit states judged at the R = -1 limits "
             f"Sigm1 = {limits['Sigm1']:g} and Taum1 = {limits['Taum1']:g} MPa"
         )
-        reference = _reference_life(block)
-        if reference is not None:
-            short = [
-                int(rid)
-                for rid, case in runouts.items()
-                if float(case["meta"]["Nf_cycles"]) < reference
-            ]
-            if short:
-                diagnostics.append(
-                    f"{len(short)} run-outs stopped below the {reference:g}-cycle reference of the "
-                    f"Summary limits (ids {short}): finite-cycle survivals, not established limits"
-                )
+        if censored_ids:
+            diagnostics.append(
+                f"{len(censored_ids)} run-outs declared as interrupted tests are not assessed "
+                f"(ids {censored_ids})"
+            )
     else:
         workflow = "ambiguous"
         missing = [k for k, v in limits.items() if v is None or v <= 0 or k in flagged]
@@ -102,6 +124,16 @@ def classify_dataset(block: dict, material: str) -> dict[str, Any]:
             "run-outs only, and the Summary lacks usable R = -1 fatigue limits "
             f"({', '.join(missing)}): neither a master curve nor a fatigue index can be built"
         )
+    if workflow not in ("fatigue_life", "fatigue_limit"):
+        limit_ids = []
+    reference = _reference_life(block) if limit_ids else None
+    if reference is not None:
+        short = [k for k in limit_ids if float(runouts[k]["meta"]["Nf_cycles"]) < reference]
+        if short:
+            diagnostics.append(
+                f"{len(short)} run-outs stopped below the {reference:g}-cycle reference of the "
+                f"Summary limits (ids {short}): finite-cycle survivals, not established limits"
+            )
 
     ids = observation_index(block)
 
@@ -116,8 +148,8 @@ def classify_dataset(block: dict, material: str) -> dict[str, Any]:
             if workflow == "fatigue_life"
             else []
         ),
-        "censored": entries("runout", sorted(runouts)) if workflow == "fatigue_life" else [],
-        "limit_state": entries("runout", sorted(runouts)) if workflow == "fatigue_limit" else [],
+        "censored": entries("runout", censored_ids) if workflow == "fatigue_life" else [],
+        "limit_state": entries("runout", limit_ids),
     }
     return {
         "material": material,
@@ -128,12 +160,19 @@ def classify_dataset(block: dict, material: str) -> dict[str, Any]:
             "failures": len(cases),
             "runouts": len(runouts),
             "design": len(roles["design"]),
+            "limit_states": len(roles["limit_state"]),
             "excluded": len(block.get("excluded_observations", [])),
         },
         "fatigue_limits_usable": usable_limits,
         "source_workbook": block.get("source", {}).get("workbook"),
         "roles": roles,
     }
+
+
+def limit_state_runouts(block: dict, material: str) -> dict:
+    """The run-outs of `block` that the classification takes as limit states, by run-out id."""
+    ids = {entry["id"] for entry in classify_dataset(block, material)["roles"]["limit_state"]}
+    return {k: v for k, v in block.get("runouts", {}).items() if int(k) in ids}
 
 
 def _reference_life(block: dict) -> float | None:

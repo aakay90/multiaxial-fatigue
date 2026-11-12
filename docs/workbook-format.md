@@ -71,6 +71,14 @@ Empty or `Null` stress cells are read as 0. Stresses in MPa, phases in degrees w
 respect to the axial load.
 Radial = sigma_xx, axial = sigma_yy, shear = tau_xy; strains are linear elastic.
 
+The optional column `Observation type (failure/run-out/fatigue limit)` (decision d113)
+declares what a row is: `failure` (Run out `No`), `run-out` (an interrupted test, a
+censored life) or `fatigue limit` (an established limit state, from a staircase or derived
+from an S-N curve; both with Run out `Yes`). A type that contradicts Run out, or any other
+text, stops the import. A blank cell leaves the row undeclared: a run-out is then a limit
+state only in a workbook without failures. A life workbook with declared fatigue limits is
+mixed: its limit states are also judged by the fatigue index (`FatigueLimit/`).
+
 A `Phase AXIAL load` column marks the revised format (October 2026 collection). There the
 radial and torsional phases are taken relative to the axial phase, an empty stress cell is
 unknown loading (the row is excluded, not read as 0), and a row is also excluded when active
@@ -99,6 +107,7 @@ read as the axial stress. Excluded rows are listed in the validation report.
 | mean_p | mean + pressure | no |
 | amp_p | amplit + pressure | no |
 | specimen | specimen | no |
+| observation_type | observation + type | no |
 
 Every model is calibrated on the uniaxial tension R = -1 tests (design set), so a
 workbook needs at least two of them with distinct lives.

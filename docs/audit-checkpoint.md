@@ -1,5 +1,15 @@
 # Development continuation checkpoint
 
+## Issue #18, Observation type (decision d113, 12 November 2026)
+
+- Branch `data/observation-type`: Dataset column `Observation type`, added to all 17 workbooks
+  (XML-only edit, `tools/add_observation_type.py`; FABEST/Delahay rebuilt); importer, classification
+  and pipeline read it; mixed life workbooks also get the fatigue index of declared limits.
+  Overlays re-pinned, MANIFEST and PROVENANCE updated; #71 closed (decision A).
+- Evidence: fingerprints with run-outs, workflows, roles, reasons and diagnostics identical to main
+  on all 17 workbooks; LibreOffice and openpyxl open the edited files; other ZIP members unchanged.
+- Next action: PR closing #18 (role-aware statistics move to #14, maintainer decision 4).
+
 ## Issue #78, load-error evaluations (12 November 2026)
 
 - Branch `fix/load-error-evaluations`: cached scaled evaluations in `run.load_errors`; the load

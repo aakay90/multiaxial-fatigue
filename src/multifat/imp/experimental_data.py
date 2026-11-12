@@ -30,6 +30,7 @@ from multifat.imp.schema import (
     material_id,
     workbook_files,
     norm_text,
+    parse_observation_type,
     to_float_or_none,
     to_float_or_zero,
 )
@@ -529,6 +530,22 @@ def load_material_workbook(
         if Nf <= 0:
             dropped["Nf <= 0"] += 1
             continue
+        declared = None
+        if cols["observation_type"] is not None:
+            where = f"row {int(idx) + 2}"
+            try:
+                declared = parse_observation_type(row[cols["observation_type"]])
+            except ValueError as exc:
+                raise WorkbookError(fp.name, "Dataset", where, str(exc)) from None
+            if declared is not None and (declared != "failure") != is_runout:
+                raise WorkbookError(
+                    fp.name,
+                    "Dataset",
+                    where,
+                    f"Observation type {declared!r} contradicts Run out "
+                    f"{'Yes' if is_runout else 'No'} (d113: failure <-> No; run-out or "
+                    "fatigue limit <-> Yes)",
+                )
 
         raw_specimen = row[cols["specimen"]] if cols["specimen"] is not None else None
         specimen = "" if is_nullish(raw_specimen) else str(raw_specimen).strip()
@@ -630,6 +647,7 @@ def load_material_workbook(
                 "specimen_id": specimen,
                 "excel_row": int(idx) + 2,
                 "frequency_text": freq_text,
+                "observation_type": declared,
             },
             1: {
                 1: {"stress": sigma_max, "strain": eps_max},

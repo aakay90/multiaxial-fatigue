@@ -15,7 +15,7 @@ staircase endurance limits (P_f = 0.5, >= 15 specimens, 1e6 or 1e7 cycles), all 
     gradient largely cancel in a pointwise criterion. The tension (583 MPa) and rotating-bending
     (602 MPa) limits stay in the transcription as information; they are not in the workbook.
   - Dataset: one limit state per row (Run out = Yes at N = 1e6, the convention of the other
-    fatigue-limit workbooks): plane bending 652, torsion 411, plane bending + torsion 442/255
+    fatigue-limit workbooks; Observation type = fatigue limit, decision d113): plane bending 652, torsion 411, plane bending + torsion 442/255
     in phase and 567/328 at 90 deg. The bending stress is the nominal surface amplitude, entered
     in the axial column with "derived from" = BENDING.
 
@@ -59,6 +59,7 @@ DATASET_HEADERS = [
     "Mean RADIAL stress  (MPa)", "Amplitute RADIAL stress  (MPa)",
     "Mean AXIAL stress  (MPa)", "Amplitute AXIAL stress  (MPa)", "derived from (AXIAL/BENDING) load",
     "Mean SHEAR stress  (MPa)", "Amplitute SHEAR stress  (MPa)",
+    "Observation type (failure/run-out/fatigue limit)",
 ]  # fmt: skip
 
 
@@ -118,6 +119,7 @@ def build(source: Path = SOURCE, output: Path = OUTPUT) -> dict:
             "Null", "cylindrical", "No", "Null",
             "Null", 0 if bending else "Null", lim["phase"] if shear else "Null",
             0, 0, 0, lim["sa"], "BENDING" if bending else "AXIAL", 0, lim["ta"],
+            "fatigue limit",  # median staircase limit (d113)
         ])  # fmt: skip
     out.save(output)
     return dict(Sigm1=sigm1, Taum1=taum1, sigma_star=sigma_star, rows=ds.max_row - 1)
