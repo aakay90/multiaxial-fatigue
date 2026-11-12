@@ -20,6 +20,15 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
   model (DP(s*) = 0.839 against the target 1.527 for Plain_18) and are now NaN. All other run and
   fatigue-index outputs are unchanged; ranking and batch comparison regenerated.
 
+### Regression snapshot covers the pipeline (#73)
+
+- `tools/regression_snapshot.py run` adds a pipeline stage: `multifat-pipeline --models all` on
+  every workbook (calibrated FS/FIN/LI/MGSE/MSWT constants, the fatigue-index path of the
+  fatigue-limit workbooks, sidecars and run reports) and one cross-batch transfer (Reis designed
+  on Santus). The script-stage materials come from the workbooks' classification instead of a
+  hand-written list. Volatile pipeline fields (dates, calibration ids, git state, timings) are
+  left out of the hashes. `--skip-pipeline` runs the script stage only.
+
 ### Test: cross-batch transfer with a native-life model (#80)
 
 - `test_transfer_native_life_model`: MOREL in the 42CrMo4_Santus -> 42CrMo4_Reis transfer keeps
