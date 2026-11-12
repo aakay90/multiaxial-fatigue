@@ -31,6 +31,7 @@ from multifat.report.subsets import dataset_fingerprint
 ROOT = Path(__file__).resolve().parents[1]
 FOLDER = ROOT / "Experimental_Data"
 OVERLAID = [
+    "Al7075_T6",
     "2_CX18",
     "3_25CrMo4",
     "4_30NCD16",
@@ -367,3 +368,20 @@ def test_drop_case_rejects_a_row_that_does_not_match(op, match):
     wb = load_workbook(FOLDER / "1_Ti6Al4V_Meneghetti.xlsx", data_only=True)
     with pytest.raises(OverlayError, match=match):
         _apply_one(wb, op)
+
+
+def test_al7075_limits_at_the_pedranz_basis_and_measured_plastic_terms():
+    """d111: Pedranz 2025 Appendix B Table 5 limits at 5e6; Benedetti 2021 Table 4 eps'_f, c."""
+    block = load_material_workbook(FOLDER / "Al7075_T6.xlsx")["Al7075_T6"]
+    m = block["material"]
+    assert (m["Tensile_fatigue_limit_MPa"], m["Torsional_fatigue_limit_MPa"]) == (143.8, 100.9)
+    (sigm1,) = block["fatigue_limit_sources"]["Sigm1"]
+    assert sigm1["reference_cycles"] == 5e6 and sigm1["loading"] == "push-pull"
+    assert sigm1["reference"] == "10.1016/j.ijmecsci.2025.109961"
+    assert (m["epsilon_f"], m["c_fat"], m["c0"]) == (0.131, -0.674, -0.674)
+    assert m["gamma_f"] == pytest.approx(3**0.5 * 0.131, abs=1e-6)
+    # sigma'_f and b stay the Basquin fit of the HCF tests (the LCF values extrapolate 2x high)
+    assert m["sigma_f"] is None and m["b_fat"] is None
+    assert not block["identity_issues"]
+    off = load_material_workbook(FOLDER / "Al7075_T6.xlsx", overlay=False)["Al7075_T6"]
+    assert off["material"]["Tensile_fatigue_limit_MPa"] == 150.0

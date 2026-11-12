@@ -1,5 +1,26 @@
 # Development continuation checkpoint
 
+## Batch names, decision d112 (12 November 2026)
+
+- Branch `data/batch-names`: `42CrMo4_QT` -> `42CrMo4_Santus` (file, `Calibrations/42CrMo4_Santus/`,
+  upstream record material_id), `Ti6Al4V` -> `Ti6Al4V_Meneghetti` (TVEIT constants moved to
+  `Calibrations/Ti6Al4V_Meneghetti/`, workbook path only). Historical records keep the old names.
+- Evidence: homepage ranking identical to main after name substitution (488 rows, all statistics
+  equal); batch comparison point statistics identical, bootstrap bounds move <= 0.05 (seed drawn in
+  name order). Ranking figure drops materials with < 2 scored methods.
+- Stacked: `docs/readme-visual-system` (README visual system) on top of this branch.
+- Next action: CI on both PRs; maintainer merge decisions (this one first).
+
+## Al7075_T6 Summary review, decision d111 (11 November 2026)
+
+- Branch `data/al7075-summary`. The curator's archive held no Al7075 tests: its "original" workbook
+  pairs the Al7075 Summary with the 60 Ti6Al4V rows of `1_Ti6Al4V`, and the template holds an older
+  Ti6Al4V subset. The repository Al7075 data (87 failures, 14 run-outs) match Pedranz Appendix B.
+- Overlay `Al7075_T6.overlay.json` (limits 143.8 / 100.9 MPa at 5e6; eps'_f, c measured; name
+  Al 7075-T6). Snapshot on Al7075_T6 vs main: limit-based methods move, others unchanged; MDC,
+  MMCCM, LIUMAHADEVAN checked through the pipeline. Ranking CSV regenerated (Al7075 rows only).
+- Next action: CI; then batch renaming and README visual pass (separate PRs).
+
 ## Fatigue-limit datasets in the load-error ranking, decision d110 (11 November 2026)
 
 - Branch `analysis/limit-ranking` from main `07bd8b1` + #90. `build_load_error_ranking.py` reads

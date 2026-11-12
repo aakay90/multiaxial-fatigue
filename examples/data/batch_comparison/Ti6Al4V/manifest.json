@@ -1,13 +1,13 @@
 {
  "family": "Ti6Al4V",
  "batches": [
-  "Ti6Al4V",
+  "Ti6Al4V_Meneghetti",
   "Ti6Al4V_Berto"
  ],
- "notes": "Ti6Al4V: Meneghetti 2018 failures (10) and Delahay 2006 run-outs (4), two author groups; the Summary keeps the Meneghetti properties only (overlay, d108). Ti6Al4V_Berto: Berto 2015 (48 failures). All assessed tests are torsional.",
+ "notes": "Ti6Al4V_Meneghetti: Meneghetti 2018 failures (10); the Summary keeps the Meneghetti properties only (overlay, d108) and the 4 Delahay 2006 rows are removed (d109). Ti6Al4V_Berto: Berto 2015 (48 failures). All assessed tests are torsional. Batch names follow the author or project (d112).",
  "constants": {},
- "created_utc": "2026-11-11T17:30:39+00:00",
- "git_commit": "d233845ef084c599b8360fc4c61406d75f0a47cc",
+ "created_utc": "2026-11-12T08:27:25+00:00",
+ "git_commit": "a27ce0ab9de160f44a2ff8cbde9eb6f7aea8971b",
  "registered_models": [
   "BP",
   "CAIM",
@@ -58,7 +58,7 @@
  ],
  "implementation_revision": "2026-11-11",
  "dataset_fingerprints": {
-  "Ti6Al4V": "c3b9a43f4f521b2f5d42196a14b61b824949dbed4b537e6b08d4fd247425871c",
+  "Ti6Al4V_Meneghetti": "c3b9a43f4f521b2f5d42196a14b61b824949dbed4b537e6b08d4fd247425871c",
   "Ti6Al4V_Berto": "75758708c36215a60aad7e144b9a18dc8ff4304726226aa3295e557026a38f02"
  },
  "methods_with_results": [

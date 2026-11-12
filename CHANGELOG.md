@@ -6,13 +6,33 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### One visual system for the homepage
+
+- Every README figure uses `examples/style.py`: `apply_homepage_style` (Inter, recessive axes),
+  the validated colour-blind safe palette `SERIES`, one blue ramp for magnitudes (`blue_cmap`) and
+  one title layout (`homepage_title`). Redrawn: the critical-plane sphere, the fatigue-limit
+  envelopes (direct labels) and the load-error ranking.
+- Removed: the polar damage landscape (repeated the sphere), the life-prediction correlation and
+  the life-error benchmark (superseded by the load-equivalent ranking, #37), with
+  `build_predictions_csv.py` and its CSV. Adding a method now refreshes the ranking only.
+
 ### Batch names after their author or project (decision d112)
 
 - `42CrMo4_QT` is now `42CrMo4_Santus` (file `6_42CrMo4_Santus.xlsx`, `Calibrations/42CrMo4_Santus/`)
   and `Ti6Al4V` is now `Ti6Al4V_Meneghetti` (`1_Ti6Al4V_Meneghetti.xlsx`): every 42CrMo4 batch is
   +QT, so the heat treatment did not distinguish them. Workbook bytes and numbers are unchanged.
+- The TVEIT2025 stage-1 constants move to `Calibrations/42CrMo4_Santus/` and
+  `Calibrations/Ti6Al4V_Meneghetti/`; only their `workbook` path changes.
 - The homepage ranking figure leaves out a material with fewer than 2 scored methods
   (Ti6Al4V_Meneghetti, only MOREL, #74) and names it in a note.
+
+### Al7075_T6 material values (decision d111)
+
+- An overlay sets the Pedranz 2025 fatigue limits at their own basis, 143.8 / 100.9 MPa at N = 5e6,
+  R = -1 (Appendix B Table 5), instead of the unsourced 150 / 100 MPa, and adds the measured plastic
+  strain-life terms of Benedetti 2021 Table 4 (eps'_f = 0.131, c = -0.674) in place of the steel
+  uniform-material-law estimates. sigma'_f and b stay the Basquin fit of the HCF tests. Only
+  Al7075_T6 outputs change; the homepage ranking is regenerated for it.
 
 ### Fatigue-limit datasets in the method ranking (decision d110, #37)
 
