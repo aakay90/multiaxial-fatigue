@@ -463,3 +463,37 @@ The Average rows are formulas and now read the converted a_MSWT values.
 Strain-life constants (σ'_f, b, ε'_f, c) are printed for **42CrMo4 (Anes/Reis batch)** and **7075-T6 (φ60
 bar)** only. No source prints the torsional constants τ'_f, b0, γ'_f or c0 for any material, so those must
 be fitted or skipped.
+
+
+## Observation type column, decision d113 (12 November 2026)
+
+At the maintainer's request every Dataset sheet gained the column
+`Observation type (failure/run-out/fatigue limit)` (issue #18). Run out `No` rows are `failure`;
+Run out `Yes` rows are `run-out` in workbooks that hold S-N curves (at least one failure) and
+`fatigue limit` in workbooks that hold fatigue limits only. `tools/add_observation_type.py` added
+the column to fifteen workbooks by editing only the XML of the Dataset sheet and of its Excel table
+(formulas, cached values, styles and all other ZIP members unchanged; the table is extended to the
+new column); `16_42CrMo4_FABEST.xlsx` and `17_Ti6Al4V_Delahay.xlsx` were rebuilt by their
+conversion scripts. Every other cell value is unchanged, as are the dataset fingerprints. The active
+overlays are re-pinned to the new SHA-256 with unchanged operations; the eight AISI316L `add_case`
+rows also declare `failure`. `MANIFEST.json` holds the new hashes.
+
+| Workbook | Previous SHA-256 | SHA-256 |
+| --- | --- | --- |
+| `10_En3B.xlsx` | `16a56e868fec91f5…` | `0f21e6c41a65a83afbe25dc359d1e0b9fe04c48ee04640568e106275f4e7bf94` |
+| `11_GJS600.xlsx` | `d4c82e5c80ca604f…` | `39c07d6f7e9d15d5c3b4416f1c3a581bb2e7ee619fe777408880aaa9794b89b7` |
+| `12_GGG60.xlsx` | `e53345f03ea4dffa…` | `367bc0e8f28bc134f694356812fcd3f0f639e6ff7160c0c9ba71cc4e01d1c45a` |
+| `13_S65A.xlsx` | `dd03c3b0a89906fa…` | `efa0778484ad51afc4e1186953b4e480316c007043de27cf703b042b4c91aab0` |
+| `14_42CrMo4_Reis.xlsx` | `8a2f87a325e2925e…` | `3fa6c5d8a20e54a39dd8272d17285fcb6f4708c39a85dd917c0d46c530b053e3` |
+| `15_Ti6Al4V_Berto.xlsx` | `4cb8262d51574e38…` | `500fb0dc62d63afafb99b9a632824b063b6ee9000759527840ace10cb0caf765` |
+| `16_42CrMo4_FABEST.xlsx` | `04afa35fc8b3c953…` | `242b6098c4e8fce2065c1116c1c0c885d84d7deeb2dbcb7731b075c399e87a25` |
+| `17_Ti6Al4V_Delahay.xlsx` | `a67fbf23ff5ecd1e…` | `fd0e79f7845f76540d57319fa07b94be8b7c5ba47c6f4f5f38da3a2dd703df30` |
+| `1_Ti6Al4V_Meneghetti.xlsx` | `86f0f71c50dffa3b…` | `78808b28fc8546bf3361b121c2f768dc5b4291be53b68b79d90e8cab1ece04dd` |
+| `2_CX18.xlsx` | `0f8040cc6c00c363…` | `f9fd79fdfb657e41050be1c867eb7125f05795c45638d00d40f7226612ce9fc1` |
+| `3_25CrMo4.xlsx` | `ba08322b49592323…` | `3fcc36daf35c12806b467b1005d4d5450d4284b618b758597705cc34c3afe17b` |
+| `4_30NCD16.xlsx` | `debf822173d4914a…` | `0deaa15c8d667ec409483c78e9e28cd85a4af767f977ae9b2412e40ff049595e` |
+| `5_34Cr4.xlsx` | `9352b72a54ddb872…` | `7f3e60c008e6449beb3f13ce0306f004c0e413ae2c8211f14ca895b648987edf` |
+| `6_42CrMo4_Santus.xlsx` | `87f40c72a2e4d766…` | `1327f64f68305d4e4453e784803a5bccce7596dc17db0ab032125598a1fd93d6` |
+| `7_982FA.xlsx` | `f786dc8e99f598dd…` | `cb91fc0b0c2a2f7ca88c44b7686cf68a389cc6b2a9d5c382fb754af731f8ac34` |
+| `8_AISI316L.xlsx` | `26a97aec4603aa19…` | `f822e4c39deb6bacb26c2019bda4744ebaf4c7a327c808ccfc19c9b7358821ee` |
+| `Al7075_T6.xlsx` | `2c250c383cfe6476…` | `2a378823426639986ba534f6fda4adefce621d1757def2531f157818306f94fc` |

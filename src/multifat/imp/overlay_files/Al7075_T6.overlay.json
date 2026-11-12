@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "workbook": "Al7075_T6.xlsx",
- "base_sha256": "2c250c383cfe6476ac207baf6da8735c6ee0aa38f3c3f336a245a64993991269",
+ "base_sha256": "2a378823426639986ba534f6fda4adefce621d1757def2531f157818306f94fc",
  "expected_fingerprint": "b5007cc636a17ef396693df62aa66cca3c293567442c36f5454045140ec89cad",
  "operations": [
   {

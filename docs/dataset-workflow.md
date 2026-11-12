@@ -75,8 +75,14 @@ The shared importer's block is classified before any assessment
 | `out_of_scope` | no plain observation (e.g. notched only) | none |
 
 Every plain observation gets one role (`design`, `assessment`, `censored`, `limit_state`) with its
-observation identity. A run-out is never a failure. In a `fatigue_life` (mixed) workbook run-outs
-stay censored life observations and are not taken as established fatigue limits; in a
+observation identity. A run-out is never a failure. The Dataset column `Observation type`
+(decision d113) declares each run-out an interrupted test (`run-out`, censored) or an established
+`fatigue limit` (limit state); a declared type is never overridden. A `fatigue_life` workbook with
+declared fatigue limits is mixed: its failures go through the life assessment and its limit states
+are also judged by the fatigue index, in `FatigueLimit/` with their own run report
+(`FatigueLimit/<MATERIAL>_run_report.tsv`); the workbook's run report and eligibility keep the life
+result. An undeclared run-out (blank cell) follows the rule before d113: in a `fatigue_life`
+workbook it stays a censored life observation and is not taken as an established fatigue limit; in a
 `fatigue_limit` workbook, run-outs stopped below the reference life of the Summary limits are
 listed in `diagnostics` as finite-cycle survivals. The rules reproduce the previous routing for all
 fifteen supplied workbooks. Finding: all 11 run-outs of 25CrMo4 stopped below the 2e6-cycle

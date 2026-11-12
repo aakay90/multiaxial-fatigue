@@ -13,7 +13,8 @@ FAB075 (90 deg). All stresses are R = -1, as reported (nominal, net section).
 Reading rules:
   - one row per test point of a curve sheet; the "<curve>_Rm" row (static strength, N < 1) is
     skipped;
-  - "finished" is a failure with N = "till break"; "interrupted" is a run-out with N = "till END";
+  - "finished" is a failure with N = "till break"; "interrupted" is a run-out with N = "till END"
+    (Observation type "run-out": an interrupted test of an S-N curve, decision d113);
   - channel 1 = axial (tension-compression) or torsion, channel 2 = torsion; the channel-2 phase
     shift is the torsional phase relative to the axial load.
 
@@ -66,6 +67,7 @@ DATASET_HEADERS = [
     "Mean RADIAL stress  (MPa)", "Amplitute RADIAL stress  (MPa)",
     "Mean AXIAL stress  (MPa)", "Amplitute AXIAL stress  (MPa)", "derived from (AXIAL/BENDING) load",
     "Mean SHEAR stress  (MPa)", "Amplitute SHEAR stress  (MPa)",
+    "Observation type (failure/run-out/fatigue limit)",
 ]  # fmt: skip
 
 
@@ -160,6 +162,7 @@ def convert(source: Path = SOURCE, output: Path = OUTPUT) -> dict:
                 "Null", 0 if ax else "Null", p["phase"] if sh else "Null",
                 "Null", p["freq"] if ax else "Null", p["freq"] if sh else "Null",
                 0, 0, p["sm"], p["sa"], "AXIAL", p["tm"], p["ta"],
+                "run-out" if p["runout"] else "failure",  # interrupted test of an S-N curve (d113)
             ])  # fmt: skip
     out.save(output)
     return dict(
