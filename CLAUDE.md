@@ -230,9 +230,10 @@ Also:
   from the Summary. A Summary column named like a declared `optional_params` key is already
   passed to the model. Changing the schema alters every dataset fingerprint
   (`tests/test_dataset_overlays.py`).
-- **Homepage figures.** Refresh the two README comparison figures, as described at the end of
-  the method steps in `docs/adding-methods.md`. Redraw only those two images:
-  `generate_gallery.py` re-renders all six with different fonts.
+- **Homepage figures.** Refresh the README ranking, as described at the end of the method steps
+  in `docs/adding-methods.md`. Every homepage figure uses the one homepage style of
+  `examples/style.py` (`apply_homepage_style`, `SERIES`, `blue_cmap`, `homepage_title`);
+  `generate_gallery.py` redraws all three.
 - **Regression snapshot.** `tools/regression_snapshot.py compare` matches CSV columns by
   position, so append new output columns at the end. To show that existing outputs are
   unchanged, run `run <dir>` on `main` and on the branch, then `compare`.

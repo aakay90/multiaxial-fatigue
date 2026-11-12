@@ -50,7 +50,7 @@ def test_committed_homepage_data_is_current():
     problems = homepage_data.check()
     assert not problems, (
         "; ".join(problems)
-        + " -> regenerate examples/data/*.csv with build_load_error_ranking.py and build_predictions_csv.py"
+        + " -> regenerate examples/data/load_error_ranking.csv with build_load_error_ranking.py"
     )
 
 

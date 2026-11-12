@@ -20,7 +20,14 @@ if str(REPO_ROOT) not in sys.path:
 from multifat.eval.evaluator import evaluate_planes, prepare_planes
 from multifat.eval.plane_search import frames_from_normals
 from multifat.models.registry import get_models
-from examples.style import DOCS_IMG_DIR, PALETTE, apply_academic_style
+from examples.style import (
+    DOCS_IMG_DIR,
+    INK,
+    SERIES,
+    apply_homepage_style,
+    blue_cmap,
+    homepage_title,
+)
 
 SIGMA_A, TAU_A, K_FI = 240.0, 150.0, 0.28
 
@@ -43,7 +50,7 @@ def findley_on_sphere(S_sin, S_cos, n_polar: int = 121, n_azimuth: int = 241):
 
 def plot_damage_sphere(out_path: Path | None = None) -> Path:
     """Two spheres (in phase, 90 deg out of phase) coloured by the Findley damage parameter."""
-    apply_academic_style()
+    apply_homepage_style()
     out_path = out_path or DOCS_IMG_DIR / "critical_plane_sphere.png"
     shear = np.array([[0.0, TAU_A, 0.0], [TAU_A, 0.0, 0.0], [0.0, 0.0, 0.0]])
     axial = np.diag([SIGMA_A, 0.0, 0.0])
@@ -55,13 +62,12 @@ def plot_damage_sphere(out_path: Path | None = None) -> Path:
     vmin = min(float(d.min()) for _, _, d in results)
     vmax = max(float(d.max()) for _, _, d in results)
     norm = colors.Normalize(vmin=vmin, vmax=vmax)
-    cmap = plt.get_cmap("magma")
+    cmap = blue_cmap()
 
-    fig = plt.figure(figsize=(11.0, 5.8), dpi=300)
-    fig.subplots_adjust(left=0.06, right=0.94, top=0.76, bottom=0.13, wspace=0.05)
-    fig.patch.set_facecolor("#FFFFFF")
+    fig = plt.figure(figsize=(11.0, 5.6), dpi=300)
+    boxes = ([0.0, 0.13, 0.5, 0.62], [0.5, 0.13, 0.5, 0.62])  # 3D axes placed by hand
     for i, (title, normals, damage) in enumerate(results):
-        ax = fig.add_subplot(1, 2, i + 1, projection="3d")
+        ax = fig.add_axes(boxes[i], projection="3d")
         X, Y, Z = normals[..., 0], normals[..., 1], normals[..., 2]
         ax.plot_surface(
             X, Y, Z, facecolors=cmap(norm(damage)), rstride=1, cstride=1,
@@ -85,19 +91,27 @@ def plot_damage_sphere(out_path: Path | None = None) -> Path:
             vec = np.asarray(vec, dtype=float)
             vec = vec if vec @ camera >= 0 else -vec  # the half-axis facing the viewer
             sign = "" if vec.sum() > 0 else r"$-$"
-            ax.plot(*zip(1.0 * vec, 1.35 * vec), color="#8A8A8A", linewidth=1.0, zorder=5)
-            ax.text(*(1.45 * vec), sign + label, fontsize=9, color="#555555", zorder=6)
+            ax.plot(*zip(1.0 * vec, 1.35 * vec), color=INK["muted"], linewidth=1.0, zorder=5)
+            ax.text(*(1.45 * vec), sign + label, fontsize=9, color=INK["secondary"], zorder=6)
         tip = 1.5 * n_cp
-        ax.plot(*zip(n_cp, tip), color=PALETTE["cerulean"], linewidth=2.8, zorder=10)
-        ax.scatter(*tip, color=PALETTE["cerulean"], s=30, depthshade=False, zorder=11)
+        ax.plot(*zip(n_cp, tip), color=SERIES[1], linewidth=2.6, zorder=10)
+        ax.scatter(
+            *tip,
+            color=SERIES[1],
+            s=34,
+            depthshade=False,
+            zorder=11,
+            edgecolors="white",
+            linewidths=1.2,
+        )
         ax.text(
-            *(1.68 * n_cp), r"$\mathbf{n}^*$", color=PALETTE["cerulean"],
+            *(1.68 * n_cp), r"$\mathbf{n}^*$", color=INK["primary"],
             fontsize=13, ha="center", va="center", zorder=12,
         )  # fmt: skip
-        ax.set_title(
-            f"{title}\n" + rf"max DP = {damage.max():.0f} MPa",
-            fontsize=11.5, pad=0,
-        )  # fmt: skip
+        x0 = boxes[i][0] + boxes[i][2] / 2
+        fig.text(x0, 0.825, title, ha="center", va="bottom", fontsize=11.5, color=INK["primary"])
+        fig.text(x0, 0.82, f"max DP = {damage.max():.0f} MPa", ha="center", va="top",
+                 fontsize=10, color=INK["secondary"])  # fmt: skip
         ax.view_init(elev=elev, azim=azim)
         ax.set_box_aspect((1, 1, 1), zoom=1.95)
         ax.set_axis_off()
@@ -106,20 +120,21 @@ def plot_damage_sphere(out_path: Path | None = None) -> Path:
         ax.set_ylim(-lim, lim)
         ax.set_zlim(-lim, lim)
     bar = fig.colorbar(
-        cm.ScalarMappable(norm=norm, cmap=cmap), ax=fig.axes, orientation="horizontal",
-        shrink=0.6, pad=0.04, aspect=40,
+        cm.ScalarMappable(norm=norm, cmap=cmap), cax=fig.add_axes([0.3, 0.1, 0.4, 0.025]),
+        orientation="horizontal",
     )  # fmt: skip
+    bar.outline.set_visible(False)
+    bar.ax.tick_params(length=0)
     bar.set_label(
-        r"Findley DP $= \tau_a + k\,\sigma_{n,\max}$ on the plane of normal $\mathbf{n}$ [MPa];"
-        r"  $\mathbf{n}^*$: critical plane (largest DP)"
+        r"Findley DP $= \tau_a + k\,\sigma_{n,\max}$ on the plane of normal $\mathbf{n}$ [MPa]",
+        color=INK["secondary"],
     )
-    fig.suptitle(
-        r"Critical-plane search: Findley damage over all plane normals"
-        "\n"
-        rf"$\sigma_a = {SIGMA_A:.0f}$ MPa, $\tau_a = {TAU_A:.0f}$ MPa, $k_{{FI}} = {K_FI}$"
-        " (illustrative loading)",
-        fontsize=12,
-        y=0.98,
+    homepage_title(
+        fig,
+        "Every material plane, one damage value",
+        rf"Findley criterion over all plane normals, $\sigma_a = {SIGMA_A:.0f}$ MPa, "
+        rf"$\tau_a = {TAU_A:.0f}$ MPa, $k_{{FI}} = {K_FI}$ (illustrative loading); "
+        r"$\mathbf{n}^*$ is the critical plane",
     )
     fig.savefig(out_path, facecolor="#FFFFFF")  # no tight box: it clips the 3D labels
     plt.close(fig)
