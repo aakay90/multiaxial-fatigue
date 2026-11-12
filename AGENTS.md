@@ -93,8 +93,10 @@ uv run python tools/check_scientific_reviews.py    # scientific dossiers
 uv run python tools/regression_snapshot.py run <dir>     # numerical gate (then compare BASE NEW)
 ```
 
-`regression_snapshot.py` runs every model on every workbook plus the calibration and the
-comparison, and hashes the outputs. Run it on the affected models when a change could touch
+`regression_snapshot.py` runs every model and `_ext` variant on every fatigue-life workbook through
+the scripts, the calibration and the comparison, then `multifat-pipeline --models all` on every
+workbook (calibrated FS/FIN constants, fatigue-limit workbooks) and one cross-batch transfer, and
+hashes the outputs (volatile pipeline fields left out; `--skip-pipeline` for the script stage only). Run it on the affected models when a change could touch
 numbers, and in full before a release. Never commit a numerical change without it.
 
 ## Outputs and data
