@@ -6,6 +6,15 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### Regression snapshot covers the pipeline (#73)
+
+- `tools/regression_snapshot.py run` adds a pipeline stage: `multifat-pipeline --models all` on
+  every workbook (calibrated FS/FIN/LI/MGSE/MSWT constants, the fatigue-index path of the
+  fatigue-limit workbooks, sidecars and run reports) and one cross-batch transfer (Reis designed
+  on Santus). The script-stage materials come from the workbooks' classification instead of a
+  hand-written list. Volatile pipeline fields (dates, calibration ids, git state, timings) are
+  left out of the hashes. `--skip-pipeline` runs the script stage only.
+
 ### One visual system for the homepage
 
 - Every README figure uses `examples/style.py`: `apply_homepage_style` (Inter, recessive axes),
