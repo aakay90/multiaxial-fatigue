@@ -152,3 +152,25 @@ def test_transfer_takes_published_constants_of_the_design_batch(tmp_path):
     frame = pd.read_csv(tmp_path / "SSF_42CrMo4_FABEST_from_42CrMo4_Reis.csv")
     assert frame[frame["Flag"] == 1]["Specimen_id"].str.startswith("FAB").all()
     assert frame[frame["Flag"] == 0]["Specimen_id"].str.startswith("Plain_multiaxial").all()
+
+
+def test_transfer_native_life_model(tmp_path):
+    """#80: MOREL (native life law) in a transfer keeps the design batch's own native lives."""
+    outcomes = pipeline.run_workbook(
+        DATA / "14_42CrMo4_Reis.xlsx",
+        models=["MOREL"],
+        results_dir=tmp_path,
+        design_workbook=DATA / "6_42CrMo4_Santus.xlsx",
+    )
+    assert [o.status for o in outcomes] == ["ok"]
+    moved = pd.read_csv(tmp_path / "MOREL_42CrMo4_Reis_from_42CrMo4_Santus.csv")
+    pipeline.run_workbook(
+        DATA / "6_42CrMo4_Santus.xlsx", models=["MOREL"], results_dir=tmp_path / "own"
+    )
+    own = pd.read_csv(tmp_path / "own" / "MOREL_42CrMo4_Santus.csv")
+    design = moved[moved["Flag"] == 0].sort_values("Observation_id")
+    own_design = own[own["Flag"] == 0].sort_values("Observation_id")
+    assert list(design["Observation_id"]) == list(own_design["Observation_id"])
+    assert np.array_equal(design["Nf_native"].to_numpy(), own_design["Nf_native"].to_numpy())
+    assessed = moved[moved["Flag"] == 1]
+    assert len(assessed) == 25 and np.isfinite(assessed["Error_load"]).all()

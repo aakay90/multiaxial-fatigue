@@ -6,6 +6,12 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 
 ## [Unreleased] (carry-forward of October 2026)
 
+### Test: cross-batch transfer with a native-life model (#80)
+
+- `test_transfer_native_life_model`: MOREL in the 42CrMo4_Santus -> 42CrMo4_Reis transfer keeps
+  the design batch's own native lives on its design rows, and its 25 assessed rows have finite
+  `Error_load`.
+
 ### One visual system for the homepage
 
 - Every README figure uses `examples/style.py`: `apply_homepage_style` (Inter, recessive axes),
