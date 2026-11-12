@@ -15,6 +15,12 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
   plane-constant calibration all use it; the calibration starts from the same 1e-3 (was 0.02)
   before its recorded relaxation (d107). Membership is unchanged on all 17 workbooks.
 
+### Test: cross-batch transfer with a native-life model (#80)
+
+- `test_transfer_native_life_model`: MOREL in the 42CrMo4_Santus -> 42CrMo4_Reis transfer keeps
+  the design batch's own native lives on its design rows, and its 25 assessed rows have finite
+  `Error_load`.
+
 ### Hand-entered constants accepted by `--constants` (#60)
 
 - New constants kind `hand_entered_constants` (`cli/pipeline.py::load_constants`), as chosen by
