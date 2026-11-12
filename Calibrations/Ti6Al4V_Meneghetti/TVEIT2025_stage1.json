@@ -13,7 +13,7 @@
         "tol_damage_TVEIT": 0.001
     },
     "provenance": {
-        "workbook": "Experimental_Data/1_Ti6Al4V.xlsx",
+        "workbook": "Experimental_Data/1_Ti6Al4V_Meneghetti.xlsx",
         "model": "TVEIT2025",
         "entered_by": "A. A. Akay, manual entry (stage 1)",
         "calibration": "Article-style three-point calibration: C, K and L fitted with Eq. (25) to three axial R = -1 failures of one source (Berto et al., 510.8 / 613.5 / 822.5 MPa: the lowest, middle and highest stress level above Sigm1_TVEIT, the median replicate at each). Many (C, K, L) sets fit almost equally well (C is not identified by uniaxial data); this is the admissible set of lowest objective.",

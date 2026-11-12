@@ -11,6 +11,8 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
 - `42CrMo4_QT` is now `42CrMo4_Santus` (file `6_42CrMo4_Santus.xlsx`, `Calibrations/42CrMo4_Santus/`)
   and `Ti6Al4V` is now `Ti6Al4V_Meneghetti` (`1_Ti6Al4V_Meneghetti.xlsx`): every 42CrMo4 batch is
   +QT, so the heat treatment did not distinguish them. Workbook bytes and numbers are unchanged.
+- The TVEIT2025 stage-1 constants move to `Calibrations/42CrMo4_Santus/` and
+  `Calibrations/Ti6Al4V_Meneghetti/`; only their `workbook` path changes.
 - The homepage ranking figure leaves out a material with fewer than 2 scored methods
   (Ti6Al4V_Meneghetti, only MOREL, #74) and names it in a note.
 

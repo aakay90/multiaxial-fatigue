@@ -76,7 +76,7 @@ def test_unresolved_decay_ends_at_the_block_limit_with_a_finite_life():
     decaying, and the life is extrapolated from the mean damage of the last 200 blocks.
     """
     cycle = _cycle("axial", -1.0, 495.0)
-    life = tveit2025_life(*cycle, *_constants("Ti6Al4V"), max_blocks=3000)
+    life = tveit2025_life(*cycle, *_constants("Ti6Al4V_Meneghetti"), max_blocks=3000)
     assert life.termination == "max_block_extrapolation" and life.blocks == 3000
     assert 3000 < life.Nf < math.inf
 

@@ -1,8 +1,8 @@
 {
- "csv": "42CrMo4_QT_predictions.csv",
- "csv_sha256": "cfa72b20749e43b7706471ce382edb8a51fe4d2e24134c2a50393067092a0e04",
- "created_utc": "2026-11-11T01:09:55+00:00",
- "git_commit": "d43b503428d10f86d51cce4bf5938b23846625aa",
+ "csv": "42CrMo4_Santus_predictions.csv",
+ "csv_sha256": "3f3d32f2a08a5525725c004f35dd3eefb341cd86b45c50fb56b3c8beb4ff628c",
+ "created_utc": "2026-11-12T08:42:52+00:00",
+ "git_commit": "d0fcb9fdcab12e65cbcabaa8d5ff549d713a77dc",
  "implementation_revision": "2026-11-11",
  "registered_models": [
   "BP",
@@ -53,10 +53,10 @@
   "ZHANGYAO"
  ],
  "materials": [
-  "42CrMo4_QT"
+  "42CrMo4_Santus"
  ],
  "dataset_fingerprints": {
-  "42CrMo4_QT": "50fcebd49c4006212a50d303f4549cf0351c59047b2f0e9bcdebf3323aec15a3"
+  "42CrMo4_Santus": "50fcebd49c4006212a50d303f4549cf0351c59047b2f0e9bcdebf3323aec15a3"
  },
  "methods_with_results": [
   "BP",

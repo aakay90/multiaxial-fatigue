@@ -335,7 +335,9 @@ def test_ti6al4v_summary_keeps_only_the_meneghetti_batch():
         assert [s["authors"] for s in block["fatigue_limit_sources"][key]] == ["Meneghetti et al."]
     # d109: the 4 Delahay rows (endurance limits entered as run-outs) leave the dataset
     assert (len(block["cases"]), len(block["runouts"])) == (10, 0)
-    off = load_material_workbook(FOLDER / "1_Ti6Al4V_Meneghetti.xlsx", overlay=False)["Ti6Al4V_Meneghetti"]
+    off = load_material_workbook(FOLDER / "1_Ti6Al4V_Meneghetti.xlsx", overlay=False)[
+        "Ti6Al4V_Meneghetti"
+    ]
     assert off["material"]["Tensile_strength_MPa"] == 1035.0  # supplied average of both rows
     assert (len(off["cases"]), len(off["runouts"])) == (10, 4)
 
