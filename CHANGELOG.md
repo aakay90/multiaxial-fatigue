@@ -20,6 +20,15 @@ Finding IDs (F, U, P, N) refer to the audit ledgers kept with the carry-forward 
   model (DP(s*) = 0.839 against the target 1.527 for Plain_18) and are now NaN. All other run and
   fatigue-index outputs are unchanged; ranking and batch comparison regenerated.
 
+### One selector of the R = -1 uniaxial design tests (#77)
+
+- `imp.experimental_data.is_design_test` (and `design_test_ratio`) is the single definition of a
+  fully reversed uniaxial tension or pure torsion test: R = min/max of the loaded component over
+  both load steps, whatever their order, within `DESIGN_RTOL_R` = 1e-3 of -1, every other
+  component of both steps below 1e-3 of the peak. The master curve, the Basquin constants and the
+  plane-constant calibration all use it; the calibration starts from the same 1e-3 (was 0.02)
+  before its recorded relaxation (d107). Membership is unchanged on all 17 workbooks.
+
 ### Regression snapshot covers the pipeline (#73)
 
 - `tools/regression_snapshot.py run` adds a pipeline stage: `multifat-pipeline --models all` on
