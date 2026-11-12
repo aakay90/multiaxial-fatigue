@@ -86,5 +86,5 @@ def test_pipeline_hashes_ignore_volatile_fields(tmp_path):
     assert snap.stable_bytes(out, archived) is None
     script_csv = out / "runs" / "FS_X.csv"
     script_csv.parent.mkdir(parents=True)
-    script_csv.write_text("a,b\n1,2\n", encoding="utf-8")
+    script_csv.write_bytes(b"a,b\n1,2\n")  # bytes: write_text would give \r\n on Windows
     assert snap.stable_bytes(out, script_csv) == b"a,b\n1,2\n"
